@@ -153,5 +153,350 @@
       "caption": "Overview comparison matrix for haploinsufficiency of a20."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haploinsufficiency_a20-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TNFAIP3 sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants",
+          "cells": [
+            {
+              "text": "Disease activity during and between flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody screen (ANA, anti-dsDNA, thyroid)",
+          "cells": [
+            {
+              "text": "Coexisting autoimmunity, which frequently overlaps with lupus and thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF-kappaB activation and cytokine profiling",
+          "cells": [
+            {
+              "text": "Functional evidence of pathway dysregulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ileocolonoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Used when gastrointestinal disease is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B51 typing",
+          "cells": [
+            {
+              "text": "Usually negative; helps distinguish from classic Behcet disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haploinsufficiency_a20-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic, adult-onset Behcet disease",
+          "cells": [
+            {
+              "text": "Early-onset disease with a strong autosomal dominant family history; HLA-B51 usually negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Autoimmune features and autoantibodies overlap with lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease, including very-early-onset disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary periodic fever syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haploinsufficiency_a20-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biologic therapy",
+          "cells": [
+            {
+              "text": "TNF inhibitors or interleukin-1 blockade to target the driving cytokines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine and glucocorticoids",
+          "cells": [
+            {
+              "text": "Mucocutaneous ulceration and acute autoinflammatory flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conventional immunosuppressants",
+          "cells": [
+            {
+              "text": "For autoimmune or organ involvement; Janus kinase inhibition in refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterocolitis management",
+          "cells": [
+            {
+              "text": "Jointly with gastroenterology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Acute-phase reactants, disease activity, autoantibodies and regular ophthalmological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Immunology, rheumatology, gastroenterology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance with variable expressivity; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Severe, treatment-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haploinsufficiency_a20-dx-mgmt",
+      "title": "Diagnosis and management of Haploinsufficiency of A20",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset recurrent oral and genital ulceration with Behcet-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe gut inflammation, CNS disease, macrophage activation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent multidisciplinary care for severe gut, CNS or macrophage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TNFAIP3 sequencing, acute-phase reactants, autoantibodies, HLA-B51 typing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a TNFAIP3 loss-of-function variant found, with classic Behcet excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic Behcet disease, SLE, IBD or another monogenic autoinflammatory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Biologics targeting TNF or interleukin-1 for the driving cytokines",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Colchicine and glucocorticoids for ulceration and flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conventional immunosuppressants; Janus kinase inhibition if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor disease activity, autoantibodies and uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Disease controlled; stem cell transplantation considered for severe refractory cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

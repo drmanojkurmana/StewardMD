@@ -157,5 +157,477 @@
       "caption": "Overview comparison matrix for paroxysmal nocturnal haemoglobinuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Paroxysmal Nocturnal Hemoglobinuria",
+      "url": "https://www.merckmanuals.com/professional/hematology/anemias-caused-by-hemolysis/paroxysmal-nocturnal-hemoglobinuria-pnh",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 106-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PNH-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in paroxysmal nocturnal haemoglobinuria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Flow cytometry",
+          "cells": [
+            {
+              "text": "{{hy:Loss of CD59, CD55 and FLAER on blood leukocytes}}"
+            },
+            {
+              "text": "Diagnostic; highly sensitive and specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemolysis pattern",
+          "cells": [
+            {
+              "text": "Chronic intravascular haemolysis with acute crises"
+            },
+            {
+              "text": "Triggered by infection, transfusion, vaccination, menses"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Visible haemoglobinuria",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Only about 30",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Absence does not exclude PNH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine haemosiderin",
+          "cells": [
+            {
+              "text": "Constantly present"
+            },
+            {
+              "text": "Chronic urinary iron loss causes iron deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thrombosis",
+          "cells": [
+            {
+              "text": "Hepatic, portal and cerebral venous sinus thrombosis"
+            },
+            {
+              "text": "Unusual-site thrombosis should prompt testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cytopenias",
+          "cells": [
+            {
+              "text": "Leukopenia, thrombocytopenia, pancytopenia"
+            },
+            {
+              "text": "Marrow failure overlap"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clone size",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Below 30 usually subclinical",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Small clones rarely need complement inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aplastic anaemia link",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50 of aplastic anaemia have a PNH clone",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Screen yearly"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PNH-ddx",
+      "kind": "ddx",
+      "title": "Other causes of predominantly intravascular haemolysis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Course",
+        "Key test"
+      ],
+      "rows": [
+        {
+          "parameter": "PNH",
+          "cells": [
+            {
+              "text": "Chronic with acute exacerbations"
+            },
+            {
+              "text": "CD59-negative cells by flow cytometry"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ABO-incompatible transfusion",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Repeat cross-match"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal cold haemoglobinuria",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "{{hy:Donath-Landsteiner antibody}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Clostridium perfringens septicaemia",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Blood cultures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Microangiopathic haemolysis",
+          "cells": [
+            {
+              "text": "Acute or chronic"
+            },
+            {
+              "text": "Red cell morphology on blood film"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "March haemoglobinuria",
+          "cells": [
+            {
+              "text": "After exertion"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Favism (G6PD deficiency)",
+          "cells": [
+            {
+              "text": "Acute after fava beans or oxidant drugs"
+            },
+            {
+              "text": "G6PD assay"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "PNH-treatment",
+      "kind": "treatment",
+      "title": "Treatment of PNH",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ravulizumab or eculizumab (C5 inhibitors)",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic anaemia, transfusion need or thrombosis}}"
+            },
+            {
+              "text": "Ravulizumab needs fewer infusions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Meningococcal vaccination",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "At least 14 before complement inhibitor",
+              "op": ">=",
+              "value": 14
+            },
+            {
+              "text": "Or prophylactic antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pegcetacoplan (C3) or iptacopan (factor B)",
+          "cells": [
+            {
+              "text": "Proximal inhibition"
+            },
+            {
+              "text": "Block intravascular and extravascular haemolysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Danicopan with a C5 inhibitor",
+          "cells": [
+            {
+              "text": "Extravascular haemolysis on a C5 inhibitor"
+            },
+            {
+              "text": "Oral factor D inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Acute thrombosis"
+            },
+            {
+              "text": "May not be needed long term on complement inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iron, folic acid, transfusion",
+          "cells": [
+            {
+              "text": "Supportive"
+            },
+            {
+              "text": "Transfuse for crises or symptomatic anaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Only if complement inhibition unavailable"
+            },
+            {
+              "text": "Avoid long term"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immunosuppression or marrow transplant",
+          "cells": [
+            {
+              "text": "Bone marrow failure"
+            },
+            {
+              "text": "Complement inhibitors do not treat marrow failure"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses were not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PNH-dx-mgmt",
+      "title": "Diagnosis and management of PNH",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Coombs-negative haemolysis, cytopenias or unusual-site thrombosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Flow cytometry for CD55, CD59 and FLAER",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "PNH clone present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for other intravascular haemolysis causes",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Symptomatic haemolysis, transfusion need or thrombosis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Small clone: monitor; screen for marrow failure",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Meningococcal vaccine at least 14 days before treatment",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start ravulizumab or eculizumab; anticoagulate acute clot",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Ongoing extravascular haemolysis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Add danicopan or switch to pegcetacoplan or iptacopan",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue therapy with iron and folate",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

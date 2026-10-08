@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for pentasomy x (49,xxxxx)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pentasomy_x-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Supplementary chromosomal analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Significant congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey including the forearm",
+          "cells": [
+            {
+              "text": "Radioulnar synostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and pubertal assessment with pelvic imaging",
+          "cells": [
+            {
+              "text": "Uterine and ovarian development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pentasomy_x-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Down syndrome",
+          "cells": [
+            {
+              "text": "Overlapping facial features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal dysplasia featuring radioulnar synostosis",
+          "cells": [
+            {
+              "text": "Radioulnar synostosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pentasomy_x-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Special education and speech, occupational and physical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac management",
+          "cells": [
+            {
+              "text": "Congenital heart defects such as patent ductus arteriosus and septal defects, with cardiology and surgical repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal management",
+          "cells": [
+            {
+              "text": "Orthopaedic and physiotherapy input for radioulnar synostosis and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine care",
+          "cells": [
+            {
+              "text": "Growth and puberty assessment with endocrine evaluation; hormone replacement if indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and malformation surveillance",
+          "cells": [
+            {
+              "text": "Recurrent infections and associated malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Lifelong support for the individual and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Sporadic non-disjunction origin and low recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pentasomy_x-dx-mgmt",
+      "title": "Diagnosis and management of Pentasomy X (49,XXXXX)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intellectual disability with Down-like facial features; suspected pentasomy X",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (congenital heart disease, recurrent infection, pubertal failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and endocrine input for heart disease or pubertal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, chromosomal microarray, echocardiography and skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does karyotype confirm 49,XXXXX?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetrasomy X, trisomy X, Down syndrome or other syndromic disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental intervention with special education and therapies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage congenital heart defects with cardiology and surgical repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic and physiotherapy input for radioulnar synostosis and contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endocrine evaluation of puberty and ovarian function; replace hormones if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveil for recurrent infections and offer genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Guarded; most have significant intellectual disability but survive into adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

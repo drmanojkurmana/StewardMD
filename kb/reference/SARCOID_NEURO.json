@@ -163,5 +163,439 @@
       "caption": "Overview comparison matrix for neurosarcoidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Clinical features, treatment and outcome in neurosarcoidosis: systematic review and meta-analysis, BMC Neurol 2016",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5109654/fullTextXML",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "A rare case of sarcoid myelitis complicating Lofgren syndrome, SVDLD 2023",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10965008/fullTextXML",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "SARCOID_NEURO-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in neurosarcoidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Frequency in sarcoidosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5 (range 2 to 26)",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "Neurological onset in 52%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cranial neuropathy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "55 overall; facial 24, optic 21",
+              "op": "=",
+              "value": 55
+            },
+            {
+              "text": "{{hy:Commonest presentation, facial palsy most typical}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other sites",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Meningeal enhancement 46, spinal cord 18, peripheral nerve 17, neuroendocrine 9, hydrocephalus 9"
+            },
+            {
+              "text": "Any part of the nervous system"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI brain",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in about 79",
+              "op": "=",
+              "value": 79
+            },
+            {
+              "text": "Leptomeningeal or parenchymal enhancement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CSF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Pleocytosis 58, raised protein 63, raised CSF ACE 46"
+            },
+            {
+              "text": "Exclude infection and malignancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum ACE",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Raised in 35",
+              "op": "=",
+              "value": 35
+            },
+            {
+              "text": "Normal value does not exclude"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest CT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Consistent with sarcoidosis in 70",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "Find a safer biopsy site"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Probable vs definite",
+          "cells": [
+            {
+              "text": "Probable: granulomas outside the nervous system; definite: granulomas in nervous tissue"
+            },
+            {
+              "text": "Consortium consensus categories"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "SARCOID_NEURO-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of neurosarcoidosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Why it matters"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "{{hy:Exclude infection before immunosuppression}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal meningitis",
+          "cells": [
+            {
+              "text": "Cryptococcal or coccidioidal infection must be excluded on CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS lymphoma",
+          "cells": [
+            {
+              "text": "Exclude malignancy; CSF cytology and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sclerosis and demyelinating disease",
+          "cells": [
+            {
+              "text": "Listed mimic of optic nerve and cord disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS vasculitis",
+          "cells": [
+            {
+              "text": "Listed inflammatory mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other granulomatous CNS disorders",
+          "cells": [
+            {
+              "text": "Lymphomatoid granulomatosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "SARCOID_NEURO-treatment",
+      "kind": "treatment",
+      "title": "Treatment of neurosarcoidosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "{{hy:First line for active disease}}"
+            },
+            {
+              "text": "Used in about 83%; favourable outcome 71% with first-line only"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV methylprednisolone then oral prednisolone",
+          "cells": [
+            {
+              "text": "Severe disease, for example myelitis"
+            },
+            {
+              "text": "Example: 1 g daily for 3 days, then 0.5 mg/kg tapered"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Methotrexate, azathioprine or mycophenolate",
+          "cells": [
+            {
+              "text": "Steroid-sparing maintenance"
+            },
+            {
+              "text": "Methotrexate 15 mg weekly in the case report"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Infliximab (TNF inhibitor)",
+          "cells": [
+            {
+              "text": "Refractory parenchymal or spinal cord disease"
+            },
+            {
+              "text": "Escalation step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and antiepileptics",
+          "cells": [
+            {
+              "text": "Hypothalamic-pituitary disease, seizures"
+            },
+            {
+              "text": "Desmopressin for diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF shunt",
+          "cells": [
+            {
+              "text": "Symptomatic hydrocephalus"
+            },
+            {
+              "text": "Neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Pooled outcomes: complete remission 27%, improvement 32%, stable 24%, deterioration 6%, mortality 5%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "SARCOID_NEURO-dx-mgmt",
+      "title": "Diagnosis and management of neurosarcoidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cranial neuropathy, myelopathy or meningitis, known or suspected sarcoid",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Gadolinium MRI brain and spine; CSF studies",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection or malignancy in CSF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat TB, fungal infection or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Chest CT or FDG-PET to find a biopsy site",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Granulomas on biopsy?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Possible only: keep investigating; consider neural biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids; IV pulse if severe",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add methotrexate or another steroid-sparing agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Refractory or severe parenchymal or cord disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Add infliximab",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Taper slowly; serial MRI",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

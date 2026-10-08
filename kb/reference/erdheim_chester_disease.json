@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for erdheim-chester disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erdheim_chester_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy of an affected site",
+          "cells": [
+            {
+              "text": "Foamy CD68-positive, CD1a-negative histiocytes with Touton giant cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for BRAF-V600E and other MAPK pathway mutations",
+          "cells": [
+            {
+              "text": "Mutation status, which guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs and technetium bone scan",
+          "cells": [
+            {
+              "text": "Symmetrical long-bone osteosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Perirenal 'hairy kidney' and periaortic 'coated aorta'"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and cardiac imaging",
+          "cells": [
+            {
+              "text": "Neurological and cardiac infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET imaging",
+          "cells": [
+            {
+              "text": "Disease extent and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erdheim_chester_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Langerhans cell histiocytosis",
+          "cells": [
+            {
+              "text": "Foamy histiocytes are CD1a-negative; immunostaining separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related disease and retroperitoneal fibrosis",
+          "cells": [
+            {
+              "text": "Periaortic and perirenal disease must not be attributed to retroperitoneal fibrosis alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erdheim_chester_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "BRAF inhibitor (vemurafenib or dabrafenib)",
+          "cells": [
+            {
+              "text": "For BRAF-V600E-mutant disease; the principal disease-modifying treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEK inhibitor (cobimetinib or trametinib)",
+          "cells": [
+            {
+              "text": "Non-BRAF MAPK pathway mutation or BRAF-inhibitor intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interferon-alpha",
+          "cells": [
+            {
+              "text": "Alternative systemic option where targeted agents are unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Desmopressin for cranial diabetes insipidus; replacement of other pituitary deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and orthopaedic input",
+          "cells": [
+            {
+              "text": "Long-bone pain and symptomatic osteosclerotic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and neurological monitoring",
+          "cells": [
+            {
+              "text": "Periaortic and right-atrial pseudotumour, and central nervous system infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial PET",
+          "cells": [
+            {
+              "text": "Maps disease extent and monitors response to targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Haematology, cardiology, endocrinology and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erdheim_chester_disease-dx-mgmt",
+      "title": "Diagnosis and management of Erdheim-Chester disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral symmetrical long-bone pain with osteosclerosis in a middle-aged adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiac involvement, CNS decline, diabetes insipidus, renal impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiology, neurology and endocrine review for threatened organ function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with CD68 and CD1a staining; BRAF-V600E testing; CT and PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Foamy CD68-positive, CD1a-negative histiocytes with Touton cells on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Langerhans cell histiocytosis or IgG4-related disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "BRAF inhibitor (vemurafenib or dabrafenib) for BRAF-V600E disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "MEK inhibitor (cobimetinib or trametinib) for non-BRAF or intolerant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Interferon-alpha where targeted agents are unavailable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hormone replacement, including desmopressin for diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiac and neurological monitoring with serial PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on site and extent; targeted therapy has transformed treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

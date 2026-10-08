@@ -154,5 +154,332 @@
       "caption": "Overview comparison matrix for fertile eunuch syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical endocrinology and genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fertile_eunuch_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Testosterone with LH and FSH",
+          "cells": [
+            {
+              "text": "Low or inappropriately normal gonadotropins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis",
+          "cells": [
+            {
+              "text": "Residual spermatogenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH stimulation testing",
+          "cells": [
+            {
+              "text": "Pituitary gonadotrope responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH bioactivity where available",
+          "cells": [
+            {
+              "text": "Functional LH deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of LHB and GnRH pathway genes",
+          "cells": [
+            {
+              "text": "Genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular volume and scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Testicular size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary imaging and prolactin",
+          "cells": [
+            {
+              "text": "Acquired central causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fertile_eunuch_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kallmann syndrome",
+          "cells": [
+            {
+              "text": "Hypogonadotropic hypogonadism with anosmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated FSH deficiency (FSHB variants)",
+          "cells": [
+            {
+              "text": "Selective gonadotropin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klinefelter syndrome or primary hypogonadism",
+          "cells": [
+            {
+              "text": "Raised gonadotropins in primary failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fertile_eunuch_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Induces and maintains virilisation, sexual function, muscle and bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotrophin therapy with hCG and FSH",
+          "cells": [
+            {
+              "text": "Supplies LH activity and adds FSH when fertility is wanted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor testosterone, haematocrit and prostate health",
+          "cells": [
+            {
+              "text": "During androgen replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density surveillance",
+          "cells": [
+            {
+              "text": "Treat osteoporosis risk from androgen deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis during gonadotrophin therapy",
+          "cells": [
+            {
+              "text": "Tracks spermatogenesis; assisted reproduction or sperm retrieval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive endocrinology referral",
+          "cells": [
+            {
+              "text": "Conception planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive LHB basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fertile_eunuch_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fertile Eunuch Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Eunuchoid habitus with delayed or incomplete virilisation and low testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (anosmia, visual field loss, headache or multiple pituitary deficiencies)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pituitary imaging for suspected acquired lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Testosterone with LH and FSH; semen analysis; GnRH test; LHB genetics; MRI pituitary",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low gonadotropins with detectable sperm and biallelic LHB variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kallmann syndrome, isolated FSH deficiency or primary testicular failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testosterone replacement for virilisation and bone health",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotrophin therapy when fertility is wanted",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid testosterone alone where fertility is desired",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Semen analysis and reproductive endocrinology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Virilisation and bone health restored; fertility achievable with gonadotrophin therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

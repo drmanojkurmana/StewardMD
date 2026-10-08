@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for gastric volvulus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastric_volvulus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest and erect abdominal radiographs",
+          "cells": [
+            {
+              "text": "Abnormally sited, distended stomach or intrathoracic gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest and abdomen",
+          "cells": [
+            {
+              "text": "Confirms rotation, defines the axis and identifies a diaphragmatic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast study",
+          "cells": [
+            {
+              "text": "Site and level of obstruction, where the patient is stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Selected non-emergency cases, with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods including lactate and inflammatory markers",
+          "cells": [
+            {
+              "text": "Detects ischaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_volvulus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Large paraoesophageal or hiatus hernia without volvulus",
+          "cells": [
+            {
+              "text": "Hernia without gastric rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myocardial infarction",
+          "cells": [
+            {
+              "text": "Overlaps with epigastric pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_volvulus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation and nasogastric decompression",
+          "cells": [
+            {
+              "text": "Immediate first steps in the acute presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "Detorse the volvulus, assess gastric viability and resect any necrotic stomach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of the predisposing defect",
+          "cells": [
+            {
+              "text": "Most often a large paraoesophageal or hiatus hernia; secure the stomach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic detorsion",
+          "cells": [
+            {
+              "text": "Selected patients unfit for major surgery, with or without percutaneous gastrostomy fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective repair",
+          "cells": [
+            {
+              "text": "Chronic or intermittent volvulus, to prevent strangulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate and inflammatory markers",
+          "cells": [
+            {
+              "text": "Monitors for early ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency general surgery",
+          "cells": [
+            {
+              "text": "With anaesthetic and critical-care support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastric_volvulus-dx-mgmt",
+      "title": "Diagnosis and management of Gastric volvulus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastric volvulus: acute epigastric pain with abnormal gastric position",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Borchardt triad, strangulation, failed nasogastric tube)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgery to detorse the volvulus and assess gastric viability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Erect radiographs, CT of chest and abdomen; lactate and inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT confirm gastric rotation with a diaphragmatic defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hernia without volvulus, gastric dilatation or myocardial infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitation and attempted nasogastric decompression as first steps",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent surgery to detorse, assess viability and resect necrotic stomach",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair the predisposing hernia and secure the stomach at operation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Elective repair for chronic or intermittent volvulus to prevent strangulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good if reduced before ischaemia; delayed strangulation and necrosis worsen outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

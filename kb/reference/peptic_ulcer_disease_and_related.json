@@ -186,5 +186,553 @@
       "caption": "Overview comparison matrix for peptic ulcer disease and related disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 293-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 293-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 151-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "AAFP POEM on ACG 2024 H. pylori guideline, 2025",
+      "kind": "web",
+      "url": "https://www.aafp.org/afp/2025/0300/poems-helicobacter-pylori-treatment"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peptic_ulcer_disease_and_related-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing peptic ulcer and its causes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Comment"
+      ],
+      "rows": [
+        {
+          "parameter": "Ulcer definition",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Mucosal break over 5 mm into submucosa",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Over 90% of classic dyspepsia has no ulcer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Most sensitive and specific test"
+            },
+            {
+              "text": "{{hy:Biopsy every gastric ulcer to exclude cancer}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid urease test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 80 to 95%, specificity 95 to 100%",
+              "range": [
+                80,
+                95
+              ]
+            },
+            {
+              "text": "False negative after recent PPI, antibiotic or bismuth"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Histology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 80 to 90%, specificity over 95%",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "Gives histologic information"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Culture",
+          "cells": [
+            {
+              "text": "Sensitivity not stated"
+            },
+            {
+              "text": "Allows antibiotic susceptibility testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity over 80%, specificity over 90%",
+              "op": ">",
+              "value": 80
+            },
+            {
+              "text": "Cannot separate active from past infection; not for follow-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urea breath test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity over 90%",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Good for follow-up; false negative after recent therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stool antigen test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity over 95%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Noninvasive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secretin test for gastrinoma",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Gastrin rise of 120 pg/mL or more at 15 min",
+              "op": ">=",
+              "value": 120
+            },
+            {
+              "text": "Stop PPI about 7 days first with H2 blocker cover"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 293-2 gives breath test sensitivity and specificity over 90%; the entry text quotes over 95% for breath and stool antigen tests."
+    },
+    {
+      "id": "peptic_ulcer_disease_and_related-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic peptic ulcer disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional dyspepsia",
+          "cells": [
+            {
+              "text": "Commonest cause of epigastric discomfort; no ulcer"
+            },
+            {
+              "text": "Normal endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GERD",
+          "cells": [
+            {
+              "text": "Heartburn and regurgitation"
+            },
+            {
+              "text": "Endoscopy, pH study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric cancer",
+          "cells": [
+            {
+              "text": "Weight loss, age 60 or older, nonhealing gastric ulcer"
+            },
+            {
+              "text": "Endoscopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary colic or chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Episodic RUQ pain or pain radiating to back"
+            },
+            {
+              "text": "Ultrasound, CT, lipase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zollinger-Ellison syndrome",
+          "cells": [
+            {
+              "text": "Multiple, distal or refractory ulcers with diarrhea"
+            },
+            {
+              "text": "Fasting gastrin off PPI, secretin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroduodenal Crohn disease",
+          "cells": [
+            {
+              "text": "Other bowel involvement"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMV or HSV ulceration",
+          "cells": [
+            {
+              "text": "Immunocompromised host"
+            },
+            {
+              "text": "Biopsy with viral stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric ischemia",
+          "cells": [
+            {
+              "text": "Postprandial pain, vascular disease, weight loss"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peptic_ulcer_disease_and_related-treatment",
+      "kind": "treatment",
+      "title": "Treating peptic ulcer disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bismuth quadruple therapy, 14 days",
+          "cells": [
+            {
+              "text": "First line for H. pylori when susceptibility unknown"
+            },
+            {
+              "text": "PPI twice daily, bismuth subcitrate 120 to 300 mg or subsalicylate 300 mg four times daily, tetracycline 500 mg four times daily, metronidazole 500 mg three or four times daily"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Rifabutin triple or vonoprazan plus amoxicillin",
+          "cells": [
+            {
+              "text": "Alternative first line; rifabutin after failed bismuth quadruple"
+            },
+            {
+              "text": "Conditional recommendation"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Clarithromycin triple (omeprazole 20 mg, clarithromycin 500 mg, amoxicillin 1 g or metronidazole 500 mg, all twice daily)",
+          "cells": [
+            {
+              "text": "Only if clarithromycin susceptibility proven"
+            },
+            {
+              "text": "Older Table 151-2 lists 7 to 14 days as first line"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Confirm eradication",
+          "cells": [
+            {
+              "text": "After every H. pylori regimen"
+            },
+            {
+              "text": "Breath, stool antigen or biopsy test at least 4 weeks after therapy"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "PPI or H2 blocker",
+          "cells": [
+            {
+              "text": "Active ulcer, NSAID stopped"
+            },
+            {
+              "text": "PPI if NSAID must continue"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NSAID prophylaxis",
+          "cells": [
+            {
+              "text": "Ongoing NSAID use with ulcer risk"
+            },
+            {
+              "text": "Misoprostol, PPI or selective COX-2 inhibitor"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Endoscopic hemostasis plus IV PPI",
+          "cells": [
+            {
+              "text": "Bleeding ulcer"
+            },
+            {
+              "text": "Bleeding is the commonest complication (about 15%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Perforation, refractory bleeding, fixed outlet obstruction"
+            },
+            {
+              "text": "Perforation 30-day mortality over 20%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose PPI, gastrinoma localization and resection",
+          "cells": [
+            {
+              "text": "Zollinger-Ellison syndrome"
+            },
+            {
+              "text": "Screen for MEN 1; do not stop PPI abruptly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Conflict: Table 151-2 (older printed table) lists clarithromycin triple, sequential and levofloxacin regimens as first-line options; ACG 2024 prefers 14-day bismuth quadruple therapy and advises against clarithromycin or levofloxacin regimens unless susceptibility is shown. The current guideline is placed first."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peptic_ulcer_disease_and_related-dx-mgmt",
+      "title": "Diagnosis and management of peptic ulcer disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspepsia or epigastric pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding, perforation signs, vomiting, weight loss or age 60+?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Upper endoscopy; biopsy gastric ulcer and test for H. pylori",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Noninvasive H. pylori test (breath or stool antigen)",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "H. pylori positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "14-day bismuth quadruple therapy",
+          "cite": "c5"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Retest at least 4 weeks after therapy",
+          "cite": "c5"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Taking NSAIDs or aspirin?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Stop NSAID and give PPI; PPI cover if NSAID must continue",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Refractory, multiple or distal ulcers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fasting gastrin off PPI and secretin test for gastrinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "PPI healing course; consider functional dyspepsia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

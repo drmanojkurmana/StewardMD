@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for familial isolated pituitary adenoma (aip)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_isolated_pituitary_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary hormone profile with GH, IGF-1 and prolactin",
+          "cells": [
+            {
+              "text": "Hormone excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose suppression testing",
+          "cells": [
+            {
+              "text": "Where acromegaly is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dedicated pituitary MRI",
+          "cells": [
+            {
+              "text": "Tumour size and invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field assessment",
+          "cells": [
+            {
+              "text": "Tumour approaching the optic chiasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AIP molecular genetic testing",
+          "cells": [
+            {
+              "text": "Index case and at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_isolated_pituitary_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic pituitary adenoma",
+          "cells": [
+            {
+              "text": "Occurs without a family history; AIP testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple endocrine neoplasia type 1",
+          "cells": [
+            {
+              "text": "Excluded by the absence of parathyroid or pancreatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex",
+          "cells": [
+            {
+              "text": "Considered in the differential of familial pituitary adenoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_isolated_pituitary_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal resection",
+          "cells": [
+            {
+              "text": "Primary therapy for GH-secreting and other non-prolactinoma adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cabergoline",
+          "cells": [
+            {
+              "text": "Medical treatment for prolactin-secreting adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues with pegvisomant",
+          "cells": [
+            {
+              "text": "For acromegaly or gigantism; AIP somatotroph tumours may respond less well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Residual or aggressive tumour not controlled by surgery and medicines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and apoplexy care",
+          "cells": [
+            {
+              "text": "Replacement of deficiencies; pituitary apoplexy is an emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field and MRI monitoring",
+          "cells": [
+            {
+              "text": "Tumour growth and chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AIP testing and screening of relatives",
+          "cells": [
+            {
+              "text": "Earlier detection while adenomas are smaller"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_isolated_pituitary_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of Familial isolated pituitary adenoma (AIP)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acromegaly or gigantism in a young patient, or pituitary adenomas in several relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visual field loss, apoplexy, rapid growth, hypopituitarism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of pituitary apoplexy; neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hormone profile; glucose suppression; pituitary MRI; visual fields; AIP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Familial adenomas with a pathogenic AIP variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic adenoma, MEN1, Carney complex or X-linked acrogigantism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal resection as primary therapy for GH-secreting adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cabergoline for prolactinomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Somatostatin analogues and pegvisomant for acromegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy for residual or aggressive tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "AIP testing and screening of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on size and response; AIP tumours are often larger and less responsive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hartnup disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hartnup_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine amino acid chromatography",
+          "cells": [
+            {
+              "text": "Neutral aminoaciduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC6A19 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms biallelic variants in SLC6A19"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acid profile",
+          "cells": [
+            {
+              "text": "Often normal or low neutral amino acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niacin or nicotinamide status",
+          "cells": [
+            {
+              "text": "Where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of newborn screening results",
+          "cells": [
+            {
+              "text": "Urinary amino acid patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of nutritional or malabsorptive causes",
+          "cells": [
+            {
+              "text": "Excludes pellagra"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hartnup_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional pellagra (niacin deficiency)",
+          "cells": [
+            {
+              "text": "Neutral aminoaciduria, with normal excretion of acidic amino acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised aminoacidurias such as Fanconi syndrome",
+          "cells": [
+            {
+              "text": "Neutral aminoaciduria, with normal excretion of acidic amino acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other photosensitive dermatoses (for example porphyrias)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Episodic ataxias of other cause",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hartnup_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-protein diet",
+          "cells": [
+            {
+              "text": "Good-quality protein to offset intestinal and renal loss of neutral amino acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niacin (nicotinamide) supplementation",
+          "cells": [
+            {
+              "text": "Corrects the functional deficiency from tryptophan loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Photoprotection, prompt treatment of intercurrent illness and preventing poor nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment during attacks",
+          "cells": [
+            {
+              "text": "Pellagra-like photosensitive rash and intermittent cerebellar ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, nutritional status and frequency of episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SLC6A19 inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hartnup_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hartnup disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Photosensitive rash with intermittent ataxia, or neutral aminoaciduria on screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe recurrent ataxia, neuropsychiatric decline, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: nutritional support and neurological assessment for severe presentations",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine amino acid chromatography; plasma amino acids; SLC6A19 genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neutral aminoaciduria with normal acidic amino acid excretion on urine testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nutritional pellagra, Fanconi syndrome or porphyria; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-protein diet of good-quality protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Niacin (nicotinamide) supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid precipitants: photoprotection and prompt treatment of illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic treatment of rash and ataxia during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most individuals remain well; attacks managed with diet and niacin",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

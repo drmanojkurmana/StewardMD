@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for fixed drug eruption."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fixed_drug_eruption-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug history with timing of exposure and lesion onset",
+          "cells": [
+            {
+              "text": "Culprit drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Interface dermatitis and necrotic keratinocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing at a previously affected site",
+          "cells": [
+            {
+              "text": "Confirms culprit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised oral provocation testing",
+          "cells": [
+            {
+              "text": "Culprit uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal and skin detachment assessment",
+          "cells": [
+            {
+              "text": "Severity in bullous cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fixed_drug_eruption-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Stevens-Johnson syndrome or toxic epidermal necrolysis",
+          "cells": [
+            {
+              "text": "Generalised bullous variant mimics them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema multiforme",
+          "cells": [
+            {
+              "text": "Target lesions with a different pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Other autoimmune blistering disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fixed_drug_eruption-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Identify and avoid the culprit drug",
+          "cells": [
+            {
+              "text": "Definitive intervention, lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Localised lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "Associated pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage generalised bullous form as for SJS or TEN",
+          "cells": [
+            {
+              "text": "Fluid balance and supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document the allergy and warn the patient",
+          "cells": [
+            {
+              "text": "Prevents inadvertent re-exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing or supervised provocation",
+          "cells": [
+            {
+              "text": "When the culprit is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Severe or diagnostically unclear cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fixed_drug_eruption-dx-mgmt",
+      "title": "Diagnosis and management of Fixed drug eruption",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sharply demarcated plaques recurring at the same site after a drug exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (widespread blistering, mucosal involvement, systemic upset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for SJS or TEN features with fluid and skin care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug history; skin biopsy; patch testing at old site; supervised provocation if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recurrence at the same site on re-exposure to the suspected drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SJS or TEN, erythema multiforme or bullous pemphigoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and permanently avoid the culprit drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids for localised lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral antihistamines for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage generalised bullous form as for SJS or TEN",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised form resolves with pigmentation; generalised bullous form is serious",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

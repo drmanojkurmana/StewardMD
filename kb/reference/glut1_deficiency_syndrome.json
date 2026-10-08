@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for glut1 deficiency syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glut1_deficiency_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar puncture with paired fasting blood glucose",
+          "cells": [
+            {
+              "text": "CSF-to-blood glucose ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF lactate",
+          "cells": [
+            {
+              "text": "Typically low or low-normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC2A1 molecular testing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Sometimes improves after a meal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Often normal; excludes alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell glucose uptake studies",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glut1_deficiency_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoglycaemic encephalopathy from systemic causes",
+          "cells": [
+            {
+              "text": "Systemic hypoglycaemia rather than low CSF glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glut1_deficiency_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Treatment of choice; ketones cross the blood-brain barrier independently of glucose transport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid GLUT1 inhibitors and ketosis-lowering agents",
+          "cells": [
+            {
+              "text": "Caffeine and methylxanthines; prevent prolonged fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures not controlled by diet; agents that do not impair ketosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder management",
+          "cells": [
+            {
+              "text": "Ataxia, dystonia and paroxysmal exercise-induced dyskinesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet monitoring",
+          "cells": [
+            {
+              "text": "Ketosis, growth, lipids, bone health and renal calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology, dietetics and developmental services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Frequent de novo dominant SLC2A1 variants; parental testing where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glut1_deficiency_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of GLUT1 deficiency syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GLUT1 deficiency: drug-resistant infant seizures with developmental slowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drug-resistant seizures, fasting-related worsening, ataxia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Start ketogenic diet urgently for drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired fasting CSF and blood glucose, CSF lactate, SLC2A1 testing and EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the CSF-to-blood glucose ratio low on paired fasting samples?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypoglycaemic encephalopathy, mitochondrial disease or other encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ketogenic diet as the treatment of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid caffeine, methylxanthines and prolonged fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for seizures not controlled by diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic management of ataxia, dystonia and paroxysmal dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Seizures and movement often respond to diet; early treatment improves function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

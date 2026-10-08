@@ -148,5 +148,354 @@
       "caption": "Overview comparison matrix for olecranon bursitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "olecranon_bursitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bursal aspiration with cell count, Gram stain and culture",
+          "cells": [
+            {
+              "text": "Septic versus aseptic bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polarised light microscopy of the aspirate",
+          "cells": [
+            {
+              "text": "Crystals, as in gout or pseudogout"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and blood cultures",
+          "cells": [
+            {
+              "text": "Systemic infection when the patient is unwell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate",
+          "cells": [
+            {
+              "text": "Gout; limited value in the acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Fracture, foreign body or bony spur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the fluid collection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "olecranon_bursitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic olecranon bursitis",
+          "cells": [
+            {
+              "text": "Warmth, marked erythema, fever, disproportionate pain or an overlying skin breach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or pseudogout",
+          "cells": [
+            {
+              "text": "Crystals on polarised microscopy of the aspirate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Olecranon fracture or elbow trauma",
+          "cells": [
+            {
+              "text": "Swelling after trauma; radiographs exclude fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis of the elbow",
+          "cells": [
+            {
+              "text": "Fever and spreading erythema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "olecranon_bursitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration to separate septic from aseptic",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Cell count, Gram stain, culture and crystal microscopy direct treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antistaphylococcal antibiotics",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Such as flucloxacillin for skin flora, with drainage or aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical drainage for refractory septic cases",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Incision and drainage or bursectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care for aseptic bursitis",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Avoid pressure and leaning; elbow padding, rest, ice and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of symptomatic aseptic effusion",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Corticosteroid injection avoided where infection cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Urate-lowering therapy for gout; disease control for rheumatoid arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up for recurrence",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Continued pressure avoidance; bursectomy reserved for recurrent or chronic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "olecranon_bursitis-dx-mgmt",
+      "title": "Diagnosis and management of Olecranon bursitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Olecranon swelling and pain; septic versus aseptic bursitis to separate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fever, spreading erythema, skin breach or systemic sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent antibiotics and drainage for suspected septic bursitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bursal aspiration: cell count, Gram stain, culture and crystal microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the aspirate show infection on cell count, Gram stain or culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Aseptic: check for gout, rheumatoid arthritis or fracture; treat conservatively",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antistaphylococcal antibiotics such as flucloxacillin with drainage or aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Incision and drainage or bursectomy for refractory septic bursitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rest, padding and ice; NSAIDs; avoid pressure on the elbow",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat underlying gout or rheumatoid arthritis; avoid steroid injection if infected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aseptic bursitis usually settles; septic bursitis resolves with antibiotics and drainage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -155,5 +155,305 @@
       "caption": "Overview comparison matrix for familial adenomatous polyposis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_adenomatous_polyposis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline APC sequencing with deletion analysis; MUTYH if APC negative",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy or flexible sigmoidoscopy from adolescence",
+          "cells": [
+            {
+              "text": "Polyp burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy with side-viewing duodenoscopy",
+          "cells": [
+            {
+              "text": "Duodenal and periampullary adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Suspected desmoid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound",
+          "cells": [
+            {
+              "text": "Papillary thyroid carcinoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Congenital hypertrophy of the retinal pigment epithelium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_adenomatous_polyposis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk-reducing colectomy",
+          "cells": [
+            {
+              "text": "Colectomy or restorative proctocolectomy, planned before malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance of rectum or pouch",
+          "cells": [
+            {
+              "text": "Removal of any significant polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoid management",
+          "cells": [
+            {
+              "text": "Surgical timing weighed against desmoid risk; cross-sectional follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemoprevention",
+          "cells": [
+            {
+              "text": "Sulindac or a COX-2 inhibitor; adjunct only, reduces adenoma burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal surveillance",
+          "cells": [
+            {
+              "text": "Side-viewing duodenoscopy; endoscopic or surgical treatment of advanced lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracolonic surveillance",
+          "cells": [
+            {
+              "text": "Thyroid ultrasound and ophthalmological examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible sigmoidoscopy screening",
+          "cells": [
+            {
+              "text": "From ages 10 to 12 years in known or suspected FAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade testing",
+          "cells": [
+            {
+              "text": "At-risk relatives; APC protein truncation or germline testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_adenomatous_polyposis-dx-mgmt",
+      "title": "Diagnosis and management of Familial adenomatous polyposis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple colorectal adenomas from adolescence, or a family history of APC variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid polyp increase or mass, enlarging desmoid, advanced duodenal adenoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer promptly to clinical genetics and a polyposis team",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline APC sequencing; colonoscopy; upper GI endoscopy; imaging if desmoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic APC variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test MUTYH and other polyposis genes; reassess serrated polyposis or Lynch syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk-reducing colectomy before malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong endoscopic surveillance of rectum or pouch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Upper GI surveillance with side-viewing duodenoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thyroid ultrasound and eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated, it almost always progresses to colorectal cancer; timely surgery decides",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

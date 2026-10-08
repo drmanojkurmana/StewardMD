@@ -147,5 +147,285 @@
       "caption": "Overview comparison matrix for gabrb3 encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gabrb3_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or whole-exome sequencing",
+          "cells": [
+            {
+              "text": "Confirms the GABRB3 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised versus multifocal patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism-spectrum assessment",
+          "cells": [
+            {
+              "text": "Developmental and autism-spectrum profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "15q11-q13 copy number change, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Guides support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gabrb3_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Antiseizure medications matched to phenotype, favouring agents that enhance GABA-A signalling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epileptic spasms with hypsarrhythmia",
+          "cells": [
+            {
+              "text": "Hormonal therapy or vigabatrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Considered in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism-focused support",
+          "cells": [
+            {
+              "text": "Early-intervention therapies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial EEG and neurodevelopmental monitoring",
+          "cells": [
+            {
+              "text": "Tracks seizure control and progress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental testing; chromosomal microarray where a 15q11-q13 change is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology and epileptology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gabrb3_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of GABRB3 encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GABRB3 encephalopathy: seizures with developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (epileptic spasms, drug-resistant seizures, status, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for epileptic spasms with hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy gene panel or exome sequencing, EEG, MRI and microarray if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing confirm a GABRB3 variant, with structural causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GABRA1, GABRG2, Dravet, STXBP1 or 15q11-q13 disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medications matched to phenotype, favouring GABA-A enhancing agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vigabatrin or hormonal therapy for epileptic spasms with hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ketogenic diet considered in refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial EEG and neurodevelopmental monitoring; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milder generalised forms may do well; encephalopathic forms carry a worse outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

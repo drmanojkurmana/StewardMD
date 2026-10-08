@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for distal (type 1) renal tubular acidosis, hereditary."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "distal_renal_tubular_acidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes, bicarbonate and anion gap",
+          "cells": [
+            {
+              "text": "Hyperchloraemic acidosis with normal anion gap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simultaneous urine pH and urinary anion gap",
+          "cells": [
+            {
+              "text": "Urine pH inappropriately high during systemic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ammonium chloride or furosemide-fludrocortisone test",
+          "cells": [
+            {
+              "text": "Acidification testing when the diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound or CT",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss in recessive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing of SLC4A1, ATP6V1B1 and ATP6V0A4",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "distal_renal_tubular_acidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 4 renal tubular acidosis",
+          "cells": [
+            {
+              "text": "Hyperkalaemic, unlike the hypokalaemia of distal RTA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal bicarbonate loss from diarrhoea",
+          "cells": [
+            {
+              "text": "Hypokalaemia wrongly attributed to diarrhoea rather than tubular loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "distal_renal_tubular_acidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong alkali",
+          "cells": [
+            {
+              "text": "Sodium bicarbonate or potassium citrate; corrects acidosis and bone buffering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium citrate for hypokalaemia",
+          "cells": [
+            {
+              "text": "Corrects hypokalaemia and raises urinary citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium citrate for stones",
+          "cells": [
+            {
+              "text": "Reduces hypercalciuria and hypocitraturia to limit nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone disease",
+          "cells": [
+            {
+              "text": "Alkali with vitamin D and calcium for rickets or osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Electrolytes, acid-base status, growth and renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and hearing support",
+          "cells": [
+            {
+              "text": "Sensorineural deafness of recessive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening for SLC4A1, ATP6V1B1 and ATP6V0A4 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Urgent when profound hypokalaemia threatens paralysis or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "distal_renal_tubular_acidosis-dx-mgmt",
+      "title": "Diagnosis and management of Distal (type 1) renal tubular acidosis, hereditary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected distal renal tubular acidosis: hyperchloraemic acidosis with hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypokalaemia, rickets, infected obstructing stone)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Potassium for paralysis or arrhythmia; urgent intervention for infected obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, bicarbonate, anion gap; urine pH; acidification test; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is urine pH inappropriately high with a normal anion gap acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider proximal RTA, type 4 RTA, diarrhoeal bicarbonate loss or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong alkali with sodium bicarbonate or potassium citrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium citrate to correct hypokalaemia and raise urinary citrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium citrate to reduce hypercalciuria and limit stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alkali with vitamin D and calcium for rickets or osteomalacia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor electrolytes, acid-base status, growth and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With alkali and potassium, growth and bone usually improve; nephrocalcinosis may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

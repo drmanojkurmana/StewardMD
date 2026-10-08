@@ -150,5 +150,344 @@
       "caption": "Overview comparison matrix for optic disc drusen."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "optic_disc_drusen-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Calcified, highly reflective body with acoustic shadowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Superficial drusen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced-depth or spectral-domain OCT",
+          "cells": [
+            {
+              "text": "Buried drusen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Arcuate and nasal field defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "No true leakage, distinguishing pseudopapilloedema from disc swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Only when true papilloedema cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "optic_disc_drusen-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "True papilloedema from raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Hyperaemia, exudates and nerve fibre layer oedema are absent in drusen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior ischaemic optic neuropathy",
+          "cells": [
+            {
+              "text": "Sudden visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripapillary choroidal neovascularisation",
+          "cells": [
+            {
+              "text": "Subretinal fluid or haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "optic_disc_drusen-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the drusen",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "B-scan confirms pseudopapilloedema and avoids unnecessary imaging and lumbar puncture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Reassurance in asymptomatic patients; no drusen-directed treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic perimetry",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Monitors the slowly progressive arcuate and nasal defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic and vascular care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Manage anterior ischaemic optic neuropathy and control vascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-VEGF therapy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For peripapillary choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ongoing follow-up",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Ophthalmology review for field and disc change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "optic_disc_drusen-dx-mgmt",
+      "title": "Diagnosis and management of Optic disc drusen",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Elevated disc with blurred margins; optic disc drusen or true papilloedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive field loss, sudden visual loss or subretinal fluid)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude raised intracranial pressure; treat ischaemic or CNV lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "B-scan ultrasound, autofluorescence, OCT, perimetry and fluorescein angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does B-scan show calcified drusen, with true papilloedema excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Possible true papilloedema: neuroimaging and neuro-ophthalmology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm pseudopapilloedema to avoid unnecessary imaging and lumbar puncture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe and reassure asymptomatic patients; no drusen-directed treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Periodic automated perimetry for slowly progressive arcuate and nasal defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage ischaemic optic neuropathy and control vascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Anti-VEGF therapy for peripapillary choroidal neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Central vision usually retained; peripheral field loss is slow and irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

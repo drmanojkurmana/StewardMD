@@ -149,5 +149,341 @@
       "caption": "Overview comparison matrix for haemophilia a (factor viii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemophilia_a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Activated partial thromboplastin time, prothrombin time and platelet count",
+          "cells": [
+            {
+              "text": "Prolonged aPTT with normal prothrombin time is the screening pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Corrects with factor deficiency; does not correct with an inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII activity assay",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and grades severity by residual activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand factor studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII inhibitor (Bethesda) assay",
+          "cells": [
+            {
+              "text": "Used when response to replacement is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F8 genetic testing, including the intron 22 inversion",
+          "cells": [
+            {
+              "text": "Diagnosis and carrier detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Lowers factor VIII secondarily"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilia B",
+          "cells": [
+            {
+              "text": "Clinically indistinguishable; a specific factor assay separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired haemophilia",
+          "cells": [
+            {
+              "text": "Caused by factor VIII autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K deficiency or anticoagulant effect",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic factor VIII replacement",
+          "cells": [
+            {
+              "text": "Prevents bleeds; a subcutaneous bispecific antibody is an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Raises endogenous factor VIII in mild disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytic agent",
+          "cells": [
+            {
+              "text": "Adjunct to haemostasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene therapy",
+          "cells": [
+            {
+              "text": "Adeno-associated-virus gene therapy in eligible adults, for sustained endogenous factor VIII"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibitor management",
+          "cells": [
+            {
+              "text": "Immune tolerance induction; bypassing agents to control bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint health",
+          "cells": [
+            {
+              "text": "Physiotherapy; avoid intramuscular injections and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Factor levels, periodic inhibitor screening and joint status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care and genetic counselling",
+          "cells": [
+            {
+              "text": "Haemophilia treatment centre; carrier testing for female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemophilia_a-dx-mgmt",
+      "title": "Diagnosis and management of Haemophilia A (factor VIII)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged aPTT with normal prothrombin time, with bleeding in a male",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intracranial, airway or compartment bleeding, or loss of response to replacement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent replacement for intracranial, airway or compartment bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "aPTT, PT, mixing study; factor VIII activity; inhibitor (Bethesda) assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is factor VIII activity low, with von Willebrand disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemophilia B, von Willebrand disease or acquired haemophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic factor VIII replacement or subcutaneous bispecific antibody",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Desmopressin in mild disease to raise endogenous factor VIII",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immune tolerance induction and bypassing agents for inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy; avoid intramuscular injections and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeds prevented and joints protected through specialist haemophilia care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

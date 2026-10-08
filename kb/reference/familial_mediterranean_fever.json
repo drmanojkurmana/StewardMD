@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for familial mediterranean fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_mediterranean_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted MEFV gene sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants (CRP, serum amyloid A, fibrinogen)",
+          "cells": [
+            {
+              "text": "Inflammation during and between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "Amyloidosis surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with Congo red staining",
+          "cells": [
+            {
+              "text": "Nephrotic-range proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAA1 genotype, where available",
+          "cells": [
+            {
+              "text": "Amyloidosis risk stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging during an attack",
+          "cells": [
+            {
+              "text": "Serositis; exclude a surgical cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_mediterranean_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Appendicitis or perforated viscus",
+          "cells": [
+            {
+              "text": "Sterile peritonitis from attacks mimics a surgical abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF receptor-associated or mevalonate kinase periodic fever",
+          "cells": [
+            {
+              "text": "Other periodic fever syndromes considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis or adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Listed in the differential of recurrent fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_mediterranean_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong continuous colchicine",
+          "cells": [
+            {
+              "text": "Cornerstone; prevents attacks and AA amyloidosis, with emphasis on adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab for colchicine-resistant or intolerant disease, or established amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory analgesia for serosal attacks",
+          "cells": [
+            {
+              "text": "Avoids unnecessary laparotomy for sterile peritonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis surveillance",
+          "cells": [
+            {
+              "text": "Serial urinalysis, serum amyloid A and CRP, even between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology input for renal amyloidosis",
+          "cells": [
+            {
+              "text": "Progression to renal replacement or transplantation if kidney failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEFV testing and SAA1 genotype counselling",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatology-led long-term follow-up",
+          "cells": [
+            {
+              "text": "Ongoing care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_mediterranean_fever-dx-mgmt",
+      "title": "Diagnosis and management of familial mediterranean fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent short febrile attacks with sterile peritonitis or erysipelas-like rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new proteinuria, pericardial signs, attack not settling, raised markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical review if peritonitis fails to settle; nephrology for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MEFV sequencing; CRP and SAA; urinalysis; imaging during attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recurrent attacks with pathogenic MEFV variants or colchicine response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other periodic fever syndromes, PFAPA or systemic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong continuous colchicine to prevent attacks and amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interleukin-1 blockade for colchicine-resistant or intolerant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-inflammatory analgesia for serosal attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial urinalysis and inflammatory markers for amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nephrology input for renal amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With adherent colchicine, most have good control and normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

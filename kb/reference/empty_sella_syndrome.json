@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for empty sella syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "empty_sella_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the pituitary",
+          "cells": [
+            {
+              "text": "Empty or partially empty sella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Hypopituitarism, especially cortisol deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Stalk-related elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic pituitary testing",
+          "cells": [
+            {
+              "text": "Suspected deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field assessment",
+          "cells": [
+            {
+              "text": "Chiasmal prolapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial pressure assessment",
+          "cells": [
+            {
+              "text": "Idiopathic intracranial hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empty_sella_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rathke cleft cyst",
+          "cells": [
+            {
+              "text": "Cystic sellar lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic or partially resolved pituitary adenoma",
+          "cells": [
+            {
+              "text": "Sellar mass with cystic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arachnoid cyst of the sella",
+          "cells": [
+            {
+              "text": "Sellar CSF collection outside the pituitary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophysitis with atrophy",
+          "cells": [
+            {
+              "text": "Inflammatory pituitary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic intracranial hypertension",
+          "cells": [
+            {
+              "text": "Headache and visual symptoms with raised pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empty_sella_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Asymptomatic primary form with normal pituitary function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Thyroxine, glucocorticoid, sex steroid or growth hormone for deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine agonist",
+          "cells": [
+            {
+              "text": "Only for significant stalk-related hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial hypertension care",
+          "cells": [
+            {
+              "text": "Weight reduction and acetazolamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical referral",
+          "cells": [
+            {
+              "text": "Chiasmal prolapse threatening vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary form",
+          "cells": [
+            {
+              "text": "Treat the cause such as surgery, radiotherapy, apoplexy or Sheehan infarction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "empty_sella_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Empty sella syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected empty sella syndrome: sella filled with CSF on MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cortisol deficiency, visual field loss, CSF rhinorrhoea)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucocorticoid replacement for symptomatic cortisol deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pituitary MRI; anterior pituitary hormone profile; prolactin; visual fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pituitary hormone deficiency confirmed on dynamic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rathke cleft cyst, cystic adenoma, arachnoid cyst or hypophysitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure the asymptomatic primary form with normal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace any demonstrated pituitary hormone deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dopamine agonist only for stalk-related hyperprolactinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting idiopathic intracranial hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurosurgical referral if chiasmal prolapse threatens vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Primary form usually benign with normal life expectancy; secondary form depends on cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

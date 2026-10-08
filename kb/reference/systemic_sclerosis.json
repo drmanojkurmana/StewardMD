@@ -161,5 +161,538 @@
       "caption": "Overview comparison matrix for systemic sclerosis (scleroderma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Tables 323-2 and 323-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Systemic Sclerosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/systemic-sclerosis"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_sclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and subtyping systemic sclerosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Limited cutaneous",
+        "Diffuse cutaneous"
+      ],
+      "rows": [
+        {
+          "parameter": "ACR/EULAR classification",
+          "cells": [
+            {
+              "text": "Skin thickening proximal to MCP joints scores 9 (sufficient alone)"
+            },
+            {
+              "text": "Other weighted items: sclerodactyly, fingertip lesions, telangiectasia, nailfold capillaries, ILD/PAH, Raynaud, antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical antibody",
+          "cells": [
+            {
+              "text": "Anticentromere (75% of CREST)"
+            },
+            {
+              "text": "Scl-70 (40% of diffuse) or RNA polymerase III"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "ANA",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 90% or more, often nucleolar",
+              "op": ">=",
+              "value": 90
+            },
+            {
+              "text": "Same"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Skin involvement",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "90%",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "100%",
+              "op": "=",
+              "value": 100
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oesophageal involvement",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "90%",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "80%",
+              "op": "=",
+              "value": 80
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary fibrosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "35%",
+              "op": "=",
+              "value": 35
+            },
+            {
+              "text": "65%",
+              "op": "=",
+              "value": 65
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary arterial hypertension",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "15%",
+              "op": "=",
+              "value": 15
+            },
+            {
+              "text": "15%",
+              "op": "=",
+              "value": 15
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scleroderma renal crisis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "2%",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:15%, mostly in first 4 to 5 years}}",
+              "op": "=",
+              "value": 15
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baseline screening",
+          "cells": [
+            {
+              "text": "PFTs, HRCT, echocardiography even without symptoms"
+            },
+            {
+              "text": "Repeat PFTs and echo every 1 to 2 years"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison cites the ACR/EULAR threshold as research classification with over 90% sensitivity and specificity; full weights were not in the sources opened."
+    },
+    {
+      "id": "systemic_sclerosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic systemic sclerosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Morphea or linear scleroderma",
+          "cells": [
+            {
+              "text": "Usually no Raynaud or organ involvement"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic fasciitis",
+          "cells": [
+            {
+              "text": "Scleroderma-like skin induration listed as a mimic"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleromyxedema or scleredema",
+          "cells": [
+            {
+              "text": "Papular mucinosis, or diabetic scleredema (Buschke)"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrogenic systemic fibrosis",
+          "cells": [
+            {
+              "text": "Gadolinium exposure with renal failure"
+            },
+            {
+              "text": "History, skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixed connective tissue disease or overlap",
+          "cells": [
+            {
+              "text": "Myositis, arthritis, SLE features"
+            },
+            {
+              "text": "Anti-U1-RNP, CK"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "TTP (vs renal crisis)",
+          "cells": [
+            {
+              "text": "Microangiopathy without SSc skin"
+            },
+            {
+              "text": "ADAMTS13 activity, renal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or toxin scleroderma",
+          "cells": [
+            {
+              "text": "Vinyl chloride, bleomycin, pentazocine, L-tryptophan"
+            },
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "systemic_sclerosis-treatment",
+      "kind": "treatment",
+      "title": "Treating systemic sclerosis by organ",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor",
+          "cells": [
+            {
+              "text": "Scleroderma renal crisis"
+            },
+            {
+              "text": "{{hy:Start promptly; dramatically prolongs survival}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Avoid corticosteroids",
+          "cells": [
+            {
+              "text": "All, especially early diffuse disease"
+            },
+            {
+              "text": "Prednisone 10 mg/day or more linked to renal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycophenolate",
+          "cells": [
+            {
+              "text": "Interstitial lung disease, skin"
+            },
+            {
+              "text": "As effective as cyclophosphamide, better tolerated"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tocilizumab or nintedanib",
+          "cells": [
+            {
+              "text": "ILD"
+            },
+            {
+              "text": "Tocilizumab preserves FVC; nintedanib slows decline, add to immunosuppression"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Long-acting nifedipine",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "Raynaud phenomenon"
+            },
+            {
+              "text": "30 to 120 mg/day; may worsen reflux"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PDE5 inhibitor, bosentan, IV prostanoid",
+          "cells": [
+            {
+              "text": "Severe Raynaud, digital ulcers, PAH"
+            },
+            {
+              "text": "Epoprostenol for critical ischaemia or PAH"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "High-dose PPI and reflux measures",
+          "cells": [
+            {
+              "text": "Oesophageal disease"
+            },
+            {
+              "text": "No lying down within 3 h of meals; dilate strictures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autologous HSCT",
+          "cells": [
+            {
+              "text": "Early severe diffuse disease, specialist centre"
+            },
+            {
+              "text": "Better long-term survival, higher first-year mortality"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_sclerosis-dx-mgmt",
+      "title": "Diagnosis and management of systemic sclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raynaud with puffy fingers, skin thickening or unexplained ILD",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ANA, anticentromere, Scl-70, RNA polymerase III; capillaroscopy",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Meets ACR/EULAR features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider morphea, fasciitis, scleromyxedema, overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diffuse cutaneous subtype by skin extent?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Limited cutaneous: screen for PAH yearly",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diffuse: monitor BP for renal crisis; avoid steroids",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "PFTs, HRCT, echocardiogram every 1 to 2 years",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "New hypertension, rising creatinine, haemolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Renal crisis: ACE inhibitor at once, dialysis if needed",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "ILD present?",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mycophenolate, add nintedanib or tocilizumab",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Organ-directed care: vasodilators, PPI, skin therapy",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

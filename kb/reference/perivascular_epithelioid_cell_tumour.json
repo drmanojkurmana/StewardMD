@@ -162,5 +162,314 @@
       "caption": "Overview comparison matrix for perivascular epithelioid cell tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perivascular_epithelioid_cell_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-sectional imaging (CT or MRI)",
+          "cells": [
+            {
+              "text": "Characterises the lesion and its extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with immunohistochemical panel",
+          "cells": [
+            {
+              "text": "HMB-45, Melan-A, smooth muscle actin, desmin and TFE3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for TFE3 rearrangement and TSC1/TSC2",
+          "cells": [
+            {
+              "text": "TFE3 rearrangement and TSC1/TSC2 status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment for tuberous sclerosis complex",
+          "cells": [
+            {
+              "text": "When suggested by other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest staging imaging",
+          "cells": [
+            {
+              "text": "Malignant features present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dedicated renal imaging",
+          "cells": [
+            {
+              "text": "Angiomyolipoma suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perivascular_epithelioid_cell_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Small asymptomatic angiomyolipoma",
+          "cells": [
+            {
+              "text": "Usually observed; the epithelioid variant can behave more aggressively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic or enlarging angiomyolipoma",
+          "cells": [
+            {
+              "text": "Embolisation may be needed for pain, retroperitoneal haemorrhage or haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised resectable PEComa",
+          "cells": [
+            {
+              "text": "Surgical resection alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant potential",
+          "cells": [
+            {
+              "text": "Assessed by adverse histology such as large size, infiltrative margins and high nuclear grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic or unresectable disease",
+          "cells": [
+            {
+              "text": "mTOR inhibitors are the effective systemic option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nab-sirolimus",
+          "cells": [
+            {
+              "text": "Regulatory-approved for locally advanced unresectable or metastatic malignant PEComa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TFE3 fusion-positive PEComa",
+          "cells": [
+            {
+              "text": "No established specific systemic regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "End-stage LAM",
+          "cells": [
+            {
+              "text": "Lung transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Sarcoma or genitourinary oncology centre for malignant or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perivascular_epithelioid_cell_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Perivascular Epithelioid Cell Tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Renal or retroperitoneal mass, often angiomyolipoma-like, suspected PEComa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (infiltrative, high-grade histology, multiple lesions, retroperitoneal bleed)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to sarcoma or genitourinary oncology for malignant or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI; immunohistochemistry panel; TFE3 and TSC1/TSC2 molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunohistochemistry support a PEComa over melanoma or other mimics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metastatic melanoma, clear cell sarcoma or renal cell carcinoma; re-review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small asymptomatic angiomyolipoma; the epithelioid variant may be more aggressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Embolise symptomatic or enlarging angiomyolipoma for bleeding or pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Resect localised, resectable PEComa surgically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Use mTOR inhibitors for metastatic or unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider nab-sirolimus for locally advanced unresectable or metastatic malignant PEComa",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign excised tumours have excellent prognosis; malignant forms carry a guarded outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

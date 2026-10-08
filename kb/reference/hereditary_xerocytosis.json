@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for hereditary xerocytosis (piezo1, dehydrated stomatocytosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_xerocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocyte response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Stomatocytes and target cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic gradient ektacytometry",
+          "cells": [
+            {
+              "text": "Characteristic defect of dehydrated red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIEZO1 and KCNN4 genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies including ferritin",
+          "cells": [
+            {
+              "text": "Iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "Excludes membrane and enzyme disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_xerocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Overhydrated hereditary stomatocytosis (RHAG)",
+          "cells": [
+            {
+              "text": "Overhydrated rather than dehydrated red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis",
+          "cells": [
+            {
+              "text": "Spherocytes rather than stomatocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired stomatocytosis",
+          "cells": [
+            {
+              "text": "Alcohol-related liver disease and other acquired causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_xerocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care with folic acid",
+          "cells": [
+            {
+              "text": "No specific therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid splenectomy",
+          "cells": [
+            {
+              "text": "Contraindicated because of thrombotic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Monitor ferritin and iron status; treat overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perinatal oedema",
+          "cells": [
+            {
+              "text": "Anticipate and manage hydrops fetalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous thromboembolism",
+          "cells": [
+            {
+              "text": "Vigilance, with prompt treatment of thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology follow-up",
+          "cells": [
+            {
+              "text": "Haemoglobin, haemolysis markers and iron"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_xerocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary xerocytosis (PIEZO1, dehydrated stomatocytosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stomatocytes on film with haemolysis and rising ferritin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hydrops, venous thrombosis, progressive iron overload or decompensated anaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent obstetric and haematology review for hydrops or thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film and reticulocytes; ektacytometry; PIEZO1 and KCNN4 testing; iron studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PIEZO1 or KCNN4 variant found, with other membrane disorders excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overhydrated stomatocytosis, spherocytosis or acquired stomatocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with folic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid splenectomy, contraindicated due to thrombotic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Iron chelation for iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vigilance for venous thromboembolism with prompt treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anaemia supported; hydrops and thrombosis risk managed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

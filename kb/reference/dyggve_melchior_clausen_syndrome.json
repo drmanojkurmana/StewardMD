@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for dyggve-melchior-clausen syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyggve_melchior_clausen_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey for lacy iliac crest, platyspondyly and epimetaphyseal change",
+          "cells": [
+            {
+              "text": "Lacy iliac crest and platyspondyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary glycosaminoglycan screen",
+          "cells": [
+            {
+              "text": "Excludes mucopolysaccharidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging with flexion-extension views",
+          "cells": [
+            {
+              "text": "Odontoid hypoplasia and instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive assessment",
+          "cells": [
+            {
+              "text": "Separates classic DMC from Smith-McCort dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DYM molecular genetic testing",
+          "cells": [
+            {
+              "text": "DYM variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyggve_melchior_clausen_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Smith-McCort dysplasia",
+          "cells": [
+            {
+              "text": "Allelic disorder with the same skeleton but normal intellect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morquio syndrome (mucopolysaccharidosis IV)",
+          "cells": [
+            {
+              "text": "Glycosaminoglycanuria on urine screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoachondroplasia",
+          "cells": [
+            {
+              "text": "Shared short-limbed skeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyggve_melchior_clausen_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Progressive spinal deformity, contractures and short-trunk stature; physiotherapy and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical instability",
+          "cells": [
+            {
+              "text": "Flexion-extension imaging; surgical stabilisation and anaesthetic precautions when cord threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Educational and behavioural support for intellectual disability in classic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine glycosaminoglycan screen",
+          "cells": [
+            {
+              "text": "Excludes a mimicking mucopolysaccharidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; DYM testing and screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyggve_melchior_clausen_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dyggve-Melchior-Clausen syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dyggve-Melchior-Clausen syndrome: short trunk and spinal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atlantoaxial instability with myelopathy, progressive kyphoscoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cervical spine imaging and cord protection before anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; urine GAGs; cervical flexion-extension imaging; DYM testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DYM variant found with the characteristic skeletal survey?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Morquio syndrome, other mucopolysaccharidoses or pseudoachondroplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, mobility aids and orthopaedic care for spinal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Flexion-extension cervical imaging; stabilisation where instability threatens the cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and educational support for intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urine glycosaminoglycan screen to exclude a mimicking mucopolysaccharidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with DYM testing for autosomal recessive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy often near normal; deformity and intellectual disability add morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -158,5 +158,332 @@
       "caption": "Overview comparison matrix for hyperornithinaemia-hyperammonaemia-homocitrullinuria syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hhh_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia during symptomatic episodes",
+          "cells": [
+            {
+              "text": "Hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Hyperornithinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino acids and orotic acid",
+          "cells": [
+            {
+              "text": "Homocitrullinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC25A15 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and coagulation profile",
+          "cells": [
+            {
+              "text": "Liver and coagulation involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging, nerve conduction or evoked potentials",
+          "cells": [
+            {
+              "text": "Neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein tolerance and dietary protein intake",
+          "cells": [
+            {
+              "text": "Dietary control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhh_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gyrate atrophy (ornithine aminotransferase deficiency)",
+          "cells": [
+            {
+              "text": "Separated by ornithine and homocitrulline pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ornithine transcarbamylase deficiency and other urea cycle disorders",
+          "cells": [
+            {
+              "text": "Homocitrullinuria with hyperornithinaemia is the HHH pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegia",
+          "cells": [
+            {
+              "text": "Chronic neurological spasticity with cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhh_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protein-restricted diet",
+          "cells": [
+            {
+              "text": "Long-term management, with metabolic supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitrogen-scavenging therapy",
+          "cells": [
+            {
+              "text": "Such as sodium benzoate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute hyperammonaemic crisis",
+          "cells": [
+            {
+              "text": "Stop protein intake and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day regimen",
+          "cells": [
+            {
+              "text": "Avoids catabolic triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma ammonia and amino acids, growth and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic team",
+          "cells": [
+            {
+              "text": "Specialist coordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hhh_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyperornithinaemia-hyperammonaemia-homocitrullinuria syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperammonaemia with hyperornithinaemia and homocitrullinuria, with spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute encephalopathy, neonatal crisis, coagulopathy, seizures or raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: stop protein and treat hyperammonaemia as a metabolic emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia; amino acids; urine amino acids and orotic acid; SLC25A15 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are SLC25A15 variants found, with other urea cycle disorders excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider OTC deficiency, gyrate atrophy, organic acidaemia or LPI",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protein-restricted diet with metabolic supervision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nitrogen scavengers such as sodium benzoate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop protein intake and treat acute crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day regimen to avoid catabolic triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ammonia controlled through diet and scavengers; growth and neurological monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

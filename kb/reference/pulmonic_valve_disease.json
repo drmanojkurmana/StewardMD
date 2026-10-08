@@ -158,5 +158,440 @@
       "caption": "Overview comparison matrix for pulmonic valve disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pulmonary Stenosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/pulmonary-stenosis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonic_valve_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading pulmonic stenosis and key findings",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Doppler value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild PS",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Peak gradient under 36 mmHg, velocity under 3 m/s",
+              "op": "<",
+              "value": 36
+            },
+            {
+              "text": "Rarely progresses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate PS",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Peak gradient 36 to 64 mmHg, velocity 3 to 4 m/s",
+              "range": [
+                36,
+                64
+              ]
+            },
+            {
+              "text": "May progress with age"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe PS",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Peak gradient over 64 mmHg (mean over 35), velocity over 4 m/s",
+              "op": ">",
+              "value": 64
+            },
+            {
+              "text": "{{hy:Valvuloplasty even if asymptomatic}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ejection click",
+          "cells": [
+            {
+              "text": "Softens with inspiration; moves toward S1 as PS worsens"
+            },
+            {
+              "text": "Only right-sided sound that decreases with inspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Murmur and S2",
+          "cells": [
+            {
+              "text": "Harsh crescendo-decrescendo murmur at left 2nd ICS; wide split S2 with soft late P2"
+            },
+            {
+              "text": "Murmur lengthens with severity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG and chest x-ray",
+          "cells": [
+            {
+              "text": "Right axis, RVH, RA enlargement; poststenotic PA dilation"
+            },
+            {
+              "text": "Severe PS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonic regurgitation",
+          "cells": [
+            {
+              "text": "Graham Steell murmur if pulmonary hypertension"
+            },
+            {
+              "text": "Trace PR on echo is usually normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "RV volumes and function"
+            },
+            {
+              "text": "Times valve replacement in PR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck says the click may be louder on inspiration; Harrison states the pulmonic ejection click softens with inspiration (the classic teaching)."
+    },
+    {
+      "id": "pulmonic_valve_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pulmonic valve disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic regurgitation",
+          "cells": [
+            {
+              "text": "Diastolic murmur like Graham Steell, wide pulse pressure"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial septal defect",
+          "cells": [
+            {
+              "text": "Flow murmur with fixed split S2"
+            },
+            {
+              "text": "Echo with bubble study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic stenosis or HOCM",
+          "cells": [
+            {
+              "text": "Murmur radiating to carotids or dynamic with Valsalva"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infundibular or tumor RV outflow obstruction",
+          "cells": [
+            {
+              "text": "Murmur lower (4th ICS) or mass"
+            },
+            {
+              "text": "Echo, MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carcinoid heart disease",
+          "cells": [
+            {
+              "text": "Flushing, diarrhea, mixed right-sided lesions"
+            },
+            {
+              "text": "Urine 5-HIAA, echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension with functional PR",
+          "cells": [
+            {
+              "text": "High PA pressure is the main problem"
+            },
+            {
+              "text": "Echo estimate, right heart catheter"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonic_valve_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating pulmonic valve disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild PS, trace or mild PR"
+            },
+            {
+              "text": "Serial echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon valvuloplasty",
+          "cells": [
+            {
+              "text": "Symptomatic moderate or severe PS, or asymptomatic severe PS"
+            },
+            {
+              "text": "First line for pliable domed valves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical valvotomy or pulmonary valve replacement",
+          "cells": [
+            {
+              "text": "Dysplastic valve, annular hypoplasia, significant PR"
+            },
+            {
+              "text": "Bioprosthetic preferred; transcatheter replacement at congenital centres"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary valve replacement for PR",
+          "cells": [
+            {
+              "text": "Severe PR with RV dilation or dysfunction"
+            },
+            {
+              "text": "Timed by RV size and function on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics",
+          "cells": [
+            {
+              "text": "Right heart failure"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Dysplastic valve"
+            },
+            {
+              "text": "Noonan syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonic_valve_disease-dx-mgmt",
+      "title": "Diagnosis and management of pulmonic valve disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Systolic ejection murmur or click at left upper sternal border",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Transthoracic Doppler echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Stenosis or regurgitation dominant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Severe PS, or moderate PS with symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Valve pliable and domed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Balloon valvuloplasty",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Surgical valvotomy or valve replacement",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Observe with serial echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac MRI for RV volumes and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Severe PR with RV dilation or dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pulmonary valve replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Stenosis"
+        },
+        {
+          "from": "n3",
+          "to": "n9",
+          "label": "Regurgitation"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

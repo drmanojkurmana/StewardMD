@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for ehrlichiosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ehrlichiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood smear",
+          "cells": [
+            {
+              "text": "Morulae in leukocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ehrlichia PCR in acute blood",
+          "cells": [
+            {
+              "text": "Early diagnosis, most useful in the acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired acute and convalescent serology",
+          "cells": [
+            {
+              "text": "Seroconversion or rising titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and liver function",
+          "cells": [
+            {
+              "text": "Cytopenias and transaminitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tests for other tick-borne and febrile illness",
+          "cells": [
+            {
+              "text": "Alternative diagnoses excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehrlichiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rocky Mountain spotted fever",
+          "cells": [
+            {
+              "text": "Rickettsial illness, usually with a rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaplasmosis",
+          "cells": [
+            {
+              "text": "Related tick-borne granulocytic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrub typhus",
+          "cells": [
+            {
+              "text": "Eschar and rural exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Conjunctival suffusion and renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe dengue or viral haemorrhagic fever",
+          "cells": [
+            {
+              "text": "Viral illness with cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehrlichiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Empirical first-line tetracycline for all ages, including children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin",
+          "cells": [
+            {
+              "text": "Alternative in true tetracycline intolerance or pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics, fluid resuscitation and cytopenia complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count and liver monitoring",
+          "cells": [
+            {
+              "text": "Expect rapid clinical response after starting therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation",
+          "cells": [
+            {
+              "text": "Respiratory or renal failure, meningoencephalitis or toxic-shock picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-infection review",
+          "cells": [
+            {
+              "text": "Anaplasmosis and other tick-borne diseases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick-bite prevention",
+          "cells": [
+            {
+              "text": "Protective clothing, repellent and prompt tick removal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ehrlichiosis-dx-mgmt",
+      "title": "Diagnosis and management of Ehrlichiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ehrlichiosis: tick exposure with fever and cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ARDS, meningism, renal failure, toxic-shock-like picture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent empirical doxycycline and critical care review for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood smear for morulae; Ehrlichia PCR; paired serology; blood count; liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Ehrlichia DNA or morulae found in an acutely unwell tick-exposed patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rocky Mountain spotted fever, anaplasmosis, scrub typhus or leptospirosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical doxycycline on clinical suspicion, before serology returns",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin if tetracycline intolerant or pregnant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antipyretics, fluid resuscitation and treatment of cytopenia complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood count and liver monitoring for rapid response",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Critical care escalation for respiratory, renal or neurological failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early antibiotics usually cure; delay can cause organ failure in high-risk hosts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

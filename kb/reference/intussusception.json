@@ -146,5 +146,307 @@
       "caption": "Overview comparison matrix for intussusception."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intussusception-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Target or doughnut sign, first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Obstruction or free air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air or contrast enema",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic in a stable child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and electrolytes",
+          "cells": [
+            {
+              "text": "Dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for a lead point",
+          "cells": [
+            {
+              "text": "Older or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intussusception-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malrotation with volvulus",
+          "cells": [
+            {
+              "text": "Bilious vomiting and rapid deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Henoch-Schonlein purpura with bowel involvement",
+          "cells": [
+            {
+              "text": "Purpura with bowel involvement; can trigger intussusception"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intussusception-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids and electrolytes; nasogastric tube if obstructed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line reduction",
+          "cells": [
+            {
+              "text": "Air (pneumatic) or hydrostatic contrast enema in the stable child without peritonitis or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Operative care",
+          "cells": [
+            {
+              "text": "Operative reduction and resection of non-viable bowel when enema fails or there is peritonitis or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peri-procedural cover",
+          "cells": [
+            {
+              "text": "Broad-spectrum antibiotics and analgesia where ischaemia or perforation is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead point",
+          "cells": [
+            {
+              "text": "Meckel diverticulum or polyp, particularly in older or recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Early recurrence watched after reduction; re-image if symptoms return"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intussusception-dx-mgmt",
+      "title": "Diagnosis and management of Intussusception",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with colicky pain, drawing up of the legs, vomiting and lethargy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonitis, free air, shock or established obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate and move to operative care; enema contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound target sign, abdominal radiograph, blood count and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stable child without peritonitis or perforation for enema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Peritonitis, perforation or failed enema: refer for operative care; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Air or hydrostatic enema reduction as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluids; nasogastric decompression if obstructed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Broad-spectrum antibiotics if ischaemia or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Seek a lead point such as Meckel diverticulum or polyp",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Observe after reduction for early recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually reduced without surgery; recurrence watched; surgery if reduction fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

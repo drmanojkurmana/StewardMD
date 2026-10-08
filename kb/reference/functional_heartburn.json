@@ -141,5 +141,314 @@
       "caption": "Overview comparison matrix for functional heartburn."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_heartburn-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with biopsies",
+          "cells": [
+            {
+              "text": "Typically normal; biopsies exclude eosinophilic oesophagitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory pH-impedance monitoring",
+          "cells": [
+            {
+              "text": "Normal acid exposure and negative symptom association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal manometry",
+          "cells": [
+            {
+              "text": "Excludes a major motility disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of psychological comorbidity",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior response to acid suppression",
+          "cells": [
+            {
+              "text": "History of response to acid suppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_heartburn-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Excluded by normal acid exposure on pH-impedance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic oesophagitis",
+          "cells": [
+            {
+              "text": "Excluded by biopsies at endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal motility disorder",
+          "cells": [
+            {
+              "text": "Excluded by manometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac chest pain",
+          "cells": [
+            {
+              "text": "Chest pain with cardiac features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_heartburn-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Explain that acid is not driving the symptom",
+          "cells": [
+            {
+              "text": "Escalating acid suppression is unlikely to help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromodulators",
+          "cells": [
+            {
+              "text": "Tricyclic antidepressants to reduce oesophageal hypersensitivity; mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological therapies",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy, hypnotherapy or relaxation techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw ineffective PPI",
+          "cells": [
+            {
+              "text": "Once reflux disease has been excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Objective confirmation",
+          "cells": [
+            {
+              "text": "Endoscopy and pH-impedance showing physiological acid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological comorbidity",
+          "cells": [
+            {
+              "text": "Identify and treat"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_heartburn-dx-mgmt",
+      "title": "Diagnosis and management of Functional heartburn",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional heartburn: heartburn with normal acid exposure on testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysphagia, weight loss, bleeding, cardiac features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of dysphagia, weight loss or bleeding for organic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsies, pH-impedance monitoring and manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pH-impedance show physiological acid exposure and negative symptom association?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GORD, reflux hypersensitivity, eosinophilic oesophagitis or motility disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Explain that acid is not driving the symptom; escalating acid suppression will not help",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuromodulators such as tricyclic antidepressants as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw ineffective PPI once reflux disease is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological therapies such as CBT, hypnotherapy or relaxation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but persistent; often improves with neuromodulators and psychological therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -142,5 +142,315 @@
       "caption": "Overview comparison matrix for compressive third nerve palsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculomotor_nerve_palsy_compressive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent CT or MR angiography",
+          "cells": [
+            {
+              "text": "Aneurysm, classically a posterior communicating artery aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and cavernous sinus",
+          "cells": [
+            {
+              "text": "Compressive or infiltrative lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pupil, lid and ocular motility assessment",
+          "cells": [
+            {
+              "text": "Eye down and out with ptosis; a dilated, poorly reactive pupil signals compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculopathic risk-factor evaluation",
+          "cells": [
+            {
+              "text": "Favours a microvascular (ischaemic) cause when considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine-receptor antibody testing",
+          "cells": [
+            {
+              "text": "Excludes myasthenia when it is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculomotor_nerve_palsy_compressive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Microvascular (ischaemic) third nerve palsy",
+          "cells": [
+            {
+              "text": "Pupil-sparing complete palsy in an older vasculopathic patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Pupil always spared, and the palsy is fatigable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculomotor_nerve_palsy_compressive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent vascular imaging and definitive treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Neurosurgical clipping or endovascular coiling of a posterior communicating artery aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other compressive causes",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Tumour or uncal herniation with raised intracranial pressure needs emergency management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic diplopia relief",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Temporary occlusion or prisms during recovery; ocular lubrication if lid closure is impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus and ptosis surgery",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For stable residual deviation once spontaneous recovery has plateaued"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Painful, pupil-involving palsy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Treated as a neurosurgical emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary management",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Neurosurgery, neurology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculomotor_nerve_palsy_compressive-dx-mgmt",
+      "title": "Diagnosis and management of Compressive third nerve palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Third nerve palsy: eye down and out with ptosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pupil involved, pain, raised intracranial pressure or progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurosurgical emergency; urgent angiography for suspected aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent CT or MR angiography; MRI of brain and cavernous sinus; pupil and motility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a compressive lesion, such as a posterior communicating aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider microvascular palsy, myasthenia or midbrain lesion; repeat imaging if evolving",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clip or coil a posterior communicating artery aneurysm with neurosurgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat other compressive lesions, such as tumour or uncal herniation, urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prisms or temporary occlusion for diplopia during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Strabismus and ptosis surgery for stable residual deviation after recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the cause; microvascular palsies often recover over weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -233,5 +233,489 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Guillain-Barre Syndrome",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/peripheral-nervous-system-and-motor-unit-disorders/guillain-barr%C3%A9-syndrome-gbs",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gbs-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Guillain-Barre syndrome (Brighton level 1 elements)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Weakness",
+          "cells": [
+            {
+              "text": "Bilateral flaccid limb weakness, usually ascending"
+            },
+            {
+              "text": "Facial weakness in about 50%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflexes",
+          "cells": [
+            {
+              "text": "Reduced or absent in weak limbs"
+            },
+            {
+              "text": "Core feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Time to nadir",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "12 h to 28 days, then plateau"
+            },
+            {
+              "text": "Monophasic course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF white cells",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "<50",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "{{hy:High protein with low cell count (cytoalbuminologic dissociation)}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF timing",
+          "cells": [
+            {
+              "text": "Protein may be normal in first 48 h to 1 week"
+            },
+            {
+              "text": "Absent in about 10%; do not wait to treat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nerve conduction",
+          "cells": [
+            {
+              "text": "Slowing or demyelination in about two-thirds"
+            },
+            {
+              "text": "Often normal in first 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-GQ1b antibody",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in >90% of Miller Fisher syndrome"
+            },
+            {
+              "text": "Ophthalmoplegia, ataxia, areflexia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forced vital capacity",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": "<15 mL/kg",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Intubate; measure every 6 to 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Features against GBS",
+          "cells": [
+            {
+              "text": "Fever at onset, sensory level, early bladder dysfunction"
+            },
+            {
+              "text": "Consider cord disease or infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gbs-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Guillain-Barre syndrome",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myelopathy or cord compression",
+          "cells": [
+            {
+              "text": "{{hy:Sensory level, early sphincter loss, back pain}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable weakness, normal reflexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Descending paralysis with early loss of pupil reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poliomyelitis or acute flaccid myelitis",
+          "cells": [
+            {
+              "text": "Asymmetric weakness, fever, CSF pleocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick paralysis or Lyme polyradiculitis",
+          "cells": [
+            {
+              "text": "Tick exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diphtheria",
+          "cells": [
+            {
+              "text": "Early oropharyngeal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria",
+          "cells": [
+            {
+              "text": "Abdominal pain, seizures, psychosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxins: organophosphate, thallium, arsenic",
+          "cells": [
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical illness neuropathy or myopathy",
+          "cells": [
+            {
+              "text": "ICU setting with sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CIDP",
+          "cells": [
+            {
+              "text": "Progression beyond 8 weeks or relapses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gbs-treatment",
+      "kind": "treatment",
+      "title": "Management of Guillain-Barre syndrome",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Admit; FVC every 6 to 8 h",
+          "cells": [
+            {
+              "text": "{{hy:All suspected GBS}}"
+            },
+            {
+              "text": "Up to about 30% need ventilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": "FVC <15 mL/kg",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Also bulbar weakness, cannot lift head"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "Within about 1 month of onset"
+            },
+            {
+              "text": "Over 1 to 2 days or 5 days; second course not helpful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Alternative to IVIG"
+            },
+            {
+              "text": "Shortens course; not after IVIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Not indicated"
+            },
+            {
+              "text": "May delay recovery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH prophylaxis",
+          "cells": [
+            {
+              "text": "Bedbound patients"
+            },
+            {
+              "text": "DVT prevention"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV fluids",
+          "unit": "L/day",
+          "cells": [
+            {
+              "text": "Keep urine output at least 1 to 1.5 L/day"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autonomic monitoring",
+          "cells": [
+            {
+              "text": "BP swings, arrhythmias, SIADH, ileus, retention"
+            },
+            {
+              "text": "Can be fatal even with mild weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early rehabilitation",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Passive range of motion at once"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "IVIG and plasma exchange doses are not stated in the source opened. About 85% recover fully; mortality under 4% to 5%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gbs-dx-mgmt",
+      "title": "Diagnosis and management of Guillain-Barre syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ascending weakness with reduced reflexes over days",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sensory level, early sphincter loss or fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal MRI; consider myelopathy or infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Admit; FVC every 6 to 8 h; LP and nerve studies",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FVC <15 mL/kg or bulbar failure?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intubate; ICU",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Within 1 month of onset and significant weakness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IVIG or plasma exchange; no steroids",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Supportive care, DVT prophylaxis, rehabilitation",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
   ]
 }

@@ -151,5 +151,465 @@
       "caption": "Overview comparison matrix for mitral regurgitation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Mitral Regurgitation (2020 ACC/AHA valve guideline)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/mitral-regurgitation"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitral_regurgitation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and severity of mitral regurgitation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Severe threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vena contracta",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 7 mm",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Moderate 3 to 7 mm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Effective regurgitant orifice area",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": "0.40 cm2 or more",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "text": "Moderate 0.20 to 0.40 cm2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Regurgitant volume",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "60 mL or more per beat",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Moderate 30 to 60 mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Regurgitant fraction",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "50% or more",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Moderate 30 to 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LV ejection fraction",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "60% or less signals dysfunction",
+              "op": "<=",
+              "value": 60
+            },
+            {
+              "text": "{{hy:EF is overestimated in MR; low-normal EF is already abnormal}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LV end-systolic diameter",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "40 mm or more",
+              "op": ">=",
+              "value": 40
+            },
+            {
+              "text": "Stage C2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Murmur",
+          "cells": [
+            {
+              "text": "Holosystolic apical murmur to axilla, louder with handgrip"
+            },
+            {
+              "text": "Acute MR: short early decrescendo murmur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "TTE for mechanism (primary vs secondary) and size"
+            },
+            {
+              "text": "TEE, CMR or stress echo if discordant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_regurgitation-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mitral regurgitation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic stenosis",
+          "cells": [
+            {
+              "text": "Basal radiation in posterior leaflet MR mimics AS"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventricular septal defect",
+          "cells": [
+            {
+              "text": "Holosystolic murmur at left sternal edge with thrill"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid regurgitation",
+          "cells": [
+            {
+              "text": "Louder on inspiration, large v waves in neck"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral stenosis",
+          "cells": [
+            {
+              "text": "Pure severe MR can give a diastolic rumble"
+            },
+            {
+              "text": "Echo mitral valve area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Murmur louder with Valsalva"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_regurgitation-treatment",
+      "kind": "treatment",
+      "title": "Management of mitral regurgitation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "{{hy:Acute severe MR: papillary rupture or endocarditis}}"
+            },
+            {
+              "text": "Vasodilators, IV nitrate, balloon pump as bridge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral repair (preferred) or replacement",
+          "cells": [
+            {
+              "text": "Severe primary MR with symptoms, LVEF 60% or less, or LVESD 40 mm or more"
+            },
+            {
+              "text": "Consider earlier if low risk and repair likely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Guideline-directed HF therapy",
+          "cells": [
+            {
+              "text": "Secondary MR, or LV dysfunction"
+            },
+            {
+              "text": "ARNI or ARB, beta-blocker, MRA, SGLT2 inhibitor; CRT if indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcatheter edge-to-edge repair, secondary MR",
+          "cells": [
+            {
+              "text": "NYHA class II or higher despite therapy, LVEF 20 to 50%, LVESD 70 mm or less, PASP 70 mmHg or less"
+            },
+            {
+              "text": "Suitable anatomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TEER, primary MR",
+          "cells": [
+            {
+              "text": "NYHA III to IV and too high risk for surgery"
+            },
+            {
+              "text": "Suitable anatomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diuretics",
+          "cells": [
+            {
+              "text": "Dyspnoea"
+            },
+            {
+              "text": "Loop diuretic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "AF with MR"
+            },
+            {
+              "text": "Rate or rhythm control and anticoagulation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Asymptomatic severe MR"
+            },
+            {
+              "text": "Serial echo of LV size, EF and PA pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck (2020 ACC/AHA) says new AF or pulmonary hypertension alone is not an indication; the entry text lists them as reasons to intervene. Vasodilators have no role in asymptomatic MR with normal LV."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitral_regurgitation-dx-mgmt",
+      "title": "Diagnosis and management of mitral regurgitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Apical systolic murmur or dyspnoea with suspected MR",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden pulmonary oedema or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Acute MR: vasodilators, balloon pump, emergency surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE: mechanism, EROA, regurgitant volume, LVEF, LVESD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe MR?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Echo surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Primary (leaflet) MR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Symptoms, LVEF 60% or less, or LVESD 40 mm or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Mitral repair; TEER if surgical risk prohibitive",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Serial echo every 6 to 12 months",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Optimise HF therapy and CRT",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Persistent symptoms: TEER if criteria met",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for erythema annulare centrifugum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_annulare_centrifugum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin scrapings and mycology",
+          "cells": [
+            {
+              "text": "Excludes dermatophyte infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Confirms the reaction pattern and excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for infective and drug triggers",
+          "cells": [
+            {
+              "text": "Guided by history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age-appropriate malignancy screen",
+          "cells": [
+            {
+              "text": "Persistent, atypical or recurrent lesions without an obvious cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody testing",
+          "cells": [
+            {
+              "text": "Where lupus is a consideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_annulare_centrifugum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema gyratum repens",
+          "cells": [
+            {
+              "text": "Rapidly progressive, widespread bands with a strong link to internal cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute cutaneous lupus erythematosus (annular type)",
+          "cells": [
+            {
+              "text": "Overlapping features; autoantibody testing where lupus is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinea corporis",
+          "cells": [
+            {
+              "text": "Distinguished by mycology on scrapings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_annulare_centrifugum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying trigger",
+          "cells": [
+            {
+              "text": "Infection, drug, food or occult malignancy; the eruption often settles once the trigger is removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antifungal",
+          "cells": [
+            {
+              "text": "Where a dermatophyte infection is demonstrated on scrapings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw implicated drug",
+          "cells": [
+            {
+              "text": "If a culprit drug is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Symptomatic relief of the itchy superficial form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines and emollients",
+          "cells": [
+            {
+              "text": "Pruritus and skin dryness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Persistent, atypical or recurrent lesions without an obvious cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Benign and frequently self-limiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_annulare_centrifugum-dx-mgmt",
+      "title": "Diagnosis and management of Erythema annulare centrifugum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly enlarging annular or polycyclic lesions with central clearing and trailing scale",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapidly progressive or atypical lesions, systemic symptoms, persistence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for erythema gyratum repens and internal malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin scrapings and mycology; skin biopsy; infective and drug trigger review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dermatophyte or other trigger identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Malignancy screen if persistent or atypical; consider other annular eruptions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical antifungal where a dermatophyte is demonstrated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw any implicated drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroid for itchy superficial lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral antihistamines and emollients for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure; the course is benign and often self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable: clears within weeks, or relapses chronically over months to years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

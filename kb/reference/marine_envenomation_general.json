@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for marine envenomation (general approach)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marine_envenomation_general-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wound imaging (ultrasound or radiography)",
+          "cells": [
+            {
+              "text": "Retained spines or barbs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurovascular assessment of the affected part",
+          "cells": [
+            {
+              "text": "Neurovascular status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography and monitoring",
+          "cells": [
+            {
+              "text": "Systemic toxicity, where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and wound cultures",
+          "cells": [
+            {
+              "text": "Infection, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase, renal function and haemolysis markers",
+          "cells": [
+            {
+              "text": "Significant systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification of the responsible species",
+          "cells": [
+            {
+              "text": "Guides specific therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marine_envenomation_general-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin infection such as Vibrio, Mycobacterium marinum or Erysipelothrix",
+          "cells": [
+            {
+              "text": "Spreading soft-tissue infection or systemic sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained foreign body without envenomation",
+          "cells": [
+            {
+              "text": "Retained spines or barbs found on wound imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marine_envenomation_general-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation first for rapidly life-threatening syndromes",
+          "cells": [
+            {
+              "text": "Box jellyfish cardiotoxicity, Irukandji syndrome, tetrodotoxin paralysis and sea snake envenomation: airway, breathing, circulation first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species-specific decontamination",
+          "cells": [
+            {
+              "text": "Vinegar to inhibit cubozoan nematocyst discharge; avoid fresh water and rubbing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hot-water immersion",
+          "cells": [
+            {
+              "text": "Heat-labile venoms of venomous fish, stingrays and sea urchins, at a tolerable temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Explore, irrigate and image puncture wounds",
+          "cells": [
+            {
+              "text": "Remove retained spines, barbs or foreign material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific antivenom",
+          "cells": [
+            {
+              "text": "Where available and indicated, as for box jellyfish, stonefish and sea snake envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Wound care covering marine organisms including Vibrio; tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and escalation",
+          "cells": [
+            {
+              "text": "Escalate to critical care for systemic toxicity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marine_envenomation_general-dx-mgmt",
+      "title": "Diagnosis and management of Marine envenomation (general approach)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Marine sting, bite or puncture with possible envenomation or retained spines",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiovascular collapse, paralysis, respiratory failure or delayed systemic syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate first: airway, breathing and circulation; escalate to critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wound imaging for retained spines, neurovascular check, ECG and species identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is envenomation or a retained spine or barb confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-venomous laceration, infection or allergic reaction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Species-specific decontamination: vinegar for cubozoans; avoid fresh water and rubbing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hot-water immersion for heat-labile venoms of fish, stingrays and sea urchins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Explore, irrigate and image puncture wounds; remove retained spines or barbs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specific antivenom where available and indicated; wound care and tetanus prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Escalate to critical care for systemic toxicity, with analgesia throughout",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

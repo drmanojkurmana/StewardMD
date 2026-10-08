@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for grin1/grin2a/grin2b-related neurodevelopmental disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "grin_related_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG with sleep recording",
+          "cells": [
+            {
+              "text": "Continuous spike-and-wave in slow-wave sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Often normal or non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech, language and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Language and cognitive profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel or exome sequencing of GRIN1, GRIN2A and GRIN2B",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional characterisation of the variant",
+          "cells": [
+            {
+              "text": "Gain- or loss-of-function class"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grin_related_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Landau-Kleffner syndrome",
+          "cells": [
+            {
+              "text": "Epilepsy-aphasia spectrum of other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rolandic epilepsy with atypical evolution",
+          "cells": [
+            {
+              "text": "Centrotemporal epilepsy that evolves atypically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy with dyskinesia",
+          "cells": [
+            {
+              "text": "Dyskinetic movement disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grin_related_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanism-directed therapy",
+          "cells": [
+            {
+              "text": "Guided by variant class; NMDA-receptor antagonists such as memantine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Including corticosteroid or benzodiazepine courses for continuous spike-and-wave in sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder care",
+          "cells": [
+            {
+              "text": "Dystonia, chorea and stereotypies; symptomatic care for hypotonia and cortical visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and language support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Periodic EEG and neuropsychological assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predominantly de novo autosomal dominant; family testing where inherited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "grin_related_disorder-dx-mgmt",
+      "title": "Diagnosis and management of GRIN1/GRIN2A/GRIN2B-related neurodevelopmental disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GRIN-related disorder: epileptic encephalopathy with language loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (language regression, sleep status, drug-resistant seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent EEG review for electrical status epilepticus in sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep EEG, MRI, language assessment and GRIN gene panel or exome sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing confirm a GRIN variant with a matching sleep EEG pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Landau-Kleffner syndrome, Rolandic epilepsy or Rett-like disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mechanism-directed therapy such as memantine for characterised variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication with corticosteroid or benzodiazepine courses for sleep discharges",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Movement disorder care for dystonia and chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early developmental intervention with speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ranges from mild learning difficulty to severe disability with drug-resistant epilepsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

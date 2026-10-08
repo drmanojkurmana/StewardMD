@@ -143,5 +143,314 @@
       "caption": "Overview comparison matrix for holmes tremor."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "holmes_tremor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Causative midbrain or thalamic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Characterisation of the tremor",
+          "cells": [
+            {
+              "text": "Rest, postural and action components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for the underlying cause",
+          "cells": [
+            {
+              "text": "Vascular, demyelinating and other lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopaminergic trial",
+          "cells": [
+            {
+              "text": "Response in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral evaluation",
+          "cells": [
+            {
+              "text": "Refractory tremor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "holmes_tremor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parkinsonian rest tremor",
+          "cells": [
+            {
+              "text": "Rest tremor component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellar intention tremor",
+          "cells": [
+            {
+              "text": "Intention component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Essential tremor",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional tremor",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "holmes_tremor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying structural cause",
+          "cells": [
+            {
+              "text": "Stroke, demyelination or other lesion, treated first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa or other dopaminergic therapy",
+          "cells": [
+            {
+              "text": "Trial, which may benefit some patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic agents",
+          "cells": [
+            {
+              "text": "Anticholinergics or clonazepam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation or focused ultrasound",
+          "cells": [
+            {
+              "text": "Refractory tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy",
+          "cells": [
+            {
+              "text": "Adaptive aids and weighted utensils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI localisation",
+          "cells": [
+            {
+              "text": "Causative midbrain or thalamic lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "holmes_tremor-dx-mgmt",
+      "title": "Diagnosis and management of Holmes tremor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rest, postural and action tremor after a midbrain or thalamic lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive brainstem or cerebellar signs, a new enlarging lesion, or severe disability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI and neurology review for a new or enlarging lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain for midbrain or thalamic lesion; tremor characterisation; dopaminergic trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a structural lesion of the midbrain or thalamus confirmed on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Parkinsonian, essential, cerebellar, dystonic or functional tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying structural cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of levodopa or other dopaminergic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic agents such as anticholinergics or clonazepam",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Deep brain stimulation or focused ultrasound for refractory tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cause treated; symptoms managed; surgery if refractory",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

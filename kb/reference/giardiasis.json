@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for giardiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "giardiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated stool microscopy for cysts and trophozoites",
+          "cells": [
+            {
+              "text": "Repeated, since shedding is intermittent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool antigen detection or PCR",
+          "cells": [
+            {
+              "text": "More sensitive detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal aspirate or biopsy",
+          "cells": [
+            {
+              "text": "Difficult cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption and nutritional assessment",
+          "cells": [
+            {
+              "text": "Chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin evaluation",
+          "cells": [
+            {
+              "text": "Recurrent or refractory infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giardiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Chronic malabsorptive diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Inflammatory mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptosporidiosis and other protozoal enteritis",
+          "cells": [
+            {
+              "text": "Same clinical picture from another protozoan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giardiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitroimidazole antiprotozoal",
+          "cells": [
+            {
+              "text": "Metronidazole or tinidazole first-line; nitazoxanide or albendazole as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration and nutritional repair",
+          "cells": [
+            {
+              "text": "Correct malabsorption and deficiencies; temporary lactose avoidance if intolerance develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory infection",
+          "cells": [
+            {
+              "text": "Extended or combination therapy; check adherence and exclude reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health measures",
+          "cells": [
+            {
+              "text": "Safe water, sanitation, hand hygiene and treatment of symptomatic household contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin deficiency check",
+          "cells": [
+            {
+              "text": "Recurrent or treatment-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation in children",
+          "cells": [
+            {
+              "text": "Growth monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "giardiasis-dx-mgmt",
+      "title": "Diagnosis and management of Giardiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected giardiasis: chronic or relapsing diarrhoea with malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, growth faltering, recurrent infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration for severe dehydration, particularly in young children",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated stool microscopy, stool antigen or PCR, and duodenal aspirate if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are cysts or trophozoites found on repeated microscopy or antigen testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coeliac disease, bacterial overgrowth, IBD or cryptosporidiosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nitroimidazole such as metronidazole or tinidazole as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydrate and correct malabsorption and nutritional deficiencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extended or combination therapy for refractory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Public health measures and treatment of symptomatic household contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover fully; recurrent untreated infection can cause lasting malabsorption",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

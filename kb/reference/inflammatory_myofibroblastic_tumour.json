@@ -163,5 +163,316 @@
       "caption": "Overview comparison matrix for inflammatory myofibroblastic tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inflammatory_myofibroblastic_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT or MRI",
+          "cells": [
+            {
+              "text": "Tumour extent and resectability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or excisional biopsy",
+          "cells": [
+            {
+              "text": "Spindle cell and inflammatory components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for ALK, smooth muscle actin and desmin",
+          "cells": [
+            {
+              "text": "ALK protein expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALK testing by FISH or sequencing, then ROS1, NTRK and RET",
+          "cells": [
+            {
+              "text": "Driver fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Paraneoplastic inflammatory picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT",
+          "cells": [
+            {
+              "text": "Staging when aggressive or epithelioid features are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myofibroblastic_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IgG4-related disease (inflammatory pseudotumour)",
+          "cells": [
+            {
+              "text": "Abundant plasma cells can cause confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive inflammatory process",
+          "cells": [
+            {
+              "text": "Dense inflammatory infiltrate; the spindle cell neoplasm must be proven"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myofibroblastic_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing",
+          "cells": [
+            {
+              "text": "ALK first; if negative, ROS1, NTRK3, RET or PDGFRB fusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised disease",
+          "cells": [
+            {
+              "text": "Complete surgical excision, the primary and often curative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma team",
+          "cells": [
+            {
+              "text": "Referral before definitive surgery is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALK-positive advanced disease",
+          "cells": [
+            {
+              "text": "ALK-directed kinase inhibition, starting with crizotinib"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression on crizotinib",
+          "cells": [
+            {
+              "text": "Brigatinib, ceritinib or lorlatinib; case-report evidence only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other drivers",
+          "cells": [
+            {
+              "text": "Crizotinib may act on ROS1; matched kinase inhibitor for other fusions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inflammatory_myofibroblastic_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Inflammatory Myofibroblastic Tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spindle-cell mass with inflammatory infiltrate in a child or young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Epithelioid morphology, necrosis, rapid growth or recurrent systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Sarcoma team review; PET-CT for staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI, biopsy with ALK immunostaining, ALK testing, then other fusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ALK-positive or other driver fusion identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IgG4-related disease or reactive process; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision for localised resectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sarcoma team review before definitive surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Crizotinib for unresectable or metastatic ALK-positive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Other ALK inhibitors on progression, case-report evidence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Matched kinase inhibitor for alternative driver fusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised disease often cured by excision; ALK-directed therapy for advanced disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

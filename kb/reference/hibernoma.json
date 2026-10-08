@@ -153,5 +153,341 @@
       "caption": "Overview comparison matrix for hibernoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hibernoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Fatty mass and its vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG PET",
+          "cells": [
+            {
+              "text": "Intense avidity is expected and does not indicate malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided core biopsy",
+          "cells": [
+            {
+              "text": "Used when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Multivacuolated brown fat cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetic or molecular assessment",
+          "cells": [
+            {
+              "text": "11q rearrangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Defines the compartment before excision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hibernoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myxoid liposarcoma",
+          "cells": [
+            {
+              "text": "When myxoid areas predominate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic deposit or lymphoma",
+          "cells": [
+            {
+              "text": "PET avidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoma and its variants",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical lipomatous tumour or well-differentiated liposarcoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hibernoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign brown-fat tumour",
+          "cells": [
+            {
+              "text": "No metastatic potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secure the diagnosis first",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging and biopsy before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive and generally curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marginal excision",
+          "cells": [
+            {
+              "text": "Generally accepted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plan for vascularity",
+          "cells": [
+            {
+              "text": "Possible intraoperative bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy or chemotherapy",
+          "cells": [
+            {
+              "text": "No established role"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Routine after excision; review any recurrence or atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma-pathway referral",
+          "cells": [
+            {
+              "text": "Experienced soft tissue surgical oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hibernoma-dx-mgmt",
+      "title": "Diagnosis and management of Hibernoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deep soft tissue fatty mass with intense FDG uptake on PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, infiltration, deep mass with local effect, or recurrence after excision?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: sarcoma-pathway review for rapid growth or infiltration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI; image-guided core biopsy if uncertain; histology; 11q cytogenetics if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show multivacuolated brown fat cells?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lipoma, atypical lipomatous tumour, myxoid liposarcoma or metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision as the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Marginal excision, generally accepted",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plan for vascularity and possible bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Routine post-operative follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign tumour excised; recurrence reviewed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

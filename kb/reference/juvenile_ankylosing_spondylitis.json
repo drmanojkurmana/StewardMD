@@ -154,5 +154,325 @@
       "caption": "Overview comparison matrix for juvenile ankylosing spondylitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_ankylosing_spondylitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HLA-B27 typing",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of sacroiliac joints and spine",
+          "cells": [
+            {
+              "text": "Early inflammatory change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and C-reactive protein",
+          "cells": [
+            {
+              "text": "Inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of sacroiliac joints and spine",
+          "cells": [
+            {
+              "text": "Established disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal mobility and posture assessment",
+          "cells": [
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Symptomatic anterior uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease screen",
+          "cells": [
+            {
+              "text": "When gastrointestinal symptoms occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_ankylosing_spondylitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enthesitis-related arthritis",
+          "cells": [
+            {
+              "text": "Shares the HLA-B27 association and enthesitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective sacroiliitis or discitis",
+          "cells": [
+            {
+              "text": "Systemic infective features; cultures distinguish"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_ankylosing_spondylitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for inflammatory back pain and enthesitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF inhibitors",
+          "cells": [
+            {
+              "text": "Active axial disease inadequately controlled by NSAIDs; IL-17 inhibitors as alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulfasalazine",
+          "cells": [
+            {
+              "text": "Predominant peripheral arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Structured programme to preserve spinal mobility, posture and hip function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injection",
+          "cells": [
+            {
+              "text": "Intra-articular corticosteroid for troublesome peripheral or entheseal inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveitis and hip",
+          "cells": [
+            {
+              "text": "Topical steroids and mydriatics for anterior uveitis; arthroplasty where hip destruction disables"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_ankylosing_spondylitis-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile ankylosing spondylitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inflammatory back or buttock pain, or lower limb enthesitis or arthritis in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hip destruction, acute painful red eye, neurological signs or bowel symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for uveitis; hip and neurology assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HLA-B27, MRI sacroiliac joints and spine, ESR and CRP, radiographs, mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inflammatory features with HLA-B27 or sacroiliitis on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical back pain or infective sacroiliitis; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs as first-line for back pain and enthesitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "TNF inhibitors for active axial disease; IL-17 inhibitors as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sulfasalazine for predominant peripheral arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured physiotherapy to preserve spinal mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Topical steroids and mydriatics for anterior uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Long-term disease control; hip and eye monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -144,5 +144,287 @@
       "caption": "Overview comparison matrix for incisional hernia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "incisional_hernia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of the scar",
+          "cells": [
+            {
+              "text": "Defect size and reducibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Defect size, contents and loss of domain; repair planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Smaller or uncertain defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity assessment",
+          "cells": [
+            {
+              "text": "Optimisation before elective repair"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "incisional_hernia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent primary ventral hernia",
+          "cells": [
+            {
+              "text": "Occurs at another site, not through the scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seroma or haematoma",
+          "cells": [
+            {
+              "text": "Fluid or blood collection at the operative site"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "incisional_hernia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pre-operative optimisation",
+          "cells": [
+            {
+              "text": "Weight reduction, glycaemic control and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesh reinforcement",
+          "cells": [
+            {
+              "text": "Standard repair, open or laparoscopic; suture-only repair of larger defects recurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large defects with loss of domain",
+          "cells": [
+            {
+              "text": "Component separation or abdominal wall reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency repair",
+          "cells": [
+            {
+              "text": "Incarceration or strangulation, especially narrow-necked defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Abdominal support garment for small asymptomatic hernias or unfit patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging to plan repair; recurrence follow-up in a specialist service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "incisional_hernia-dx-mgmt",
+      "title": "Diagnosis and management of Incisional hernia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bulge through a previous abdominal scar that enlarges with straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Irreducible tender bulge, loss of cough impulse, obstruction or sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical repair for incarceration or strangulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine defect, CT abdomen and pelvis for loss of domain, comorbidity review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Modifiable risks optimised and defect reducible?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Optimise weight, glycaemia and smoking before elective repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mesh reinforcement as standard repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Component separation for large defects with loss of domain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Support garment for small asymptomatic hernias",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specialist abdominal wall follow-up for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Elective mesh repair; recurrence surveillance in a specialist service",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for frasier syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Handbook of Nephrology and Hypertension",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frasier_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and proteinuria quantification",
+          "cells": [
+            {
+              "text": "Quantifies proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function monitoring and kidney biopsy",
+          "cells": [
+            {
+              "text": "Biopsy where indicated, for focal segmental glomerulosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and WT1 molecular analysis",
+          "cells": [
+            {
+              "text": "WT1 intron 9 splice variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine assessment",
+          "cells": [
+            {
+              "text": "Pubertal development and sex-hormone profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadal imaging",
+          "cells": [
+            {
+              "text": "Evaluates gonadoblastoma risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frasier_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Denys-Drash syndrome",
+          "cells": [
+            {
+              "text": "WT1 missense variants, Wilms tumour and diffuse mesangial sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WAGR syndrome",
+          "cells": [
+            {
+              "text": "WT1 deletion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frasier_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic bilateral gonadectomy",
+          "cells": [
+            {
+              "text": "Of the dysgenetic streak gonads, to prevent gonadoblastoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renoprotective management",
+          "cells": [
+            {
+              "text": "For focal segmental glomerulosclerosis, progressing to renal replacement therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen-based hormone replacement",
+          "cells": [
+            {
+              "text": "Induces and maintains puberty and bone health given gonadal dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorder-of-sex-development care",
+          "cells": [
+            {
+              "text": "Endocrinology and psychological support around gender identity and fertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal surveillance",
+          "cells": [
+            {
+              "text": "Function and proteinuria monitored to time renal replacement planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Nephrology, endocrinology, clinical genetics and psychology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Constitutional WT1 splice-site variant and implications for the family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frasier_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Frasier syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Frasier syndrome: proteinuric nephropathy with 46,XY gonadal dysgenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive proteinuria, delayed puberty, gonadoblastoma features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gonadal assessment for gonadoblastoma risk and gonadectomy planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, renal monitoring, karyotype and WT1 gene analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does WT1 analysis (intron 9 splice variant) confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Denys-Drash syndrome, WAGR syndrome or other causes of FSGS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic bilateral gonadectomy of dysgenetic streak gonads",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Renoprotective management of focal segmental glomerulosclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oestrogen-based hormone replacement to induce and maintain puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance of renal function and proteinuria for renal replacement planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progresses more slowly to end-stage kidney disease than Denys-Drash syndrome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

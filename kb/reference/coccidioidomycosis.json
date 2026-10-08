@@ -164,5 +164,432 @@
       "caption": "Overview comparison matrix for coccidioidomycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Coccidioidomycosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/coccidioidomycosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coccidioidomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of coccidioidomycosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 40%; 60% asymptomatic"
+            },
+            {
+              "text": "Pneumonia days to 3 weeks after exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune features",
+          "cells": [
+            {
+              "text": "Erythema nodosum, erythema multiforme, toxic erythema, desert rheumatism"
+            },
+            {
+              "text": "{{hy:Clues that separate it from bacterial pneumonia}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EIA IgM and IgG",
+          "cells": [
+            {
+              "text": "Initial test"
+            },
+            {
+              "text": "IgM can be falsely positive; confirm with immunodiffusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement fixation titre",
+          "cells": [
+            {
+              "text": "1:32 or greater",
+              "op": ">=",
+              "value": 32
+            },
+            {
+              "text": "Suggests dissemination; falls with successful therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF CF antibody",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Indicates meningitis; culture positive in under one-third"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spherules on stain",
+          "unit": "microns",
+          "cells": [
+            {
+              "text": "Up to 200",
+              "op": "<=",
+              "value": 200
+            },
+            {
+              "text": "Unique to Coccidioides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Grows in 3 to 7",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Lab biohazard: warn laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen test (urine, serum, CSF)",
+          "cells": [
+            {
+              "text": "Immunosuppressed or meningitis"
+            },
+            {
+              "text": "False positive with histoplasmosis or blastomycosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dissemination",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 1% of infections"
+            },
+            {
+              "text": "Risk: HIV CD4 <250, steroids, transplant, TNF blockers, late pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coccidioidomycosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of coccidioidomycosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Community-acquired bacterial pneumonia",
+          "cells": [
+            {
+              "text": "{{hy:Commonest misdiagnosis}}; cocci fails antibiotics, has rash, eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodules are PET-avid in both; satellite nodules favour cocci; biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Upper lobe infiltrate, cavities, hilar nodes in both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasmosis or blastomycosis",
+          "cells": [
+            {
+              "text": "Antigen cross-reactivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coccidioidomycosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of coccidioidomycosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild primary pneumonia in immunocompetent"
+            },
+            {
+              "text": "Most resolve over weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole",
+          "cells": [
+            {
+              "text": "Prolonged or severe primary infection, or risk factors"
+            },
+            {
+              "text": "3 to 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole or itraconazole",
+          "cells": [
+            {
+              "text": "Mild to moderate non-meningeal extrapulmonary disease"
+            },
+            {
+              "text": "Skin, soft tissue, bone usually 1 to 2 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipid amphotericin B",
+          "cells": [
+            {
+              "text": "Severe illness"
+            },
+            {
+              "text": "Switch to triazole once stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole for life",
+          "cells": [
+            {
+              "text": "{{hy:Meningitis}}"
+            },
+            {
+              "text": "Relapse common and fatal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azole maintenance",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Immunocompromised (HIV)"
+            },
+            {
+              "text": "Until CD4 >250 on ART",
+              "op": ">",
+              "value": 250
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amphotericin B",
+          "cells": [
+            {
+              "text": "Severe disease in first trimester"
+            },
+            {
+              "text": "Avoid azoles in first trimester"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Cavity with haemoptysis or rupture risk; osteomyelitis"
+            },
+            {
+              "text": "Plus triazole"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened. Itraconazole needs level monitoring."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coccidioidomycosis-dx-mgmt",
+      "title": "Diagnosis and management of coccidioidomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pneumonia or rash with arthralgia after endemic-area exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "EIA IgM and IgG, confirm by immunodiffusion; CF titre; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Coccidioidal infection confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider bacterial pneumonia, TB, cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Headache or confusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "LP: CSF CF antibody, antigen; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Meningitis: lifelong fluconazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Severe, disseminated, CF >=1:32, immunosuppressed or pregnant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Azole or amphotericin by severity; follow CF titres",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Observe; fluconazole if prolonged symptoms",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Positive"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Negative"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

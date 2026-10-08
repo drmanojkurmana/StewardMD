@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for fibrosing mediastinitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory and thoracic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrosing_mediastinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the chest",
+          "cells": [
+            {
+              "text": "Infiltrative mass, calcification and vessel or airway encasement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI for soft-tissue and vascular involvement",
+          "cells": [
+            {
+              "text": "Soft-tissue characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasma and tuberculosis testing",
+          "cells": [
+            {
+              "text": "Infective trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4 with tissue IgG4 immunostaining",
+          "cells": [
+            {
+              "text": "IgG4-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Malignancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scanning",
+          "cells": [
+            {
+              "text": "Perfusion defects mimicking thromboembolic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrosing_mediastinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma or metastatic carcinoma",
+          "cells": [
+            {
+              "text": "Malignant mediastinal infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis with mediastinal lymphadenopathy",
+          "cells": [
+            {
+              "text": "Granulomatous mediastinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "When the pulmonary arteries are involved"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrosing_mediastinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids and steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "IgG4-related or idiopathic infiltrative form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azole antifungal trial",
+          "cells": [
+            {
+              "text": "Histoplasma-associated disease; sometimes used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular stenting",
+          "cells": [
+            {
+              "text": "Superior vena cava, pulmonary veins or arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for superior vena cava syndrome",
+          "cells": [
+            {
+              "text": "Breathlessness and post-obstructive complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and right heart catheterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Respiratory, interventional radiology, thoracic surgery and infectious disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for life-threatening airway or vascular compromise",
+          "cells": [
+            {
+              "text": "Open surgical resection is rarely feasible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrosing_mediastinitis-dx-mgmt",
+      "title": "Diagnosis and management of Fibrosing mediastinitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mediastinal mass compressing vessels or airways, often after histoplasmosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (superior vena cava syndrome, haemoptysis, syncope, airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stenting for superior vena cava or airway compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT; MRI; Histoplasma and TB tests; IgG4; biopsy; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fibrotic mediastinal mass with vessel or airway encasement on biopsy and imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignancy, sarcoidosis or chronic thromboembolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids and immunosuppression for IgG4 or idiopathic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endovascular stenting of compressed vessels",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for superior vena cava syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pulmonary hypertension surveillance and multidisciplinary care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on extent and bilaterality of vital-structure involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

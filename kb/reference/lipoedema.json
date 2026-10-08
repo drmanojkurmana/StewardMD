@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for lipoedema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of distribution, tenderness, bruising and Stemmer sign",
+          "cells": [
+            {
+              "text": "Stemmer sign negative in early disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Where lymphoedema or lipo-lymphoedema is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous duplex ultrasonography",
+          "cells": [
+            {
+              "text": "Excludes venous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dual-energy X-ray absorptiometry or bioimpedance",
+          "cells": [
+            {
+              "text": "Body composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid, renal, hepatic and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Systemic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound of subcutaneous tissue",
+          "cells": [
+            {
+              "text": "Subcutaneous fat thickness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary or secondary lymphoedema",
+          "cells": [
+            {
+              "text": "Foot typically involved in lymphoedema; spared in this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised obesity with bilateral lipohypertrophy",
+          "cells": [
+            {
+              "text": "Dietary weight loss reduces it; the affected depots resist dietary restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous insufficiency",
+          "cells": [
+            {
+              "text": "Venous signs on duplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroid myxoedema",
+          "cells": [
+            {
+              "text": "Systemic cause excluded by thyroid evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complex decongestive therapy",
+          "cells": [
+            {
+              "text": "Mainstay: graduated compression garments with decongestive measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise",
+          "cells": [
+            {
+              "text": "Regular low-impact exercise, particularly aquatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight management",
+          "cells": [
+            {
+              "text": "For coexisting obesity; affected depots resist dietary energy restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liposuction",
+          "cells": [
+            {
+              "text": "Tumescent or water-jet-assisted, in selected patients, for durable reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and psychological support",
+          "cells": [
+            {
+              "text": "Tenderness, easy bruising and body-image impact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression to lipo-lymphoedema",
+          "cells": [
+            {
+              "text": "Intensified decongestive therapy for secondary lymphatic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Attentive care of oedematous limbs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoedema-dx-mgmt",
+      "title": "Diagnosis and management of lipoedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetrical painful leg and hip fat enlargement with feet spared and easy bruising",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new pitting oedema, skin breakdown, cellulitis, disabling pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: lymphatic review and treatment of cellulitis or breakdown",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stemmer sign, lymphoscintigraphy if lymphoedema, duplex, thyroid, renal and cardiac tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is symmetrical gynoid fat with feet spared and Stemmer sign negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphoedema, generalised obesity, chronic venous disease or myxoedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complex decongestive therapy with graduated compression garments",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-impact aquatic exercise to support mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight management for coexisting obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liposuction for durable reduction in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Pain management and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and slowly progressive; diet alone does not correct it; compression helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

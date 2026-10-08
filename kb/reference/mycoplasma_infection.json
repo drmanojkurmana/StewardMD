@@ -158,5 +158,464 @@
       "caption": "Overview comparison matrix for mycoplasma infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Mycoplasma pneumoniae: Clinical Care",
+      "kind": "web",
+      "url": "https://www.cdc.gov/mycoplasma/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycoplasma_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of Mycoplasma pneumoniae infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Gradual onset, dry cough, headache, malaise, fever"
+            },
+            {
+              "text": "Cannot be separated reliably from other CAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia rate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "3 to 13% of infections",
+              "range": [
+                3,
+                13
+              ]
+            },
+            {
+              "text": "Upper respiratory illness far more common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest signs",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Wheeze or crackles in about 80%",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Often diagnosed only on chest film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Peribronchial infiltrates, subsegmental atelectasis"
+            },
+            {
+              "text": "Lobar consolidation possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory PCR",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 65 to 90%, specificity 90 to 100%",
+              "range": [
+                65,
+                90
+              ]
+            },
+            {
+              "text": "{{hy:Test of choice for early diagnosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired serology",
+          "cells": [
+            {
+              "text": "IgM and IgG on acute and convalescent sera"
+            },
+            {
+              "text": "Single sample inadequate; IgM persists up to 1 year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 60% or less",
+              "op": "<=",
+              "value": 60
+            },
+            {
+              "text": "Slow; not for routine use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold agglutinins",
+          "cells": [
+            {
+              "text": "Nonspecific"
+            },
+            {
+              "text": "No longer recommended"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "No organisms seen"
+            },
+            {
+              "text": "No cell wall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycoplasma_infection-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Mycoplasma infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chlamydia pneumoniae",
+          "cells": [
+            {
+              "text": "Similar atypical picture, often hoarseness"
+            },
+            {
+              "text": "Respiratory PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Legionella pneumonia",
+          "cells": [
+            {
+              "text": "High fever, diarrhoea, hyponatraemia, sicker"
+            },
+            {
+              "text": "Urine antigen, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumococcal pneumonia",
+          "cells": [
+            {
+              "text": "Abrupt onset, lobar, responds to beta-lactam"
+            },
+            {
+              "text": "Sputum Gram stain, urine antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral pneumonia",
+          "cells": [
+            {
+              "text": "Seasonal, myalgia"
+            },
+            {
+              "text": "Viral PCR panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma exacerbation",
+          "cells": [
+            {
+              "text": "Wheeze without infiltrate"
+            },
+            {
+              "text": "Chest film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or HSV-associated erythema multiforme",
+          "cells": [
+            {
+              "text": "Mucocutaneous disease without respiratory infection"
+            },
+            {
+              "text": "Mycoplasma PCR and HSV testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycoplasma_infection-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Mycoplasma infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide (azithromycin, clarithromycin)",
+          "cells": [
+            {
+              "text": "{{hy:First line for children and adults}}"
+            },
+            {
+              "text": "Beta-lactams are ineffective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Older children and adults, or no response to macrolide"
+            },
+            {
+              "text": "Weigh harms in children and pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Adults, including suspected macrolide resistance"
+            },
+            {
+              "text": "Avoid ciprofloxacin and ofloxacin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Macrolide resistance testing",
+          "cells": [
+            {
+              "text": "Poor response to macrolide"
+            },
+            {
+              "text": "US resistance under 10%; varies worldwide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Most infections self-limited"
+            },
+            {
+              "text": "Antipyretics, fluids, bronchodilator for wheeze"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrapulmonary disease",
+          "cells": [
+            {
+              "text": "Haemolysis, encephalitis, SJS or MIRM"
+            },
+            {
+              "text": "Specialist care; manage complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No test of cure",
+          "cells": [
+            {
+              "text": "After treatment"
+            },
+            {
+              "text": "PCR stays positive despite effective therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Neither CDC nor the entry gives doses or durations; dose per local CAP guidance."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycoplasma_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycoplasma infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cough, fever, headache with gradual onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infiltrate present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Likely upper respiratory illness; supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Respiratory PCR if result changes care",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe pneumonia or extrapulmonary signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Admit; treat complication; macrolide or alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Macrolide; doxycycline or fluoroquinolone in adults",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Not improving on macrolide?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Switch to doxycycline or fluoroquinolone; test resistance",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete course; no test of cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

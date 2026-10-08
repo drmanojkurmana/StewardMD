@@ -142,5 +142,314 @@
       "caption": "Overview comparison matrix for functional constipation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_constipation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History and examination with rectal examination",
+          "cells": [
+            {
+              "text": "Evaluates for evacuation disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods",
+          "cells": [
+            {
+              "text": "Excludes metabolic causes such as thyroid dysfunction and hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic transit studies",
+          "cells": [
+            {
+              "text": "Where slow transit is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry and balloon expulsion",
+          "cells": [
+            {
+              "text": "For suspected defecatory disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Where alarm features or obstruction are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_constipation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dyssynergic defecation",
+          "cells": [
+            {
+              "text": "Coexisting defecatory disorder that laxatives alone will not treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary constipation (hypothyroidism, hypercalcaemia, drugs)",
+          "cells": [
+            {
+              "text": "Metabolic or drug cause, excluded by bloods and medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colorectal obstruction or stricture",
+          "cells": [
+            {
+              "text": "Features suggesting obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_constipation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "Increased dietary fibre, adequate fluid intake and physical activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic laxatives",
+          "cells": [
+            {
+              "text": "Macrogol as the mainstay of pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant laxatives",
+          "cells": [
+            {
+              "text": "Added when the response is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secretagogues or prucalopride",
+          "cells": [
+            {
+              "text": "Linaclotide, or the prokinetic prucalopride, for refractory or slow-transit disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor biofeedback",
+          "cells": [
+            {
+              "text": "For defecatory (evacuation) disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Withdraw constipating drugs; exclude hypothyroidism and hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist anorectal investigation",
+          "cells": [
+            {
+              "text": "When disease is refractory or alarm features emerge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_constipation-dx-mgmt",
+      "title": "Diagnosis and management of Functional constipation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional constipation: persistent constipation without structural cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rectal bleeding, anaemia, weight loss, obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation of bleeding, anaemia, weight loss or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rectal examination, bloods, transit studies and anorectal manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are secondary causes such as hypothyroidism excluded by bloods?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider colorectal obstruction, dyssynergic defecation or neurological disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fibre, fluid and physical activity as first-line lifestyle measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Macrogol as the mainstay; stimulants if the response is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pelvic floor biofeedback for evacuation disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and withdraw constipating medications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but benign; most respond to stepwise treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

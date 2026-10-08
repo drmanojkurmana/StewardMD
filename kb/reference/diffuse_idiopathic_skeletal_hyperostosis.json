@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for diffuse idiopathic skeletal hyperostosis (dish, forestier disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinal radiographs",
+          "cells": [
+            {
+              "text": "Flowing anterolateral ossification over four or more vertebrae with preserved discs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the spine",
+          "cells": [
+            {
+              "text": "Extent of ossification and cervical osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium swallow or endoscopy",
+          "cells": [
+            {
+              "text": "Dysphagia caused by cervical osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Associated metabolic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Canal stenosis, myelopathy or posterior longitudinal ligament ossification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "Preserved discs and sacroiliac joints distinguish DISH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degenerative spondylosis with osteophytes",
+          "cells": [
+            {
+              "text": "Discs are preserved in DISH; a common pitfall is missing this"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "For stiffness and enthesopathic pain; no disease-modifying drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and exercise",
+          "cells": [
+            {
+              "text": "Preserves spinal mobility, posture and range of movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic syndrome management",
+          "cells": [
+            {
+              "text": "Weight reduction, glycaemic control of type 2 diabetes, lipid optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia management",
+          "cells": [
+            {
+              "text": "Soft diet; osteophytectomy for dysphagia or airway compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture vigilance",
+          "cells": [
+            {
+              "text": "Low threshold for CT and spinal immobilisation after minor trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Canal stenosis, myelopathy or posterior longitudinal ligament ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Rheumatology, ENT or gastroenterology and spinal surgery as indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-dx-mgmt",
+      "title": "Diagnosis and management of Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DISH: stiff spine with flowing ossification along the vertebral margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive dysphagia, myelopathy, unstable fracture, new severe pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal imaging and immobilisation for suspected fracture after minor trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spinal radiographs; CT spine; swallow study; HbA1c and lipid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Flowing ossification over four or more vertebrae with preserved discs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ankylosing spondylitis, degenerative spondylosis or alkaptonuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Simple analgesia and NSAIDs; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and structured exercise to preserve mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the metabolic syndrome: weight, glycaemia and lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Osteophytectomy for dysphagia or airway compromise from cervical osteophytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical decompression for canal stenosis or myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally benign and slowly progressive; fracture risk rises after minor trauma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

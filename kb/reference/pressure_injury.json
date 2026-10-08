@@ -149,5 +149,321 @@
       "caption": "Overview comparison matrix for pressure injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pressure_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Validated pressure-injury risk scale",
+          "cells": [
+            {
+              "text": "Pressure-injury risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound assessment",
+          "cells": [
+            {
+              "text": "Stage, size, depth, exudate and tissue type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment",
+          "cells": [
+            {
+              "text": "Undernutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perfusion, continence and mobility evaluation",
+          "cells": [
+            {
+              "text": "Modifiable contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection investigations",
+          "cells": [
+            {
+              "text": "Osteomyelitis or spreading infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pressure_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous infection or abscess",
+          "cells": [
+            {
+              "text": "Spreading erythema, purulent discharge or systemic features"
+            },
+            {
+              "text": "Wound and systemic infection assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising soft-tissue infection",
+          "cells": [
+            {
+              "text": "Signs requiring urgent surgical assessment"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pressure_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Validated scale such as Braden or Waterlow; scheduled repositioning; pressure-redistributing support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Offloading",
+          "cells": [
+            {
+              "text": "Consistent pressure relief and repositioning as the foundation of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound management",
+          "cells": [
+            {
+              "text": "Cleansing, debridement of necrotic or devitalised tissue, stage-appropriate dressings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Adequate protein and energy to promote healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moisture, continence and perfusion",
+          "cells": [
+            {
+              "text": "Reduce ongoing tissue damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Antibiotics when cellulitis or osteomyelitis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain",
+          "cells": [
+            {
+              "text": "Analgesia, including cover for dressing changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Tissue-viability nursing, dietetics and surgery for reconstruction of deep wounds"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pressure_injury-dx-mgmt",
+      "title": "Diagnosis and management of Pressure injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pressure injury: localised skin damage over a pressure area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Spreading erythema, pus, systemic signs, exposed bone or rapid deterioration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical assessment for necrotising soft-tissue infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Risk scale; wound staging; nutrition; perfusion and infection assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is wound infection or osteomyelitis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue offloading and wound care; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevention: validated risk scale, scheduled repositioning, support surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Offload pressure and reposition as the foundation of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cleanse, debride necrotic tissue, stage-appropriate dressings",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics for cellulitis or osteomyelitis; optimise nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ongoing tissue-viability care; surgical reconstruction for deep wounds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

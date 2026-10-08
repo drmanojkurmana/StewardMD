@@ -144,5 +144,267 @@
       "caption": "Overview comparison matrix for meigs syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meigs_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal and pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Solid ovarian mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Mass and effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA-125, interpreted cautiously",
+          "cells": [
+            {
+              "text": "Poor specificity in this setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analysis of pleural and ascitic fluid",
+          "cells": [
+            {
+              "text": "Benign, non-malignant nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination of the excised tumour",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meigs_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Benign ovarian tumour; curative and resolves the effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Excised tumour confirms the benign diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic drainage",
+          "cells": [
+            {
+              "text": "Symptomatic ascites or pleural effusion while awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CA-125 interpretation",
+          "cells": [
+            {
+              "text": "Interpret a raised value cautiously; imaging avoids mistaking the syndrome for malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid analysis",
+          "cells": [
+            {
+              "text": "Confirms benign, transudative nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative check",
+          "cells": [
+            {
+              "text": "Resolution of ascites and pleural effusion after tumour removal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meigs_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Meigs syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Solid ovarian mass with ascites and pleural effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Picture indistinguishable from malignancy, markedly raised CA-125 or large effusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Therapeutic drainage for breathlessness; urgent gynaecology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pelvic ultrasound, CT chest, abdomen and pelvis, CA-125, fluid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a benign tumour confirmed on fluid analysis and histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ovarian malignancy, pseudo-Meigs, cirrhosis or tuberculous peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision of the benign ovarian tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Therapeutic drainage of symptomatic ascites or effusion while awaiting surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Interpret raised CA-125 cautiously; use imaging to avoid mistaking it for malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm resolution of ascites and pleural effusion after tumour removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Curative excision; effusions resolve after tumour removal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

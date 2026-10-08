@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for digital myxoid (mucous) cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "digital_myxoid_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical inspection and transillumination",
+          "cells": [
+            {
+              "text": "Translucent swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Relation of the cyst to a longitudinal nail groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiograph of the digit",
+          "cells": [
+            {
+              "text": "Underlying osteoarthritic change and osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Cystic nature and any joint connection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of an excised specimen",
+          "cells": [
+            {
+              "text": "Used when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "digital_myxoid_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; relieving matrix pressure usually resolves the nail groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative measures for recurrence",
+          "cells": [
+            {
+              "text": "Repeated aseptic needle puncture and expression, cryotherapy, intralesional steroid or sclerotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Ligation of the joint pedicle and removal of the underlying osteophyte to minimise recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CO2 laser ablation",
+          "cells": [
+            {
+              "text": "Alternative destructive option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying osteoarthritis",
+          "cells": [
+            {
+              "text": "Management of the distal interphalangeal joint osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid self-drainage",
+          "cells": [
+            {
+              "text": "Risk of infection and septic arthritis through the joint communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Dermatology or hand surgery for recurrence or uncertain diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "digital_myxoid_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Digital myxoid (mucous) cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected digital myxoid cyst: translucent swelling at the fingertip with a nail groove",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, ulceration, signs of septic arthritis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for septic arthritis or a solid tumour rather than a cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination and onychoscopy; digit radiograph; ultrasound or MRI for joint link",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a cystic lesion with a joint connection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider solid tumour, ganglion, epidermoid cyst or rheumatoid nodule; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign; relieving matrix pressure usually resolves the nail groove",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeated aseptic puncture, cryotherapy or intralesional steroid for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision with ligation of the joint pedicle and removal of the osteophyte",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid repeated self-drainage, which risks septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dermatology or hand surgery referral for recurrence or uncertain diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; the nail groove usually resolves after treatment, but recurrence is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

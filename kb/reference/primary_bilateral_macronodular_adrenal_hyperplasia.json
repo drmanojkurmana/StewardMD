@@ -150,5 +150,342 @@
       "caption": "Overview comparison matrix for primary bilateral macronodular adrenal hyperplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology reference texts and adrenal disorder consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_bilateral_macronodular_adrenal_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Late-night salivary cortisol and 24-hour urinary free cortisol",
+          "cells": [
+            {
+              "text": "Hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose dexamethasone suppression and paired plasma ACTH",
+          "cells": [
+            {
+              "text": "ACTH independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the adrenals",
+          "cells": [
+            {
+              "text": "Bilateral macronodular enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provocative testing (mixed-meal, posture, hormone challenge)",
+          "cells": [
+            {
+              "text": "Aberrant receptor responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARMC5 germline genetic testing",
+          "cells": [
+            {
+              "text": "Germline variant, with family screening where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic assessment",
+          "cells": [
+            {
+              "text": "Glucose intolerance, dyslipidaemia and bone density loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_bilateral_macronodular_adrenal_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cortisol-secreting adrenal adenoma",
+          "cells": [
+            {
+              "text": "Unilateral rather than bilateral adrenal enlargement"
+            },
+            {
+              "text": "Cross-sectional adrenal imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenocortical carcinoma",
+          "cells": [
+            {
+              "text": "Imaging atypical for benign hyperplasia"
+            },
+            {
+              "text": "Adrenal CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary (ACTH-dependent) Cushing disease",
+          "cells": [
+            {
+              "text": "ACTH-dependent cortisol excess"
+            },
+            {
+              "text": "Paired plasma ACTH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_bilateral_macronodular_adrenal_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Adrenalectomy",
+          "cells": [
+            {
+              "text": "Unilateral or bilateral; definitive treatment of ACTH-independent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical cortisol control",
+          "cells": [
+            {
+              "text": "Metyrapone or ketoconazole when surgery is deferred or unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aberrant-receptor forms",
+          "cells": [
+            {
+              "text": "Beta-blocker, somatostatin analogue or GnRH analogue, guided by provocative testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replacement after bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Lifelong glucocorticoid, and mineralocorticoid where bilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic complications",
+          "cells": [
+            {
+              "text": "Hypertension, glucose intolerance, dyslipidaemia and reduced bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education",
+          "cells": [
+            {
+              "text": "Adrenal insufficiency, steroid sick-day rules and recognition of adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "ARMC5 germline testing and family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Endocrine multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_bilateral_macronodular_adrenal_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of Primary bilateral macronodular adrenal hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected bilateral macronodular adrenal hyperplasia: ACTH-independent hypercortisolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid or severe hypercortisolism, or imaging atypical for benign hyperplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent adrenal surgical and oncology review for suspected carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Late-night salivary and urinary cortisol; dexamethasone suppression; ACTH; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the tests confirm ACTH-independent hypercortisolism with bilateral macronodules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adenoma, pituitary or ectopic ACTH causes; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Offer adrenalectomy as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metyrapone or ketoconazole if surgery is deferred or unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Targeted blockade in aberrant-receptor forms, guided by provocative testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong glucocorticoid replacement after bilateral adrenalectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Endocrine follow-up; treat metabolic complications; ARMC5 family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

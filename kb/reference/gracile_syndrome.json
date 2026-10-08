@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for gracile syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gracile_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood lactate and lactate:pyruvate ratio",
+          "cells": [
+            {
+              "text": "Lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests, bile acids, ferritin and iron studies",
+          "cells": [
+            {
+              "text": "Cholestasis and hepatic iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino acids",
+          "cells": [
+            {
+              "text": "Generalised aminoaciduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Cholestasis and iron deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory chain enzyme analysis",
+          "cells": [
+            {
+              "text": "Reduced complex III activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCS1L gene sequencing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gracile_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal haemochromatosis",
+          "cells": [
+            {
+              "text": "Hepatic iron overload mimics it; mitochondrial basis is missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other mitochondrial respiratory chain disorders",
+          "cells": [
+            {
+              "text": "Congenital lactic acidosis with respiratory chain defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosinaemia type 1",
+          "cells": [
+            {
+              "text": "Hepatorenal metabolic disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gracile_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying therapy",
+          "cells": [
+            {
+              "text": "No treatment corrects the BCS1L complex III defect; supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactic acidosis",
+          "cells": [
+            {
+              "text": "Buffering with fluid and electrolyte support in neonatal intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholestatic liver disease",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamins and ursodeoxycholic acid with high-energy nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubulopathy",
+          "cells": [
+            {
+              "text": "Correct electrolyte, bicarbonate and amino acid losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid iron",
+          "cells": [
+            {
+              "text": "No iron supplements; monitor hepatic iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Early involvement, given the frequently fatal course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing and prenatal options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gracile_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of GRACILE syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GRACILE syndrome: neonate with lactic acidosis, cholestasis and iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory lactic acidosis, liver failure, multiorgan failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal intensive care for refractory lactic acidosis and liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate, liver tests, urine amino acids, respiratory chain enzymes and BCS1L testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does BCS1L sequencing confirm the complex III defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neonatal haemochromatosis or other mitochondrial disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Buffering and fluid and electrolyte support in neonatal intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fat-soluble vitamins and ursodeoxycholic acid for cholestasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct renal tubular electrolyte and amino acid losses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid iron supplements; early palliative care involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Classic Finnish form is usually fatal within months; milder phenotypes survive longer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

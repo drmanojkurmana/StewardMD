@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for hyperprolinaemia (types i and ii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperprolinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative plasma amino acids",
+          "cells": [
+            {
+              "text": "Degree of proline elevation; modest in type I, higher in type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delta-1-pyrroline-5-carboxylate assay",
+          "cells": [
+            {
+              "text": "Identifies type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino and organic acid analysis",
+          "cells": [
+            {
+              "text": "Urinary amino and organic acid pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PRODH and ALDH4A1 molecular testing",
+          "cells": [
+            {
+              "text": "Type I (PRODH) or type II (ALDH4A1)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma lactate",
+          "cells": [
+            {
+              "text": "Excludes secondary elevation of proline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and vitamin B6 status",
+          "cells": [
+            {
+              "text": "Seizure assessment and cofactor status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperprolinemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary hyperprolinaemia",
+          "cells": [
+            {
+              "text": "Lactic acidosis or hyperlactataemia, since proline oxidase is redox-sensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "22q11.2 deletion syndrome",
+          "cells": [
+            {
+              "text": "Associated hyperprolinaemia; coexisting features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine-dependent and B6-responsive epilepsies",
+          "cells": [
+            {
+              "text": "Seizures with overlapping B6 chemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular disease",
+          "cells": [
+            {
+              "text": "Generalised aminoaciduria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperprolinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying drug",
+          "cells": [
+            {
+              "text": "Type I is generally benign and managed with reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "For seizures more consistently associated with type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine supplementation",
+          "cells": [
+            {
+              "text": "Addresses P5C-mediated inactivation of pyridoxal phosphate in type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipyretic measures",
+          "cells": [
+            {
+              "text": "During febrile illness to lower seizure risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluate 22q11 deletion",
+          "cells": [
+            {
+              "text": "Considered given PRODH location; developmental support where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening, distinguishing type I from type II biochemically"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperprolinemia-dx-mgmt",
+      "title": "Diagnosis and management of Hyperprolinaemia (types I and II)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised plasma proline, with or without seizures or developmental features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures (febrile or hard to control), acidosis or 22q11 features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for secondary cause, B6-responsive epilepsy or 22q11 deletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Quantitative plasma amino acids, urinary P5C, lactate, PRODH and ALDH4A1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type I (PRODH) or type II (P5C, ALDH4A1) pattern defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude secondary causes such as lactic acidosis and repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No disease-modifying drug; type I managed with reassurance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants for seizures in type II",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pyridoxine supplementation given P5C effects on B6",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antipyretics during febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Type I generally benign; type II outcome depends on seizure control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

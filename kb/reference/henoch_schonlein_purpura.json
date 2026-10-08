@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for henoch-schonlein purpura (iga vasculitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "henoch_schonlein_purpura-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis, repeated over follow-up",
+          "cells": [
+            {
+              "text": "Haematuria and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure measurement",
+          "cells": [
+            {
+              "text": "Hypertension with nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Normal platelets; excludes a bleeding disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and serum albumin",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Intussusception or significant gut involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin or renal biopsy",
+          "cells": [
+            {
+              "text": "IgA deposition, in atypical or severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "henoch_schonlein_purpura-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcaemia or sepsis with purpura",
+          "cells": [
+            {
+              "text": "Purpura in an unwell, febrile, toxic child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia and other bleeding disorders",
+          "cells": [
+            {
+              "text": "Non-thrombocytopenic palpable purpura"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute abdomen from appendicitis or other cause",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "henoch_schonlein_purpura-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Rest, hydration and simple analgesia for most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Severe abdominal pain, scrotal involvement or significant nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Significant or crescentic nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid NSAIDs",
+          "cells": [
+            {
+              "text": "Where there is renal impairment or gastrointestinal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure and urinalysis at intervals over several months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intussusception management",
+          "cells": [
+            {
+              "text": "Radiological or surgical treatment if severe abdominal pain suggests it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric nephrology referral",
+          "cells": [
+            {
+              "text": "Persistent or significant renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "henoch_schonlein_purpura-dx-mgmt",
+      "title": "Diagnosis and management of Henoch-Schonlein purpura (IgA vasculitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Palpable purpura with arthritis or abdominal pain in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intussusception, GI bleeding, nephritis, scrotal involvement or toxic appearance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude intussusception and meningococcaemia urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, blood pressure, full blood count, coagulation, renal tests, abdominal USS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the purpura non-thrombocytopenic, with normal platelets and coagulation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate for a bleeding disorder or immune thrombocytopenia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with rest, hydration and simple analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for severe abdominal pain, scrotal involvement or nephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for significant or crescentic nephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor blood pressure and urinalysis over several months",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually self-limiting; renal follow-up for delayed nephritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

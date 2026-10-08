@@ -157,5 +157,341 @@
       "caption": "Overview comparison matrix for hepatoblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum alpha-fetoprotein at diagnosis and serially",
+          "cells": [
+            {
+              "text": "Markedly raised in most; a low or normal level raises concern for small cell undifferentiated tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "The mass and its vascular relations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT or MRI of the abdomen",
+          "cells": [
+            {
+              "text": "PRETEXT assignment and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle or open biopsy",
+          "cells": [
+            {
+              "text": "Histological subtyping when upfront resection is not planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-hCG",
+          "cells": [
+            {
+              "text": "Precocious puberty from rare paraneoplastic virilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline audiometry and renal function",
+          "cells": [
+            {
+              "text": "Before platinum-based chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatocellular carcinoma",
+          "cells": [
+            {
+              "text": "Older children, often with chronic liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile hepatic haemangioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenchymal hamartoma of the liver",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "First-line when the tumour is confined and completely resectable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoadjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "For initially unresectable liver-confined disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cisplatin-based chemotherapy",
+          "cells": [
+            {
+              "text": "Systemic backbone, as a single agent or in combination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection after chemotherapy",
+          "cells": [
+            {
+              "text": "Tumours unresectable at diagnosis that remain liver-confined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid primary resection",
+          "cells": [
+            {
+              "text": "When the tumour is likely to downstage well with chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "Intensified chemotherapy, most often for pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "No role is described for hepatoblastoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein for response and relapse; ototoxicity and renal function on platinum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of hepatoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Liver mass in a child with markedly raised alpha-fetoprotein",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tumour rupture, respiratory compromise, rising AFP after treatment, or early puberty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric oncology review for rupture or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum AFP; abdominal ultrasound with Doppler; contrast CT or MRI for PRETEXT; chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the tumour confined to the liver and completely resectable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Neoadjuvant cisplatin-based chemotherapy to shrink the tumour, then reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection when confined and completely resectable",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cisplatin-based chemotherapy as the systemic backbone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensified chemotherapy for metastatic disease, most often pulmonary",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial AFP and surveillance for pulmonary metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resection after response; alpha-fetoprotein tracked for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

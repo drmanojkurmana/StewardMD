@@ -149,5 +149,324 @@
       "caption": "Overview comparison matrix for occupational asthma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "occupational_asthma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial peak flow diaries at and away from work",
+          "cells": [
+            {
+              "text": "Peak flows that fall at work and recover away from work, supporting a work link"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry with reversibility testing",
+          "cells": [
+            {
+              "text": "Reversible airflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-specific bronchial challenge",
+          "cells": [
+            {
+              "text": "Bronchial hyper-responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific IgE or skin prick testing",
+          "cells": [
+            {
+              "text": "Sensitisation to suspected occupational allergens, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific inhalation challenge (specialist centres)",
+          "cells": [
+            {
+              "text": "Response to the suspected agent when diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed occupational history",
+          "cells": [
+            {
+              "text": "Symptoms that track work exposure, materials, processes and timing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occupational_asthma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-occupational asthma worsened at work",
+          "cells": [
+            {
+              "text": "Symptoms do not improve on days away from work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational rhinitis",
+          "cells": [
+            {
+              "text": "Often precedes the asthma; post-nasal symptoms can mimic lower airway disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occupational_asthma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete removal from the sensitiser",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Relocation or substitution; the best chance of recovery, as reducing exposure alone is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stepwise asthma pharmacotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Inhaled corticosteroids and bronchodilators; systemic corticosteroids for exacerbations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Engineering controls and respiratory protection",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For irritant-induced disease and unavoidable residual exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial peak flow and spirometry surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Confirms the work relationship and tracks lung function over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Notification and occupational advice",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Reportable occupational disease; advice on compensation, redeployment and workplace assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral and co-worker screening",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Occupational and respiratory medicine; screen co-workers sharing the same exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "occupational_asthma-dx-mgmt",
+      "title": "Diagnosis and management of Occupational asthma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected occupational asthma: symptoms improve away from work, worsen at work",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe bronchospasm, nocturnal attacks or falling peak flows)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for acute severe bronchospasm after a major irritant exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial peak flow diaries at and away from work; spirometry with reversibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do serial peak flows and bronchial challenge confirm a work relationship?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Review for non-occupational asthma, COPD or rhinitis; repeat the occupational history",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the worker from the causative sensitiser by relocation or substitution",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stepwise asthma therapy with inhaled corticosteroids and bronchodilators",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Engineering controls and respiratory protection for irritant-induced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer to occupational and respiratory medicine; screen co-workers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Best recovery after complete removal; continued exposure predicts persistent asthma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for fat necrosis of the breast."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and breast imaging guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fat_necrosis_breast-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination and history",
+          "cells": [
+            {
+              "text": "Trauma, surgery or radiotherapy in triple assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography",
+          "cells": [
+            {
+              "text": "Oil cyst, calcification or a suspicious mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle biopsy",
+          "cells": [
+            {
+              "text": "Where imaging or examination is not clearly benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI in selected cases",
+          "cells": [
+            {
+              "text": "Indeterminate imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging follow-up",
+          "cells": [
+            {
+              "text": "Presumed benign but not biopsied"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fat_necrosis_breast-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast carcinoma",
+          "cells": [
+            {
+              "text": "Spiculated mass or suspicious microcalcification; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroadenoma or other benign solid lump",
+          "cells": [
+            {
+              "text": "Listed in the differential of a firm breast lump"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast abscess or haematoma",
+          "cells": [
+            {
+              "text": "Infection or bleeding after trauma or surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fat_necrosis_breast-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Triple assessment with core biopsy",
+          "cells": [
+            {
+              "text": "Confirms the benign diagnosis where not clearly benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance once malignancy excluded",
+          "cells": [
+            {
+              "text": "Most lesions stabilise, resolve or persist as an inert oil cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia and warm compresses",
+          "cells": [
+            {
+              "text": "Tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or excision",
+          "cells": [
+            {
+              "text": "Symptomatic oil cyst (aspiration); persistent, enlarging or troublesome mass (excision)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging",
+          "cells": [
+            {
+              "text": "Presumed benign but unbiopsied lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of precipitating factor",
+          "cells": [
+            {
+              "text": "Trauma, surgery, radiotherapy, fat grafting or anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fat_necrosis_breast-dx-mgmt",
+      "title": "Diagnosis and management of Fat necrosis of the breast",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm breast lump after trauma, surgery, radiotherapy or fat grafting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (spiculated mass, skin tethering, discordant findings, enlarging lesion, nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent triple assessment with core biopsy for suspicious features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mammography; ultrasound; core biopsy where not clearly benign; MRI if indeterminate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Benign pathology or typical oil cyst on imaging, with malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or excise; treat as carcinoma until excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure once malignancy excluded; most lesions settle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia and warm compresses for tenderness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspirate a symptomatic oil cyst or excise a persistent mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval imaging for presumed benign but unbiopsied lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with excellent prognosis; most lesions stabilise or persist as inert scar or cyst",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

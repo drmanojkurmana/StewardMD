@@ -177,5 +177,405 @@
       "caption": "Overview comparison matrix for uncommon disseminated fungal infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO eEML, Itraconazole recommendation (talaromycosis), 2017",
+      "kind": "web",
+      "url": "https://list.essentialmeds.org/recommendations/499"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uncommon_disseminated_fungal_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing uncommon disseminated mycoses",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and tissue culture",
+          "cells": [
+            {
+              "text": "Identify to mould phase"
+            },
+            {
+              "text": "{{hy:Histology alone confuses Fusarium or Scedosporium with Aspergillus}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture in fusariosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in up to about 50% of disseminated cases",
+              "op": "<=",
+              "value": 50
+            },
+            {
+              "text": "S. apiospermum usually culture negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fontana-Masson stain",
+          "cells": [
+            {
+              "text": "Melanised hyphae"
+            },
+            {
+              "text": "Phaeohyphomycosis (dematiaceous moulds)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasma antigen positive",
+          "cells": [
+            {
+              "text": "Cross-reacts with Emergomyces"
+            },
+            {
+              "text": "Confirm by culture or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptococcal antigen positive",
+          "cells": [
+            {
+              "text": "May reflect Trichosporon asahii"
+            },
+            {
+              "text": "Culture identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracoccidioides serology",
+          "cells": [
+            {
+              "text": "Supportive"
+            },
+            {
+              "text": "Some assays miss P. lutzii"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR (28S rDNA, ITS)",
+          "cells": [
+            {
+              "text": "Reference laboratory"
+            },
+            {
+              "text": "Species identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin lesions",
+          "cells": [
+            {
+              "text": "Umbilicated papules (talaromycosis); painful necrotic nodules (fusariosis)"
+            },
+            {
+              "text": "Biopsy and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uncommon_disseminated_fungal_infections-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic these mycoses",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated histoplasmosis",
+          "cells": [
+            {
+              "text": "Mimics talaromycosis and emergomycosis"
+            },
+            {
+              "text": "Culture and PCR; antigen cross-reacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive aspergillosis",
+          "cells": [
+            {
+              "text": "Mimics Fusarium, Scedosporium, Lomentospora"
+            },
+            {
+              "text": "Culture identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive candidiasis",
+          "cells": [
+            {
+              "text": "Resembles trichosporonosis"
+            },
+            {
+              "text": "Culture identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucocutaneous leishmaniasis or squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Mimic chronic paracoccidioidomycosis lesions"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Umbilicated papules like talaromycosis"
+            },
+            {
+              "text": "Skin biopsy and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uncommon_disseminated_fungal_infections-treatment",
+      "kind": "treatment",
+      "title": "Treating uncommon disseminated mycoses",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amphotericin B then itraconazole",
+          "cells": [
+            {
+              "text": "Disseminated talaromycosis"
+            },
+            {
+              "text": "2 weeks IV amphotericin B then 10 weeks itraconazole; 97.3% response in one trial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liposomal amphotericin B then azole",
+          "cells": [
+            {
+              "text": "Severe dimorphic fungal disease"
+            },
+            {
+              "text": "Step down to itraconazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voriconazole",
+          "cells": [
+            {
+              "text": "Fusariosis, scedosporiosis"
+            },
+            {
+              "text": "Amphotericin less reliable: Scedosporium resistant, Fusarium MICs high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination antifungals",
+          "cells": [
+            {
+              "text": "Lomentospora prolificans"
+            },
+            {
+              "text": "Often multidrug resistant; seek expert advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restore immunity",
+          "cells": [
+            {
+              "text": "AIDS or neutropenia"
+            },
+            {
+              "text": "ART; growth factors for neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement",
+          "cells": [
+            {
+              "text": "Localised angioinvasive mould disease"
+            },
+            {
+              "text": "Source control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Ongoing immunosuppression"
+            },
+            {
+              "text": "Until immune recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Exact antifungal doses were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uncommon_disseminated_fungal_infections-dx-mgmt",
+      "title": "Diagnosis and management of uncommon disseminated mycoses",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, skin lesions or lung disease in immunocompromised or endemic host",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood and tissue culture, histology with stains, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Dimorphic fungus (Talaromyces, Paracoccidioides, Emergomyces)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Amphotericin B induction, then itraconazole; start ART if HIV",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fusarium or Scedosporium mould?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Voriconazole; debride; reverse neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Lomentospora prolificans?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Combination therapy with expert input",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Organism-directed therapy (e.g. Trichosporon, dematiaceous mould)",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

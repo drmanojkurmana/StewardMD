@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for fundus albipunctatus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fundus_albipunctatus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged dark adaptometry",
+          "cells": [
+            {
+              "text": "Delayed but eventual rod recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-field ERG before and after extended dark adaptation",
+          "cells": [
+            {
+              "text": "Reduced rod response, repeated after prolonged dark adaptation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence and OCT",
+          "cells": [
+            {
+              "text": "Characterises the white dots and structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and visual field testing",
+          "cells": [
+            {
+              "text": "Monitors for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "RDH5 and related visual-cycle genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial assessment",
+          "cells": [
+            {
+              "text": "Detects late cone or macular involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fundus_albipunctatus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinitis punctata albescens",
+          "cells": [
+            {
+              "text": "Progressive field loss, pigmentary change or acuity decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin A deficiency retinopathy",
+          "cells": [
+            {
+              "text": "Systemic features or malabsorption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fundus_albipunctatus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and counselling",
+          "cells": [
+            {
+              "text": "Disorder is usually stationary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advice on night blindness",
+          "cells": [
+            {
+              "text": "Practical impact of delayed dark adaptation; caution over night driving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Serial OCT, fundus autofluorescence and electroretinography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and visual field monitoring",
+          "cells": [
+            {
+              "text": "Periodic, to detect progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical genetics and low-vision services",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fundus_albipunctatus-dx-mgmt",
+      "title": "Diagnosis and management of Fundus albipunctatus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fundus albipunctatus: white retinal dots with night blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive field loss, acuity decline, vitamin A deficiency)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for progressive field loss suggesting retinitis punctata albescens",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dark adaptometry, full-field ERG after extended dark adaptation, RDH5 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ERG after prolonged dark adaptation confirm delayed rod recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinitis punctata albescens, Oguchi disease or vitamin A deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance that the disorder is usually stationary",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Advice on night blindness and caution over night driving",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial OCT, fundus autofluorescence and ERG surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with cascade testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally good, as the disorder is typically stationary with preserved daytime acuity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -194,5 +194,561 @@
       "caption": "Overview comparison matrix for disorders of the autonomic nervous system."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Orthostatic Hypotension",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/symptoms-of-cardiovascular-disorders/orthostatic-hypotension",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_autonomic_nervous-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria and autonomic tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthostatic hypotension",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "{{hy:SBP fall >=20 or DBP fall >=10 within 3 min}}",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "Standing or tilt >=60 degrees; >=30/15 in hypertensive patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic OH: heart rate rise",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "<15",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "HR rise to SBP fall ratio <0.5 beats/min/mm Hg is more accurate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POTS: heart rate rise",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": ">=30 (>=40 under 19 y) or HR >120 within 10 min",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "No sustained OH; symptoms >3 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed OH",
+          "cells": [
+            {
+              "text": "May appear after 3 to 5, even 10 min of tilt"
+            },
+            {
+              "text": "Short tests miss it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep breathing and Valsalva",
+          "cells": [
+            {
+              "text": "Cardiovagal and adrenergic baroreflex"
+            },
+            {
+              "text": "Reduced in most autonomic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QSART and thermoregulatory sweat test",
+          "cells": [
+            {
+              "text": "Postganglionic: both abnormal; preganglionic: QSART normal, TST abnormal"
+            },
+            {
+              "text": "Localises sudomotor lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma catecholamines supine and upright",
+          "cells": [
+            {
+              "text": "No rise on standing in central or preganglionic failure"
+            },
+            {
+              "text": "Low supine in postganglionic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MIBG or fluorodopamine PET",
+          "cells": [
+            {
+              "text": "Preserved in MSA"
+            },
+            {
+              "text": "Reduced in Parkinson, Lewy body, pure autonomic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ganglionic AChR (alpha-3) antibody",
+          "cells": [
+            {
+              "text": "High titre in autoimmune autonomic ganglionopathy"
+            },
+            {
+              "text": "Screen for SCLC, thymoma, lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Nerve fibre density, alpha-synuclein"
+            },
+            {
+              "text": "Small fibre neuropathy and synucleinopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_autonomic_nervous-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of autonomic failure",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple system atrophy",
+          "cells": [
+            {
+              "text": "{{hy:OH within 2 years of parkinsonism}}, poor levodopa response"
+            },
+            {
+              "text": "Preserved MIBG; MRI hot cross bun or putaminal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinson or Lewy body disease",
+          "cells": [
+            {
+              "text": "Levodopa responsive, OH later"
+            },
+            {
+              "text": "Reduced MIBG uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure autonomic failure",
+          "cells": [
+            {
+              "text": "Isolated autonomic failure"
+            },
+            {
+              "text": "Reduced MIBG, low supine catecholamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic autonomic neuropathy",
+          "cells": [
+            {
+              "text": "Long-standing diabetes"
+            },
+            {
+              "text": "HbA1c, OGTT in small fibre neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid neuropathy",
+          "cells": [
+            {
+              "text": "Macroglossia, neuropathy"
+            },
+            {
+              "text": "Free light chains, electrophoresis, TTR genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune autonomic ganglionopathy",
+          "cells": [
+            {
+              "text": "Subacute after infection or with cancer"
+            },
+            {
+              "text": "Ganglionic AChR antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced OH",
+          "cells": [
+            {
+              "text": "Diuretics, antihypertensives, tricyclics, antipsychotics"
+            },
+            {
+              "text": "Medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma or hyperthyroidism",
+          "cells": [
+            {
+              "text": "Mimic POTS sympathetic activation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Cholinergic failure with descending paralysis"
+            },
+            {
+              "text": "Clinical, toxin testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Best-test cells not stated in the cited sources are marked needs-source."
+    },
+    {
+      "id": "disorders_of_the_autonomic_nervous-treatment",
+      "kind": "treatment",
+      "title": "Treatment of orthostatic hypotension and POTS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop offending drugs",
+          "cells": [
+            {
+              "text": "All OH"
+            },
+            {
+              "text": "Antihypertensives, diuretics, alpha-blockers, tricyclics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salt and fluid",
+          "cells": [
+            {
+              "text": "OH without heart failure or hypertension"
+            },
+            {
+              "text": "Sodium 6 to 10 g daily; adequate fluids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Compression, head-up sleeping, counter-manoeuvres",
+          "cells": [
+            {
+              "text": "{{hy:First-line non-drug}}"
+            },
+            {
+              "text": "Waist-high fitted hose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fludrocortisone",
+          "cells": [
+            {
+              "text": "Volume expansion"
+            },
+            {
+              "text": "0.1 mg at bedtime, up weekly to 1 mg or oedema; watch supine hypertension, hypokalaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Midodrine",
+          "cells": [
+            {
+              "text": "Symptomatic neurogenic OH"
+            },
+            {
+              "text": "2.5 to 10 mg three times daily; avoid in coronary or peripheral arterial disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Droxidopa or pyridostigmine",
+          "cells": [
+            {
+              "text": "Neurogenic OH"
+            },
+            {
+              "text": "Benefit in small studies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exercise reconditioning, fluid and salt; beta-blocker, ivabradine or pyridostigmine",
+          "cells": [
+            {
+              "text": "POTS"
+            },
+            {
+              "text": "Do not label as psychiatric"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage supine hypertension",
+          "cells": [
+            {
+              "text": "Coexisting with neurogenic OH"
+            },
+            {
+              "text": "Predicts end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove trigger (bladder, bowel, skin)",
+          "cells": [
+            {
+              "text": "Autonomic dysreflexia, lesion above T6"
+            },
+            {
+              "text": "Risk of vasospasm or haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_autonomic_nervous-dx-mgmt",
+      "title": "Diagnosis and management of orthostatic hypotension and dysautonomia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Orthostatic dizziness, syncope or falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Supine and standing BP and HR at 1 and 3 min; tilt if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "SBP fall >=20 or DBP fall >=10 mm Hg?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "HR rise >=30 beats/min without OH?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "POTS: reconditioning, fluids, salt, rate control",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider delayed OH or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "HR rise <15 beats/min (neurogenic)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Volume depletion or drugs: correct and review",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Autonomic tests, catecholamines, MIBG, antibodies, glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat cause; salt, compression, head-up sleep",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Still symptomatic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Add midodrine or fludrocortisone",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Monitor supine BP and disease progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

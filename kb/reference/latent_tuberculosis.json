@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for latent tuberculosis infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "latent_tuberculosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculin skin test or interferon-gamma release assay",
+          "cells": [
+            {
+              "text": "Detects infection; cannot distinguish latent from active"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom screening and chest radiography",
+          "cells": [
+            {
+              "text": "Excludes active tuberculosis before preventive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Major impact on reactivation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of other risk factors",
+          "cells": [
+            {
+              "text": "Diabetes, immunosuppressive therapy and silicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum evaluation",
+          "cells": [
+            {
+              "text": "If any features suggest active disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "latent_tuberculosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Active pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Must be excluded by symptom screening and chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prior BCG vaccination",
+          "cells": [
+            {
+              "text": "Causes tuberculin reactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-tuberculous mycobacterial sensitisation",
+          "cells": [
+            {
+              "text": "Causes test cross-reactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Old healed tuberculosis on imaging",
+          "cells": [
+            {
+              "text": "Imaging change without active disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "latent_tuberculosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rifamycin-based short-course regimen",
+          "cells": [
+            {
+              "text": "Rifampicin or rifapentine with isoniazid; or isoniazid monotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude active tuberculosis first",
+          "cells": [
+            {
+              "text": "Symptom screening and chest radiography before preventive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and other reactivation risks",
+          "cells": [
+            {
+              "text": "Anti-TNF therapy, transplantation, silicosis and diabetes raise the need for prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Adherence and hepatotoxicity; liver-function checks in those at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prioritise high-risk groups",
+          "cells": [
+            {
+              "text": "HIV co-infection and recent contacts of infectious cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education and escalation",
+          "cells": [
+            {
+              "text": "Reactivation symptoms; full multidrug treatment if active tuberculosis develops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "latent_tuberculosis-dx-mgmt",
+      "title": "Diagnosis and management of Latent tuberculosis infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asymptomatic person with TB exposure or a positive tuberculin or IGRA test",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (active TB signs, infectious contact, HIV, planned immunosuppression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: full multidrug treatment if active tuberculosis is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Symptom screening, chest radiography, HIV test, sputum if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is active tuberculosis excluded by symptom screening and chest imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate for active TB with sputum before any preventive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rifamycin-based short course (rifampicin or rifapentine with isoniazid), or isoniazid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Test for and treat HIV; assess other reactivation risks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor adherence and liver function during treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prioritise HIV co-infection and recent contacts of infectious cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Educate on reactivation symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most never develop active disease; preventive treatment substantially lowers progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

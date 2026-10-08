@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for glycogen storage disease type vi (hers disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glycogen_storage_disease_type_6-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PYGL molecular genetic testing",
+          "cells": [
+            {
+              "text": "First-line confirmatory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Controlled fasting studies",
+          "cells": [
+            {
+              "text": "Ketotic hypoglycaemia with normal lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biochemistry, fasting lipids, lactate and urate",
+          "cells": [
+            {
+              "text": "Transaminases, lipids, lactate and urate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Hepatomegaly and liver texture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphorylase kinase assay or genetics",
+          "cells": [
+            {
+              "text": "Excludes the near-identical GSD IX"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycogen_storage_disease_type_6-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycogen storage disease type I",
+          "cells": [
+            {
+              "text": "Lactic acidosis and raised urate; both normal in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen storage disease type IX",
+          "cells": [
+            {
+              "text": "Clinically very similar; separated by genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycogen_storage_disease_type_6-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevent fasting ketotic hypoglycaemia",
+          "cells": [
+            {
+              "text": "Avoid prolonged fasts; frequent complex-carbohydrate and uncooked cornstarch feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate dietary protein",
+          "cells": [
+            {
+              "text": "Supports gluconeogenesis, which remains intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, liver size, transaminases, fasting glucose and ketones, which tend to improve with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Generally mild course; intensive intervention for the uncommon severe hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from GSD IX and GSD I",
+          "cells": [
+            {
+              "text": "So treatment is tailored appropriately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive PYGL; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glycogen_storage_disease_type_6-dx-mgmt",
+      "title": "Diagnosis and management of Glycogen storage disease type VI (Hers disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GSD type VI: hepatomegaly with ketotic hypoglycaemia on fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures in hypoglycaemia, faltering growth, progressive hepatomegaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose treatment for hypoglycaemia with seizures or reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PYGL testing, controlled fasting studies, liver biochemistry and ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do PYGL variants confirm the diagnosis, with GSD IX excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GSD I, GSD IX, GSD 0 or idiopathic ketotic hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged fasts; frequent complex-carbohydrate and cornstarch feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adequate dietary protein to support intact gluconeogenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor growth, liver size, transaminases and ketones",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally mild and favourable; hepatomegaly and biochemistry tend to normalise with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

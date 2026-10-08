@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for drug-induced pemphigus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_pemphigus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy for histology",
+          "cells": [
+            {
+              "text": "Intraepidermal acantholysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Intercellular IgG and C3 deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoglein 1 and 3 antibody assays",
+          "cells": [
+            {
+              "text": "Autoantibodies against desmosomal proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed drug history for thiol agents",
+          "cells": [
+            {
+              "text": "Thiol agents such as penicillamine and captopril"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for underlying malignancy",
+          "cells": [
+            {
+              "text": "Paraneoplastic disease, where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_pemphigus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic pemphigus vulgaris or foliaceus",
+          "cells": [
+            {
+              "text": "Idiopathic disease; the trigger is not stopped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Screen for underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous drug eruptions",
+          "cells": [
+            {
+              "text": "Blistering from other drug reactions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_pemphigus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the triggering drug",
+          "cells": [
+            {
+              "text": "Especially thiol agents; often leads to remission without further treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids with steroid-sparing agent",
+          "cells": [
+            {
+              "text": "For persistent non-thiol-induced disease; azathioprine or mycophenolate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and mucosal care",
+          "cells": [
+            {
+              "text": "Erosion care and oral hygiene where mucosae are involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical activity and desmoglein titres to guide tapering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Where paraneoplastic pemphigus is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_pemphigus-dx-mgmt",
+      "title": "Diagnosis and management of Drug-induced pemphigus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced pemphigus: blistering after a thiol drug such as penicillamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extensive denudation, mucosal disease, progression after withdrawal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent skin and fluid care for extensive denudation; check airway if mucosa involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for acantholysis; direct immunofluorescence; desmoglein 1 and 3 assays",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show acantholysis with IgG and C3 at intercellular spaces?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic pemphigus, pemphigoid, paraneoplastic disease or SJS or TEN",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the triggering drug, especially thiol agents, often enough for remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids with azathioprine or mycophenolate for persistent non-thiol disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab for refractory or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skin erosion care and oral hygiene where mucosa is involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor activity and desmoglein titres to guide immunosuppression tapering",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thiol-induced disease often remits in weeks to months; non-thiol disease may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

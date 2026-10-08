@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for lipoid proteinosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoid_proteinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with PAS staining",
+          "cells": [
+            {
+              "text": "PAS-positive, diastase-resistant hyaline deposits around vessels and at the dermo-epidermal junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECM1 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain CT or MRI",
+          "cells": [
+            {
+              "text": "Medial temporal lobe calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Vocal cord and upper airway infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Where seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and psychiatric assessment",
+          "cells": [
+            {
+              "text": "Cognitive or behavioural features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoid_proteinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyloidosis with mucocutaneous deposition",
+          "cells": [
+            {
+              "text": "Congo red staining distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythropoietic protoporphyria and other cutaneous porphyrias",
+          "cells": [
+            {
+              "text": "Photosensitivity and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colloid milium",
+          "cells": [
+            {
+              "text": "Hyaline dermal deposits; histology and ECM1 testing separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papular mucinosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoid_proteinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic skin therapy",
+          "cells": [
+            {
+              "text": "Oral dimethyl sulfoxide and oral retinoids such as acitretin for deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice and airway",
+          "cells": [
+            {
+              "text": "Laryngoscopic surveillance; CO2 laser or microlaryngoscopy for vocal-cord deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin lesions",
+          "cells": [
+            {
+              "text": "Dermabrasion or laser for cosmetic or functional lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy",
+          "cells": [
+            {
+              "text": "Antiseizure medication for seizures related to amygdala calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Neuropsychological and psychiatric support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, ENT, neurology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ECM1 defect; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoid_proteinosis-dx-mgmt",
+      "title": "Diagnosis and management of lipoid proteinosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with a husky or hoarse cry from infancy, beaded eyelid papules and scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway compromise, seizures, feeding difficulty, ocular involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT airway assessment and laryngoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PAS-stained biopsy for hyaline deposits, ECM1 sequencing, brain imaging, laryngoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biallelic ECM1 variant confirmed with PAS-positive hyaline deposits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amyloidosis, porphyria or colloid milium",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic skin therapy with dimethyl sulfoxide or acitretin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laryngoscopic surveillance and laser removal of vocal-cord deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dermabrasion or laser for significant skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication for temporal lobe epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, slowly progressive, normal life expectancy; hoarseness and scarring persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

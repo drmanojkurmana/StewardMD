@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for hsp spg10 (kif5a)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg10-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted KIF5A sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous variants within an HSP or motor neuron disease panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and electromyography",
+          "cells": [
+            {
+              "text": "Associated neuropathy in complicated presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and spine",
+          "cells": [
+            {
+              "text": "Excludes structural and demyelinating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-generation family history",
+          "cells": [
+            {
+              "text": "Variable allelic phenotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Excludes adrenomyeloneuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg10-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Axonal Charcot-Marie-Tooth disease type 2",
+          "cells": [
+            {
+              "text": "Allelic with KIF5A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis and juvenile primary lateral sclerosis",
+          "cells": [
+            {
+              "text": "Prominent lower motor neurone or bulbar signs suggest evolution to these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenomyeloneuropathy",
+          "cells": [
+            {
+              "text": "Excluded by very-long-chain fatty acid testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other autosomal dominant HSP (SPG4, SPG3A, SPG31)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg10-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity agents",
+          "cells": [
+            {
+              "text": "Such as baclofen, for symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Preserve mobility and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and orthopaedic input",
+          "cells": [
+            {
+              "text": "Foot deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder management",
+          "cells": [
+            {
+              "text": "Where bladder symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Complicated features such as neuropathy or cognitive change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KIF5A inheritance and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg10-dx-mgmt",
+      "title": "Diagnosis and management of HSP SPG10 (KIF5A)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive spastic gait in childhood or early adulthood, with a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lower motor neurone or bulbar signs, rapid weakness, or sensory level or sphincter loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude motor neuron disease or compressive myelopathy with urgent MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KIF5A sequencing; nerve conduction studies and EMG; brain and spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a KIF5A variant confirmed, with structural and VLCFA mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other dominant HSP, axonal CMT type 2, ALS or adrenomyeloneuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antispasticity agents such as baclofen for symptom control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and stretching to preserve mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthoses and orthopaedic input for foot deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for neuropathy or cognitive change in complicated forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; slow progression monitored; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

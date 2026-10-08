@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for idiopathic intracranial hypertension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "idiopathic_intracranial_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with venography",
+          "cells": [
+            {
+              "text": "Mass, hydrocephalus or venous sinus thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture opening pressure",
+          "cells": [
+            {
+              "text": "Raised pressure with normal CSF constituents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Blind spot enlargement and field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Grades and follows disc swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination and disc photography",
+          "cells": [
+            {
+              "text": "Papilloedema severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and medication review",
+          "cells": [
+            {
+              "text": "Hypertension and precipitating drugs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_intracranial_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Venous sinus thrombosis on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial mass or hydrocephalus",
+          "cells": [
+            {
+              "text": "Mass lesion or hydrocephalus on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc drusen (pseudopapilloedema)",
+          "cells": [
+            {
+              "text": "Distinguished from true bilateral papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-induced intracranial hypertension",
+          "cells": [
+            {
+              "text": "Tetracyclines, retinoids or excess vitamin A"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_intracranial_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight loss",
+          "cells": [
+            {
+              "text": "Key disease-modifying step with dietary support; bariatric surgery in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide",
+          "cells": [
+            {
+              "text": "Carbonic anhydrase inhibitor; topiramate or a diuretic as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw precipitants",
+          "cells": [
+            {
+              "text": "Tetracyclines, retinoids and excess vitamin A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vision monitoring",
+          "cells": [
+            {
+              "text": "Serial automated perimetry, disc assessment and optical coherence tomography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fulminant or resistant disease",
+          "cells": [
+            {
+              "text": "Optic nerve sheath fenestration, cerebrospinal fluid diversion or venous sinus stenting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Headache treatment; therapeutic lumbar puncture as a temporising measure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "idiopathic_intracranial_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic intracranial hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache, transient visual obscurations and bilateral papilloedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid visual field loss, severe papilloedema or new focal deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent medical or surgical escalation to protect vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with venography, opening pressure, perimetry, optical coherence tomography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mass, hydrocephalus and venous thrombosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the secondary cause such as thrombosis or mass; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Weight loss with dietary support; consider bariatric surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acetazolamide to lower intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw precipitants such as tetracyclines, retinoids and vitamin A",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial perimetry, disc assessment and optical coherence tomography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Therapeutic lumbar puncture and symptomatic headache care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vision protected by monitoring; fulminant disease needs surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for lmna laminopathy with dilated cardiomyopathy and muscular dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laminopathy_dilated_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "LMNA sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms an LMNA variant, often within a cardiomyopathy or dystrophy panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG and ambulatory (Holter) monitoring",
+          "cells": [
+            {
+              "text": "Conduction disease and ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Ventricular function and myocardial fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase, EMG and muscle biopsy",
+          "cells": [
+            {
+              "text": "Neuromuscular phenotype, where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial respiratory function testing",
+          "cells": [
+            {
+              "text": "Diaphragmatic and spinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmic risk stratification",
+          "cells": [
+            {
+              "text": "Guides the timing of defibrillator implantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laminopathy_dilated_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Emery-Dreifuss muscular dystrophy",
+          "cells": [
+            {
+              "text": "Caused by EMD (emerin) rather than LMNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other genetic dilated cardiomyopathies with conduction disease",
+          "cells": [
+            {
+              "text": "Other genes, including desmin and SCN5A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoidosis or infiltrative conduction-system disease",
+          "cells": [
+            {
+              "text": "Infiltrative rather than genetic conduction-system disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laminopathy_dilated_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Guideline-directed, including ACE inhibitors or an angiotensin receptor-neprilysin inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-threshold defibrillator",
+          "cells": [
+            {
+              "text": "Cardioverter-defibrillator rather than pacemaker alone, because of sudden-death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conduction and atrial arrhythmias",
+          "cells": [
+            {
+              "text": "Anticoagulation for atrial fibrillation as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG, ambulatory monitoring, echocardiography, cardiac MRI and arrhythmic risk stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular and respiratory care",
+          "cells": [
+            {
+              "text": "Physiotherapy for contractures, orthoses, non-invasive ventilation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise advice",
+          "cells": [
+            {
+              "text": "Advise against competitive or intense exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced therapies",
+          "cells": [
+            {
+              "text": "Mechanical circulatory support or transplantation when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade cardiac and genetic screening of relatives; autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laminopathy_dilated_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of LMNA laminopathy with dilated cardiomyopathy and muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "LMNA variant with conduction disease, cardiomyopathy or limb-girdle weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope, NSVT, high-grade block, falling ventricular function)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent arrhythmia review and defibrillator assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LMNA sequencing, ECG and Holter, echo, cardiac MRI, CK, respiratory tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does LMNA sequencing identify a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Emery-Dreifuss, other dilated cardiomyopathies or sarcoidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heart failure therapy and low-threshold defibrillator implantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage conduction disease and atrial arrhythmias, with anticoagulation as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong cardiac surveillance with imaging and risk stratification",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy for contractures and respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Advise against competitive exertion; cascade screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis dominated by cardiac disease; ventricular arrhythmia and sudden death risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for glanders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glanders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Culture of pus, ulcer exudate, blood or sputum",
+          "cells": [
+            {
+              "text": "Organism isolation, with a biosafety warning to the laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "Gram-negative bacilli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification and PCR",
+          "cells": [
+            {
+              "text": "Identification at a reference laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Interpreted with caution, given limited sensitivity and specificity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Deep abscesses in lungs, liver and spleen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Septicaemic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanders-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Melioidosis",
+          "cells": [
+            {
+              "text": "Similar picture; separated by laboratory identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal or streptococcal cellulitis and abscess",
+          "cells": [
+            {
+              "text": "Gram-positive organisms rather than Gram-negative bacilli"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanders-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive intravenous phase",
+          "cells": [
+            {
+              "text": "Ceftazidime or a carbapenem, modelled on melioidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral eradication phase",
+          "cells": [
+            {
+              "text": "Typically co-trimoxazole with or without doxycycline, to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical drainage",
+          "cells": [
+            {
+              "text": "Abscesses and localised suppurative disease, as an adjunct to antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive and organ-support care",
+          "cells": [
+            {
+              "text": "Sepsis management for the septicaemic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory biosafety alert",
+          "cells": [
+            {
+              "text": "Warn the laboratory and handle specimens under containment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health notification",
+          "cells": [
+            {
+              "text": "Trace occupational and animal exposures; post-exposure prophylaxis for high-risk contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long follow-up",
+          "cells": [
+            {
+              "text": "Surveillance for relapse, given intracellular persistence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glanders-dx-mgmt",
+      "title": "Diagnosis and management of Glanders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glanders: deep abscesses or pneumonia after animal or laboratory exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septic shock, respiratory failure, multiple deep abscesses)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis care and laboratory alert for septicaemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture of pus, sputum or blood with laboratory biosafety warning, and PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does culture or PCR identify the organism at a reference laboratory?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider melioidosis, cellulitis, cutaneous anthrax, tuberculosis or pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive intravenous phase with ceftazidime or a carbapenem",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged oral eradication, typically co-trimoxazole with or without doxycycline",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical drainage of abscesses as an adjunct to antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Warn the laboratory, trace exposures and notify public health",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated septicaemia is often fatal; eradication needs prolonged combination therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

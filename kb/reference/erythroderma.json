@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for erythroderma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythroderma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy, often repeated",
+          "cells": [
+            {
+              "text": "The underlying dermatosis; early histology is often non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film and flow cytometry",
+          "cells": [
+            {
+              "text": "Circulating atypical (Sezary) cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid, electrolyte, albumin and infection bloods",
+          "cells": [
+            {
+              "text": "Fluid, electrolyte and protein status; infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history with eosinophil count and organ review",
+          "cells": [
+            {
+              "text": "Features suggesting DRESS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures",
+          "cells": [
+            {
+              "text": "Secondary infection or sepsis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythroderma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythrodermic psoriasis",
+          "cells": [
+            {
+              "text": "Nail and scalp changes suggest psoriasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous T-cell lymphoma (Sezary syndrome)",
+          "cells": [
+            {
+              "text": "Lymphadenopathy and Sezary cells on the blood film raise concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction with eosinophilia (DRESS)",
+          "cells": [
+            {
+              "text": "Eosinophilia and organ involvement suggest DRESS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythroderma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Admission and supportive care",
+          "cells": [
+            {
+              "text": "Warmth, fluid and electrolyte correction, nutrition and emollients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw culprit drug",
+          "cells": [
+            {
+              "text": "Immediately, if one is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease-specific therapy",
+          "cells": [
+            {
+              "text": "Systemic agents for psoriasis or eczema; phototherapy or chemotherapy for cutaneous T-cell lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids for drug causes",
+          "cells": [
+            {
+              "text": "Such as DRESS; avoided in psoriasis, where they may precipitate deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for complications",
+          "cells": [
+            {
+              "text": "Secondary infection, sepsis, hypothermia, hypoalbuminaemia and high-output cardiac state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated biopsy and blood film",
+          "cells": [
+            {
+              "text": "To identify the dermatosis or Sezary cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology-led, with high-dependency support for severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythroderma-dx-mgmt",
+      "title": "Diagnosis and management of Erythroderma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Erythema and scaling over most of the body surface in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sepsis, dehydration, DRESS features, cardiac strain, frailty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit for high-dependency supportive care; treat sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, blood film and flow cytometry, fluid and electrolyte bloods, drug history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Underlying dermatosis or drug cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat biopsy; consider lymphoma (Sezary cells) or another dermatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw any culprit drug immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic agents for psoriasis or eczema; phototherapy or chemotherapy for lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids for DRESS; avoid them in psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for infection, hypothermia, hypoalbuminaemia and cardiac strain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on cause and comorbidity; many drug or dermatosis cases resolve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

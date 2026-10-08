@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for familial dysbetalipoproteinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and lipidology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_dysbetalipoproteinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "Parallel elevation of cholesterol and triglycerides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ApoE genotyping or phenotyping",
+          "cells": [
+            {
+              "text": "E2/E2 status or a rare dominant apoE variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VLDL-cholesterol to triglyceride ratio and apoB",
+          "cells": [
+            {
+              "text": "Relatively low apoB for the lipid burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoprotein electrophoresis or ultracentrifugation",
+          "cells": [
+            {
+              "text": "Beta-migrating VLDL (broad beta pattern)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, HbA1c, thyroid function and renal profile",
+          "cells": [
+            {
+              "text": "Secondary precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral arterial evaluation",
+          "cells": [
+            {
+              "text": "Cardiovascular risk assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_dysbetalipoproteinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial combined hyperlipidaemia",
+          "cells": [
+            {
+              "text": "Overproduction of apoB-containing particles rather than remnant accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "Isolated LDL elevation without a proportional triglyceride rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial chylomicronaemia syndrome",
+          "cells": [
+            {
+              "text": "Triglycerides dominate, with chylomicron rather than remnant lipoproteins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_dysbetalipoproteinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle intervention",
+          "cells": [
+            {
+              "text": "Weight reduction, low-fat and low-cholesterol diet, exercise and alcohol reduction; often strikingly effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrate and or statin",
+          "cells": [
+            {
+              "text": "Clears the atherogenic remnant lipoprotein burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary precipitants",
+          "cells": [
+            {
+              "text": "Diabetes, hypothyroidism and offending oestrogen therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk-factor management",
+          "cells": [
+            {
+              "text": "Blood pressure, glycaemic control and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of premature coronary and peripheral disease",
+          "cells": [
+            {
+              "text": "Management as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic fasting lipid monitoring",
+          "cells": [
+            {
+              "text": "Guides therapy; xanthomata are expected to regress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family lipid screening",
+          "cells": [
+            {
+              "text": "Apolipoprotein E2 basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_dysbetalipoproteinaemia-dx-mgmt",
+      "title": "Diagnosis and management of Familial dysbetalipoproteinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Xanthomata and mixed lipids with cholesterol and triglycerides raised together",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (premature coronary disease, claudication, very high lipids with pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiovascular and peripheral arterial review; pancreatitis care if triglycerides high",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting lipids; apoE genotype; VLDL-cholesterol to triglyceride ratio; apoB",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Remnant-rich pattern with apoE2/E2 or a dominant apoE variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial combined hyperlipidaemia or another mixed dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifestyle intervention, often strikingly effective",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fibrate and or statin to clear remnant lipoproteins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat diabetes, hypothyroidism and offending oestrogen therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood pressure, glycaemic control and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic fasting lipid monitoring with genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable once treated; dyslipidaemia and xanthomata usually respond strikingly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

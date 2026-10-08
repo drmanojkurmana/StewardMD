@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for myosin storage myopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dubowitz's Muscle Disorders in Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myosin_storage_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MYH7 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and correlates the genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with slow-myosin immunostaining and electron microscopy",
+          "cells": [
+            {
+              "text": "Subsarcolemmal hyaline bodies of slow myosin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography, with cardiac MRI if needed",
+          "cells": [
+            {
+              "text": "Hypertrophic or dilated cardiomyopathy, which may coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Pattern of selective muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing",
+          "cells": [
+            {
+              "text": "Progressive respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myosin_storage_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Laing distal myopathy",
+          "cells": [
+            {
+              "text": "Clinically and genetically overlaps with this disorder; it is easily overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myofibrillar myopathies, such as desmin or myotilin",
+          "cells": [
+            {
+              "text": "Other protein aggregates; slow-myosin immunostaining identifies the hyaline bodies here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myosin_storage_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG and echocardiography, with cardiac MRI as needed; treat heart failure or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and ankle-foot orthoses",
+          "cells": [
+            {
+              "text": "Mobility and foot-drop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and aids",
+          "cells": [
+            {
+              "text": "Scapular and scapuloperoneal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation if weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually autosomal dominant; cardiac and neurological screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist coordination",
+          "cells": [
+            {
+              "text": "Neuromuscular and cardiology specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myosin_storage_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Myosin storage myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive scapuloperoneal or limb-girdle weakness, possibly with cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (arrhythmia, syncope, heart failure, progressive respiratory weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for arrhythmia or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MYH7 sequencing, slow-myosin biopsy staining, ECG, echocardiography, muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hyaline bodies with slow-myosin staining and a MYH7 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Laing distal or myofibrillar myopathy; broaden gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cardiac surveillance; treat heart failure or arrhythmia accordingly",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and ankle-foot orthoses for foot-drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occupational therapy and aids for scapular weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-invasive ventilation if respiratory weakness progresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Weakness slowly progressive with ambulation often preserved; heart disease sets outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

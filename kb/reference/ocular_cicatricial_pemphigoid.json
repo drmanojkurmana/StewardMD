@@ -151,5 +151,339 @@
       "caption": "Overview comparison matrix for ocular cicatricial pemphigoid (mucous membrane pemphigoid)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / American Academy of Ophthalmology BCSC (External Disease and Cornea)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ocular_cicatricial_pemphigoid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Conjunctival biopsy with direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Linear deposition of immunoglobulin and complement along the basement membrane zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fornix depth and symblepharon",
+          "cells": [
+            {
+              "text": "Fornix shortening marks disease stage and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp review of tear film, cornea and lid margins",
+          "cells": [
+            {
+              "text": "Advanced disease: trichiasis, entropion, keratinisation and corneal scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic mucosal review",
+          "cells": [
+            {
+              "text": "Oral, nasopharyngeal, oesophageal, genital and cutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limbal stem cell function assessment",
+          "cells": [
+            {
+              "text": "Limbal stem cell failure, which limits surgical options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_cicatricial_pemphigoid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced pseudopemphigoid",
+          "cells": [
+            {
+              "text": "Pattern caused by chronic topical medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dry eye disease",
+          "cells": [
+            {
+              "text": "Chronic redness that is easily mistaken for it; early cicatrisation is then missed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_cicatricial_pemphigoid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic immunosuppression (mainstay)",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Dapsone for mild disease, then mycophenolate, methotrexate or azathioprine, then cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab or intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For refractory or rapidly progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Preservative-free lubricants, treatment of aqueous and mucin deficiency, punctal occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid and lash management",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Epilation and surgical correction of trichiasis and entropion; control of blepharitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and surgical timing",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Serial fornix depth; avoid elective ocular surgery during active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flare treatment",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Intensify systemic immunosuppression rather than relying on topical steroids alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Oral medicine, ENT, dermatology and gastroenterology for mucosal and skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface reconstruction for end-stage disease",
+          "cells": [
+            {
+              "text": "8"
+            },
+            {
+              "text": "Limbal stem cell transplantation and keratoprosthesis once inflammation is controlled"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ocular_cicatricial_pemphigoid-dx-mgmt",
+      "title": "Diagnosis and management of Ocular cicatricial pemphigoid (mucous membrane pemphigoid)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic bilateral cicatrising conjunctivitis in an older adult, mistaken for dry eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fast fornix shortening, corneal, oesophageal or laryngeal involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensify systemic immunosuppression; urgent corneal and airway review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Conjunctival biopsy with direct immunofluorescence; charting fornix depth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show linear basement membrane immunoreactant deposition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dry eye, drug-induced pseudopemphigoid or other scarring conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic immunosuppression: dapsone, then mycophenolate, methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preservative-free lubricants and punctal occlusion for the ocular surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lid surgery for trichiasis and entropion; defer elective surgery during inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary care; surface reconstruction for end-stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early control can arrest scarring; established scarring is generally irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

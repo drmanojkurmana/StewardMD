@@ -154,5 +154,343 @@
       "caption": "Overview comparison matrix for ehlers-danlos syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ehlers_danlos_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Beighton hypermobility score",
+          "cells": [
+            {
+              "text": "Joint laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective-tissue gene panel, COL3A1 first if vascular",
+          "cells": [
+            {
+              "text": "Subtype-specific variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy for collagen study",
+          "cells": [
+            {
+              "text": "Selected cases with ultrastructural or biochemical evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Aortic root dilatation and mitral valve prolapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Vascular EDS arterial anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone assessment",
+          "cells": [
+            {
+              "text": "Osteogenesis imperfecta overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marfan or Loeys-Dietz syndrome",
+          "cells": [
+            {
+              "text": "Aortic disease with skeletal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutis laxa",
+          "cells": [
+            {
+              "text": "Redundant skin with elastic fibre defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoxanthoma elasticum",
+          "cells": [
+            {
+              "text": "Skin and retinal changes with arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypermobility spectrum disorder",
+          "cells": [
+            {
+              "text": "Hypermobility without a defined syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Joint stabilisation, low-resistance strengthening and bracing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and autonomic care",
+          "cells": [
+            {
+              "text": "Graded exercise, non-opioid analgesia and dysmotility treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue-sparing wound care",
+          "cells": [
+            {
+              "text": "Tension-free closure, deep sutures and trauma protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade in vascular EDS",
+          "cells": [
+            {
+              "text": "Celiprolol to reduce arterial wall stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and vascular imaging for vascular EDS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency preparedness",
+          "cells": [
+            {
+              "text": "Arterial, intestinal or uterine rupture; favour conservative management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy and genetic counselling",
+          "cells": [
+            {
+              "text": "Subtype-targeted testing and pregnancy risk in vascular EDS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ehlers_danlos_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ehlers-Danlos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ehlers-Danlos syndrome: hypermobility, skin fragility or vascular features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden severe pain, haemorrhage, pregnancy in vascular EDS)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for suspected arterial or visceral rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Beighton score; COL3A1-first gene panel; echocardiography; vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a subtype-defining variant found, such as COL3A1 in vascular EDS?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Marfan, Loeys-Dietz, cutis laxa or hypermobility spectrum disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and bracing for joint stabilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multimodal pain and dysautonomia management, minimising opioids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tension-free wound closure with deep sutures in fragile tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Celiprolol for vascular EDS; avoid arterial catheterisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Echocardiography and vascular imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vascular EDS markedly shortens life; classical and hypermobile types usually do not",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,507 @@
       "caption": "Overview comparison matrix for cholera."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cholera",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/cholera",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholera-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and dehydration grading in cholera",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "24 to 48",
+              "range": [
+                24,
+                48
+              ]
+            },
+            {
+              "text": "Sudden painless watery diarrhoea, vomiting, usually no fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rice-water stool",
+          "cells": [
+            {
+              "text": "Grey, cloudy, mucus flecks, no blood, fishy odour"
+            },
+            {
+              "text": "{{hy:Classic cholera stool}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild dehydration",
+          "unit": "% body weight",
+          "cells": [
+            {
+              "text": "<5% loss",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Thirst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate dehydration",
+          "unit": "% body weight",
+          "cells": [
+            {
+              "text": "5 to 10% loss",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Postural hypotension, tachycardia, poor turgor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe dehydration",
+          "unit": "% body weight",
+          "cells": [
+            {
+              "text": ">10% loss",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Weak or absent pulse, oliguria, lethargy, sunken eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool loss in cholera gravis",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": ">250 in first 24 h",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "Shock within hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool culture on TCBS or TTG agar",
+          "cells": [
+            {
+              "text": "Must be requested specifically"
+            },
+            {
+              "text": "Not grown on routine media"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dark-field microscopy, rapid dipstick",
+          "cells": [
+            {
+              "text": "Darting vibrios; antigen test"
+            },
+            {
+              "text": "Field diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods in dehydration",
+          "cells": [
+            {
+              "text": "High haematocrit, low bicarbonate, prerenal azotaemia"
+            },
+            {
+              "text": "Normal sodium and chloride"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholera-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of acute watery diarrhoea",
+      "rowHeader": "Condition",
+      "columns": [
+        "Incubation",
+        "Key feature and food source"
+      ],
+      "rows": [
+        {
+          "parameter": "Enterotoxigenic E. coli",
+          "cells": [
+            {
+              "text": ">16 h"
+            },
+            {
+              "text": "{{hy:Watery diarrhoea; cholera-like toxin}}; salads, cheese, meats, water"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vibrio cholerae (reference)",
+          "cells": [
+            {
+              "text": ">16 h"
+            },
+            {
+              "text": "Watery diarrhoea; shellfish, water"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Staphylococcus aureus or B. cereus (emetic)",
+          "cells": [
+            {
+              "text": "1 to 6 h"
+            },
+            {
+              "text": "Nausea, vomiting, diarrhoea; ham, salads, pastries, fried rice"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Clostridium perfringens or B. cereus (diarrhoeal)",
+          "cells": [
+            {
+              "text": "8 to 16 h"
+            },
+            {
+              "text": "Cramps and diarrhoea, little vomiting; meats, gravies, beans"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Salmonella or Campylobacter",
+          "cells": [
+            {
+              "text": ">16 h"
+            },
+            {
+              "text": "Inflammatory diarrhoea; poultry, eggs, raw milk"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Shigella or Vibrio parahaemolyticus",
+          "cells": [
+            {
+              "text": ">16 h"
+            },
+            {
+              "text": "Dysentery; salads, raw vegetables, shellfish"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Enterohaemorrhagic E. coli",
+          "cells": [
+            {
+              "text": ">16 h"
+            },
+            {
+              "text": "Bloody diarrhoea; ground beef, raw milk, apple juice"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-O1/O139 V. cholerae",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Usually no cholera toxin; no large epidemics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholera-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cholera",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration solution",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": "Mild to moderate dehydration, able to drink"
+            },
+            {
+              "text": "About 75 over 4 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV isotonic fluid",
+          "cells": [
+            {
+              "text": "{{hy:Severe dehydration or shock}}"
+            },
+            {
+              "text": "Rapid correction is lifesaving; then replace ongoing stool losses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium",
+          "cells": [
+            {
+              "text": "During rehydration"
+            },
+            {
+              "text": "KCl 10 to 15 mEq/L in IV fluid, or oral potassium bicarbonate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "First line, adults and children"
+            },
+            {
+              "text": "300 mg once if 12 or older (including pregnancy); 2 to 4 mg/kg once if under 12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Alternative"
+            },
+            {
+              "text": "1 g once if 12 or older; 20 mg/kg once (max 1 g) if under 12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "cells": [
+            {
+              "text": "Alternative, susceptible strains"
+            },
+            {
+              "text": "1 g once if 12 or older; 20 mg/kg once (max 1 g) if under 12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zinc",
+          "cells": [
+            {
+              "text": "Children in low-resource settings"
+            },
+            {
+              "text": "Reduces severity and duration; dose not stated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral cholera vaccine",
+          "cells": [
+            {
+              "text": "Travellers or endemic risk"
+            },
+            {
+              "text": "Killed vaccines 60 to 85% protection for 2 to 3 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholera-dx-mgmt",
+      "title": "Diagnosis and management of cholera",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute profuse watery diarrhoea in endemic or outbreak setting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Assess dehydration by weight loss and signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe dehydration or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rapid IV isotonic fluid with potassium",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "ORS about 75 mL/kg over 4 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stool on TCBS, dipstick; notify public health",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single-dose doxycycline or azithromycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Ongoing large stool losses?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace measured stool volume",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Recovery in a few days; zinc for children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Then"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Then"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

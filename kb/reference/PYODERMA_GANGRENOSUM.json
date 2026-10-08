@@ -160,5 +160,473 @@
       "caption": "Overview comparison matrix for pyoderma gangrenosum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "DermNet, Pyoderma gangrenosum",
+      "url": "https://dermnetnz.org/topics/pyoderma-gangrenosum",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PYODERMA_GANGRENOSUM-diagnostic",
+      "kind": "diagnostic",
+      "title": "Delphi consensus criteria for pyoderma gangrenosum (2018)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Major criterion",
+          "cells": [
+            {
+              "text": "Neutrophilic infiltrate on biopsy of the ulcer edge"
+            },
+            {
+              "text": "Required; may be absent once treated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor criteria needed",
+          "cells": [
+            {
+              "text": "4 or more of 8",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "86% sensitive, 90% specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: infection excluded",
+          "cells": [
+            {
+              "text": "Swab, culture and histology"
+            },
+            {
+              "text": "Organisms are colonisers, not the cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: pathergy",
+          "cells": [
+            {
+              "text": "Ulcer after minor trauma"
+            },
+            {
+              "text": "{{hy:Debridement can enlarge the ulcer}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: IBD or inflammatory arthritis",
+          "cells": [
+            {
+              "text": "History present"
+            },
+            {
+              "text": "PG occurs in 1% to 3% of IBD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: rapid evolution",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Papule, vesicle or pustule ulcerating within 4",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "Early lesion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: ulcer edge",
+          "cells": [
+            {
+              "text": "Peripheral erythema, undermined border, tenderness"
+            },
+            {
+              "text": "Violaceous undermined border is classic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: distribution",
+          "cells": [
+            {
+              "text": "Multiple ulcers, one or more on anterior lower leg"
+            },
+            {
+              "text": "Typical site"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: scars",
+          "cells": [
+            {
+              "text": "Cribriform or wrinkled paper scars"
+            },
+            {
+              "text": "Healed ulcers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: treatment response",
+          "cells": [
+            {
+              "text": "Ulcer shrinks within 1 month of immunosuppression"
+            },
+            {
+              "text": "Supports diagnosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PYODERMA_GANGRENOSUM-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of pyoderma gangrenosum",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous or arterial ulcer",
+          "cells": [
+            {
+              "text": "Vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vasculitis or occlusive vasculopathy",
+          "cells": [
+            {
+              "text": "Vascular inflammatory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ecthyma, ecthyma gangrenosum, Buruli ulcer, tuberculosis, sporotrichosis, amoebiasis",
+          "cells": [
+            {
+              "text": "{{hy:Infection; exclude with culture and biopsy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ulcerating skin tumour or lymphoma",
+          "cells": [
+            {
+              "text": "Neoplastic; biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug-induced ulcer (hydroxycarbamide, nicorandil, halogens)",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factitious ulcer",
+          "cells": [
+            {
+              "text": "Artefact"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PYODERMA_GANGRENOSUM-treatment",
+      "kind": "treatment",
+      "title": "Treatment of pyoderma gangrenosum",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gentle wound care",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Avoid wide surgical debridement while active}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potent topical steroid or tacrolimus ointment",
+          "cells": [
+            {
+              "text": "Small ulcers"
+            },
+            {
+              "text": "Intralesional steroid at the edge is an option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral doxycycline or minocycline",
+          "cells": [
+            {
+              "text": "Small or mild ulcers"
+            },
+            {
+              "text": "Anti-inflammatory use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral prednisone or IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Larger or rapidly spreading ulcers"
+            },
+            {
+              "text": "IV pulses for 3 to 5 days; taper slowly over months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciclosporin",
+          "cells": [
+            {
+              "text": "Alternative to prednisone"
+            },
+            {
+              "text": "Similar efficacy; about half healed within a year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infliximab, adalimumab or etanercept",
+          "cells": [
+            {
+              "text": "Refractory or IBD-associated disease"
+            },
+            {
+              "text": "Growing evidence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat associated disease",
+          "cells": [
+            {
+              "text": "Active IBD, arthritis, haematological disease"
+            },
+            {
+              "text": "IBD active in over half of IBD-related episodes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses were not stated in the source opened. Antibiotics such as flucloxacillin help only with secondary infection."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PYODERMA_GANGRENOSUM-dx-mgmt",
+      "title": "Diagnosis and management of pyoderma gangrenosum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging painful ulcer with violaceous undermined edge",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Swab and culture; biopsy of ulcer edge",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection, vasculitis or tumour found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the alternative diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neutrophilic infiltrate and 4 or more minor criteria?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Reconsider diagnosis; repeat biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for IBD, arthritis, haematological disease",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Small, limited ulcer?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical steroid or tacrolimus, intralesional steroid",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic prednisone or ciclosporin",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Healing?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Add anti-TNF agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Slow taper; avoid trauma",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

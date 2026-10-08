@@ -176,5 +176,544 @@
       "caption": "Overview comparison matrix for tumors of the liver and biliary tree."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hepatocellular Carcinoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/liver-masses-and-granulomas/hepatocellular-carcinoma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumors_of_the_liver_and-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging liver and biliary tumours",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Ultrasound plus AFP every 6 months in cirrhosis or long-standing HBV"
+            },
+            {
+              "text": "Sensitivity about 65%, specificity over 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiphase CT or MRI",
+          "cells": [
+            {
+              "text": "Arterial hyperenhancement with delayed washout, capsule, growth"
+            },
+            {
+              "text": "{{hy:Diagnostic of HCC in cirrhosis without biopsy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LI-RADS 5",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 95% probability of HCC",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Treat as HCC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LI-RADS 4",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 60 to 70% probability",
+              "range": [
+                60,
+                70
+              ]
+            },
+            {
+              "text": "Biopsy or repeat imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodule under 1 cm",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Under 1 cm",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Ultrasound every 3 to 4 months, not biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AFP",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Over 400 ng/mL in 40 to 65% of HCC",
+              "op": ">",
+              "value": 400
+            },
+            {
+              "text": "Suspicious but not diagnostic; 20 or more prompts imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BCLC 0 and A",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Single nodule 2 cm or less (0); up to 3 nodules 3 cm or less (A)",
+              "op": "<=",
+              "value": 3
+            },
+            {
+              "text": "Curative options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCLC B, C, D",
+          "cells": [
+            {
+              "text": "Multinodular (B); vascular invasion or spread (C); Child-Pugh C (D)"
+            },
+            {
+              "text": "TACE, systemic, supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milan criteria",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Single tumour under 5 cm, or up to 3 tumours 3 cm or less",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Transplant candidacy; AFP under 500"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison text gives the AFP cut-off as 400 ng/dL; Merck gives 400 ng/mL. Merck unit shown. Biopsy sensitivity falls below 50% for 1 to 2 cm tumours (Harrison)."
+    },
+    {
+      "id": "tumors_of_the_liver_and-ddx",
+      "kind": "ddx",
+      "title": "Lesions that mimic hepatobiliary cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemangioma",
+          "cells": [
+            {
+              "text": "Benign vascular lesion"
+            },
+            {
+              "text": "Contrast CT or MRI pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal nodular hyperplasia",
+          "cells": [
+            {
+              "text": "Benign, non-cirrhotic liver"
+            },
+            {
+              "text": "MRI with gadoxetate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular adenoma",
+          "cells": [
+            {
+              "text": "Over 5 cm risks bleeding or malignancy"
+            },
+            {
+              "text": "MRI, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysplastic nodule in cirrhosis",
+          "cells": [
+            {
+              "text": "Lacks full HCC enhancement pattern"
+            },
+            {
+              "text": "Biopsy with GPC3, glutamine synthetase, HSP70"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "Colorectal, breast, lung primary"
+            },
+            {
+              "text": "Biopsy with immunostains, search for primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related cholangiopathy",
+          "cells": [
+            {
+              "text": "Stricture mimicking cholangiocarcinoma"
+            },
+            {
+              "text": "Serum IgG4, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early pancreatic cancer",
+          "cells": [
+            {
+              "text": "Mimics distal cholangiocarcinoma"
+            },
+            {
+              "text": "EUS, CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumors_of_the_liver_and-treatment",
+      "kind": "treatment",
+      "title": "Treating hepatocellular carcinoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Single tumour, no vascular invasion, no portal hypertension"
+            },
+            {
+              "text": "5-year survival over 60%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Within Milan criteria"
+            },
+            {
+              "text": "Potentially curative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiofrequency ablation",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Small tumours"
+            },
+            {
+              "text": "Potentially curative under 2 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TACE or Y-90 radioembolisation",
+          "cells": [
+            {
+              "text": "Intermediate stage (BCLC B), or bridge to transplant"
+            },
+            {
+              "text": "Palliation, slows growth"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atezolizumab plus bevacizumab",
+          "cells": [
+            {
+              "text": "Advanced HCC, first line"
+            },
+            {
+              "text": "{{hy:Band varices first (bleeding risk)}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Durvalumab plus tremelimumab",
+          "cells": [
+            {
+              "text": "Advanced HCC when bevacizumab unsuitable"
+            },
+            {
+              "text": "First-line alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lenvatinib or sorafenib",
+          "cells": [
+            {
+              "text": "Advanced HCC alternative"
+            },
+            {
+              "text": "Sorafenib largely replaced"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat underlying liver disease",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Antivirals for HBV or HCV, stop alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Best supportive care",
+          "cells": [
+            {
+              "text": "BCLC D"
+            },
+            {
+              "text": "Median survival under 1 year when symptomatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumors_of_the_liver_and-dx-mgmt",
+      "title": "Diagnosis and management of hepatocellular carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Liver nodule on surveillance or rising AFP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Nodule 1 cm or larger?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Repeat ultrasound every 3 to 4 months",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multiphase CT or MRI, LI-RADS",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "LI-RADS 5 (arterial enhancement plus washout)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stage with BCLC, Child-Pugh, ECOG; chest CT",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "BCLC 0 or A?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Resection, transplant within Milan, or ablation",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "BCLC B (liver-confined, multinodular)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "TACE or radioembolisation",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "BCLC C with preserved liver function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Atezolizumab-bevacizumab or durvalumab-tremelimumab",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "BCLC D: supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

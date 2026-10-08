@@ -152,5 +152,342 @@
       "caption": "Overview comparison matrix for pretibial myxoedema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pretibial_myxoedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests with TSH-receptor antibody",
+          "cells": [
+            {
+              "text": "Thyroid status and TSH-receptor antibody level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with special stains",
+          "cells": [
+            {
+              "text": "Dermal mucin deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment and imaging for Graves ophthalmopathy",
+          "cells": [
+            {
+              "text": "Associated ophthalmopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiography of the hands",
+          "cells": [
+            {
+              "text": "Thyroid acropachy, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler studies",
+          "cells": [
+            {
+              "text": "Venous insufficiency or lymphatic obstruction as alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithyroid peroxidase and antithyroglobulin antibodies",
+          "cells": [
+            {
+              "text": "Support for autoimmune thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pretibial_myxoedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic lymphoedema and elephantiasis nostras",
+          "cells": [
+            {
+              "text": "Lymphatic obstruction"
+            },
+            {
+              "text": "Doppler studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous stasis dermatitis",
+          "cells": [
+            {
+              "text": "Venous insufficiency"
+            },
+            {
+              "text": "Doppler studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pretibial cellulitis or chronic bacterial infection",
+          "cells": [
+            {
+              "text": "Ulceration or signs of secondary infection"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pretibial_myxoedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for infiltrated plaques, often under occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compression and bandaging",
+          "cells": [
+            {
+              "text": "Dependent oedema and mechanical aggravation of the lower legs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat Graves disease",
+          "cells": [
+            {
+              "text": "Antithyroid drugs, radioiodine or thyroidectomy to restore euthyroid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid local trauma",
+          "cells": [
+            {
+              "text": "Koebner phenomenon provokes new lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or elephantiasic disease",
+          "cells": [
+            {
+              "text": "Intralesional corticosteroids, or systemic immunomodulation such as rituximab or intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmopathy",
+          "cells": [
+            {
+              "text": "Co-management with ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "TSH-receptor antibody titres and clinical progression of the dermopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Combined endocrinology and dermatology service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pretibial_myxoedema-dx-mgmt",
+      "title": "Diagnosis and management of Pretibial myxoedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pretibial myxoedema: indurated shin plaques in Graves disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Elephantiasic swelling, ulceration, severe ophthalmopathy or uncertain diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for ophthalmopathy threatening vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thyroid function and TSH-receptor antibody; skin biopsy; Doppler; hand X-ray",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show dermal mucin in autoimmune thyroid disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude venous, lymphatic or infective causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potent topical corticosteroids, often under occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compression therapy and bandaging for dependent oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat Graves disease to restore euthyroid status",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Co-manage Graves ophthalmopathy with ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Combined endocrinology and dermatology care; monitor TSH-receptor antibody titres",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

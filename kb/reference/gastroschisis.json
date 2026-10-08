@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for gastroschisis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastroschisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and monitors bowel appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Typically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postnatal assessment of bowel viability",
+          "cells": [
+            {
+              "text": "Search for associated atresia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial electrolytes and fluid balance",
+          "cells": [
+            {
+              "text": "Large insensible losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "If an additional anomaly is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastroschisis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Omphalocele (exomphalos) with intact sac",
+          "cells": [
+            {
+              "text": "Intact sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured omphalocele",
+          "cells": [
+            {
+              "text": "Ruptured sac"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastroschisis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protection of eviscerated bowel",
+          "cells": [
+            {
+              "text": "Clear covering or bowel bag to limit heat, fluid and evaporative losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive IV fluid resuscitation",
+          "cells": [
+            {
+              "text": "Replaces large insensible losses; nasogastric decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positioning of viscera",
+          "cells": [
+            {
+              "text": "Prevents kinking of the narrow mesenteric pedicle and ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical closure",
+          "cells": [
+            {
+              "text": "Primary reduction and fascial repair where volume allows, or staged reduction using a preformed silo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition",
+          "cells": [
+            {
+              "text": "Sustains the infant until dysmotility resolves and enteral feeding is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for complications",
+          "cells": [
+            {
+              "text": "Atresia, perforation, necrotising enterocolitis and short bowel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neonatal and paediatric surgical care",
+          "cells": [
+            {
+              "text": "With antenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastroschisis-dx-mgmt",
+      "title": "Diagnosis and management of Gastroschisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastroschisis: antenatal ultrasound showing bowel outside the abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dusky bowel, hypovolaemia, atresia or perforation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate protection of exposed bowel; urgent review if dusky or ischaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal ultrasound, alpha-fetoprotein, bowel viability and atresia assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does postnatal assessment confirm viable bowel without associated atresia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider omphalocele, ruptured omphalocele or umbilical cord hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protect eviscerated bowel in a covering or bowel bag to limit losses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive IV fluid resuscitation and nasogastric decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Position viscera to prevent mesenteric kinking and ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical closure by reduction and repair, or staged reduction using a silo",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival generally high; recovery prolonged by intestinal dysmotility and delayed feeding",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

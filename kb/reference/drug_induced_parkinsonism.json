@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for drug induced parkinsonism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_parkinsonism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Comprehensive medication review",
+          "cells": [
+            {
+              "text": "Antiemetics, calcium-channel blockers and antidepressants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine transporter SPECT imaging",
+          "cells": [
+            {
+              "text": "Reversible drug effect versus nigrostriatal degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Vascular disease, hydrocephalus or atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and metabolic screen",
+          "cells": [
+            {
+              "text": "Treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured assessment for tardive dyskinesia and dystonia",
+          "cells": [
+            {
+              "text": "Coexisting tardive syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_parkinsonism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic Parkinson disease",
+          "cells": [
+            {
+              "text": "Unmasked by drug withdrawal in persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular parkinsonism",
+          "cells": [
+            {
+              "text": "Vascular disease on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal-pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Hydrocephalus on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_parkinsonism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or reduce the offending drug",
+          "cells": [
+            {
+              "text": "The definitive treatment; symptoms are potentially reversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower-risk antipsychotic and antiemetic",
+          "cells": [
+            {
+              "text": "Quetiapine or clozapine; domperidone or ondansetron instead of metoclopramide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Anticholinergic or amantadine while awaiting resolution, weighing adverse effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Signs over months after withdrawal, as recovery may be slow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DaT SPECT if persistent",
+          "cells": [
+            {
+              "text": "Manage as idiopathic Parkinson disease if degeneration is unmasked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Where diagnosis is uncertain or symptoms fail to resolve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_parkinsonism-dx-mgmt",
+      "title": "Diagnosis and management of drug induced parkinsonism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced parkinsonism: parkinsonian signs after a dopamine-blocking drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked asymmetry, rapid progression, fever with rigidity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of neuroleptic malignant syndrome if fever and rigidity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Medication review; DaT SPECT if unclear; MRI brain; thyroid and metabolic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do signs improve after withdrawal of the causative drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Persistent signs: DaT SPECT and neurology review for degeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or reduce the dopamine-blocking or depleting drug, the definitive step",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Switch to quetiapine or clozapine; use domperidone or ondansetron as antiemetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticholinergic or amantadine for symptomatic relief while waiting for recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess signs over months after withdrawal, as recovery may be slow",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to neurology if the diagnosis is uncertain or signs persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most improve after withdrawal over months; some unmask underlying Parkinson disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

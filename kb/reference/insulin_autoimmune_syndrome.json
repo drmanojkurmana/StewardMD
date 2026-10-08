@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for insulin autoimmune syndrome (hirata disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / endocrine reference literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "insulin_autoimmune_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucose, insulin, C-peptide and proinsulin during a hypoglycaemic episode",
+          "cells": [
+            {
+              "text": "High insulin with detectable C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin autoantibody titres",
+          "cells": [
+            {
+              "text": "Positive in this syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulfonylurea and meglitinide screen",
+          "cells": [
+            {
+              "text": "Secretagogue ingestion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing",
+          "cells": [
+            {
+              "text": "Predisposing DR4 alleles where uncertainty persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for autoimmune disease",
+          "cells": [
+            {
+              "text": "Especially thyroid disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for insulinoma",
+          "cells": [
+            {
+              "text": "When the antibody result is not confirmatory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "insulin_autoimmune_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulinoma",
+          "cells": [
+            {
+              "text": "Antibody result separates it; pitfall of pancreatic surgery without antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious hypoglycaemia",
+          "cells": [
+            {
+              "text": "Exogenous insulin or secretagogue use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin receptor autoantibody syndrome",
+          "cells": [
+            {
+              "text": "Receptor antibodies rather than insulin antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "insulin_autoimmune_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the thiol-containing drug",
+          "cells": [
+            {
+              "text": "Such as methimazole or alpha-lipoic acid; resolves many cases alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary measures",
+          "cells": [
+            {
+              "text": "Frequent small low-carbohydrate meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-glucosidase inhibitor",
+          "cells": [
+            {
+              "text": "Reduces postprandial peaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids or immunomodulation",
+          "cells": [
+            {
+              "text": "Persistent or severe disease only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated autoimmunity",
+          "cells": [
+            {
+              "text": "Screen for and treat thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remission",
+          "cells": [
+            {
+              "text": "Monitor under endocrinology; spontaneous remission is usual within months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "insulin_autoimmune_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Insulin autoimmune syndrome (Hirata disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spontaneous hypoglycaemia in a patient who never received exogenous insulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures or loss of consciousness, or hypoglycaemia refractory to diet?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose; withdraw the thiol-containing trigger drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hypoglycaemic-episode insulin and C-peptide, insulin antibodies, secretagogue screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insulin antibodies positive and factitious causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider insulinoma or factitious hypoglycaemia; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop the thiol-containing drug such as methimazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Small frequent meals with low carbohydrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha-glucosidase inhibitor to reduce peaks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids for persistent or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen and treat thyroid autoimmunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually remits within months; endocrinology monitoring continues",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

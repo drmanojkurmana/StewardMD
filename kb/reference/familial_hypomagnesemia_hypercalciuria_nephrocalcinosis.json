@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for fhhnc (cldn16/cldn19)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum magnesium and calcium with fractional excretion of magnesium",
+          "cells": [
+            {
+              "text": "Confirms renal loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour or spot urinary calcium",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Medullary nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial estimated GFR",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Where CLDN19 disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLDN16 and CLDN19 gene sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated dominant hypomagnesaemia (FXYD2)",
+          "cells": [
+            {
+              "text": "A dominant pattern rather than this recessive tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal renal tubular acidosis with nephrocalcinosis",
+          "cells": [
+            {
+              "text": "Listed in the differential of nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypercalciuria",
+          "cells": [
+            {
+              "text": "Hypercalciuric stones without renal magnesium wasting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic oral magnesium replacement",
+          "cells": [
+            {
+              "text": "Titrated to symptom control rather than full normalisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiazide diuretics with high fluid intake and citrate or alkali",
+          "cells": [
+            {
+              "text": "Reduces hypercalciuria and slows nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephroprotective management",
+          "cells": [
+            {
+              "text": "Blood-pressure and proteinuria control; avoidance of nephrotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral magnesium",
+          "cells": [
+            {
+              "text": "Acute tetany or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "CLDN19 disease: severe myopia and macular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement or transplantation",
+          "cells": [
+            {
+              "text": "For kidney failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and sibling screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-dx-mgmt",
+      "title": "Diagnosis and management of FHHNC (CLDN16/CLDN19)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with recurrent stones or nephrocalcinosis, hypomagnesaemia and hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rising creatinine, obstructing calculi, tetany, rapidly worsening vision)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Parenteral magnesium for symptomatic hypomagnesaemia; nephrology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Magnesium with FEMg; urinary calcium; renal ultrasound; serial GFR; CLDN16 and CLDN19",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypercalciuria with nephrocalcinosis and biallelic CLDN16 or CLDN19 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gitelman syndrome, FXYD2 disease or primary hyperoxaluria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Chronic oral magnesium replacement titrated to symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thiazides with high fluid intake and citrate or alkali",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nephroprotective management of declining GFR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological review where CLDN19 disease is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and sibling screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Guarded; progressive kidney disease usual, with kidney failure in adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -155,5 +155,285 @@
       "caption": "Overview comparison matrix for gangliocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gangliocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Striated folial pattern in the cerebellar variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG",
+          "cells": [
+            {
+              "text": "When the tumour presents with focal epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Dysplastic ganglion cells without a neoplastic glial component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PTEN germline testing",
+          "cells": [
+            {
+              "text": "Cerebellar variant or Cowden features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for Cowden-associated tumours",
+          "cells": [
+            {
+              "text": "Breast, thyroid and endometrium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Part of the epilepsy surgery evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gangliocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Mainstay; generally curative for the typical cortical tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy surgery pathway",
+          "cells": [
+            {
+              "text": "Focal epilepsy; resection planned with video-EEG localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellar variant",
+          "cells": [
+            {
+              "text": "Resection reserved for symptomatic lesions with mass effect, ataxia or hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Residual or recurrent disease, especially after incomplete resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Seizure control pending or alongside surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline PTEN testing",
+          "cells": [
+            {
+              "text": "Cerebellar variant or Cowden features, with lifelong surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No role for radiotherapy or systemic therapy",
+          "cells": [
+            {
+              "text": "Benign, non-infiltrating tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gangliocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Gangliocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gangliocytoma: drug-resistant focal epilepsy or cerebellar mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drug-resistant seizures, mass effect, Cowden features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurosurgical referral for a symptomatic cerebellar variant with hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, video-EEG and histopathology; PTEN testing if cerebellar or Cowden",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show dysplastic neurons without a neoplastic glial component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ganglioglioma, dysembryoplastic tumour or focal cortical dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resection of symptomatic cortical tumour through an epilepsy-surgery pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resection of the cerebellar variant only for symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance MRI for residual or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PTEN germline testing and Cowden syndrome surveillance where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; complete resection of a symptomatic cortical tumour is usually curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

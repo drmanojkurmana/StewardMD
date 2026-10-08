@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for hyphema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyphema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Grades the hyphema and detects associated trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Raised pressure; serial monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy (deferred until rebleeding risk passes)",
+          "cells": [
+            {
+              "text": "Angle recession"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination or B-scan ultrasound",
+          "cells": [
+            {
+              "text": "Posterior segment injury when the view is obscured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell screening",
+          "cells": [
+            {
+              "text": "Sickle cell disease or trait in at-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Bleeding tendency when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyphema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Traumatic microhyphema",
+          "cells": [
+            {
+              "text": "No layered blood in the anterior chamber"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neovascular disease (diabetic retinopathy, retinal vein occlusion)",
+          "cells": [
+            {
+              "text": "Spontaneous hyphema should prompt consideration of neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular tumour (retinoblastoma in children)",
+          "cells": [
+            {
+              "text": "Spontaneous hyphema in a child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding diathesis or anticoagulation",
+          "cells": [
+            {
+              "text": "Bleeding tendency is a cause of spontaneous hyphema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyphema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Bed rest, head elevation, rigid eye shield, limit strenuous activity to reduce rebleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic and steroid",
+          "cells": [
+            {
+              "text": "Topical cycloplegic for comfort; topical corticosteroid to reduce inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withhold antithrombotics",
+          "cells": [
+            {
+              "text": "Antiplatelet and anticoagulant agents where clinically safe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pressure control",
+          "cells": [
+            {
+              "text": "Topical ocular antihypertensives; avoid carbonic anhydrase inhibitors and hyperosmotics in sickle cell disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Intraocular pressure, corneal blood staining and rebleeding in the early high-risk days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell screening",
+          "cells": [
+            {
+              "text": "Even modest pressure endangers the optic nerve in sickle cell disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyphema-dx-mgmt",
+      "title": "Diagnosis and management of Hyphema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blood layer in the anterior chamber, usually after blunt ocular trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised pressure, rebleeding, corneal staining or globe injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pressure control; assess for globe rupture or posterior injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp grading, pressure, fundus or B-scan, sickle cell and coagulation screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sickle cell disease or bleeding tendency excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Sickle or bleeding disorder found: adapt drugs and pressure treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bed rest, head elevation, rigid eye shield, limit activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cycloplegic and topical corticosteroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withhold antiplatelet and anticoagulant agents where safe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical antihypertensives for pressure; avoid CAIs in sickle cell",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial pressure checks and watch for rebleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor for rebleeding and optic nerve damage in the early high-risk days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

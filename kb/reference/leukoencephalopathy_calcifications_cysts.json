@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for leukoencephalopathy with calcifications and cysts (labrune, snord118)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leukoencephalopathy_calcifications_cysts-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the brain",
+          "cells": [
+            {
+              "text": "Distribution and extent of calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Leukoencephalopathy, cysts and mass effect; cyst growth on follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SNORD118 sequencing",
+          "cells": [
+            {
+              "text": "Analyses the non-coding gene specifically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection screen",
+          "cells": [
+            {
+              "text": "Excludes TORCH causes of calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interferon signature testing",
+          "cells": [
+            {
+              "text": "Where an interferonopathy is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical assessment",
+          "cells": [
+            {
+              "text": "Symptomatic or enlarging cysts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukoencephalopathy_calcifications_cysts-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coats plus syndrome (CTC1)",
+          "cells": [
+            {
+              "text": "Systemic features: retinal, gastrointestinal, bone marrow; Labrune is nervous-system only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infections (TORCH group)",
+          "cells": [
+            {
+              "text": "Cause calcification; screened for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aicardi-Goutieres syndrome and other interferonopathies",
+          "cells": [
+            {
+              "text": "Interferonopathy with calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary familial brain calcification (SLC20A2)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukoencephalopathy_calcifications_cysts-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurosurgical intervention",
+          "cells": [
+            {
+              "text": "Fenestration, drainage or shunting for symptomatic or enlarging cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "CT and MRI to monitor cyst growth, calcification and white-matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Management of pressure from expanding cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorders and rehabilitation",
+          "cells": [
+            {
+              "text": "Symptomatic treatment; neurorehabilitation for cognitive and focal deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, neurosurgery and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SNORD118 disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leukoencephalopathy_calcifications_cysts-dx-mgmt",
+      "title": "Diagnosis and management of Leukoencephalopathy with calcifications and cysts (Labrune, SNORD118)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leukoencephalopathy with calcification and cysts, with seizures or focal signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised ICP from cyst, new focal deficit, status, cognitive decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for an enlarging symptomatic cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT for calcification, MRI for cysts and white matter, SNORD118 sequencing, TORCH screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SNORD118 sequencing show biallelic variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coats plus, congenital infection or an interferonopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neurosurgical fenestration, drainage or shunting for symptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial CT and MRI to monitor cyst growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of raised intracranial pressure from expanding cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurology, neurosurgery and clinical genetics with counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable, often slowly progressive course; depends on lesion location and cyst growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

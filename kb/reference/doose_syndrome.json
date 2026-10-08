@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for doose syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification and clinical guidance on the epilepsy syndromes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "doose_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-EEG capturing drop attacks and interictal discharges",
+          "cells": [
+            {
+              "text": "Ictal drop attacks and interictal discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Usually normal; excludes a structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing including SLC2A1 and epilepsy gene panels",
+          "cells": [
+            {
+              "text": "SLC2A1 variant (GLUT1 deficiency)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF-to-blood glucose ratio or SLC2A1 analysis",
+          "cells": [
+            {
+              "text": "GLUT1 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognitive and developmental outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "doose_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lennox-Gastaut syndrome",
+          "cells": [
+            {
+              "text": "Tonic seizures, slow spike-wave and a worse prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLUT1 deficiency syndrome",
+          "cells": [
+            {
+              "text": "Responds to ketogenic therapy; SLC2A1 testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "doose_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure medication",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam, lamotrigine or ethosuximide first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Notably effective; essential where GLUT1 deficiency is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Carbamazepine and oxcarbazepine can aggravate myoclonic and atonic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identify GLUT1 deficiency",
+          "cells": [
+            {
+              "text": "Responds specifically to ketogenic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injury prevention and rescue",
+          "cells": [
+            {
+              "text": "Protective headgear; benzodiazepine rescue for prolonged or non-convulsive status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and educational support",
+          "cells": [
+            {
+              "text": "Neuropsychological assessment and educational support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and follow-up",
+          "cells": [
+            {
+              "text": "Paediatric neurology review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "doose_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Doose syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Doose syndrome: generalised epilepsy with frequent injurious drop attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (injurious drop attacks, regression, non-convulsive status)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for non-convulsive status and injury prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-EEG; MRI brain; SLC2A1 and epilepsy gene panel; CSF-to-blood glucose ratio",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is GLUT1 deficiency excluded by CSF glucose ratio or SLC2A1 analysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Lennox-Gastaut, Dravet syndrome or progressive myoclonic epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication such as valproate or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early ketogenic diet, notably effective and essential in GLUT1 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid carbamazepine and oxcarbazepine, which aggravate myoclonic seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective headgear; benzodiazepine rescue for prolonged or non-convulsive status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neuropsychological assessment, educational support and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highly variable; many achieve seizure freedom with preserved cognition, others do not",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

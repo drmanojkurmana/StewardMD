@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for perioperative anaphylaxis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perioperative_anaphylaxis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial mast cell tryptase levels",
+          "cells": [
+            {
+              "text": "Taken during the reaction and after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous ECG, blood pressure and oxygenation monitoring",
+          "cells": [
+            {
+              "text": "Cardiovascular and oxygenation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Oxygenation and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and specific IgE allergy testing (referral)",
+          "cells": [
+            {
+              "text": "Identifies the trigger later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of all agents and materials given",
+          "cells": [
+            {
+              "text": "Likely trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perioperative_anaphylaxis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Adrenaline first line",
+          "cells": [
+            {
+              "text": "Given immediately, titrated intramuscularly or intravenously to severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop the trigger",
+          "cells": [
+            {
+              "text": "Stop the likely agent, such as a neuromuscular blocker, antibiotic, chlorhexidine or latex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and bronchospasm",
+          "cells": [
+            {
+              "text": "Secure the airway, high-flow oxygen, inhaled or nebulised bronchodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid resuscitation",
+          "cells": [
+            {
+              "text": "Aggressive intravenous fluids for distributive shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory shock",
+          "cells": [
+            {
+              "text": "Vasopressor infusions such as noradrenaline or vasopressin; glucagon considered in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrest",
+          "cells": [
+            {
+              "text": "Standard advanced life support, with prolonged resuscitation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts and observation",
+          "cells": [
+            {
+              "text": "Corticosteroids and antihistamines after resuscitation; observe for a biphasic reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tryptase and allergy referral",
+          "cells": [
+            {
+              "text": "Serial tryptase samples; later skin and specific IgE testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perioperative_anaphylaxis-dx-mgmt",
+      "title": "Diagnosis and management of Perioperative anaphylaxis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden hypotension, bronchospasm or airway swelling during anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiac arrest, severe bronchospasm, refractory hypotension, airway swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Advanced life support and airway control for cardiac arrest or airway threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous ECG, blood pressure and oxygenation; serial tryptase; arterial blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the picture fit anaphylaxis, with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider local anaesthetic toxicity, high spinal block, embolism or septic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Give adrenaline immediately, titrated intramuscularly or intravenously to severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop the likely trigger, such as a neuromuscular blocker, antibiotic or latex",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secure the airway, give high-flow oxygen and relieve bronchospasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Give fluid resuscitation and vasopressors for refractory shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Give corticosteroids and antihistamines; observe for a biphasic reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover with prompt adrenaline; delay can be fatal or cause hypoxic injury",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

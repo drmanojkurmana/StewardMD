@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for inguinal hernia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inguinal_hernia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination standing and supine with cough impulse",
+          "cells": [
+            {
+              "text": "Groin swelling and cough impulse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the groin",
+          "cells": [
+            {
+              "text": "Swelling that is uncertain or not clinically obvious"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Complex, recurrent or occult hernias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herniography",
+          "cells": [
+            {
+              "text": "Occult cases; rarely used now"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline bloods and lactate",
+          "cells": [
+            {
+              "text": "Strangulation or obstruction suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inguinal_hernia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Femoral hernia",
+          "cells": [
+            {
+              "text": "Lies below and lateral to the pubic tubercle; higher strangulation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphadenopathy, saphena varix or vascular causes",
+          "cells": [
+            {
+              "text": "Groin lump that is not a hernia; must be excluded first"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inguinal_hernia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Elective mesh repair",
+          "cells": [
+            {
+              "text": "Tension-free, open (Lichtenstein) or laparoscopic; definitive for symptomatic hernias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Minimally symptomatic or asymptomatic hernia in high operative risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency exploration",
+          "cells": [
+            {
+              "text": "Incarcerated or strangulated hernia; resect non-viable bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative care",
+          "cells": [
+            {
+              "text": "Analgesia; avoid heavy straining during recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral",
+          "cells": [
+            {
+              "text": "Irreducible, tense and tender hernia with loss of cough impulse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Low recurrence after mesh repair; safety-net advice while awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inguinal_hernia-dx-mgmt",
+      "title": "Diagnosis and management of Inguinal hernia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Groin swelling that appears or enlarges on standing, coughing or straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tense, tender irreducible lump, obstruction or sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical exploration; avoid forcible reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination standing and supine, ultrasound if uncertain, CT or MRI if complex",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reducible inguinal hernia suitable for elective repair?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider femoral hernia or another groin mimic; further imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Elective tension-free mesh repair, open or laparoscopic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Watchful waiting for minimal symptoms in high operative risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and avoidance of heavy straining during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on low recurrence after mesh repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic hernia repaired electively; early referral prevents strangulation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for feingold syndrome (mycn)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "feingold_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MYCN molecular testing with microarray",
+          "cells": [
+            {
+              "text": "Sequence variant or deletion encompassing MYCN"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and surgical assessment of oesophageal or duodenal atresia",
+          "cells": [
+            {
+              "text": "Gastrointestinal atresia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot radiography",
+          "cells": [
+            {
+              "text": "Digital anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference and neuroimaging",
+          "cells": [
+            {
+              "text": "Consistent microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and educational assessment",
+          "cells": [
+            {
+              "text": "Learning difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "feingold_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "VACTERL association",
+          "cells": [
+            {
+              "text": "Overlapping gastrointestinal and limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "Atresia with multiple congenital anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi anaemia",
+          "cells": [
+            {
+              "text": "Limb anomalies and growth restriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "feingold_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt neonatal surgical correction of atresia",
+          "cells": [
+            {
+              "text": "Oesophageal or duodenal atresia; principal early concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early educational and learning intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference and neuroimaging",
+          "cells": [
+            {
+              "text": "Consistent microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac anomaly management",
+          "cells": [
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and hand assessment",
+          "cells": [
+            {
+              "text": "Digital anomalies; intervene only where function is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Clinical genetics, paediatric surgery and developmental services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant MYCN haploinsufficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "feingold_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Feingold syndrome (MYCN)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microcephaly with oesophageal or duodenal atresia and digital anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aspiration, bilious vomiting, cardiac or renal malformation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal surgical correction of atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MYCN sequencing and microarray for deletion; hand radiography; head circumference",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MYCN variant or deletion confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider VACTERL, CHARGE or other syndromic atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt neonatal surgical correction of atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Developmental and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial head circumference monitoring and neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and cardiac anomaly evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With timely surgery, outlook is generally good and lifespan usually normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

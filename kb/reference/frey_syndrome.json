@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for frey syndrome (gustatory sweating)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frey_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Minor starch-iodine test",
+          "cells": [
+            {
+              "text": "Demonstrates and delineates the sweating area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical history",
+          "cells": [
+            {
+              "text": "Correlates symptoms with eating and prior parotid surgery or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative sweat assessment",
+          "cells": [
+            {
+              "text": "Quantifies sweat production for research or treatment monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the parotid bed",
+          "cells": [
+            {
+              "text": "Where a sialocele or recurrent mass is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic mapping",
+          "cells": [
+            {
+              "text": "Guides injection sites before botulinum toxin treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frey_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Salivary fistula or sialocele after parotid surgery",
+          "cells": [
+            {
+              "text": "Persistent fistula or infection at the operative site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent parotid tumour",
+          "cells": [
+            {
+              "text": "New mass in the parotid bed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid or phaeochromocytoma flushing",
+          "cells": [
+            {
+              "text": "Systemic flushing with palpitations or hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frey_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intradermal botulinum toxin",
+          "cells": [
+            {
+              "text": "Most effective and durable treatment; blocks cholinergic stimulation of sweat glands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antiperspirants",
+          "cells": [
+            {
+              "text": "Aluminium chloride and topical anticholinergics for milder symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Starch-iodine mapping",
+          "cells": [
+            {
+              "text": "Guides targeted botulinum toxin injection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign nature; tends to stabilise over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical interposition barrier",
+          "cells": [
+            {
+              "text": "For refractory or severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Reassess symptom control and time repeat treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frey_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Frey syndrome (gustatory sweating)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Frey syndrome: gustatory sweating after parotid surgery or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (parotid bed mass, systemic flushing, persistent fistula)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: parotid bed mass suggesting recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Minor starch-iodine test to map the sweating area, with history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does starch-iodine mapping match the eating-related sweating?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider salivary fistula, sialocele, recurrent parotitis or neuroendocrine flushing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Map the sweating area with the starch-iodine test",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intradermal botulinum toxin, the most effective and durable treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical aluminium chloride or anticholinergics for milder symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassurance; surgical interposition barrier for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, often stabilises; botulinum toxin reliably controls symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

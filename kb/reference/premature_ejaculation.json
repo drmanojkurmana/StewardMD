@@ -145,5 +145,327 @@
       "caption": "Overview comparison matrix for premature ejaculation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "premature_ejaculation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sexual and psychosocial history",
+          "cells": [
+            {
+              "text": "Lifelong versus acquired pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erectile function assessment",
+          "cells": [
+            {
+              "text": "Coexisting erectile dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Endocrine cause, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for prostatitis or lower urinary tract symptoms",
+          "cells": [
+            {
+              "text": "Prostatitis or LUTS, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression, anxiety and relationship stress",
+          "cells": [
+            {
+              "text": "Psychological and relationship contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premature_ejaculation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Erectile dysfunction with compensatory rapid ejaculation",
+          "cells": [
+            {
+              "text": "Erectile dysfunction present"
+            },
+            {
+              "text": "Erectile function assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic prostatitis or pelvic pain",
+          "cells": [
+            {
+              "text": "Associated pelvic or perineal pain"
+            },
+            {
+              "text": "Prostatitis evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Symptoms of thyrotoxicosis"
+            },
+            {
+              "text": "Thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Performance anxiety or relationship conflict",
+          "cells": [
+            {
+              "text": "Significant psychological distress or relationship breakdown"
+            },
+            {
+              "text": "Depression and anxiety screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premature_ejaculation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural techniques",
+          "cells": [
+            {
+              "text": "Stop-start and squeeze methods, often with partner involvement and psychosexual counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serotonergic pharmacotherapy",
+          "cells": [
+            {
+              "text": "On-demand or daily SSRI such as dapoxetine to raise the ejaculatory threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical anaesthetic",
+          "cells": [
+            {
+              "text": "Lidocaine-prilocaine to reduce glans sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting erectile dysfunction",
+          "cells": [
+            {
+              "text": "PDE5 inhibitor, which may itself resolve the complaint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage contributing conditions",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction, prostatitis or lower urinary tract symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Anxiety, performance pressure and relationship factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "premature_ejaculation-dx-mgmt",
+      "title": "Diagnosis and management of Premature ejaculation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Premature ejaculation: ejaculatory control complaint, lifelong or acquired",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden onset with erectile dysfunction, pelvic pain or thyrotoxic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for underlying vascular, endocrine or prostatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sexual and psychosocial history; erectile function; thyroid function; mood screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are history and tests consistent with premature ejaculation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other causes such as ED, thyroid disease or prostatitis; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural techniques: stop-start and squeeze, with partner involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "On-demand or daily SSRI such as dapoxetine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical lidocaine-prilocaine to reduce glans sensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting erectile dysfunction and contributing conditions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treatment follows the cause found; psychological support for anxiety",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

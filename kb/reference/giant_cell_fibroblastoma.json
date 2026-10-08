@@ -157,5 +157,314 @@
       "caption": "Overview comparison matrix for giant cell fibroblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "giant_cell_fibroblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CD34 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Typically diffusely positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or molecular testing for COL1A1-PDGFB fusion",
+          "cells": [
+            {
+              "text": "COL1A1-PDGFB fusion status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endothelial markers",
+          "cells": [
+            {
+              "text": "Confirms pseudovascular spaces are not true vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Dermal and subcutaneous extent for excision planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Margin assessment on excision specimen",
+          "cells": [
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_cell_fibroblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatofibrosarcoma protuberans",
+          "cells": [
+            {
+              "text": "Shared infiltrative pattern; undertreatment with narrow margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular tumours such as angiosarcoma",
+          "cells": [
+            {
+              "text": "Pseudovascular spaces can mimic a vascular tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_cell_fibroblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Confirm diagnosis before surgery",
+          "cells": [
+            {
+              "text": "Fusion testing where feasible, and expert pathology review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay for localised resectable disease, with margin assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Clear microscopic margins rather than the narrowest possible defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-excision",
+          "cells": [
+            {
+              "text": "For positive or close margins where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Margin-positive disease that cannot be safely re-excised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PDGFR-targeted tyrosine kinase inhibitor",
+          "cells": [
+            {
+              "text": "Unresectable, recurrent or locally advanced disease, such as imatinib"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical follow-up",
+          "cells": [
+            {
+              "text": "Local recurrence; repeat pathology review for any recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Sarcoma or paediatric oncology MDT for positive margins or suspected high-grade change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "giant_cell_fibroblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Giant cell fibroblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected giant cell fibroblastoma: dermal tumour with pseudovascular spaces",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrence, fibrosarcomatous change, large or deep tumour)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to sarcoma MDT for suspected high-grade or fibrosarcomatous change",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CD34 staining, COL1A1-PDGFB fusion testing and MRI for extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the COL1A1-PDGFB fusion confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DFSP, dermatofibroma, vascular tumour or neurofibroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision with clear microscopic margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Re-excision for positive or close margins where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiotherapy only for margin-positive disease that cannot be re-excised",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PDGFR-targeted tyrosine kinase inhibitor for unresectable or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Locally aggressive, usually non-metastasising; clear-margin wide excision is curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

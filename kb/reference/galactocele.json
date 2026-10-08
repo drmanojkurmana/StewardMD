@@ -147,5 +147,287 @@
       "caption": "Overview comparison matrix for galactocele."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and benign breast disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "galactocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "First-line imaging; may show a fat-fluid level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic and therapeutic aspiration",
+          "cells": [
+            {
+              "text": "Typically yields milk, confirming the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytology or further imaging",
+          "cells": [
+            {
+              "text": "If the aspirate is atypical or a mass persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy",
+          "cells": [
+            {
+              "text": "Any residual solid lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "galactocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lactational breast abscess",
+          "cells": [
+            {
+              "text": "Marked pain, erythema and systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast carcinoma",
+          "cells": [
+            {
+              "text": "Atypical imaging features, or a lump that does not resolve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "galactocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign milk-filled retention cyst; no specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aspiration",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic; yields milky fluid and relieves swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continued breastfeeding",
+          "cells": [
+            {
+              "text": "Safe, and often allows spontaneous resolution as lactation settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat aspiration",
+          "cells": [
+            {
+              "text": "For recurrent or symptomatic collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further evaluation",
+          "cells": [
+            {
+              "text": "Cytology, core biopsy or repeat imaging if the aspirate is atypical or a solid mass persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast surgery referral",
+          "cells": [
+            {
+              "text": "Persistent or diagnostically uncertain lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "galactocele-dx-mgmt",
+      "title": "Diagnosis and management of Galactocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected galactocele: milk-filled breast swelling during or after lactation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked pain, systemic upset, bloodstained aspirate, solid mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a lactational abscess with systemic upset",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound and diagnostic aspiration; cytology or biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspiration yield milky fluid with resolution of the swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lactational abscess, carcinoma or other cysts; biopsy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance: a benign milk-filled retention cyst needing no drug therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle aspiration to confirm the diagnosis and relieve swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continued breastfeeding, which is safe and often resolves the cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Core biopsy or repeat imaging if the aspirate is atypical or a mass persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Entirely benign; usually resolves after aspiration or conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,521 @@
       "caption": "Overview comparison matrix for movement disorders (tremor, chorea, dystonia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Tremor",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/movement-and-cerebellar-disorders/tremor"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 372-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "movement_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising hyperkinetic movement disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Defining feature",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation from intermittent contractions"
+            },
+            {
+              "text": "Classify by rest, posture or action"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rest (parkinsonian) tremor",
+          "unit": "Hz",
+          "cells": [
+            {
+              "text": "3 to 6 Hz",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "With rigidity and bradykinesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Essential tremor",
+          "unit": "Hz",
+          "cells": [
+            {
+              "text": "4 to 12 Hz, symmetric, postural and kinetic",
+              "range": [
+                4,
+                12
+              ]
+            },
+            {
+              "text": "{{hy:Improves with alcohol; arms-abducted latency 1 to 2 s}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cerebellar intention tremor",
+          "unit": "Hz",
+          "cells": [
+            {
+              "text": "Under 4 Hz, often unilateral",
+              "op": "<",
+              "value": 4
+            },
+            {
+              "text": "Worse near target"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, dance-like, nonpatterned movements"
+            },
+            {
+              "text": "Huntington, Sydenham, drugs, Wilson"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Sustained patterned contractions with twisting and posture"
+            },
+            {
+              "text": "New asymmetric dystonia in young adult may herald PD"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow distal writhing of arms and hands"
+            },
+            {
+              "text": "Often with chorea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myoclonus",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Sudden jerks under 100 ms",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Arrhythmic"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief stereotyped contractions, often suppressible"
+            },
+            {
+              "text": "Simple or complex"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Work-up",
+          "cells": [
+            {
+              "text": "TSH; ceruloplasmin, 24-h urine copper and slit lamp if under 40"
+            },
+            {
+              "text": "MRI if acute onset or focal signs; CAG repeat test for Huntington"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "movement_disorders-ddx",
+      "kind": "ddx",
+      "title": "Key causes and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Parkinson disease",
+          "cells": [
+            {
+              "text": "Bradykinesia, rest tremor, rigidity, postural instability; anosmia, micrographia"
+            },
+            {
+              "text": "Clinical; response to levodopa"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Huntington disease",
+          "cells": [
+            {
+              "text": "Chorea, psychiatric change, dementia, dominant family history"
+            },
+            {
+              "text": "CAG repeat genetic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient with tremor, dystonia or chorea and liver disease"
+            },
+            {
+              "text": "Ceruloplasmin, urine copper, Kayser-Fleischer rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sydenham chorea",
+          "cells": [
+            {
+              "text": "Young female after streptococcal infection; carditis in over 50%"
+            },
+            {
+              "text": "ASO, anti-DNase B, echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tardive dyskinesia",
+          "cells": [
+            {
+              "text": "Long-term D2-blocking drugs"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Fine physiological tremor 8 to 13 Hz"
+            },
+            {
+              "text": "TSH and T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Functional movement disorder",
+          "cells": [
+            {
+              "text": "Variable, distractible, entrains"
+            },
+            {
+              "text": "Clinical signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "movement_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment by disorder",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Propranolol or primidone",
+          "cells": [
+            {
+              "text": "{{hy:First-line for essential tremor}}"
+            },
+            {
+              "text": "Topiramate or gabapentin second line"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalamic DBS or focused ultrasound",
+          "cells": [
+            {
+              "text": "Severe medication-refractory essential tremor"
+            },
+            {
+              "text": "Ventral intermediate nucleus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "VMAT2 inhibitor (tetrabenazine)",
+          "cells": [
+            {
+              "text": "Huntington chorea or tardive dyskinesia"
+            },
+            {
+              "text": "Withdraw or reduce the D2 blocker in TD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Focal dystonia"
+            },
+            {
+              "text": "DBS for generalised or refractory dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper chelation plus zinc",
+          "cells": [
+            {
+              "text": "Wilson disease"
+            },
+            {
+              "text": "Penicillamine or trientine; start early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal eradication and rheumatic care",
+          "cells": [
+            {
+              "text": "Sydenham chorea"
+            },
+            {
+              "text": "Echocardiography for carditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa and dopamine agonists",
+          "cells": [
+            {
+              "text": "Parkinsonism"
+            },
+            {
+              "text": "See Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and rehabilitation",
+          "cells": [
+            {
+              "text": "Heritable disorders; all patients"
+            },
+            {
+              "text": "Physio, OT, speech, psychiatry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no doses for tremor drugs."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "movement_disorders-dx-mgmt",
+      "title": "Diagnosis and management of movement disorders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Involuntary movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rhythmic oscillation (tremor)?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Present at rest with bradykinesia and rigidity?",
+          "cite": "c4"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Parkinsonism pathway",
+          "cite": "c4"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "TSH; copper studies if under 40",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Essential tremor: propranolol or primidone; DBS if refractory",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Chorea?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drug history, ASO and echo, copper studies, CAG repeat test",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Treat cause; VMAT2 inhibitor for disabling chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Dystonia?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Botulinum toxin for focal; exclude Wilson and early PD",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Classify as myoclonus, tic or functional; specialist review",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

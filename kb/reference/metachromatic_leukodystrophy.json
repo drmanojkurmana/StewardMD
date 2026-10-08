@@ -145,5 +145,276 @@
       "caption": "Overview comparison matrix for metachromatic leukodystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metachromatic_leukodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arylsulfatase A enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity; pseudodeficiency alleles considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARSA molecular genetic testing",
+          "cells": [
+            {
+              "text": "ARSA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary sulfatide measurement",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White matter involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and CSF protein assessment",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy; CSF protein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metachromatic_leukodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Disease-modifying gene therapy or transplant",
+          "cells": [
+            {
+              "text": "Presymptomatic or very early patients: atidarsagene autotemcel or allogeneic transplant in slower-progressing juvenile disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity",
+          "cells": [
+            {
+              "text": "Baclofen supplemented by botulinum toxin, with physiotherapy and positioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures, pain and dystonia",
+          "cells": [
+            {
+              "text": "Antiepileptic drugs; treatment of neuropathic pain and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and respiratory support",
+          "cells": [
+            {
+              "text": "Gastrostomy, secretion management and respiratory care as function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial brain MRI, neurological review, and monitoring for gallbladder disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Metabolic, neurology, rehabilitation and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Test at-risk siblings; presymptomatic identification enables early treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metachromatic_leukodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Metachromatic leukodystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Toddler with loss of motor milestones and combined central and peripheral signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar dysfunction with aspiration, cognitive decline in older patients, or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutrition and aspiration assessment; respiratory support as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ARSA enzyme assay, ARSA genetic testing, urinary sulfatide, brain MRI, NCS, CSF protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ARSA deficiency confirmed by enzyme assay and genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider multiple sulfatase deficiency, Krabbe disease or X-linked adrenoleukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gene-corrected stem cell therapy or transplant for presymptomatic or very early patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baclofen with botulinum toxin for spasticity, with physiotherapy and positioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiepileptic drugs for seizures; treat neuropathic pain and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gastrostomy, secretion management and respiratory care as function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial MRI and multidisciplinary care; test at-risk siblings for early treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

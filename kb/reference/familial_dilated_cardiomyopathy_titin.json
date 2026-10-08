@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for titin-truncation dilated cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard cardiology and inherited cardiac conditions references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_dilated_cardiomyopathy_titin-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Chamber dilatation and systolic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG and ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Conduction disease and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Function and fibrosis; helps exclude mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of TTN and a dilated cardiomyopathy panel",
+          "cells": [
+            {
+              "text": "Variant, with careful interpretation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cascade clinical screening",
+          "cells": [
+            {
+              "text": "First-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for reversible contributors",
+          "cells": [
+            {
+              "text": "Alcohol, cardiotoxic drugs and tachyarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_dilated_cardiomyopathy_titin-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "LMNA and other genetic dilated cardiomyopathies",
+          "cells": [
+            {
+              "text": "Generally less arrhythmogenic than lamin disease, which is higher risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol- or chemotherapy-related cardiomyopathy",
+          "cells": [
+            {
+              "text": "Alcohol and cardiotoxic chemotherapy modify penetrance of this gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripartum cardiomyopathy",
+          "cells": [
+            {
+              "text": "The peripartum state modifies penetrance; heightened surveillance is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_dilated_cardiomyopathy_titin-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Guideline-directed heart failure therapy",
+          "cells": [
+            {
+              "text": "ARNI, or ACE inhibitor or ARB, beta-blocker and mineralocorticoid antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD or cardiac resynchronisation",
+          "cells": [
+            {
+              "text": "Where indicated by ventricular function and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia management",
+          "cells": [
+            {
+              "text": "Anticoagulation if atrial fibrillation develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Removal of cardiotoxic exposures",
+          "cells": [
+            {
+              "text": "Alcohol and cardiotoxic chemotherapy; heightened peripartum surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography and rhythm surveillance",
+          "cells": [
+            {
+              "text": "Ventricular function and ambulatory monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced therapies",
+          "cells": [
+            {
+              "text": "Mechanical circulatory support or transplantation for end-stage disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "TTN and cardiomyopathy panel; first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_dilated_cardiomyopathy_titin-dx-mgmt",
+      "title": "Diagnosis and management of Titin-truncation dilated cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dilated left ventricle with systolic dysfunction, heart failure or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid decline, ventricular arrhythmia, conduction disease, sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Heart failure team review; ICD assessment for ventricular arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; ECG and monitoring; cardiac MRI; TTN and cardiomyopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Truncating TTN variant confirmed with careful interpretation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider LMNA, ischaemic or toxic dilated cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Guideline heart failure therapy with ARNI or ACE inhibitor or ARB, and beta-blocker",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ICD or cardiac resynchronisation where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove alcohol and cardiotoxic exposures; peripartum surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and ambulatory rhythm monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade screening of first-degree relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Relatively favourable, with substantial recovery on guideline-directed therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

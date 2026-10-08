@@ -162,5 +162,508 @@
       "caption": "Overview comparison matrix for thyroid gland physiology and testing."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Overview of Thyroid Function",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/overview-of-thyroid-function"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_gland_physiology_and_testing-diagnostic",
+      "kind": "diagnostic",
+      "title": "Interpreting thyroid function tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "TSH",
+        "Free T4",
+        "T3"
+      ],
+      "rows": [
+        {
+          "parameter": "Overt hyperthyroidism",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "High"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "T3 toxicosis",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "High; 2 to 5% of thyrotoxicosis",
+              "range": [
+                2,
+                5
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subclinical hyperthyroidism",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary hypothyroidism",
+          "cells": [
+            {
+              "text": "High"
+            },
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Low or normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subclinical hypothyroidism",
+          "cells": [
+            {
+              "text": "High"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central (pituitary) hypothyroidism",
+          "cells": [
+            {
+              "text": "{{hy:Low or normal, inappropriately}}"
+            },
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Low or normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Euthyroid sick syndrome",
+          "cells": [
+            {
+              "text": "Normal, low or high"
+            },
+            {
+              "text": "Normal or low"
+            },
+            {
+              "text": "Low"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resistance to thyroid hormone or TSH adenoma",
+          "cells": [
+            {
+              "text": "Normal or high (inappropriate)"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "High"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TBG excess (oestrogen, pregnancy)",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal (total T4 high)"
+            },
+            {
+              "text": "Total T3 high"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Third-generation TSH assays detect down to 0.01 mIU/L. Stop biotin at least 2 days before testing (Harrison). Use local reference intervals."
+    },
+    {
+      "id": "thyroid_gland_physiology_and_testing-ddx",
+      "kind": "ddx",
+      "title": "Look-alike test patterns",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial dysalbuminaemic hyperthyroxinaemia",
+          "cells": [
+            {
+              "text": "High total T4, normal free T4, euthyroid"
+            },
+            {
+              "text": "Free T4 by equilibrium dialysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TBG deficiency",
+          "cells": [
+            {
+              "text": "Low total T4 with normal free T4"
+            },
+            {
+              "text": "Free T4; do not treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biotin interference",
+          "cells": [
+            {
+              "text": "Falsely low TSH and high T4, T3"
+            },
+            {
+              "text": "Repeat after stopping biotin 2 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid or dopamine effect",
+          "cells": [
+            {
+              "text": "Low TSH in sick patients"
+            },
+            {
+              "text": "Repeat after recovery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early pregnancy",
+          "cells": [
+            {
+              "text": "Transient TSH 0.01 to 0.1 mIU/L from hCG",
+              "range": [
+                0.01,
+                0.1
+              ]
+            },
+            {
+              "text": "Trimester-specific ranges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenytoin or high-dose aspirin",
+          "cells": [
+            {
+              "text": "Displace T4, spuriously low total T4"
+            },
+            {
+              "text": "Free T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroiditis vs Graves",
+          "cells": [
+            {
+              "text": "Both thyrotoxic"
+            },
+            {
+              "text": "Low vs high radioiodine uptake; TRAb"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_gland_physiology_and_testing-treatment",
+      "kind": "treatment",
+      "title": "Acting on thyroid test results",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH as first test",
+          "cells": [
+            {
+              "text": "Screening and most follow-up"
+            },
+            {
+              "text": "Normal TSH excludes primary hypo- or hyperthyroidism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Free T4 with TSH",
+          "cells": [
+            {
+              "text": "Suspected pituitary or hypothalamic disease"
+            },
+            {
+              "text": "TSH alone misses central hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Free T3",
+          "cells": [
+            {
+              "text": "Suppressed TSH with normal free T4"
+            },
+            {
+              "text": "Detects T3 toxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TPO antibodies",
+          "cells": [
+            {
+              "text": "Suspected autoimmune thyroiditis"
+            },
+            {
+              "text": "Present in almost all Hashimoto"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TRAb or TSI",
+          "cells": [
+            {
+              "text": "Graves disease; pregnancy"
+            },
+            {
+              "text": "Over 3x ULN in third trimester predicts neonatal thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iodine-123 uptake and scan",
+          "cells": [
+            {
+              "text": "Cause of thyrotoxicosis"
+            },
+            {
+              "text": "High in Graves, low in thyroiditis or iodine excess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroglobulin",
+          "cells": [
+            {
+              "text": "Surveillance after thyroidectomy for cancer"
+            },
+            {
+              "text": "Check thyroglobulin antibodies, which interfere"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "TBG abnormality, dysalbuminaemia"
+            },
+            {
+              "text": "{{hy:Treating a binding-protein abnormality is harmful}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_gland_physiology_and_testing-dx-mgmt",
+      "title": "Diagnosis and management of thyroid function testing",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroid dysfunction",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pituitary or hypothalamic disease suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Measure TSH and free T4 together",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Measure TSH",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TSH normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Primary thyroid disease excluded",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "TSH low?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Free T4, then free T3 if free T4 normal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Thyrotoxicosis: TRAb and radioiodine uptake for cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Free T4 and TPO antibodies",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Primary or subclinical hypothyroidism by free T4",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

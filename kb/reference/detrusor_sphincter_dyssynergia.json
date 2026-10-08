@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for detrusor sphincter dyssynergia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "detrusor_sphincter_dyssynergia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-urodynamics with external sphincter EMG",
+          "cells": [
+            {
+              "text": "Confirms dyssynergia; symptoms or flow rate alone do not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and serial upper tract ultrasound",
+          "cells": [
+            {
+              "text": "Upper tract damage and hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy",
+          "cells": [
+            {
+              "text": "Structural outlet obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isotope renography",
+          "cells": [
+            {
+              "text": "Differential function and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spinal cord or brain",
+          "cells": [
+            {
+              "text": "The neurological lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "detrusor_sphincter_dyssynergia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anatomical bladder outlet obstruction",
+          "cells": [
+            {
+              "text": "Prostatic enlargement; outlet surgery offered without recognising dyssynergia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fowler's syndrome",
+          "cells": [
+            {
+              "text": "Impaired sphincter relaxation in young women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysfunctional voiding in neurologically intact patients",
+          "cells": [
+            {
+              "text": "No neurological lesion on examination or imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "detrusor_sphincter_dyssynergia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clean intermittent catheterisation",
+          "cells": [
+            {
+              "text": "Converts the bladder to a low-pressure reservoir, with antimuscarinics or a beta-3 agonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intradetrusor botulinum toxin",
+          "cells": [
+            {
+              "text": "Refractory detrusor overactivity and high storage pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outlet resistance reduction",
+          "cells": [
+            {
+              "text": "Alpha-blockers, sphincteric botulinum toxin, sphincterotomy or urethral stent in selected men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent urinary tract infection",
+          "cells": [
+            {
+              "text": "Treat and prevent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper tract protection",
+          "cells": [
+            {
+              "text": "Surveillance renal ultrasound, renal function and repeat urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying neurological cause",
+          "cells": [
+            {
+              "text": "Treated with the neurology team, for example in multiple sclerosis or spinal cord injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diversion or augmentation",
+          "cells": [
+            {
+              "text": "Refractory high-pressure disease threatening the kidneys"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "detrusor_sphincter_dyssynergia-dx-mgmt",
+      "title": "Diagnosis and management of Detrusor sphincter dyssynergia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected detrusor sphincter dyssynergia: neurogenic bladder with high pressures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising creatinine, hydronephrosis, high-grade reflux, urosepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat urosepsis or hydronephrosis and check for autonomic dysreflexia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-urodynamics with external sphincter EMG; renal function; upper tract ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does video-urodynamics confirm dyssynergia with high storage pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anatomical outlet obstruction, Fowler's syndrome or detrusor underactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clean intermittent catheterisation with an antimuscarinic or beta-3 agonist",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intradetrusor botulinum toxin for refractory high storage pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha-blockers or sphincter botulinum toxin to reduce outlet resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat and prevent recurrent urinary tract infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Upper tract surveillance with ultrasound, renal function and urodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With early diagnosis and low pressures most preserve renal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

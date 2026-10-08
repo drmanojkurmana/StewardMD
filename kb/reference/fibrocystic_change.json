@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for fibrocystic change."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ABC of Breast Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrocystic_change-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination correlated with menstrual timing",
+          "cells": [
+            {
+              "text": "Cyclical nodularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of dominant or focal areas",
+          "cells": [
+            {
+              "text": "Discrete lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy of discrete or suspicious lesion",
+          "cells": [
+            {
+              "text": "Histology and atypia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst aspiration for symptomatic cysts",
+          "cells": [
+            {
+              "text": "Bloodstained fluid for cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain chart documenting cyclical mastalgia",
+          "cells": [
+            {
+              "text": "Pattern of pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrocystic_change-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibroadenoma",
+          "cells": [
+            {
+              "text": "Discrete lump within nodular tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerosing adenosis presenting as a mass",
+          "cells": [
+            {
+              "text": "Mass-forming benign change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical mastalgia without a mass",
+          "cells": [
+            {
+              "text": "Pain without lump"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrocystic_change-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance once triple assessment excludes malignancy",
+          "cells": [
+            {
+              "text": "Aberration of normal development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bra, simple analgesia and topical NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain chart to guide persistent symptoms",
+          "cells": [
+            {
+              "text": "Documents the cyclical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of symptomatic cysts",
+          "cells": [
+            {
+              "text": "Cytology of bloodstained aspirate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Danazol or tamoxifen for severe refractory mastalgia",
+          "cells": [
+            {
+              "text": "Specialist supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy and risk-stratified surveillance",
+          "cells": [
+            {
+              "text": "Atypical hyperplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast surgery referral",
+          "cells": [
+            {
+              "text": "Dominant or persistent lumps"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrocystic_change-dx-mgmt",
+      "title": "Diagnosis and management of Fibrocystic change",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cyclical breast pain and nodularity, worst in the premenstrual phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dominant hard mass, single-duct discharge, skin dimpling, non-cyclical pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Breast surgery referral for dominant or fixed mass or bloody discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination with cycle timing; imaging; core biopsy if discrete; pain chart",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-proliferative nodular change with no discrete suspicious lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy the discrete lesion; consider fibroadenoma or carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance once triple assessment excludes malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive bra, analgesia and topical NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspiration of symptomatic cysts with cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Core biopsy and surveillance where atypia is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; cancer risk depends on the epithelial component",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

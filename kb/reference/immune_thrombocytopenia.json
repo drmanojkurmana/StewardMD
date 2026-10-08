@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for immune thrombocytopenia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hoffbrand's Essential Haematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "immune_thrombocytopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Isolated thrombocytopenia; clumping or blasts excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and hepatitis C serology",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Common variable immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody and autoimmune screen",
+          "cells": [
+            {
+              "text": "Lupus and other autoimmune causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori testing",
+          "cells": [
+            {
+              "text": "Secondary trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Coexisting anaemia, to detect Evans syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Atypical presentations or older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_thrombocytopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudothrombocytopenia",
+          "cells": [
+            {
+              "text": "EDTA-induced platelet clumping gives a spurious low count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplasia or marrow failure",
+          "cells": [
+            {
+              "text": "Older patient with apparently isolated thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_thrombocytopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild thrombocytopenia without significant bleeding; many need no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line",
+          "cells": [
+            {
+              "text": "Prednisolone or dexamethasone; intravenous immunoglobulin when a rapid platelet rise is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line",
+          "cells": [
+            {
+              "text": "Eltrombopag or romiplostim, rituximab, or splenectomy for chronic or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Life-threatening bleeding",
+          "cells": [
+            {
+              "text": "Combined platelet transfusion, intravenous immunoglobulin and intravenous corticosteroids, with tranexamic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Helicobacter pylori eradication; antiviral therapy for HIV or hepatitis C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precautions",
+          "cells": [
+            {
+              "text": "Avoid antiplatelet and anticoagulant drugs; contact-injury precautions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "immune_thrombocytopenia-dx-mgmt",
+      "title": "Diagnosis and management of immune thrombocytopenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Isolated thrombocytopenia with otherwise normal count and film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Headache or focal neurology, GI bleeding, extensive mucosal bleeding or haematuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Platelet transfusion, intravenous immunoglobulin, steroids and tranexamic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film for clumping, HIV, hepatitis C, immunoglobulins, ANA, H pylori, DAT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause excluded and no clumping or blasts?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat any secondary cause; consider marrow for atypical cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe if mild thrombocytopenia without significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prednisolone or dexamethasone first-line; intravenous immunoglobulin for rapid rise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eltrombopag, romiplostim, rituximab or splenectomy if chronic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Helicobacter pylori eradication and antiviral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid antiplatelet and anticoagulant drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Platelet count monitored for relapse; second-line options for chronic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for glioblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glioblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain with contrast and advanced sequences",
+          "cells": [
+            {
+              "text": "Perfusion and spectroscopy characterise the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology and molecular analysis of biopsy or resection tissue",
+          "cells": [
+            {
+              "text": "IDH and MGMT status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging or systemic imaging",
+          "cells": [
+            {
+              "text": "When metastasis is a differential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Performance status and comorbidity assessment",
+          "cells": [
+            {
+              "text": "Guides treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glioblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain metastasis",
+          "cells": [
+            {
+              "text": "Solitary enhancing lesion; systemic staging distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary CNS lymphoma",
+          "cells": [
+            {
+              "text": "High-dose steroids before biopsy can obscure the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral abscess",
+          "cells": [
+            {
+              "text": "Solitary enhancing lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glioblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "Reduces tumour burden and provides tissue for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy with temozolomide",
+          "cells": [
+            {
+              "text": "Adjuvant fractionated radiotherapy with concurrent and maintenance temozolomide, the standard combined-modality treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Dexamethasone for symptomatic peritumoural vasogenic oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs and VTE prophylaxis",
+          "cells": [
+            {
+              "text": "Seizure control; prothrombotic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular-guided therapy",
+          "cells": [
+            {
+              "text": "MGMT methylation and IDH status guide therapy; tumour-treating fields or bevacizumab at progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Corticosteroids and urgent neurosurgical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-oncology team",
+          "cells": [
+            {
+              "text": "Early integration of palliative and supportive care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glioblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Glioblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glioblastoma: enhancing brain lesion with rapid neurological decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised pressure or herniation, status epilepticus, haemorrhage)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for impending herniation or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with contrast, perfusion and spectroscopy, then biopsy with IDH and MGMT testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do histology and molecular analysis confirm glioblastoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metastasis, primary CNS lymphoma, abscess or lower-grade glioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection with tissue for diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fractionated radiotherapy with concurrent and maintenance temozolomide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic peritumoural oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Use MGMT and IDH status to guide therapy; palliative care integrated early",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Poor prognosis; median survival in months to a couple of years even with optimal therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

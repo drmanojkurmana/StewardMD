@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for epidermolytic ichthyosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epidermolytic_ichthyosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Epidermolytic hyperkeratosis: vacuolar degeneration with clumped keratin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of KRT1 and KRT10 (KRT2 for the superficial variant)",
+          "cells": [
+            {
+              "text": "Causative keratin variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological swabs",
+          "cells": [
+            {
+              "text": "Eroded or malodorous skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of palmoplantar involvement",
+          "cells": [
+            {
+              "text": "Helps localise the mutation (KRT1 or KRT10)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal monitoring of fluid balance, temperature and infection",
+          "cells": [
+            {
+              "text": "Neonatal barrier failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermolytic_ichthyosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Neonatal blistering must not be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermolysis bullosa",
+          "cells": [
+            {
+              "text": "Neonatal blistering that evolves into a chronic hyperkeratotic phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermolytic_ichthyosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal nursing",
+          "cells": [
+            {
+              "text": "Warm humidified environment, careful fluid and electrolyte balance, gentle barrier care and infection prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and keratolytics",
+          "cells": [
+            {
+              "text": "Urea, lactic acid or propylene glycol to reduce scaling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoid",
+          "cells": [
+            {
+              "text": "Acitretin used cautiously for severe hyperkeratosis; it can aggravate skin fragility and blistering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Antiseptic washes and targeted antibiotics guided by skin swabs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle skin and wound care",
+          "cells": [
+            {
+              "text": "Avoids friction and shearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KRT1/KRT10 inheritance, mosaic naevi, and risk of generalised disease in offspring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Dermatology and, in infancy, neonatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epidermolytic_ichthyosis-dx-mgmt",
+      "title": "Diagnosis and management of Epidermolytic ichthyosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Erythroderma and superficial blistering at birth, evolving to thick hyperkeratosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (barrier failure, dehydration, sepsis, rapidly spreading infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neonatal care for fluid, temperature and infection; treat sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for epidermolytic hyperkeratosis; KRT1 and KRT10 testing; swabs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Epidermolytic hyperkeratosis with a KRT1 or KRT10 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other congenital ichthyoses, epidermolysis bullosa or scalded skin syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emollients and keratolytics such as urea, lactic acid or propylene glycol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acitretin cautiously for severe hyperkeratosis; may aggravate fragility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseptic washes and targeted antibiotics guided by swabs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gentle skin care avoiding friction and shearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling, including risk of generalised disease in offspring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually gives way to a chronic, stable hyperkeratotic phenotype",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

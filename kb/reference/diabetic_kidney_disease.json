@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for diabetic kidney disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetic_kidney_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine albumin-to-creatinine ratio and serial eGFR",
+          "cells": [
+            {
+              "text": "Albuminuria and declining filtration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis with microscopy",
+          "cells": [
+            {
+              "text": "Active sediment suggests an alternative diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundoscopy",
+          "cells": [
+            {
+              "text": "Diabetic retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Kidney size and obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_kidney_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glomerulonephritis",
+          "cells": [
+            {
+              "text": "Active urinary sediment or haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membranous nephropathy",
+          "cells": [
+            {
+              "text": "Nephrotic-range proteinuria with hypoalbuminaemia and oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive uropathy",
+          "cells": [
+            {
+              "text": "Obstruction on renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_kidney_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Lowers intraglomerular pressure and reduces albuminuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Kidney and cardiovascular protection in albuminuric disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Finerenone (non-steroidal MRA)",
+          "cells": [
+            {
+              "text": "Further reduces albuminuria and cardiovascular risk in suitable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemia, blood pressure and lipids",
+          "cells": [
+            {
+              "text": "Optimise to achieve targets; manage overall cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial eGFR and albumin-to-creatinine ratio; watch potassium on RAS and MRA blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diet and complications",
+          "cells": [
+            {
+              "text": "Moderate sodium and protein; treat anaemia and mineral-bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology and renal replacement",
+          "cells": [
+            {
+              "text": "Atypical features or advancing disease; plan dialysis or transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetic_kidney_disease-dx-mgmt",
+      "title": "Diagnosis and management of Diabetic kidney disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diabetic kidney disease: albuminuria with declining eGFR in diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline, nephrotic range, active sediment, refractory BP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology review for rapid decline, active sediment or nephrotic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine albumin-to-creatinine ratio and eGFR; urinalysis; fundoscopy; renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is albuminuria present with no active sediment or alternative cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glomerulonephritis, membranous nephropathy, obstruction or nephrosclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or ARB to lower intraglomerular pressure and albuminuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add an SGLT2 inhibitor for kidney and cardiovascular protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider finerenone for residual albuminuria in suitable patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tight control of glucose, blood pressure, lipids and cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor eGFR, albuminuria and potassium on RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated, progresses to end-stage disease; cardiovascular mortality is high",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

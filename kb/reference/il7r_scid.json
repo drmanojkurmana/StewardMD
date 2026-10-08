@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for interleukin-7 receptor alpha deficiency scid."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "il7r_scid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subset flow cytometry",
+          "cells": [
+            {
+              "text": "T-B+NK+ pattern: T cells profoundly absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and antibody responses",
+          "cells": [
+            {
+              "text": "Interpreted against maternal IgG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell proliferation assays to mitogens",
+          "cells": [
+            {
+              "text": "Absent responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor repertoire analysis",
+          "cells": [
+            {
+              "text": "Markedly restricted diversity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IL7R gene sequencing",
+          "cells": [
+            {
+              "text": "Causative mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal T-cell engraftment evaluation",
+          "cells": [
+            {
+              "text": "Confounder of subset results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing of patient and family",
+          "cells": [
+            {
+              "text": "Transplant planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "il7r_scid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked (IL2RG) and JAK3 SCID",
+          "cells": [
+            {
+              "text": "Absent NK cells (T-B+NK-)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAG or Artemis deficiency",
+          "cells": [
+            {
+              "text": "B cells absent in these forms; present in IL-7R SCID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenosine deaminase deficiency",
+          "cells": [
+            {
+              "text": "Typically T-B-NK-"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete DiGeorge syndrome",
+          "cells": [
+            {
+              "text": "Athymia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "il7r_scid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Only curative treatment; ideally before infection supervenes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective measures",
+          "cells": [
+            {
+              "text": "Protective isolation; avoid all live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products",
+          "cells": [
+            {
+              "text": "Irradiated, CMV-negative, leucodepleted only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis",
+          "cells": [
+            {
+              "text": "Co-trimoxazole against Pneumocystis, with antifungal and antiviral cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Compensates for absent T-cell help and poor antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and counselling",
+          "cells": [
+            {
+              "text": "Aggressive infection treatment, nutrition, genetic counselling and newborn screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "il7r_scid-dx-mgmt",
+      "title": "Diagnosis and management of Interleukin-7 receptor alpha deficiency SCID",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with severe T lymphopenia, infections and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pneumocystis pneumonia, absent thymic shadow, erythroderma or hepatosplenomegaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent infection treatment, protective isolation; assess for graft-versus-host disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets, immunoglobulins, mitogen proliferation, IL7R sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "T-B+NK+ phenotype with IL7R variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider X-linked, JAK3, RAG or other SCID; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent allogeneic stem cell transplantation, the only cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protective isolation; no live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Irradiated, CMV-negative, leucodepleted blood products",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Co-trimoxazole, antifungal and antiviral cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Transplant offers the only cure; outcome depends on timing before infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

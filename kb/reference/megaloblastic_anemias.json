@@ -168,5 +168,514 @@
       "caption": "Overview comparison matrix for megaloblastic anemias."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "GPnotebook, Treatment of vitamin B12 deficiency (UK, BNF-based)",
+      "kind": "web",
+      "url": "https://gpnotebook.com/en-GB/pages/haematology/management/treatment-of-vitamin-b12-deficiency"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 105-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "megaloblastic_anemias-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of megaloblastic anaemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "MCV",
+          "unit": "fL",
+          "cells": [
+            {
+              "text": "Usually above 100 fL",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Coexisting iron deficiency can mask macrocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Oval macrocytes and hypersegmented neutrophils (more than 5 lobes)"
+            },
+            {
+              "text": "May be the only clue before anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum B12, deficient",
+          "unit": "pmol/L",
+          "cells": [
+            {
+              "text": "Usually below 74 pmol/L (100 ng/L)",
+              "op": "<",
+              "value": 74
+            },
+            {
+              "text": "Very low levels with cord disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum B12, borderline",
+          "unit": "pmol/L",
+          "cells": [
+            {
+              "text": "74 to 148 pmol/L (100 to 200 ng/L)",
+              "range": [
+                74,
+                148
+              ]
+            },
+            {
+              "text": "Confirm with methylmalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylmalonic acid",
+          "cells": [
+            {
+              "text": "Raised in B12 deficiency, normal in folate deficiency"
+            },
+            {
+              "text": "Falsely raised in renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Homocysteine",
+          "cells": [
+            {
+              "text": "Raised in both B12 and folate deficiency"
+            },
+            {
+              "text": "Nonspecific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell folate",
+          "cells": [
+            {
+              "text": "Reflects body folate stores"
+            },
+            {
+              "text": "False normal after transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pernicious anaemia tests",
+          "cells": [
+            {
+              "text": "Intrinsic factor and parietal cell antibodies, high gastrin, low pepsinogen I"
+            },
+            {
+              "text": "{{hy:Anti-IF antibodies can make serum B12 falsely normal in up to 50%}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "High LDH and bilirubin from ineffective erythropoiesis"
+            },
+            {
+              "text": "Weak positive DAT may mislead"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megaloblastic_anemias-ddx",
+      "kind": "ddx",
+      "title": "Causes of macrocytosis and megaloblastic change",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "B12 deficiency",
+          "cells": [
+            {
+              "text": "Neuropathy, subacute combined degeneration, autoimmune associations"
+            },
+            {
+              "text": "B12 and MMA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Folate deficiency",
+          "cells": [
+            {
+              "text": "Poor diet, alcohol, pregnancy, coeliac; stores last only 3 to 4 months"
+            },
+            {
+              "text": "Red cell folate; normal MMA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Antifolate or DNA synthesis drugs",
+          "cells": [
+            {
+              "text": "Antifolates such as methotrexate; DNA synthesis blockers: cytarabine, hydroxyurea, 6-mercaptopurine, AZT"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myelodysplasia or AML",
+          "cells": [
+            {
+              "text": "Megaloblastoid marrow refractory to vitamins"
+            },
+            {
+              "text": "Marrow with cytogenetics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Orotic aciduria or thiamine-responsive anaemia",
+          "cells": [
+            {
+              "text": "Rare inherited; responds to uridine or thiamine"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-megaloblastic macrocytosis",
+          "cells": [
+            {
+              "text": "Alcohol, liver disease, hypothyroidism, myeloma, smoking"
+            },
+            {
+              "text": "LFTs, TSH, film without hypersegmentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megaloblastic_anemias-treatment",
+      "kind": "treatment",
+      "title": "Treatment of B12 and folate deficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydroxocobalamin, neurological signs",
+          "cells": [
+            {
+              "text": "{{hy:B12 deficiency with neurological involvement}}"
+            },
+            {
+              "text": "1000 mcg IM alternate days until no further improvement, then every 2 months lifelong"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydroxocobalamin, no neurological signs",
+          "cells": [
+            {
+              "text": "Pernicious anaemia or malabsorption"
+            },
+            {
+              "text": "1000 mcg IM 3 times a week for 2 weeks, then every 3 months lifelong"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral cyanocobalamin",
+          "cells": [
+            {
+              "text": "Dietary deficiency or borderline levels"
+            },
+            {
+              "text": "50 to 150 mcg daily; recheck B12 and FBC at 2 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Folic acid with B12 replacement",
+          "cells": [
+            {
+              "text": "Anaemia from B12 deficiency"
+            },
+            {
+              "text": "5 mg PO daily for 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Never folate alone",
+          "cells": [
+            {
+              "text": "Untreated B12 deficiency"
+            },
+            {
+              "text": "Folate can let cord damage progress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate deficiency",
+          "cells": [
+            {
+              "text": "Confirmed folate deficiency with B12 replete"
+            },
+            {
+              "text": "Oral folic acid; correct diet and malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expected response",
+          "cells": [
+            {
+              "text": "After starting B12"
+            },
+            {
+              "text": "Reticulocytes peak about 1 week; anaemia resolves by about 8 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Watch during response",
+          "cells": [
+            {
+              "text": "Brisk early haematological response"
+            },
+            {
+              "text": "Hypokalaemia and rebound thrombocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pernicious anaemia surveillance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Screen thyroid and other autoimmune disease; gastric cancer risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "megaloblastic_anemias-dx-mgmt",
+      "title": "Diagnosis and management of megaloblastic anaemias",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Macrocytic anaemia or neuropathy with possible B12 or folate lack",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood film, serum B12, red cell folate, LFTs, TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Hypersegmented neutrophils or megaloblastic picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for alcohol, liver disease, hypothyroidism, MDS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "B12 low or borderline with raised MMA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Check IF antibodies; assess neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Neurological involvement?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IM hydroxocobalamin alternate days until plateau",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IM hydroxocobalamin 3 times a week for 2 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Folate low with normal B12?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oral folic acid; treat cause such as coeliac or diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Marrow exam for MDS or drug cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Lifelong maintenance; check potassium and reticulocytes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

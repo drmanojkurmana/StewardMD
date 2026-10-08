@@ -149,5 +149,341 @@
       "caption": "Overview comparison matrix for mueller-weiss syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mueller_weiss_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Lateral navicular compression and a comma-shaped deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of hindfoot alignment",
+          "cells": [
+            {
+              "text": "Paradoxical hindfoot varus rather than the flatfoot expected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Computed tomography",
+          "cells": [
+            {
+              "text": "Fragmentation and secondary joint involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnetic resonance imaging",
+          "cells": [
+            {
+              "text": "Confirms osteonecrosis and assesses adjacent joints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for navicular stress fracture",
+          "cells": [
+            {
+              "text": "Alternative cause of midfoot pain to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for inflammatory arthropathy",
+          "cells": [
+            {
+              "text": "Contributing factor where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mueller_weiss_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kohler disease",
+          "cells": [
+            {
+              "text": "Benign, self-limiting childhood navicular osteonecrosis; the adult navicular does not reconstitute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tarsal navicular stress fracture",
+          "cells": [
+            {
+              "text": "Fragmentation of the navicular can be mistaken for a simple stress fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior tibial tendon dysfunction",
+          "cells": [
+            {
+              "text": "Medial column collapse gives valgus; here the hindfoot drifts into varus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Midfoot osteoarthritis",
+          "cells": [
+            {
+              "text": "Talonavicular and naviculocuneiform degeneration follows navicular collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot neuroarthropathy of the midfoot",
+          "cells": [
+            {
+              "text": "Suggested by midfoot features in a patient with peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mueller_weiss_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Custom orthoses, rigid-soled footwear and activity modification to offload the midfoot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and immobilisation",
+          "cells": [
+            {
+              "text": "Non-steroidal anti-inflammatory drugs and immobilisation during painful flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Weight-bearing radiographs to monitor navicular collapse and secondary arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corrective arthrodesis",
+          "cells": [
+            {
+              "text": "Talonavicular, naviculocuneiform or triple fusion for progressive collapse; restores the medial column and corrects varus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hindfoot alignment",
+          "cells": [
+            {
+              "text": "Surgical restoration as part of reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing factors",
+          "cells": [
+            {
+              "text": "Assess and treat, such as inflammatory arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Foot and ankle orthopaedic surgeon when conservative measures fail"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mueller_weiss_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mueller-Weiss syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult midfoot or hindfoot pain with paradoxical hindfoot varus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive collapse, fixed deformity, Charcot features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to foot and ankle surgeon; progressive collapse may need arthrodesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs, CT and MRI to confirm navicular osteonecrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lateral navicular compression confirmed on radiographs and MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider navicular stress fracture or midfoot osteoarthritis; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Custom orthoses and rigid-soled footwear to offload the midfoot",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and immobilisation during painful flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial weight-bearing radiographs to monitor collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corrective arthrodesis for progressive collapse, restoring alignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Conservative care may control symptoms for a time; advanced disease needs fusion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

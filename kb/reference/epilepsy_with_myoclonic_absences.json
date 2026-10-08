@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for epilepsy with myoclonic absences."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification and clinical guidance on the epilepsy syndromes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epilepsy_with_myoclonic_absences-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-EEG with polygraphic EMG",
+          "cells": [
+            {
+              "text": "Time-locked myoclonias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray and genetic testing",
+          "cells": [
+            {
+              "text": "Chromosomal or genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "If progressive features emerge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability, which is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperventilation-activated EEG",
+          "cells": [
+            {
+              "text": "Provocation by hyperventilation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epilepsy_with_myoclonic_absences-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Childhood absence epilepsy",
+          "cells": [
+            {
+              "text": "Lacks the rhythmic bilateral myoclonic jerks; these are not simple typical absences"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lennox-Gastaut syndrome",
+          "cells": [
+            {
+              "text": "Emergence of tonic or atonic seizures suggests evolution to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epilepsy_with_myoclonic_absences-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Valproate with ethosuximide",
+          "cells": [
+            {
+              "text": "Broad-spectrum regimen; a common combination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lamotrigine",
+          "cells": [
+            {
+              "text": "Added for incomplete control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid seizure-aggravating drugs",
+          "cells": [
+            {
+              "text": "Carbamazepine, oxcarbazepine and phenytoin can worsen generalised seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting generalised tonic-clonic seizures",
+          "cells": [
+            {
+              "text": "Managed within the same regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and educational support",
+          "cells": [
+            {
+              "text": "Intellectual disability commonly accompanies the epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure precautions",
+          "cells": [
+            {
+              "text": "Hyperventilation can provoke attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Treatment response and evolution into other epileptic encephalopathies, with paediatric neurology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epilepsy_with_myoclonic_absences-dx-mgmt",
+      "title": "Diagnosis and management of Epilepsy with myoclonic absences",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Frequent absence seizures with rhythmic bilateral myoclonic jerks from about age 7",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cognitive decline, tonic or atonic seizures, drug-resistant seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Paediatric neurology review; consider evolution to Lennox-Gastaut syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-EEG with polygraphic EMG; MRI; chromosomal microarray and genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myoclonias time-locked to 3 Hz spike-wave on polygraphic EEG-EMG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider childhood absence epilepsy or another generalised syndrome; re-record",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Valproate with ethosuximide as the broad-spectrum regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add lamotrigine for incomplete control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid carbamazepine, oxcarbazepine and phenytoin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuropsychological and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Seizure precautions; hyperventilation can provoke attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable and often guarded; cognitive impairment is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

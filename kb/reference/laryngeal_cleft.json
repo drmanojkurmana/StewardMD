@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for laryngeal cleft."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngeal_cleft-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Rigid microlaryngoscopy and bronchoscopy with probing",
+          "cells": [
+            {
+              "text": "Interarytenoid cleft; the diagnostic gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Initial airway assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional endoscopic or videofluoroscopic swallow study",
+          "cells": [
+            {
+              "text": "Aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast swallow",
+          "cells": [
+            {
+              "text": "Tracheo-oesophageal anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated anomalies",
+          "cells": [
+            {
+              "text": "Syndromic associations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_cleft-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tracheo-oesophageal fistula",
+          "cells": [
+            {
+              "text": "Associated anomaly; defined on contrast swallow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Feeding symptoms attributed to reflux; definitive assessment still needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological (bulbar) dysphagia with aspiration",
+          "cells": [
+            {
+              "text": "Separated by swallow study"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_cleft-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Shallow interarytenoid clefts",
+          "cells": [
+            {
+              "text": "Conservative: thickened feeds and feeding modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deeper clefts",
+          "cells": [
+            {
+              "text": "Endoscopic or open surgical repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflux control",
+          "cells": [
+            {
+              "text": "Anti-reflux measures and acid suppression, to protect the airway and any repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow therapy",
+          "cells": [
+            {
+              "text": "Speech-and-language-led swallow therapy and adjusted feed consistency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent aspiration pneumonia",
+          "cells": [
+            {
+              "text": "Prompt antimicrobials and respiratory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-repair monitoring",
+          "cells": [
+            {
+              "text": "Serial swallow assessment, respiratory review and re-endoscopy to confirm healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Screen for tracheo-oesophageal fistula, VACTERL, Opitz-Frias and Pallister-Hall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngeal_cleft-dx-mgmt",
+      "title": "Diagnosis and management of Laryngeal cleft",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with feeding-related choking, cough, chest infections or cyanotic episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cyanosis with feeds, recurrent aspiration, severe stridor, deep cleft)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway protection for a deep cleft or severe respiratory distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rigid microlaryngoscopy and bronchoscopy with probing, swallow study, contrast swallow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does endoscopy under anaesthesia show a cleft on active probing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TOF, reflux, neurological dysphagia or vocal fold paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care for shallow clefts: thickened feeds and feed modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic or open surgical repair for deeper clefts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-reflux measures and acid suppression to protect the airway and repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech-and-language-led swallow therapy with adjusted consistency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial swallow assessment, respiratory review and re-endoscopy after repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Shallow clefts often do well; deep clefts carry substantial morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,307 @@
       "caption": "Overview comparison matrix for iodine deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iodine_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH and free thyroid hormones",
+          "cells": [
+            {
+              "text": "Thyroid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary iodine concentration",
+          "cells": [
+            {
+              "text": "Population and individual iodine status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound",
+          "cells": [
+            {
+              "text": "Goitre or nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal thyroid screening",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment",
+          "cells": [
+            {
+              "text": "Affected children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iodine_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital hypothyroidism",
+          "cells": [
+            {
+              "text": "Thyroid dysgenesis or dyshormonogenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goitre from goitrogen exposure",
+          "cells": [
+            {
+              "text": "Goitrogen exposure rather than iodine deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iodine_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Universal salt iodisation",
+          "cells": [
+            {
+              "text": "Population correction through iodised salt and supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy and lactation",
+          "cells": [
+            {
+              "text": "Iodine-containing supplements to protect fetal neurodevelopment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Levothyroxine replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longstanding or nodular goitre",
+          "cells": [
+            {
+              "text": "Gradual repletion to avoid iodine-induced thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Thyroid function tests and median urinary iodine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Large, compressive or obstructive goitre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iodine_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Iodine deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Goitre or hypothyroidism in a region with iodine-poor water and soil",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pregnancy, large compressive goitre, infant hypothyroidism or signs of cretinism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent thyroid replacement in infants; airway review for goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TSH, free thyroid hormones, urinary iodine, thyroid ultrasound, developmental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low urinary iodine with goitre or hypothyroidism confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autoimmune, congenital or goitrogen causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Universal salt iodisation and population supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iodine supplementation in pregnancy and lactation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Levothyroxine for established hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gradual repletion in longstanding or nodular goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgery for large compressive or obstructive goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Preventable condition; population monitoring with urinary iodine",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,296 @@
       "caption": "Overview comparison matrix for pemphigus vegetans."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pemphigus_vegetans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lesional biopsy for histopathology",
+          "cells": [
+            {
+              "text": "Suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perilesional biopsy for direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Intercellular IgG and C3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indirect immunofluorescence",
+          "cells": [
+            {
+              "text": "Circulating intercellular antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ELISA for desmoglein 1 and desmoglein 3",
+          "cells": [
+            {
+              "text": "Antibodies to desmoglein 1 and 3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swabs and culture",
+          "cells": [
+            {
+              "text": "Secondary bacterial or candidal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology",
+          "cells": [
+            {
+              "text": "Tests for secondary syphilis when vegetations suggest condylomata lata"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_vegetans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line therapy to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine, mycophenolate mofetil or rituximab for durable control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical treatment of vegetating plaques",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and antiseptic measures for flexural plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superinfection",
+          "cells": [
+            {
+              "text": "Treat secondary bacterial or candidal infection of macerated intertriginous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal care",
+          "cells": [
+            {
+              "text": "Oral care, analgesia and dietary modification for painful mucosal erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Anti-desmoglein antibody titres and complications of immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dermatology, with oral medicine input for mucosal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pemphigus_vegetans-dx-mgmt",
+      "title": "Diagnosis and management of pemphigus vegetans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vegetating flexural erosive plaques with suspected pemphigus vegetans",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extensive erosions, severe oral involvement, systemic infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: extensive erosions with fluid loss, sepsis or failed oral intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lesional biopsy for histology and perilesional direct immunofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biopsy and immunofluorescence show acantholysis with intercellular IgG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider condylomata lata, intertrigo or pyoderma vegetans; repeat the workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induce remission with systemic corticosteroids as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add azathioprine, mycophenolate mofetil or rituximab for durable control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat flexural plaques with topical corticosteroids and antiseptic measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat superinfection; provide oral care and analgesia for mucosal erosions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor anti-desmoglein titres and complications of immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Controllable with immunosuppression, but relapses are frequent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,285 @@
       "caption": "Overview comparison matrix for meier-gorlin syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meier_gorlin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or exome sequencing of pre-replication complex genes (ORC1, ORC4, ORC6, CDT1, CDC6, GMNN)",
+          "cells": [
+            {
+              "text": "Pre-replication complex gene variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Copy-number causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Knee radiographs",
+          "cells": [
+            {
+              "text": "Absent or hypoplastic patellae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological and ENT assessment",
+          "cells": [
+            {
+              "text": "Microtia and hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and endocrine evaluation",
+          "cells": [
+            {
+              "text": "Growth axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and feeding assessment in infancy",
+          "cells": [
+            {
+              "text": "Airway and feeding risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meier_gorlin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth hormone trial",
+          "cells": [
+            {
+              "text": "Where indicated; response in this primordial dwarfism is often limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and feeding support",
+          "cells": [
+            {
+              "text": "The main early risks in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microtia and hearing",
+          "cells": [
+            {
+              "text": "ENT and reconstructive input; audiological rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic assessment",
+          "cells": [
+            {
+              "text": "Absent or hypoplastic patellae and other skeletal problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Development monitoring",
+          "cells": [
+            {
+              "text": "Cognition is frequently near-normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance, with rarer dominant genotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric, endocrine, ENT and orthopaedic teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meier_gorlin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Meier-Gorlin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with microtia, absent or hypoplastic patellae and faltering growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway obstruction or apnoea, recurrent aspiration, or severe faltering growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure the airway and feeding; nutritional intervention for faltering growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome for pre-replication complex genes; microarray; knee radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pre-replication complex gene variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Seckel, Silver-Russell, Nager or CHARGE syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial of growth hormone where indicated; response is often limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Assess and support the airway and feeding in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ENT and reconstructive input for microtia; audiological rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic assessment for absent or hypoplastic patellae",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cognition often near-normal; genetic counselling and multidisciplinary follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

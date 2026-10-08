@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for early repolarisation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard cardiology and inherited cardiac conditions references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "early_repolarization_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "J-point elevation morphology and distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory and event monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia capture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Structural disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary assessment",
+          "cells": [
+            {
+              "text": "Ischaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and drug-provocation testing",
+          "cells": [
+            {
+              "text": "Other channelopathies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "early_repolarization_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Different ECG morphology and channelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pericarditis",
+          "cells": [
+            {
+              "text": "Diffuse ST elevation from inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothermia (Osborn J waves)",
+          "cells": [
+            {
+              "text": "Temperature-related J waves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "early_repolarization_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Secondary prevention after aborted sudden death or documented arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute electrical storm",
+          "cells": [
+            {
+              "text": "Isoprenaline infusion; quinidine for chronic suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Triggering ventricular ectopy in refractory arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Marked J-point elevation, horizontal or descending ST segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign pattern",
+          "cells": [
+            {
+              "text": "Reassure and avoid overtreatment of the isolated pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "High-risk or familial cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Inherited cardiac conditions clinic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "early_repolarization_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Early repolarisation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected early repolarisation syndrome: J-point elevation on ECG with syncope or arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (resuscitated arrest, polymorphic VT, family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardioverter-defibrillator assessment after aborted sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG morphology; ambulatory monitoring; echo and MRI; coronary assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a high-risk J-point pattern with arrhythmia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Benign isolated pattern: reassure; consider Brugada, pericarditis or ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cardioverter-defibrillator for survivors of aborted sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isoprenaline for acute electrical storm; quinidine for chronic suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risk-stratify by J-point height and ST segment shape",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure and avoid overtreating the isolated benign pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing and cascade screening in high-risk or familial cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated pattern carries very low risk; arrest survivors carry recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

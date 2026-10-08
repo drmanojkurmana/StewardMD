@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for fascioliasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fascioliasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serology (antibody detection)",
+          "cells": [
+            {
+              "text": "Key test in the acute pre-patent phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy with concentration",
+          "cells": [
+            {
+              "text": "Large operculated eggs in the chronic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile or duodenal aspirate examination",
+          "cells": [
+            {
+              "text": "Eggs when stool is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound, CT or MRI",
+          "cells": [
+            {
+              "text": "Migratory tracks (acute) or biliary flukes and dilatation (chronic)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fascioliasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Clonorchis or Opisthorchis (chronic phase)",
+          "cells": [
+            {
+              "text": "Other liver flukes; the egg and clinical picture must be compared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic or amoebic liver abscess",
+          "cells": [
+            {
+              "text": "Listed in the differential of acute hepatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary stones or cholangitis",
+          "cells": [
+            {
+              "text": "Other causes of obstructive jaundice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fascioliasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Triclabendazole",
+          "cells": [
+            {
+              "text": "First-line; effective against migratory larval and adult biliary flukes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitazoxanide",
+          "cells": [
+            {
+              "text": "Alternative where triclabendazole fails or resistance is suspected; Fasciola is unresponsive to praziquantel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic biliary treatment",
+          "cells": [
+            {
+              "text": "ERCP and antibiotics for obstruction and cholangitis in the chronic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and confirmation of cure",
+          "cells": [
+            {
+              "text": "Follow-up stool examination and serology; watch for resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid raw watercress and untreated water",
+          "cells": [
+            {
+              "text": "Public-health and veterinary measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Complicated biliary or ectopic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fascioliasis-dx-mgmt",
+      "title": "Diagnosis and management of Fascioliasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, right upper quadrant pain and eosinophilia after eating wild watercress",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute cholangitis, obstructive jaundice, severe acute-phase illness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat cholangitis with antibiotics and ERCP; hepatobiliary referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serology in the acute phase; stool or bile eggs in chronic phase; FBC; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fasciola antibodies or eggs in stool or bile confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other liver flukes, hepatitis, abscess or biliary stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Triclabendazole as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nitazoxanide where triclabendazole fails or resistance is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ERCP and antibiotics for biliary obstruction in the chronic phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool examination and serology to confirm cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Advise avoiding raw watercress and untreated water",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most respond to anthelmintic therapy; heavy chronic infection can cause biliary fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

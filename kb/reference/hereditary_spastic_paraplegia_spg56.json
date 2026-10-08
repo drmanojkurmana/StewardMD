@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hereditary spastic paraplegia type 56 (spg56)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg56-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Biallelic CYP2U1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain CT",
+          "cells": [
+            {
+              "text": "Basal ganglia calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Subclinical axonal neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and developmental assessment",
+          "cells": [
+            {
+              "text": "Development and cognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic work-up for mitochondrial and coenzyme Q markers",
+          "cells": [
+            {
+              "text": "Where a mitochondrial cause is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, phosphate and parathyroid screen",
+          "cells": [
+            {
+              "text": "Excludes metabolic calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg56-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary familial brain calcification",
+          "cells": [
+            {
+              "text": "Calcification pattern; SLC20A2 and PDGFB related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG35 (FA2H)",
+          "cells": [
+            {
+              "text": "Fatty-acid hydroxylase complicated form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG54, SPG28 and SPG46",
+          "cells": [
+            {
+              "text": "Other lipid-metabolism complicated HSPs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg56-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Baclofen or tizanidine",
+          "cells": [
+            {
+              "text": "Symptomatic antispasticity therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-dystonic therapy",
+          "cells": [
+            {
+              "text": "Trihexyphenidyl or another agent, for dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, stretching and orthoses",
+          "cells": [
+            {
+              "text": "Orthopaedic care included"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive support",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Basal ganglia calcification and neurological progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance, with carrier testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, rehabilitation and developmental services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg56-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia type 56 (SPG56)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spastic paraplegia with dystonia, basal ganglia calcification and cognitive decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive dystonia, cognitive decline, lost walking, or wide calcification?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology review for progressive dystonia; exclude metabolic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CYP2U1 panel or exome; brain CT; nerve studies; calcium and PTH; mitochondrial markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic CYP2U1 variants found, with familial brain calcification excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary familial brain calcification, SPG35, SPG54 or SPG11",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Baclofen or tizanidine for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-dystonic therapy such as trihexyphenidyl",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, stretching and orthoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance of basal ganglia calcification and neurological progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; calcification and movement surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

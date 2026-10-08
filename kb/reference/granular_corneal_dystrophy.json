@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for granular corneal dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granular_corneal_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy",
+          "cells": [
+            {
+              "text": "Discrete granular opacities with clear intervening stroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Masson trichrome histology",
+          "cells": [
+            {
+              "text": "Hyaline deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TGFBI genetic testing",
+          "cells": [
+            {
+              "text": "Subtype and combined granular-lattice disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congo red staining",
+          "cells": [
+            {
+              "text": "Coexistent amyloid in suspected type 2 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT",
+          "cells": [
+            {
+              "text": "Deposit depth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography and pachymetry",
+          "cells": [
+            {
+              "text": "Before surgical intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granular_corneal_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lattice corneal dystrophy",
+          "cells": [
+            {
+              "text": "Combined granular-lattice (Avellino) dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular corneal dystrophy",
+          "cells": [
+            {
+              "text": "Other corneal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cornea verticillata",
+          "cells": [
+            {
+              "text": "Drug-induced whorl keratopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granular_corneal_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Clear stroma between deposits preserves vision for many years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelial erosion care",
+          "cells": [
+            {
+              "text": "Lubricants, hypertonic saline, bandage contact lens and debridement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapeutic keratectomy",
+          "cells": [
+            {
+              "text": "Excimer laser for visually significant superficial deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoplasty",
+          "cells": [
+            {
+              "text": "Lamellar or penetrating for advanced deeper opacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence planning",
+          "cells": [
+            {
+              "text": "Deposits recur in grafts; repeat PTK or regrafting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid refractive laser surgery",
+          "cells": [
+            {
+              "text": "Can accelerate deposition, particularly in type 2 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; TGFBI testing and relative screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granular_corneal_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Granular corneal dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granular corneal dystrophy: discrete granular opacities with clear stroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (confluent central deposits, recurrent erosions, atypical progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for keratoplasty review for marked visual loss from confluent deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, TGFBI testing, Congo red staining and anterior segment OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TGFBI testing confirm the subtype, with amyloid excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lattice dystrophy, macular dystrophy, Reis-Bucklers or cornea verticillata",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe mildly affected eyes, as clear stroma preserves vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lubricants, hypertonic saline and bandage contact lens for erosions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excimer phototherapeutic keratectomy for visually significant deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lamellar or penetrating keratoplasty for advanced deeper opacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision often good for many years; progressive deposition may eventually need surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

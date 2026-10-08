@@ -169,5 +169,452 @@
       "caption": "Overview comparison matrix for pneumococcal disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP summary of ATS/IDSA CAP guideline, 2020",
+      "kind": "web",
+      "url": "https://www.aafp.org/pubs/afp/issues/2020/0715/p121.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 257-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumococcal_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing pneumococcal disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Comment"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Lobar or segmental consolidation; more than 1 lobe in about 30%",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "May be normal early or with dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in under 30% of pneumococcal pneumonia",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Indicated in severe CAP or prior MRSA or Pseudomonas risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum Gram stain and culture",
+          "cells": [
+            {
+              "text": "Lancet-shaped gram-positive diplococci"
+            },
+            {
+              "text": "Yield depends on quality and prior antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary pneumococcal antigen",
+          "cells": [
+            {
+              "text": "Detects cell-wall polysaccharide"
+            },
+            {
+              "text": "Use in severe CAP; unreliable in children and colonized settings"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CSF",
+          "cells": [
+            {
+              "text": "Turbid, high protein and WBC, low glucose; Gram stain, culture, antigen or PCR"
+            },
+            {
+              "text": "Meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe CAP (ATS/IDSA)",
+          "cells": [
+            {
+              "text": "1 major (ventilation, vasopressors) or 3 or more minor criteria"
+            },
+            {
+              "text": "Minor: BUN 20 mg/dL or more, confusion, RR 30 or more, PaO2/FiO2 250 or less, multilobar, temperature under 36 C, WBC under 4000, platelets under 100,000, hypotension needing fluids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leukopenia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 10% of cases",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "{{hy:Poor prognostic sign}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumococcal_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pneumococcal disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral pneumonia",
+          "cells": [
+            {
+              "text": "Gradual onset, myalgia, interstitial pattern"
+            },
+            {
+              "text": "Respiratory viral PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical pneumonia (Mycoplasma, Legionella)",
+          "cells": [
+            {
+              "text": "Extrapulmonary features; Legionella with diarrhea, hyponatremia"
+            },
+            {
+              "text": "Legionella urine antigen, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal or Klebsiella pneumonia",
+          "cells": [
+            {
+              "text": "Cavitation, post-influenza or alcohol use"
+            },
+            {
+              "text": "Sputum and blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocystis pneumonia",
+          "cells": [
+            {
+              "text": "HIV or immunosuppression, bilateral interstitial infiltrates"
+            },
+            {
+              "text": "Induced sputum or BAL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myocardial infarction or heart failure",
+          "cells": [
+            {
+              "text": "Chest pain, edema, raised BNP"
+            },
+            {
+              "text": "ECG, troponin, echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute abdomen",
+          "cells": [
+            {
+              "text": "Lower-lobe pneumonia refers pain to upper abdomen"
+            },
+            {
+              "text": "Chest radiograph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Round consolidation that fails to clear"
+            },
+            {
+              "text": "Follow-up imaging, bronchoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcal meningitis",
+          "cells": [
+            {
+              "text": "Petechial rash, clinically similar meningitis"
+            },
+            {
+              "text": "CSF Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumococcal_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating pneumococcal pneumonia and invasive disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amoxicillin 1 g every 8 h or doxycycline 100 mg every 12 h",
+          "cells": [
+            {
+              "text": "Healthy outpatient with CAP"
+            },
+            {
+              "text": "Macrolide only where pneumococcal macrolide resistance under 25%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amoxicillin-clavulanate or cephalosporin plus macrolide or doxycycline, or respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Outpatient with comorbidities"
+            },
+            {
+              "text": "Levofloxacin 750 mg daily or moxifloxacin 400 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-lactam plus macrolide, or respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Inpatient, non-severe or severe"
+            },
+            {
+              "text": "Ceftriaxone 1 to 2 g IV daily plus azithromycin 500 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Penicillin or ceftriaxone when susceptible",
+          "cells": [
+            {
+              "text": "Confirmed pneumococcus"
+            },
+            {
+              "text": "De-escalate to culture results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vancomycin plus third-generation cephalosporin with dexamethasone",
+          "cells": [
+            {
+              "text": "Suspected pneumococcal meningitis"
+            },
+            {
+              "text": "Dexamethasone cuts neurologic sequelae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "CAP"
+            },
+            {
+              "text": "At least 5 days and until clinically stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Empyema or persistent fever with effusion after 4 to 5 days"
+            },
+            {
+              "text": "Pleural fluid pH and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination and penicillin prophylaxis",
+          "cells": [
+            {
+              "text": "At-risk groups, asplenia"
+            },
+            {
+              "text": "Conjugate and polysaccharide vaccines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Older Table 257-4 lists macrolide or doxycycline monotherapy as first line for healthy outpatients; ATS/IDSA 2019 prefers amoxicillin and limits macrolides to areas with resistance under 25%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumococcal_disease-dx-mgmt",
+      "title": "Diagnosis and management of pneumococcal pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, cough, consolidation, or meningitis signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Meningitis features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Blood cultures, LP; vancomycin plus ceftriaxone with dexamethasone",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; assess ATS/IDSA severity",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe CAP (1 major or 3 or more minor)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "ICU; cultures, urinary antigens; beta-lactam plus macrolide or FQ",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Needs admission?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Ward: beta-lactam plus macrolide, or respiratory FQ",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Outpatient: amoxicillin or doxycycline; 5 days minimum",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

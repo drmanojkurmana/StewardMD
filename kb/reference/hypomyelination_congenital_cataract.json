@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for hypomyelination with congenital cataract (fam126a)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypomyelination_congenital_cataract-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Confirms and characterises the cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypomyelination with periventricular white matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FAM126A sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes treatable causes of infantile cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and physiotherapy assessment",
+          "cells": [
+            {
+              "text": "Guides rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomyelination_congenital_cataract-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marinesco-Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Cataract with ataxia and myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrotendinous xanthomatosis",
+          "cells": [
+            {
+              "text": "Juvenile cataract with neurological decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cataract with metabolic disease",
+          "cells": [
+            {
+              "text": "Galactosaemia, peroxisomal disorders and Lowe syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomyelination_congenital_cataract-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early cataract surgery",
+          "cells": [
+            {
+              "text": "Preserves vision and prevents deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity",
+          "cells": [
+            {
+              "text": "Physiotherapy, orthoses and baclofen; botulinum toxin for focal spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy care",
+          "cells": [
+            {
+              "text": "Rehabilitation, orthotics, gait and foot care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Neurorehabilitation using relatively preserved cognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Contractures, scoliosis and mobility decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive FAM126A disorder; test at-risk siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypomyelination_congenital_cataract-dx-mgmt",
+      "title": "Diagnosis and management of Hypomyelination with congenital cataract (FAM126A)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital or early-infantile cataract with delayed motor milestones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dense cataract threatening amblyopia, regression or dysphagia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology referral for cataract surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ophthalmology, brain MRI, nerve conduction, FAM126A sequencing, metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FAM126A variant confirmed with leukodystrophy on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude metabolic cataract causes and other leukodystrophies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early cataract surgery to prevent deprivation amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, orthoses and baclofen for progressive spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathy rehabilitation, orthotics and foot care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor contractures, scoliosis and mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision preserved by early surgery; mobility managed as disease progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

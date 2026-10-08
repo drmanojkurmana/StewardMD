@@ -177,5 +177,449 @@
       "caption": "Overview comparison matrix for acute meningitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Bacterial Meningitis",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 381-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_meningitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "CSF and other findings in acute bacterial meningitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF white cells",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Neutrophilic, above 100 in 90%",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Lymphocytic in viral, mixed in TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Below 40, or CSF/serum ratio below 0.4 (about 60%)",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "{{hy:18 or less, or ratio below 0.23, strongly suggests bacterial}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF protein",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Above 0.45 in 90%",
+              "op": ">",
+              "value": 0.45
+            },
+            {
+              "text": "Usually 100 to 500 mg/dL in bacterial meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opening pressure",
+          "unit": "mm H2O",
+          "cells": [
+            {
+              "text": "Above 180 in 90%",
+              "op": ">",
+              "value": 180
+            },
+            {
+              "text": "Raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Gram stain positive in over 60; culture in 70 to 80"
+            },
+            {
+              "text": "Culture needed for susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiplex CSF PCR",
+          "cells": [
+            {
+              "text": "Bacteria plus HSV, enterovirus, VZV"
+            },
+            {
+              "text": "Does not replace culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging before LP",
+          "cells": [
+            {
+              "text": "Papilloedema, focal deficit or seizure, mass, stroke, suspected abscess, obtundation"
+            },
+            {
+              "text": "Give antibiotics before imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Immediately"
+            },
+            {
+              "text": "Before antibiotics where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_meningitis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of acute bacterial meningitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral meningitis or HSV encephalitis",
+          "cells": [
+            {
+              "text": "Lymphocytic CSF, normal glucose; altered behaviour in HSV"
+            },
+            {
+              "text": "CSF PCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "Subacute; mixed cells, low glucose"
+            },
+            {
+              "text": "CSF PCR (about 50% sensitive) and culture up to 8 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fungal meningitis (Cryptococcus)",
+          "cells": [
+            {
+              "text": "Subacute; lymphocytic, low glucose"
+            },
+            {
+              "text": "Fungal studies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "{{hy:Major non-infectious mimic; thunderclap onset}}"
+            },
+            {
+              "text": "CT, then LP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain abscess or subdural empyema",
+          "cells": [
+            {
+              "text": "Focal signs"
+            },
+            {
+              "text": "Imaging before LP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rickettsial disease",
+          "cells": [
+            {
+              "text": "Rash and exposure"
+            },
+            {
+              "text": "Clinical and serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_meningitis-treatment",
+      "kind": "treatment",
+      "title": "Empirical and adjunctive treatment of bacterial meningitis",
+      "rowHeader": "Option",
+      "columns": [
+        "Indication",
+        "Antibiotics or regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Preterm to under 1 month",
+          "cells": [
+            {
+              "text": "Neonates"
+            },
+            {
+              "text": "Ampicillin plus cefotaxime"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Infants 1 to 3 months",
+          "cells": [
+            {
+              "text": "Young infants"
+            },
+            {
+              "text": "Ampicillin plus cefotaxime or ceftriaxone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Over 3 months to adults under 55",
+          "cells": [
+            {
+              "text": "Immunocompetent"
+            },
+            {
+              "text": "{{hy:Cefotaxime, ceftriaxone or cefepime plus vancomycin}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Over 55, alcoholism or debility",
+          "cells": [
+            {
+              "text": "Listeria risk"
+            },
+            {
+              "text": "Ampicillin plus cefotaxime, ceftriaxone or cefepime plus vancomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hospital-acquired, post-trauma or neurosurgery, neutropenia, impaired cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Gram-negative and resistant organisms"
+            },
+            {
+              "text": "Ampicillin plus ceftazidime or meropenem plus vancomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adult IV doses",
+          "cells": [
+            {
+              "text": "Normal renal function"
+            },
+            {
+              "text": "Ceftriaxone 2 g every 12 h; vancomycin 10 to 15 mg/kg every 8 h; ampicillin 2 to 3 g every 4 h; meropenem 2 g every 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "Before or with first antibiotic dose"
+            },
+            {
+              "text": "Adults 10 mg IV, children 0.15 mg/kg, every 6 h for 4 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Meningococcal contact prophylaxis",
+          "cells": [
+            {
+              "text": "Close contacts"
+            },
+            {
+              "text": "Rifampicin 600 mg every 12 h for 4 doses, or ceftriaxone 250 mg IM once, or ciprofloxacin 500 mg once"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Mortality about 21% in adults even with antibiotics."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_meningitis-dx-mgmt",
+      "title": "Diagnosis and management of acute bacterial meningitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, headache, neck stiffness or altered mentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood cultures immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Papilloedema, focal signs, seizures, obtundation or immunocompromise?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dexamethasone and empirical antibiotics, then CT before LP",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Lumbar puncture, then dexamethasone and empirical antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Choose regimen by age and risk group",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "CSF bacterial pattern or organism found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Narrow antibiotics to organism; notify public health; contact prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Lymphocytic CSF: consider viral, HSV, TB or fungal causes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

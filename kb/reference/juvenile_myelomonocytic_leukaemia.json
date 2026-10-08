@@ -149,5 +149,307 @@
       "caption": "Overview comparison matrix for juvenile myelomonocytic leukaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / paediatric haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_myelomonocytic_leukaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Monocytosis and immature cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination with cytogenetics",
+          "cells": [
+            {
+              "text": "Monosomy 7 assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAS-pathway mutation analysis",
+          "cells": [
+            {
+              "text": "PTPN11, NRAS, KRAS, NF1 and CBL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for NF1 and Noonan syndrome",
+          "cells": [
+            {
+              "text": "RASopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of infective mimics",
+          "cells": [
+            {
+              "text": "Reactive monocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_myelomonocytic_leukaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral or other infection with hepatosplenomegaly",
+          "cells": [
+            {
+              "text": "Reactive monocytosis; excluded by infective work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noonan-syndrome-associated myeloproliferative disorder",
+          "cells": [
+            {
+              "text": "Often transient"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_myelomonocytic_leukaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Curative intent",
+          "cells": [
+            {
+              "text": "Centred on transplant rather than chemotherapy alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical JMML",
+          "cells": [
+            {
+              "text": "Allogeneic haematopoietic stem cell transplant as principal curative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CBL and Noonan-associated JMML",
+          "cells": [
+            {
+              "text": "Watchful waiting may suit indolent courses once genotype confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF1-associated JMML",
+          "cells": [
+            {
+              "text": "Transplant as mainstay alongside NF1 management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-transplant cytoreduction",
+          "cells": [
+            {
+              "text": "Hypomethylating agent or low-intensity chemotherapy; not definitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant referral",
+          "cells": [
+            {
+              "text": "Early referral; do not delay for cytoreduction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_myelomonocytic_leukaemia-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile myelomonocytic leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young child with hepatosplenomegaly, monocytosis and cytopenias, often with rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising white count, progressive cytopenias, respiratory compromise or transformation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric haematology review; transplant referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film, marrow with cytogenetics, RAS-pathway panel, NF1 and Noonan assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical RAS-driven JMML confirmed with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reactive infection or an indolent CBL or Noonan course; monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allogeneic stem cell transplant as principal curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hypomethylating agent or low-intensity chemotherapy for cytoreduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NF1-associated JMML: transplant with NF1 management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CBL or Noonan: watchful waiting may suit indolent courses",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Early transplant referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Transplant offers cure for typical disease; indolent genotypes need monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -166,5 +166,491 @@
       "caption": "Overview comparison matrix for menopause and postmenopausal hormone therapy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Menopause",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 347-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "menopause_and_postmenopausal_hormone_thera-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of menopause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Menopause",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "12 months without menses, no other cause",
+              "op": ">=",
+              "value": 12
+            },
+            {
+              "text": "{{hy:Clinical, retrospective diagnosis}}; average age about 51"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Premature and early menopause",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Premature under 40 years; early 40 to 45",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Suspect primary ovarian insufficiency under 40"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early menopausal transition (STRAW+10)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Persistent 7 day or more difference in cycle length",
+              "op": ">=",
+              "value": 7
+            },
+            {
+              "text": "Cycle history is the main criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late menopausal transition",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Amenorrhoea of 60 days or more",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Random FSH above 25 IU/L is typical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FSH testing",
+          "cells": [
+            {
+              "text": "Rarely needed; levels fluctuate"
+            },
+            {
+              "text": "Useful after hysterectomy or at young age; needs repeated high values"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Perimenopause",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Starts 2 to 8 years before final period, mean about 4",
+              "range": [
+                2,
+                8
+              ]
+            },
+            {
+              "text": "Smoking brings it forward about 2 years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone assessment",
+          "cells": [
+            {
+              "text": "BMD and FRAX 10-year fracture risk"
+            },
+            {
+              "text": "25-OH vitamin D 50 nmol/L or more is sufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abnormal bleeding",
+          "cells": [
+            {
+              "text": "Heavy or unscheduled bleeding"
+            },
+            {
+              "text": "Transvaginal ultrasound and endometrial biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menopause_and_postmenopausal_hormone_thera-ddx",
+      "kind": "ddx",
+      "title": "Conditions mistaken for the menopausal transition",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Amenorrhoea in the forties"
+            },
+            {
+              "text": "hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary ovarian insufficiency",
+          "cells": [
+            {
+              "text": "Ovarian failure before age 40"
+            },
+            {
+              "text": "Repeated FSH, karyotype as needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroid disease",
+          "cells": [
+            {
+              "text": "Flushing, heat intolerance, cycle change"
+            },
+            {
+              "text": "TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety or panic disorder",
+          "cells": [
+            {
+              "text": "Episodic sweating with fear and palpitations"
+            },
+            {
+              "text": "Clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial hyperplasia or cancer",
+          "cells": [
+            {
+              "text": "Heavy or irregular bleeding"
+            },
+            {
+              "text": "Endometrial biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroids or polyps",
+          "cells": [
+            {
+              "text": "Heavy bleeding with structural lesion"
+            },
+            {
+              "text": "Saline sonography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menopause_and_postmenopausal_hormone_thera-treatment",
+      "kind": "treatment",
+      "title": "Treatment of menopausal symptoms",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic oestrogen",
+          "cells": [
+            {
+              "text": "{{hy:Most effective for hot flashes; best under 60 or within 10 years of menopause}}"
+            },
+            {
+              "text": "Start estradiol 0.5 mg PO daily or conjugated oestrogen 0.3 mg daily; patch 0.014 to 0.375 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add progestogen",
+          "cells": [
+            {
+              "text": "Intact uterus"
+            },
+            {
+              "text": "Micronized progesterone 100 mg continuous or 200 mg sequential; or MPA 2.5 mg continuous; or LNG IUD 52 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transdermal route",
+          "cells": [
+            {
+              "text": "Higher thrombotic risk"
+            },
+            {
+              "text": "Lower VTE and gallbladder risk than oral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose vaginal oestrogen",
+          "cells": [
+            {
+              "text": "Genitourinary syndrome"
+            },
+            {
+              "text": "Estradiol tablet 4 or 10 mcg, ring 7.5 mcg or cream 0.5 mg; no progestogen needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonhormonal: gabapentin",
+          "cells": [
+            {
+              "text": "HT contraindicated or declined"
+            },
+            {
+              "text": "300 mg up to three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonhormonal: SSRI, SNRI, oxybutynin, fezolinetant",
+          "cells": [
+            {
+              "text": "HT contraindicated or declined"
+            },
+            {
+              "text": "Fezolinetant needs liver tests at baseline and every 3 months for 9 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid HT",
+          "cells": [
+            {
+              "text": "Breast cancer, stroke, CAD, prior VTE, active liver disease, undiagnosed bleeding"
+            },
+            {
+              "text": "Stop at once for acute coronary event or stroke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bone protection",
+          "cells": [
+            {
+              "text": "Osteoporosis or high FRAX"
+            },
+            {
+              "text": "Exercise, calcium, vitamin D, bisphosphonate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Contraindications are taken from the oral contraceptive table (347-6) and Merck; Merck names no fixed maximum duration of HT."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "menopause_and_postmenopausal_hormone_thera-dx-mgmt",
+      "title": "Diagnosis and management of menopause",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Woman around 45 to 55 with cycle change or hot flashes",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Under 40, or abnormal or heavy bleeding?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Exclude pregnancy, thyroid disease; test for POI or biopsy endometrium",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis by cycle history; FSH rarely needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Troublesome vasomotor symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Contraindication: breast cancer, VTE, stroke, CAD?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Nonhormonal: SSRI or SNRI, gabapentin, fezolinetant",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Under 60 or within 10 years of menopause?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Uterus present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Oestrogen plus progestogen; review yearly",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oestrogen alone; review yearly",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifestyle, bone and CV risk care; vaginal oestrogen if GSM",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

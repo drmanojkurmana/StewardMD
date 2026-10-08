@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for familial medullary thyroid carcinoma (ret)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_medullary_thyroid_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcitonin, including stimulated testing",
+          "cells": [
+            {
+              "text": "Principal tumour marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoembryonic antigen",
+          "cells": [
+            {
+              "text": "Tumour burden monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Thyroid nodules and cervical lymphadenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines",
+          "cells": [
+            {
+              "text": "Phaeochromocytoma excluded before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and PTH",
+          "cells": [
+            {
+              "text": "Parathyroid involvement in MEN2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RET gene sequencing with codon-specific risk classification",
+          "cells": [
+            {
+              "text": "Causative variant and risk category"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_medullary_thyroid_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "MEN2A with phaeochromocytoma and hyperparathyroidism",
+          "cells": [
+            {
+              "text": "This condition is a variant of MEN2A without those tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic medullary thyroid carcinoma",
+          "cells": [
+            {
+              "text": "RET testing separates the familial form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papillary or follicular thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Calcitonin marker is the discriminator"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_medullary_thyroid_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Total thyroidectomy",
+          "cells": [
+            {
+              "text": "Prophylactic timing guided by RET codon risk, or therapeutic surgery with lymph-node dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metanephrine measurement before surgery",
+          "cells": [
+            {
+              "text": "Excludes phaeochromocytoma to avoid a hypertensive crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong levothyroxine",
+          "cells": [
+            {
+              "text": "After thyroidectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective RET kinase inhibitor",
+          "cells": [
+            {
+              "text": "Selpercatinib or pralsetinib for advanced, progressive or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcitonin and CEA surveillance",
+          "cells": [
+            {
+              "text": "Detects residual or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RET testing and cascade screening",
+          "cells": [
+            {
+              "text": "Genotype-directed prophylactic thyroidectomy in relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Endocrinology, endocrine surgery and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_medullary_thyroid_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Familial medullary thyroid carcinoma (RET)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thyroid nodule with raised calcitonin, or a family history of medullary thyroid cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapidly rising calcitonin or CEA, fixed mass, nodes, metastatic disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude phaeochromocytoma before any thyroid surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcitonin and CEA; neck ultrasound; metanephrines; calcium and PTH; RET sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Medullary carcinoma with pathogenic RET variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic medullary, papillary or follicular carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Total thyroidectomy, prophylactic or therapeutic by RET risk category",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metanephrine measurement before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong levothyroxine after thyroidectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Selective RET inhibitor for advanced or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade RET testing and genotype-directed surgery in relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with early genotype-guided thyroidectomy; cure is achievable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -155,5 +155,492 @@
       "caption": "Overview comparison matrix for hiv/aids."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO Fact Sheet, HIV and AIDS",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/hiv-aids"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Tables 189-11, 189-23 and 189-24",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hiv_aids-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging HIV",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or test",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute retroviral syndrome",
+          "cells": [
+            {
+              "text": "Mononucleosis-like illness: fever, sore throat (about half), rash on upper trunk, nodes"
+            },
+            {
+              "text": "Antibody may still be negative; check viral load or p24"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marker sequence",
+          "cells": [
+            {
+              "text": "HIV RNA first, then p24 antigen, then antibody"
+            },
+            {
+              "text": "Fourth-generation Ag/Ab assay shortens window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibody window",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Antibodies usually within 28 days",
+              "op": "<=",
+              "value": 28
+            },
+            {
+              "text": "Retest after 28 days if recent exposure and negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "No single test confirms HIV"
+            },
+            {
+              "text": "Supplemental assay; retest before starting ART"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infants under 18 months",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Virological testing from birth or 6 weeks",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "Rapid antibody tests insufficient"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Advanced HIV disease",
+          "unit": "cells/mm3",
+          "cells": [
+            {
+              "text": "{{hy:CD4 below 200 cells/mm3 or WHO stage 3 or 4 event}}",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "All children under 5 with HIV count as advanced"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CD4 below 200 cells/uL",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Opportunistic infection risk rises",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "PCP, toxoplasmosis, cryptococcus, MAC, CMV; start prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline before ART",
+          "cells": [
+            {
+              "text": "Genotypic resistance test, hepatitis B and C, tuberculosis screen"
+            },
+            {
+              "text": "Guides regimen and co-infection care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hiv_aids-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute HIV infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "EBV infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Exudative pharyngitis, atypical lymphocytes, splenomegaly"
+            },
+            {
+              "text": "Heterophile antibody, EBV serology, HIV RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute CMV infection",
+          "cells": [
+            {
+              "text": "Mononucleosis-like, often less pharyngitis"
+            },
+            {
+              "text": "CMV IgM, HIV RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary syphilis",
+          "cells": [
+            {
+              "text": "Palms and soles rash, mucous patches"
+            },
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal or viral pharyngitis",
+          "cells": [
+            {
+              "text": "Sore throat predominant"
+            },
+            {
+              "text": "Rapid strep test; HIV testing if risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug hypersensitivity",
+          "cells": [
+            {
+              "text": "Fever and morbilliform rash after new drug"
+            },
+            {
+              "text": "Drug history, HIV testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hiv_aids-treatment",
+      "kind": "treatment",
+      "title": "Managing HIV infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Combination ART for all",
+          "cells": [
+            {
+              "text": "{{hy:All people with HIV regardless of CD4}}"
+            },
+            {
+              "text": "Lifelong, aiming for undetectable viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "On ART"
+            },
+            {
+              "text": "Viral load and CD4 count; undetectable means no sexual transmission (U=U)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Change ART",
+          "cells": [
+            {
+              "text": "Less than 1-log drop in HIV RNA by 4 weeks, threefold rise from nadir, falling CD4, clinical deterioration, side effects"
+            },
+            {
+              "text": "Repeat resistance testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "OI prophylaxis",
+          "cells": [
+            {
+              "text": "CD4 below 200 cells/uL"
+            },
+            {
+              "text": "Co-trimoxazole against Pneumocystis and toxoplasmosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IRIS",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Weeks to months after ART, most common with CD4 under 50/uL, often with TB",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Paradoxical worsening; can be fatal; do not label as ART failure"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pre-exposure prophylaxis for partners",
+          "cells": [
+            {
+              "text": "HIV-negative people at risk"
+            },
+            {
+              "text": "Oral tenofovir-based PrEP, dapivirine ring, long-acting cabotegravir or lenacapavir"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Co-infection care",
+          "cells": [
+            {
+              "text": "Hepatitis B, hepatitis C, tuberculosis"
+            },
+            {
+              "text": "Screen, vaccinate and treat"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The Tables PDF (older Harrison Table 189-23) lists ART initiation for asymptomatic patients with CD4 below 500/uL; current Harrison 22e and WHO practice is to treat everyone regardless of CD4. Both kept; follow current guidance. Specific ART regimens and doses are not stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hiv_aids-dx-mgmt",
+      "title": "Diagnosis and management of HIV infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Risk exposure, mononucleosis-like illness, or routine screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fourth-generation HIV Ag/Ab test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Reactive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Possible acute infection (recent exposure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "HIV RNA now; repeat antibody test after 28 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "HIV negative; offer PrEP if ongoing risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supplemental confirmation, viral load, CD4, resistance test",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "CD4 below 200 or stage 3 or 4 event?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advanced disease: OI screen and co-trimoxazole prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Start combination ART promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Viral load suppressed on follow-up?",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue ART; U=U; monitor yearly comorbidities",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Check adherence, resistance; change regimen",
+          "cite": "c3"
+        },
+        {
+          "id": "n14",
+          "type": "decision",
+          "text": "HIV RNA detected or later antibody positive?",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n14",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n14",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

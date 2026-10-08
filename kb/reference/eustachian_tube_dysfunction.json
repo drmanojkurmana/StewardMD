@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for eustachian tube dysfunction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eustachian_tube_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy or microscopy",
+          "cells": [
+            {
+              "text": "Tympanic membrane; effusion or retraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Middle-ear pressure and effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy and nasopharyngeal examination",
+          "cells": [
+            {
+              "text": "Essential in persistent unilateral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of nasopharynx and skull base",
+          "cells": [
+            {
+              "text": "Where a mass is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eustachian_tube_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasopharyngeal carcinoma or mass",
+          "cells": [
+            {
+              "text": "Persistent unilateral effusion in an adult requires its exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patulous eustachian tube",
+          "cells": [
+            {
+              "text": "Autophony from an abnormally open tube; managed differently from obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholesteatoma",
+          "cells": [
+            {
+              "text": "Progressive retraction pocket heralds it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eustachian_tube_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intranasal corticosteroids and antihistamines",
+          "cells": [
+            {
+              "text": "Contributing nasal factors, allergic rhinitis, and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoinflation and pressure-equalisation manoeuvres",
+          "cells": [
+            {
+              "text": "Opens the tube and ventilates the middle ear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon tuboplasty or ventilation tubes",
+          "cells": [
+            {
+              "text": "Persistent obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of effusion and retraction",
+          "cells": [
+            {
+              "text": "Watches for retraction pockets and cholesteatoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and imaging",
+          "cells": [
+            {
+              "text": "Excludes a nasopharyngeal mass in persistent unilateral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patulous form management",
+          "cells": [
+            {
+              "text": "Nasal saline, weight restoration, and avoidance of decongestants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eustachian_tube_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Eustachian tube dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aural fullness and muffled hearing that worsen with pressure change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (persistent unilateral effusion in an adult, cranial nerve deficit, neck mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nasopharyngeal examination and imaging to exclude carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, tympanometry, audiometry and nasal endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Obstructive pattern with effusion or negative pressure and no mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Patulous tube, third-window disorder or cholesteatoma: manage differently",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat nasal factors: intranasal steroid, antihistamine, reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Autoinflation and pressure-equalisation manoeuvres",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Balloon tuboplasty or grommets for persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor effusion, retraction and cholesteatoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many self-limiting or improve; a subset develops chronic effusion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

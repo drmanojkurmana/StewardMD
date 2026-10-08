@@ -151,5 +151,332 @@
       "caption": "Overview comparison matrix for hereditary/familial pulmonary fibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATS/ERS/JRS/ALAT idiopathic pulmonary fibrosis guidance and respiratory genetics texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_pulmonary_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution chest CT",
+          "cells": [
+            {
+              "text": "Fibrosis pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Telomere-related and surfactant gene testing",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Telomere length in blood leucocytes",
+          "cells": [
+            {
+              "text": "Telomere disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and liver function tests",
+          "cells": [
+            {
+              "text": "Telomere-related marrow and liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology",
+          "cells": [
+            {
+              "text": "Excludes connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests with gas transfer",
+          "cells": [
+            {
+              "text": "Lung function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_pulmonary_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "Fibrosis in two or more relatives suggests a heritable cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease-associated interstitial lung disease",
+          "cells": [
+            {
+              "text": "Excluded by autoimmune serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumoconiosis and other occupational fibrosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_pulmonary_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antifibrotic therapy",
+          "cells": [
+            {
+              "text": "Pirfenidone or nintedanib, to slow decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Used with caution; generally avoided where a telomere biology disorder is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Supplemental oxygen and pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrapulmonary screening",
+          "cells": [
+            {
+              "text": "Telomere-related cytopenias and liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation referral",
+          "cells": [
+            {
+              "text": "Early assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interstitial lung disease team review",
+          "cells": [
+            {
+              "text": "Integrated multidisciplinary review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and testing",
+          "cells": [
+            {
+              "text": "Telomere-related and surfactant genes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_pulmonary_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary/familial pulmonary fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pulmonary fibrosis in two or more relatives, or fibrosis with unexplained cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid breathlessness, unexplained cytopenias, cirrhosis or hypoxaemia present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ILD review; check for telomere disorder and liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT; telomere length; telomere and surfactant gene testing; autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a telomere or surfactant gene variant confirmed, with CTD excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic IPF, connective tissue disease, hypersensitivity or occupational lung",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antifibrotic therapy with pirfenidone or nintedanib to slow decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunosuppression used with caution, generally avoided in telomere disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oxygen, pulmonary rehabilitation and supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early referral for lung transplantation assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Decline slowed where possible; extrapulmonary complications screened",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

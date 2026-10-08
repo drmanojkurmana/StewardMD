@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for fasciolopsiasis (fasciolopsis buski)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fasciolopsiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration techniques",
+          "cells": [
+            {
+              "text": "Large operculated eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Egg morphometry",
+          "cells": [
+            {
+              "text": "Distinguishes from Fasciola eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia and anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin and nutritional assessment",
+          "cells": [
+            {
+              "text": "Heavy or paediatric infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Obstruction, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool sampling",
+          "cells": [
+            {
+              "text": "Improves sensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fasciolopsiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fascioliasis (Fasciola hepatica)",
+          "cells": [
+            {
+              "text": "Eggs are morphologically similar; careful morphometry is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterophyiasis or metagonimiasis",
+          "cells": [
+            {
+              "text": "Other intestinal fluke infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis or other protozoal enteritis",
+          "cells": [
+            {
+              "text": "Listed in the differential of intestinal symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fasciolopsiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "Highly effective; treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Anaemia and hypoalbuminaemia in heavy or paediatric infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for toxic-allergic state",
+          "cells": [
+            {
+              "text": "Oedema; surgery if intestinal obstruction occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool microscopy",
+          "cells": [
+            {
+              "text": "Confirms clearance; re-treat if eggs persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cooking aquatic plants and sanitation",
+          "cells": [
+            {
+              "text": "Avoid raw water plants; community measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat household and community contacts",
+          "cells": [
+            {
+              "text": "Reduces reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fasciolopsiasis-dx-mgmt",
+      "title": "Diagnosis and management of Fasciolopsiasis (Fasciolopsis buski)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Epigastric pain, alternating diarrhoea and constipation after eating raw water plants",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intestinal obstruction, generalised oedema, severe malnutrition or anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical review for obstruction; nutritional rehabilitation for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration and egg morphometry; FBC; albumin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Large operculated eggs with fasciolopsis morphology in stool?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fasciola, other intestinal flukes or protozoal enteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel as the anthelmintic of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional rehabilitation for anaemia and hypoalbuminaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical treatment if intestinal obstruction occurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool microscopy to confirm clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cook aquatic plants and screen household contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most respond promptly; heavy infection in malnourished children can be debilitating",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

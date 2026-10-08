@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for female infertility."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "female_infertility-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Confirmation of ovulation with mid-luteal progesterone",
+          "cells": [
+            {
+              "text": "Ovulatory status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian reserve hormonal markers and antral follicle count",
+          "cells": [
+            {
+              "text": "Ovarian reserve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterosalpingography or laparoscopy",
+          "cells": [
+            {
+              "text": "Tubal patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound and hysteroscopy",
+          "cells": [
+            {
+              "text": "Uterine cavity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and prolactin, with partner semen analysis",
+          "cells": [
+            {
+              "text": "Endocrine and male factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "female_infertility-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polycystic ovary syndrome with anovulation",
+          "cells": [
+            {
+              "text": "Anovulatory cause of infertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Premature ovarian insufficiency",
+          "cells": [
+            {
+              "text": "Amenorrhoea with raised gonadotrophins in a young woman"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubal factor from pelvic infection, surgery or endometriosis",
+          "cells": [
+            {
+              "text": "Silent tubal damage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "female_infertility-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optimise weight, stop smoking, reduce alcohol, folic acid",
+          "cells": [
+            {
+              "text": "Modifiable factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovulation induction with letrozole or clomifene",
+          "cells": [
+            {
+              "text": "Anovulatory disorders such as PCOS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine agonists and thyroid correction",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia and thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for tubal, uterine or pelvic factors",
+          "cells": [
+            {
+              "text": "Tubal surgery; hysteroscopic adhesiolysis or polyp removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assisted reproduction, particularly IVF",
+          "cells": [
+            {
+              "text": "Tubal disease, reduced ovarian reserve, maternal age or failure of other treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the male partner",
+          "cells": [
+            {
+              "text": "Concurrent assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Donor oocytes or fertility preservation where reserve is severely reduced"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "female_infertility-dx-mgmt",
+      "title": "Diagnosis and management of Female infertility",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Failure to conceive after 12 months of regular unprotected intercourse",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (amenorrhoea with high gonadotrophins, pituitary signs, pelvic mass, older age)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gynaecology review for adnexal mass; expedited work-up in older women",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mid-luteal progesterone; ovarian reserve; tubal patency; uterine cavity; TFT, prolactin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ovulatory disorder or tubal or uterine factor identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider unexplained infertility; male factor or further investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise weight, smoking, alcohol and folic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ovulation induction with letrozole or clomifene for anovulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for tubal, uterine or pelvic factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IVF or other assisted reproduction where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the male partner concurrently",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on cause and ovarian reserve; ovulatory disorders often respond to induction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

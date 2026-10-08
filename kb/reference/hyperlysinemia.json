@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hyperlysinaemia (saccharopine pathway)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperlysinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Raised lysine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino acids and organic acids",
+          "cells": [
+            {
+              "text": "Saccharopine assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AASS molecular genetic testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ammonia measurement",
+          "cells": [
+            {
+              "text": "Excludes a urea-cycle contribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for glutaric aciduria type 1",
+          "cells": [
+            {
+              "text": "Performed in symptomatic children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental evaluation",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperlysinemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glutaric aciduria type 1",
+          "cells": [
+            {
+              "text": "True neurotoxic metabolite accumulation; must not be confused with hyperlysinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of raised plasma lysine (generalised aminoacidurias)",
+          "cells": [
+            {
+              "text": "Raised lysine with other amino acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemia syndromes",
+          "cells": [
+            {
+              "text": "Raised lysine together with raised ammonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperlysinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign management",
+          "cells": [
+            {
+              "text": "Generally requires no specific treatment or dietary lysine restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm pattern",
+          "cells": [
+            {
+              "text": "Raised plasma and urinary lysine; undertake AASS molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude neurotoxic disorders",
+          "cells": [
+            {
+              "text": "Exclude glutaric aciduria type 1 in any symptomatic child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measure ammonia",
+          "cells": [
+            {
+              "text": "Excludes a urea-cycle contribution when interpreting the profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassure and limit investigation",
+          "cells": [
+            {
+              "text": "Seek an additional diagnosis if clinical problems persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic service care",
+          "cells": [
+            {
+              "text": "Individualised ongoing care and developmental assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperlysinemia-dx-mgmt",
+      "title": "Diagnosis and management of Hyperlysinaemia (saccharopine pathway)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised plasma and urinary lysine, with or without developmental concerns",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Encephalopathic crisis, regression, seizures or concurrent hyperammonaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Search for a different, harmful disorder such as glutaric aciduria type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Amino acids, urine organic acids, ammonia and AASS molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AASS variant confirmed and urea-cycle contribution excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat ammonia and profile; reconsider secondary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Generally no lysine restriction or specific treatment for the benign variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure family and avoid unnecessary investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Individualised metabolic service follow-up and developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign inborn error, normal outcome in most; seek another diagnosis if problems persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

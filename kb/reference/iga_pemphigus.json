@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for iga pemphigus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iga_pemphigus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Intraepidermal pustules with neutrophils and slight acantholysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Intercellular IgA deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indirect immunofluorescence",
+          "cells": [
+            {
+              "text": "Circulating IgA intercellular antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-desmocollin-1 testing",
+          "cells": [
+            {
+              "text": "Antigen-specific testing where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum protein electrophoresis",
+          "cells": [
+            {
+              "text": "Monoclonal gammopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease investigation",
+          "cells": [
+            {
+              "text": "When clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iga_pemphigus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subcorneal pustular dermatosis (Sneddon-Wilkinson)",
+          "cells": [
+            {
+              "text": "Separated from IgA pemphigus by direct immunofluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pustular psoriasis",
+          "cells": [
+            {
+              "text": "Sterile pustules with systemic upset; must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Desmoglein rather than desmocollin antibody target"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iga_pemphigus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dapsone",
+          "cells": [
+            {
+              "text": "First-line; suppresses the neutrophilic inflammation that drives pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and acitretin",
+          "cells": [
+            {
+              "text": "Topical or systemic steroids; acitretin an option, particularly in the SPD type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive agents",
+          "cells": [
+            {
+              "text": "Colchicine or sulfapyridine in resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety monitoring",
+          "cells": [
+            {
+              "text": "Screen for G6PD deficiency before dapsone; monitor for haemolysis and methaemoglobinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptoms and wounds",
+          "cells": [
+            {
+              "text": "Pruritus control and wound care for eroded pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated disease and taper",
+          "cells": [
+            {
+              "text": "Screen for monoclonal gammopathy and IBD; taper to minimum needed for remission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iga_pemphigus-dx-mgmt",
+      "title": "Diagnosis and management of IgA pemphigus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flaccid vesicles and pustules forming annular or herpetiform patterns on trunk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Extensive pustulation with systemic upset, or infection of eroded skin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude pustular psoriasis or infection; treat secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, direct and indirect immunofluorescence, anti-desmocollin-1, SPEP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Intercellular IgA deposition confirmed on immunofluorescence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subcorneal pustular dermatosis or pustular psoriasis; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dapsone first-line after G6PD screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for control; acitretin in SPD type",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colchicine or sulfapyridine for resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for haemolysis and methaemoglobinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for monoclonal gammopathy; taper to lowest effective dose",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Relapses possible; taper therapy to a remission-maintaining dose",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

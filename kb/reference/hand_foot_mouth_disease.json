@@ -150,5 +150,303 @@
       "caption": "Overview comparison matrix for hand, foot and mouth disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hand_foot_mouth_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Typical presentation: fever, painful oral lesions and a vesicular rash on the hands and feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterovirus PCR from throat, vesicle or stool",
+          "cells": [
+            {
+              "text": "Used in severe or atypical disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF examination",
+          "cells": [
+            {
+              "text": "Used if meningitis or encephalitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status",
+          "cells": [
+            {
+              "text": "Assessed, especially in young children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_foot_mouth_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kawasaki disease",
+          "cells": [
+            {
+              "text": "Febrile child with mucocutaneous findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stevens-Johnson syndrome or drug eruption",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic gingivostomatitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpangina",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_foot_mouth_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Hydration, simple analgesia and antipyretics for fever and painful oral lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical oral analgesic or barrier preparations",
+          "cells": [
+            {
+              "text": "Ease mouth ulcers and maintain oral intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antibiotics",
+          "cells": [
+            {
+              "text": "No role in this illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antivirals",
+          "cells": [
+            {
+              "text": "Reserved for severe enteroviral complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Hand hygiene, avoiding contact with vesicle fluid, and exclusion from childcare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor hydration",
+          "cells": [
+            {
+              "text": "Low threshold for rehydration when oral intake is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalate neurological complications",
+          "cells": [
+            {
+              "text": "Enterovirus 71 brainstem encephalitis or aseptic meningitis, urgently"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hand_foot_mouth_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hand, foot and mouth disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with painful oral vesicles and a vesicular rash on hands and feet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lethargy, ataxia, myoclonus, seizures, respiratory distress)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate urgently for Enterovirus 71 neurological or cardiopulmonary complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; enterovirus PCR if severe or atypical; CSF if meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the illness typical, with adequate oral intake and no dehydration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess hydration, consider CSF and PCR, rehydrate; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care: hydration, analgesia and antipyretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical oral analgesic or barrier preparations for mouth ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid antibiotics; hand hygiene and exclusion from childcare",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Usually self-limiting; recovery with supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

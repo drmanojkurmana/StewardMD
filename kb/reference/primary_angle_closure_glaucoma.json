@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for primary angle-closure glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_angle_closure_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonioscopy of both eyes",
+          "cells": [
+            {
+              "text": "Angle configuration and peripheral anterior synechiae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Height of the pressure rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment assessment of chamber depth",
+          "cells": [
+            {
+              "text": "Chamber depth; AS-OCT or ultrasound biomicroscopy optional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc evaluation and retinal nerve fibre layer OCT",
+          "cells": [
+            {
+              "text": "Glaucomatous cupping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss, once the eye settles"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_angle_closure_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Phacomorphic glaucoma from an intumescent lens",
+          "cells": [
+            {
+              "text": "Bulky or cataractous lens driving angle closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary angle closure from a posterior segment mass or effusion",
+          "cells": [
+            {
+              "text": "Posterior segment mass or effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_angle_closure_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent IOP lowering",
+          "cells": [
+            {
+              "text": "Topical beta-blocker, alpha-agonist and pilocarpine; systemic acetazolamide; hyperosmotic agent added"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser peripheral iridotomy",
+          "cells": [
+            {
+              "text": "Definitive treatment once the cornea clears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fellow eye",
+          "cells": [
+            {
+              "text": "Prophylactic laser peripheral iridotomy to the occludable fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and antiemetics",
+          "cells": [
+            {
+              "text": "During the acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lens extraction",
+          "cells": [
+            {
+              "text": "Where a bulky or cataractous lens drives angle closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Mydriasis; caution with anticholinergic and dilating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "IOP, optic disc and visual fields; topical therapy for chronic angle closure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_angle_closure_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary angle-closure glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected acute angle closure: painful red eye with haloes and mid-dilated pupil",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stony-hard globe, corneal oedema or markedly reduced vision?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency ophthalmology referral and urgent pressure lowering",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gonioscopy of both eyes; applanation tonometry; anterior segment and disc review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the angle occludable with raised intraocular pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other red-eye causes such as uveitis or keratitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent IOP lowering with topical agents and systemic acetazolamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laser peripheral iridotomy once the cornea clears",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prophylactic iridotomy to the fellow eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lens extraction where a bulky or cataractous lens drives closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term IOP, disc and visual field monitoring; topical therapy for chronic closure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

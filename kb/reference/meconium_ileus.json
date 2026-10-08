@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for meconium ileus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meconium_ileus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Dilated loops, soap-bubble sign and peritoneal calcification suggesting perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water-soluble contrast enema",
+          "cells": [
+            {
+              "text": "Microcolon and inspissated pellets, with therapeutic intent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride testing and CFTR analysis",
+          "cells": [
+            {
+              "text": "Confirms cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening (immunoreactive trypsinogen) follow-up",
+          "cells": [
+            {
+              "text": "Immunoreactive trypsinogen follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial examination and imaging",
+          "cells": [
+            {
+              "text": "Complicated features such as volvulus or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal ultrasound review",
+          "cells": [
+            {
+              "text": "Echogenic bowel, dilated loops or intra-abdominal calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meconium_ileus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic contrast enema",
+          "cells": [
+            {
+              "text": "Water-soluble, sometimes repeated, to disimpact inspissated meconium, with careful IV rehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasogastric decompression",
+          "cells": [
+            {
+              "text": "Fluid and electrolyte correction as initial resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for complicated disease",
+          "cells": [
+            {
+              "text": "Volvulus, atresia, perforation or meconium peritonitis: enterotomy and irrigation, resection or temporary stoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Adjunct to soften and dissolve tenacious meconium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis confirmation and care",
+          "cells": [
+            {
+              "text": "Sweat chloride and CFTR analysis; pancreatic enzymes, fat-soluble vitamins, CFTR modulator and respiratory care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric surgery and cystic fibrosis service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meconium_ileus-dx-mgmt",
+      "title": "Diagnosis and management of Meconium ileus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with abdominal distension and bowel obstruction; suspected meconium ileus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonitis, perforation signs, volvulus or respiratory compromise from distension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgery for perforation, volvulus or meconium peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph and water-soluble contrast enema for microcolon and pellets",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the contrast enema show microcolon with inspissated meconium?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intestinal atresia, Hirschsprung disease or meconium plug syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Water-soluble contrast enema, sometimes repeated, with IV rehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nasogastric decompression with fluid and electrolyte correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "N-acetylcysteine to soften and dissolve tenacious meconium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sweat chloride and CFTR analysis; cystic fibrosis team for enzymes and respiratory care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery for complicated disease; cystic fibrosis care and family genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

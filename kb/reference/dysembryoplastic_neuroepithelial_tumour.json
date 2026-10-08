@@ -159,5 +159,325 @@
       "caption": "Overview comparison matrix for dysembryoplastic neuroepithelial tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysembryoplastic_neuroepithelial_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Cortical multicystic bubbly lesion with FLAIR rim, minimal enhancement and little oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT for calcification and scalloping",
+          "cells": [
+            {
+              "text": "Calcification and inner-table remodelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG or long-term monitoring",
+          "cells": [
+            {
+              "text": "Epileptogenic zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Specific glioneuronal element and any cortical dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FGFR1 and BRAF V600E testing",
+          "cells": [
+            {
+              "text": "FGFR1 alteration or BRAF V600E"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysembryoplastic_neuroepithelial_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ganglioglioma",
+          "cells": [
+            {
+              "text": "Glioneuronal tumour that can mimic the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oligodendroglioma or diffuse low-grade glioma",
+          "cells": [
+            {
+              "text": "Mistaken for DNET, risking overtreatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal cortical dysplasia",
+          "cells": [
+            {
+              "text": "Adjacent dysplasia drives persistent seizures if missed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysembryoplastic_neuroepithelial_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resection for drug-resistant epilepsy",
+          "cells": [
+            {
+              "text": "Standard care for tissue diagnosis and durable seizure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for incidental lesions",
+          "cells": [
+            {
+              "text": "A reasonable alternative when there is no significant epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete resection",
+          "cells": [
+            {
+              "text": "Lesion and adjacent focal cortical dysplasia; incomplete removal causes persistent seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy surgery pathway",
+          "cells": [
+            {
+              "text": "Video-EEG, epilepsy MRI, neuropsychology and functional MRI near eloquent cortex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No radiotherapy or chemotherapy",
+          "cells": [
+            {
+              "text": "Overtreatment when DNET is mistaken for a diffuse glioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Adjunctive symptomatic therapy, not a substitute for resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Seizure outcome and serial imaging; watch for interval enlargement or new nodularity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysembryoplastic_neuroepithelial_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Dysembryoplastic neuroepithelial tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DNET: cortical multicystic lesion with drug-resistant focal epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (interval growth, solid enhancing nodule, new deficit, raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for growth, new deficit or raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy-protocol MRI; CT for calcification; video-EEG; FGFR1 and BRAF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a cortical multicystic lesion confirmed with epileptogenic activity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ganglioglioma, low-grade glioma, focal cortical dysplasia or PXA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection for drug-resistant epilepsy, for tissue diagnosis and seizure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete resection including any adjacent focal cortical dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance imaging for incidental or clinically stable lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid radiotherapy or chemotherapy, which would be overtreatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial imaging and seizure follow-up after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent, as a benign grade 1 tumour, with high seizure freedom after complete resection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

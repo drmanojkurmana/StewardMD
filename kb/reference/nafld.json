@@ -177,5 +177,519 @@
       "caption": "Overview comparison matrix for masld / nafld (fatty liver disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AASLD, Update to MASLD Practice Guidance (semaglutide), November 2025",
+      "kind": "web",
+      "url": "https://www.aasld.org/aasld-announces-update-metabolic-dysfunction-associated-steatotic-liver-disease-masld-practice"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 309-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 307-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nafld-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and fibrosis staging of MASLD",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "MASLD definition",
+          "cells": [
+            {
+              "text": "Steatosis plus at least one cardiometabolic risk factor"
+            },
+            {
+              "text": "Overweight, hypertension, dyslipidaemia, insulin resistance or T2DM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol limit",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Under 20 g/day women, under 30 g/day men",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "MetALD: 20 to 50 g/day women, 30 to 60 g/day men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIB-4 low risk",
+          "cells": [
+            {
+              "text": "Under 1.3",
+              "op": "<",
+              "value": 1.3
+            },
+            {
+              "text": "{{hy:Manage in primary care}}; less accurate under 35 or over 65"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIB-4 high risk",
+          "cells": [
+            {
+              "text": "2.67 or more",
+              "op": ">=",
+              "value": 2.67
+            },
+            {
+              "text": "Needs elastography or ELF and specialist review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient elastography (VCTE)",
+          "unit": "kPa",
+          "cells": [
+            {
+              "text": "Under 8 kPa low; 8 to 12 intermediate; over 12 high",
+              "range": [
+                8,
+                12
+              ]
+            },
+            {
+              "text": "Over 12 kPa associated with cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ELF test",
+          "cells": [
+            {
+              "text": "Under 7.7 low; 7.7 to 9.8 intermediate; over 9.8 high",
+              "range": [
+                7.7,
+                9.8
+              ]
+            },
+            {
+              "text": "Over 11.8 suspect cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALT",
+          "cells": [
+            {
+              "text": "Normal ALT does not exclude MASLD"
+            },
+            {
+              "text": "True normal about 29 to 33 U/L men, 19 to 25 U/L women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "At-risk MASH",
+          "cells": [
+            {
+              "text": "Fibrosis stage F2 or more",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Higher risk of liver outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lean MASLD",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "BMI under 25 (under 23 in Asians)",
+              "op": "<",
+              "value": 25
+            },
+            {
+              "text": "Normal BMI does not exclude"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nafld-ddx",
+      "kind": "ddx",
+      "title": "Other causes of fatty liver to exclude",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol-related liver disease",
+          "cells": [
+            {
+              "text": "AST two to sevenfold, under 400 U/L, AST/ALT usually over 1"
+            },
+            {
+              "text": "Alcohol history; GGT rises in all fatty liver"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Drug-induced steatosis",
+          "cells": [
+            {
+              "text": "Glucocorticoids, oestrogens, tamoxifen, amiodarone"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hepatitis C genotype 3",
+          "cells": [
+            {
+              "text": "Steatosis from the virus"
+            },
+            {
+              "text": "HCV antibody and RNA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient, haemolysis or neuro signs"
+            },
+            {
+              "text": "Ceruloplasmin, urine copper"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nutritional causes",
+          "cells": [
+            {
+              "text": "Starvation, kwashiorkor, choline deficiency, jejunoileal bypass"
+            },
+            {
+              "text": "Diet and surgical history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "High IgG; ANA positive in about 20% of SLD so interpret carefully"
+            },
+            {
+              "text": "Autoantibodies, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemochromatosis or alpha-1 antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Iron overload or lung disease"
+            },
+            {
+              "text": "Ferritin, transferrin saturation, A1AT level"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nafld-treatment",
+      "kind": "treatment",
+      "title": "Management of MASLD and MASH",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle and weight loss",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "About 5% loss improves steatosis; over 10% improves MASH and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiometabolic control",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Treat diabetes, lipids, BP; CV disease is the leading cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semaglutide",
+          "cells": [
+            {
+              "text": "MASH with moderate to advanced fibrosis (F2 to F3)"
+            },
+            {
+              "text": "AASLD 2025 guidance; lifestyle remains the base"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resmetirom",
+          "cells": [
+            {
+              "text": "Noncirrhotic MASH with F2 to F3 fibrosis"
+            },
+            {
+              "text": "Thyroid hormone receptor beta agonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pioglitazone or vitamin E",
+          "cells": [
+            {
+              "text": "Selected patients with MASH"
+            },
+            {
+              "text": "Per specialist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bariatric surgery",
+          "cells": [
+            {
+              "text": "Eligible obese patients"
+            },
+            {
+              "text": "Improves MASH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol reduction and vaccination",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Hepatitis A and B vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cirrhosis care",
+          "cells": [
+            {
+              "text": "F4"
+            },
+            {
+              "text": "HCC and variceal surveillance; transplant referral when decompensated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No drug doses are stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nafld-dx-mgmt",
+      "title": "Diagnosis and management of MASLD",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Steatosis on imaging or raised ALT with metabolic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Alcohol history; exclude viral, drug, autoimmune, metabolic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Other cause found?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat that cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Calculate FIB-4; screen for type 2 diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "FIB-4 under 1.3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Low risk: lifestyle, metabolic care; repeat FIB-4",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elastography or ELF",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "VCTE over 12 kPa or features of cirrhosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hepatology: cirrhosis care, HCC surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "VCTE 8 to 12 kPa (likely F2 to F3)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Hepatology: consider semaglutide or resmetirom plus lifestyle",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

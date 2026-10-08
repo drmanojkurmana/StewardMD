@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for hemicrania continua."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemicrania_continua-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Headache diary",
+          "cells": [
+            {
+              "text": "Continuous unilateral pain and its exacerbations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised indometacin trial with gastroprotection",
+          "cells": [
+            {
+              "text": "An absolute response confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain with pituitary and cavernous sinus views",
+          "cells": [
+            {
+              "text": "Excludes a secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of analgesic use",
+          "cells": [
+            {
+              "text": "Medication overuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for cranial autonomic features",
+          "cells": [
+            {
+              "text": "Ipsilateral features during exacerbations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemicrania_continua-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic migraine",
+          "cells": [
+            {
+              "text": "Migraine-like features may coexist and lead to misdiagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal hemicrania",
+          "cells": [
+            {
+              "text": "Continuous, strictly unilateral pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-overuse headache",
+          "cells": [
+            {
+              "text": "Identified by review of analgesic use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cluster headache",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemicrania_continua-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Indometacin",
+          "cells": [
+            {
+              "text": "Typically abolishes the pain and confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroprotection",
+          "cells": [
+            {
+              "text": "Proton pump inhibitor, with gastrointestinal and renal monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Celecoxib",
+          "cells": [
+            {
+              "text": "COX-2 inhibitor trial for patients intolerant of indometacin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital nerve stimulation",
+          "cells": [
+            {
+              "text": "Genuinely refractory or indometacin-intolerant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review analgesic use",
+          "cells": [
+            {
+              "text": "Identify and address medication-overuse headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Headache specialist and MRI",
+          "cells": [
+            {
+              "text": "Specialist referral; MRI brain including pituitary and cavernous sinus views"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemicrania_continua-dx-mgmt",
+      "title": "Diagnosis and management of Hemicrania continua",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Daily, continuous, strictly unilateral headache for more than three months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Incomplete response to indometacin, neurological signs or side-shifting pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI for a secondary cause and headache specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Headache diary; supervised indometacin trial with gastroprotection; MRI brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does indometacin give an absolute response, confirming the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic migraine, cluster headache or medication-overuse headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Indometacin, with proton pump inhibitor gastroprotection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Celecoxib, a COX-2 inhibitor, if indometacin is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occipital nerve stimulation for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review analgesic use and treat medication-overuse headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pain controlled on indometacin; neuromodulation for refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

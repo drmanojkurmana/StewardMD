@@ -157,5 +157,495 @@
       "caption": "Overview comparison matrix for mitral stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Mitral Stenosis (2020 ACC/AHA valve guideline)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/mitral-stenosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 322-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitral_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and severity of mitral stenosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal mitral valve area",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": "4 to 5 cm2",
+              "range": [
+                4,
+                5
+              ]
+            },
+            {
+              "text": "Obstruction begins below about 2 cm2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate MS",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": "Over 1.5 to 2.5 cm2",
+              "range": [
+                1.5,
+                2.5
+              ]
+            },
+            {
+              "text": "Pressure half-time under 150 ms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe MS",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": "1.5 cm2 or less",
+              "op": "<=",
+              "value": 1.5
+            },
+            {
+              "text": "{{hy:Pressure half-time 150 ms or more}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Very severe MS",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": "Under 1 cm2",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Cardiac output low at rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Auscultation",
+          "cells": [
+            {
+              "text": "Loud S1, opening snap, apical diastolic rumble with presystolic accentuation"
+            },
+            {
+              "text": "Shorter A2 to OS interval = more severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest film",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Kerley B lines when LA pressure over about 20 mmHg",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Large LA, straight left heart border"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TEE",
+          "cells": [
+            {
+              "text": "Exclude LA thrombus"
+            },
+            {
+              "text": "Required before balloon commissurotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise echo",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Mean gradient over 15 mmHg on exercise",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Supports intervention in moderate MS with symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic embolism",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20% of patients",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Higher with AF and age over 65"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Severity: 2020 ACC/AHA (Merck) calls 1.5 cm2 or less severe; Harrison 22e calls 1 to 1.5 cm2 severe and under 1 cm2 very severe."
+    },
+    {
+      "id": "mitral_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mitral stenosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe mitral regurgitation",
+          "cells": [
+            {
+              "text": "Soft S1, no opening snap, LV enlargement"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Austin Flint murmur of aortic regurgitation",
+          "cells": [
+            {
+              "text": "No presystolic accentuation; softer with vasodilators"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left atrial myxoma",
+          "cells": [
+            {
+              "text": "Positional murmur, fever, weight loss, emboli"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial septal defect",
+          "cells": [
+            {
+              "text": "Fixed split S2, no LA enlargement or Kerley lines"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid stenosis",
+          "cells": [
+            {
+              "text": "Murmur louder on inspiration, slow y descent"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral annular calcification",
+          "cells": [
+            {
+              "text": "Elderly, no commissural fusion"
+            },
+            {
+              "text": "Echo; balloon commissurotomy does not help"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "mitral_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management of mitral stenosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Percutaneous balloon commissurotomy",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic severe MS with suitable valve}}"
+            },
+            {
+              "text": "Not with LA thrombus, heavy calcification or moderate to severe MR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Asymptomatic severe MS",
+          "cells": [
+            {
+              "text": "PA pressure over 50 mmHg or new AF"
+            },
+            {
+              "text": "Intervention may be considered"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical commissurotomy or replacement",
+          "cells": [
+            {
+              "text": "Not a PMBC candidate or needs other cardiac surgery"
+            },
+            {
+              "text": "Usually NYHA class III"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diuretics and rate control",
+          "cells": [
+            {
+              "text": "Mild symptoms, sinus tachycardia or AF"
+            },
+            {
+              "text": "Beta-blocker or calcium channel blocker"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Warfarin",
+          "cells": [
+            {
+              "text": "AF, prior embolism or LA thrombus"
+            },
+            {
+              "text": "DOACs not indicated in rheumatic MS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary rheumatic prophylaxis",
+          "cells": [
+            {
+              "text": "Rheumatic valve disease"
+            },
+            {
+              "text": "10 years after last attack or to age 40, whichever is longer; sometimes lifelong"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "MS in pregnancy"
+            },
+            {
+              "text": "Rising gradient and tachycardia risk pulmonary oedema, especially postpartum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitral_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of mitral stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspnoea, AF or diastolic rumble suggesting MS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "TTE: valve area, gradient, PA pressure, valve anatomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Valve area 1.5 cm2 or less?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Symptoms with exercise gradient over 15 mmHg?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Surveillance and rheumatic prophylaxis",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Symptoms, PA pressure over 50 mmHg or new AF?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "TEE to exclude LA thrombus and assess MR",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Valve suitable for PMBC?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Percutaneous balloon commissurotomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical commissurotomy or valve replacement",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Warfarin if AF; diuretics, rate control",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

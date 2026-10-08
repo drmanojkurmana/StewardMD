@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for ipex syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ipex_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FOXP3 genetic testing and protein expression",
+          "cells": [
+            {
+              "text": "Causal variant and expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regulatory T cell enumeration and function",
+          "cells": [
+            {
+              "text": "Regulatory T cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody panels",
+          "cells": [
+            {
+              "text": "Anti-enterocyte and endocrine autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and thyroid screen",
+          "cells": [
+            {
+              "text": "Endocrinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "Autoimmune enteropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and haemolysis screen",
+          "cells": [
+            {
+              "text": "Autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ipex_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "APECED (autoimmune polyendocrinopathy)",
+          "cells": [
+            {
+              "text": "Autosomal recessive, AIRE-related, presents later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omenn syndrome",
+          "cells": [
+            {
+              "text": "Severe combined immunodeficiency with enteropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ipex_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Corticosteroids with a calcineurin inhibitor or sirolimus as a bridge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive treatment",
+          "cells": [
+            {
+              "text": "Early allogeneic haematopoietic stem cell transplantation, the only prospect of cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteropathy",
+          "cells": [
+            {
+              "text": "Parenteral nutrition and fluid and electrolyte support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinopathy",
+          "cells": [
+            {
+              "text": "Insulin for neonatal diabetes; thyroid hormone replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and cytopenias",
+          "cells": [
+            {
+              "text": "Intensive skin care; management of autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Prophylaxis and prompt treatment; avoid live vaccines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ipex_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of IPEX syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe watery diarrhoea, eczema and early diabetes or thyroiditis in an infant boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dehydration, metabolic decompensation, severe cytopenias or overwhelming infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fluids, electrolytes and parenteral nutrition; treat infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FOXP3 sequencing and expression, regulatory T cell assay, autoantibodies, gut biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FOXP3 variant confirmed with regulatory T cell defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider APECED, Omenn syndrome or other enteropathy; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids with calcineurin inhibitor or sirolimus as bridge",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early allogeneic stem cell transplant for cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parenteral nutrition and fluid support for diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Insulin and thyroid replacement for endocrinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid live vaccines; prophylaxis for infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Transplant is the only cure; immunosuppression and nutrition support until then",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

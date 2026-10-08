@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for gastric bezoar."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastric_bezoar-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with biopsy of underlying mucosa",
+          "cells": [
+            {
+              "text": "Identifies the bezoar; biopsies the mucosa beneath"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the abdomen",
+          "cells": [
+            {
+              "text": "Size, location and complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium meal",
+          "cells": [
+            {
+              "text": "Mottled, freely mobile intraluminal filling defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric emptying study",
+          "cells": [
+            {
+              "text": "Where dysmotility is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Chronic occult blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Markers of nutritional depletion",
+          "cells": [
+            {
+              "text": "Nutritional status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_bezoar-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastric outlet obstruction from peptic stricture",
+          "cells": [
+            {
+              "text": "Persistent vomiting and dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained food from gastroparesis",
+          "cells": [
+            {
+              "text": "No discrete bezoar present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_bezoar-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic fragmentation and retrieval",
+          "cells": [
+            {
+              "text": "First-line for most gastric bezoars, under direct vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemical dissolution for phytobezoars",
+          "cells": [
+            {
+              "text": "Cola lavage, or enzymatic agents such as cellulase or papain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical removal",
+          "cells": [
+            {
+              "text": "Large, hard diospyrobezoars and trichobezoars"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetics and treatment of gastroparesis",
+          "cells": [
+            {
+              "text": "Aids clearance and prevents reformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing factors",
+          "cells": [
+            {
+              "text": "Dentition, diet and dysmotility after prior gastric surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric management",
+          "cells": [
+            {
+              "text": "Trichotillomania and trichophagia in trichobezoar cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correct iron-deficiency anaemia from chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastric_bezoar-dx-mgmt",
+      "title": "Diagnosis and management of gastric bezoar",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastric bezoar: intraluminal filling defect with vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (outlet obstruction, haematemesis, perforation, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for perforation or peritonism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsy, contrast CT, barium meal and full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a mobile intraluminal filling defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider outlet obstruction, gastroparesis, malignancy or volvulus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic fragmentation and retrieval under direct vision, first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chemical dissolution for phytobezoars: cola lavage, cellulase or papain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical removal of large, hard diospyrobezoars and trichobezoars",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prokinetics and treatment of underlying gastroparesis to prevent reformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent if removed and the cause is treated; recurrence is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

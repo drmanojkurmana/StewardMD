@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for mycobacterium simiae infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_simiae_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated respiratory cultures",
+          "cells": [
+            {
+              "text": "Distinguish colonisation from genuine disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial culture with photochromogen recognition",
+          "cells": [
+            {
+              "text": "Photochromogenic pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Species identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-susceptibility testing",
+          "cells": [
+            {
+              "text": "Limited predictive value for outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Nodular-bronchiectatic or cavitary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Particularly where disseminated disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_simiae_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonisation or contamination without true disease",
+          "cells": [
+            {
+              "text": "Commonly isolated as a contaminant or coloniser; many isolates need no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated NTM in advanced HIV",
+          "cells": [
+            {
+              "text": "Disseminated infection occurs in the profoundly immunosuppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis exacerbation from conventional pathogens",
+          "cells": [
+            {
+              "text": "Diagnostic criteria must be met before treating a respiratory isolate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_simiae_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict diagnostic criteria and repeated cultures",
+          "cells": [
+            {
+              "text": "Many isolates need no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidrug therapy for confirmed disease",
+          "cells": [
+            {
+              "text": "A macrolide with a fluoroquinolone such as moxifloxacin, and co-trimoxazole; in vitro susceptibility correlates poorly with response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease control rather than cure",
+          "cells": [
+            {
+              "text": "Resistance is notorious and unpredictable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying lung disease",
+          "cells": [
+            {
+              "text": "Manage structural lung disease alongside treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response and toxicity monitoring",
+          "cells": [
+            {
+              "text": "Repeated cultures over the prolonged course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases or respiratory medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_simiae_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium simiae infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Positive M. simiae culture from a respiratory sample in structural lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated disease, progressive pulmonary disease, poor response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess immune status urgently; refer to infectious diseases for disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated respiratory cultures, species identification, susceptibility, chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diagnostic criteria met on repeated cultures, not a single isolate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as colonisation or contamination; no antimicrobial treatment needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidrug therapy with a macrolide, moxifloxacin and co-trimoxazole for confirmed disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aim for disease control rather than reliable cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage the underlying structural lung disease alongside treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor response with repeated cultures and watch for drug toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded prognosis when true disease is confirmed; many isolates never progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

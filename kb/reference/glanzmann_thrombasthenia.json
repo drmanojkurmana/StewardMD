@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for glanzmann thrombasthenia (itga2b/itgb3)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glanzmann_thrombasthenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC and blood film",
+          "cells": [
+            {
+              "text": "Normal platelet number and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Light-transmission platelet aggregometry",
+          "cells": [
+            {
+              "text": "Absent response to physiological agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for glycoprotein IIb/IIIa",
+          "cells": [
+            {
+              "text": "Expression level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Normal clotting factor pathways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ITGA2B and ITGB3 genetic testing",
+          "cells": [
+            {
+              "text": "Confirmation and counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanzmann_thrombasthenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Excluded by von Willebrand studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Distinguished by low platelet count"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanzmann_thrombasthenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid and local haemostasis",
+          "cells": [
+            {
+              "text": "Antifibrinolytics for mucosal bleeds and minor procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant activated factor VII",
+          "cells": [
+            {
+              "text": "First-line systemic agent for serious bleeding and surgical cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-matched platelet transfusion",
+          "cells": [
+            {
+              "text": "Severe or refractory bleeding; risk of platelet alloimmunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menorrhagia and iron",
+          "cells": [
+            {
+              "text": "Hormonal therapy and iron replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet drugs and NSAIDs",
+          "cells": [
+            {
+              "text": "Meticulous dental hygiene; hepatitis B immunisation for transfusion recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Platelet alloantibodies and iron status, through haematology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Curative option in severe refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screening of at-risk family members"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glanzmann_thrombasthenia-dx-mgmt",
+      "title": "Diagnosis and management of Glanzmann thrombasthenia (ITGA2B/ITGB3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Glanzmann thrombasthenia: mucosal bleeding with normal platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (major bleeding, severe menorrhagia, refractory platelets)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for life-threatening bleeding or refractory platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, platelet aggregometry, flow cytometry for IIb/IIIa, and ITGA2B/ITGB3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aggregometry show an absent response with a normal platelet count?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Willebrand disease, Bernard-Soulier syndrome or immune thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tranexamic acid and local haemostatic measures for mucosal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant activated factor VII for serious bleeding or surgical cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "HLA-matched platelet transfusion for severe or refractory bleeding only",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid antiplatelet drugs and NSAIDs; monitor for platelet alloantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most have normal life expectancy with modern care, though bleeding can be serious",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

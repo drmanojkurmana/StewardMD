@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for epididymo-orchitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epididymo_orchitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and midstream urine culture",
+          "cells": [
+            {
+              "text": "Urinary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-void urine nucleic acid amplification test and urethral swab",
+          "cells": [
+            {
+              "text": "Sexually transmitted organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Increased blood flow; excludes abscess or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full STI screen with partner notification",
+          "cells": [
+            {
+              "text": "Where a sexually transmitted cause is likely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract evaluation",
+          "cells": [
+            {
+              "text": "Structural abnormality in older or recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymo_orchitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Testicular torsion",
+          "cells": [
+            {
+              "text": "Prehn's sign and a present cremasteric reflex favour epididymo-orchitis over torsion; torsion must always be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal abscess",
+          "cells": [
+            {
+              "text": "Fluctuant swelling or failure to improve raises concern; imaging and drainage follow"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymo_orchitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Guided by the likely organism: a cephalosporin plus doxycycline when an STI is likely in younger men; a fluoroquinolone when coliform urinary pathogens are likely in older men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent exclusion of torsion",
+          "cells": [
+            {
+              "text": "A surgical emergency to exclude before attributing pain to infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Scrotal support and elevation, rest, and anti-inflammatory analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STI screening and partner treatment",
+          "cells": [
+            {
+              "text": "When an STI cause is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Drain an abscess; monitor for testicular infarction or atrophy; supportive care for mumps orchitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract investigation",
+          "cells": [
+            {
+              "text": "Older men and recurrent disease, with follow-up to confirm resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epididymo_orchitis-dx-mgmt",
+      "title": "Diagnosis and management of Epididymo-orchitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gradual-onset unilateral scrotal pain and swelling with fever or urethral discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (torsion not excluded, abscess, sepsis, failure to respond)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of testicular torsion; surgical review if it is not excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, urine NAAT and urethral swab, colour Doppler ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Torsion excluded and infection supported?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical exploration without delay if torsion is not excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical antibiotics guided by organism and patient age",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Scrotal support, elevation, rest and anti-inflammatory analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Full STI screening with partner notification and treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain abscess; monitor for infarction or atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Investigate the urinary tract in older men or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve with antibiotics; swelling can take weeks to settle",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

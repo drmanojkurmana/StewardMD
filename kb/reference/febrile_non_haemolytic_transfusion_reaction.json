@@ -154,5 +154,323 @@
       "caption": "Overview comparison matrix for febrile non-haemolytic transfusion reaction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "febrile_non_haemolytic_transfusion_reaction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clerical recheck of patient identity and unit label",
+          "cells": [
+            {
+              "text": "Compatibility and identity errors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test and repeat crossmatch",
+          "cells": [
+            {
+              "text": "Haemolysis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual inspection of plasma and urine for haemoglobin",
+          "cells": [
+            {
+              "text": "Haemoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and culture of the implicated unit",
+          "cells": [
+            {
+              "text": "Bacterial contamination, where sepsis suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH, bilirubin and haptoglobin",
+          "cells": [
+            {
+              "text": "Red-cell destruction excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_non_haemolytic_transfusion_reaction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Excluded by DAT, crossmatch and haemoglobin checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial contamination with septic transfusion reaction",
+          "cells": [
+            {
+              "text": "Rigors and cardiovascular collapse; cultures of unit and patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion-related acute lung injury",
+          "cells": [
+            {
+              "text": "Hypoxia and bilateral infiltrates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_non_haemolytic_transfusion_reaction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop or interrupt the transfusion",
+          "cells": [
+            {
+              "text": "First step, with symptomatic fever treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipyretic such as paracetamol",
+          "cells": [
+            {
+              "text": "Symptomatic treatment of fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude dangerous mimics first",
+          "cells": [
+            {
+              "text": "Clerical recheck, haemolysis and contamination investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and observation",
+          "cells": [
+            {
+              "text": "Until the fever settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-storage leucoreduced components",
+          "cells": [
+            {
+              "text": "Prevents recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipyretic premedication only selectively",
+          "cells": [
+            {
+              "text": "Considered for recurrent reactions; not routine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for serious reaction",
+          "cells": [
+            {
+              "text": "Hypotension, shock or respiratory distress"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "febrile_non_haemolytic_transfusion_reaction-dx-mgmt",
+      "title": "Diagnosis and management of Febrile non-haemolytic transfusion reaction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, chills or rigors during or within hours of a transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypotension, haemoglobinuria, hypoxia, rapid high fever with collapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop the transfusion; resuscitate; escalate for suspected serious reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clerical recheck; DAT and repeat crossmatch; LDH, bilirubin, haptoglobin; cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Haemolysis and bacterial contamination excluded, with a benign fever pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as a serious reaction: haemolysis, sepsis, TRALI or circulatory overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antipyretic such as paracetamol and symptomatic care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe until fever settles",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pre-storage leucoreduced components to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Selective antipyretic premedication for recurrent reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting; resolves within hours of stopping the transfusion and antipyretics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

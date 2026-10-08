@@ -172,5 +172,471 @@
       "caption": "Overview comparison matrix for toxic and drug-induced hepatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Liver Injury Caused by Drugs",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/drugs-and-the-liver/liver-injury-caused-by-drugs"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxic_and_drug_induced_hepatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing drug-induced liver injury",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Significant DILI: enzymes",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "ALT or AST over 5x ULN, or ALP over 2x ULN, twice 24 h apart",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Meets case threshold"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Significant DILI: bilirubin",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Total bilirubin over 2.5 mg/dL with raised enzymes",
+              "op": ">",
+              "value": 2.5
+            },
+            {
+              "text": "Meets case threshold"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Significant DILI: INR",
+          "cells": [
+            {
+              "text": "INR over 1.5 with raised enzymes",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "Meets case threshold"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "R value hepatocellular",
+          "cells": [
+            {
+              "text": "R over 5 (ALT/ALP as multiples of ULN)",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Hepatocellular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "R value cholestatic",
+          "cells": [
+            {
+              "text": "R under 2",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Cholestatic; mixed if 2 to 5"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hy's law",
+          "cells": [
+            {
+              "text": "Jaundice with hepatocellular injury"
+            },
+            {
+              "text": "{{hy:Predicts serious injury and liver failure}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetaminophen level at 4 h",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "Over 300 mcg/mL predicts severe injury; under 150 unlikely",
+              "op": ">",
+              "value": 300
+            },
+            {
+              "text": "Plot on nomogram 4 to 8 h after ingestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial lactate in acetaminophen ALF",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Over 3.5 mmol/L",
+              "op": ">",
+              "value": 3.5
+            },
+            {
+              "text": "Likely needs transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Causality",
+          "cells": [
+            {
+              "text": "Exclusion diagnosis; RUCAM, RECAM, LiverTox"
+            },
+            {
+              "text": "Avoid rechallenge"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "toxic_and_drug_induced_hepatitis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic drug-induced liver injury",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute viral hepatitis A, B, C",
+          "cells": [
+            {
+              "text": "Identical picture"
+            },
+            {
+              "text": "Viral serology and HCV RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "Also triggered by nitrofurantoin, minocycline"
+            },
+            {
+              "text": "ANA, anti-smooth muscle antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol-related hepatitis",
+          "cells": [
+            {
+              "text": "Alcohol history; amiodarone mimics it"
+            },
+            {
+              "text": "History, AST/ALT pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic hepatitis",
+          "cells": [
+            {
+              "text": "Recent hypotension or shock"
+            },
+            {
+              "text": "Clinical timeline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary obstruction or sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Cholestatic, dilated ducts"
+            },
+            {
+              "text": "Ultrasound, MRCP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metabolic liver disease",
+          "cells": [
+            {
+              "text": "Wilson, haemochromatosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adaptation",
+          "cells": [
+            {
+              "text": "Mild ALT rise resolving on drug (isoniazid, statins)"
+            },
+            {
+              "text": "Serial tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_and_drug_induced_hepatitis-treatment",
+      "kind": "treatment",
+      "title": "Managing drug-induced liver injury",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the suspected drug",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Essential first step; usually leads to recovery}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Acetaminophen toxicity, suspected or confirmed"
+            },
+            {
+              "text": "Give empirically without waiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silymarin or penicillin",
+          "cells": [
+            {
+              "text": "Amanita phalloides poisoning"
+            },
+            {
+              "text": "Mushroom toxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "DRESS, autoimmune-like or checkpoint-inhibitor hepatitis"
+            },
+            {
+              "text": "Minocycline, PD-1/PD-L1 inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholestyramine",
+          "cells": [
+            {
+              "text": "Cholestatic pruritus"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist and transplant referral",
+          "cells": [
+            {
+              "text": "Jaundice with impaired function, ALF"
+            },
+            {
+              "text": "Coagulopathy plus encephalopathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Report the case",
+          "cells": [
+            {
+              "text": "All suspected DILI"
+            },
+            {
+              "text": "MedWatch, DILIN"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxic_and_drug_induced_hepatitis-dx-mgmt",
+      "title": "Diagnosis and management of drug-induced liver injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised liver enzymes on a drug, herbal or toxin",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acetaminophen ingestion possible?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Start N-acetylcysteine; timed level on nomogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop suspected agent; compute R value",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Exclude viral, biliary, alcohol, autoimmune, metabolic causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Coagulopathy with encephalopathy (liver failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Acute liver failure: transplant centre referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Autoimmune-like, DRESS or checkpoint inhibitor?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Corticosteroids; monitor enzymes",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor to recovery; avoid rechallenge; report",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

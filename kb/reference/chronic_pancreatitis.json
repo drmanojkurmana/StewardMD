@@ -154,5 +154,493 @@
       "caption": "Overview comparison matrix for chronic pancreatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Chronic Pancreatitis",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/pancreatitis/chronic-pancreatitis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_pancreatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in chronic pancreatitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum amylase and lipase",
+          "cells": [
+            {
+              "text": "{{hy:Usually not strikingly raised}}"
+            },
+            {
+              "text": "Unlike acute pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse calcification on plain film or CT",
+          "cells": [
+            {
+              "text": "Pathognomonic"
+            },
+            {
+              "text": "CT is first-line imaging; excludes cancer and pseudocyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS features",
+          "cells": [
+            {
+              "text": "5 or more of 9",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Diagnostic, but nonspecific early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secretin pancreatic function test",
+          "unit": "% function lost",
+          "cells": [
+            {
+              "text": "Abnormal once >=60% lost",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Most sensitive function test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal elastase-1",
+          "cells": [
+            {
+              "text": "Low on formed stool"
+            },
+            {
+              "text": "Supports exocrine insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum trypsinogen",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Highly specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "72-hour faecal fat",
+          "cells": [
+            {
+              "text": "On high-fat diet"
+            },
+            {
+              "text": "Diagnoses steatorrhoea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exocrine insufficiency",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Cumulative >80%",
+              "op": ">",
+              "value": 80
+            },
+            {
+              "text": "Diabetes lifetime prevalence also >80%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopenia or osteoporosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 65%"
+            },
+            {
+              "text": "Screen bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic cancer risk",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "4% at 20 years in calcific disease"
+            },
+            {
+              "text": "Higher in PRSS1 and tropical forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pancreatitis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of chronic pancreatitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "{{hy:Must be excluded on imaging}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune pancreatitis type 1",
+          "cells": [
+            {
+              "text": "IgG4 disease; steroid responsive; can mimic sclerosing cholangitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune pancreatitis type 2",
+          "cells": [
+            {
+              "text": "Idiopathic duct-centric"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic pseudocyst",
+          "cells": [
+            {
+              "text": "Cystic collection on CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal ageing, diabetes or smoking on EUS",
+          "cells": [
+            {
+              "text": "EUS changes without disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Poor steroid response in suspected autoimmune pancreatitis should raise suspicion of cancer."
+    },
+    {
+      "id": "chronic_pancreatitis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of chronic pancreatitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop alcohol and smoking",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "Slows progression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancreatic enzyme replacement",
+          "cells": [
+            {
+              "text": "Exocrine insufficiency, steatorrhoea"
+            },
+            {
+              "text": "25,000 to 50,000 IU lipase per meal, half with snacks; titrate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PPI or H2 blocker",
+          "cells": [
+            {
+              "text": "Non-enteric-coated enzymes"
+            },
+            {
+              "text": "Prevents acid breakdown"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fat-soluble vitamins A, D, K (and E)",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            },
+            {
+              "text": "Medium-chain triglycerides for refractory steatorrhoea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-fat diet",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Pain"
+            },
+            {
+              "text": "<25",
+              "op": "<",
+              "value": 25
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Analgesia with adjuncts",
+          "cells": [
+            {
+              "text": "Chronic pain"
+            },
+            {
+              "text": "TCAs, gabapentin, pregabalin, SSRIs; opioids carry addiction risk; coeliac block short-term"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ERCP decompression or lithotripsy",
+          "cells": [
+            {
+              "text": "Ductal stricture or stones"
+            },
+            {
+              "text": "Stent, dilation, sphincterotomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lateral pancreaticojejunostomy",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Main duct dilated over 5 to 8",
+              "range": [
+                5,
+                8
+              ]
+            },
+            {
+              "text": "Pain relief in 70 to 80% of selected patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cautious insulin",
+          "cells": [
+            {
+              "text": "Pancreatogenic diabetes"
+            },
+            {
+              "text": "Glucagon deficiency risks prolonged hypoglycaemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_pancreatitis-dx-mgmt",
+      "title": "Diagnosis and management of chronic pancreatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent abdominal pain, steatorrhoea or weight loss with risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CT pancreas; MRCP or EUS if CT unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Mass or features of cancer?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Investigate for pancreatic cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Calcification, duct changes or EUS >=5 features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider other causes; repeat function tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop alcohol and smoking; faecal elastase; glucose; bone density",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Exocrine insufficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Enzymes with meals, vitamins A, D, K",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Refractory pain with dilated duct or stones?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Endoscopic or surgical drainage",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Analgesic adjuncts; diabetes and cancer surveillance",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

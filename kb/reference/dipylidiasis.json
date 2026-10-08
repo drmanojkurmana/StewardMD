@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for dipylidiasis (dipylidium caninum)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dipylidiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Macroscopic and microscopic identification of proglottids",
+          "cells": [
+            {
+              "text": "Proglottids passed in stool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy for egg packets",
+          "cells": [
+            {
+              "text": "Distinctive egg packets rather than single eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal examination",
+          "cells": [
+            {
+              "text": "Migrating segments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Mild eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pet ownership and flea history",
+          "cells": [
+            {
+              "text": "Pet and flea exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dipylidiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Taenia species tapeworm",
+          "cells": [
+            {
+              "text": "Proglottids mistaken for Taenia misdirect the workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterobiasis (pinworm)",
+          "cells": [
+            {
+              "text": "Single eggs sought in error; egg packets are the distinctive finding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dipylidiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Single-dose praziquantel",
+          "cells": [
+            {
+              "text": "Highly effective at clearing the infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flea control and deworming of pets",
+          "cells": [
+            {
+              "text": "Veterinary flea control and deworming of household dogs and cats"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental flea eradication",
+          "cells": [
+            {
+              "text": "Household hygiene to prevent reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Usually benign and often asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand hygiene",
+          "cells": [
+            {
+              "text": "For young children in close contact with pets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat examination",
+          "cells": [
+            {
+              "text": "If the result is inconclusive or symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dipylidiasis-dx-mgmt",
+      "title": "Diagnosis and management of Dipylidiasis (Dipylidium caninum)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dipylidium caninum infection: proglottids in a child's stool or perianal area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss or failure to thrive, symptoms after treatment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for weight loss; search for another cause if symptoms persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Proglottid identification; stool microscopy for egg packets; perianal exam; FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are egg packets seen in stool or proglottids identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Taenia, Hymenolepis, pinworm or functional abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single-dose praziquantel, highly effective at clearing infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Veterinary flea control and deworming of household dogs and cats",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Environmental flea eradication and household hygiene to prevent reinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand hygiene for young children in close contact with pets",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure: the infection is usually benign and often asymptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent after treatment; main issue is reinfection unless pet and fleas are treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

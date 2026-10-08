@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for mallory-weiss tear."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mallory_weiss_tear-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Linear tear, and active or recent bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with coagulation studies",
+          "cells": [
+            {
+              "text": "Blood loss; coagulation status before crossmatch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for underlying causes",
+          "cells": [
+            {
+              "text": "Alcohol use, hiatus hernia or an eating disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest and abdominal imaging",
+          "cells": [
+            {
+              "text": "Perforation, if suspected clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI bleeding risk score",
+          "cells": [
+            {
+              "text": "Risk stratification to guide admission and endoscopy timing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallory_weiss_tear-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oesophageal or gastric varices",
+          "cells": [
+            {
+              "text": "Portal hypertension, a stated bleeding red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Boerhaave syndrome (transmural rupture)",
+          "cells": [
+            {
+              "text": "Severe chest pain, subcutaneous emphysema or sepsis; erect imaging if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallory_weiss_tear-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "IV access and fluids, transfusion as required, correction of coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Antiemetics and a proton pump inhibitor; bleeding usually stops spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic haemostasis",
+          "cells": [
+            {
+              "text": "Adrenaline injection, thermal therapy, clips or band ligation for active or high-risk bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Validated upper GI bleeding score to guide admission and endoscopy timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the precipitant",
+          "cells": [
+            {
+              "text": "Alcohol excess, an eating disorder or persistent vomiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or recurrent bleeding",
+          "cells": [
+            {
+              "text": "Repeat endoscopic therapy; angiographic embolisation or, rarely, surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mallory_weiss_tear-dx-mgmt",
+      "title": "Diagnosis and management of Mallory-Weiss tear",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematemesis after forceful retching or vomiting; suspected mucosal tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe bleeding, instability, rebleeding or features of Boerhaave perforation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: resuscitate and urgent endoscopy; embolisation or surgery if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent upper GI endoscopy to visualise the tear and check active bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a longitudinal tear near the gastro-oesophageal junction confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peptic ulcer, varices, oesophagitis or Dieulafoy lesion; repeat endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitate with IV access, fluids, transfusion and coagulopathy correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Conservative care with antiemetics and a proton pump inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic haemostasis for active or high-risk bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the precipitant: alcohol excess, eating disorder or persistent vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; bleeding is self-limiting and the mucosal tear heals rapidly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

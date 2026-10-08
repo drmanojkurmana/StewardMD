@@ -155,5 +155,350 @@
       "caption": "Overview comparison matrix for mammary duct ectasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ABC of Breast Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mammary_duct_ectasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Triple assessment: examination, ultrasound and mammography",
+          "cells": [
+            {
+              "text": "Excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of discharge",
+          "cells": [
+            {
+              "text": "Single-duct versus multiple-duct discharge, and its colour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography",
+          "cells": [
+            {
+              "text": "Coarse secretory calcification is the benign pattern; fine pleomorphic or branching calcification is not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of any subareolar mass or dilated duct",
+          "cells": [
+            {
+              "text": "Subareolar mass or dilated duct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis of a discrete or suspicious mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ductography or ductoscopy",
+          "cells": [
+            {
+              "text": "Selected discharge cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin and thyroid function",
+          "cells": [
+            {
+              "text": "Galactorrhoea, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mammary_duct_ectasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Periductal mastitis",
+          "cells": [
+            {
+              "text": "Superimposed periductal infection, treated with antibiotics; on the same spectrum as ectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraductal papilloma",
+          "cells": [
+            {
+              "text": "Blood-stained or single-duct nipple discharge, which needs investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ductal carcinoma in situ",
+          "cells": [
+            {
+              "text": "Fine pleomorphic or branching microcalcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive carcinoma causing nipple retraction",
+          "cells": [
+            {
+              "text": "Progressive unilateral nipple retraction with skin distortion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paget's disease of the nipple",
+          "cells": [
+            {
+              "text": "Eczematous or ulcerated nipple change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactorrhoea from hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Galactorrhoea; check serum prolactin and thyroid function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mammary_duct_ectasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Triple assessment",
+          "cells": [
+            {
+              "text": "Excludes malignancy; then reassure that this is a benign, self-limiting involutional condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Warm compresses, good nipple hygiene and a well-fitting supportive bra"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Only for superimposed periductal infection, covering anaerobes and skin flora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Advised given its association within the ectasia-periductal mastitis spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical duct excision",
+          "cells": [
+            {
+              "text": "Microdochectomy or total duct excision for persistent troublesome discharge or nipple retraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-biopsy",
+          "cells": [
+            {
+              "text": "Any suspicious mass or bloody single-duct discharge, to exclude carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mammary_duct_ectasia-dx-mgmt",
+      "title": "Diagnosis and management of Mammary duct ectasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nipple discharge or subareolar lump with dilated ducts on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bloody or single-duct discharge, fixed mass, or pleomorphic microcalcification?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent core biopsy of a discrete or suspicious mass to exclude carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Triple assessment: examination, ultrasound, mammography and discharge assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there coarse secretory calcification without a suspicious mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Core biopsy, ductography or ductoscopy for suspicious features; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, self-limiting involutional condition without raised cancer risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warm compresses, nipple hygiene and a supportive bra",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics only for superimposed periductal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Duct excision for persistent troublesome discharge or nipple retraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, self-limiting condition; surgery is reserved for persistent troublesome symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

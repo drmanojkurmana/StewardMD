@@ -169,5 +169,504 @@
       "caption": "Overview comparison matrix for streptococcal infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Streptococcal Infections",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-positive-cocci/streptococcal-infections"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 136-1 and rheumatic fever prophylaxis table",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "streptococcal_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing streptococcal infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Centor or McIsaac features",
+          "cells": [
+            {
+              "text": "Tonsillar exudate, tender anterior nodes, fever, no cough, age"
+            },
+            {
+              "text": "Cough argues most strongly against strep"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rapid antigen test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Specificity over 95%; sensitivity 70 to 90%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Positive confirms; negative in children needs culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Throat culture",
+          "cells": [
+            {
+              "text": "Swab both tonsillar pillars"
+            },
+            {
+              "text": "Gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ASO titre",
+          "unit": "fold",
+          "cells": [
+            {
+              "text": "2-fold or greater rise, samples 2 to 4 weeks apart",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:For prior infection (rheumatic fever, PSGN), not acute pharyngitis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-DNase B",
+          "cells": [
+            {
+              "text": "Rises after skin infection"
+            },
+            {
+              "text": "Better than ASO after pyoderma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Strep TSS: definite",
+          "cells": [
+            {
+              "text": "GAS from sterile site plus hypotension plus 2 or more organ signs"
+            },
+            {
+              "text": "Renal, coagulopathy, liver, ARDS, rash, soft tissue necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strep TSS: probable",
+          "cells": [
+            {
+              "text": "GAS from non-sterile site with same clinical signs"
+            },
+            {
+              "text": "No other cause found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lancefield grouping",
+          "cells": [
+            {
+              "text": "Group A beta-haemolytic S. pyogenes"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "streptococcal_infections-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic streptococcal infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral pharyngitis (EBV, CMV, HIV, others)",
+          "cells": [
+            {
+              "text": "Cough, coryza, hoarseness"
+            },
+            {
+              "text": "Negative rapid test or culture; monospot"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Group C or G strep, F. necrophorum",
+          "cells": [
+            {
+              "text": "Bacterial pharyngitis, Lemierre risk with Fusobacterium"
+            },
+            {
+              "text": "Throat culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kawasaki disease",
+          "cells": [
+            {
+              "text": "Strawberry tongue also, but conjunctivitis and nodes, no strep"
+            },
+            {
+              "text": "Clinical criteria, echocardiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staphylococcal toxic shock",
+          "cells": [
+            {
+              "text": "Usually not bacteraemic"
+            },
+            {
+              "text": "Blood and site cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S. aureus cellulitis or bullous impetigo",
+          "cells": [
+            {
+              "text": "Around wound or ulcer; bullae"
+            },
+            {
+              "text": "Culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV or VZV lesions",
+          "cells": [
+            {
+              "text": "Grouped discrete vesicles mimic impetigo"
+            },
+            {
+              "text": "PCR of vesicle fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous congestion",
+          "cells": [
+            {
+              "text": "Purplish erythema mimics cellulitis"
+            },
+            {
+              "text": "Bilateral, no fever"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "streptococcal_infections-treatment",
+      "kind": "treatment",
+      "title": "Treating streptococcal infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzathine penicillin G IM",
+          "cells": [
+            {
+              "text": "GAS pharyngitis, single dose"
+            },
+            {
+              "text": "1.2 million units adults; 600,000 units under 27 kg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Penicillin V oral",
+          "cells": [
+            {
+              "text": "GAS pharyngitis"
+            },
+            {
+              "text": "500 mg every 8 to 12 h for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amoxicillin oral",
+          "cells": [
+            {
+              "text": "GAS pharyngitis, often preferred"
+            },
+            {
+              "text": "500 mg once or twice daily (max 1 g) for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cephalexin or cefadroxil",
+          "cells": [
+            {
+              "text": "Non-anaphylactic penicillin allergy"
+            },
+            {
+              "text": "Narrow-spectrum cephalosporin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin, clarithromycin or clindamycin",
+          "cells": [
+            {
+              "text": "Anaphylactic penicillin allergy"
+            },
+            {
+              "text": "12 mg/kg once daily (max 500 mg) macrolide; check local resistance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-lactam plus clindamycin",
+          "cells": [
+            {
+              "text": "Invasive GAS, necrotising fasciitis, TSS"
+            },
+            {
+              "text": "{{hy:Clindamycin suppresses toxin}}; linezolid if clindamycin resistant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical debridement",
+          "cells": [
+            {
+              "text": "Necrotising fasciitis"
+            },
+            {
+              "text": "Early, often repeated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "Streptococcal TSS or fasciitis"
+            },
+            {
+              "text": "Associated with lower mortality"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Penicillin, ampicillin or vancomycin",
+          "cells": [
+            {
+              "text": "Group B streptococcal infection"
+            },
+            {
+              "text": "Susceptibility testing if severe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatic fever secondary prophylaxis",
+          "cells": [
+            {
+              "text": "After rheumatic fever"
+            },
+            {
+              "text": "5 years or to age 21 without carditis; 10 years or to 40 with valve disease"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "streptococcal_infections-dx-mgmt",
+      "title": "Diagnosis and management of streptococcal infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sore throat, skin infection or septic presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shock, organ failure or pain out of proportion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Invasive GAS: debride, beta-lactam plus clindamycin, IVIG",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Pharyngitis without cough?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Skin or other site: culture, treat by syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Rapid antigen test or NAAT",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Test positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Child or high risk?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Throat culture positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Viral likely: no antibiotic",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Penicillin or amoxicillin 10 days, or benzathine penicillin",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

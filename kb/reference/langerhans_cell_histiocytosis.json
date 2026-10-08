@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for langerhans cell histiocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "langerhans_cell_histiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with CD1a and CD207 (langerin) immunohistochemistry",
+          "cells": [
+            {
+              "text": "Characteristic cells; Birbeck granules on electron microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E and MAPK pathway mutation testing",
+          "cells": [
+            {
+              "text": "Activating mutations, most commonly BRAF V600E"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal imaging survey",
+          "cells": [
+            {
+              "text": "Maps bone lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-organ assessment",
+          "cells": [
+            {
+              "text": "Liver and spleen imaging, full blood count, liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation and pituitary MRI",
+          "cells": [
+            {
+              "text": "Diabetes insipidus, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "langerhans_cell_histiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomyelitis or Ewing sarcoma",
+          "cells": [
+            {
+              "text": "Solitary lytic bone lesion; biopsy avoids assuming infection or cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seborrhoeic or atopic dermatitis",
+          "cells": [
+            {
+              "text": "Infant skin rash can mimic seborrhoeic dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Another histiocytic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "langerhans_cell_histiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Local measures for single-system bone lesions",
+          "cells": [
+            {
+              "text": "Observation, curettage or intralesional corticosteroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy for multisystem disease",
+          "cells": [
+            {
+              "text": "Vinblastine combined with a corticosteroid such as prednisolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAPK-pathway inhibitors",
+          "cells": [
+            {
+              "text": "BRAF inhibitors (vemurafenib, dabrafenib) or MEK inhibitors for BRAF V600E or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine care",
+          "cells": [
+            {
+              "text": "Desmopressin for diabetes insipidus; replacement of other deficient pituitary hormones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-organ monitoring",
+          "cells": [
+            {
+              "text": "Liver, spleen and bone marrow, to identify high-risk disease and guide salvage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Endocrinopathy, neurodegenerative CNS involvement and pulmonary disease; smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Haematology-oncology and endocrinology; salvage for risk-organ or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "langerhans_cell_histiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Langerhans Cell Histiocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful lytic bone lesion or scaly rash, possibly with polyuria, in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (risk-organ involvement, cytopenias, diabetes insipidus, CNS decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology-oncology review for high-risk multisystem disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with CD1a and CD207, BRAF V600E testing, skeletal survey, risk-organ assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do CD1a and CD207 staining confirm Langerhans-type cells?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, Ewing sarcoma, leukaemia or dermatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Local measures for isolated single-system bone lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vinblastine with prednisolone for multisystem or multifocal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "BRAF or MEK inhibitors for BRAF V600E or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Desmopressin and replacement of deficient pituitary hormones",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor risk organs and long-term sequelae",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Single-system disease often excellent; risk-organ disease carries higher mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

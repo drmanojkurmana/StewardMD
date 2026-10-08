@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for insomnia disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "insomnia_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed sleep history and sleep diary",
+          "cells": [
+            {
+              "text": "Over one to two weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening questionnaires for sleep apnoea",
+          "cells": [
+            {
+              "text": "Apnoea and other sleep disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for depression, anxiety and substance use",
+          "cells": [
+            {
+              "text": "Comorbid contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and stimulant review",
+          "cells": [
+            {
+              "text": "Drugs disturbing sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Suspected apnoea, periodic limb movements or atypical features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "insomnia_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Witnessed apnoeas with daytime sleepiness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depressive and anxiety disorders",
+          "cells": [
+            {
+              "text": "Sleep disturbance from a mood disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance or medication effects",
+          "cells": [
+            {
+              "text": "Caffeine, alcohol and stimulants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "insomnia_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy for insomnia",
+          "cells": [
+            {
+              "text": "First-line; stimulus control, sleep restriction and cognitive restructuring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-term medicines",
+          "cells": [
+            {
+              "text": "Z-drugs, melatonin or receptor agonists, dual orexin-receptor antagonists, or sedating antidepressants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidities",
+          "cells": [
+            {
+              "text": "Depression, anxiety, chronic pain, substance use, obstructive sleep apnoea and restless legs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Rationalise drugs and stimulant intake that disturb sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural strategies",
+          "cells": [
+            {
+              "text": "Reinforce behaviour and sleep hygiene; hygiene advice alone is rarely sufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Sleep medicine for uncertainty, treatment-resistant insomnia or suspected primary sleep disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "insomnia_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Insomnia disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dissatisfaction with sleep onset, maintenance or early waking, with daytime impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Witnessed apnoeas, suicidal thoughts, escalating hypnotic use or unsafe sleepiness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent mood assessment; review hypnotic use and apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep diary, questionnaires, mood and substance screen, medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Chronic insomnia with no apnoea or other primary sleep disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat apnoea, restless legs or comorbidity; polysomnography if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cognitive behavioural therapy for insomnia as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short-term drugs: Z-drugs, melatonin, orexin antagonists, sedating antidepressants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat comorbid depression, anxiety, pain and substance use",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review medications and stimulant intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to sleep medicine if uncertain or treatment-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Improved sleep with CBT-I; reassess if daytime impairment persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

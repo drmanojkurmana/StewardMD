@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for factor xiii deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "factor_xiii_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Specific factor XIII activity assay",
+          "cells": [
+            {
+              "text": "The key diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard coagulation screen",
+          "cells": [
+            {
+              "text": "Typically normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clot solubility test",
+          "cells": [
+            {
+              "text": "Historical qualitative screen where activity assays are unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XIII subunit antigen assays",
+          "cells": [
+            {
+              "text": "A-subunit versus B-subunit deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F13A1 and F13B genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "When intracranial haemorrhage is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_xiii_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other clot-stability defects (alpha-2 antiplasmin or PAI-1 deficiency)",
+          "cells": [
+            {
+              "text": "Also defects of clot stability; the factor XIII activity assay is the specific test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K deficiency or warfarin effect",
+          "cells": [
+            {
+              "text": "Excluded by normal coagulation screens"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_xiii_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Regular factor XIII concentrate prophylaxis",
+          "cells": [
+            {
+              "text": "Mainstay in severe deficiency; long half-life allows infrequent dosing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoprecipitate or fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Where concentrate is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "On-demand factor XIII replacement",
+          "cells": [
+            {
+              "text": "Acute bleeding and surgical cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous replacement in pregnancy",
+          "cells": [
+            {
+              "text": "Prevents miscarriage and supports placental stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytics",
+          "cells": [
+            {
+              "text": "Adjunct for mucosal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and urgent replacement",
+          "cells": [
+            {
+              "text": "Suspected intracranial haemorrhage; patients educated about delayed bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trough level monitoring and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "factor_xiii_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Factor XIII deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Delayed bleeding after a clot forms, umbilical stump bleeding, or poor wound healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intracranial bleed, delayed post-surgical bleed, pregnancy loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging and factor XIII replacement for suspected intracranial bleed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Specific factor XIII activity assay; subunit antigens; F13A1 and F13B testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low factor XIII activity with normal routine screens?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Willebrand disease, platelet disorder or another clot-stability defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular factor XIII concentrate prophylaxis in severe deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cryoprecipitate or FFP where concentrate is unavailable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "On-demand replacement for acute bleeding and surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continuous replacement in pregnancy to prevent miscarriage",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antifibrinolytics for mucosal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with regular prophylaxis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

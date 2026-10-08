@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for menkes disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "menkes_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Characteristically low; interpreted cautiously in neonates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and CSF catecholamine ratios",
+          "cells": [
+            {
+              "text": "Dopamine beta-hydroxylase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Light microscopy of hair",
+          "cells": [
+            {
+              "text": "Pili torti"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of ATP7A",
+          "cells": [
+            {
+              "text": "ATP7A variant and carrier testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Atrophy, subdural collections and tortuous intracranial vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Metaphyseal changes and wormian bones"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menkes_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Child abuse or non-accidental injury",
+          "cells": [
+            {
+              "text": "Fractures and subdural collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional copper deficiency",
+          "cells": [
+            {
+              "text": "Low serum copper"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menkes_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early copper-histidine replacement",
+          "cells": [
+            {
+              "text": "Parenteral; most beneficial when started neonatally and in ATP7A variants with residual transporter function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Seizures, and management of hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Failure to thrive and feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective-tissue and vascular surveillance",
+          "cells": [
+            {
+              "text": "Bladder diverticula, with attention to urinary tract infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging follow-up",
+          "cells": [
+            {
+              "text": "Subdural collections, alongside neurodevelopmental therapies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal carrier testing; prenatal or pre-symptomatic diagnosis; X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine and clinical genetics, with palliative input in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "menkes_disease-dx-mgmt",
+      "title": "Diagnosis and management of Menkes disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young male infant with seizures, hypotonia and developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Unexplained fractures or subdural haemorrhage, or vascular tortuosity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Safeguarding review for fractures or subdurals; neuroimaging; urgent neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum copper and caeruloplasmin, catecholamine ratios, hair microscopy, ATP7A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ATP7A variant confirmed with low copper and caeruloplasmin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider child abuse, nutritional copper deficiency or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early parenteral copper-histidine replacement, most beneficial when started neonatally",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsant therapy for seizures and management of hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support for failure to thrive and feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for bladder diverticula and urinary tract infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling with maternal carrier testing; palliative input if advanced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

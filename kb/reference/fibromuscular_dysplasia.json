@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for fibromuscular dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / vascular medicine consensus documents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibromuscular_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Catheter angiography or CT and MR angiography",
+          "cells": [
+            {
+              "text": "String-of-beads or focal stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound of renal and cervical arteries",
+          "cells": [
+            {
+              "text": "Screening and follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial vascular imaging",
+          "cells": [
+            {
+              "text": "Associated aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure evaluation",
+          "cells": [
+            {
+              "text": "Renovascular hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-arterial-bed imaging",
+          "cells": [
+            {
+              "text": "Multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibromuscular_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atherosclerotic renal or carotid stenosis",
+          "cells": [
+            {
+              "text": "Older patients; not the typical young woman"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu arteritis or polyarteritis nodosa",
+          "cells": [
+            {
+              "text": "Vasculitis affecting the same arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ehlers-Danlos and connective tissue arteriopathies",
+          "cells": [
+            {
+              "text": "Arterial fragility and dissection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibromuscular_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspirin or antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Reduces thromboembolic and stroke risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renin-angiotensin system blockade and antihypertensives",
+          "cells": [
+            {
+              "text": "Renovascular hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous transluminal balloon angioplasty",
+          "cells": [
+            {
+              "text": "Haemodynamically significant renal artery stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic therapy and aneurysm repair",
+          "cells": [
+            {
+              "text": "Arterial dissection; endovascular or surgical repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-arterial screening for aneurysms",
+          "cells": [
+            {
+              "text": "Intracranial and other aneurysms once diagnosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard cerebrovascular emergency pathways",
+          "cells": [
+            {
+              "text": "Acute stroke or dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation and risk-factor control",
+          "cells": [
+            {
+              "text": "Vascular medicine or hypertension referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibromuscular_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Fibromuscular dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young woman with early-onset or resistant hypertension or cervical arterial symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dissection, Horner syndrome, stroke, accelerated hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stroke or dissection pathway; urgent imaging for aneurysm rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex of renal and cervical arteries; CT or MR angiography; intracranial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "String-of-beads or focal stenosis on angiography in a non-atherosclerotic patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atherosclerosis, vasculitis or connective tissue arteriopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiplatelet therapy such as aspirin unless contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Renin-angiotensin blockade and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Balloon angioplasty for significant renal artery stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen the whole arterial bed for aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often benign; dissection, aneurysm rupture and stroke can be serious",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

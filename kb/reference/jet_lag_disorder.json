@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for jet lag disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jet_lag_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of recent transmeridian travel",
+          "cells": [
+            {
+              "text": "Characteristic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep diary before and after travel",
+          "cells": [
+            {
+              "text": "Sleep-wake timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting sleep disorders",
+          "cells": [
+            {
+              "text": "When symptoms are prolonged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood screening",
+          "cells": [
+            {
+              "text": "When sleep disturbance persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Actigraphy",
+          "cells": [
+            {
+              "text": "Selected or research settings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jet_lag_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Shift work disorder",
+          "cells": [
+            {
+              "text": "Circadian disorder from shift work rather than travel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Loud snoring and witnessed apnoeas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insomnia disorder unrelated to travel",
+          "cells": [
+            {
+              "text": "Not linked to recent transmeridian travel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jet_lag_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Timed bright light",
+          "cells": [
+            {
+              "text": "Advance the clock for eastward travel; delay for westward"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timed melatonin",
+          "cells": [
+            {
+              "text": "Around destination bedtime to speed re-entrainment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-flight adjustment",
+          "cells": [
+            {
+              "text": "Gradual shift of sleep and meal timing; sleep hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alertness",
+          "cells": [
+            {
+              "text": "Strategic short naps and judicious daytime caffeine; avoid late stimulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypnotic",
+          "cells": [
+            {
+              "text": "Short course for disabling insomnia during adjustment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Coexisting sleep or mood disorder considered if symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jet_lag_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Jet lag disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Insomnia and daytime sleepiness after rapid travel across several time zones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Symptoms beyond adjustment, loud snoring, unsafe sleepiness or mood change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for sleep apnoea or mood disorder; advise on driving safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep diary before and after travel; assess coexisting disorders if prolonged",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recent transmeridian travel with misaligned clock and typical symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider insomnia, shift work disorder or apnoea; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Timed bright light: advance for eastward, delay for westward",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Timed melatonin around destination bedtime",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pre-flight shift of sleep and meal times",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Short naps and timed caffeine; avoid late stimulants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Short hypnotic course for disabling insomnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting; resolves as the clock entrains over successive days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -158,5 +158,525 @@
       "caption": "Overview comparison matrix for coagulation disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hemophilia",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/coagulation-disorders/hemophilia",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 115-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 58-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coagulation_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory diagnosis of inherited coagulation disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated prolonged PT",
+          "cells": [
+            {
+              "text": "Factor VII deficiency"
+            },
+            {
+              "text": "First-line screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated prolonged aPTT",
+          "cells": [
+            {
+              "text": "FVIII, FIX or FXI deficiency"
+            },
+            {
+              "text": "{{hy:FXII, HMWK, prekallikrein deficiency prolong aPTT without bleeding}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Both PT and aPTT prolonged",
+          "cells": [
+            {
+              "text": "FV, FX, FII or fibrinogen abnormality"
+            },
+            {
+              "text": "Or liver disease, DIC, vitamin K deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Corrects: factor deficiency; does not correct: inhibitor"
+            },
+            {
+              "text": "Then specific factor assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe haemophilia",
+          "unit": "% factor activity",
+          "cells": [
+            {
+              "text": "<1",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Spontaneous joint and muscle bleeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate haemophilia",
+          "unit": "% factor activity",
+          "cells": [
+            {
+              "text": "1 to 5",
+              "range": [
+                1,
+                5
+              ]
+            },
+            {
+              "text": "Bleeds after minor trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild haemophilia",
+          "unit": "% factor activity",
+          "cells": [
+            {
+              "text": "6 to 30",
+              "range": [
+                6,
+                30
+              ]
+            },
+            {
+              "text": "Bleeds with surgery or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bethesda assay",
+          "cells": [
+            {
+              "text": "Inhibitor titre"
+            },
+            {
+              "text": "Inhibitors in about 30% of severe haemophilia A, 3 to 5% of B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VWD panel",
+          "cells": [
+            {
+              "text": "aPTT, VWF antigen, VWF activity, FVIII activity, multimers"
+            },
+            {
+              "text": "Classifies types 1, 2A, 2B, 2M, 2N, 3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chromogenic FVIII assay",
+          "cells": [
+            {
+              "text": "Patients on emicizumab"
+            },
+            {
+              "text": "Routine aPTT unreliable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Type O blood lowers VWF physiologically; diagnose VWD only with bleeding history or family history."
+    },
+    {
+      "id": "coagulation_disorders-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of a bleeding disorder",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemophilia A versus B",
+          "cells": [
+            {
+              "text": "Clinically identical; factor VIII or IX assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "{{hy:Mucocutaneous bleeding}}; type 2N mimics haemophilia A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XI deficiency",
+          "cells": [
+            {
+              "text": "Bleeding poorly predicted by level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet adhesion disorders",
+          "cells": [
+            {
+              "text": "Von Willebrand disease, Bernard-Soulier"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet aggregation disorders",
+          "cells": [
+            {
+              "text": "Glanzmann thrombasthenia, afibrinogenaemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet secretion disorders",
+          "cells": [
+            {
+              "text": "Aspirin, NSAIDs, thienopyridines, storage pool, uraemia, paraprotein, penicillin"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Scott syndrome",
+          "cells": [
+            {
+              "text": "Defective platelet coagulant activity"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acquired factor inhibitor",
+          "cells": [
+            {
+              "text": "Postpartum, autoimmune, cancer; mixing study fails to correct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired VWD",
+          "cells": [
+            {
+              "text": "Aortic stenosis (Heyde), MGUS, myeloma, platelets >1.5 million"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease, DIC, vitamin K deficiency",
+          "cells": [
+            {
+              "text": "Multiple factors low"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coagulation_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment of haemophilia and coagulation disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or target"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor VIII, minor bleed",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Dental extraction, early joint bleed"
+            },
+            {
+              "text": "Raise to 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor VIII, severe joint or muscle bleed",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Haemarthrosis, muscle haematoma"
+            },
+            {
+              "text": "50 to 80%",
+              "range": [
+                50,
+                80
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor VIII, life-threatening bleed or major surgery",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:CNS, airway, retroperitoneal bleeds}}"
+            },
+            {
+              "text": "100%; troughs 50 to 80% for 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor VIII dosing rule",
+          "cells": [
+            {
+              "text": "Haemophilia A"
+            },
+            {
+              "text": "1 unit/kg raises level about 2%; 25 units/kg gives about 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor IX",
+          "cells": [
+            {
+              "text": "Haemophilia B"
+            },
+            {
+              "text": "1 unit/kg raises about 1%; every 12 to 24 h; first dose about 25% higher"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emicizumab",
+          "cells": [
+            {
+              "text": "Haemophilia A prophylaxis"
+            },
+            {
+              "text": "Subcutaneous every 1, 2 or 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Mild haemophilia A with FVIII >=5% and proven response"
+            },
+            {
+              "text": "Dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tranexamic or aminocaproic acid",
+          "cells": [
+            {
+              "text": "Dental or oral bleeding"
+            },
+            {
+              "text": "Not for haematuria (clot obstruction)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concizumab",
+          "cells": [
+            {
+              "text": "Patients with inhibitors"
+            },
+            {
+              "text": "Prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coagulation_disorders-dx-mgmt",
+      "title": "Evaluation of a suspected coagulation disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abnormal bleeding history or prolonged clotting test",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "PT, aPTT, platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Which test is prolonged?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mixing study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Corrects with normal plasma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Inhibitor: Bethesda assay, specialist care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Factor assays (VIII, IX, XI, VII, others)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Haemophilia: factor replacement or emicizumab by severity",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "VWF antigen, activity, FVIII, multimers; platelet function",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "VWD or platelet disorder management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "PT or aPTT"
+        },
+        {
+          "from": "n3",
+          "to": "n9",
+          "label": "Both normal, mucosal bleeding"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "VIII or IX low"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "VIII low, check VWF"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

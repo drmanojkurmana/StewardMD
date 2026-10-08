@@ -149,5 +149,287 @@
       "caption": "Overview comparison matrix for pena-shokeir syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pena_shokeir_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed prenatal ultrasound",
+          "cells": [
+            {
+              "text": "Reduced foetal movement, contractures and polyhydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postnatal or postmortem examination",
+          "cells": [
+            {
+              "text": "Phenotype, with clinical photographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle and nerve histology",
+          "cells": [
+            {
+              "text": "Myopathic or neurogenic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Neuromuscular and neuromuscular-junction gene panels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray or karyotype",
+          "cells": [
+            {
+              "text": "Aneuploidy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pena_shokeir_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Comfort-focused neonatal care where pulmonary hypoplasia is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Neonatal respiratory support and airway management for pulmonary hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Physiotherapy, splinting and orthopaedic input for contractures in survivors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Assisted or tube feeding for micrognathia and impaired swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause identification",
+          "cells": [
+            {
+              "text": "Neuromuscular or restrictive cause, including maternal testing for myasthenia or myotonic dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Prenatal counselling and recurrence-risk assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neonatology, clinical genetics and palliative care with family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pena_shokeir_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pena-Shokeir syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fetal akinesia with contractures and polyhydramnios on prenatal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pulmonary hypoplasia, severe akinesia, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Palliative, comfort-focused neonatal care where pulmonary hypoplasia is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phenotype review, muscle and nerve histology, and molecular genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do findings identify a neuromuscular or restrictive cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test for maternal myasthenia or myotonic dystrophy; review other arthrogryposis causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Provide neonatal respiratory support and airway management for pulmonary hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Support feeding by assisted or tube feeding given micrognathia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage joint contractures with physiotherapy, splinting and orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer genetic counselling with recurrence-risk assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Co-ordinate neonatology, clinical genetics and palliative care with family support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally poor; many affected infants are stillborn or die in the neonatal period",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

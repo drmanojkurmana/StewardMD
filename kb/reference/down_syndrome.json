@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for down syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "down_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Trisomy 21, translocation or mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Transient myeloproliferative disorder and later leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine assessment when symptomatic",
+          "cells": [
+            {
+              "text": "Atlantoaxial instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "down_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital hypothyroidism",
+          "cells": [
+            {
+              "text": "Overlapping hypotonia and coarse features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trisomy 18 or trisomy 13",
+          "cells": [
+            {
+              "text": "Distinguished by karyotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "down_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, speech and language and occupational therapy; no disease-specific cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surgery",
+          "cells": [
+            {
+              "text": "Congenital heart disease, especially AV septal defect, guided by early echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal surgery",
+          "cells": [
+            {
+              "text": "Duodenal atresia and Hirschsprung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid replacement",
+          "cells": [
+            {
+              "text": "Levothyroxine on a scheduled basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and vision",
+          "cells": [
+            {
+              "text": "Regular assessment with correction of deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep apnoea and leukaemia surveillance",
+          "cells": [
+            {
+              "text": "Screen for obstructive sleep apnoea; FBC for transient myeloproliferative disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atlantoaxial instability",
+          "cells": [
+            {
+              "text": "Assess when neurological symptoms arise; activity precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental karyotyping, especially in translocation forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "down_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Down Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Down syndrome: neonatal hypotonia and characteristic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heart failure, bilious vomiting, cord signs, leukaemia features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and bowel surgical review; cervical spine assessment for cord signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype; echocardiography; thyroid function; FBC; hearing and vision; cervical spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is trisomy 21 confirmed on karyotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trisomy 18 or 13, congenital hypothyroidism or other syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early physiotherapy, speech and occupational therapy for development",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct congenital heart disease, especially AV septal defect, after echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for duodenal atresia or Hirschsprung disease where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Scheduled thyroid testing and levothyroxine; hearing and vision review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for sleep apnoea and monitor FBC for leukaemia; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy often reaches adulthood; outcome depends on cardiac complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

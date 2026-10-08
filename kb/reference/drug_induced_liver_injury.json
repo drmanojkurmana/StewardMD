@@ -160,5 +160,325 @@
       "caption": "Overview comparison matrix for drug-induced liver injury (dili)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_liver_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial liver function tests with R value",
+          "cells": [
+            {
+              "text": "Pattern of injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile (INR) and bilirubin",
+          "cells": [
+            {
+              "text": "Synthetic dysfunction and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis and autoimmune serology",
+          "cells": [
+            {
+              "text": "Other causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Biliary obstruction excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol concentration and toxicology screen",
+          "cells": [
+            {
+              "text": "Paracetamol overdose, where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_liver_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral hepatitis (A, B, C, E)",
+          "cells": [
+            {
+              "text": "Hepatotropic virus must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary obstruction",
+          "cells": [
+            {
+              "text": "Choledocholithiasis, stricture or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic hepatitis",
+          "cells": [
+            {
+              "text": "Shock or hypoperfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_liver_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the causative drug",
+          "cells": [
+            {
+              "text": "Including over-the-counter, herbal and recreational agents; avoid rechallenge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Specific antidote for paracetamol hepatotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and severity",
+          "cells": [
+            {
+              "text": "Serial liver enzymes, bilirubin and INR; watch for jaundiced hepatocellular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholestatic pruritus",
+          "cells": [
+            {
+              "text": "Colestyramine or ursodeoxycholic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Immunoallergic or autoimmune-type hepatitis, and DRESS reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant referral",
+          "cells": [
+            {
+              "text": "Urgent for acute liver failure with coagulopathy or encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reporting",
+          "cells": [
+            {
+              "text": "Report as a suspected adverse drug reaction; counsel on avoidance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_liver_injury-dx-mgmt",
+      "title": "Diagnosis and management of Drug-induced liver injury (DILI)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced liver injury: raised transaminases or jaundice after a drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (encephalopathy, rising INR, hepatocellular jaundice, DRESS)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transplant referral for acute liver failure; N-acetylcysteine if paracetamol",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial liver tests with R value; INR; viral and autoimmune serology; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the injury pattern fit a drug cause with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral hepatitis, biliary obstruction, ischaemic hepatitis or fatty liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and withdraw the causative drug, including herbal and OTC agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "N-acetylcysteine as the specific antidote for paracetamol hepatotoxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial enzymes, bilirubin and INR; note the poor prognosis of jaundice (Hy's law)",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Colestyramine or ursodeoxycholic acid for cholestatic pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Report the reaction as a suspected adverse drug reaction; counsel on avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most injury resolves after withdrawal; hepatocellular jaundice carries high risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

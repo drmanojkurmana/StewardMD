@@ -151,5 +151,341 @@
       "caption": "Overview comparison matrix for hard metal dermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hard_metal_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed occupational history",
+          "cells": [
+            {
+              "text": "Grinding, coolants and materials handled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to cobalt chloride, nickel sulfate and potassium dichromate",
+          "cells": [
+            {
+              "text": "Allergic sensitisation to cobalt, nickel and chromate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to metalworking fluid components and biocides",
+          "cells": [
+            {
+              "text": "Sensitisation to fluid additives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing of workplace coolants and gloves",
+          "cells": [
+            {
+              "text": "Workplace agents implicated in contact dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swabs",
+          "cells": [
+            {
+              "text": "Secondary infection of eczema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry or peak-flow monitoring",
+          "cells": [
+            {
+              "text": "Respiratory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Used when hard metal lung disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hard_metal_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritant contact dermatitis from coolants and wet work",
+          "cells": [
+            {
+              "text": "Wet grinding coolants act as irritants and leach cobalt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic contact dermatitis to nickel or chromate",
+          "cells": [
+            {
+              "text": "Cobalt allergy often occurs together with nickel or chromate sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atopic hand eczema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pompholyx (dyshidrotic eczema)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hard_metal_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eliminate cobalt exposure",
+          "cells": [
+            {
+              "text": "Substitution, improved coolant hygiene and engineering controls; avoidance is the key"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barrier protection",
+          "cells": [
+            {
+              "text": "Emollients, suitable protective gloves and reduced wet work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "For eczematous flares; short systemic courses for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise irritant contact",
+          "cells": [
+            {
+              "text": "Coolants, solvents and abrasives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Confirms sensitisation to cobalt, nickel and chromate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory screening",
+          "cells": [
+            {
+              "text": "Occupational asthma and hard metal lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health referral",
+          "cells": [
+            {
+              "text": "Workplace assessment; task modification or redeployment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hard_metal_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of hard metal dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hand and forearm eczema in a worker exposed to hard metal or coolants",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (breathlessness, secondary infection, spreading or systemic eczema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for hard metal lung disease; treat infected eczema urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Occupational history; patch testing for cobalt, nickel and chromate; spirometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does patch testing confirm cobalt or metalworking fluid sensitisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider irritant dermatitis, nickel or chromate allergy, or other hand eczema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eliminate cobalt exposure through substitution and better coolant hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients, suitable protective gloves and reduced wet work",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids for flares; systemic steroids for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer to occupational health for task modification or redeployment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Exposure controlled; dermatitis settles, with respiratory review as needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

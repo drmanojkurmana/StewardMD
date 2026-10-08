@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for gestational trophoblastic disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gestational_trophoblastic_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative serum hCG",
+          "cells": [
+            {
+              "text": "Often markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Molar features and fetal tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of evacuated tissue",
+          "cells": [
+            {
+              "text": "Ploidy and immunostaining where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial hCG after evacuation",
+          "cells": [
+            {
+              "text": "Detects persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and cross-sectional staging",
+          "cells": [
+            {
+              "text": "When neoplasia or metastasis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, renal, liver and thyroid function",
+          "cells": [
+            {
+              "text": "Baseline; hCG-driven thyroid effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_trophoblastic_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple pregnancy with high hCG",
+          "cells": [
+            {
+              "text": "Raised hCG from a multiple pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-gestational malignancy producing hCG",
+          "cells": [
+            {
+              "text": "A non-gestational source of hCG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_trophoblastic_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Suction curettage evacuation",
+          "cells": [
+            {
+              "text": "First-line treatment for molar pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-D prophylaxis",
+          "cells": [
+            {
+              "text": "For rhesus-negative women; avoid oxytocic augmentation before evacuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial hCG monitoring",
+          "cells": [
+            {
+              "text": "Structured follow-up after evacuation to detect persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contraception",
+          "cells": [
+            {
+              "text": "Reliable contraception until hCG has normalised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy escalation",
+          "cells": [
+            {
+              "text": "When hCG plateaus or rises, indicating gestational trophoblastic neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre",
+          "cells": [
+            {
+              "text": "Registration and management at a trophoblastic disease centre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "hCG-driven hyperthyroidism, early pre-eclampsia and anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gestational_trophoblastic_disease-dx-mgmt",
+      "title": "Diagnosis and management of Gestational Trophoblastic Disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected molar pregnancy: vaginal bleeding with markedly raised hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising hCG, heavy bleeding, respiratory or neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of heavy bleeding with haemodynamic compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Quantitative hCG, pelvic ultrasound and histology of evacuated tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology of evacuated tissue confirm a molar pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider multiple pregnancy, miscarriage or non-gestational hCG-secreting malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Suction curettage evacuation as first-line treatment for molar pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-D prophylaxis for rhesus-negative women",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Structured serial hCG monitoring after evacuation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate to chemotherapy if hCG plateaus or rises",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most moles are cured by evacuation alone; neoplasia is one of the most curable cancers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

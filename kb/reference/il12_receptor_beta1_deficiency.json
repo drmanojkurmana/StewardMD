@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for interleukin-12 receptor beta-1 deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "il12_receptor_beta1_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flow cytometry for IL-12 receptor beta-1",
+          "cells": [
+            {
+              "text": "Surface expression on activated T and NK cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-blood interferon-gamma after IL-12 and BCG",
+          "cells": [
+            {
+              "text": "Absent response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IL12RB1 sequencing",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma IL-12 and interferon-gamma",
+          "cells": [
+            {
+              "text": "Concentrations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial and Salmonella cultures",
+          "cells": [
+            {
+              "text": "Species identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Th17 and IL-17 assessment",
+          "cells": [
+            {
+              "text": "Used when candidiasis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broader inborn errors of immunity panel",
+          "cells": [
+            {
+              "text": "Excludes phenocopies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "il12_receptor_beta1_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IL-12 subunit p40 deficiency (IL12B)",
+          "cells": [
+            {
+              "text": "Overlapping mycobacterial susceptibility through the IL-12 pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interferon-gamma receptor deficiency",
+          "cells": [
+            {
+              "text": "Defect in the interferon-gamma receptor chain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-gamma autoantibody syndrome",
+          "cells": [
+            {
+              "text": "Acquired neutralising antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "il12_receptor_beta1_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimicrobial therapy",
+          "cells": [
+            {
+              "text": "Prolonged regimens for mycobacterial and Salmonella infection, guided by culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant interferon-gamma",
+          "cells": [
+            {
+              "text": "Adjunct; effective because downstream receptor and STAT1 signalling remain intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candidiasis",
+          "cells": [
+            {
+              "text": "Antifungal agents, reflecting the IL-23 and IL-17 defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Antimicrobial prophylaxis for recurrent infection; avoid live BCG and live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated disease",
+          "cells": [
+            {
+              "text": "Cultures and directed antimicrobials for febrile deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and counselling",
+          "cells": [
+            {
+              "text": "Serial cultures; genetic counselling with family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "il12_receptor_beta1_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Interleukin-12 receptor beta-1 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Disseminated BCG disease, non-tuberculous mycobacteria or invasive Salmonella",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent Salmonella septicaemia, multifocal mycobacteria or invasive candidiasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cultures and directed antimicrobials for febrile deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IL-12 receptor flow cytometry, IFN-gamma response, IL12RB1 sequencing, cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Absent IL-12 response with IL12RB1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IL-12p40, interferon-gamma pathway or autoantibody causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged culture-directed antimicrobial therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant interferon-gamma as adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antifungals for mucocutaneous candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylaxis; avoid live BCG and live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial cultures and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Recurrent infection risk; incomplete penetrance, so family screening matters",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

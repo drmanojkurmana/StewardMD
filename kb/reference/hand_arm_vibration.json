@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hand-arm vibration syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hand_arm_vibration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Vibration exposure history",
+          "cells": [
+            {
+              "text": "Tools used and years of exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stockholm Workshop staging",
+          "cells": [
+            {
+              "text": "Grades the vascular and sensorineural components separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold provocation testing",
+          "cells": [
+            {
+              "text": "Vascular response with rewarming, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory testing (thermal and vibrotactile)",
+          "cells": [
+            {
+              "text": "Sensory thresholds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Distinguishes carpal tunnel syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_arm_vibration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary Raynaud's phenomenon",
+          "cells": [
+            {
+              "text": "Prolonged use of vibrating hand-held tools in the exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease such as systemic sclerosis",
+          "cells": [
+            {
+              "text": "Features suggesting connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal tunnel syndrome and other entrapment neuropathies",
+          "cells": [
+            {
+              "text": "Nerve conduction studies distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral vascular disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical radiculopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_arm_vibration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reduce vibration exposure",
+          "cells": [
+            {
+              "text": "Engineering controls, low-vibration tools and limited exposure time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keep warm and stop smoking",
+          "cells": [
+            {
+              "text": "Limits vascular attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium channel blockers",
+          "cells": [
+            {
+              "text": "For disabling cold-induced vasospastic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Health surveillance",
+          "cells": [
+            {
+              "text": "Stockholm Workshop staging of the vascular and sensorineural components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational reporting",
+          "cells": [
+            {
+              "text": "Report as a prescribed or reportable occupational disease; workplace risk assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting disease",
+          "cells": [
+            {
+              "text": "Treat carpal tunnel syndrome; exclude connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hand_arm_vibration-dx-mgmt",
+      "title": "Diagnosis and management of Hand-arm vibration syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vibration exposure from hand-held power tools with finger blanching or numbness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (digital ulceration, connective tissue features, rapid sensory loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for severe vascular compromise and connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exposure history, Stockholm staging, cold provocation and nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the picture fit HAVS, with carpal tunnel and connective tissue disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Raynaud's phenomenon, carpal tunnel syndrome or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reduce vibration exposure with low-vibration tools and limited exposure time",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Keep hands warm and stop smoking to limit vascular attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Calcium channel blockers for disabling cold-induced vasospasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ongoing health surveillance with Stockholm Workshop staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Exposure reduced; symptoms managed with surveillance and occupational reporting",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

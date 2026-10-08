@@ -158,5 +158,312 @@
       "caption": "Overview comparison matrix for oligodendroglioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the Central Nervous System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oligodendroglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI",
+          "cells": [
+            {
+              "text": "New nodular enhancement suggests higher-grade transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification, frequent and well seen on CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH1 and IDH2 mutation testing",
+          "cells": [
+            {
+              "text": "Mutation required for the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "1p/19q codeletion analysis",
+          "cells": [
+            {
+              "text": "Whole-arm codeletion required; without it the tumour is not an oligodendroglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TERT promoter and CDKN2A status",
+          "cells": [
+            {
+              "text": "CDKN2A homozygous deletion portends worse behaviour in grade 3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue diagnosis by resection or biopsy",
+          "cells": [
+            {
+              "text": "Histology alone is unreliable; molecular confirmation is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligodendroglioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IDH-mutant astrocytoma",
+          "cells": [
+            {
+              "text": "No 1p/19q codeletion; morphology alone does not decide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glioblastoma, IDH-wildtype",
+          "cells": [
+            {
+              "text": "Lacks the IDH mutation required for this diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligodendroglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular confirmation before treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion; grade 2 or grade 3 only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Principal treatment; timing coordinated with radiotherapy and chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy first in partially resectable tumours",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Allows response and preserved brain plasticity before a later staged resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade 3 codeleted disease",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Postoperative combined chemoradiotherapy rather than radiotherapy alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkylating-agent chemotherapy with radiotherapy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For codeleted anaplastic disease; roughly double the survival of radiotherapy alone in this subgroup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oligodendroglioma-dx-mgmt",
+      "title": "Diagnosis and management of oligodendroglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with seizures and a cortical or frontal glioma; oligodendroglioma suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (raised pressure, new deficit, status epilepticus or nodular enhancement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for raised pressure or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, CT for calcification, IDH1/2 and 1p/19q testing on tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do IDH mutation and whole-arm 1p/19q codeletion both confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IDH-mutant astrocytoma or IDH-wildtype glioblastoma; reassess the tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection as the principal treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chemotherapy first in partially resectable tumours, before staged resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Grade 3 codeleted disease: postoperative chemoradiotherapy, not radiotherapy alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alkylating-agent chemotherapy with radiotherapy for codeleted anaplastic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relatively favourable outcome, but the tumour remains incurable and eventually progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

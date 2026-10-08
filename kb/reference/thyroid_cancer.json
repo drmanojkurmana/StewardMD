@@ -176,5 +176,514 @@
       "caption": "Overview comparison matrix for thyroid nodular disease and cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Approach to the Patient With a Thyroid Nodule",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/approach-to-the-patient-with-a-thyroid-nodule"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Thyroid Cancers",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/thyroid-cancers"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Evaluating a thyroid nodule",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH",
+          "cells": [
+            {
+              "text": "First test"
+            },
+            {
+              "text": "Low TSH: radionuclide scan; hot nodule seldom malignant, no FNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Suspicious ultrasound features",
+          "cells": [
+            {
+              "text": "Hypoechoic, taller than wide, irregular margin, microcalcifications, vascular"
+            },
+            {
+              "text": "Raise TI-RADS level"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FNA, TI-RADS 5",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Nodule over 1 cm",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Highly suspicious"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FNA, TI-RADS 4",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Nodule over 1.5 cm",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "Moderately suspicious"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No FNA",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Under 1 cm or purely cystic",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "{{hy:Unless suspicious cervical nodes}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bethesda II",
+          "cells": [
+            {
+              "text": "Benign"
+            },
+            {
+              "text": "Follow up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bethesda III or IV",
+          "cells": [
+            {
+              "text": "Indeterminate"
+            },
+            {
+              "text": "Molecular testing or calcitonin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bethesda V or VI",
+          "cells": [
+            {
+              "text": "Suspicious or malignant"
+            },
+            {
+              "text": "Surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum calcitonin and RET",
+          "cells": [
+            {
+              "text": "Medullary carcinoma"
+            },
+            {
+              "text": "All MTC get germline RET testing"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_cancer-ddx",
+      "kind": "ddx",
+      "title": "Nodules that mimic thyroid cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Colloid (hyperplastic) nodule or multinodular goitre",
+          "cells": [
+            {
+              "text": "Benign ultrasound features"
+            },
+            {
+              "text": "Ultrasound, FNA if criteria met"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroid cyst",
+          "cells": [
+            {
+              "text": "Purely cystic"
+            },
+            {
+              "text": "Ultrasound; no FNA needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Toxic adenoma",
+          "cells": [
+            {
+              "text": "Low TSH, hot on scan"
+            },
+            {
+              "text": "Radionuclide scan"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Follicular adenoma",
+          "cells": [
+            {
+              "text": "Cytology identical to follicular carcinoma"
+            },
+            {
+              "text": "Histology for capsular or vascular invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NIFTP",
+          "cells": [
+            {
+              "text": "Papillary-like nuclei, non-invasive"
+            },
+            {
+              "text": "Excision histology; not malignant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid lymphoma",
+          "cells": [
+            {
+              "text": "Rapid growth on Hashimoto background"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroiditis",
+          "cells": [
+            {
+              "text": "Tender or diffuse change"
+            },
+            {
+              "text": "TSH, antibodies, ultrasound"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treating thyroid cancer",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "Papillary under 1.5 cm"
+            },
+            {
+              "text": "15% grow 3 mm in 10 years"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hemithyroidectomy (lobectomy)",
+          "cells": [
+            {
+              "text": "Papillary 1.5 to 4 cm; follicular under 4 cm without vascular invasion"
+            },
+            {
+              "text": "Usually curative"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Total or near-total thyroidectomy",
+          "cells": [
+            {
+              "text": "Papillary over 4 cm or multifocal; follicular with over 4 foci of vascular invasion"
+            },
+            {
+              "text": "Node dissection for nodal disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Radioactive iodine",
+          "cells": [
+            {
+              "text": "Intermediate or high-risk differentiated cancer"
+            },
+            {
+              "text": "Not for low-risk disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "TSH-suppressive levothyroxine",
+          "cells": [
+            {
+              "text": "Differentiated cancer"
+            },
+            {
+              "text": "Lifelong replacement after thyroidectomy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Thyroglobulin and neck ultrasound",
+          "cells": [
+            {
+              "text": "Surveillance after treatment"
+            },
+            {
+              "text": "20 to 30% of intermediate or high risk recur"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Total thyroidectomy plus central node dissection",
+          "cells": [
+            {
+              "text": "Medullary carcinoma"
+            },
+            {
+              "text": "{{hy:Exclude phaeochromocytoma with metanephrines first}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dabrafenib plus trametinib",
+          "cells": [
+            {
+              "text": "Anaplastic with BRAF V600E (about 45%)"
+            },
+            {
+              "text": "Often with checkpoint inhibitor; surgery if feasible"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Merck gives follicular cancer as about 2% in one section and about 4% in its overview; papillary is 80 to 90%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_cancer-dx-mgmt",
+      "title": "Diagnosis and management of thyroid nodule and cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thyroid nodule found",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Measure TSH",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "TSH low?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Radionuclide scan; hot nodule: treat hyperthyroidism, no FNA",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Thyroid and neck ultrasound, TI-RADS",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Meets FNA size and TI-RADS threshold?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Ultrasound surveillance",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ultrasound-guided FNA, Bethesda report",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Bethesda III or IV?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Molecular testing or calcitonin",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Malignant or suspicious?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign: follow up",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Surgery by size and type; RAI and TSH suppression if higher risk",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

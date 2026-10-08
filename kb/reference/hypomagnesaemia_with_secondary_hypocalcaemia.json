@@ -157,5 +157,361 @@
       "caption": "Overview comparison matrix for hypomagnesaemia with secondary hypocalcaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited kidney disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypomagnesaemia_with_secondary_hypocalcaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum magnesium and serum calcium",
+          "cells": [
+            {
+              "text": "Interpreted together"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone",
+          "cells": [
+            {
+              "text": "Inappropriately low-normal for the hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractional excretion of magnesium and urinary calcium",
+          "cells": [
+            {
+              "text": "Renal magnesium leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Prolonged QT interval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRPM6 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; wider panel if negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal malabsorption assessment",
+          "cells": [
+            {
+              "text": "Acquired mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies",
+          "cells": [
+            {
+              "text": "Recurrence risk in siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomagnesaemia_with_secondary_hypocalcaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial hypomagnesaemia with hypercalciuria (CLDN16 or CLDN19)",
+          "cells": [
+            {
+              "text": "Hypercalciuria and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gitelman syndrome (SLC12A3)",
+          "cells": [
+            {
+              "text": "Hypokalaemic metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated dominant hypomagnesaemia (FXYD2 or CNNM2)",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EAST/SeSAME syndrome (KCNJ10)",
+          "cells": [
+            {
+              "text": "Epilepsy, ataxia and salt-losing tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HNF1B-related disease",
+          "cells": [
+            {
+              "text": "Renal cysts and diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomagnesaemia_with_secondary_hypocalcaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive magnesium replacement",
+          "cells": [
+            {
+              "text": "Lifelong oral magnesium salts titrated to maximum tolerated dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute crises",
+          "cells": [
+            {
+              "text": "Intravenous magnesium for acute crises and tetany or seizures, with calcium, airway and cardiac support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium follows magnesium",
+          "cells": [
+            {
+              "text": "Calcium normalises only once magnesium is repleted; calcium and vitamin D alone are insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tolerability",
+          "cells": [
+            {
+              "text": "Divide doses and use better-tolerated preparations to limit diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum magnesium, calcium and ECG for QT prolongation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intercurrent illness",
+          "cells": [
+            {
+              "text": "Escalate supplementation during vomiting or intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TRPM6 disorder; screen at-risk siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypomagnesaemia_with_secondary_hypocalcaemia-dx-mgmt",
+      "title": "Diagnosis and management of Hypomagnesaemia with Secondary Hypocalcaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with seizures, tetany or muscle spasm and low magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures unresponsive to anticonvulsants, tetany, laryngospasm or prolonged QT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intravenous magnesium with calcium, airway and cardiac support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum magnesium and calcium, PTH, urinary magnesium leak, ECG, TRPM6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Renal magnesium wasting and TRPM6 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gitelman syndrome, CLDN16 or CLDN19 and other genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral magnesium titrated to tolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace magnesium before expecting calcium to normalise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Divide doses to limit diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor magnesium, calcium and ECG QT interval",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and sibling screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong magnesium; continue even after calcium normalises",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -143,5 +143,325 @@
       "caption": "Overview comparison matrix for empty nose syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otolaryngology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "empty_nose_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom history against prior turbinate surgery",
+          "cells": [
+            {
+              "text": "Temporal link to tissue removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Wide cavity and mucosal state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cotton test",
+          "cells": [
+            {
+              "text": "Predicts benefit from tissue augmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood, anxiety and sleep assessment",
+          "cells": [
+            {
+              "text": "Psychological burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for rhinosinusitis or atrophic rhinitis",
+          "cells": [
+            {
+              "text": "Coexisting disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empty_nose_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Persistent structural nasal obstruction",
+          "cells": [
+            {
+              "text": "Obstruction with a narrow airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic rhinosinusitis",
+          "cells": [
+            {
+              "text": "Mucus and facial pressure with sinus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrophic rhinitis",
+          "cells": [
+            {
+              "text": "Crusting and foetor with mucosal atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatic symptom or anxiety disorder",
+          "cells": [
+            {
+              "text": "Symptoms without objective findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empty_nose_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Humidification, saline irrigation, sprays and emollient ointment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal conditioning",
+          "cells": [
+            {
+              "text": "Improves humidification and mucosal health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cotton test",
+          "cells": [
+            {
+              "text": "Predicts likely benefit before augmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical augmentation",
+          "cells": [
+            {
+              "text": "Implants or grafts in selected refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Anxiety, low mood and sleep disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Otolaryngology familiar with the condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "empty_nose_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Empty nose syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected empty nose syndrome: paradoxical obstruction after turbinate reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suicidal ideation, progressive crusting, atrophic infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent mental health assessment for severe distress or suicidal ideation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy; cotton test; history of turbinate surgery; mood and sleep assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the cotton test relieve symptoms after prior turbinate removal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider structural obstruction, rhinosinusitis, atrophic rhinitis or somatic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Saline irrigation, humidification, sprays and emollient ointment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cotton test to predict benefit before any augmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Implant or graft augmentation in selected refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological support for anxiety, low mood and poor sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid further tissue-removing surgery; refer to a specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and hard to treat; outcomes variable, psychological support often needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

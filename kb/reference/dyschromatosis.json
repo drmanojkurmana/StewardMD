@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for dyschromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyschromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Three-generation family pedigree",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing for ADAR1 and ABCB6",
+          "cells": [
+            {
+              "text": "ADAR1 (DSH) or ABCB6 and related genes (DUH)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of paired hyper- and hypopigmented macules",
+          "cells": [
+            {
+              "text": "Corresponding melanin changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Pattern of pigment change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Reticulate pigmentary pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyschromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dowling-Degos disease",
+          "cells": [
+            {
+              "text": "Reticulate pattern with distinct distribution and genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulate acropigmentation of Kitamura",
+          "cells": [
+            {
+              "text": "Reticulate pattern with distinct distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xeroderma pigmentosum",
+          "cells": [
+            {
+              "text": "Photosensitivity or early skin cancer with dyschromia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyschromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, stable, lifelong pigmentary disorder; no medical treatment needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Broad-spectrum sunscreen to reduce contrast between macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic camouflage",
+          "cells": [
+            {
+              "text": "Limited and unpredictable role of laser therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological review",
+          "cells": [
+            {
+              "text": "Dystonia or developmental delay in DSH, reflecting ADAR1 involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subtype confirmation",
+          "cells": [
+            {
+              "text": "Molecular testing and paired skin biopsy where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Typically autosomal dominant; pedigree and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyschromatosis-dx-mgmt",
+      "title": "Diagnosis and management of dyschromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dyschromatosis: hyper- and hypopigmented macules in a reticulate pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dystonia or regression, marked photosensitivity, ulcerating lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology or malignancy review for red flag features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Family pedigree; ADAR1 and ABCB6 testing; paired skin biopsy; Wood's lamp; dermoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ADAR1 or ABCB6 variant found with the typical pigment pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dowling-Degos, Kitamura acropigmentation or xeroderma pigmentosum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, stable, lifelong pigmentary disorder with no malignant potential",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum sunscreen to reduce contrast between macules",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cosmetic camouflage; laser therapy has a limited, unpredictable role",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological referral for dystonia or developmental delay in DSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance with family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, stable and lifelong; outcome chiefly set by any associated neurological disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

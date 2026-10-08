@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for familial dysautonomia (hsan type 3, riley-day, elp1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_dysautonomia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted ELP1 (IKBKAP) genetic testing, including the founder mutation",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function and tilt-table testing",
+          "cells": [
+            {
+              "text": "Baroreflex failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for absent fungiform papillae and overflow tears",
+          "cells": [
+            {
+              "text": "Cardinal signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intradermal histamine test",
+          "cells": [
+            {
+              "text": "Absent axon flare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video fluoroscopy of swallowing",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction and sensory testing",
+          "cells": [
+            {
+              "text": "Sensory neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_dysautonomia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration prevention",
+          "cells": [
+            {
+              "text": "Swallowing assessment, texture-modified feeding or gastrostomy, and chest physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of autonomic crises",
+          "cells": [
+            {
+              "text": "Benzodiazepines such as diazepam, clonidine, rehydration and antiemesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Volume and salt repletion, fludrocortisone and midodrine; control paroxysmal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular protection",
+          "cells": [
+            {
+              "text": "Artificial tears and lubricants for alacrima"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ongoing surveillance",
+          "cells": [
+            {
+              "text": "Cardiovascular instability, renal impairment, scoliosis and optic neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and carrier screening",
+          "cells": [
+            {
+              "text": "ELP1; Ashkenazi Jewish ancestry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_dysautonomia-dx-mgmt",
+      "title": "Diagnosis and management of Familial dysautonomia (HSAN type 3, Riley-Day, ELP1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with absent tears, feeding difficulty and labile BP; Ashkenazi ancestry",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dysautonomic crisis, aspiration, profound orthostatic syncope, arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat autonomic crisis promptly: benzodiazepine, rehydration and antiemesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ELP1 testing; tilt-table test; fungiform papillae; histamine test; fluoroscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ELP1 variant confirmed with absent axon flare?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other HSAN types or an acquired autonomic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary supportive care as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspiration prevention with feeding modification or gastrostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fludrocortisone and midodrine for blood pressure instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Artificial tears for alacrima",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for cardiovascular, renal, scoliosis and optic complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Survival has improved; aspiration and cardiovascular morbidity remain substantial",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

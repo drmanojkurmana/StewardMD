@@ -150,5 +150,276 @@
       "caption": "Overview comparison matrix for mesenteric cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Schwartz's Principles of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mesenteric_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Cyst and septa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Anatomy and vascular relationships"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue characterisation and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analysis of aspirated fluid",
+          "cells": [
+            {
+              "text": "Chyle versus serous content"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with endothelial and mesothelial markers",
+          "cells": [
+            {
+              "text": "Origin of the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Equivocal cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mesenteric_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive; laparoscopy or laparotomy, with enucleation where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Segmental bowel resection",
+          "cells": [
+            {
+              "text": "When the cyst is inseparable from adjacent bowel or its blood supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery for complications",
+          "cells": [
+            {
+              "text": "Torsion, intracystic haemorrhage, infection, rupture or bowel obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological confirmation",
+          "cells": [
+            {
+              "text": "Immunohistochemistry to define origin and exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marsupialisation or sclerotherapy",
+          "cells": [
+            {
+              "text": "Only when complete excision is not feasible; higher recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up for recurrence",
+          "cells": [
+            {
+              "text": "Particularly after incomplete removal of lymphatic lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mesenteric_cyst-dx-mgmt",
+      "title": "Diagnosis and management of mesenteric cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intra-abdominal cyst with septa on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Torsion, rupture, bowel obstruction, infection, chylous ascites or solid components?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery for torsion, haemorrhage, rupture or bowel obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound; contrast CT for anatomy; MRI; aspirate for chyle versus serous content",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the cyst confirmed as a mesenteric cyst on histopathology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cystic mesothelioma, duplication cyst or pseudocyst; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision by laparoscopy or laparotomy, with enucleation where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Segmental bowel resection when the cyst is inseparable from bowel or its blood supply",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histopathology with immunohistochemistry to define origin and exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Marsupialisation or sclerotherapy only when complete excision is not feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow-up for recurrence, particularly after incomplete removal of lymphatic lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

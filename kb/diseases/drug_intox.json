@@ -205,5 +205,591 @@
       "caption": "Diagnostic and clinical overview matrix for drug intoxication / poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, General Principles of Poisoning",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/poisoning/general-principles-of-poisoning",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_intox-diagnostic",
+      "kind": "diagnostic",
+      "title": "Toxidromes and key tests in poisoning",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Key features",
+        "Typical agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticholinergic",
+          "cells": [
+            {
+              "text": "Tachycardia, hyperthermia, wide pupils, hot dry skin, retention, ileus, delirium"
+            },
+            {
+              "text": "Antihistamines, atropine, tricyclics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sympathomimetic",
+          "cells": [
+            {
+              "text": "Tachycardia, hypertension, wide pupils, sweating, agitation, seizures"
+            },
+            {
+              "text": "Cocaine, amphetamines, MDMA, theophylline"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioid",
+          "cells": [
+            {
+              "text": "{{hy:Pinpoint pupils, sedation, slow breathing}}"
+            },
+            {
+              "text": "Heroin, fentanyl, methadone, morphine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholinergic muscarinic",
+          "cells": [
+            {
+              "text": "Salivation, lacrimation, urination, diarrhoea, bronchorrhoea, bradycardia, small pupils"
+            },
+            {
+              "text": "Organophosphates, carbamates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholinergic nicotinic",
+          "cells": [
+            {
+              "text": "Fasciculation, weakness, tachycardia, hypertension"
+            },
+            {
+              "text": "Nicotine, some organophosphates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Withdrawal",
+          "cells": [
+            {
+              "text": "Agitation, seizures, tachycardia"
+            },
+            {
+              "text": "Alcohol, benzodiazepines, GHB, opioids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Core temperature",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Best predictor of poor outcome in stimulant poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmolal gap",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": ">10",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Toxic alcohol or glycol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anion gap",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Methanol, ethylene glycol, salicylate, organ failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "QRS or QT prolongation, AV block, VT"
+            },
+            {
+              "text": "Points to sodium-channel or other cardiotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol level",
+          "cells": [
+            {
+              "text": "All mixed or unknown ingestions"
+            },
+            {
+              "text": "Silent early toxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine drug screen",
+          "cells": [
+            {
+              "text": "Qualitative only"
+            },
+            {
+              "text": "False positives and negatives common"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "drug_intox-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic poisoning",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "{{hy:Rapid response to IV dextrose}}"
+            },
+            {
+              "text": "Bedside glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural brain lesion",
+          "cells": [
+            {
+              "text": "Focal neurological signs are uncommon in poisoning"
+            },
+            {
+              "text": "CT head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS infection",
+          "cells": [
+            {
+              "text": "Fever with altered mental state"
+            },
+            {
+              "text": "Lumbar puncture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psychogenic illness",
+          "cells": [
+            {
+              "text": "Symptoms out of keeping with exposure"
+            },
+            {
+              "text": "Clinical observation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic ketoacidosis or DKA",
+          "cells": [
+            {
+              "text": "Anion gap with ketosis"
+            },
+            {
+              "text": "Glucose and ketones"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Head injury",
+          "cells": [
+            {
+              "text": "Trauma history"
+            },
+            {
+              "text": "CT head"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "drug_intox-treatment",
+      "kind": "treatment",
+      "title": "General management and antidotes in poisoning",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway, breathing, circulation; poison centre",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "Consult a poison centre for all but trivial cases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dextrose",
+          "cells": [
+            {
+              "text": "Altered consciousness, hypoglycaemia not excluded"
+            },
+            {
+              "text": "50 mL of 50% IV in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thiamine",
+          "cells": [
+            {
+              "text": "Suspected deficiency"
+            },
+            {
+              "text": "100 mg IV with or before glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Naloxone",
+          "cells": [
+            {
+              "text": "Opioid toxidrome with poor breathing"
+            },
+            {
+              "text": "0.4 to 2 mg IV every 2 to 3 min, maximum 10 mg; may precipitate withdrawal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Within 1 to 2 h of a toxic ingestion, airway safe"
+            },
+            {
+              "text": "0.5 to 2 g/kg (50 to 100 g adults); not for caustics, alcohols, iron, lithium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Whole bowel irrigation",
+          "cells": [
+            {
+              "text": "Sustained-release drugs, metals, drug packets"
+            },
+            {
+              "text": "Polyethylene glycol until effluent clear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Paracetamol poisoning"
+            },
+            {
+              "text": "Specific antidote"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fomepizole",
+          "cells": [
+            {
+              "text": "Methanol or ethylene glycol"
+            },
+            {
+              "text": "Ethanol as alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atropine and pralidoxime",
+          "cells": [
+            {
+              "text": "Organophosphate or carbamate"
+            },
+            {
+              "text": "Cholinergic poisoning antidotes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Tricyclic poisoning"
+            },
+            {
+              "text": "Also urinary alkalinisation for salicylate to urine pH >=7.5"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Flumazenil or physostigmine",
+          "cells": [
+            {
+              "text": "Only with toxicologist advice"
+            },
+            {
+              "text": "Controversial; can cause harm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Ethylene glycol, methanol, lithium, salicylate, theophylline"
+            },
+            {
+              "text": "By level and clinical state"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Observation",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "4 to 6 h",
+              "range": [
+                4,
+                6
+              ]
+            },
+            {
+              "text": "Longer for sustained-release or delayed toxins; psychiatric review after intentional ingestion"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Antidote doses other than naloxone and charcoal are not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_intox-dx-mgmt",
+      "title": "Approach to suspected drug poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected overdose or unexplained altered state",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ABC; glucose; ECG; temperature",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Opioid toxidrome with poor breathing?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Naloxone 0.4 to 2 mg IV, repeat as needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Identify toxidrome; paracetamol level; gaps",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Ingestion within 1 to 2 h and airway safe?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activated charcoal if agent binds",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Specific antidote or dialysable toxin?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Give antidote or arrange haemodialysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Symptom-free with normal tests at 4 to 6 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Discharge after psychiatric review if intentional",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Admit for monitoring",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

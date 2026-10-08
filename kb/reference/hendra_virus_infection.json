@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for hendra virus infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hendra_virus_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR on respiratory secretions, blood or CSF",
+          "cells": [
+            {
+              "text": "Viral RNA, tested in a high-containment laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Henipavirus-specific serology",
+          "cells": [
+            {
+              "text": "Antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Used when encephalitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Encephalitic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and oxygenation",
+          "cells": [
+            {
+              "text": "Pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and renal function tests",
+          "cells": [
+            {
+              "text": "Systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hendra_virus_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nipah virus infection",
+          "cells": [
+            {
+              "text": "Clinical overlap; both are henipaviruses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Q fever and other zoonoses",
+          "cells": [
+            {
+              "text": "Animal-contact history; contact with a sick or dead horse points to Hendra"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Community-acquired or viral pneumonia progressing to ARDS",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral encephalitis from herpes simplex or arboviruses",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hendra_virus_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "For pneumonitis and encephalitis, with ventilatory and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Experimental henipavirus-neutralising antibody",
+          "cells": [
+            {
+              "text": "Considered as post-exposure prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Management of encephalitic complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Strict precautions and personal protective equipment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged neurological follow-up",
+          "cells": [
+            {
+              "text": "Risk of late relapsing encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Infectious diseases, critical care, public health and veterinary authorities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Vaccinating horses to interrupt transmission to humans"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hendra_virus_infection-dx-mgmt",
+      "title": "Diagnosis and management of Hendra virus infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Influenza-like illness or pneumonitis after contact with a sick horse",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Altered consciousness, seizures, focal deficit or progressive respiratory failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive care for pneumonitis and encephalitis; isolate the patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR in a high-containment laboratory; serology; CSF; MRI brain; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is henipavirus infection confirmed by PCR or serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Nipah virus, pneumonia, or viral or bacterial encephalitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care for pneumonitis and encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Seizure control and neuroprotective supportive measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strict infection control and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prolonged neurological follow-up for late relapsing encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care; long-term neurological follow-up for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

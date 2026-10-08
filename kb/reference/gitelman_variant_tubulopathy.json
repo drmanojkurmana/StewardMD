@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for gitelman-spectrum salt-losing tubulopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gitelman_variant_tubulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes including potassium, magnesium, bicarbonate and calcium",
+          "cells": [
+            {
+              "text": "Electrolyte profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas or bicarbonate",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypocalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary electrolytes and diuretic screen",
+          "cells": [
+            {
+              "text": "Surreptitious diuretic use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Activation of the axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC12A3 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gitelman_variant_tubulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bartter syndrome",
+          "cells": [
+            {
+              "text": "Excluded by urinary calcium and magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypomagnesaemia with hypercalciuria",
+          "cells": [
+            {
+              "text": "Contrasting phenotype with hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surreptitious diuretic use",
+          "cells": [
+            {
+              "text": "Identical biochemical picture; excluded by urine diuretic screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gitelman_variant_tubulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong oral magnesium replacement",
+          "cells": [
+            {
+              "text": "The cornerstone; restoring magnesium is usually essential to correct potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral potassium with liberal salt and fluid",
+          "cells": [
+            {
+              "text": "Compensates for renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing diuretics",
+          "cells": [
+            {
+              "text": "Spironolactone, eplerenone or amiloride to limit potassium and magnesium wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous replacement",
+          "cells": [
+            {
+              "text": "Severe symptomatic depletion with tetany or carpopedal spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial electrolytes; ECG when disturbance is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid decompensation",
+          "cells": [
+            {
+              "text": "Salt and fluid maintenance during vomiting, diarrhoea or heat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screening of at-risk siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gitelman_variant_tubulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Gitelman-spectrum salt-losing tubulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gitelman-spectrum tubulopathy: salt-losing alkalosis with low magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypokalaemia, tetany, rhabdomyolysis, QT prolongation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent electrolyte replacement with ECG for arrhythmia or tetany",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, blood gas, urinary calcium ratio, renin and aldosterone, SLC12A3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC12A3 testing confirm the tubulopathy, with diuretic misuse excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bartter syndrome, diuretic misuse or hypomagnesaemia with hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral magnesium replacement as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral potassium with liberal salt and fluid intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium-sparing diuretics to limit potassium and magnesium wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous replacement for severe symptomatic depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally good long-term prognosis with normal life expectancy in most patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for perrault syndrome (snhl + ovarian dysgenesis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perrault_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Characterises and monitors sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Excludes Turner syndrome; confirms 46,XX status in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine assessment with pelvic imaging",
+          "cells": [
+            {
+              "text": "Gonadotrophins and ovarian reserve markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Perrault-associated genes such as CLPP, HARS2, LARS2 and TWNK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological evaluation and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Ataxia or neuropathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging before cochlear implantation",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging, when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perrault_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Turner syndrome",
+          "cells": [
+            {
+              "text": "Gonadal dysgenesis; excluded by karyotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Usher and Pendred syndromes",
+          "cells": [
+            {
+              "text": "Systemic features overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perrault_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multisystem care",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids and cochlear implantation for progressive sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Oestrogen and progesterone to induce or maintain puberty and protect bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Assisted reproduction or oocyte donation, as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological management",
+          "cells": [
+            {
+              "text": "Physiotherapy for ataxia and peripheral neuropathy in neurological subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening for autosomal recessive genes such as CLPP, HARS2, LARS2 and TWNK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Audiology, reproductive endocrinology, clinical genetics and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perrault_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Perrault syndrome (SNHL + ovarian dysgenesis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hearing loss in a female with primary or premature ovarian insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ovarian insufficiency, progressive ataxia, profound progressive hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist audiology and reproductive endocrine input for profound or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure-tone audiometry; karyotype; gonadotrophins and ovarian reserve; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm a Perrault-associated gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Turner syndrome, Usher or Pendred syndrome, or autoimmune ovarian failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive multisystem care, as no disease-specific drug therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for progressive sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oestrogen and progesterone replacement to induce or maintain puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fertility counselling, with assisted reproduction or oocyte donation as appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Hearing loss progresses; ovarian insufficiency usually causes infertility",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

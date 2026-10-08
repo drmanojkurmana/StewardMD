@@ -156,5 +156,350 @@
       "caption": "Overview comparison matrix for grey zone lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gray_zone_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Core or excisional biopsy with expert haematopathology",
+          "cells": [
+            {
+              "text": "Adequate tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended immunohistochemistry panel",
+          "cells": [
+            {
+              "text": "CD20, CD15, CD30, PAX5, CD45 and transcription factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT",
+          "cells": [
+            {
+              "text": "Staging and response of the mediastinal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or molecular testing for 9p24",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood counts, LDH and organ function",
+          "cells": [
+            {
+              "text": "Before intensive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for SVC obstruction and airway compromise",
+          "cells": [
+            {
+              "text": "Presentation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gray_zone_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary mediastinal large B-cell lymphoma",
+          "cells": [
+            {
+              "text": "Shared mediastinal presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic Hodgkin lymphoma, nodular sclerosis",
+          "cells": [
+            {
+              "text": "Hodgkin category; forcing it into this category is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse large B-cell lymphoma",
+          "cells": [
+            {
+              "text": "Aggressive B-cell lymphoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gray_zone_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Adequate biopsy and expert review",
+          "cells": [
+            {
+              "text": "Before choosing a treatment path"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive B-cell lymphoma approach",
+          "cells": [
+            {
+              "text": "Treated as aggressive non-Hodgkin B-cell lymphoma, not classical Hodgkin regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curative first-line therapy",
+          "cells": [
+            {
+              "text": "For non-metastatic, typically localised bulky mediastinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthracycline-based rituximab chemoimmunotherapy",
+          "cells": [
+            {
+              "text": "Backbone of first-line treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "R-CHOP-type regimen",
+          "cells": [
+            {
+              "text": "Acceptable first-line option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose-adjusted EPOCH-R",
+          "cells": [
+            {
+              "text": "Alternative first-line regimen with rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical trial",
+          "cells": [
+            {
+              "text": "Considered, since neither regimen is clearly superior"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Consolidation for residual mass or salvage for localised relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "No therapeutic role; only for diagnostic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse",
+          "cells": [
+            {
+              "text": "Second-line chemotherapy bridging to autologous transplant, extrapolated from PMBL"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gray_zone_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Grey zone lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected grey zone lymphoma: bulky mediastinal B-cell lymphoma with discordant features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (SVC obstruction, airway compromise, effusion, discordant biopsy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of SVC obstruction or airway compromise from a bulky mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Adequate biopsy, extended immunohistochemistry, PET-CT and FISH for 9p24",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does expert haematopathology review confirm a grey zone phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary mediastinal LBCL, nodular sclerosing Hodgkin or DLBCL",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Adequate biopsy and expert haematopathology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive B-cell lymphoma approach, not a Hodgkin regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab-containing chemoimmunotherapy as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider clinical trial enrolment and radiotherapy for residual mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Behaves more aggressively and responds less predictably than related lymphomas",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

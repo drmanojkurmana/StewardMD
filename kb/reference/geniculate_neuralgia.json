@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for geniculate neuralgia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "geniculate_neuralgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and microscopy",
+          "cells": [
+            {
+              "text": "Excludes middle and external ear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus and cerebellopontine angle",
+          "cells": [
+            {
+              "text": "Facial nerve and skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Identifies a compressive vascular loop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the external auditory canal",
+          "cells": [
+            {
+              "text": "Triggerable zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "If hearing symptoms or tinnitus accompany the pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oropharyngeal examination",
+          "cells": [
+            {
+              "text": "Excludes referred otalgia from malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geniculate_neuralgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ramsay Hunt syndrome (herpes zoster oticus)",
+          "cells": [
+            {
+              "text": "Vesicles in the ear canal or pinna with facial weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellopontine angle or skull base tumour",
+          "cells": [
+            {
+              "text": "Cerebellopontine angle mass on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referred otalgia from oropharyngeal malignancy",
+          "cells": [
+            {
+              "text": "Persistent unilateral otalgia with a normal ear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geniculate_neuralgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "Carbamazepine or oxcarbazepine first line, with gabapentin or other neuropathic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiviral therapy",
+          "cells": [
+            {
+              "text": "Where varicella-zoster or preceding Ramsay Hunt syndrome is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude other causes",
+          "cells": [
+            {
+              "text": "Otoscopy and imaging of the internal auditory meatus and cerebellopontine angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger-zone avoidance",
+          "cells": [
+            {
+              "text": "Advice on provoking stimuli in the external auditory canal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular decompression",
+          "cells": [
+            {
+              "text": "For a compressive vascular loop; sectioning of the nervus intermedius is an option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neurology and skull-base neurosurgery for drug-resistant or uncertain disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "geniculate_neuralgia-dx-mgmt",
+      "title": "Diagnosis and management of Geniculate neuralgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected geniculate neuralgia: deep ear pain with a normal ear",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ear vesicles with facial weakness, cranial neuropathy, CPA mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for Ramsay Hunt syndrome or a cerebellopontine angle mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, MRI of internal auditory meatus and cerebellopontine angle, MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI or MR angiography show a compressive vascular loop?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glossopharyngeal neuralgia, trigeminal neuralgia or referred malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticonvulsants such as carbamazepine or oxcarbazepine, with gabapentin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiviral therapy where herpetic zoster is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trigger-zone avoidance advice in the external auditory canal",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microvascular decompression for a compressive vascular loop",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but distressing; many respond to anticonvulsants, and surgery is an option",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

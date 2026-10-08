@@ -148,5 +148,344 @@
       "caption": "Overview comparison matrix for ollier disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ollier_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Distribution and burden of enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of symptomatic or enlarging lesions",
+          "cells": [
+            {
+              "text": "Cartilage and aggressive features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH1 and IDH2 testing on lesional tissue",
+          "cells": [
+            {
+              "text": "Somatic variants where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "Change in size, cortical breach or soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of suspicious lesions",
+          "cells": [
+            {
+              "text": "Features suggesting malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ollier_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple hereditary exostoses",
+          "cells": [
+            {
+              "text": "Surface osteochondromas, rather than intramedullary enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maffucci syndrome",
+          "cells": [
+            {
+              "text": "Associated haemangiomas reclassify the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary enchondroma",
+          "cells": [
+            {
+              "text": "Single lesion; in Ollier disease malignant risk is higher and rises with lesion number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondrosarcoma",
+          "cells": [
+            {
+              "text": "Cortical destruction or an associated soft-tissue mass on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ollier_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance of enchondromas",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "No medical therapy for the enchondromas themselves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Curettage and grafting, corrective osteotomy or limb equalisation for deformity, fracture or limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance for chondrosarcoma",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Prompted by new pain, growth, cortical breach or a soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and biopsy of aggressive lesions",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Wide excision if chondrosarcoma is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Orthopaedics, radiology and a bone-tumour or sarcoma service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance on inheritance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Sporadic somatic-mosaic IDH1/IDH2 condition, so routine familial screening is unnecessary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ollier_disease-dx-mgmt",
+      "title": "Diagnosis and management of Ollier disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple asymmetric enchondromas with limb deformity or pathological fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new pain or growth, cortical destruction, soft-tissue mass or fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI and biopsy of aggressive lesions; sarcoma service referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; MRI of symptomatic lesions; IDH1/IDH2 testing if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and IDH testing confirm enchondromas without malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hereditary exostoses, Maffucci syndrome or fibrous dysplasia; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No medical therapy; surveillance of the enchondromas themselves",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic surgery for deformity, fracture or limb-length discrepancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong surveillance for chondrosarcoma: new pain, growth or cortical breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wide excision if chondrosarcoma is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure: sporadic and not inherited, so familial screening is unnecessary",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Deformity and fracture are the morbidity; chondrosarcoma needs lifelong watch",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

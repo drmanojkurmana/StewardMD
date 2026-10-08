@@ -164,5 +164,437 @@
       "caption": "Overview comparison matrix for reactive arthritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Reactive Arthritis",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/joint-disorders/reactive-arthritis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "REACTIVE_ARTHRITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in reactive arthritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Preceding infection",
+          "cells": [
+            {
+              "text": "Chlamydia trachomatis, or Shigella, Salmonella, Yersinia, Campylobacter, C. difficile"
+            },
+            {
+              "text": "No pathogen found in about 40%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Timing",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Urethritis 7 to 14 after sexual contact, arthritis over following weeks",
+              "range": [
+                7,
+                14
+              ]
+            },
+            {
+              "text": "Diagnosis is clinical"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Arthritis pattern",
+          "cells": [
+            {
+              "text": "{{hy:Asymmetric oligoarthritis of toes and large leg joints}}"
+            },
+            {
+              "text": "Knee effusions often only mildly painful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enthesitis and dactylitis",
+          "cells": [
+            {
+              "text": "Plantar fasciitis, Achilles tendinitis, sausage digits"
+            },
+            {
+              "text": "Characteristic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mucocutaneous and eye",
+          "cells": [
+            {
+              "text": "Conjunctivitis, uveitis, keratoderma blennorrhagicum, circinate balanitis, oral ulcers"
+            },
+            {
+              "text": "Support the diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HLA-B27",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 80 vs 7 in controls",
+              "op": "<=",
+              "value": 80
+            },
+            {
+              "text": "Predicts more severe, prolonged disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Joint fluid",
+          "cells": [
+            {
+              "text": "Organisms cannot be cultured"
+            },
+            {
+              "text": "Aspirate to exclude septic or crystal arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HIV and STI screen",
+          "cells": [
+            {
+              "text": "Test in severe disease and STI-triggered cases"
+            },
+            {
+              "text": "Treat partners"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "REACTIVE_ARTHRITIS-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of reactive arthritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated gonococcal infection",
+          "cells": [
+            {
+              "text": "Upper and lower limbs equally, migratory, no back pain, non-hyperkeratotic vesicles"
+            },
+            {
+              "text": "{{hy:Gonococcal culture of blood or skin lesions; response to ceftriaxone}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic arthritis",
+          "cells": [
+            {
+              "text": "Similar skin lesions, uveitis and asymmetric arthritis"
+            },
+            {
+              "text": "No preceding infection; psoriasis history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other HLA-B27 spondyloarthritis",
+          "cells": [
+            {
+              "text": "Ankylosing spondylitis and anterior uveitis share HLA-B27"
+            },
+            {
+              "text": "Axial imaging"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Hot, very painful single joint"
+            },
+            {
+              "text": "Synovial fluid Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout",
+          "cells": [
+            {
+              "text": "Acute monoarthritis"
+            },
+            {
+              "text": "Crystals in synovial fluid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "REACTIVE_ARTHRITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of reactive arthritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAID (indomethacin)",
+          "cells": [
+            {
+              "text": "{{hy:First line}}"
+            },
+            {
+              "text": "25 to 50 mg orally three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intra-articular depot steroid",
+          "cells": [
+            {
+              "text": "Resistant oligoarthritis or enthesitis"
+            },
+            {
+              "text": "Local injection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Chlamydia-triggered disease"
+            },
+            {
+              "text": "100 mg twice daily for up to 3 months; benefit controversial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sulfasalazine",
+          "cells": [
+            {
+              "text": "Persistent arthritis"
+            },
+            {
+              "text": "As in rheumatoid arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Severe despite NSAIDs and sulfasalazine"
+            },
+            {
+              "text": "No dose in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TNF inhibitor",
+          "cells": [
+            {
+              "text": "Resistant to NSAIDs and conventional DMARDs"
+            },
+            {
+              "text": "No dose in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Steroid and mydriatic eye drops",
+          "cells": [
+            {
+              "text": "Anterior uveitis"
+            },
+            {
+              "text": "Ophthalmology review"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Often settles in 3 to 4 months; up to 50% have recurrent or prolonged symptoms."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "REACTIVE_ARTHRITIS-dx-mgmt",
+      "title": "Diagnosis and management of reactive arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asymmetric lower-limb oligoarthritis weeks after GU or GI infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Aspirate effusion; STI and HIV testing; look for enthesitis, eye and skin signs",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Septic or crystal arthritis on fluid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat septic arthritis or gout",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gonococcal infection possible?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Culture blood and lesions; ceftriaxone trial",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAID; treat chlamydia and partners",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Persistent after several weeks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intra-articular steroid, sulfasalazine, then methotrexate",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "TNF inhibitor if still resistant",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Expect resolution in 3 to 4 months",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "If resistant"
+        }
+      ]
+    }
+  ]
 }

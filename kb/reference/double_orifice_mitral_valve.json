@@ -146,5 +146,298 @@
       "caption": "Overview comparison matrix for double orifice mitral valve."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "double_orifice_mitral_valve-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with parasternal short-axis imaging",
+          "cells": [
+            {
+              "text": "Two orifices separated by a fibrous bridge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-dimensional transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Orifice and bridge anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler inflow gradient measurement",
+          "cells": [
+            {
+              "text": "Severity of stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for atrioventricular septal defect and left-heart obstruction",
+          "cells": [
+            {
+              "text": "Associated defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "double_orifice_mitral_valve-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrioventricular septal defect",
+          "cells": [
+            {
+              "text": "Associated defect that is easily missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital mitral stenosis from parachute valve or supravalvar ring",
+          "cells": [
+            {
+              "text": "Congenital stenosis without a bridge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "double_orifice_mitral_valve-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Normal valve function, the usual situation; no intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Haemodynamically significant stenosis or regurgitation, tailored to the dominant lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure measures",
+          "cells": [
+            {
+              "text": "Diuretics and afterload reduction for symptomatic left-heart obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Transthoracic and 3D transoesophageal echo with Doppler gradients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated lesions",
+          "cells": [
+            {
+              "text": "Atrioventricular septal defect, coarctation and bicuspid aortic valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cardiology",
+          "cells": [
+            {
+              "text": "Congenital surgical input when intervention is contemplated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "double_orifice_mitral_valve-dx-mgmt",
+      "title": "Diagnosis and management of double orifice mitral valve",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected double orifice mitral valve: two mitral orifices on echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe mitral stenosis with pulmonary hypertension, heart failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent heart failure treatment and congenital cardiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo with parasternal short-axis and 3D transoesophageal imaging; Doppler gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is valve function abnormal, with a significant gradient or regurgitation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Normal valve function: observe; repeat imaging for progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Normal valve function needs no intervention; observe",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical repair for significant stenosis or regurgitation, tailored to the lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics and afterload reduction for symptomatic left-heart obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and Doppler gradients for progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen and manage AV septal defect, coarctation and bicuspid aortic valve",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Normal function needs no treatment; symptomatic cases depend on lesion severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

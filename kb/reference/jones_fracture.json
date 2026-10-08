@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for jones fracture (fifth metatarsal base)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jones_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anteroposterior, oblique and lateral foot radiographs",
+          "cells": [
+            {
+              "text": "Fracture zone localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing views",
+          "cells": [
+            {
+              "text": "Alignment and stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with tuberosity and intermetatarsal joint",
+          "cells": [
+            {
+              "text": "True Jones fracture versus avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Suspected non-union or medullary sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Early stress fracture before radiographic change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jones_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proximal fifth metatarsal tuberosity avulsion (pseudo-Jones, zone 1)",
+          "cells": [
+            {
+              "text": "Proximal tuberosity; usually heals well with symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zone 3 proximal diaphyseal stress fracture",
+          "cells": [
+            {
+              "text": "Lies beyond the fourth-fifth intermetatarsal joint"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jones_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immobilisation",
+          "cells": [
+            {
+              "text": "Non-weight-bearing cast or boot for acute fracture; watershed blood supply slows union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fixation",
+          "cells": [
+            {
+              "text": "Intramedullary screw for athletes, high-demand patients and displaced fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone healing",
+          "cells": [
+            {
+              "text": "Correct vitamin D and calcium; advise smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Union monitoring",
+          "cells": [
+            {
+              "text": "Radiographic follow-up given risk of delayed union and non-union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-union",
+          "cells": [
+            {
+              "text": "Revision fixation and bone grafting, with adjuvant bone stimulation where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Return to loading",
+          "cells": [
+            {
+              "text": "Graded loading with lateral-column offloading orthotics and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jones_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Jones fracture (fifth metatarsal base)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral foot pain at the fifth metatarsal base after a twisting injury or in an athlete",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Established non-union, recurrent fracture in an athlete or pain despite immobilisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Orthopaedic review; CT for non-union; consider fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP, oblique and lateral radiographs for zone, weight-bearing views, MRI if early stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Zone 2 true Jones fracture confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pseudo-Jones or zone 3 stress fracture: manage separately",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-weight-bearing cast or boot immobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intramedullary screw fixation for athletes or displaced fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct vitamin D and calcium; stop smoking",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiographic monitoring of union",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Revision fixation and bone grafting for non-union",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Union depends on fixation and weight-bearing; delayed union is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

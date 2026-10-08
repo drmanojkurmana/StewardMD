@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for electrical injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "electrical_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia or ischaemic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase and urine myoglobin",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and potassium",
+          "cells": [
+            {
+              "text": "Acute kidney injury and hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for pigment and urine output",
+          "cells": [
+            {
+              "text": "Myoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of fractures, dislocations or spine",
+          "cells": [
+            {
+              "text": "Associated trauma from falls or tetany"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "electrical_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thermal burns from other causes",
+          "cells": [
+            {
+              "text": "Burn without an electrical source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary cardiac arrest",
+          "cells": [
+            {
+              "text": "Arrest without a current pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crush injury with rhabdomyolysis",
+          "cells": [
+            {
+              "text": "Compression rather than current"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure with secondary injury",
+          "cells": [
+            {
+              "text": "Injury from an unrelated seizure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "electrical_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Scene safety and resuscitation",
+          "cells": [
+            {
+              "text": "Remove from the source; prolonged CPR after lightning; defibrillate VF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid resuscitation",
+          "cells": [
+            {
+              "text": "Titrated to urine output to prevent myoglobinuric kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "ECG and monitoring for significant exposure; correct hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burn and wound care",
+          "cells": [
+            {
+              "text": "Deep injury exceeds the surface burn; tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment checks",
+          "cells": [
+            {
+              "text": "Serial limb examination; fasciotomy and debridement as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma assessment",
+          "cells": [
+            {
+              "text": "Fractures, posterior shoulder dislocation and spinal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burns centre referral",
+          "cells": [
+            {
+              "text": "High-voltage injury; rehabilitation for sequelae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "electrical_injury-dx-mgmt",
+      "title": "Diagnosis and management of Electrical injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected electrical injury: contact with current, lightning or high-voltage source",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (arrhythmia, dark urine, compartment signs, spinal injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate resuscitation and defibrillation for ventricular fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG; creatine kinase and urine myoglobin; renal function; imaging for trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is rhabdomyolysis or a compartment syndrome present on examination and labs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thermal burns, primary cardiac arrest, crush injury or unrelated seizure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove from the source and resuscitate, with prolonged CPR after lightning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Titrated intravenous fluids to protect the kidneys from myoglobin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ECG and monitoring for arrhythmia; correct hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial compartment checks with fasciotomy and debridement as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Burns centre referral for high-voltage injury and rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Low-voltage injuries usually do well; high-voltage injury can cause amputation or death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

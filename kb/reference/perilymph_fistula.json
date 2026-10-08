@@ -150,5 +150,287 @@
       "caption": "Overview comparison matrix for perilymph fistula."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perilymph_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Characterises and monitors sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry and fistula test",
+          "cells": [
+            {
+              "text": "Pressure-induced nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Otic capsule and windows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular-evoked myogenic potentials",
+          "cells": [
+            {
+              "text": "Helps exclude superior canal dehiscence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Excludes a retrocochlear or central lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocochleography where available",
+          "cells": [
+            {
+              "text": "Inner-ear function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perilymph_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management first",
+          "cells": [
+            {
+              "text": "Bed rest, head elevation and avoidance of straining, heavy lifting and nose-blowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Stool softeners and vestibular sedatives or antiemetics for vertigo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical sealing",
+          "cells": [
+            {
+              "text": "Tympanotomy with grafting of the round or oval window for persistent, disabling or progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity restriction",
+          "cells": [
+            {
+              "text": "Avoid diving, flying and other barotrauma-inducing activities until healed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing monitoring",
+          "cells": [
+            {
+              "text": "Serial pure-tone audiometry; hearing recovery is less predictable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Otology and vestibular rehabilitation for residual imbalance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perilymph_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Perilymph fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vertigo and hearing loss after head trauma, barotrauma or ear surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid or profound hearing loss, meningitis signs, disabling vertigo)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical exploration (tympanotomy) for persistent, disabling or progressive fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure-tone audiometry, fistula test, temporal bone CT, VEMP and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the fistula test or CT support a perilymph fistula?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Meniere disease, superior canal dehiscence, labyrinthitis or BPPV",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care first: bed rest, head elevation and avoidance of straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stool softeners and vestibular sedatives or antiemetics for vertigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid diving, flying and barotrauma-inducing activities until healed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor hearing with serial pure-tone audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to otology and provide vestibular rehabilitation for residual imbalance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many fistulae settle with conservative care; surgical sealing relieves vertigo",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

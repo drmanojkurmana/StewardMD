@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for marburg variant multiple sclerosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marburg_multiple_sclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain and spinal cord with contrast",
+          "cells": [
+            {
+              "text": "Extent and activity of lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Cell count and oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 and MOG antibody testing",
+          "cells": [
+            {
+              "text": "Separates alternative demyelinating disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy",
+          "cells": [
+            {
+              "text": "Used when imaging cannot exclude tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced MRI (spectroscopy, perfusion)",
+          "cells": [
+            {
+              "text": "Separates demyelination from neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for infective causes",
+          "cells": [
+            {
+              "text": "Infection excluded before intensive immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marburg_multiple_sclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-grade glioma or CNS lymphoma",
+          "cells": [
+            {
+              "text": "Imaging cannot exclude tumour; advanced MRI and brain biopsy help separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral abscess or other infection",
+          "cells": [
+            {
+              "text": "Screened for before intensive immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 or MOG antibody disease",
+          "cells": [
+            {
+              "text": "Tested with AQP4 and MOG antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marburg_multiple_sclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose IV corticosteroids",
+          "cells": [
+            {
+              "text": "Methylprednisolone as first-line immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Steroid-refractory fulminant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent immunosuppression",
+          "cells": [
+            {
+              "text": "Cyclophosphamide in refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocritical supportive care",
+          "cells": [
+            {
+              "text": "Airway and ventilatory support for brainstem involvement; raised intracranial pressure and oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection and neoplasm",
+          "cells": [
+            {
+              "text": "Before and during intensive immunosuppression; brain biopsy where imaging cannot distinguish tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neuroimmunology",
+          "cells": [
+            {
+              "text": "AQP4 and MOG antibody testing to distinguish disorders and guide therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marburg_multiple_sclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Marburg variant multiple sclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large demyelinating lesions with rapidly declining consciousness or brainstem signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem dysfunction, respiratory compromise or failure to respond to steroids?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurocritical care, airway support and urgent immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spinal cord with contrast, CSF analysis, AQP4 and MOG antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are tumour and infection excluded on imaging, CSF or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Brain biopsy for suspected tumour; screen for infection before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose IV corticosteroids such as methylprednisolone as first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange for steroid-refractory fulminant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclophosphamide for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurocritical support: airway, ventilation and intracranial pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurorehabilitation with physiotherapy and occupational therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

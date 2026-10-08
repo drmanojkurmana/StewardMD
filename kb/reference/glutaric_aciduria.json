@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for glutaric aciduria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glutaric_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Elevated glutarylcarnitine (C5DC)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Glutaric and 3-hydroxyglutaric acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening acylcarnitine analysis",
+          "cells": [
+            {
+              "text": "Presymptomatic detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Frontotemporal atrophy and widened Sylvian fissures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCDH gene testing and enzyme assay",
+          "cells": [
+            {
+              "text": "Molecular confirmation when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-excretor status assessment",
+          "cells": [
+            {
+              "text": "Urine metabolites near normal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glutaric_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glutaric aciduria type 2",
+          "cells": [
+            {
+              "text": "Multiple acyl-CoA dehydrogenase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury",
+          "cells": [
+            {
+              "text": "Subdural collections and macrocephaly; misreading is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glutaric_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lysine-restricted diet",
+          "cells": [
+            {
+              "text": "Lysine-free, arginine-enriched amino-acid supplements to limit neurotoxic metabolite production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine supplementation",
+          "cells": [
+            {
+              "text": "Replenishes free carnitine and promotes excretion of glutarylcarnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency sick-day regimen",
+          "cells": [
+            {
+              "text": "High-energy glucose-based feeds during fever, fasting or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt admission during catabolic stress",
+          "cells": [
+            {
+              "text": "Intravenous glucose in the vulnerable early-childhood window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonia management",
+          "cells": [
+            {
+              "text": "Baclofen or trihexyphenidyl alongside physiotherapy and neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic monitoring",
+          "cells": [
+            {
+              "text": "Growth, nutrition, carnitine status and neurodevelopment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; newborn screening and testing of siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glutaric_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of Glutaric aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glutaric aciduria: encephalopathy or dystonia in an infant with macrocephaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute crisis during illness, new dystonia, progressive macrocephaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency metabolic management with IV glucose for an encephalopathic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile, urine organic acids, brain MRI and GCDH testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do raised glutarylcarnitine and urine glutaric acid confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glutaric aciduria type 2, other organic acidaemias or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lysine-restricted diet with arginine-enriched amino-acid supplements",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "L-carnitine to replenish free carnitine and remove glutarylcarnitine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency sick-day regimen during illness, fasting or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic dystonia treatment with physiotherapy and neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on striatal metabolic crisis; newborn screening and diet help prevent it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

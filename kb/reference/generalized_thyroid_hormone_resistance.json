@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for resistance to thyroid hormone beta."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalized_thyroid_hormone_resistance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Free T4 and free T3 with non-suppressed TSH",
+          "cells": [
+            {
+              "text": "Raised thyroid hormones with non-suppressed TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat and confirmatory thyroid function tests",
+          "cells": [
+            {
+              "text": "Excludes assay artefact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-subunit measurement and dynamic testing",
+          "cells": [
+            {
+              "text": "Distinguishes from TSH-secreting adenoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Where a TSH-secreting tumour cannot be excluded biochemically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral markers such as sex hormone-binding globulin",
+          "cells": [
+            {
+              "text": "Peripheral thyroid hormone action"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "THRB gene sequencing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_thyroid_hormone_resistance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH-secreting pituitary adenoma",
+          "cells": [
+            {
+              "text": "Separated by alpha-subunit, dynamic testing and pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperthyroidism (Graves disease)",
+          "cells": [
+            {
+              "text": "Treating raised hormones as hyperthyroidism causes iatrogenic harm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assay interference or heterophile antibodies",
+          "cells": [
+            {
+              "text": "Excluded by repeat and confirmatory tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_thyroid_hormone_resistance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No thyroid-directed treatment",
+          "cells": [
+            {
+              "text": "Most patients are compensated and euthyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from TSH-secreting adenoma",
+          "cells": [
+            {
+              "text": "Dynamic testing, alpha-subunit and imaging before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-adrenergic blockade",
+          "cells": [
+            {
+              "text": "Controls tachycardia and adrenergic symptoms from hormone-sensitive tissues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Learning and attention support",
+          "cells": [
+            {
+              "text": "Particularly in affected children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic monitoring",
+          "cells": [
+            {
+              "text": "Goitre, cardiac status and peripheral markers of hormone action"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant THRB disease; cascade testing to prevent misdiagnosis in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalized_thyroid_hormone_resistance-dx-mgmt",
+      "title": "Diagnosis and management of Resistance to thyroid hormone beta",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroid hormone resistance: raised thyroid hormones with non-suppressed TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atrial fibrillation, developmental concern, pituitary mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Pituitary imaging and endocrine review for suspected TSH-secreting adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Free T4 and T3 with TSH, alpha-subunit, dynamic testing and THRB sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does THRB sequencing or dynamic testing confirm the resistance pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TSH-secreting adenoma, Graves disease or assay interference",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No thyroid-directed treatment for most compensated, euthyroid patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Distinguish from TSH-secreting adenoma before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blockade for tachycardia and adrenergic symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid antithyroid drugs or thyroidectomy after misdiagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most have normal life expectancy; the main risk is iatrogenic harm from misdiagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for myofibrillar myopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myofibrillar_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Often normal to moderately elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic changes, sometimes with myotonic or neurogenic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with immunohistochemistry and electron microscopy",
+          "cells": [
+            {
+              "text": "Protein aggregates and Z-disc pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment: ECG, echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Cardiac involvement is common and can precede weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing",
+          "cells": [
+            {
+              "text": "Respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panel genetic testing",
+          "cells": [
+            {
+              "text": "Desmin, alpha-B-crystallin, myotilin, ZASP, filamin C and related genes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myofibrillar_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Limb-girdle muscular dystrophies",
+          "cells": [
+            {
+              "text": "Biopsy aggregate pathology is diagnostic; distal or mixed onset distinguishes it from most limb-girdle dystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal myopathies, including GNE and Miyoshi myopathy",
+          "cells": [
+            {
+              "text": "Cardiac conduction disease and cardiomyopathy are common in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited cardiomyopathies with skeletal involvement",
+          "cells": [
+            {
+              "text": "Skeletal weakness with cardiomyopathy; genetic panel testing is needed to separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myofibrillar_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG, echocardiography and cardiac MRI; treat conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pacemaker or implantable defibrillator",
+          "cells": [
+            {
+              "text": "Considered to prevent sudden death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation for respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility and function",
+          "cells": [
+            {
+              "text": "Physiotherapy, ankle-foot orthoses and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia and nutrition",
+          "cells": [
+            {
+              "text": "Speech and language therapy and dietetic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene confirmation",
+          "cells": [
+            {
+              "text": "Genetic testing for desmin, alpha-B-crystallin, myotilin, ZASP or filamin C to refine surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and family screening",
+          "cells": [
+            {
+              "text": "Genetic counselling and cardiac screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myofibrillar_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Myofibrillar myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Distal or mixed weakness with cardiac conduction disease or cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (conduction block, arrhythmia, heart failure, hypoventilation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review; consider pacemaker or defibrillator for sudden-death risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, EMG, muscle biopsy for aggregates, cardiac MRI, respiratory tests, gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myofibrillar aggregates on biopsy with a Z-disc gene variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider limb-girdle dystrophy, distal myopathy or inherited cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cardiac surveillance with ECG, echocardiography and cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pacemaker or implantable defibrillator considered to prevent sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring with non-invasive ventilation for weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, ankle-foot orthoses and occupational therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Skeletal weakness progresses slowly; cardiac and respiratory disease dominate morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

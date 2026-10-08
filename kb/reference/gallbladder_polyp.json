@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for gallbladder polyp."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gallbladder_polyp-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transabdominal ultrasound",
+          "cells": [
+            {
+              "text": "Size, number and morphology; detects gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Detailed characterisation of indeterminate or larger polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced ultrasound or MRI",
+          "cells": [
+            {
+              "text": "When malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ultrasound",
+          "cells": [
+            {
+              "text": "Growth of small polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and CA 19-9",
+          "cells": [
+            {
+              "text": "When malignancy is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for primary sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "In relevant patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder_polyp-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adherent gallstone or tumefactive sludge",
+          "cells": [
+            {
+              "text": "Mistaken for a fixed polyp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallbladder adenocarcinoma",
+          "cells": [
+            {
+              "text": "Solitary sessile polyp or focal wall thickening at the polyp base"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder_polyp-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cholecystectomy, usually laparoscopic",
+          "cells": [
+            {
+              "text": "For high-risk polyps, such as large, enlarging or solitary sessile polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholecystectomy for symptomatic disease",
+          "cells": [
+            {
+              "text": "Symptomatic polyps or symptomatic coexisting gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ultrasound surveillance",
+          "cells": [
+            {
+              "text": "Small, low-risk polyps, to detect growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound or contrast-enhanced imaging",
+          "cells": [
+            {
+              "text": "Characterises indeterminate or larger lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Age, polyp number, morphology and coexisting gallstones guide surgery versus surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary surgery referral",
+          "cells": [
+            {
+              "text": "Polyps meeting resection criteria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gallbladder_polyp-dx-mgmt",
+      "title": "Diagnosis and management of Gallbladder polyp",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gallbladder polyp: incidental polyp on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (polyp at size threshold, growth, solitary sessile polyp)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for surgery: polyp at or above the size threshold, or growing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transabdominal ultrasound; endoscopic ultrasound for larger or indeterminate polyps",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a fixed polyp rather than an adherent stone or sludge?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-image to confirm a stone or sludge mimic, then serial ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Laparoscopic cholecystectomy for high-risk polyps, such as large or enlarging ones",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cholecystectomy for symptomatic polyps or symptomatic coexisting gallstones",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial ultrasound surveillance of small, low-risk polyps",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Risk stratification by age, polyp number, morphology and gallstones",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Small non-neoplastic polyps have an excellent prognosis and rarely progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

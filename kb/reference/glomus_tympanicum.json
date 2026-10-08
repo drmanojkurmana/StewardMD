@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for glomus tympanicum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glomus_tympanicum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and microscopy",
+          "cells": [
+            {
+              "text": "Retrotympanic vascular mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Defines the tumour and the jugular bulb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with contrast",
+          "cells": [
+            {
+              "text": "Soft-tissue extent; distinguishes from glomus jugulare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiography and preoperative embolisation",
+          "cells": [
+            {
+              "text": "Larger or vascular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholamine screening and family history",
+          "cells": [
+            {
+              "text": "Functional or hereditary paraganglioma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomus_tympanicum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glomus jugulare tumour",
+          "cells": [
+            {
+              "text": "Extension to the skull base or lower cranial nerve palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aberrant internal carotid artery in the middle ear",
+          "cells": [
+            {
+              "text": "Can be mistaken for a tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomus_tympanicum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Transcanal or via tympanotomy; curative for middle-ear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy or stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "Alternative in poor surgical candidates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, minimally symptomatic tumours in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid transtympanic biopsy",
+          "cells": [
+            {
+              "text": "Vascular lesions bleed readily; consider embolisation for larger lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholamine screening",
+          "cells": [
+            {
+              "text": "Where a functional or hereditary paraganglioma is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "SDH mutations; screening for multicentric disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT and skull base team",
+          "cells": [
+            {
+              "text": "Imaging to distinguish tympanicum from jugulare or vagale disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glomus_tympanicum-dx-mgmt",
+      "title": "Diagnosis and management of Glomus tympanicum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glomus tympanicum: pulsatile retrotympanic mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (skull base extension, lower cranial palsy, catecholamine excess)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent skull base review for lower cranial nerve palsies or catecholamine symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, temporal bone CT, contrast MRI and catecholamine screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the mass confined to the middle ear on CT and MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glomus jugulare, aberrant carotid, haemangioma or facial nerve schwannoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, transcanal or via tympanotomy, for middle-ear disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy or radiosurgery for poor surgical candidates",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid transtympanic biopsy because the lesions bleed readily",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic evaluation for SDH mutations and screening for multicentric disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook with complete excision of a confined, slow-growing tumour",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

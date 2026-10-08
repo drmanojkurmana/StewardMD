@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for myofascial pain syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myofascial_pain_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for taut bands, trigger points and referred pain",
+          "cells": [
+            {
+              "text": "Reproducible referred pattern; the diagnosis is clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local twitch response on snapping palpation or needling",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of posture and ergonomics",
+          "cells": [
+            {
+              "text": "Perpetuating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or nerve conduction studies",
+          "cells": [
+            {
+              "text": "When a structural or neurological cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for thyroid dysfunction, vitamin deficiency and sleep disturbance",
+          "cells": [
+            {
+              "text": "Contributing conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Where inflammatory or systemic disease is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myofascial_pain_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Widespread pain with diffuse tender points, not regional referring trigger points"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiculopathy or peripheral nerve entrapment",
+          "cells": [
+            {
+              "text": "Trigger-point referral does not follow dermatomal boundaries; radicular pain does"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myofascial_pain_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Manual and physical therapy",
+          "cells": [
+            {
+              "text": "Trigger-point release, stretching and spray-and-stretch techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger-point needling",
+          "cells": [
+            {
+              "text": "Dry needling or local anaesthetic injection for persistent active points"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "For selected refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perpetuating factors",
+          "cells": [
+            {
+              "text": "Correct posture, ergonomic strain, muscle overload and psychological stressors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesics; a low-dose tricyclic antidepressant or muscle relaxant for pain and sleep disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing conditions",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction, vitamin deficiency and sleep disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active rehabilitation",
+          "cells": [
+            {
+              "text": "Multimodal programme; address central sensitisation in chronic cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myofascial_pain_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Myofascial pain syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Regional muscle pain with a palpable taut band and reproducible referred pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, weight loss, progressive neurological deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for infection, malignancy or neurological cause before a myofascial label",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trigger-point examination, local twitch response, posture, thyroid and vitamin screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Trigger points with local twitch response and reproduced referred pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fibromyalgia, radiculopathy or entrapment; image or test nerves",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trigger-point release, stretching and spray-and-stretch techniques",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dry needling or local anaesthetic injection for persistent active points",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct posture, ergonomic strain and muscle overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Active, multimodal rehabilitation programme with sleep and mood care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute overload often resolves; chronic cases with central sensitisation can persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

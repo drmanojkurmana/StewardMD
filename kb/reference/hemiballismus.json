@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for hemiballismus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemiballismus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Contralateral subthalamic or striatal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and ketones",
+          "cells": [
+            {
+              "text": "Non-ketotic hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular risk factor and stroke work-up",
+          "cells": [
+            {
+              "text": "Vascular cause, the commonest in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for neoplastic, structural or inflammatory lesions",
+          "cells": [
+            {
+              "text": "Used where imaging is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and autoimmune screen",
+          "cells": [
+            {
+              "text": "Younger patients or atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Recognised cause, where clinically relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemiballismus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hemichorea of other cause",
+          "cells": [
+            {
+              "text": "Hemiballismus and hemichorea form a continuum and often coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced dyskinesia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) movement disorder",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemiballismus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Correct non-ketotic hyperglycaemia with glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine-receptor-blocking agents",
+          "cells": [
+            {
+              "text": "Symptomatic suppression of the involuntary movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Limb padding; prevent self-injury and exhaustion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional neurosurgery",
+          "cells": [
+            {
+              "text": "Deep brain stimulation or pallidotomy for severe, disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and screening work-up",
+          "cells": [
+            {
+              "text": "Vascular risk-factor and stroke work-up; screen for metabolic, neoplastic and inflammatory causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Vascular cases often improve spontaneously over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemiballismus-dx-mgmt",
+      "title": "Diagnosis and management of Hemiballismus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Violent unilateral flinging limb movements, often in an older patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Self-injury, reduced consciousness or very high blood glucose present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat hyperglycaemia and protect from self-injury; urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain for subthalamic or striatal lesion; glucose and ketones; stroke work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a contralateral subthalamic or striatal lesion identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Screen for neoplastic, inflammatory, metabolic or autoimmune causes; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, such as non-ketotic hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dopamine-receptor-blocking agents to suppress the movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limb padding and support to prevent self-injury and exhaustion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Deep brain stimulation or pallidotomy for severe, disabling cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vascular cases often improve over weeks to months; the cause is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

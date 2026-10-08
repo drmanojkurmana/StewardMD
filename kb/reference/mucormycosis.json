@@ -161,5 +161,447 @@
       "caption": "Overview comparison matrix for mucormycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Mucormycosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/mucormycosis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mucormycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of mucormycosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Host",
+          "cells": [
+            {
+              "text": "Diabetes or DKA, neutropenia, leukaemia, transplant, deferoxamine, steroids, COVID-19"
+            },
+            {
+              "text": "DKA favours rhino-orbital-cerebral; leukaemia favours pulmonary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early rhino-orbital signs",
+          "cells": [
+            {
+              "text": "Facial or eye pain, facial numbness, then proptosis, chemosis, visual loss"
+            },
+            {
+              "text": "Black eschar or palatal ulcer is late"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "unit": "um",
+          "cells": [
+            {
+              "text": "Broad aseptate ribbon hyphae 6 to 30 um, right-angle branching",
+              "range": [
+                6,
+                30
+              ]
+            },
+            {
+              "text": "{{hy:Most sensitive and specific test}}; PAS or H&E stain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in under half of cases",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Section tissue, do not homogenise; negative culture does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI head and sinuses",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 80% sensitive for orbital and CNS spread",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Better than CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest",
+          "cells": [
+            {
+              "text": "Defines pulmonary extent early"
+            },
+            {
+              "text": "May precede chest film changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR or plasma cell-free DNA",
+          "cells": [
+            {
+              "text": "Mucorales DNA"
+            },
+            {
+              "text": "Supportive; no FDA-approved assay"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Nasal and sinus inspection"
+            },
+            {
+              "text": "Biopsy even normal-looking tissue if suspicion high"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucormycosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mucormycosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspergillosis",
+          "cells": [
+            {
+              "text": "Narrow septate hyphae with acute-angle branching"
+            },
+            {
+              "text": "{{hy:Histology; voriconazole worsens mucormycosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fusarium or Scedosporium",
+          "cells": [
+            {
+              "text": "Septate hyphae, often disseminated skin lesions"
+            },
+            {
+              "text": "Culture and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial orbital cellulitis or cavernous sinus thrombosis",
+          "cells": [
+            {
+              "text": "S. aureus or streptococci; responds to antibiotics"
+            },
+            {
+              "text": "Cultures and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhinoscleroma",
+          "cells": [
+            {
+              "text": "Chronic nasal granulomatous mass"
+            },
+            {
+              "text": "Biopsy and culture for Klebsiella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tolosa-Hunt syndrome",
+          "cells": [
+            {
+              "text": "Painful ophthalmoplegia without progression or necrosis"
+            },
+            {
+              "text": "MRI; steroid response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Entomophthoromycosis",
+          "cells": [
+            {
+              "text": "Chronic subcutaneous facial swelling in immunocompetent host"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucormycosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of mucormycosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liposomal amphotericin B",
+          "cells": [
+            {
+              "text": "{{hy:Start empirically on reasonable suspicion}}"
+            },
+            {
+              "text": "Initial therapy of choice, especially if severely ill"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isavuconazole",
+          "cells": [
+            {
+              "text": "Approved primary therapy or step-down"
+            },
+            {
+              "text": "Amphotericin preferred in severe illness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Posaconazole",
+          "cells": [
+            {
+              "text": "Consolidation or salvage"
+            },
+            {
+              "text": "Oral step-down"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical debridement",
+          "cells": [
+            {
+              "text": "All necrotic tissue"
+            },
+            {
+              "text": "Early and repeated; critical to survival"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reverse predisposition",
+          "cells": [
+            {
+              "text": "DKA, neutropenia, steroids, deferoxamine"
+            },
+            {
+              "text": "Correct acidosis and glucose; taper immunosuppression; stop deferoxamine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid iron",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Limit iron and liberal transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying malignancy",
+          "cells": [
+            {
+              "text": "Haematological patients"
+            },
+            {
+              "text": "Do not delay cancer care awaiting cure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no antifungal doses; dose per guideline or formulary."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mucormycosis-dx-mgmt",
+      "title": "Diagnosis and management of mucormycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diabetic or immunocompromised host with sinus, orbital or lung signs",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urgent MRI sinuses and orbits or CT chest",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Endoscopy or biopsy; alert lab, section tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Start liposomal amphotericin B empirically",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Broad aseptate right-angle hyphae?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Septate acute-angle hyphae?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Treat as aspergillosis or other mould",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Reassess: bacterial, Tolosa-Hunt, other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical debridement of all necrotic tissue",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct DKA, stop deferoxamine, cut immunosuppression",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Step down to isavuconazole or posaconazole when stable",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

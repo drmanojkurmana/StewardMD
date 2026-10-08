@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for geographic tongue (benign migratory glossitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Burket's Oral Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "geographic_tongue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from migratory appearance",
+          "cells": [
+            {
+              "text": "Characteristic migratory appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for fissured tongue, psoriasis or atopy",
+          "cells": [
+            {
+              "text": "Associated fissured tongue, psoriasis or atopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematinics: ferritin, vitamin B12, folate",
+          "cells": [
+            {
+              "text": "Where glossitis or soreness suggests deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candidal swab or smear",
+          "cells": [
+            {
+              "text": "Where fungal infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Atypical, persistent or non-migratory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Demonstrates the changing pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geographic_tongue-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral candidiasis",
+          "cells": [
+            {
+              "text": "Excluded by candidal swab or smear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythroplakia",
+          "cells": [
+            {
+              "text": "Fixed, non-migrating red patch needing biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "geographic_tongue-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; no active treatment needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid provoking foods",
+          "cells": [
+            {
+              "text": "Spicy, acidic, salty or hot items when lesions are sore"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Topical anaesthetic, antihistamine or anti-inflammatory mouthrinses; topical corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct haematinic deficiency",
+          "cells": [
+            {
+              "text": "Iron, vitamin B12 or folate deficiency contributing to glossitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal for superimposed candidiasis",
+          "cells": [
+            {
+              "text": "Topical antifungal if it develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-examine or biopsy atypical lesions",
+          "cells": [
+            {
+              "text": "Persistent or non-migratory lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "geographic_tongue-dx-mgmt",
+      "title": "Diagnosis and management of Geographic tongue (benign migratory glossitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected geographic tongue: migratory, changing patches on the tongue",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fixed red patch, induration or bleeding, systemic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy of a fixed, non-migrating red patch to exclude erythroplakia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; haematinics if sore; candidal smear if fungal infection suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion migratory and typical, with fungal and deficiency causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy atypical or persistent lesions; consider lichen planus, psoriasis or candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that geographic tongue is benign and self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid spicy, acidic, salty or hot foods when lesions are sore",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical anaesthetic, antihistamine or anti-inflammatory mouthrinse for relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct coexisting iron, vitamin B12 or folate deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Entirely benign; lesions wax and wane, may persist for years, and cause no harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

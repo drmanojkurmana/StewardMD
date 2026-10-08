@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for medial collateral ligament injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medial_collateral_ligament_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Valgus stress testing at 0 and 30 degrees",
+          "cells": [
+            {
+              "text": "Valgus laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Tear grade and associated injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Fracture, Pellegrini-Stieda calcification or physeal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress radiographs in skeletally immature patients",
+          "cells": [
+            {
+              "text": "Physeal fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medial_collateral_ligament_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ACL injury (unhappy triad)",
+          "cells": [
+            {
+              "text": "Forms the unhappy triad with MCL injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medial patellofemoral ligament injury",
+          "cells": [
+            {
+              "text": "After patellar dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physeal injury in skeletally immature patients",
+          "cells": [
+            {
+              "text": "Skeletally immature; stress radiographs distinguish physeal fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medial_collateral_ligament_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-operative management of isolated tears",
+          "cells": [
+            {
+              "text": "Hinged knee brace, early protected weight-bearing, rest, ice and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive physiotherapy",
+          "cells": [
+            {
+              "text": "Range of motion, quadriceps and hamstring strength, proprioception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to sport",
+          "cells": [
+            {
+              "text": "Criteria-based, once stability and strength are regained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair or reconstruction",
+          "cells": [
+            {
+              "text": "Combined cruciate or posteromedial-corner injuries, or persistent high-grade valgus instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grading and associated injury",
+          "cells": [
+            {
+              "text": "Valgus stress testing and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physeal injury in children",
+          "cells": [
+            {
+              "text": "Distinguished and managed with stress radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medial_collateral_ligament_injury-dx-mgmt",
+      "title": "Diagnosis and management of Medial collateral ligament injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Medial knee pain after a valgus injury to the knee",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Valgus laxity in full extension, multiligament injury or physeal fracture in a child?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for combined ligament injury or knee dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Valgus stress testing at 0 and 30 degrees; radiographs; MRI to grade the tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an isolated tear confirmed on valgus stress testing and MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ACL injury, MPFL injury or physeal injury; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-operative care for isolated tears: hinged brace, protected weight-bearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive physiotherapy for range, strength and proprioception",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Graded, criteria-based return to sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for combined cruciate or posteromedial injury or persistent valgus instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Return to sport once stability and strength are regained",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

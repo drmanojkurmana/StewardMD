@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for dry socket."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dry_socket-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of the socket for absent clot and exposed bone",
+          "cells": [
+            {
+              "text": "Absent clot with exposed bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic signs",
+          "cells": [
+            {
+              "text": "Spreading infection, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiography",
+          "cells": [
+            {
+              "text": "Retained root, foreign body or bony pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of smoking and medication history",
+          "cells": [
+            {
+              "text": "Risk factors for socket breakdown"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dry_socket-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-extraction infection with suppuration",
+          "cells": [
+            {
+              "text": "Spreading swelling, fever or purulent discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained root fragment or foreign body",
+          "cells": [
+            {
+              "text": "Persistent socket pain despite supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-related osteonecrosis of the jaw",
+          "cells": [
+            {
+              "text": "Non-healing socket on antiresorptive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dry_socket-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Warm saline irrigation",
+          "cells": [
+            {
+              "text": "Removes food debris and necrotic material from exposed bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedative intra-alveolar dressing",
+          "cells": [
+            {
+              "text": "Eugenol-containing dressing to cover bone and relieve pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesics and NSAIDs for self-limiting inflammatory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine antibiotics",
+          "cells": [
+            {
+              "text": "Fibrinolytic and inflammatory process, not established infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation and hygiene",
+          "cells": [
+            {
+              "text": "Warm saline or antiseptic rinses to support healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review and imaging",
+          "cells": [
+            {
+              "text": "Review until symptoms settle; image if pain persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "For spreading infection or osteonecrosis risk on antiresorptive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dry_socket-dx-mgmt",
+      "title": "Diagnosis and management of Dry socket",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dry socket: severe pain after extraction with an empty, exposed socket",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spreading swelling, fever, trismus, or pus after extraction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for spreading infection; treat as infection, not dry socket",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine socket for absent clot and exposed bone; radiograph if root suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the clot absent with exposed bone and no systemic infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retained root, osteomyelitis, osteonecrosis or neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gentle warm saline irrigation to clear debris from exposed bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sedative eugenol dressing to cover bone and relieve pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Simple analgesics and NSAIDs for the self-limiting inflammatory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid routine antibiotics; this is not an established infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review until settled; image if pain persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting; usually resolves over one to two weeks with supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

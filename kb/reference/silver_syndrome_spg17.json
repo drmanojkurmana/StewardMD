@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for silver syndrome (spg17, bscl2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "silver_syndrome_spg17-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "BSCL2 sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous BSCL2 variant, within an HSP or neuropathy panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Motor axonopathy affecting the hands and feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and cervical spine",
+          "cells": [
+            {
+              "text": "Excludes compressive and demyelinating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Marked intrafamilial variability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand function and grip assessment",
+          "cells": [
+            {
+              "text": "Intrinsic-hand-muscle wasting, for rehabilitation planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "Separates lipodystrophy-associated BSCL2 variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silver_syndrome_spg17-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal hereditary motor neuropathy type V",
+          "cells": [
+            {
+              "text": "Allelic BSCL2 disease with a neuropathic phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot-Marie-Tooth disease type 2",
+          "cells": [
+            {
+              "text": "Allelic with BSCL2 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Mixed upper and lower motor neurone signs; bulbar symptoms suggest motor neurone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spondylotic myeloradiculopathy",
+          "cells": [
+            {
+              "text": "Cervical sensory level or radicular pain points to compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local entrapment neuropathy",
+          "cells": [
+            {
+              "text": "Hand wasting attributed to entrapment rather than the genetic disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silver_syndrome_spg17-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity therapy",
+          "cells": [
+            {
+              "text": "Baclofen or tizanidine for lower-limb spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal botulinum toxin",
+          "cells": [
+            {
+              "text": "Targeted muscle overactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Maintains gait and prevents contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and adaptive aids",
+          "cells": [
+            {
+              "text": "For intrinsic-hand-muscle wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Preserve ambulation and independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; marked intrafamilial variability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "silver_syndrome_spg17-dx-mgmt",
+      "title": "Diagnosis and management of Silver syndrome (SPG17, BSCL2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower-limb spasticity with small hand muscle wasting: suspected Silver syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bulbar signs, radicular pain, rapidly progressive respiratory decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for motor neurone disease or compressive myeloradiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BSCL2 sequencing, nerve conduction studies and EMG, MRI of brain and cervical spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does BSCL2 sequencing confirm a heterozygous variant with a motor axonopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CMT type 2, distal HMN or ALS; repeat neurophysiology and genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antispasticity therapy and focal botulinum toxin for targeted overactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and stretching to maintain gait and prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occupational therapy and adaptive aids for intrinsic-hand-muscle wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ankle-foot orthoses and mobility aids to preserve ambulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for an autosomal dominant variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progression is usually slow; many keep ambulation for prolonged periods",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -142,5 +142,267 @@
       "caption": "Overview comparison matrix for external auditory canal exostoses."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otolaryngology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "external_auditory_canal_exostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Characteristic bony narrowing of the canal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Conductive hearing loss, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of cold-water exposure",
+          "cells": [
+            {
+              "text": "Surfing, diving or swimming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the temporal bone before surgery",
+          "cells": [
+            {
+              "text": "Bony anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for recurrent otitis externa",
+          "cells": [
+            {
+              "text": "Trapped water and infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "external_auditory_canal_exostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Water precautions",
+          "cells": [
+            {
+              "text": "Well-fitting earplugs; avoid cold-water and wind exposure to slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aural toileting and microsuction",
+          "cells": [
+            {
+              "text": "Clears trapped water, wax and debris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotic-steroid drops and drying agents",
+          "cells": [
+            {
+              "text": "Recurrent otitis externa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Canalplasty",
+          "cells": [
+            {
+              "text": "Significant canal obstruction, refractory infection or conductive loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Monitors hearing when conductive loss is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otolaryngology referral",
+          "cells": [
+            {
+              "text": "Symptomatic or progressive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "external_auditory_canal_exostosis-dx-mgmt",
+      "title": "Diagnosis and management of External auditory canal exostoses",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent otitis externa or conductive hearing loss in a swimmer or surfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe ear infection, conductive loss, solitary mass, canal occlusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Otolaryngology referral; CT of temporal bone if surgery is planned",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy for bony narrowing; audiometry; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multiple bony exostoses on otoscopy rather than a solitary mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteoma, cerumen or canal tumour; biopsy or imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Water precautions with earplugs; avoid cold water and wind",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Microsuction to clear trapped water and debris",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical antibiotic-steroid drops for recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Canalplasty for significant obstruction or conductive loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and slowly progressive; controlled by water precautions and surgery if needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

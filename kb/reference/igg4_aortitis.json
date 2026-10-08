@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for igg4-related aortitis/periaortitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / IgG4-related disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "igg4_aortitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MR angiography of aorta and retroperitoneum",
+          "cells": [
+            {
+              "text": "Aortic and retroperitoneal extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4 and IgG subclass measurement",
+          "cells": [
+            {
+              "text": "IgG4 levels; neither sensitive nor required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy",
+          "cells": [
+            {
+              "text": "IgG4-positive plasma cells with storiform fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET imaging",
+          "cells": [
+            {
+              "text": "Extent and other organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinary tract imaging",
+          "cells": [
+            {
+              "text": "Obstructive uropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and other IgG4-related organ screen",
+          "cells": [
+            {
+              "text": "Other IgG4-related disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_aortitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic retroperitoneal fibrosis",
+          "cells": [
+            {
+              "text": "Periaortitis encasing the ureters; IgG4 histology distinguishes the IgG4-related form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinically isolated aortitis",
+          "cells": [
+            {
+              "text": "Screening for IgG4-related disease at other organs distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_aortitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Induce remission; typically rapid regression of aortic wall inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agent or rituximab",
+          "cells": [
+            {
+              "text": "Maintain remission and manage common relapses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "CT or MR angiography for aneurysm or dissection, with serum IgG4 and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural repair",
+          "cells": [
+            {
+              "text": "Surgical or endovascular repair when aneurysm or dissection is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureteric obstruction",
+          "cells": [
+            {
+              "text": "Stenting to relieve entrapment while treating the underlying disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other organs",
+          "cells": [
+            {
+              "text": "Screen and monitor pancreas and salivary glands; coordinate rheumatology, vascular and surgical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "igg4_aortitis-dx-mgmt",
+      "title": "Diagnosis and management of IgG4-related aortitis/periaortitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aortic wall and periaortic thickening, often with back or chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute chest or back pain, rapid aneurysm growth, or obstructive uropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular surgery review for dissection or rupture; relieve obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MR angiography, serum IgG4, biopsy, PET, renal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "IgG4-related pattern confirmed on imaging or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic retroperitoneal fibrosis or other aortitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Glucocorticoids to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing agent or rituximab for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial angiography, IgG4 and inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repair of aneurysm or dissection when structural damage is established",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Stenting for ureteric obstruction; screen other organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Inflammation usually regresses; relapses need surveillance and repair if needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

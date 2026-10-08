@@ -161,5 +161,325 @@
       "caption": "Overview comparison matrix for interstitial cystitis / bladder pain syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interstitial_cystitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and urine culture",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine cytology and cystoscopy",
+          "cells": [
+            {
+              "text": "Malignancy when haematuria is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder diary",
+          "cells": [
+            {
+              "text": "Frequency, voided volumes and symptom pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Validated symptom and pain questionnaires",
+          "cells": [
+            {
+              "text": "Severity and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy with or without hydrodistension",
+          "cells": [
+            {
+              "text": "Hunner lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Stones or other structural pathology when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_cystitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection",
+          "cells": [
+            {
+              "text": "Negative cultures; repeated antibiotics are not the answer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder carcinoma",
+          "cells": [
+            {
+              "text": "Haematuria or abnormal urine cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overactive bladder",
+          "cells": [
+            {
+              "text": "Pain worsens as the bladder fills and is relieved by voiding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_cystitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Education, dietary trigger avoidance, fluid and stress management, bladder training"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor physiotherapy",
+          "cells": [
+            {
+              "text": "Treats myofascial dysfunction; avoid pelvic floor strengthening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral therapy",
+          "cells": [
+            {
+              "text": "Amitriptyline, hydroxyzine or pentosan polysulfate alongside pain management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravesical therapy",
+          "cells": [
+            {
+              "text": "Dimethyl sulfoxide, heparin or local anaesthetic for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hunner lesions",
+          "cells": [
+            {
+              "text": "Fulguration, resection or intralesional corticosteroid after hydrodistension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced options",
+          "cells": [
+            {
+              "text": "Sacral neuromodulation; augmentation cystoplasty or urinary diversion in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interstitial_cystitis-dx-mgmt",
+      "title": "Diagnosis and management of Interstitial Cystitis / Bladder Pain Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bladder or pelvic pain that worsens as the bladder fills, with urgency and frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haematuria, abnormal cytology, sterile pyuria or atypical pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cystoscopy and cytology to exclude bladder cancer or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis and culture, bladder diary, questionnaires, cystoscopy with hydrodistension",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection and malignancy excluded, with Hunner lesion status recorded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the identified cause; repeat cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Education, trigger avoidance, fluid and bladder training",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic floor physiotherapy, avoiding strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral amitriptyline, hydroxyzine or pentosan polysulfate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravesical dimethyl sulfoxide, heparin or local anaesthetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat Hunner lesions by fulguration, resection or steroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, relapsing condition; escalation after conservative care is exhausted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -179,5 +179,562 @@
       "caption": "Overview comparison matrix for chronic hepatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 304-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 306-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 306-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "AASLD-IDSA HCV Guidance, Simplified Treatment",
+      "url": "https://www.hcvguidelines.org/treatment-naive/simplified-treatment",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_hepatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Serology and diagnosis in chronic hepatitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker pattern",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Definition",
+          "cells": [
+            {
+              "text": "Liver inflammation and necrosis for at least 6 months"
+            },
+            {
+              "text": "Classify by cause, grade and stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HBsAg+, anti-HBs-, IgM anti-HBc, HBeAg+, anti-HBe-",
+          "cells": [
+            {
+              "text": "Acute hepatitis B"
+            },
+            {
+              "text": "High infectivity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg+, anti-HBs-, IgG anti-HBc, HBeAg+, anti-HBe-",
+          "cells": [
+            {
+              "text": "{{hy:Chronic hepatitis B}}"
+            },
+            {
+              "text": "High infectivity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg+, anti-HBs-, IgG anti-HBc, HBeAg-, anti-HBe+",
+          "cells": [
+            {
+              "text": "Late acute or chronic HBV, or HBeAg-negative precore mutant"
+            },
+            {
+              "text": "Low infectivity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg+, anti-HBs+, anti-HBc+, HBeAg and anti-HBe either",
+          "cells": [
+            {
+              "text": "Heterotypic anti-HBs (common) or seroconversion (rare)"
+            },
+            {
+              "text": "Two subtypes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg-, anti-HBs-, IgM anti-HBc, HBeAg and anti-HBe either",
+          "cells": [
+            {
+              "text": "Acute hepatitis B or anti-HBc window"
+            },
+            {
+              "text": "Recent infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg-, anti-HBs-, IgG anti-HBc, HBeAg-, anti-HBe either",
+          "cells": [
+            {
+              "text": "Low-level carrier or remote infection"
+            },
+            {
+              "text": "Check HBV DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg-, anti-HBs+, IgG anti-HBc, HBeAg-, anti-HBe either",
+          "cells": [
+            {
+              "text": "Recovery from hepatitis B"
+            },
+            {
+              "text": "Immune"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HBsAg-, anti-HBs+ only",
+          "cells": [
+            {
+              "text": "Vaccination, remote infection, or false positive"
+            },
+            {
+              "text": "Vaccine response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatitis C",
+          "cells": [
+            {
+              "text": "Anti-HCV and HCV RNA"
+            },
+            {
+              "text": "Anti-LKM1 in some"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hepatitis D",
+          "cells": [
+            {
+              "text": "Anti-HDV, HDV RNA with HBsAg and IgG anti-HBc"
+            },
+            {
+              "text": "Anti-LKM3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "ANA, ASMA or anti-LKM1, anti-SLA; globulin >2.5",
+              "op": ">",
+              "value": 2.5
+            },
+            {
+              "text": "Biopsy imperative: interface hepatitis, plasma cells"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_hepatitis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of chronic hepatitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "{{hy:Hyperglobulinaemia and autoantibodies, absent in hepatitis B}}; women 75%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced chronic hepatitis",
+          "cells": [
+            {
+              "text": "No markers; improves on withdrawal (minocycline and others)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient; check before neurological signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-1 antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Genetic liver and lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary biliary cholangitis",
+          "cells": [
+            {
+              "text": "Cholestatic pattern; antimitochondrial antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MASH or alcohol-related liver disease",
+          "cells": [
+            {
+              "text": "Metabolic risk or alcohol history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic hepatitis E",
+          "cells": [
+            {
+              "text": "Immunosuppressed or transplant host"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptogenic chronic hepatitis",
+          "cells": [
+            {
+              "text": "All markers negative"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "chronic_hepatitis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of chronic hepatitis by cause",
+      "rowHeader": "Option",
+      "columns": [
+        "Criteria",
+        "Recommendation"
+      ],
+      "rows": [
+        {
+          "parameter": "HBeAg+, HBV DNA >2 x 10^4, ALT <2 x ULN",
+          "cells": [
+            {
+              "text": "Not in chronic hepatitis phase"
+            },
+            {
+              "text": "No treatment; monitor; biopsy may help if over 40, HCC family history, or ALT high-normal range"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg+ chronic hepatitis",
+          "cells": [
+            {
+              "text": "HBV DNA >2 x 10^4 and ALT >2 x ULN"
+            },
+            {
+              "text": "Treat"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg+ compensated cirrhosis",
+          "cells": [
+            {
+              "text": "HBV DNA >2 x 10^3, any ALT"
+            },
+            {
+              "text": "Treat with oral agents, not PEG IFN; consider if DNA <2 x 10^3 with ALT >ULN"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg+ decompensated cirrhosis",
+          "cells": [
+            {
+              "text": "DNA detectable"
+            },
+            {
+              "text": "Oral agents, not PEG IFN; refer for transplant (observe and refer if undetectable)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg- inactive carrier",
+          "cells": [
+            {
+              "text": "DNA <=2 x 10^3 and ALT <=ULN"
+            },
+            {
+              "text": "Treatment not necessary"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg- chronic hepatitis",
+          "cells": [
+            {
+              "text": "DNA >10^3 and ALT 1 to >2 x ULN"
+            },
+            {
+              "text": "Consider biopsy; treat if moderate to severe inflammation or fibrosis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg- chronic hepatitis, high",
+          "cells": [
+            {
+              "text": "DNA >10^4 and ALT >2 x ULN"
+            },
+            {
+              "text": "Treat"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg- cirrhosis",
+          "cells": [
+            {
+              "text": "Compensated DNA >2 x 10^3, or decompensated with detectable DNA"
+            },
+            {
+              "text": "Oral agents, not PEG IFN; transplant referral if decompensated"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hepatitis B drugs listed",
+          "cells": [
+            {
+              "text": "Chronic HBV"
+            },
+            {
+              "text": "IFN-alpha, PEG IFN, lamivudine, adefovir, entecavir, telbivudine, tenofovir"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Glecaprevir 300 mg / pibrentasvir 120 mg",
+          "cells": [
+            {
+              "text": "{{hy:HCV, treatment-naive, no cirrhosis}}"
+            },
+            {
+              "text": "With food for 8 weeks; SVR check 12 weeks after end"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Sofosbuvir 400 mg / velpatasvir 100 mg",
+          "cells": [
+            {
+              "text": "HCV, treatment-naive, no cirrhosis"
+            },
+            {
+              "text": "12 weeks"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "IFN-alpha or PEG IFN-alpha",
+          "cells": [
+            {
+              "text": "Hepatitis D"
+            },
+            {
+              "text": "Per Tables PDF"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prednisone with azathioprine",
+          "cells": [
+            {
+              "text": "Autoimmune hepatitis"
+            },
+            {
+              "text": "Withdraw drug for drug-induced disease"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Tables PDF lists PEG IFN with ribavirin, telaprevir and boceprevir for hepatitis C; these are superseded by the pangenotypic direct-acting antivirals in the AASLD-IDSA guidance. Cirrhosis presumed if FIB-4 >3.25 or elastography >12.5 kPa (AASLD-IDSA)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_hepatitis-dx-mgmt",
+      "title": "Diagnosis and management of chronic hepatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised liver enzymes for at least 6 months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "HBsAg, anti-HBc, anti-HCV, HCV RNA, autoantibodies, globulins",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "HBsAg positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HBeAg, HBV DNA, ALT, fibrosis assessment; test anti-HDV",
+          "cite": "c4"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat or monitor per HBeAg, DNA, ALT and cirrhosis",
+          "cite": "c4"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "HCV RNA positive?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Pangenotypic DAA; check SVR at 12 weeks",
+          "cite": "c5"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Autoantibodies with hyperglobulinaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Liver biopsy; prednisone with azathioprine",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Check drugs, Wilson, alpha-1 antitrypsin, MASH",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

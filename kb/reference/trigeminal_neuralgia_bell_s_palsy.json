@@ -198,5 +198,477 @@
       "caption": "Overview comparison matrix for trigeminal neuralgia, bell’s palsy, and other cranial nerve disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Trigeminal Neuralgia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/neuro-ophthalmologic-and-cranial-nerve-disorders/trigeminal-neuralgia"
+    },
+    {
+      "id": "c3",
+      "label": "AFP Journal Club, Acyclovir or Steroids for Bell Palsy, 2009",
+      "kind": "web",
+      "url": "https://www.aafp.org/afp/2009/0315/p435.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigeminal_neuralgia_bell_s_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing trigeminal neuralgia and Bell palsy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "TN paroxysm length",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Seconds up to 2 minutes, up to 100 times a day",
+              "op": "<=",
+              "value": 2
+            },
+            {
+              "text": "Classic trigeminal neuralgia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TN triggers",
+          "cells": [
+            {
+              "text": "Chewing, brushing teeth, smiling, trigger points"
+            },
+            {
+              "text": "Normal neurological exam in classic TN"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TN with sensory loss or jaw weakness",
+          "cells": [
+            {
+              "text": "Objective deficit"
+            },
+            {
+              "text": "{{hy:Secondary cause: MRI for tumour, MS plaque, aneurysm}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bilateral TN or young adult",
+          "cells": [
+            {
+              "text": "Atypical"
+            },
+            {
+              "text": "Consider multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial weakness including forehead",
+          "cells": [
+            {
+              "text": "Lower motor neuron pattern"
+            },
+            {
+              "text": "Peripheral (Bell) palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forehead-sparing weakness",
+          "cells": [
+            {
+              "text": "Upper motor neuron pattern"
+            },
+            {
+              "text": "Central lesion such as stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ear or palate vesicles, eighth nerve signs",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Ramsay Hunt syndrome, not Bell palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bell prognosis sign",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Incomplete palsy in week 1 best; EMG denervation after 10 days worse",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Severity by completeness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_neuralgia_bell_s_palsy-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic trigeminal neuralgia or Bell palsy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Paroxysmal hemicrania",
+          "cells": [
+            {
+              "text": "Attacks 5 to 8 minutes"
+            },
+            {
+              "text": "Dramatic indomethacin response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postherpetic neuralgia",
+          "cells": [
+            {
+              "text": "Constant pain, prior rash, ophthalmic division"
+            },
+            {
+              "text": "History, scarring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Migraine or cluster headache",
+          "cells": [
+            {
+              "text": "Longer, throbbing or deep steady pain"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dental or sinus disease",
+          "cells": [
+            {
+              "text": "Tooth sensitivity, nasal discharge, fever"
+            },
+            {
+              "text": "Dental exam, imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Temporal arteritis",
+          "cells": [
+            {
+              "text": "Older, systemic symptoms"
+            },
+            {
+              "text": "ESR and CRP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme disease",
+          "cells": [
+            {
+              "text": "Facial palsy, often bilateral, in endemic area"
+            },
+            {
+              "text": "Lyme serology before steroids"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sarcoidosis or tumour",
+          "cells": [
+            {
+              "text": "Bilateral or progressive palsy, other nerve palsies"
+            },
+            {
+              "text": "MRI, chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke",
+          "cells": [
+            {
+              "text": "Forehead sparing, limb weakness, aphasia"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_neuralgia_bell_s_palsy-treatment",
+      "kind": "treatment",
+      "title": "Treating trigeminal neuralgia and Bell palsy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamazepine",
+          "cells": [
+            {
+              "text": "Trigeminal neuralgia, first line"
+            },
+            {
+              "text": "Titrate gradually; usually effective long term"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxcarbazepine, lamotrigine, gabapentin, baclofen, phenytoin",
+          "cells": [
+            {
+              "text": "TN if carbamazepine fails or not tolerated"
+            },
+            {
+              "text": "Alternatives or add-ons"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microvascular decompression",
+          "cells": [
+            {
+              "text": "Refractory TN, fit patient"
+            },
+            {
+              "text": "Pain recurs in about 15%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiosurgery or percutaneous ganglion lesion",
+          "cells": [
+            {
+              "text": "Refractory TN, poor surgical candidate"
+            },
+            {
+              "text": "Rhizotomy: anaesthesia dolorosa in 4%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisolone",
+          "cells": [
+            {
+              "text": "Bell palsy within 72 h of onset"
+            },
+            {
+              "text": "{{hy:25 mg twice daily for 10 days; NNT 6 at 3 months}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Antiviral",
+          "cells": [
+            {
+              "text": "Bell palsy"
+            },
+            {
+              "text": "No added benefit in trial; Harrison suggests adding in severe cases"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Eye protection",
+          "cells": [
+            {
+              "text": "Incomplete eye closure"
+            },
+            {
+              "text": "Lubricant drops, night ointment, taping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Antiviral therapy: the 2009 trial summary found acyclovir of no benefit, while Harrison suggests an antiviral in severe Bell palsy. Both views kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigeminal_neuralgia_bell_s_palsy-dx-mgmt",
+      "title": "Diagnosis and management of trigeminal neuralgia and Bell palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial pain or facial weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Paroxysmal stabbing facial pain?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Sensory loss, bilateral, or young adult?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for secondary cause (MS, tumour, vascular)",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Carbamazepine; alternatives if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Refractory: microvascular decompression or ablation",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Forehead spared?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Central lesion: urgent brain imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Vesicles, other cranial nerves or Lyme risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Ramsay Hunt, Lyme, sarcoid or tumour work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bell palsy: prednisolone within 72 h, eye care",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

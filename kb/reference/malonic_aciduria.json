@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for malonic aciduria (malonyl-coa decarboxylase deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malonic_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Elevated malonic acid and a raised malonic to methylmalonic acid ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MLYCD molecular genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic MLYCD variants, autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy, which largely determines outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, blood gas and ketones during illness",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and acidosis during decompensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malonic_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Combined malonic and methylmalonic aciduria (ACSF3)",
+          "cells": [
+            {
+              "text": "A distinct entity, in which methylmalonate is usually higher than malonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty acid oxidation disorders",
+          "cells": [
+            {
+              "text": "Presents with cardiomyopathy and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial disease",
+          "cells": [
+            {
+              "text": "Presents with cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen storage disorders",
+          "cells": [
+            {
+              "text": "Presents with hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malonic_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid prolonged fasting",
+          "cells": [
+            {
+              "text": "Regular feeds and an emergency intravenous glucose regimen during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modified diet",
+          "cells": [
+            {
+              "text": "Restrict long-chain fat with generous carbohydrate; medium-chain triglycerides where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine supplementation",
+          "cells": [
+            {
+              "text": "Supports fatty acid metabolism and prevents secondary deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, with heart failure therapy as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic monitoring during illness",
+          "cells": [
+            {
+              "text": "Glucose, acid-base status and ketones; prompt treatment of acidosis and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Developmental support and seizure management with paediatric neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist metabolic team",
+          "cells": [
+            {
+              "text": "Metabolic team including a metabolic dietitian"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; testing of at-risk family members"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malonic_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of Malonic aciduria (malonyl-CoA decarboxylase deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with cardiomyopathy, hypoglycaemia or acidosis; suspected malonic aciduria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia, seizures or acute decompensation present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat hypoglycaemia and acidosis promptly; heart failure therapy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids, acylcarnitine profile, echocardiography and MLYCD testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is malonic aciduria confirmed on urine organic acids?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider combined malonic-methylmalonic aciduria or other look-alikes; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged fasting; regular feeds and an emergency glucose regimen in illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Modified diet: restrict long-chain fat, generous carbohydrate, medium-chain triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjunctive carnitine supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography with heart failure therapy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome largely set by cardiomyopathy; some children stabilise with diet",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

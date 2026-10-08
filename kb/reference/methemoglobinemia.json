@@ -146,5 +146,276 @@
       "caption": "Overview comparison matrix for methaemoglobinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "methemoglobinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Co-oximetry to quantify the methaemoglobin fraction",
+          "cells": [
+            {
+              "text": "Methaemoglobin fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas alongside pulse oximetry",
+          "cells": [
+            {
+              "text": "Saturation gap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase assay",
+          "cells": [
+            {
+              "text": "G6PD deficiency, before methylene blue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of drug, chemical and occupational exposures",
+          "cells": [
+            {
+              "text": "Oxidant exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assay or haemoglobin analysis, when a congenital form is suspected",
+          "cells": [
+            {
+              "text": "Congenital form, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "methemoglobinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the oxidant and give methylene blue",
+          "cells": [
+            {
+              "text": "For acquired disease, with symptomatic elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD check before methylene blue",
+          "cells": [
+            {
+              "text": "Ascorbic acid, exchange transfusion or hyperbaric oxygen if deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital reductase deficiency",
+          "cells": [
+            {
+              "text": "Chronic oral methylene blue or ascorbic acid when troublesome; many need no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and co-oximetry",
+          "cells": [
+            {
+              "text": "Supplemental oxygen; monitor the methaemoglobin fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient education",
+          "cells": [
+            {
+              "text": "Avoid oxidant drugs and chemicals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe or refractory acute elevations",
+          "cells": [
+            {
+              "text": "Exchange transfusion and critical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Reductase deficiency and haemoglobin M variants; M variants usually need no therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "methemoglobinemia-dx-mgmt",
+      "title": "Diagnosis and management of Methaemoglobinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cyanosis with a saturation gap after oxidant drug or chemical exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Altered consciousness, cyanosis unresponsive to oxygen, or a rapid rise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: oxygen and critical care; G6PD status before methylene blue",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Co-oximetry; blood gas with pulse oximetry; G6PD assay; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is methaemoglobin raised on co-oximetry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sulfhaemoglobinaemia, carbon monoxide poisoning or cyanotic heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the offending oxidant; methylene blue for symptomatic elevation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "G6PD check first; if deficient, ascorbic acid, exchange transfusion or hyperbaric oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supplemental oxygen and co-oximetry monitoring of methaemoglobin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exchange transfusion and critical care for severe or refractory elevations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Educate patients to avoid oxidant drugs and chemicals; genetic counselling if congenital",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

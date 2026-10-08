@@ -160,5 +160,446 @@
       "caption": "Overview comparison matrix for parvovirus infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 184-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "SMFM, Human Parvovirus B19 in Pregnancy",
+      "kind": "web",
+      "url": "https://www.smfm.org/parvovirus-b19"
+    },
+    {
+      "id": "c4",
+      "label": "CDC, Parvovirus B19 in Pregnancy",
+      "kind": "web",
+      "url": "https://www.cdc.gov/parvovirus-b19/about/parvovirus-b19-in-pregnancy.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parvovirus_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory pattern by parvovirus B19 syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antibodies",
+        "B19 DNA"
+      ],
+      "rows": [
+        {
+          "parameter": "Fifth disease (healthy children)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "IgM positive, IgG positive"
+            },
+            {
+              "text": "PCR positive, quantitative over 10^3 IU/mL",
+              "op": ">",
+              "value": 1000
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Polyarthropathy (healthy adults, more often women)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "IgM positive within 3 months of onset, IgG positive"
+            },
+            {
+              "text": "PCR positive, quantitative over 10^3 IU/mL",
+              "op": ">",
+              "value": 1000
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transient aplastic crisis (high red cell turnover)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "IgM and IgG negative or positive"
+            },
+            {
+              "text": "Often over 10^12 IU/mL, falls rapidly",
+              "op": ">",
+              "value": 1000000000000.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Persistent anemia or pure red cell aplasia (immunodeficient)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "{{hy:Negative or weakly positive, so use quantitative DNA}}"
+            },
+            {
+              "text": "Often over 10^12 IU/mL; over 10^6 if untreated",
+              "op": ">",
+              "value": 1000000.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrops fetalis or congenital anemia (fetus under 20 weeks)",
+          "cells": [
+            {
+              "text": "IgM negative or positive, IgG positive"
+            },
+            {
+              "text": "PCR positive in amniotic fluid or tissue"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paired sera 2 weeks apart",
+          "cells": [
+            {
+              "text": "Seroconversion or fourfold IgG rise means acute infection"
+            },
+            {
+              "text": "IgG appears by day 7 and lasts for life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow",
+          "cells": [
+            {
+              "text": "Giant pronormoblasts, absent erythroid precursors"
+            },
+            {
+              "text": "Seen in aplastic crisis and red cell aplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 184-1 gives a fifth disease viral load over 10^3 IU/mL; the entry severity text cites over 10^4 IU/mL. Low-level DNA persists for months to years, so qualitative PCR alone does not prove acute infection."
+    },
+    {
+      "id": "parvovirus_infections-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic parvovirus B19 disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other viral exanthems (rubella, measles, enterovirus)",
+          "cells": [
+            {
+              "text": "Rash patterns overlap; slapped cheek favors B19"
+            },
+            {
+              "text": "B19 IgM and specific serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Symmetric small-joint arthritis, may have RF"
+            },
+            {
+              "text": "B19 IgM; B19 arthritis resolves in weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of aplastic crisis or red cell aplasia",
+          "cells": [
+            {
+              "text": "Drugs, thymoma, other marrow failure"
+            },
+            {
+              "text": "Quantitative B19 DNA, marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of nonimmune hydrops",
+          "cells": [
+            {
+              "text": "Chromosomal, cardiac, other infections"
+            },
+            {
+              "text": "Amniotic fluid B19 PCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "B19 can lower platelets"
+            },
+            {
+              "text": "B19 serology and PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parvovirus_infections-treatment",
+      "kind": "treatment",
+      "title": "Managing parvovirus B19 infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care, NSAIDs",
+          "cells": [
+            {
+              "text": "Fifth disease and arthropathy"
+            },
+            {
+              "text": "Self-limited; joint symptoms can recur for weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "cells": [
+            {
+              "text": "Transient aplastic crisis in hemolytic disorders"
+            },
+            {
+              "text": "Until erythropoiesis returns"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV immunoglobulin",
+          "cells": [
+            {
+              "text": "Chronic red cell aplasia in immunocompromised patients"
+            },
+            {
+              "text": "Reduce immunosuppression where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal monitoring",
+          "cells": [
+            {
+              "text": "Maternal infection or exposure in pregnancy"
+            },
+            {
+              "text": "Serial ultrasound and MCA Doppler for fetal anemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrauterine transfusion",
+          "cells": [
+            {
+              "text": "Severe fetal anemia or hydrops"
+            },
+            {
+              "text": "Highest fetal risk with infection before 20 weeks (excess loss about 9%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology in pregnancy",
+          "cells": [
+            {
+              "text": "Compatible symptoms, confirmed exposure, suspected fetal anemia"
+            },
+            {
+              "text": "Routine immunity screening not recommended"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Droplet precautions",
+          "cells": [
+            {
+              "text": "Aplastic crisis or chronic infection"
+            },
+            {
+              "text": "Children with rash are no longer infectious"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parvovirus_infections-dx-mgmt",
+      "title": "Diagnosis and management of parvovirus B19 infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slapped-cheek rash, arthralgia, anemia with low reticulocytes, or exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pregnant?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "IgG and IgM serology",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "IgM positive or seroconversion?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Immune or not infected; nonimmune: watch for symptoms",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Serial ultrasound and MCA Doppler; intrauterine transfusion if severe anemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Hemolytic disorder or immunocompromised with anemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Quantitative B19 DNA and reticulocyte count",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Immunocompromised with persistent aplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "IVIG, reduce immunosuppression, droplet precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transfuse until marrow recovers; droplet precautions",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Supportive care and NSAIDs; return to school once rash appears",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

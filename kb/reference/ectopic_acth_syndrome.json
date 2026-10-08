@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for ectopic acth syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ectopic_acth_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Late-night salivary cortisol, urinary free cortisol or overnight dexamethasone",
+          "cells": [
+            {
+              "text": "Confirms hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ACTH",
+          "cells": [
+            {
+              "text": "ACTH-dependent versus independent Cushing syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose dexamethasone suppression and CRH testing",
+          "cells": [
+            {
+              "text": "Pituitary versus ectopic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior petrosal sinus sampling",
+          "cells": [
+            {
+              "text": "Pituitary source differentiated from ectopic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallium DOTATATE PET",
+          "cells": [
+            {
+              "text": "Somatostatin-receptor-positive tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest, abdomen and pelvis cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Tumour localisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectopic_acth_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary-dependent Cushing disease",
+          "cells": [
+            {
+              "text": "Responds to high-dose dexamethasone suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal adenoma or carcinoma",
+          "cells": [
+            {
+              "text": "ACTH-independent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-Cushing state",
+          "cells": [
+            {
+              "text": "Depression or alcohol excess with raised cortisol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous glucocorticoid exposure",
+          "cells": [
+            {
+              "text": "Iatrogenic steroid history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectopic_acth_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Definitive treatment for a localised, resectable ACTH-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Metyrapone, ketoconazole or osilodrostat to lower cortisol rapidly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Etomidate",
+          "cells": [
+            {
+              "text": "Parenteral option for critical hypercortisolism when surgery is not immediate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Refractory or occult tumours; lifelong steroid replacement follows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and metabolic control",
+          "cells": [
+            {
+              "text": "Potassium, spironolactone, glucose, blood pressure and thromboprophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis prophylaxis given profound immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ectopic_acth_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ectopic ACTH syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ectopic ACTH syndrome: Cushing features with hypokalaemia and raised ACTH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypokalaemia, sepsis, venous thrombosis, psychosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium correction and cortisol-lowering therapy for critical disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cortisol testing; plasma ACTH; high-dose dexamethasone and CRH; petrosal sinus sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ACTH-dependent hypercortisolism without pituitary source on sampling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pituitary Cushing disease, adrenal tumour or pseudo-Cushing state",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the ACTH-secreting tumour where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metyrapone, ketoconazole or osilodrostat to rapidly lower cortisol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium replacement and spironolactone for alkalosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pneumocystis prophylaxis and infection surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying malignancy alongside cortisol-lowering therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on the tumour; localised indolent tumours may be cured, aggressive ones are not",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

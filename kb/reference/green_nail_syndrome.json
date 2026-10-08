@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for green nail syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "green_nail_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood's light examination",
+          "cells": [
+            {
+              "text": "Green fluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial culture of subungual debris or nail clipping",
+          "cells": [
+            {
+              "text": "Pseudomonas or other bacteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail clipping for mycology",
+          "cells": [
+            {
+              "text": "Concurrent onychomycosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy of the nail plate",
+          "cells": [
+            {
+              "text": "Pigment distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for onycholysis or paronychia",
+          "cells": [
+            {
+              "text": "Predisposing changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and wet-work history",
+          "cells": [
+            {
+              "text": "Exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "green_nail_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subungual haematoma",
+          "cells": [
+            {
+              "text": "Dark nail discolouration without green colour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual melanoma",
+          "cells": [
+            {
+              "text": "Single darkening streak or Hutchinson sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromogenic fungal onychomycosis",
+          "cells": [
+            {
+              "text": "Aspergillus or Scytalidium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "green_nail_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clip the onycholytic nail",
+          "cells": [
+            {
+              "text": "Removes the moist space Pseudomonas colonises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antiseptics",
+          "cells": [
+            {
+              "text": "Dilute acetic acid soaks, sodium hypochlorite or topical antipseudomonal agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keep the nail dry",
+          "cells": [
+            {
+              "text": "Treat underlying onycholysis or chronic paronychia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prolonged wet exposure",
+          "cells": [
+            {
+              "text": "Protective gloves for wet work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic antipseudomonal therapy",
+          "cells": [
+            {
+              "text": "Oral fluoroquinolone for extensive, refractory or immunocompromised cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting onychomycosis",
+          "cells": [
+            {
+              "text": "Exclude and treat if present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "green_nail_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Green nail syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected green nail syndrome: green discolouration of a nail with onycholysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spreading erythema, fever, lymphangitis, single darkening streak)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for spreading infection, or streak raising melanoma concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood's light, subungual culture, mycology and dermoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does Wood's light show green fluorescence with bacterial growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subungual haematoma, melanoma, fungal onychomycosis or staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clip away the detached onycholytic nail",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical antiseptic such as dilute acetic acid or topical antipseudomonal agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Keep the nail dry and treat underlying onycholysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral fluoroquinolone for extensive, refractory or immunocompromised cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; resolves once the nail is kept dry and the lifted portion removed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

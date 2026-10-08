@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for drug allergy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_allergy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin prick and intradermal testing where validated",
+          "cells": [
+            {
+              "text": "Penicillins and perioperative agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum drug-specific IgE and serum tryptase",
+          "cells": [
+            {
+              "text": "Drug-specific IgE; tryptase during acute reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised graded drug challenge",
+          "cells": [
+            {
+              "text": "Confirms or excludes allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count, eosinophils, liver and renal function",
+          "cells": [
+            {
+              "text": "Systemic involvement in suspected DRESS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_allergy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-immune pharmacological intolerance",
+          "cells": [
+            {
+              "text": "Dose-related toxicity rather than immune reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct mast-cell activation (opioids, vancomycin infusion reaction)",
+          "cells": [
+            {
+              "text": "Non-IgE mast-cell activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic spontaneous urticaria unrelated to the drug",
+          "cells": [
+            {
+              "text": "Recurrent urticaria without the drug link"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_allergy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw and document the culprit drug",
+          "cells": [
+            {
+              "text": "Counsel to avoid it and cross-reacting agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis",
+          "cells": [
+            {
+              "text": "Intramuscular adrenaline first-line, with oxygen, fluids and airway support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe cutaneous reactions",
+          "cells": [
+            {
+              "text": "Urgent drug cessation and supportive care in a specialist or burns unit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milder reactions",
+          "cells": [
+            {
+              "text": "Antihistamines and topical or oral corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy testing and de-labelling",
+          "cells": [
+            {
+              "text": "Penicillin skin testing and supervised challenge to remove inaccurate labels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desensitisation",
+          "cells": [
+            {
+              "text": "Considered where an implicated drug is essential and irreplaceable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and documentation",
+          "cells": [
+            {
+              "text": "Allergy and immunology referral, written documentation and HLA testing where advised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_allergy-dx-mgmt",
+      "title": "Diagnosis and management of Drug allergy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug allergy: rash, urticaria, wheeze or hypotension after a new drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anaphylaxis, mucosal erosion or blistering, DRESS features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intramuscular adrenaline for anaphylaxis; stop the drug for severe skin reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug history; tryptase in acute reaction; eosinophils; liver and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the timing and reaction pattern fit an immune drug reaction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral exanthem, dose-related toxicity or chronic urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the culprit drug and document it; counsel on cross-reacting agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intramuscular adrenaline first-line for anaphylaxis, with oxygen and fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihistamines and corticosteroids for milder immediate or delayed reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allergy testing and supervised challenge to de-label inaccurate penicillin allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to allergy and immunology; provide a written alert",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most reactions resolve after withdrawal; severe skin reactions carry high morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for gyrate atrophy of the choroid and retina."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gyrate_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting plasma amino acid analysis",
+          "cells": [
+            {
+              "text": "Markedly elevated ornithine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Progressive rod and cone dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Areas of atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Peripheral constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OAT enzyme assay and gene testing",
+          "cells": [
+            {
+              "text": "Ornithine aminotransferase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine responsiveness test",
+          "cells": [
+            {
+              "text": "Change in plasma ornithine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gyrate_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choroideremia",
+          "cells": [
+            {
+              "text": "Chorioretinal atrophy without raised ornithine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Rod-cone dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathological high myopia",
+          "cells": [
+            {
+              "text": "Chorioretinal atrophy from myopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gyrate_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Arginine-restricted diet",
+          "cells": [
+            {
+              "text": "Lowers plasma ornithine; mainstay that slows degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine (vitamin B6) trial",
+          "cells": [
+            {
+              "text": "Subset responds with lowering of plasma ornithine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lysine and creatine supplementation",
+          "cells": [
+            {
+              "text": "Counters hyperornithinaemia effects on creatine pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular correction",
+          "cells": [
+            {
+              "text": "Refraction for high myopia; cataract surgery for posterior subcapsular cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma ornithine, visual fields, ERG, OCT and autofluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Progressive visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive OAT-related inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gyrate_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Gyrate atrophy of the choroid and retina",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gyrate atrophy: progressive chorioretinal atrophy with night blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly constricting fields, dense cataract, poor dietary adherence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for rapid field constriction threatening central fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ornithine, ERG, OCT, visual fields and OAT testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is plasma ornithine markedly raised with OAT deficiency confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider choroideremia, retinitis pigmentosa, high myopia or toxic retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Arginine-restricted diet to lower plasma ornithine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pyridoxine trial in pyridoxine-responsive patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lysine and creatine supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cataract and myopia correction with low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; most reach severe visual impairment or blindness by middle age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

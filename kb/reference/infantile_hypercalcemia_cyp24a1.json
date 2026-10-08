@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for idiopathic infantile hypercalcaemia (cyp24a1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_hypercalcemia_cyp24a1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and parathyroid hormone",
+          "cells": [
+            {
+              "text": "PTH suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25- and 1,25-dihydroxyvitamin D metabolites",
+          "cells": [
+            {
+              "text": "Vitamin D metabolite levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24,25-dihydroxyvitamin D and the 25-D to 24,25-D ratio",
+          "cells": [
+            {
+              "text": "Functional marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CYP24A1 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_hypercalcemia_cyp24a1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Williams syndrome and syndromic infantile hypercalcaemia",
+          "cells": [
+            {
+              "text": "Syndromic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D intoxication",
+          "cells": [
+            {
+              "text": "Excess vitamin D intake without an enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypocalciuric hypercalcaemia",
+          "cells": [
+            {
+              "text": "Hypocalciuria rather than hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "PTH raised, unlike suppressed PTH here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_hypercalcemia_cyp24a1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop vitamin D",
+          "cells": [
+            {
+              "text": "Withdraw all supplementation; moderate dietary calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sunlight",
+          "cells": [
+            {
+              "text": "Sensible avoidance to reduce endogenous vitamin D synthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute hypercalcaemia",
+          "cells": [
+            {
+              "text": "Isotonic saline rehydration with a loop diuretic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory hypercalcaemia",
+          "cells": [
+            {
+              "text": "Glucocorticoids or an antiresorptive bisphosphonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term hydration",
+          "cells": [
+            {
+              "text": "Reduces hypercalciuria and stone formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum and urinary calcium, PTH, renal function and renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_hypercalcemia_cyp24a1-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic infantile hypercalcaemia (CYP24A1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with hypercalcaemia after routine vitamin D, poor feeding and vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dehydration, lethargy, progressive nephrocalcinosis or hypercalcaemic crisis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent isotonic saline and loop diuretic; nephrology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, PTH, vitamin D metabolites, 25-D to 24,25-D ratio, urine calcium, CYP24A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic CYP24A1 variant or raised 25-D to 24,25-D ratio confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Williams syndrome, vitamin D intoxication or hyperparathyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop all vitamin D supplements; moderate dietary calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid sunlight to reduce endogenous vitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term hydration to reduce hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Glucocorticoids or bisphosphonate for refractory hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor calcium, PTH, renal function and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Controlled by stopping vitamin D; watch for nephrocalcinosis and stones",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

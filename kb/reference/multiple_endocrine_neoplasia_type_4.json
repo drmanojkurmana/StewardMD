@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for multiple endocrine neoplasia type 4 (cdkn1b)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_endocrine_neoplasia_type_4-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Primary hyperparathyroidism, usually the earliest and most frequent feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Prolactin, IGF-1 and cortisol axis testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gut hormone and neuroendocrine tumour screening",
+          "cells": [
+            {
+              "text": "As clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN1 sequencing",
+          "cells": [
+            {
+              "text": "A negative result prompts further testing in a MEN1-like phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKN1B gene sequencing",
+          "cells": [
+            {
+              "text": "Testing in MEN1-like patients who are MEN1 mutation-negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_endocrine_neoplasia_type_4-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple endocrine neoplasia type 1",
+          "cells": [
+            {
+              "text": "Clinically resembles MEN1; molecular testing is needed to separate the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Isolated hyperparathyroidism should not be attributed to sporadic disease without family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_endocrine_neoplasia_type_4-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parathyroidectomy",
+          "cells": [
+            {
+              "text": "For primary hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary tumour treatment",
+          "cells": [
+            {
+              "text": "Transsphenoidal surgery, or dopamine agonists for prolactinomas and somatostatin analogues for growth-hormone-secreting adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct hypercalcaemia",
+          "cells": [
+            {
+              "text": "Rehydration and, where required, bisphosphonates or cinacalcet while awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong biochemical surveillance",
+          "cells": [
+            {
+              "text": "Serum calcium, PTH and anterior pituitary hormones for recurrent or new tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic imaging",
+          "cells": [
+            {
+              "text": "Pituitary MRI and screening for gastro-entero-pancreatic and other neuroendocrine tumours as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Endocrinology, endocrine surgery and neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade CDKN1B testing of at-risk relatives; structured surveillance of carriers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_endocrine_neoplasia_type_4-dx-mgmt",
+      "title": "Diagnosis and management of Multiple endocrine neoplasia type 4 (CDKN1B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "MEN1-like phenotype with hyperparathyroidism or pituitary tumour, MEN1 test negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (symptomatic hypercalcaemia, visual loss, functioning NET)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calcium correction; specialist review for macroadenoma or NET",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum calcium, PTH, pituitary hormones, pituitary MRI, CDKN1B sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic CDKN1B variant confirmed after negative MEN1 testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-examine the phenotype and family history before calling it sporadic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parathyroidectomy for primary hyperparathyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transsphenoidal surgery or medical therapy for pituitary tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong biochemical surveillance of calcium, PTH and pituitary hormones",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic pituitary MRI and neuroendocrine tumour screening as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade CDKN1B testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most do well with surveillance and timely parathyroid and pituitary treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

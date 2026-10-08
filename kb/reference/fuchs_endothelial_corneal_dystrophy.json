@@ -155,5 +155,276 @@
       "caption": "Overview comparison matrix for fuchs endothelial corneal dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy",
+          "cells": [
+            {
+              "text": "Identifies guttae, corneal oedema and bullae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specular microscopy",
+          "cells": [
+            {
+              "text": "Endothelial cell density, pleomorphism and polymegathism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal pachymetry and thickness mapping",
+          "cells": [
+            {
+              "text": "Quantifies oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scheimpflug tomography",
+          "cells": [
+            {
+              "text": "Posterior corneal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for TCF4 repeat expansion",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical hypertonic sodium chloride",
+          "cells": [
+            {
+              "text": "Drops and ointment to draw fluid from the stroma and clear morning blurring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm-air evaporation on waking",
+          "cells": [
+            {
+              "text": "Reduces overnight epithelial oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bandage contact lens and lubricants",
+          "cells": [
+            {
+              "text": "Analgesia for painful epithelial bullae in bullous keratopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endothelial keratoplasty (DMEK or DSAEK)",
+          "cells": [
+            {
+              "text": "Definitive treatment for visually significant decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endothelial-protective cataract surgery",
+          "cells": [
+            {
+              "text": "Staged or combined with keratoplasty where the cornea is borderline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Endothelial cell density and corneal thickness with specular microscopy and pachymetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graft surveillance",
+          "cells": [
+            {
+              "text": "Rejection and failure after keratoplasty; prophylactic topical corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fuchs_endothelial_corneal_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Fuchs Endothelial Corneal Dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fuchs endothelial corneal dystrophy: morning blurring with guttae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ruptured bullae, rapid decompensation, sudden vision loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected microbial keratitis on a bullous cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, specular microscopy, pachymetry and Scheimpflug tomography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do guttae and endothelial cell loss on specular microscopy confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bullous keratopathy, posterior polymorphous dystrophy or endothelial injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical hypertonic sodium chloride and warm-air evaporation on waking",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bandage contact lens, lubricants and analgesia for painful bullae",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endothelial keratoplasty (DMEK or DSAEK) for visually significant decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor endothelial density and thickness; surveil for graft rejection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; with timely keratoplasty visual outcomes are generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for medication-overuse headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medication_overuse_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Headache and medication diary",
+          "cells": [
+            {
+              "text": "Days per month of each acute drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical diagnosis per ICHD-3",
+          "cells": [
+            {
+              "text": "No single confirmatory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of analgesics, including opioids and combination products",
+          "cells": [
+            {
+              "text": "Analgesic use, including opioids and combination products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging with MRI",
+          "cells": [
+            {
+              "text": "Secondary cause, if red flags or atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for dependence, anxiety and depression",
+          "cells": [
+            {
+              "text": "Comorbidities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline bloods, where indicated",
+          "cells": [
+            {
+              "text": "NSAID or paracetamol-related organ effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medication_overuse_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary headache from raised or low intracranial pressure, or a mass lesion",
+          "cells": [
+            {
+              "text": "Atypical features; papilloedema or raised intracranial pressure as red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hemicrania continua",
+          "cells": [
+            {
+              "text": "Indometacin-responsive chronic daily headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medication_overuse_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the overused acute medication",
+          "cells": [
+            {
+              "text": "Abruptly for simple analgesics and triptans; supervised taper for opioids and barbiturate-containing combinations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive therapy",
+          "cells": [
+            {
+              "text": "For the underlying primary headache: topiramate, amitriptyline, a beta-blocker or a CGRP monoclonal antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bridging therapy",
+          "cells": [
+            {
+              "text": "Longer-acting NSAID, a short corticosteroid course or antiemetics to ease withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education and headache diary",
+          "cells": [
+            {
+              "text": "Limit acute treatment to a safe number of days; prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity management",
+          "cells": [
+            {
+              "text": "Anxiety, depression and medication dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse-prevention follow-up",
+          "cells": [
+            {
+              "text": "Recurrence is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist or inpatient withdrawal",
+          "cells": [
+            {
+              "text": "When outpatient treatment fails, or with opioid or barbiturate overuse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medication_overuse_headache-dx-mgmt",
+      "title": "Diagnosis and management of Medication-overuse headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Frequent acute analgesic use with a chronic daily headache pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Papilloedema, thunderclap onset, new neurology or onset over age 50?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for secondary headache: imaging and specialist neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Headache and medication diary: days per month of each acute drug; analgesic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pattern consistent with ICHD-3 medication-overuse headache?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic migraine, tension-type headache or hemicrania continua; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the overused acute medication: abrupt for simple analgesics and triptans",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supervised taper for opioids and barbiturate-containing combinations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Start or optimise preventive therapy for the underlying primary headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bridging therapy with a longer-acting NSAID, short steroid course or antiemetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relapse-prevention follow-up; specialist withdrawal if outpatient care fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

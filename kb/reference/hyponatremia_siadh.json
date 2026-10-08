@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for hyponatraemia and siadh."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyponatremia_siadh-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma osmolality",
+          "cells": [
+            {
+              "text": "Confirms true hypotonic hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine osmolality and urine sodium",
+          "cells": [
+            {
+              "text": "Water handling and volume status; concentrated urine with raised sodium in SIADH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and adrenal function",
+          "cells": [
+            {
+              "text": "Hypothyroidism or adrenal insufficiency excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical volume assessment",
+          "cells": [
+            {
+              "text": "Euvolaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drugs that cause hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy, pulmonary or CNS screen",
+          "cells": [
+            {
+              "text": "Underlying trigger when SIADH is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia_siadh-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypovolaemic hyponatraemia",
+          "cells": [
+            {
+              "text": "Renal or extrarenal sodium loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypervolaemic hyponatraemia",
+          "cells": [
+            {
+              "text": "Heart failure, cirrhosis or nephrotic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism and adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Must be excluded before diagnosing SIADH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary polydipsia",
+          "cells": [
+            {
+              "text": "Low-solute intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiazide-induced hyponatraemia",
+          "cells": [
+            {
+              "text": "Drug-induced; review medications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia_siadh-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the trigger",
+          "cells": [
+            {
+              "text": "Malignancy, pulmonary or CNS disease, or an offending drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid restriction",
+          "cells": [
+            {
+              "text": "Cornerstone of chronic SIADH management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop provoking drugs",
+          "cells": [
+            {
+              "text": "Review and stop medications that provoke hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute severe hyponatraemia",
+          "cells": [
+            {
+              "text": "Hypertonic saline with controlled, slow rise in sodium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line agents",
+          "cells": [
+            {
+              "text": "Oral urea, vasopressin receptor antagonists or demeclocycline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Frequent serum sodium during correction to prevent osmotic demyelination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyponatremia_siadh-dx-mgmt",
+      "title": "Diagnosis and management of Hyponatraemia and SIADH",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Low serum sodium; confirm true hypotonic hyponatraemia first",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures, marked confusion, reduced consciousness or raised intracranial pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hypertonic saline with a controlled, slow sodium rise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Osmolality, urine osmolality and sodium, volume status, thyroid and adrenal tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Euvolaemic SIADH with thyroid and adrenal disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat volume depletion, heart failure or cirrhosis; then reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the trigger: malignancy, lung or CNS disease, or drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluid restriction as cornerstone for chronic SIADH",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop drugs that provoke hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Second-line: oral urea, vasopressin antagonists or demeclocycline",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Frequent sodium monitoring during correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Sodium corrected slowly; over-rapid rise risks osmotic demyelination",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

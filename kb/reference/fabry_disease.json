@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for fabry disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fabry_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or leukocyte alpha-galactosidase A activity",
+          "cells": [
+            {
+              "text": "Most reliable in males"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Essential for diagnosis in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gb3 and lyso-Gb3 biomarkers",
+          "cells": [
+            {
+              "text": "Plasma or urinary levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG, echocardiography and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Cardiac involvement and cornea verticillata"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fabry_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy (recombinant agalsidase)",
+          "cells": [
+            {
+              "text": "Clears lysosomal Gb3 and slows multisystem progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migalastat",
+          "cells": [
+            {
+              "text": "Oral pharmacological chaperone for amenable GLA missense variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain control",
+          "cells": [
+            {
+              "text": "Anticonvulsants for acroparaesthesia; avoid heat, fever and exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor or angiotensin-receptor blocker",
+          "cells": [
+            {
+              "text": "Renoprotection and reduction of proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and cerebrovascular protection",
+          "cells": [
+            {
+              "text": "Arrhythmia management; antiplatelet or anticoagulant therapy for stroke prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multisystem surveillance",
+          "cells": [
+            {
+              "text": "Renal function, ECG, echocardiography, neuroimaging, audiology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy or transplantation",
+          "cells": [
+            {
+              "text": "End-stage renal disease, through a specialist metabolic team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fabry_disease-dx-mgmt",
+      "title": "Diagnosis and management of Fabry disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Childhood burning hand and foot pain, or early stroke, proteinuria or LVH as an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (early stroke or TIA, progressive proteinuria, LVH with arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist metabolic team; cardiac and renal review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Alpha-galactosidase A (males); GLA testing (females); Gb3 and lyso-Gb3; urine protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Enzyme deficiency in males or a GLA variant in females confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider small-fibre neuropathy or another lysosomal or inherited cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Enzyme replacement therapy with agalsidase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral migalastat for amenable missense variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsants for acroparaesthesia; avoid heat, fever and exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "ACE inhibitor or ARB to reduce proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy for stroke prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated disease progresses to renal failure, cardiac complications and early stroke",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

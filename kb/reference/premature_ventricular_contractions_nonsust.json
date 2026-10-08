@@ -163,5 +163,442 @@
       "caption": "Overview comparison matrix for premature ventricular contractions, nonsustained idioventricular rhythm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ventricular Premature Beats",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/ventricular-premature-beats-vpb"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "premature_ventricular_contractions_nonsust-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining ventricular ectopy and its risk",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "PVC",
+          "cells": [
+            {
+              "text": "Early wide QRS without preceding P wave, usually full compensatory pause"
+            },
+            {
+              "text": "Same shape means unifocal; varied shapes suggest structural disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Couplet",
+          "unit": "beats",
+          "cells": [
+            {
+              "text": "2 consecutive ventricular beats",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Repetitive ectopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonsustained VT",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "3 or more beats over 100/min ending within 30 s",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Benign if heart and ECG normal and rate under 200/min"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accelerated idioventricular rhythm",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "3 or more ventricular beats under 100/min",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Common in acute MI reperfusion and sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PVC burden for cardiomyopathy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20% or more of 24 h beats",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "{{hy:Reversible PVC-induced LV dysfunction}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent PVCs after MI or in heart failure",
+          "unit": "PVCs",
+          "cells": [
+            {
+              "text": "Over 10 PVCs per hour (Harrison) or over 10 per minute (Merck)",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Marker of higher mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LBBB-like PVC with inferior axis",
+          "cells": [
+            {
+              "text": "Outflow-tract origin"
+            },
+            {
+              "text": "Usually idiopathic and benign"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Workup",
+          "cells": [
+            {
+              "text": "12-lead ECG, Holter, echocardiogram; MRI if abnormal"
+            },
+            {
+              "text": "Exercise test if ischemia suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Frequency threshold differs: Harrison cites over 10 PVCs per hour after MI; Merck cites over 10 per minute in structural heart disease."
+    },
+    {
+      "id": "premature_ventricular_contractions_nonsust-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from benign ectopy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sustained monomorphic VT",
+          "cells": [
+            {
+              "text": "Lasts over 30 s or causes instability"
+            },
+            {
+              "text": "ECG duration and hemodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVT with aberrancy",
+          "cells": [
+            {
+              "text": "Wide complex with preceding P waves"
+            },
+            {
+              "text": "12-lead ECG, response to adenosine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischemic heart disease",
+          "cells": [
+            {
+              "text": "New ectopy, more with exercise"
+            },
+            {
+              "text": "Exercise test, angiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ARVC or HCM",
+          "cells": [
+            {
+              "text": "Abnormal ECG, family history, syncope"
+            },
+            {
+              "text": "Echocardiogram and cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Channelopathies (long QT, Brugada, CPVT)",
+          "cells": [
+            {
+              "text": "Short-coupled or polymorphic ectopy, syncope"
+            },
+            {
+              "text": "ECG, exercise test, genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral valve prolapse with annular disjunction",
+          "cells": [
+            {
+              "text": "Papillary muscle ectopy"
+            },
+            {
+              "text": "Echocardiogram or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte or stimulant effect",
+          "cells": [
+            {
+              "text": "Low potassium or magnesium, caffeine, sympathomimetics"
+            },
+            {
+              "text": "Electrolytes, history"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "premature_ventricular_contractions_nonsust-treatment",
+      "kind": "treatment",
+      "title": "Managing PVCs and NSVT",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Asymptomatic ectopy with normal heart and ECG"
+            },
+            {
+              "text": "Avoid triggers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Correct provocateurs",
+          "cells": [
+            {
+              "text": "Hypokalemia, hypomagnesemia, ischemia, hypoxia, stimulants"
+            },
+            {
+              "text": "In acutely ill inpatients this is usually enough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta blocker or verapamil or diltiazem",
+          "cells": [
+            {
+              "text": "Bothersome symptoms"
+            },
+            {
+              "text": "Avoid nondihydropyridine CCB with reduced LV function"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class I or III antiarrhythmic",
+          "cells": [
+            {
+              "text": "Rarely, refractory symptoms"
+            },
+            {
+              "text": "May raise mortality, especially after MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "High burden, PVC cardiomyopathy or drug-refractory symptoms"
+            },
+            {
+              "text": "Suppresses idiopathic PVCs in about 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat structural disease, consider ICD",
+          "cells": [
+            {
+              "text": "Ectopy with LV dysfunction or high sudden-death risk"
+            },
+            {
+              "text": "Suppression drugs do not lower mortality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "premature_ventricular_contractions_nonsust-dx-mgmt",
+      "title": "Diagnosis and management of PVCs and NSVT",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "PVCs or NSVT on ECG or monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "12-lead ECG, electrolytes, echocardiogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Syncope, family history of sudden death, abnormal ECG or heart?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Evaluate structural disease or channelopathy; MRI; consider ICD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Holter to measure PVC burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Burden 10% or more or falling LVEF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Suppress: beta blocker or CCB, or ablation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Bothersome symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Avoid triggers; beta blocker or CCB if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Reassure; no treatment",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

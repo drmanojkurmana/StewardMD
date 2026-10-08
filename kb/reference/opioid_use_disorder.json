@@ -148,5 +148,356 @@
       "caption": "Overview comparison matrix for opioid use disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opioid_use_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine toxicology",
+          "cells": [
+            {
+              "text": "Confirms opioid and other substance use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised withdrawal scale",
+          "cells": [
+            {
+              "text": "Withdrawal severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood-borne virus screening",
+          "cells": [
+            {
+              "text": "Injection-related infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and general medical assessment",
+          "cells": [
+            {
+              "text": "Liver function and general medical status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for psychiatric comorbidity and suicide risk",
+          "cells": [
+            {
+              "text": "Comorbid psychiatric disorder and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prescription monitoring data",
+          "cells": [
+            {
+              "text": "Pattern of prescribed opioid supply, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_use_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological dependence on prescribed analgesia",
+          "cells": [
+            {
+              "text": "Dependence on appropriately prescribed analgesia, without a use disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid depression or anxiety",
+          "cells": [
+            {
+              "text": "Can drive misuse; treated alongside the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis in an injecting drug user",
+          "cells": [
+            {
+              "text": "Endocarditis, sepsis or deep soft-tissue infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_use_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Opioid agonist therapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Methadone or buprenorphine as the cornerstone; reduces mortality and illicit use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antagonist therapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Naltrexone for motivated, fully detoxified patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Structured counselling and relapse prevention alongside pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Take-home naloxone and harm reduction",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Supplied to the patient and, where appropriate, family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood-borne virus and injection infection",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Screen and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity and suicide risk",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Identify and manage comorbid psychiatric disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term maintenance",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Retention in care and social stability improve prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opioid_use_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Opioid use disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Problematic opioid use with impaired control, craving or continued harm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (respiratory depression, endocarditis or sepsis, or suicidal intent)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: naloxone for overdose, then urgent medical and sepsis care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine toxicology, withdrawal scale, blood-borne virus screen, liver tests, risk review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do toxicology and history confirm a pattern of opioid misuse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider physiological dependence on prescribed analgesia or other intoxication",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Opioid agonist therapy with methadone or buprenorphine as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Naltrexone for motivated patients who have fully detoxified",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychosocial support, counselling and relapse prevention alongside medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Take-home naloxone and harm-reduction measures for patient and family",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen and treat blood-borne viruses; treat comorbid psychiatric disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic relapsing condition; maintenance treatment improves survival and function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

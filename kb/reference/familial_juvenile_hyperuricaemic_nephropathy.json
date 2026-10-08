@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for familial juvenile hyperuricaemic nephropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited kidney disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_juvenile_hyperuricaemic_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum urate with fractional excretion of urate",
+          "cells": [
+            {
+              "text": "Low fractional excretion of urate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial renal function and eGFR",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and proteinuria quantification",
+          "cells": [
+            {
+              "text": "Typically minimal proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Kidney size and medullary cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UMOD sequencing, then an ADTKD panel (REN, HNF1B, MUC1)",
+          "cells": [
+            {
+              "text": "Causative variant if UMOD negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with uromodulin immunostaining",
+          "cells": [
+            {
+              "text": "If genetic testing is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_juvenile_hyperuricaemic_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ADTKD-REN",
+          "cells": [
+            {
+              "text": "Childhood anaemia, hyperkalaemia and a tendency to hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADTKD-HNF1B",
+          "cells": [
+            {
+              "text": "Renal cysts, early-onset diabetes, hypomagnesaemia and genital tract anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADTKD-MUC1",
+          "cells": [
+            {
+              "text": "Tubulointerstitial disease without prominent hyperuricaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_juvenile_hyperuricaemic_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Xanthine oxidase inhibitor from early on",
+          "cells": [
+            {
+              "text": "Allopurinol or febuxostat to control hyperuricaemia and prevent recurrent gout"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory therapy for gout flares",
+          "cells": [
+            {
+              "text": "Colchicine, an NSAID or a corticosteroid, chosen by renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephroprotective management",
+          "cells": [
+            {
+              "text": "Blood-pressure control and avoidance of nephrotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial renal function and renal replacement planning",
+          "cells": [
+            {
+              "text": "As the disease advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney transplantation",
+          "cells": [
+            {
+              "text": "End-stage disease; the condition does not recur in the graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UMOD testing and family screening",
+          "cells": [
+            {
+              "text": "Serum urate and renal function in first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_juvenile_hyperuricaemic_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Familial Juvenile Hyperuricaemic Nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early gout with progressive kidney disease in an autosomal dominant family",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (falling GFR, refractory gout, childhood hyperkalaemia, nephrotic proteinuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology review; alternative diagnosis if nephrotic-range proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urate and fractional excretion of urate; eGFR; UMOD testing; ADTKD panel if negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low fractional urate excretion with a UMOD variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ADTKD-REN, ADTKD-HNF1B, ADTKD-MUC1 or primary gout with CKD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early xanthine oxidase inhibitor (allopurinol or febuxostat)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Colchicine, NSAID or corticosteroid for flares, chosen by renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Blood-pressure control and avoidance of nephrotoxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement planning and transplantation for kidney failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "UMOD testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progression to end-stage kidney disease is usual, generally in adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

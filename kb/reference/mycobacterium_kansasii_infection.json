@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for mycobacterium kansasii infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_kansasii_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterial culture with photochromogen recognition",
+          "cells": [
+            {
+              "text": "Yellow pigment on exposure to light"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification",
+          "cells": [
+            {
+              "text": "Distinguishes it from M. tuberculosis and other NTM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin susceptibility testing",
+          "cells": [
+            {
+              "text": "Confirms the isolate remains rifampicin-susceptible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Upper-lobe cavitary or fibronodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated sputum cultures",
+          "cells": [
+            {
+              "text": "To meet diagnostic criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and immune assessment",
+          "cells": [
+            {
+              "text": "Especially with disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_kansasii_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Produces the most tuberculosis-like illness of the NTM; a positive interferon-gamma assay adds confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other cavitary NTM, such as M. avium complex, M. xenopi and M. malmoense",
+          "cells": [
+            {
+              "text": "Molecular speciation distinguishes the species"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_kansasii_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rifampicin-based combination",
+          "cells": [
+            {
+              "text": "Rifampicin, ethambutol and either isoniazid or a macrolide; reliably good outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin susceptibility testing",
+          "cells": [
+            {
+              "text": "Confirms the isolate remains susceptible and guides the regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying lung disease",
+          "cells": [
+            {
+              "text": "Manage conditions such as COPD alongside antimycobacterial treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug toxicity and response monitoring",
+          "cells": [
+            {
+              "text": "Visual monitoring for ethambutol toxicity, hepatotoxicity and repeated sputum cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and immune management",
+          "cells": [
+            {
+              "text": "Treat disseminated disease more intensively; start antiretroviral therapy where indicated, accounting for rifamycin interactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases or respiratory medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_kansasii_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium kansasii infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic upper-lobe cavitary disease with cough and haemoptysis, often with COPD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extensive cavitation, rifampicin resistance, rapid progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review; test rifampicin susceptibility of the isolate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Photochromogen culture, molecular identification, rifampicin testing, chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Molecular testing identifies M. kansasii rather than tuberculosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat sputum cultures and molecular testing; consider tuberculosis or other NTM",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged rifampicin, ethambutol and either isoniazid or a macrolide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin susceptibility testing to guide the regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage underlying lung disease such as COPD alongside treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor ethambutol ocular toxicity, hepatotoxicity and sputum cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable with rifampicin-based therapy; low relapse rate when adherent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

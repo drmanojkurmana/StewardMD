@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for mckusick-kaufman syndrome (mkks)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mckusick_kaufman_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelvic and abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Hydrometrocolpos and renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of the hands and feet",
+          "cells": [
+            {
+              "text": "Polydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term ophthalmological monitoring with electroretinography",
+          "cells": [
+            {
+              "text": "Emerging retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of MKKS with a ciliopathy gene panel",
+          "cells": [
+            {
+              "text": "MKKS variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mckusick_kaufman_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bardet-Biedl syndrome (especially BBS6)",
+          "cells": [
+            {
+              "text": "Later retinal dystrophy or renal impairment indicates Bardet-Biedl"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated hydrometrocolpos",
+          "cells": [
+            {
+              "text": "Imperforate hymen or vaginal atresia causing hydrometrocolpos"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mckusick_kaufman_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt drainage of hydrometrocolpos",
+          "cells": [
+            {
+              "text": "Newborn girl; corrects vaginal outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiological assessment",
+          "cells": [
+            {
+              "text": "Surgical repair of congenital heart lesions as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polydactyly and genital surgery",
+          "cells": [
+            {
+              "text": "Excision of postaxial polydactyly; repair of genital anomalies such as hypospadias in boys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal surveillance",
+          "cells": [
+            {
+              "text": "Electroretinography for emerging retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and metabolic monitoring",
+          "cells": [
+            {
+              "text": "If the phenotype evolves towards Bardet-Biedl; obesity and metabolic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Detects evolving Bardet-Biedl features and allows the diagnosis to be revised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mckusick_kaufman_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of McKusick-Kaufman syndrome (MKKS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Newborn girl with hydrometrocolpos and polydactyly; suspected MKKS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tense pelvic mass with urinary obstruction, or significant congenital heart disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of hydrometrocolpos to relieve outflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pelvic and renal ultrasound, echocardiography, hand and foot radiographs, MKKS testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an MKKS variant confirmed with a ciliopathy gene panel?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bardet-Biedl, Pallister-Hall or Ellis-van Creveld syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excision of postaxial polydactyly; repair of genital anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cardiological assessment with surgical repair of congenital heart lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Electroretinography surveillance for emerging retinal dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and metabolic monitoring if the phenotype evolves to Bardet-Biedl",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term follow-up to detect evolving Bardet-Biedl features; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

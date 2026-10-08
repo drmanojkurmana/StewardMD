@@ -201,5 +201,500 @@
       "caption": "Diagnostic and clinical overview matrix for hypoglycemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypoglycemia",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/hypoglycemia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypoglycemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and investigating hypoglycaemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Level 1",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<70 and >=54",
+              "range": [
+                54,
+                70
+              ]
+            },
+            {
+              "text": "Mild (treated diabetes)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Level 2",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<54",
+              "op": "<",
+              "value": 54
+            },
+            {
+              "text": "Moderate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Level 3",
+          "cells": [
+            {
+              "text": "Needs another person's help"
+            },
+            {
+              "text": "Severe, any glucose value"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Whipple triad glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<55 with symptoms, relieved by sugar",
+              "op": "<",
+              "value": 55
+            },
+            {
+              "text": "{{hy:Confirms hypoglycaemia without diabetes treatment}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autonomic symptoms",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Begin near 60"
+            },
+            {
+              "text": "Tremor, sweating, palpitations, hunger"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuroglycopenic symptoms",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Near 50"
+            },
+            {
+              "text": "Confusion, behaviour change, seizures, coma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin, C-peptide, proinsulin",
+          "cells": [
+            {
+              "text": "High with low glucose"
+            },
+            {
+              "text": "Insulinoma or sulfonylurea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide low with high insulin",
+          "cells": [
+            {
+              "text": "Suppressed C-peptide"
+            },
+            {
+              "text": "Exogenous insulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulfonylurea level",
+          "cells": [
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Surreptitious or accidental sulfonylurea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IGF-II/IGF-I ratio",
+          "cells": [
+            {
+              "text": ">10:1",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Non-islet cell tumour hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "72-hour fast",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Stop if <=45 with symptoms",
+              "op": "<=",
+              "value": 45
+            },
+            {
+              "text": "Standard test for insulinoma"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Women may have glucose as low as 50 mg/dL without symptoms (Merck)."
+    },
+    {
+      "id": "hypoglycemia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic hypoglycaemia or cause it",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Seizure or syncope",
+          "cells": [
+            {
+              "text": "{{hy:Check glucose in any altered or collapsed patient}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric illness",
+          "cells": [
+            {
+              "text": "Neuroglycopenic behaviour of insulinoma can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohypoglycaemia",
+          "cells": [
+            {
+              "text": "Very high WBC consumes glucose in the tube"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe falciparum malaria",
+          "cells": [
+            {
+              "text": "Hypoglycaemia without adrenergic warning signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulinoma",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia, high insulin and C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious insulin or sulfonylurea",
+          "cells": [
+            {
+              "text": "Low C-peptide with insulin; positive sulfonylurea screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver failure, alcohol, starvation",
+          "cells": [
+            {
+              "text": "Low glycogen stores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-gastric bypass",
+          "cells": [
+            {
+              "text": "Postprandial hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypoglycemia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of hypoglycaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral glucose",
+          "unit": "g",
+          "cells": [
+            {
+              "text": "{{hy:Able to swallow}}"
+            },
+            {
+              "text": "15 g; recheck at 15 min; repeat until >80 mg/dL, then a snack"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV 50% dextrose",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "Cannot swallow, IV access"
+            },
+            {
+              "text": "50 to 100 mL bolus, then 5% to 10% infusion as needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucagon IM or SC",
+          "cells": [
+            {
+              "text": "No IV access"
+            },
+            {
+              "text": "1 mg (0.5 mg if <25 kg); poor effect if glycogen depleted"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucagon nasal or dasiglucagon",
+          "cells": [
+            {
+              "text": "Out-of-hospital rescue"
+            },
+            {
+              "text": "Nasal 3 mg; dasiglucagon 0.6 mg SC"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Octreotide with dextrose",
+          "cells": [
+            {
+              "text": "Severe sulfonylurea hypoglycaemia"
+            },
+            {
+              "text": "Dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Find and treat cause",
+          "cells": [
+            {
+              "text": "Recurrent or unexplained episodes"
+            },
+            {
+              "text": "Insulin, C-peptide, sulfonylurea screen at time of event"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypoglycemia-dx-mgmt",
+      "title": "Diagnosis and management of hypoglycaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Altered behaviour, sweating, seizure or coma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Bedside glucose now",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Glucose <70 mg/dL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for other causes of altered state",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Able to swallow safely?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "15 g oral glucose; recheck in 15 min",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "IV access?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "50% dextrose 50 to 100 mL IV",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucagon 1 mg IM",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Sulfonylurea cause or recurrent?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Dextrose infusion, octreotide, admit and monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Snack; review insulin dose; investigate if no diabetes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,287 @@
       "caption": "Overview comparison matrix for factor v leiden."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "factor_v_leiden-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional activated protein C resistance assay",
+          "cells": [
+            {
+              "text": "Initial screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for the mutation and zygosity",
+          "cells": [
+            {
+              "text": "Confirms factor V Leiden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting thrombophilia",
+          "cells": [
+            {
+              "text": "Where clinically relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation of provoking factors",
+          "cells": [
+            {
+              "text": "Around any thrombotic event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history review",
+          "cells": [
+            {
+              "text": "Selective testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_v_leiden-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment for asymptomatic carriers",
+          "cells": [
+            {
+              "text": "No primary prophylactic anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard anticoagulation for acute venous thromboembolism",
+          "cells": [
+            {
+              "text": "Heparin or low-molecular-weight heparin, transitioning to a direct oral anticoagulant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised anticoagulation duration",
+          "cells": [
+            {
+              "text": "Extended therapy considered for unprovoked, recurrent or homozygous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Situational thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Surgery, immobility and the peripartum period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid oestrogen-containing contraception and hormone replacement",
+          "cells": [
+            {
+              "text": "Offer alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modify other thrombotic risk factors",
+          "cells": [
+            {
+              "text": "Obesity, smoking and immobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective family testing",
+          "cells": [
+            {
+              "text": "Rather than universal screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "factor_v_leiden-dx-mgmt",
+      "title": "Diagnosis and management of Factor V Leiden",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Venous thromboembolism at an unusual site or recurrent, with thrombophilia suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (VTE in homozygotes, thrombosis on oestrogen or in pregnancy, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Anticoagulation for acute VTE; reassess if events recur",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Functional APC resistance assay; genetic testing for mutation and zygosity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Factor V Leiden confirmed by genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess other thrombophilia or acquired APC resistance; retest later",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Standard anticoagulation for acute VTE, extended if unprovoked or homozygous",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Situational thromboprophylaxis in surgery, immobility and the peripartum period",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid oestrogen contraception and hormone replacement; offer alternatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Modify obesity, smoking and immobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Selective family testing rather than universal screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most carriers stay asymptomatic; homozygosity increases thrombotic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

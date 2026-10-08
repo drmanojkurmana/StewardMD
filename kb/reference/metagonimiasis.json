@@ -147,5 +147,276 @@
       "caption": "Overview comparison matrix for metagonimiasis (intestinal fluke)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metagonimiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration techniques",
+          "cells": [
+            {
+              "text": "Ova and parasites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool examination",
+          "cells": [
+            {
+              "text": "Intermittent, low egg output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Egg morphometry",
+          "cells": [
+            {
+              "text": "Distinguishes from other small trematode eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or echocardiography, if ectopic disease is suspected",
+          "cells": [
+            {
+              "text": "Cardiac or cerebral disease, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology, where available",
+          "cells": [
+            {
+              "text": "Supports the diagnosis where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metagonimiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "Highly effective; the agent of choice for intestinal fluke infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive rehydration",
+          "cells": [
+            {
+              "text": "Correction of malabsorption or nutritional deficit from heavy infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cure check",
+          "cells": [
+            {
+              "text": "Follow-up stool microscopy, allowing for intermittent low egg output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contacts",
+          "cells": [
+            {
+              "text": "Household members and others who shared the same raw or undercooked freshwater fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic disease",
+          "cells": [
+            {
+              "text": "Anthelmintic therapy plus organ-specific care and specialist referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Thorough cooking of freshwater fish; avoid raw preparations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metagonimiasis-dx-mgmt",
+      "title": "Diagnosis and management of Metagonimiasis (intestinal fluke)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diarrhoea or abdominal symptoms after raw or undercooked freshwater fish",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological deficit, seizures, cardiac symptoms, or malabsorption with weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review for cerebral or cardiac egg embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration, repeated stools, full blood count, egg morphometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the characteristic eggs confirmed on stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other intestinal flukes, giardiasis or functional bowel disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel, the agent of choice for intestinal fluke infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydration and correction of malabsorption or nutritional deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat household members who shared the same freshwater fish source",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool microscopy to confirm cure, allowing for low egg output",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prevention through thorough cooking of freshwater fish; avoid raw preparations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

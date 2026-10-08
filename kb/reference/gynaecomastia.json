@@ -156,5 +156,332 @@
       "caption": "Overview comparison matrix for gynaecomastia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gynaecomastia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination of breasts, testes and systemic signs",
+          "cells": [
+            {
+              "text": "Breast and testicular findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone, oestradiol, LH and FSH",
+          "cells": [
+            {
+              "text": "Sex hormone profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin, thyroid and liver and renal function",
+          "cells": [
+            {
+              "text": "Endocrine and organ function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-hCG and alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Germ-cell tumour screen when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular ultrasound",
+          "cells": [
+            {
+              "text": "Testicular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast ultrasound and mammography",
+          "cells": [
+            {
+              "text": "Malignancy not excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy of a hard eccentric mass",
+          "cells": [
+            {
+              "text": "Histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynaecomastia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudogynaecomastia",
+          "cells": [
+            {
+              "text": "Adipose enlargement without glandular tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Male breast carcinoma",
+          "cells": [
+            {
+              "text": "Hard, eccentric or fixed mass with skin or nipple change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoma of the chest wall",
+          "cells": [
+            {
+              "text": "Benign soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynaecomastia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the cause",
+          "cells": [
+            {
+              "text": "Withdraw or substitute drugs such as spironolactone, digoxin or cimetidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying pathology",
+          "cells": [
+            {
+              "text": "Testosterone replacement for hypogonadism; thyrotoxicosis and chronic disease management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone-secreting tumour",
+          "cells": [
+            {
+              "text": "Resection of testicular or adrenal tumour where identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early painful phase",
+          "cells": [
+            {
+              "text": "Selective oestrogen-receptor modulator such as tamoxifen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Physiological cases, most of which regress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Subcutaneous mastectomy or liposuction for long-standing fibrotic or distressing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude male breast carcinoma",
+          "cells": [
+            {
+              "text": "For hard, eccentric or fixed masses, with referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gynaecomastia-dx-mgmt",
+      "title": "Diagnosis and management of Gynaecomastia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gynaecomastia: benign male breast enlargement with a symmetrical disc",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard eccentric mass, nipple change, testicular mass, axillary nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent breast and testicular assessment for suspected carcinoma or germ-cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hormone profile, prolactin, ultrasound and core biopsy of any hard eccentric mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the mass look like a symmetrical subareolar disc without malignant features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider male breast carcinoma, lipoma, abscess or pseudogynaecomastia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the cause by withdrawing offending drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat hypogonadism, thyrotoxicosis or chronic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tamoxifen in the early painful proliferative phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for long-standing fibrotic or distressing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Physiological and drug-induced cases often resolve once the trigger is removed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

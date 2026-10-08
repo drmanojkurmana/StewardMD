@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for myoadenylate deaminase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myoadenylate_deaminase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Forearm exercise test with paired lactate and ammonia",
+          "cells": [
+            {
+              "text": "Normal lactate rise with a blunted or absent ammonia rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with AMP deaminase histochemistry",
+          "cells": [
+            {
+              "text": "Absent enzyme activity; routine histology excludes another myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical assay of AMP deaminase in muscle",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AMPD1 sequencing",
+          "cells": [
+            {
+              "text": "Including the common recurrent variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase, and urine myoglobin during attacks",
+          "cells": [
+            {
+              "text": "Creatine kinase may be normal between attacks; myoglobin in acute episodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myoadenylate_deaminase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "McArdle disease and other glycogen-storage myopathies",
+          "cells": [
+            {
+              "text": "Forearm test shows a flat lactate, with a normal ammonia rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine palmitoyltransferase II deficiency and fatty-acid oxidation defects",
+          "cells": [
+            {
+              "text": "Also cause exertional rhabdomyolysis; a broader metabolic panel separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary AMP deaminase deficiency with an inflammatory or dystrophic myopathy",
+          "cells": [
+            {
+              "text": "A bystander enzyme deficiency alongside another myopathy; biopsy histology shows it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myoadenylate_deaminase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "The primary defect is often asymptomatic, with normal life expectancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded, paced exercise",
+          "cells": [
+            {
+              "text": "Adequate warm-up; avoid sudden maximal or sustained exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and carbohydrate",
+          "cells": [
+            {
+              "text": "Good hydration and carbohydrate intake before exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis management",
+          "cells": [
+            {
+              "text": "Prompt intravenous fluids to protect against acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude a coexisting myopathy",
+          "cells": [
+            {
+              "text": "Before attributing symptoms to a secondary bystander deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral ribose",
+          "cells": [
+            {
+              "text": "Anecdotal symptomatic benefit; evidence is limited and it is not established therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive AMPD1 defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myoadenylate_deaminase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Myoadenylate deaminase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exercise-induced myalgia, early fatigue and cramp, sometimes with dark urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tea-coloured urine, marked weakness with high CK, AKI)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intravenous fluids; monitor renal function for myoglobinuric AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Forearm exercise test with paired lactate and ammonia; biopsy; AMPD1 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Blunted ammonia with a normal lactate rise, confirmed by biopsy or AMPD1 testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glycogenosis (flat lactate), fatty-acid oxidation defect or another myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; the primary defect is often asymptomatic with normal life expectancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Graded, paced exercise with warm-up; avoid sudden maximal exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydration and carbohydrate intake before exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude a coexisting inflammatory or dystrophic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good prognosis; symptoms are exercise-limited and managed conservatively",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

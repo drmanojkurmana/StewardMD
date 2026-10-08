@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for functional neurological disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_neurological_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurological examination for positive functional signs",
+          "cells": [
+            {
+              "text": "Hoover sign and give-way weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted MRI",
+          "cells": [
+            {
+              "text": "Excludes structural mimics when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG",
+          "cells": [
+            {
+              "text": "When functional (dissociative) seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Where a neuromuscular cause is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for psychological comorbidity",
+          "cells": [
+            {
+              "text": "Precipitating factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_neurological_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Structural neurological disease such as stroke, multiple sclerosis or tumour",
+          "cells": [
+            {
+              "text": "Objective signs such as fixed reflex asymmetry or extensor plantar response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy where seizures are the presentation",
+          "cells": [
+            {
+              "text": "Video-EEG when seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious disorder or malingering",
+          "cells": [
+            {
+              "text": "Symptoms consciously produced"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_neurological_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clear positive diagnosis",
+          "cells": [
+            {
+              "text": "Non-judgemental, based on rule-in signs such as Hoover sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Tailored to the dominant symptom; physiotherapy for functional weakness and gait disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Comorbidity and perpetuating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and speech-and-language therapy",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting symptoms",
+          "cells": [
+            {
+              "text": "Pain, fatigue, mood and anxiety disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid over-investigation",
+          "cells": [
+            {
+              "text": "Reinforces illness beliefs and iatrogenic harm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Persistent or complex cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_neurological_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Functional neurological disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional neurological disorder: positive signs such as Hoover sign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (structural signs, progressive deficits, new hard signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acute presentation that could be stroke or another emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination for Hoover sign and give-way weakness; targeted MRI if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are positive rule-in signs present, with structural mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider stroke, multiple sclerosis, tumour, epilepsy or factitious disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clear, non-judgemental positive diagnosis based on rule-in signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation with physiotherapy for functional weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive behavioural therapy for comorbidity and perpetuating factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting pain, fatigue, mood and anxiety; avoid over-investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; early confident diagnosis and rehabilitation improve recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

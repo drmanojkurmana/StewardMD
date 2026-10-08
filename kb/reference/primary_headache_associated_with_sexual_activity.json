@@ -144,5 +144,327 @@
       "caption": "Overview comparison matrix for primary headache associated with sexual activity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_headache_associated_with_sexual_activity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent CT of the head; lumbar puncture if non-diagnostic",
+          "cells": [
+            {
+              "text": "First severe episode"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography and venography",
+          "cells": [
+            {
+              "text": "Vascular causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat vascular imaging",
+          "cells": [
+            {
+              "text": "Reversible cerebral vasoconstriction, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_headache_associated_with_sexual_activity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "First explosive orgasmic headache"
+            },
+            {
+              "text": "Urgent CT of the head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible cerebral vasoconstriction syndrome",
+          "cells": [
+            {
+              "text": "Recurrent thunderclap episodes"
+            },
+            {
+              "text": "Repeat vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical or intracranial arterial dissection",
+          "cells": [
+            {
+              "text": "Neck pain"
+            },
+            {
+              "text": "CT or MR angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "CT or MR venography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_headache_associated_with_sexual_activity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker preventive",
+          "cells": [
+            {
+              "text": "Such as propranolol, during symptomatic bouts, to suppress exertional headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "On-demand prophylaxis",
+          "cells": [
+            {
+              "text": "Indometacin or a triptan taken shortly before sexual activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural advice",
+          "cells": [
+            {
+              "text": "Reduce exertion, adopt a more passive role, temporarily abstain during a cluster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular optimisation",
+          "cells": [
+            {
+              "text": "Control coexisting hypertension that amplifies the pressure surge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Mandatory on the first or a severe episode before the primary label is accepted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible cerebral vasoconstriction",
+          "cells": [
+            {
+              "text": "Investigate in recurrent orgasmic thunderclap attacks; calcium channel blocker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, frequently self-remitting course; neurology referral if refractory or atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_headache_associated_with_sexual_activity-dx-mgmt",
+      "title": "Diagnosis and management of Primary headache associated with sexual activity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary headache with sexual activity: sudden orgasmic headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Explosive first headache, focal deficit, seizures, or recurrent thunderclap attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent CT and lumbar puncture to exclude subarachnoid haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent CT head; LP if non-diagnostic; CT or MR angiography and venography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is subarachnoid haemorrhage or another vascular cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate RCVS or dissection as indicated; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blocker such as propranolol during symptomatic bouts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Indometacin or a triptan shortly before sexual activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Behavioural advice: reduce exertion, temporary abstinence in a cluster",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control coexisting hypertension; investigate RCVS in recurrent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassure about benign course; neurology referral if refractory or atypical",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

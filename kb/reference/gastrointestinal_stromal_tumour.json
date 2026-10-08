@@ -162,5 +162,332 @@
       "caption": "Overview comparison matrix for gastrointestinal stromal tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Digestive System Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastrointestinal_stromal_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging and response assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound with FNA or biopsy",
+          "cells": [
+            {
+              "text": "Tissue sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for CD117, DOG1, CD34 and SDHB",
+          "cells": [
+            {
+              "text": "Marker profile for GIST"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genotyping of KIT and PDGFRA",
+          "cells": [
+            {
+              "text": "Mutation status; BRAF or SDH where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitotic count per high-power field",
+          "cells": [
+            {
+              "text": "Histological grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI for rectal or hepatic lesions",
+          "cells": [
+            {
+              "text": "Where CT characterisation is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Early metabolic response to tyrosine kinase inhibitor therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_stromal_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastrointestinal neuroendocrine tumour",
+          "cells": [
+            {
+              "text": "Distinguished by the CD117 and DOG1 marker profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_stromal_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Core needle biopsy and mutation analysis",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; SDH immunohistochemistry if KIT and PDGFRA are negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for localised disease",
+          "cells": [
+            {
+              "text": "Macroscopically complete (R0) resection is the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoadjuvant imatinib",
+          "cells": [
+            {
+              "text": "Large or high rupture-risk tumours, only after confirmation of diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant imatinib",
+          "cells": [
+            {
+              "text": "Typically about three years, for a high estimated relapse risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indefinite TKI therapy for metastatic disease",
+          "cells": [
+            {
+              "text": "Stopping typically leads to progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sequenced TKI therapy",
+          "cells": [
+            {
+              "text": "Imatinib first for imatinib-sensitive genotypes; avapritinib for PDGFRA D842V"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDH-deficient GIST",
+          "cells": [
+            {
+              "text": "Largely imatinib-insensitive; sunitinib or regorafenib considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Palliation only, such as bone metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up after resection",
+          "cells": [
+            {
+              "text": "Periodic CT of the abdomen (MRI as an alternative) to detect relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastrointestinal_stromal_tumour-dx-mgmt",
+      "title": "Diagnosis and management of gastrointestinal stromal tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GIST: submucosal or intramural gastrointestinal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, rupture, rapid enlargement, obstruction, metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for bleeding, rupture or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT abdomen and pelvis, endoscopic ultrasound with biopsy, CD117 and DOG1 staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do CD117 or DOG1 staining and KIT or PDGFRA testing confirm GIST?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider leiomyoma, schwannoma, neuroendocrine tumour or desmoid fibromatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Core biopsy and KIT or PDGFRA mutation analysis to confirm the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgery with complete (R0) resection for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant imatinib, typically about three years, for high relapse risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Indefinite TKI therapy for metastatic or unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on size, mitotic rate, site and resection; small gastric tumours often cured",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

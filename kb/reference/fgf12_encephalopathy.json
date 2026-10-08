@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for fgf12 developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fgf12_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "FGF12 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Focal and tonic seizures; interictal abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Trajectory of development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to sodium-channel blocking therapy",
+          "cells": [
+            {
+              "text": "Mechanism-based response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fgf12_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SCN8A or SCN2A encephalopathy",
+          "cells": [
+            {
+              "text": "Other sodium-channel developmental epileptic encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNQ2 or STXBP1 encephalopathy",
+          "cells": [
+            {
+              "text": "Other early infantile epileptic encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Early infantile epilepsy with developmental delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fgf12_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium-channel blocking antiseizure medication",
+          "cells": [
+            {
+              "text": "Carbamazepine, oxcarbazepine, phenytoin or lacosamide preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional antiseizure agents",
+          "cells": [
+            {
+              "text": "Drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Where seizures remain refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational and speech therapy",
+          "cells": [
+            {
+              "text": "Hypotonia and developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial EEG and clinical review",
+          "cells": [
+            {
+              "text": "Seizure control and encephalopathic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue benzodiazepine protocol",
+          "cells": [
+            {
+              "text": "Status epilepticus and seizure clusters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "After identification of the FGF12 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fgf12_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of FGF12 developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset developmental and epileptic encephalopathy with focal or tonic seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (refractory clusters, status epilepticus, feeding or respiratory difficulty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rescue benzodiazepine and urgent neurology for status or clusters",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome for FGF12; EEG; brain MRI; developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGF12 variant identified on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other sodium-channel or early infantile epileptic encephalopathy genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium-channel blocking antiseizure medication first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add antiseizure agents and ketogenic diet if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial EEG and genetic counselling for family",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Significant intellectual disability; seizures may respond well to sodium-channel blockers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

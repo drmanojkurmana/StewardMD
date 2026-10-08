@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for hypomelanosis of ito."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypomelanosis_of_ito-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Delineates the hypopigmented pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype or chromosomal microarray of skin fibroblasts and blood",
+          "cells": [
+            {
+              "text": "Mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment with EEG",
+          "cells": [
+            {
+              "text": "Seizures when they occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Central nervous system involvement when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Ocular anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and dental evaluation",
+          "cells": [
+            {
+              "text": "Associated anomalies as indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomelanosis_of_ito-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Incontinentia pigmenti (hypopigmented fourth stage)",
+          "cells": [
+            {
+              "text": "Confusion with the hypopigmented stage is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linear and whorled naevoid hypermelanosis",
+          "cells": [
+            {
+              "text": "The pigmentary opposite: hyperpigmented rather than hypopigmented"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomelanosis_of_ito-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No specific skin treatment",
+          "cells": [
+            {
+              "text": "Skin change is benign; care is directed at extracutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopment and seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication and developmental support where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Ophthalmological, skeletal and dental evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Characterise mosaicism",
+          "cells": [
+            {
+              "text": "Chromosomal microarray or karyotype of skin fibroblasts and blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS assessment",
+          "cells": [
+            {
+              "text": "Neuroimaging and EEG when central nervous system involvement is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Most cases arise from postzygotic mosaicism rather than Mendelian inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypomelanosis_of_ito-dx-mgmt",
+      "title": "Diagnosis and management of Hypomelanosis of Ito",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blaschko-linear hypopigmented streaks, whorls or patches on the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures, regression, progressive deficit or threatened vision?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurology review with EEG and neuroimaging; urgent eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood's lamp, skin and blood karyotype or microarray, developmental and eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mosaicism confirmed and central nervous system involvement assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test skin fibroblasts, as blood karyotype may miss mosaicism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No specific skin treatment; the change is benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication and developmental support where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology, skeletal and dental evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for postzygotic mosaicism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign skin marker; long-term care set by any associated anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,287 @@
       "caption": "Overview comparison matrix for disulfiram-ethanol reaction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disulfiram_ethanol_reaction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from timing relative to alcohol intake",
+          "cells": [
+            {
+              "text": "Reaction timed after alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Hypotension and cardiac effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Arrhythmia or ischaemia in severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of hidden alcohol sources and disulfiram-like agents",
+          "cells": [
+            {
+              "text": "Hidden alcohol and disulfiram-like drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood alcohol concentration",
+          "cells": [
+            {
+              "text": "Confirms alcohol exposure where unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disulfiram_ethanol_reaction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop alcohol; supportive care",
+          "cells": [
+            {
+              "text": "Most episodes self-limit once acetaldehyde is metabolised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids and supine positioning",
+          "cells": [
+            {
+              "text": "For hypotension, with continuous blood pressure and cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiemetics and oxygen",
+          "cells": [
+            {
+              "text": "Nausea and vomiting; oxygen if breathless"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasopressors and arrhythmia treatment",
+          "cells": [
+            {
+              "text": "Severe reactions, particularly with cardiovascular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on alcohol sources and drugs",
+          "cells": [
+            {
+              "text": "Mouthwashes, tonics, topical preparations; metronidazole and certain cephalosporins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disulfiram review",
+          "cells": [
+            {
+              "text": "Within a structured alcohol-dependence programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation",
+          "cells": [
+            {
+              "text": "Refractory hypotension or cardiac effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disulfiram_ethanol_reaction-dx-mgmt",
+      "title": "Diagnosis and management of Disulfiram-ethanol reaction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected disulfiram-ethanol reaction: systemic symptoms after alcohol on disulfiram",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory hypotension, chest pain or arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to critical care for refractory hypotension or cardiac effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood pressure and cardiac monitoring; ECG; electrolytes; history of hidden alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Did symptoms follow alcohol intake while taking disulfiram?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anaphylaxis, acute coronary syndrome, sepsis or other flushing disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop alcohol; supportive care, as most reactions self-limit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV fluids and supine positioning for hypotension, with monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiemetics; oxygen if breathless",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vasopressors and arrhythmia treatment for severe reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Counsel on hidden alcohol sources and on metronidazole and similar drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually unpleasant but self-limiting over hours; severe reactions can be life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for epiretinal membrane (macular pucker)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epiretinal_membrane-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Membrane, foveal contour and retinal thickness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amsler grid testing",
+          "cells": [
+            {
+              "text": "Quantifies and monitors metamorphopsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Best-corrected visual acuity",
+          "cells": [
+            {
+              "text": "Functional change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus examination and imaging",
+          "cells": [
+            {
+              "text": "Vessel distortion and any macular hole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Secondary vascular pathology or leakage, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for secondary causes",
+          "cells": [
+            {
+              "text": "Prior retinal tears, vascular occlusion or uveitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epiretinal_membrane-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-thickness or lamellar macular hole",
+          "cells": [
+            {
+              "text": "An evolving hole beneath the membrane is seen on OCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoid or diabetic macular oedema",
+          "cells": [
+            {
+              "text": "Can coexist; reduced vision should not be attributed to a mild membrane alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epiretinal_membrane-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild or asymptomatic membranes, with home Amsler grid monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Optimise vision non-surgically while acuity and metamorphopsia are acceptable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy with membrane peel",
+          "cells": [
+            {
+              "text": "Visually significant metamorphopsia or reduced acuity; usually with internal limiting membrane peel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary causes",
+          "cells": [
+            {
+              "text": "Retinal tears, vascular occlusion or uveitis; manage any associated macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Optical coherence tomography and best-corrected visual acuity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Recovery after surgery is gradual and often incomplete; cataract commonly progresses after vitrectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epiretinal_membrane-dx-mgmt",
+      "title": "Diagnosis and management of Epiretinal membrane (macular pucker)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Distorted vision and reduced acuity in an older adult with a membrane on fundus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid worsening, macular hole, retinal detachment symptoms, secondary cause)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for retinal assessment of tear, vascular occlusion or detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT, Amsler grid, best-corrected visual acuity and fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Visually significant metamorphopsia or reduced acuity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe with periodic review and home Amsler grid monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise refraction while acuity is acceptable",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pars plana vitrectomy with membrane peel, usually with internal limiting membrane peel",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat secondary causes and any macular oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on gradual, often incomplete recovery; cataract may progress",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many idiopathic membranes stay stable; surgery usually improves distortion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

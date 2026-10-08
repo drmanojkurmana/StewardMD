@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for metabolic alkalosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metabolic_alkalosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial or venous blood gas with serum bicarbonate",
+          "cells": [
+            {
+              "text": "Primary alkalosis and its compensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes including potassium, chloride and magnesium",
+          "cells": [
+            {
+              "text": "Potassium, chloride and magnesium status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine chloride",
+          "cells": [
+            {
+              "text": "Chloride-responsive versus chloride-resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of volume status and blood pressure",
+          "cells": [
+            {
+              "text": "Volume depletion and blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone, when a mineralocorticoid cause is suspected",
+          "cells": [
+            {
+              "text": "Mineralocorticoid cause, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications and history",
+          "cells": [
+            {
+              "text": "Vomiting, diuretic or laxative use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metabolic_alkalosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperaldosteronism and other mineralocorticoid excess",
+          "cells": [
+            {
+              "text": "Hypertension with hypokalaemic alkalosis suggests mineralocorticoid excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milk-alkali syndrome or excessive alkali administration",
+          "cells": [
+            {
+              "text": "Excessive alkali administration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metabolic_alkalosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the generating cause",
+          "cells": [
+            {
+              "text": "Stop loop or thiazide diuretics; control vomiting or nasogastric losses with antiemetics and acid suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chloride-responsive disease",
+          "cells": [
+            {
+              "text": "Restore volume and chloride with sodium chloride solution, alongside potassium chloride"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replace potassium and magnesium",
+          "cells": [
+            {
+              "text": "Hypokalaemia both drives and worsens the alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chloride-resistant disease",
+          "cells": [
+            {
+              "text": "Address the mineralocorticoid excess with an aldosterone antagonist, or definitive management of an adrenal source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide",
+          "cells": [
+            {
+              "text": "Selected volume-overloaded patients in whom saline loading is undesirable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe alkalaemia",
+          "cells": [
+            {
+              "text": "Haemodialysis or dilute hydrochloric acid infusion where renal impairment is unresponsive to other measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood gases and electrolytes; watch for arrhythmia and compensatory hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metabolic_alkalosis-dx-mgmt",
+      "title": "Diagnosis and management of Metabolic alkalosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Metabolic alkalosis with vomiting, diuretic use or hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe alkalaemia, profound hypokalaemia, marked volume depletion or hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium and volume correction; cardiac monitoring for arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood gas with bicarbonate; electrolytes; urine chloride; BP; renin and aldosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does urine chloride classify the disease as chloride-responsive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chloride-resistant: assess renin and aldosterone for mineralocorticoid excess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop loop or thiazide diuretics; control vomiting or nasogastric losses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium chloride solution with potassium chloride for chloride-responsive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace potassium and magnesium, as hypokalaemia drives the alkalosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aldosterone antagonist or adrenal management for chloride-resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor blood gases and electrolytes for arrhythmia and compensatory hypoventilation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

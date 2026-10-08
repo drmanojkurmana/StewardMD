@@ -186,5 +186,495 @@
       "caption": "Overview comparison matrix for upper gastrointestinal tract cancers."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Esophageal Cancer, 2025",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/tumors-of-the-gastrointestinal-tract/esophageal-cancer"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Stomach Cancer",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/tumors-of-the-gastrointestinal-tract/stomach-cancer"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "upper_gastrointestinal_tract_cancers-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging upper GI cancers",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Alarm symptoms",
+          "cells": [
+            {
+              "text": "Progressive dysphagia, weight loss, bleeding, iron deficiency, early satiety"
+            },
+            {
+              "text": "Endoscopy, even under age 50"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Required for tissue diagnosis"
+            },
+            {
+              "text": "{{hy:Deep or EUS-guided biopsy for diffuse gastric cancer or lymphoma}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen, pelvis plus PET-CT",
+          "cells": [
+            {
+              "text": "Distant metastases"
+            },
+            {
+              "text": "PET may miss diffuse-type gastric cancer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "T depth and regional nodes"
+            },
+            {
+              "text": "Done when no metastases on CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staging laparoscopy",
+          "cells": [
+            {
+              "text": "Peritoneal spread"
+            },
+            {
+              "text": "Gastric and GEJ tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biomarkers",
+          "cells": [
+            {
+              "text": "MSI standard on biopsy; HER2 and PD-L1 in advanced disease"
+            },
+            {
+              "text": "Guide trastuzumab or immunotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tumour markers (CEA, CA19-9)",
+          "cells": [
+            {
+              "text": "Nonspecific"
+            },
+            {
+              "text": "Monitoring only, not diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal 5-year survival",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Overall 22%; localised 49%; regional 28%; distant 6%",
+              "op": "=",
+              "value": 22
+            },
+            {
+              "text": "ACS figures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gastric 5-year survival",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 95% if confined to mucosa or submucosa",
+              "op": "<=",
+              "value": 95
+            },
+            {
+              "text": "Overall under 5 to 15%"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "upper_gastrointestinal_tract_cancers-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic upper GI cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign peptic ulcer",
+          "cells": [
+            {
+              "text": "Gastric ulcer can hide cancer"
+            },
+            {
+              "text": "Biopsy and repeat endoscopy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reflux oesophagitis or Barrett without cancer",
+          "cells": [
+            {
+              "text": "No mass; dysplasia grade"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achalasia or benign stricture",
+          "cells": [
+            {
+              "text": "Dysphagia without mass"
+            },
+            {
+              "text": "Endoscopy, manometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary gastric lymphoma",
+          "cells": [
+            {
+              "text": "Treatment differs markedly"
+            },
+            {
+              "text": "Deep biopsy with immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GIST or submucosal benign tumour",
+          "cells": [
+            {
+              "text": "Smooth bulging submucosal mass"
+            },
+            {
+              "text": "EUS-guided sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastasis to stomach or oesophagus",
+          "cells": [
+            {
+              "text": "Known other primary"
+            },
+            {
+              "text": "Biopsy with immunostains"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "upper_gastrointestinal_tract_cancers-treatment",
+      "kind": "treatment",
+      "title": "Treating oesophageal and gastric cancer",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic resection",
+          "cells": [
+            {
+              "text": "Oesophageal Tis or T1a N0; high-grade dysplasia in Barrett"
+            },
+            {
+              "text": "Confirm depth by EUS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery alone",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Oesophageal T1b"
+            },
+            {
+              "text": "Oesophagectomy mortality about 5%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoadjuvant chemoradiation then oesophagectomy",
+          "cells": [
+            {
+              "text": "Oesophageal T2 or higher, or node positive"
+            },
+            {
+              "text": "CROSS trial survival benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjuvant nivolumab",
+          "cells": [
+            {
+              "text": "Residual disease after chemoradiation and surgery"
+            },
+            {
+              "text": "CheckMate-577"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Definitive chemoradiation",
+          "cells": [
+            {
+              "text": "Unfit or declines surgery"
+            },
+            {
+              "text": "Alternative to surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Perioperative FLOT plus gastrectomy",
+          "cells": [
+            {
+              "text": "Resectable gastric cancer"
+            },
+            {
+              "text": "Subtotal or total gastrectomy with nodes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chemotherapy plus immunotherapy or trastuzumab",
+          "cells": [
+            {
+              "text": "Advanced disease"
+            },
+            {
+              "text": "Trastuzumab if HER2 positive; checkpoint inhibitor by PD-L1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stent, radiation, palliative bypass",
+          "cells": [
+            {
+              "text": "Obstruction or stage IV"
+            },
+            {
+              "text": "Metal stents outlast dilation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck oesophageal page gives 22% overall 5-year survival in the text but under 5% in its key points; the ACS-based 22% is shown."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "upper_gastrointestinal_tract_cancers-dx-mgmt",
+      "title": "Diagnosis and management of upper GI cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dysphagia, weight loss, GI bleeding or iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Upper endoscopy with biopsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Carcinoma confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Manage benign cause, lymphoma or GIST on histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT and PET-CT; MSI, HER2, PD-L1",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Distant metastases?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Systemic therapy and palliation (stent, radiotherapy)",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "EUS for depth; laparoscopy for gastric or GEJ",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Mucosal (Tis or T1a, N0)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Endoscopic resection",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Oesophageal primary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neoadjuvant chemoradiation, oesophagectomy, adjuvant nivolumab if residual",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Perioperative FLOT and gastrectomy",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -155,5 +155,334 @@
       "caption": "Overview comparison matrix for facioscapulohumeral muscular dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "facioscapulohumeral_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "D4Z4 repeat sizing and 4qA/4qB haplotype",
+          "cells": [
+            {
+              "text": "Repeat size on 4q35 (molecular combing, optical genome mapping or Southern blot)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D4Z4 methylation analysis",
+          "cells": [
+            {
+              "text": "Where FSHD2 is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMCHD1 sequencing",
+          "cells": [
+            {
+              "text": "Where FSHD2 or hypomethylation is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Typically normal or mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Asymmetric, selective muscle involvement; guides biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and dilated retinal examination",
+          "cells": [
+            {
+              "text": "Early-onset or paediatric disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic process; excludes neurogenic mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "facioscapulohumeral_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory myopathy (polymyositis)",
+          "cells": [
+            {
+              "text": "Rapidly progressive or strikingly symmetrical weakness prompts reconsideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired focal disorder",
+          "cells": [
+            {
+              "text": "Marked asymmetry can be mistaken for it; striking left-right asymmetry is characteristic of this dystrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "facioscapulohumeral_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and rehabilitative care",
+          "cells": [
+            {
+              "text": "No targeted therapy is currently available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised physiotherapy and moderate exercise",
+          "cells": [
+            {
+              "text": "Preserves function and limits contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Tibialis anterior weakness and foot drop; prevents falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapulothoracic fixation",
+          "cells": [
+            {
+              "text": "Selected disabling scapular winging, to improve arm elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and musculoskeletal management",
+          "cells": [
+            {
+              "text": "Symptomatic pain and complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extramuscular surveillance",
+          "cells": [
+            {
+              "text": "Audiometry and dilated retinal examination, especially early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade testing",
+          "cells": [
+            {
+              "text": "Digenic FSHD2 mechanism involving SMCHD1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "facioscapulohumeral_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Facioscapulohumeral Muscular Dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asymmetric facial weakness with scapular winging or foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (infantile onset with retinal vasculopathy, nocturnal hypoventilation, falls)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Ophthalmology and audiology review; respiratory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "D4Z4 repeat sizing and haplotype; muscle MRI; creatine kinase; EMG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Contracted D4Z4 repeat on 4q35 confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test D4Z4 methylation and SMCHD1 for FSHD2; consider other dystrophies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and moderate aerobic and resistance exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses and mobility aids for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Scapulothoracic fixation for disabling winging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Audiometry and retinal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually slow with wide variability; most remain ambulant with normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

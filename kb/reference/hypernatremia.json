@@ -148,5 +148,332 @@
       "caption": "Overview comparison matrix for hypernatraemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypernatremia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum sodium and plasma osmolality with volume status",
+          "cells": [
+            {
+              "text": "Hypernatraemia with volume status assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine osmolality and urine volume",
+          "cells": [
+            {
+              "text": "Characterises water handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water deprivation testing and desmopressin response",
+          "cells": [
+            {
+              "text": "Response when diabetes insipidus is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and osmotic loads or hypertonic fluids",
+          "cells": [
+            {
+              "text": "Osmotic loads and hypertonic fluids reviewed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and other electrolytes",
+          "cells": [
+            {
+              "text": "Assessed alongside sodium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging or pituitary evaluation",
+          "cells": [
+            {
+              "text": "Considered when central diabetes insipidus is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypernatremia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central diabetes insipidus",
+          "cells": [
+            {
+              "text": "Response to water deprivation and desmopressin; pituitary evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrogenic diabetes insipidus",
+          "cells": [
+            {
+              "text": "Treated by withdrawing causative drugs and using a thiazide diuretic with solute restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic diuresis",
+          "cells": [
+            {
+              "text": "Hyperglycaemia, high-protein feeds or mannitol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium overload",
+          "cells": [
+            {
+              "text": "Hypertonic fluids or salt ingestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypernatremia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Replace free-water deficit",
+          "cells": [
+            {
+              "text": "Enteral water or intravenous hypotonic or dextrose solutions; lower plasma sodium slowly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct cause and ongoing losses",
+          "cells": [
+            {
+              "text": "Replace ongoing renal or extrarenal water losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central diabetes insipidus",
+          "cells": [
+            {
+              "text": "Desmopressin to replace antidiuretic hormone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrogenic diabetes insipidus",
+          "cells": [
+            {
+              "text": "Withdraw causative drugs, correct electrolyte disturbance, thiazide diuretic with dietary solute restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secure water access",
+          "cells": [
+            {
+              "text": "Address impaired thirst in infants, elderly or obtunded patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent sodium monitoring",
+          "cells": [
+            {
+              "text": "Prevents over-rapid lowering during correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Seizure control and airway protection in severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypernatremia-dx-mgmt",
+      "title": "Diagnosis and management of Hypernatraemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised serum sodium from water deficit; thirst cannot be relied on",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Depressed consciousness, seizures, coma or haemodynamic compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of severe hypernatraemia and neurological deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma and urine osmolality, urine volume, glucose, renal function, pituitary review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Water loss cause identified, such as diabetes insipidus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess water access, osmotic loads and ongoing losses, then repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Replace free-water deficit gradually; lower sodium slowly",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat central diabetes insipidus with desmopressin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nephrogenic: withdraw drugs and use a thiazide diuretic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Frequent sodium monitoring during correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sodium corrected slowly to avoid cerebral oedema from over-rapid lowering",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

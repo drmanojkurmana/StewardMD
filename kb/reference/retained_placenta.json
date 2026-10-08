@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for retained placenta."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "RCOG Green-top Guideline / Williams Obstetrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retained_placenta-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of blood loss and tone",
+          "cells": [
+            {
+              "text": "Ongoing bleeding and maternal haemodynamic status, including signs of shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Relevant when bleeding is heavy; crossmatch or group and save"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of delivered placenta and membranes",
+          "cells": [
+            {
+              "text": "Completeness; missing cotyledons or a succenturiate lobe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside ultrasound",
+          "cells": [
+            {
+              "text": "Retained tissue and features suggesting abnormal placentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal imaging review",
+          "cells": [
+            {
+              "text": "Accreta spectrum when the placenta will not separate over a uterine scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observations and inflammatory markers",
+          "cells": [
+            {
+              "text": "Suspected endometritis when retention is delayed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retained_placenta-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Placenta adherens due to uterine atony",
+          "cells": [
+            {
+              "text": "Poor myometrial contraction prevents shearing, so the placenta stays attached"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trapped placenta behind a closed cervix",
+          "cells": [
+            {
+              "text": "Placenta has separated, but the cervix contracts before expulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Placenta accreta, increta or percreta",
+          "cells": [
+            {
+              "text": "Deficient decidua; the placenta will not separate over a uterine scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uterine inversion",
+          "cells": [
+            {
+              "text": "Sudden pain, haemorrhage and a mass at or beyond the introitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Succenturiate lobe left in situ",
+          "cells": [
+            {
+              "text": "Missing cotyledons or a lobe on inspection of the placenta"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retained_placenta-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple first measures",
+          "cells": [
+            {
+              "text": "Empty the bladder, breastfeeding or nipple stimulation, oxytocin, gentle controlled cord traction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manual removal",
+          "cells": [
+            {
+              "text": "When initial measures fail, under regional or general anaesthesia; check for completeness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "Given at the time of manual removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage management",
+          "cells": [
+            {
+              "text": "Intravenous access, fluid resuscitation, uterotonics, tranexamic acid and crossmatched blood as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suspect accreta spectrum",
+          "cells": [
+            {
+              "text": "Placenta not separating over a uterine scar; prepare for possible hysterectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Senior obstetric and anaesthetic teams; specialist input for morbidly adherent placentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retained_placenta-dx-mgmt",
+      "title": "Diagnosis and management of Retained placenta",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Placenta not delivered after birth, beyond the defined interval",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heavy bleeding, shock, uterine inversion, suspected accreta)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to senior obstetric and anaesthetic teams; possible hysterectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Assess blood loss and tone, check blood counts, examine placenta, bedside ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination confirm retention with no spontaneous delivery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for other causes of bleeding; repeat the examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empty bladder, give oxytocin, gentle controlled cord traction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manual removal under anaesthesia if initial measures fail; antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage haemorrhage: IV access, fluids, tranexamic acid, crossmatched blood",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "If no separation over scar, suspect accreta spectrum and prepare for hysterectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve without lasting harm; delay raises the risk of major haemorrhage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

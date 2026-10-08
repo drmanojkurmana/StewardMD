@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for linear porokeratosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "linear_porokeratosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Cornoid lamella; excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Characteristic peripheral keratotic ridge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography",
+          "cells": [
+            {
+              "text": "Monitors change over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of nodular, ulcerated or changing areas",
+          "cells": [
+            {
+              "text": "Squamous cell carcinoma or Bowen disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal or developmental assessment",
+          "cells": [
+            {
+              "text": "Extensive or facial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate-pathway molecular testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_porokeratosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Linear epidermal naevus",
+          "cells": [
+            {
+              "text": "Linear keratotic plaque; the cornoid lamella separates it on histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen striatus",
+          "cells": [
+            {
+              "text": "Blaschko-linear and usually self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory linear verrucous epidermal naevus",
+          "cells": [
+            {
+              "text": "Linear verrucous plaque; histology separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linear lichen planus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_porokeratosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical therapies",
+          "cells": [
+            {
+              "text": "Topical retinoids, 5-fluorouracil or vitamin D analogues for symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Strict sun protection to limit malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial photography; biopsy of nodular, ulcerated or changing areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Destructive or excisional treatment",
+          "cells": [
+            {
+              "text": "Cryotherapy, laser or excision for localised, symptomatic or suspicious lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and developmental assessment",
+          "cells": [
+            {
+              "text": "Extensive or facial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology escalation",
+          "cells": [
+            {
+              "text": "Excision and oncological care if squamous cell carcinoma develops within a plaque"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "linear_porokeratosis-dx-mgmt",
+      "title": "Diagnosis and management of Linear porokeratosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Linear Blaschko-distributed keratotic plaques with a raised border, from childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nodule, ulceration, bleeding, rapid enlargement, non-healing erosion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy and excision for suspected squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for cornoid lamella, dermoscopy, serial photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a cornoid lamella seen on biopsy of the lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider linear epidermal naevus, lichen striatus or linear lichen planus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical retinoids, 5-fluorouracil or vitamin D analogues for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict photoprotection to limit malignant change",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial photography and biopsy of changing areas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cryotherapy, laser or excision for localised or suspicious lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Skeletal and developmental assessment for extensive or facial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic; highest malignant potential of porokeratoses; lifelong surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

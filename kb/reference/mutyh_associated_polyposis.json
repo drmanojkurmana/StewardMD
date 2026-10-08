@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for mutyh-associated polyposis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mutyh_associated_polyposis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline MUTYH sequencing and deletion/duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy with polypectomy and histology",
+          "cells": [
+            {
+              "text": "Characterises polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Duodenal assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APC germline testing",
+          "cells": [
+            {
+              "text": "Excludes adenomatous polyposis when the phenotype overlaps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Occult blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family testing",
+          "cells": [
+            {
+              "text": "Considers both parents, given recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mutyh_associated_polyposis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial adenomatous polyposis and its attenuated form",
+          "cells": [
+            {
+              "text": "Phenotype can closely mimic attenuated FAP; the recessive inheritance pattern helps distinguish them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lynch syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mutyh_associated_polyposis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong cancer-risk reduction",
+          "cells": [
+            {
+              "text": "Managed without cytotoxic or targeted cancer therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopic surveillance and polypectomy",
+          "cells": [
+            {
+              "text": "For attenuated polyposis with a manageable adenoma count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-reducing colectomy",
+          "cells": [
+            {
+              "text": "When polyp burden cannot be cleared endoscopically or cancer is confirmed; individualised to distribution, rectal sparing, age and preference"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard-of-stage cancer treatment",
+          "cells": [
+            {
+              "text": "If colorectal cancer develops; no MAP-specific systemic regimen is implied"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Duodenal examination given the increased duodenal cancer risk; closer follow-up of advanced duodenal adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric screening",
+          "cells": [
+            {
+              "text": "Guided by a genetics or GI guideline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia and blood loss monitoring",
+          "cells": [
+            {
+              "text": "Possible signal of a missed lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic referral and cascade testing",
+          "cells": [
+            {
+              "text": "Cascade testing of siblings and reproductive counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mutyh_associated_polyposis-dx-mgmt",
+      "title": "Diagnosis and management of MUTYH-associated polyposis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Attenuated colorectal polyposis of tens to low hundreds of adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (advanced colorectal lesion, advanced duodenal adenoma, anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colorectal assessment and resection for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MUTYH sequencing, colonoscopy with polypectomy, upper GI endoscopy, APC testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic pathogenic MUTYH variants confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test APC to exclude adenomatous polyposis; reassess the phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Colonoscopic surveillance and polypectomy for a manageable adenoma count",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Upper GI endoscopy with duodenal assessment and follow-up of advanced adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risk-reducing colectomy if polyps cannot be cleared endoscopically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Standard-of-stage cancer treatment if colorectal cancer develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade testing of siblings and reproductive counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable when detected early; risk persists lifelong, extending to the duodenum",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

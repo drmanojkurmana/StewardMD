@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for muehrcke lines."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "muehrcke_lines-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum albumin and total protein",
+          "cells": [
+            {
+              "text": "Low albumin underlies the bands; lines may resolve when albumin normalises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Proteinuria or nephrotic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Chronic liver disease as a cause of low albumin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full nutritional assessment",
+          "cells": [
+            {
+              "text": "Malnutrition as a cause of low albumin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blanch test with digital pressure",
+          "cells": [
+            {
+              "text": "Lines disappear with pressure, confirming nail-bed origin; distinguishes them from true leukonychia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of chemotherapy or systemic illness",
+          "cells": [
+            {
+              "text": "Described causes of the change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muehrcke_lines-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mees lines",
+          "cells": [
+            {
+              "text": "True plate leukonychia that migrates distally; linked to arsenic and thallium poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "True punctate or transverse leukonychia",
+          "cells": [
+            {
+              "text": "Plate keratin is abnormal and the white mark migrates distally as the nail grows"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muehrcke_lines-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Correcting the hypoalbuminaemia that produces the bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage the cause of low albumin",
+          "cells": [
+            {
+              "text": "Nephrotic syndrome, chronic liver disease or malnutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Optimise protein and albumin status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review systemic contributors",
+          "cells": [
+            {
+              "text": "Recent chemotherapy or systemic illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Nail changes are benign and often fade once serum albumin normalises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Lines parallel the course of the underlying disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Nephrology or hepatology, according to the identified cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "muehrcke_lines-dx-mgmt",
+      "title": "Diagnosis and management of Muehrcke lines",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paired white transverse bands parallel to the lunula; low albumin suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, heavy proteinuria or oedema, decompensated liver)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent work-up of nephrotic syndrome, liver disease or systemic illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum albumin, urinalysis, liver tests, nutritional assessment, blanch test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Blanch test shows the lines disappear on pressure, confirming nail-bed origin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Mees lines or heavy-metal exposure; true leukonychia migrates distally",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct the hypoalbuminaemia that causes the bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Investigate and manage nephrotic syndrome, liver disease or malnutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support to optimise protein and albumin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: benign nail change that often fades with albumin correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lines fade as albumin normalises; prognosis follows the underlying disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

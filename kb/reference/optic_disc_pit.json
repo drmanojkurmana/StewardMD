@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for optic disc pit."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "optic_disc_pit-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "OCT of the macula and optic nerve head",
+          "cells": [
+            {
+              "text": "Schisis-like intraretinal splitting; subretinal fluid communicating with the pit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Late hyperfluorescence of the pit, with no active RPE leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Arcuate or centrocaecal defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Extent of serous detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fundus photography",
+          "cells": [
+            {
+              "text": "Pit and maculopathy over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT angiography",
+          "cells": [
+            {
+              "text": "Excludes a secondary choroidal neovascular membrane"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "optic_disc_pit-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "Mimics serous detachment; pit maculopathy shows schisis-like splitting and no active leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired glaucomatous pit",
+          "cells": [
+            {
+              "text": "Acquired rather than congenital; raised intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "optic_disc_pit-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation of an isolated pit",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Serial OCT; an isolated pit without maculopathy is compatible with normal vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitrectomy with gas tamponade",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Pars plana vitrectomy, often with internal limiting membrane peel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive treatment",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Laser to the temporal disc margin or macular buckling in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial OCT",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Tracks the schisis-like separation and serous detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Confirms no active RPE leak and excludes a neovascular membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Vitreoretinal referral when maculopathy develops; report central disturbance promptly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "optic_disc_pit-dx-mgmt",
+      "title": "Diagnosis and management of optic disc pit",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital disc pit, possibly with new central blurring or metamorphopsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new metamorphopsia, progressive serous detachment or marked acuity loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal referral for maculopathy or glaucomatous pit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT of macula and disc, fluorescein angiography, perimetry and autofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT show schisis-like splitting and subretinal fluid linked to the pit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central serous chorioretinopathy or glaucomatous pit; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe an isolated pit without maculopathy with serial OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vitrectomy with gas tamponade, often with internal limiting membrane peel",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser to the temporal disc margin or macular buckling in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial OCT and angiography to track fluid and exclude neovascular membrane",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated pit keeps normal vision; untreated maculopathy often reduces acuity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

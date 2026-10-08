@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for gerodermia osteodysplastica."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gerodermia_osteodysplastica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GORAB sequencing, usually within a cutis laxa gene panel",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DXA bone densitometry",
+          "cells": [
+            {
+              "text": "Quantifies osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Fractures and vertebral changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and dermal histology",
+          "cells": [
+            {
+              "text": "Elastic fibre changes where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for fracture-related complications",
+          "cells": [
+            {
+              "text": "Fracture complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerodermia_osteodysplastica-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autosomal recessive cutis laxa types 1 and 2",
+          "cells": [
+            {
+              "text": "Lack the severe osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteogenesis imperfecta",
+          "cells": [
+            {
+              "text": "Fragility fractures can be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerodermia_osteodysplastica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bone health optimisation",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D with bone-protective bisphosphonate or antiresorptive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt fracture management",
+          "cells": [
+            {
+              "text": "Orthopaedic fixation and attention to vertebral collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing exercise and falls prevention",
+          "cells": [
+            {
+              "text": "Preserves bone mass and mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and joint protection",
+          "cells": [
+            {
+              "text": "Cutis laxa and joint laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone status surveillance",
+          "cells": [
+            {
+              "text": "Serial bone densitometry and skeletal or vertebral imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Clinical genetics, metabolic bone medicine and orthopaedics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive GORAB disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gerodermia_osteodysplastica-dx-mgmt",
+      "title": "Diagnosis and management of Gerodermia osteodysplastica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gerodermia osteodysplastica: cutis laxa with fragility fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent fragility fractures, spinal deformity, neurological change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for vertebral collapse or neurological compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GORAB testing, DXA bone densitometry, skeletal survey and skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GORAB sequencing confirm the diagnosis, with osteogenesis imperfecta excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutis laxa types 1 and 2, De Barsy, Ehlers-Danlos or osteogenesis imperfecta",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Calcium, vitamin D and bone-protective antiresorptive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt orthopaedic fixation of fragility fractures and vertebral collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight-bearing exercise, physiotherapy and falls prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial bone densitometry and vertebral imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life expectancy generally normal; recurrent fractures cause significant morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

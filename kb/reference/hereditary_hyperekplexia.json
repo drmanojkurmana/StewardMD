@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for hereditary hyperekplexia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_hyperekplexia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GLRA1 and related gene testing (SLC6A5, GLRB, GPHN, ARHGEF9)",
+          "cells": [
+            {
+              "text": "Confirms the genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Distinguishes from startle-induced epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography of the startle reflex",
+          "cells": [
+            {
+              "text": "Startle reflex latency and pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural or acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen in neonates with hypertonia",
+          "cells": [
+            {
+              "text": "Excludes metabolic causes of neonatal hypertonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glabellar tap test",
+          "cells": [
+            {
+              "text": "Sustained tonic stiffness after the tap, a pathognomonic sign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hyperekplexia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Startle-induced epileptic seizures",
+          "cells": [
+            {
+              "text": "Separated by EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal seizures or other neonatal hypertonia",
+          "cells": [
+            {
+              "text": "Stiffness resolves during sleep in hyperekplexia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff-person syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetanus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hyperekplexia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clonazepam",
+          "cells": [
+            {
+              "text": "Enhances GABAergic inhibition; the mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vigevano manoeuvre",
+          "cells": [
+            {
+              "text": "Carers taught forced flexion of the head and limbs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal airway vigilance",
+          "cells": [
+            {
+              "text": "Monitoring, with prompt resuscitation for apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injury prevention",
+          "cells": [
+            {
+              "text": "Practical safety measures against startle-induced falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Neonatal stiffness and startle tend to improve with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Molecular testing of GLRA1, SLC6A5, GLRB, GPHN and ARHGEF9"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_hyperekplexia-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary hyperekplexia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exaggerated startle with generalised stiffness or falls, from the neonatal period",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Apnoea or cyanosis during stiffness, recurrent falls, or severe hypertonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neonatal airway support and prompt resuscitation for apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GLRA1 and related gene testing; EEG; startle EMG; brain MRI; glabellar tap test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GLRA1 or related variant found, with epilepsy excluded on EEG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider startle-induced epilepsy, stiff-person syndrome, neonatal seizures or tetanus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clonazepam, enhancing GABAergic inhibition, the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Teach carers the Vigevano manoeuvre of forced flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway vigilance with monitoring and prompt resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Injury prevention against startle-induced falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stiffness and startle improve with age; carers trained for emergencies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

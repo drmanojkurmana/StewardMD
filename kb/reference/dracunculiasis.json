@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for dracunculiasis (guinea worm disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / WHO Guinea Worm Eradication Programme guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dracunculiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical identification of the emerging adult worm",
+          "cells": [
+            {
+              "text": "Emerging worm at the skin ulcer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy of fluid expressed from the lesion",
+          "cells": [
+            {
+              "text": "Larvae in fluid after water contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound assessment for secondary bacterial infection",
+          "cells": [
+            {
+              "text": "Bacterial infection of the wound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiography",
+          "cells": [
+            {
+              "text": "Calcified dead worm in chronic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of tetanus immunisation status",
+          "cells": [
+            {
+              "text": "Tetanus risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dracunculiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous larva migrans and migratory helminths",
+          "cells": [
+            {
+              "text": "Emerging worm at the ulcer distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial skin abscess or cellulitis",
+          "cells": [
+            {
+              "text": "Infection without an emerging worm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dracunculiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Slow extraction",
+          "cells": [
+            {
+              "text": "Wind the worm onto a stick or gauze daily over days to weeks; no curative drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Cleansing and dressing; antibiotics for secondary cellulitis or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and tetanus",
+          "cells": [
+            {
+              "text": "Intense local pain; tetanus immunisation kept up to date"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keep the limb out of drinking water",
+          "cells": [
+            {
+              "text": "Prevents larval discharge and interrupts transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications",
+          "cells": [
+            {
+              "text": "Septic arthritis or contracture needs surgery and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public-health notification",
+          "cells": [
+            {
+              "text": "Eradication programme; filtration and safe-water provision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dracunculiasis-dx-mgmt",
+      "title": "Diagnosis and management of Dracunculiasis (Guinea worm disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dracunculiasis: painful skin ulcer with an emerging worm after water exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spreading cellulitis, sepsis, suspected tetanus, joint involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics for sepsis or cellulitis; tetanus assessment and joint review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Emerging worm at ulcer; larval microscopy of fluid; wound and tetanus check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an emerging adult worm seen at the skin ulcer?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutaneous larva migrans, bacterial abscess, tropical ulcer or myiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Slow daily extraction by winding the worm onto a stick or gauze over days to weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Meticulous wound care; antibiotics for secondary cellulitis or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and ensure tetanus immunisation is up to date",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Keep the lesion out of drinking water to prevent larval discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Notify the eradication programme and address the water source",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rarely fatal but protracted and disabling; secondary infection can cause lasting harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

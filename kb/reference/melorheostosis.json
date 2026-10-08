@@ -147,5 +147,285 @@
       "caption": "Overview comparison matrix for melorheostosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "melorheostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Flowing candle-wax cortical hyperostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Extent and cortical involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue fibrosis, contracture and marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Increased uptake in active lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of joint range, limb length and function",
+          "cells": [
+            {
+              "text": "Joint range, limb length and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or genetic analysis in atypical cases",
+          "cells": [
+            {
+              "text": "Malignancy excluded in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melorheostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs and analgesics",
+          "cells": [
+            {
+              "text": "Chronic bone and soft-tissue pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Maintain joint range and limit contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Selected patients with pain from active hyperostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Contracture release, deformity correction or excision of excess bone for functional limitation or limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEK-pathway-directed therapy",
+          "cells": [
+            {
+              "text": "Emerging targeted approach given somatic MAP2K1 mutations in lesional tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or genetic analysis",
+          "cells": [
+            {
+              "text": "Atypical cases, to exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Limb length, deformity and function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "melorheostosis-dx-mgmt",
+      "title": "Diagnosis and management of Melorheostosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Limb pain and stiffness with flowing cortical hyperostosis on radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly enlarging mass, progressive contracture, neurovascular compromise or pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy to exclude surface osteosarcoma; orthopaedic review for limb compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, CT for cortical extent, MRI for fibrosis, scintigraphy for active lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the flowing candle-wax hyperostosis the typical pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Atypical lesion: biopsy or genetic analysis to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs and analgesics for chronic bone and soft-tissue pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and stretching to maintain joint range",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bisphosphonates in selected patients with pain from active hyperostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for contracture, deformity or limb-length discrepancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term monitoring of limb length, deformity and function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

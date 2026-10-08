@@ -166,5 +166,473 @@
       "caption": "Overview comparison matrix for infections due to the hacek group and miscellaneous gram-negative bacteria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 146-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, HACEK Infections",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/hacek-infections"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, modified Duke criteria (p131 to 140 inventory)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infections_due_to_the_hacek-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing HACEK and related gram-negative infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "HACEK in two separate blood cultures",
+          "cells": [
+            {
+              "text": "Typical organism for endocarditis"
+            },
+            {
+              "text": "Major modified Duke criterion"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Predictive value of HACEK bacteraemia for endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 60% overall; 62 to 100% for Aggregatibacter, 0 to 6% for Eikenella",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Always image the valves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Share of endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "0.8 to 6% of cases",
+              "range": [
+                0.8,
+                6
+              ]
+            },
+            {
+              "text": "Most common gram-negative bacillary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Vegetations in up to 85%",
+              "op": "<=",
+              "value": 85
+            },
+            {
+              "text": "Aortic and mitral valves most often"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Major emboli",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "28 to 71% of cases",
+              "range": [
+                28,
+                71
+              ]
+            },
+            {
+              "text": "Younger patients, more embolic and immunologic signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture practice",
+          "cells": [
+            {
+              "text": "Alert the laboratory; most grow within the first week"
+            },
+            {
+              "text": "{{hy:Prolonged incubation adds no significant isolates}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular tests",
+          "cells": [
+            {
+              "text": "16S rRNA PCR of blood or valve; MALDI-TOF on colonies"
+            },
+            {
+              "text": "For culture-negative or slow cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kingella kingae",
+          "cells": [
+            {
+              "text": "Young children, bone and joint infection, daycare clusters"
+            },
+            {
+              "text": "Real-time PCR; synovial fluid into blood culture bottles"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_the_hacek-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic HACEK infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viridans streptococcal endocarditis",
+          "cells": [
+            {
+              "text": "Also subacute after dental source"
+            },
+            {
+              "text": "Blood culture organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-negative endocarditis (Bartonella, Coxiella, Tropheryma)",
+          "cells": [
+            {
+              "text": "Sterile blood cultures"
+            },
+            {
+              "text": "Serology and valve PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S. aureus endocarditis or septic arthritis",
+          "cells": [
+            {
+              "text": "More acute course"
+            },
+            {
+              "text": "Blood or joint culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcaemia (versus K. kingae)",
+          "cells": [
+            {
+              "text": "Petechial rash with sepsis"
+            },
+            {
+              "text": "Blood culture and PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capnocytophaga sepsis",
+          "cells": [
+            {
+              "text": "Dog or cat exposure, asplenia, purpura, DIC"
+            },
+            {
+              "text": "Blood culture with exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudomonas ecthyma (versus Aeromonas)",
+          "cells": [
+            {
+              "text": "Water or flood exposure with Aeromonas"
+            },
+            {
+              "text": "Culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitis or thromboembolic disease",
+          "cells": [
+            {
+              "text": "Embolic and immune features without bacteraemia"
+            },
+            {
+              "text": "Blood cultures and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_the_hacek-treatment",
+      "kind": "treatment",
+      "title": "Treating HACEK endocarditis (Tables PDF, Table 146-1)",
+      "rowHeader": "Option",
+      "columns": [
+        "Initial therapy",
+        "Alternative and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemophilus species, Aggregatibacter",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "{{hy:Ceftriaxone 2 g/day}}",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Ampicillin-sulbactam 3 g ampicillin q6h or a fluoroquinolone; ampicillin with or without aminoglycoside only if no beta-lactamase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiobacterium hominis",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Ceftriaxone 2 g/day",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Ampicillin-sulbactam; penicillin 16 to 18 mU q4h or ampicillin 2 g q4h if susceptible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eikenella corrodens",
+          "cells": [
+            {
+              "text": "Ampicillin 2 g q4h"
+            },
+            {
+              "text": "Ceftriaxone 2 g/day or fluoroquinolone; resistant to clindamycin, metronidazole, aminoglycosides"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kingella kingae",
+          "cells": [
+            {
+              "text": "Ceftriaxone 2 g/day or ampicillin-sulbactam"
+            },
+            {
+              "text": "Fluoroquinolone alternative; beta-lactamase strains increasing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Susceptibility testing",
+          "cells": [
+            {
+              "text": "All isolates"
+            },
+            {
+              "text": "Beta-lactamase may go undetected; resistance most in Haemophilus and Aggregatibacter"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cardiac surgery referral",
+          "cells": [
+            {
+              "text": "Large vegetation, embolism, heart failure, valve destruction"
+            },
+            {
+              "text": "Heart failure in about 19 to 50% of Haemophilus cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck names ceftriaxone and ampicillin-sulbactam as current drugs of choice, matching Table 146-1. Treatment duration was not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infections_due_to_the_hacek-dx-mgmt",
+      "title": "Diagnosis and management of HACEK endocarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute fever, valve disease or recent dental work",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Three blood culture sets; tell the lab HACEK is possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "HACEK organism grown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Send 16S rRNA PCR on blood or valve if suspicion stays high",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Echocardiography for vegetations",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Endocarditis confirmed (modified Duke)?",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Treat focal or bone infection; repeat imaging if worse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV ceftriaxone 2 g/day, adjust by susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Heart failure, emboli or large vegetation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Early cardiac surgery referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete IV course with clinical follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

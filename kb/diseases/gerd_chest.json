@@ -248,5 +248,504 @@
       "caption": "Diagnostic and clinical overview matrix for gerd / non-cardiac chest pain."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Gastroesophageal Reflux Disease",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/gastroesophageal-reflux-disease-gerd",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gerd_chest-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing reflux-related chest pain",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac evaluation",
+          "cells": [
+            {
+              "text": "ECG and troponin first"
+            },
+            {
+              "text": "{{hy:Exclude ACS before attributing pain to reflux}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Features favouring oesophageal pain",
+          "cells": [
+            {
+              "text": "Non-exertional, prolonged, meal-related, eased by antacids, with heartburn or regurgitation"
+            },
+            {
+              "text": "All overlap with cardiac pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitroglycerin response",
+          "cells": [
+            {
+              "text": "Relief"
+            },
+            {
+              "text": "Does not confirm cardiac origin; spasm also responds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest wall tenderness",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Does not exclude ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PPI trial",
+          "cells": [
+            {
+              "text": "Typical heartburn or regurgitation"
+            },
+            {
+              "text": "Responders need no further tests"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopy indications",
+          "cells": [
+            {
+              "text": "No response, long-standing or complicated symptoms, overlap with other diagnoses"
+            },
+            {
+              "text": "Also persistent dysphagia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LA grade A",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Breaks <=5 mm not crossing 2 folds"
+            },
+            {
+              "text": "Not conclusive; needs pH testing off therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LA grade B",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Breaks >5 mm not crossing 2 folds"
+            },
+            {
+              "text": "Objective GERD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LA grade C",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Breaks crossing 2 or more folds, <75% of circumference"
+            },
+            {
+              "text": "Objective GERD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LA grade D",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Breaks involving >=75% of circumference"
+            },
+            {
+              "text": "Objective GERD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ambulatory pH testing",
+          "cells": [
+            {
+              "text": "Normal endoscopy with persistent typical symptoms"
+            },
+            {
+              "text": "Off PPI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ED chest pain due to ACS",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 15%"
+            },
+            {
+              "text": "GI causes are commonest overall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerd_chest-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic reflux chest pain",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "{{hy:Must be excluded first}}; ECG and troponin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal spasm or jackhammer oesophagus",
+          "cells": [
+            {
+              "text": "Squeezing pain with dysphagia; manometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal rupture",
+          "cells": [
+            {
+              "text": "After vomiting; most urgent non-cardiac cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic oesophagitis",
+          "cells": [
+            {
+              "text": "Dysphagia, food impaction; biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic ulcer disease",
+          "cells": [
+            {
+              "text": "Pain 60 to 90 min after meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary colic or pancreatitis",
+          "cells": [
+            {
+              "text": "RUQ or epigastric pain; ultrasound, lipase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection, PE, pneumothorax, pericarditis",
+          "cells": [
+            {
+              "text": "Life-threatening chest causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Musculoskeletal or cervical root pain",
+          "cells": [
+            {
+              "text": "Positional or reproducible pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panic disorder",
+          "cells": [
+            {
+              "text": "Up to about 10% of ED chest pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerd_chest-treatment",
+      "kind": "treatment",
+      "title": "Treatment of reflux-related chest pain",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "No food within 4 h of bed, raise bed head about 15 cm, weight loss, stop smoking, avoid triggers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "{{hy:After cardiac causes excluded}}"
+            },
+            {
+              "text": "Omeprazole 20 mg, lansoprazole 30 mg, pantoprazole 40 mg or esomeprazole 40 mg 30 min before a meal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Twice-daily PPI",
+          "cells": [
+            {
+              "text": "Partial response"
+            },
+            {
+              "text": "Before breakfast and dinner"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vonoprazan",
+          "cells": [
+            {
+              "text": "Erosive disease"
+            },
+            {
+              "text": "Superior to PPI in erosive oesophagitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "H2 blocker",
+          "cells": [
+            {
+              "text": "Mild or nocturnal symptoms"
+            },
+            {
+              "text": "Effective for mild symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metoclopramide",
+          "cells": [
+            {
+              "text": "Add-on"
+            },
+            {
+              "text": "10 mg before meals and at bedtime"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laparoscopic fundoplication",
+          "cells": [
+            {
+              "text": "LA grade C or D, large hiatus hernia, stricture, bleeding, intolerance of drugs"
+            },
+            {
+              "text": "Surgical option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Barrett surveillance",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Non-dysplastic Barrett"
+            },
+            {
+              "text": "Endoscopy every 3 to 5 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "PPI trial length and pH thresholds are not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gerd_chest-dx-mgmt",
+      "title": "Approach to suspected reflux chest pain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chest pain thought to be reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG, troponin, risk assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "ACS or other dangerous cause likely?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat cardiac or other emergency cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dysphagia, bleeding, weight loss or long history?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endoscopy",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "PPI trial with lifestyle measures",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Symptoms resolve?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Lowest effective PPI dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Endoscopy, pH testing or manometry",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

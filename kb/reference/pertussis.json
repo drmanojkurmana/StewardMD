@@ -166,5 +166,477 @@
       "caption": "Overview comparison matrix for pertussis (whooping cough)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Pertussis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/pertussis/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pertussis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing pertussis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Catarrhal phase",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Coryza, mild cough, low fever for 1 to 2 weeks",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "Looks like a cold; most infectious"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal phase",
+          "cells": [
+            {
+              "text": "Bursts of 5 to 10 coughs in one breath, whoop, post-tussive vomiting"
+            },
+            {
+              "text": "Classic picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adolescents and adults",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Pertussis in 12 to 30% of adults with cough over 2 weeks",
+              "range": [
+                12,
+                30
+              ]
+            },
+            {
+              "text": "{{hy:Often no whoop; commonly missed}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of nasopharyngeal aspirate",
+          "cells": [
+            {
+              "text": "Fast and more sensitive than culture"
+            },
+            {
+              "text": "Separates B. pertussis, B. parapertussis, B. holmesii"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture (Bordet-Gengou or Regan-Lowe)",
+          "cells": [
+            {
+              "text": "100% specific"
+            },
+            {
+              "text": "Positive by day 5; specimen must not dry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocytosis",
+          "cells": [
+            {
+              "text": "Helpful in young children"
+            },
+            {
+              "text": "Not reliable in adolescents and adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infant danger signs",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Apnea in 27.1% of hospitalized children under 2 years",
+              "op": "=",
+              "value": 27.1
+            },
+            {
+              "text": "Also cyanosis, seizures, pneumonia (up to 22%), extreme leukocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pertussis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pertussis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "B. parapertussis",
+          "cells": [
+            {
+              "text": "Similar but milder illness, no pertussis toxin"
+            },
+            {
+              "text": "Multitarget PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B. holmesii",
+          "cells": [
+            {
+              "text": "Up to 20% of pertussis-like syndromes"
+            },
+            {
+              "text": "Multitarget PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma or Chlamydia pneumoniae",
+          "cells": [
+            {
+              "text": "Prolonged cough, often with pneumonia"
+            },
+            {
+              "text": "PCR or serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenovirus, influenza, RSV",
+          "cells": [
+            {
+              "text": "Fever and systemic symptoms more prominent"
+            },
+            {
+              "text": "Respiratory viral PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor cough",
+          "cells": [
+            {
+              "text": "Dry cough on ACE inhibitor"
+            },
+            {
+              "text": "Resolves off the drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma or reactive airways",
+          "cells": [
+            {
+              "text": "Wheeze, variable airflow"
+            },
+            {
+              "text": "Spirometry with reversibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GERD",
+          "cells": [
+            {
+              "text": "Cough with reflux symptoms"
+            },
+            {
+              "text": "Trial of acid suppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pertussis-treatment",
+      "kind": "treatment",
+      "title": "Treating pertussis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Drug of choice, including infants under 1 month"
+            },
+            {
+              "text": "Watch for pyloric stenosis in neonates and QT prolongation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clarithromycin or erythromycin",
+          "cells": [
+            {
+              "text": "Alternative macrolides from 1 month"
+            },
+            {
+              "text": "Erythromycin carries higher pyloric stenosis risk in neonates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP-SMX",
+          "cells": [
+            {
+              "text": "Age 2 months or more, macrolide allergy or resistance"
+            },
+            {
+              "text": "Alternative agent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treatment window",
+          "cells": [
+            {
+              "text": "Within 3 weeks of cough onset if 1 year or older; within 6 weeks in infants and pregnant women"
+            },
+            {
+              "text": "{{hy:Antibiotics mainly stop spread; little effect after catarrhal phase}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hospital supportive care",
+          "cells": [
+            {
+              "text": "Infants under 2 to 3 months, apnea, cyanosis"
+            },
+            {
+              "text": "Oxygen, feeding support, apnea monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukodepletion or exchange transfusion",
+          "cells": [
+            {
+              "text": "Extreme leukocytosis with pulmonary hypertension"
+            },
+            {
+              "text": "Intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postexposure prophylaxis",
+          "cells": [
+            {
+              "text": "Close contacts and those at high risk"
+            },
+            {
+              "text": "Same agents as treatment; droplet precautions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid cough suppressants",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Not effective; steroids and beta agonists unproven"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "CDC clinical care page does not list doses; check the CDC treatment and PEP dosing table."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pertussis-dx-mgmt",
+      "title": "Diagnosis and management of pertussis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal cough, whoop, vomiting or cough over 2 weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Nasopharyngeal PCR (or culture); droplet precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "High-risk or strong clinical suspicion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Treat empirically before results",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PCR or culture positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider other causes of prolonged cough",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Within treatment window (3 weeks, or 6 weeks infants or pregnant)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azithromycin (TMP-SMX if 2 months or older and macrolide not possible)",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Supportive care only; antibiotics add little",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Infant under 3 months or apnea, cyanosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Admit; monitor apnea; ICU for leukocytosis with pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outpatient care; prophylaxis for close contacts",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

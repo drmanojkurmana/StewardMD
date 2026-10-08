@@ -148,5 +148,285 @@
       "caption": "Overview comparison matrix for glomus jugulare tumour (jugular paraganglioma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glomus_jugulare_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the skull base",
+          "cells": [
+            {
+              "text": "Characteristic flow voids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution temporal bone CT",
+          "cells": [
+            {
+              "text": "Bony erosion of the jugular foramen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholamine and metanephrine screening",
+          "cells": [
+            {
+              "text": "Detects a secretory tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiography",
+          "cells": [
+            {
+              "text": "Consideration of preoperative embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for SDH mutations",
+          "cells": [
+            {
+              "text": "Screening for multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomus_jugulare_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Microsurgical resection",
+          "cells": [
+            {
+              "text": "Definitive control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery or radiotherapy",
+          "cells": [
+            {
+              "text": "Tumour control as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, slow-growing tumours in older or comorbid patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative embolisation",
+          "cells": [
+            {
+              "text": "Reduces vascularity and bleeding risk of resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholamine screening and alpha-blockade",
+          "cells": [
+            {
+              "text": "If a secretory tumour is confirmed, before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial nerve rehabilitation",
+          "cells": [
+            {
+              "text": "Swallowing and voice therapy for jugular foramen syndrome deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "SDH mutations; screening for multifocal or familial paraganglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull base MDT and surveillance",
+          "cells": [
+            {
+              "text": "Long-term surveillance imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glomus_jugulare_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Glomus jugulare tumour (jugular paraganglioma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glomus jugulare tumour: pulsatile mass with lower cranial nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lower cranial palsy, catecholamine excess, intracranial spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent skull base MDT review for aspiration or brainstem compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skull base MRI, temporal bone CT, catecholamines and angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does skull base MRI show flow voids with bony erosion on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glomus tympanicum, meningioma, schwannoma or cholesteatoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Microsurgical resection for definitive control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stereotactic radiosurgery or radiotherapy as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Preoperative embolisation to reduce bleeding risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alpha-adrenergic blockade before intervention if a secretory tumour is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival generally good; slow growth may allow observation in selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

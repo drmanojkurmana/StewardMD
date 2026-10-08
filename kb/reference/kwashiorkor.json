@@ -146,5 +146,345 @@
       "caption": "Overview comparison matrix for kwashiorkor."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kwashiorkor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anthropometry and oedema assessment",
+          "cells": [
+            {
+              "text": "Oedema can mask underlying wasting, so severity is underestimated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and temperature",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and hypothermia, both life-threatening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes (potassium, magnesium, phosphate)",
+          "cells": [
+            {
+              "text": "Electrolyte disturbance, including refeeding-related shifts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for infection",
+          "cells": [
+            {
+              "text": "Infection is often occult and may be afebrile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrient and anaemia assessment",
+          "cells": [
+            {
+              "text": "Micronutrient deficiencies and anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kwashiorkor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marasmus and marasmic-kwashiorkor",
+          "cells": [
+            {
+              "text": "Marasmus shows wasting without oedema; marasmic-kwashiorkor combines both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Oedema and hypoalbuminaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic liver disease",
+          "cells": [
+            {
+              "text": "Ascites and oedema; kwashiorkor has a distended abdomen with fatty liver"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kwashiorkor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged rehabilitation",
+          "cells": [
+            {
+              "text": "Low-protein, low-energy stabilisation formula before catch-up feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia and hypothermia",
+          "cells": [
+            {
+              "text": "Frequent feeds and active warming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and rehydration",
+          "cells": [
+            {
+              "text": "Potassium and magnesium; cautious rehydration to avoid overload and cardiac failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum for presumed infection, because sepsis is often occult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrient replacement",
+          "cells": [
+            {
+              "text": "Vitamin A, zinc and folate; iron deferred until recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and oedema care",
+          "cells": [
+            {
+              "text": "Gentle skin care for flaky-paint dermatosis; manage oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up and food security",
+          "cells": [
+            {
+              "text": "Multidisciplinary follow-up, caregiver education, address food insecurity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Inpatient or high-dependency care for shock, worsening oedema or feeding intolerance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kwashiorkor-dx-mgmt",
+      "title": "Diagnosis and management of Kwashiorkor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected kwashiorkor: bilateral pitting oedema in a young child on a poor diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypoglycaemia, hypothermia, sepsis signs, cardiac failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: inpatient or high-dependency care for shock or worsening oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anthropometry, glucose, temperature, electrolytes, infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is severe acute malnutrition confirmed by anthropometry and oedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider marasmus, nephrotic syndrome or liver disease as the cause of oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Staged feeding: stabilisation formula before catch-up feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Frequent feeds and active warming for hypoglycaemia and hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium and magnesium; cautious rehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Empirical broad-spectrum antibiotics for presumed occult sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Vitamin A, zinc and folate; defer iron until recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Multidisciplinary follow-up and caregiver education",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Recovery possible with staged rehabilitation; mortality high if complications missed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

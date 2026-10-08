@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for isolated gnrh deficiency (normosmic idiopathic hypogonadotropic hypogonadism)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "isolated_gnrh_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal LH, FSH and sex steroid levels",
+          "cells": [
+            {
+              "text": "Low or inappropriately normal gonadotropins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal olfaction testing",
+          "cells": [
+            {
+              "text": "Normosmic disease versus Kallmann syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of hypothalamus, pituitary and olfactory structures",
+          "cells": [
+            {
+              "text": "Structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Confirms the deficiency is isolated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH-axis gene testing",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_gnrh_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kallmann syndrome",
+          "cells": [
+            {
+              "text": "GnRH deficiency with anosmia or hyposmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional delay of growth and puberty",
+          "cells": [
+            {
+              "text": "Biochemically similar before puberty; time or testing distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Raised prolactin suppresses gonadotropin secretion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_gnrh_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sex-steroid replacement",
+          "cells": [
+            {
+              "text": "Testosterone in males; staged oestrogen then combined oestrogen-progestogen in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility",
+          "cells": [
+            {
+              "text": "Gonadotropin therapy or pulsatile GnRH when fertility is wanted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infant boys",
+          "cells": [
+            {
+              "text": "Short-course androgen or gonadotropin for micropenis or cryptorchidism, specialist directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Adequate sex steroids, calcium and vitamin D; bone density monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Periodic check for spontaneous reversal of the deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Genetic counselling for GnRH-axis gene defects with variable penetrance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "isolated_gnrh_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Isolated GnRH deficiency (normosmic idiopathic hypogonadotropic hypogonadism)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Absent or incomplete puberty with low sex steroids and low or normal gonadotropins",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Visual field defect, headache, other pituitary deficits or neonatal micropenis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Pituitary MRI and endocrine review; treat any intracranial mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LH, FSH, sex steroids, smell testing, pituitary MRI, prolactin, pituitary profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low gonadotropins with normal smell and other axes intact?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kallmann, constitutional delay or hyperprolactinaemia; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testosterone in males; staged oestrogen then combined in females",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotropins or pulsatile GnRH when fertility is wanted",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-course androgen or gonadotropin for infant boys with micropenis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone health with sex steroids, calcium, vitamin D and density checks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic reassessment for spontaneous reversal",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Puberty induced; fertility possible with gonadotropin therapy; reversal rechecked",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

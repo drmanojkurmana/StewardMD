@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for micropenis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "micropenis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stretched penile length against age-based normative data",
+          "cells": [
+            {
+              "text": "Penile length against age norms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH, FSH and testosterone, ideally in the neonatal minipuberty window",
+          "cells": [
+            {
+              "text": "Gonadotrophin and testosterone status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary axis: cortisol, thyroid and growth hormone",
+          "cells": [
+            {
+              "text": "Hypopituitarism, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "hCG stimulation test",
+          "cells": [
+            {
+              "text": "Testicular testosterone production capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and disorder-of-sex-development workup",
+          "cells": [
+            {
+              "text": "Genital ambiguity, if present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "micropenis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypogonadotropic hypogonadism, including congenital GnRH deficiency",
+          "cells": [
+            {
+              "text": "Hypopituitarism with neonatal hypoglycaemia or prolonged jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary testicular failure",
+          "cells": [
+            {
+              "text": "Hypergonadotropic hypogonadism; LH and FSH measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partial androgen insensitivity syndrome",
+          "cells": [
+            {
+              "text": "Failure of any response to an androgen trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "A more complex disorder of sex development",
+          "cells": [
+            {
+              "text": "Bilateral non-palpable gonads or genital ambiguity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "micropenis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgen trial in infancy",
+          "cells": [
+            {
+              "text": "Testosterone to promote penile growth and gauge androgen responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Gonadotrophin or GnRH therapy for hypogonadotropic hypogonadism; testosterone induction of puberty for testicular failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopituitarism replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid, thyroxine and growth hormone; prompt treatment of hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Penile growth, overall growth and pubertal progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "For the family and, in due course, the patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric and reproductive endocrinology, urology, and DSD input where ambiguous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Karyotype or DSD assessment; fertility potential depends on the site of the defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "micropenis-dx-mgmt",
+      "title": "Diagnosis and management of Micropenis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stretched penile length below age norms in a neonate or infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoglycaemia, prolonged jaundice, midline facial defects or non-palpable gonads?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine review for hypopituitarism and adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stretched penile length; LH, FSH, testosterone; pituitary panel; hCG test; karyotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hypogonadal cause confirmed on hormone testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider partial androgen insensitivity or a complex DSD; repeat androgen trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Androgen trial in infancy to promote penile growth and test responsiveness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotrophin or GnRH therapy for hypogonadotropic hypogonadism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replacement of deficient pituitary hormones: glucocorticoid, thyroxine, growth hormone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor penile growth, overall growth and pubertal progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling; fertility potential depends on the site of the defect",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -143,5 +143,325 @@
       "caption": "Overview comparison matrix for lead nephropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology and toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lead_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood lead level and exposure history",
+          "cells": [
+            {
+              "text": "Recent exposure; body burden needs mobilisation testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, urate and blood pressure",
+          "cells": [
+            {
+              "text": "Chronic kidney disease, saturnine gout and hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead-mobilisation (chelation) test",
+          "cells": [
+            {
+              "text": "Body burden, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and markers of tubular dysfunction",
+          "cells": [
+            {
+              "text": "Tubular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and environmental exposure assessment",
+          "cells": [
+            {
+              "text": "Sources such as old paint and pipes, remedies and illicit alcohol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lead_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other chronic tubulointerstitial nephropathies (analgesic, aristolochic acid)",
+          "cells": [
+            {
+              "text": "Chronic tubulointerstitial injury from other agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive nephrosclerosis",
+          "cells": [
+            {
+              "text": "Hypertension is also present; the exposure history separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gouty (urate) nephropathy of other cause",
+          "cells": [
+            {
+              "text": "Saturnine gout is the lead-associated form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lead_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal from exposure",
+          "cells": [
+            {
+              "text": "Source identification and occupational hygiene measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Succimer or sodium calcium edetate for significant body burden on blood lead or mobilisation test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renoprotective blood pressure control",
+          "cells": [
+            {
+              "text": "ACE inhibitors or angiotensin receptor blockers to slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saturnine gout and hyperuricaemia",
+          "cells": [
+            {
+              "text": "Urate-lowering therapy such as allopurinol; anti-inflammatory treatment for flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Correct, as it increases gastrointestinal lead absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, blood pressure, serum urate and blood lead over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Nephrology and occupational medicine; renal replacement planning if progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lead_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Lead nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic kidney disease with gout or hypertension after prolonged lead exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive CKD with exposure, neuro signs, severe hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent lead toxicity review with nephrology for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood lead, renal function, urate, blood pressure, exposure history, urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a significant lead burden confirmed on blood lead or mobilisation testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other chronic tubulointerstitial or hypertensive kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove ongoing lead exposure and identify the source",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chelation with succimer or sodium calcium edetate for significant burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ACE inhibitor or ARB to slow progression and control blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urate-lowering therapy for saturnine gout; correct iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor renal function, blood pressure, urate and blood lead",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Removing exposure can stabilise renal function; established fibrosis is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

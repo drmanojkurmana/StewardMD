@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for retinitis pigmentosa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinitis_pigmentosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Reduced or extinguished rod responses, with cone responses later affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Peripheral constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular status and cystoid macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence imaging",
+          "cells": [
+            {
+              "text": "Areas of degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Causative gene variant, which guides prognosis and targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinitis_pigmentosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Usher syndrome",
+          "cells": [
+            {
+              "text": "Associated hearing loss; needs audiology and multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bardet-Biedl syndrome",
+          "cells": [
+            {
+              "text": "Syndromic association; needs broader evaluation (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug toxicity, infection or inflammation",
+          "cells": [
+            {
+              "text": "Pigmentary retinopathy from these causes can be mistaken for the inherited disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinitis_pigmentosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene-replacement therapy",
+          "cells": [
+            {
+              "text": "Voretigene neparvovec for confirmed biallelic RPE65-mediated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoid macular oedema",
+          "cells": [
+            {
+              "text": "Carbonic anhydrase inhibitor: oral acetazolamide or topical dorzolamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract",
+          "cells": [
+            {
+              "text": "Surgical removal of visually significant posterior subcapsular cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Low-vision rehabilitation, visual aids and ultraviolet-protective tinted lenses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genotype confirmation",
+          "cells": [
+            {
+              "text": "Genetic testing to guide prognosis, counselling and eligibility for targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic screening",
+          "cells": [
+            {
+              "text": "Audiology for Usher syndrome; evaluation for Bardet-Biedl syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening according to the inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial visual fields, OCT and electroretinography; retinal prostheses considered in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinitis_pigmentosa-dx-mgmt",
+      "title": "Diagnosis and management of Retinitis pigmentosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Night blindness and progressive peripheral field loss with pigmentary retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden central loss, hearing loss, systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for superimposed macular oedema or syndromic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ERG, visual fields, OCT, autofluorescence and genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm a causative mutation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider drug toxicity, infection, inflammation or other dystrophies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic testing for genotype, counselling and targeted therapy eligibility",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat cystoid macular oedema with a carbonic anhydrase inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision rehabilitation, visual aids and tinted lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for syndromic disease: audiology and Bardet-Biedl evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; many keep useful central vision into adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

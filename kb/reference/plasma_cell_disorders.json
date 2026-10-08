@@ -182,5 +182,488 @@
       "caption": "Overview comparison matrix for plasma cell disorders (mgus, waldenström)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 111-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plasma_cell_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for monoclonal plasma cell disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "M-protein and marrow",
+        "Organ damage"
+      ],
+      "rows": [
+        {
+          "parameter": "MGUS",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Serum M-protein under 30 g/L and clonal marrow plasma cells under 10%",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "None; no other B-cell disorder"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smoldering myeloma",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Serum M-protein 30 g/L or more, urine 500 mg/24 h or more, or marrow plasma cells 10 to 60%",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "None and no symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic multiple myeloma",
+          "cells": [
+            {
+              "text": "Clonal marrow plasma cells or plasmacytoma, M-protein in serum or urine"
+            },
+            {
+              "text": "{{hy:CRAB: calcium, renal failure, anemia, bone lesions}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myeloma biomarkers without CRAB",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Marrow plasma cells 60% or more, involved to uninvolved FLC ratio 100 or more, or over 1 focal MRI lesion",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Counts as myeloma-defining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonsecretory myeloma",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "No M-protein on immunofixation; marrow plasma cells 10% or more or plasmacytoma",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "End-organ damage present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Solitary plasmacytoma of bone",
+          "cells": [
+            {
+              "text": "Single lytic lesion of clonal plasma cells; marrow not myelomatous"
+            },
+            {
+              "text": "Normal skeletal survey and spine and pelvis MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma cell leukemia",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Over 2000 circulating plasma cells/uL",
+              "op": ">",
+              "value": 2000
+            },
+            {
+              "text": "Aggressive variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waldenstrom macroglobulinemia",
+          "cells": [
+            {
+              "text": "IgM M-protein with lymphoplasmacytic marrow infiltrate"
+            },
+            {
+              "text": "MYD88 L265P separates from MZL, IgM myeloma, CLL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk MGUS features",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Non-IgG type, abnormal FLC ratio, M-protein over 15 g/L",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Progression about 5% at 20 years with none, about 60% with all three"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 111-2 is the older version: smoldering myeloma there is M-protein 30 g/L or more and/or marrow plasma cells 10% or more, and myeloma needs organ damage. Current IMWG criteria in the entry cap smoldering at under 60% plasma cells and add biomarker-defined myeloma (60% or more plasma cells, FLC ratio 100 or more, more than 1 MRI lesion)."
+    },
+    {
+      "id": "plasma_cell_disorders-ddx",
+      "kind": "ddx",
+      "title": "Conditions with a monoclonal protein",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "AL amyloidosis",
+          "cells": [
+            {
+              "text": "Nephrotic proteinuria, cardiomyopathy, neuropathy; small M-spike"
+            },
+            {
+              "text": "Serum and urine immunofixation and FLC (over 90% positive); tissue biopsy with typing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POEMS syndrome",
+          "cells": [
+            {
+              "text": "Polyneuropathy, sclerotic bone lesions, raised VEGF"
+            },
+            {
+              "text": "VEGF, skeletal imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgM myeloma",
+          "cells": [
+            {
+              "text": "Lytic lesions, CD138 plasma cells, t(11;14)"
+            },
+            {
+              "text": "Marrow immunophenotype, MYD88 negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLL or marginal zone lymphoma",
+          "cells": [
+            {
+              "text": "Lymphocytosis or splenomegaly with small M-protein"
+            },
+            {
+              "text": "Flow cytometry, MYD88"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heavy chain diseases",
+          "cells": [
+            {
+              "text": "Gamma, alpha (IPSID) or mu chain only"
+            },
+            {
+              "text": "Immunofixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive or other-disease M-protein",
+          "cells": [
+            {
+              "text": "Cirrhosis, sarcoid, autoimmune disease, post-transplant"
+            },
+            {
+              "text": "Clinical context; stable over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixed cryoglobulinemia",
+          "cells": [
+            {
+              "text": "Vasculitis, often with RA or hepatitis C"
+            },
+            {
+              "text": "Cryoglobulin testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasma_cell_disorders-treatment",
+      "kind": "treatment",
+      "title": "Managing MGUS and Waldenstrom macroglobulinemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "MGUS"
+            },
+            {
+              "text": "SPEP, FLC ratio and CBC; annual or less often if low risk; progression about 1% per year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic WM"
+            },
+            {
+              "text": "Treat only for cytopenias, hyperviscosity, bulky or constitutional disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Symptomatic hyperviscosity"
+            },
+            {
+              "text": "{{hy:Emergency; IgM is mostly intravascular}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab-based therapy",
+          "cells": [
+            {
+              "text": "Symptomatic WM"
+            },
+            {
+              "text": "With bendamustine or a proteasome inhibitor; beware IgM flare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BTK inhibitor (ibrutinib, zanubrutinib)",
+          "cells": [
+            {
+              "text": "WM, particularly MYD88 mutated"
+            },
+            {
+              "text": "Oral continuous therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloma therapy",
+          "cells": [
+            {
+              "text": "Symptomatic myeloma or high-risk smoldering"
+            },
+            {
+              "text": "Refer to hematology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Anemia, neuropathy, cryoglobulinemia"
+            },
+            {
+              "text": "Transfusion as needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plasma_cell_disorders-dx-mgmt",
+      "title": "Diagnosis and management of monoclonal gammopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "M-protein on electrophoresis or abnormal free light chains",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Immunofixation, FLC ratio, CBC, calcium, creatinine, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "IgM paraprotein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Marrow with MYD88 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hyperviscosity, cytopenias or bulky disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat WM: plasma exchange if needed, rituximab or BTK inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Observe asymptomatic WM or IgM MGUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "CRAB or myeloma biomarker present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Multiple myeloma: refer for therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "M-protein 30 g/L or more or marrow plasma cells 10% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Smoldering myeloma: close monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "MGUS: risk-stratified surveillance; screen for AL if organ signs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

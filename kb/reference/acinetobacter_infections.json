@@ -160,5 +160,402 @@
       "caption": "Overview comparison matrix for acinetobacter infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections",
+      "url": "https://www.idsociety.org/practice-guideline/amr-guidance/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acinetobacter_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising Acinetobacter infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Organism",
+          "cells": [
+            {
+              "text": "Gram-negative oxidase-negative non-fermenting coccobacillus"
+            },
+            {
+              "text": "Can look like Neisseria on CSF Gram stain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification",
+          "cells": [
+            {
+              "text": "MALDI-TOF or real-time PCR"
+            },
+            {
+              "text": "Phenotypic species separation is unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical setting",
+          "cells": [
+            {
+              "text": "Late ventilator-associated pneumonia, line infection, burns, combat or disaster wounds"
+            },
+            {
+              "text": "Survives desiccation on surfaces for weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory or wound culture",
+          "cells": [
+            {
+              "text": "{{hy:Positive culture may be colonisation only}}"
+            },
+            {
+              "text": "Treat invasive infection, not colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility testing",
+          "cells": [
+            {
+              "text": "Essential; OXA-type carbapenemases common"
+            },
+            {
+              "text": "Empirical choices unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloodstream infection severity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Septic shock or DIC in about 25 to 30",
+              "range": [
+                25,
+                30
+              ]
+            },
+            {
+              "text": "Crude mortality about 40%, up to 70% if carbapenem resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nosocomial pneumonia mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Crude up to 65",
+              "op": "<=",
+              "value": 65
+            },
+            {
+              "text": "Reflects underlying illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acinetobacter_infections-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Acinetobacter infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonisation of airway or wound",
+          "cells": [
+            {
+              "text": "{{hy:No clinical signs of infection despite positive culture}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudomonas, Klebsiella and other Enterobacterales pneumonia",
+          "cells": [
+            {
+              "text": "Separated by culture and identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stenotrophomonas or Burkholderia",
+          "cells": [
+            {
+              "text": "Other non-fermenters in ventilated or immunocompromised hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neisseria meningitidis meningitis",
+          "cells": [
+            {
+              "text": "Similar gram-negative paired cocci on CSF Gram stain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising soft tissue infection of other cause",
+          "cells": [
+            {
+              "text": "Streptococcal, clostridial or polymicrobial after trauma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acinetobacter_infections-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Acinetobacter infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbapenem",
+          "cells": [
+            {
+              "text": "Carbapenem-susceptible strain"
+            },
+            {
+              "text": "Guided by susceptibility testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulbactam-durlobactam plus imipenem or meropenem",
+          "cells": [
+            {
+              "text": "{{hy:Preferred for invasive carbapenem-resistant A. baumannii (CRAB)}}"
+            },
+            {
+              "text": "Can start empirically while awaiting susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose ampicillin-sulbactam with another active agent",
+          "cells": [
+            {
+              "text": "Bridge until sulbactam-durlobactam available"
+            },
+            {
+              "text": "Total sulbactam 9 g/day, for example 9 g IV every 8 hours as prolonged infusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minocycline",
+          "cells": [
+            {
+              "text": "Partner agent or sulbactam-durlobactam resistance"
+            },
+            {
+              "text": "200 mg every 12 hours; under 50% of CRAB meet breakpoint"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cefiderocol or polymyxin B",
+          "cells": [
+            {
+              "text": "Resistance precludes sulbactam-durlobactam, or bridging"
+            },
+            {
+              "text": "Polymyxin: poor lung penetration, nephrotoxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nebulised antibiotics",
+          "cells": [
+            {
+              "text": "Not routine for CRAB pneumonia"
+            },
+            {
+              "text": "Selective use if poor response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Source control and infection control",
+          "cells": [
+            {
+              "text": "All infections"
+            },
+            {
+              "text": "Remove infected lines; contact precautions; environmental cleaning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acinetobacter_infections-dx-mgmt",
+      "title": "Diagnosis and management of Acinetobacter infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "A. baumannii isolated from an ICU, ventilated or trauma patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Clinical signs of invasive infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Colonisation: no antibiotics; infection control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood cultures, source search, susceptibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Carbapenem resistant?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Carbapenem guided by susceptibilities",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sulbactam-durlobactam plus imipenem or meropenem",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Sulbactam-durlobactam unavailable or resisted?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose ampicillin-sulbactam with minocycline, cefiderocol or polymyxin B",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Source control, remove lines, contact precautions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

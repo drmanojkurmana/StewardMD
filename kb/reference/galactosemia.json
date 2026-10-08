@@ -151,5 +151,285 @@
       "caption": "Overview comparison matrix for galactosemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "galactosemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn screening and confirmatory GALT enzyme assay",
+          "cells": [
+            {
+              "text": "Confirmatory enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative galactose-1-phosphate and molecular genetic testing",
+          "cells": [
+            {
+              "text": "Quantifies galactose-1-phosphate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and coagulation studies",
+          "cells": [
+            {
+              "text": "Liver involvement and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine for reducing substances",
+          "cells": [
+            {
+              "text": "Supportive, non-specific finding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and sepsis evaluation",
+          "cells": [
+            {
+              "text": "E. coli infection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Cataracts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "galactosemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict lifelong dietary galactose and lactose restriction",
+          "cells": [
+            {
+              "text": "Breast milk and standard formula are replaced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Covering E. coli in the acutely unwell neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Support for acute liver dysfunction",
+          "cells": [
+            {
+              "text": "Vitamin K and clotting-factor support for coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract management",
+          "cells": [
+            {
+              "text": "May regress with dietary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental and endocrine surveillance",
+          "cells": [
+            {
+              "text": "Speech and motor difficulties; ovarian function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic supervision",
+          "cells": [
+            {
+              "text": "Adequate calcium and vitamin D intake given dairy exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; newborn screening and cascade testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "galactosemia-dx-mgmt",
+      "title": "Diagnosis and management of Galactosemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected galactosaemia: jaundiced neonate with poor feeding and lethargy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Gram-negative sepsis, liver failure, encephalopathy, hypoglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis evaluation with empirical broad-spectrum antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Newborn screen, GALT enzyme assay, liver tests, blood cultures and eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the GALT enzyme assay confirm galactosaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neonatal sepsis, cholestasis, tyrosinaemia or urea cycle disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict lifelong dietary galactose and lactose restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical broad-spectrum antibiotics covering E. coli in the unwell neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin K and clotting-factor support for acute liver dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietetic supervision for adequate calcium and vitamin D on a dairy-free diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early diagnosis and restriction reverse acute life-threatening features",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

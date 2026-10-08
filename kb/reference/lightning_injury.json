@@ -147,5 +147,343 @@
       "caption": "Overview comparison matrix for lightning injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tintinalli's Emergency Medicine / Auerbach's Wilderness Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lightning_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous ECG monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and conduction abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Where myocardial injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and renal function",
+          "cells": [
+            {
+              "text": "Muscle injury, usually less severe than in high-voltage injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma imaging",
+          "cells": [
+            {
+              "text": "Possible blunt injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy and audiology",
+          "cells": [
+            {
+              "text": "Tympanic membrane rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Cataract and other ocular injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lightning_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-voltage electrical injury",
+          "cells": [
+            {
+              "text": "Deep tissue destruction and severe rhabdomyolysis are typical of this, less so of lightning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrest from primary arrhythmia or ischaemia",
+          "cells": [
+            {
+              "text": "Primary cardiac cause; standard resuscitation applies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blunt polytrauma from a fall or blast",
+          "cells": [
+            {
+              "text": "Associated trauma to be surveyed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lightning_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reverse triage",
+          "cells": [
+            {
+              "text": "Resuscitate apparently lifeless casualties first, as arrest may be reversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged ventilatory support",
+          "cells": [
+            {
+              "text": "Where respiratory arrest persists after cardiac activity returns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "Continuous ECG and treatment of arrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assisted ventilation",
+          "cells": [
+            {
+              "text": "For medullary respiratory paralysis until spontaneous breathing returns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma survey",
+          "cells": [
+            {
+              "text": "Spinal precautions for blast or fall injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keraunoparalysis and skin",
+          "cells": [
+            {
+              "text": "Supportive care for transient keraunoparalysis; wound care for superficial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ear and eye",
+          "cells": [
+            {
+              "text": "Tympanic membrane and ophthalmological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological rehabilitation",
+          "cells": [
+            {
+              "text": "For persistent cognitive, autonomic or motor sequelae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lightning_injury-dx-mgmt",
+      "title": "Diagnosis and management of Lightning injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Person struck by lightning, with collapse and cardiac or respiratory arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiac or respiratory arrest, depressed consciousness, major trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate CPR with reverse-triage resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous ECG, cardiac biomarkers, CK, trauma imaging, otoscopy, eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are spontaneous circulation and breathing restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue resuscitation and ventilation while arrest persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reverse triage, with prolonged ventilatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous cardiac monitoring and arrhythmia treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trauma survey with spinal precautions for blast or fall",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Examine for tympanic membrane rupture and ocular injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurological and neuropsychological rehabilitation for sequelae",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good recovery when arrest is promptly treated; some sequelae persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

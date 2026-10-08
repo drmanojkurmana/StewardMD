@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for ganglion wrist."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganglion_wrist-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis with transillumination",
+          "cells": [
+            {
+              "text": "Clinical features, aided by transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a cystic anechoic lesion; relation to the radial artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Occult dorsal ganglia or atypical solid-feeling masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Carpal boss or associated degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration",
+          "cells": [
+            {
+              "text": "Clear viscous mucin supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allen test",
+          "cells": [
+            {
+              "text": "Documents arterial patency before volar intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_wrist-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Radial artery aneurysm",
+          "cells": [
+            {
+              "text": "Pulsatile volar swelling mimicking a volar ganglion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapholunate instability",
+          "cells": [
+            {
+              "text": "Causes dorsal wrist pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal boss",
+          "cells": [
+            {
+              "text": "Osteoarthritic exostosis seen on radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_wrist-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Many ganglia resolve without treatment once the diagnosis is confident"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splinting, activity modification and analgesia",
+          "cells": [
+            {
+              "text": "For activity-related discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration for dorsal ganglia",
+          "cells": [
+            {
+              "text": "For symptomatic lesions; frequent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open or arthroscopic excision",
+          "cells": [
+            {
+              "text": "Persistent or recurrent cysts, including the capsular pedicle and stalk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radial artery check before volar excision",
+          "cells": [
+            {
+              "text": "Allen test and ultrasound for a ganglion near the artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for occult dorsal ganglia",
+          "cells": [
+            {
+              "text": "Ultrasound or MRI for unexplained wrist pain, before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on recurrence",
+          "cells": [
+            {
+              "text": "Recurrence possible despite meticulous surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganglion_wrist-dx-mgmt",
+      "title": "Diagnosis and management of Ganglion wrist",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected wrist ganglion: cystic swelling, usually dorsal, often clinically diagnosed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (solid mass, pulsatile volar swelling, nerve deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Check arterial patency before any volar intervention; image for aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination, ultrasound, MRI for occult ganglia, radiographs and aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspiration of clear viscous mucin support the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider radial artery aneurysm, tenosynovitis, lipoma or soft-tissue sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; many ganglia resolve once the diagnosis is confident",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Splinting, activity modification and analgesia for discomfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspiration for symptomatic dorsal ganglia, with warning of recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Open or arthroscopic excision including the capsular stalk for persistent cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, excellent outlook; aspiration often recurs, meticulous excision less so",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

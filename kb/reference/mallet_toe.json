@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for mallet toe."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mallet_toe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of the DIP deformity",
+          "cells": [
+            {
+              "text": "Localises the deformity to the DIP joint and tests its flexibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Level of deformity; bony lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inspection of toe tip and nail",
+          "cells": [
+            {
+              "text": "Callosity, corn or ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of other toes and forefoot",
+          "cells": [
+            {
+              "text": "Wider deformity pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "Perfusion and sensation before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers or serology",
+          "cells": [
+            {
+              "text": "Only when inflammatory arthritis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallet_toe-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hammer toe",
+          "cells": [
+            {
+              "text": "Proximal interphalangeal flexion, whereas the PIP is neutral in mallet toe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Claw toe",
+          "cells": [
+            {
+              "text": "Combined metatarsophalangeal and interphalangeal deformity, unlike the isolated DIP deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual exostosis or nail pathology",
+          "cells": [
+            {
+              "text": "Firm, growing subungual lesion causing tip pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthritis of the DIP joint",
+          "cells": [
+            {
+              "text": "Multiple or symmetrical deformities; inflammatory markers or serology if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallet_toe-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Footwear advice",
+          "cells": [
+            {
+              "text": "Roomy, deep toe box and protective silicone sleeves or padding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tip callosity or corn paring",
+          "cells": [
+            {
+              "text": "Regular paring with podiatry input; attention to nail deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor tenotomy",
+          "cells": [
+            {
+              "text": "Passively correctable, flexible deformity, to relieve tip pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DIP arthrodesis or resection arthroplasty",
+          "cells": [
+            {
+              "text": "Fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-surgical vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "Protective offloading where sensation or perfusion is impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat ulceration or infection",
+          "cells": [
+            {
+              "text": "Reinforce appropriate footwear to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mallet_toe-dx-mgmt",
+      "title": "Diagnosis and management of Mallet toe",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Isolated DIP flexion deformity of the toe, often with tip callosity or pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tip ulceration, digital ischaemia or multiple symmetrical deformities present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for tip ulceration, digital ischaemia or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs; examine flexibility, toe tip, nail and perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the deformity correct passively on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Fixed deformity: exclude subungual exostosis and inflammatory arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Roomy, deep toe box and silicone sleeves or padding for pressure relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Paring of tip callosity with podiatry input",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Flexor tenotomy for a passively correctable deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Arthrodesis or resection arthroplasty for a fixed deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Flexible deformity often relieved by tenotomy; recurrence uncommon with good footwear",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

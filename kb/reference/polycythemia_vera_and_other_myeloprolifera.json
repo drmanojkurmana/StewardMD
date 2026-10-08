@@ -188,5 +188,533 @@
       "caption": "Overview comparison matrix for polycythemia vera and other myeloproliferative neoplasms."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Polycythemia Vera",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/myeloproliferative-disorders/polycythemia-vera"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Essential Thrombocythemia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/myeloproliferative-disorders/essential-thrombocythemia"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 108-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 108-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polycythemia_vera_and_other_myeloprolifera-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing myeloproliferative neoplasms",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "PV hemoglobin, men",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Over 16.5 g/dL",
+              "op": ">",
+              "value": 16.5
+            },
+            {
+              "text": "Prompts PV workup"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PV hemoglobin, women",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Over 16.0 g/dL",
+              "op": ">",
+              "value": 16.0
+            },
+            {
+              "text": "Plasma expansion can mask raised red cell mass"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "JAK2 V617F",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 95% of PV (Harrison) or about 90% (Merck); about 50% of ET and PMF",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Exon 12 in most JAK2 V617F-negative PV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum erythropoietin",
+          "cells": [
+            {
+              "text": "Low or low-normal in PV"
+            },
+            {
+              "text": "High suggests secondary erythrocytosis; normal does not exclude PV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ET platelet count",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Over 450,000/uL with normal red cell mass and iron",
+              "op": ">",
+              "value": 450000
+            },
+            {
+              "text": "Exclude reactive causes and CML (BCR-ABL)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "JAK2 allele burden in ET",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Not over 50%",
+              "op": "<=",
+              "value": 50
+            },
+            {
+              "text": "Higher burden suggests PV or PMF"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acquired von Willebrand syndrome",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Platelets about 1,000,000/uL",
+              "op": ">=",
+              "value": 1000000
+            },
+            {
+              "text": "{{hy:Very high counts cause bleeding more than clotting}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PMF risk factors (DIPSS)",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Hb under 10 g/dL, WBC over 25,000/uL, blasts 1% or more, symptoms, age over 65",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Anemia scores 2 points"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marrow",
+          "cells": [
+            {
+              "text": "Panmyelosis with clustered large megakaryocytes; reticulin fibrosis in PMF"
+            },
+            {
+              "text": "Dry tap suggests fibrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives JAK2 V617F in about 90% of PV; Harrison gives over 95%."
+    },
+    {
+      "id": "polycythemia_vera_and_other_myeloprolifera-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic myeloproliferative neoplasms",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative erythrocytosis",
+          "cells": [
+            {
+              "text": "Dehydration, diuretics, alcohol, androgens, tobacco"
+            },
+            {
+              "text": "Red cell mass and plasma volume"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hypoxic erythrocytosis",
+          "cells": [
+            {
+              "text": "Lung disease, shunt, sleep apnea, altitude, CO, high-affinity hemoglobin"
+            },
+            {
+              "text": "Oxygen saturation, carboxyhemoglobin, raised EPO"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Tumor or renal erythrocytosis",
+          "cells": [
+            {
+              "text": "Renal cell carcinoma, hepatoma, hemangioblastoma, myoma, pheochromocytoma, renal artery stenosis, cysts"
+            },
+            {
+              "text": "Raised EPO, imaging"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Drug or familial erythrocytosis",
+          "cells": [
+            {
+              "text": "Androgens, EPO, SGLT2 inhibitors; EPO receptor, VHL, 2,3-BPG mutations"
+            },
+            {
+              "text": "History, genetic testing"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Reactive thrombocytosis",
+          "cells": [
+            {
+              "text": "Inflammation, infection, cancer, iron deficiency, hemorrhage, post-splenectomy"
+            },
+            {
+              "text": "CRP, ferritin; JAK2, CALR, MPL negative"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Chronic myeloid leukemia",
+          "cells": [
+            {
+              "text": "Can present with thrombocytosis alone"
+            },
+            {
+              "text": "BCR-ABL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myelodysplastic syndrome (5q-, sideroblastic)",
+          "cells": [
+            {
+              "text": "Thrombocytosis with cytopenias"
+            },
+            {
+              "text": "Marrow and cytogenetics"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Secondary myelofibrosis",
+          "cells": [
+            {
+              "text": "Metastatic cancer, lymphoma, TB, HIV, SLE, renal osteodystrophy"
+            },
+            {
+              "text": "Marrow biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polycythemia_vera_and_other_myeloprolifera-treatment",
+      "kind": "treatment",
+      "title": "Treating myeloproliferative neoplasms",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phlebotomy",
+          "cells": [
+            {
+              "text": "All PV"
+            },
+            {
+              "text": "Initially 500 mL every other day (200 to 300 mL twice weekly if elderly or cardiac); target Hct under 45% men, under 42% women"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "PV and ET with vasomotor or microvascular symptoms"
+            },
+            {
+              "text": "81 to 100 mg daily; avoid with acquired von Willebrand bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydroxyurea",
+          "cells": [
+            {
+              "text": "High-risk PV or ET (age over 60 with JAK2, prior thrombosis)"
+            },
+            {
+              "text": "Specialist use; Merck notes leukemia concern"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Peginterferon or ropeginterferon alfa",
+          "cells": [
+            {
+              "text": "Cytoreduction in younger patients and pregnancy"
+            },
+            {
+              "text": "About 20% complete molecular remission in PV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ruxolitinib",
+          "cells": [
+            {
+              "text": "Hydroxyurea-resistant PV; symptomatic splenomegaly in myelofibrosis"
+            },
+            {
+              "text": "Usually 10 mg twice daily in PV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anagrelide",
+          "cells": [
+            {
+              "text": "ET when other agents unsuitable"
+            },
+            {
+              "text": "Cardiac and renal side effects"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "Symptomatic hyperuricemia or on cytoreduction"
+            },
+            {
+              "text": "300 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plateletpheresis",
+          "cells": [
+            {
+              "text": "Serious bleeding, recurrent thrombosis, urgent surgery"
+            },
+            {
+              "text": "Transient effect"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison and ELN-style care use hydroxyurea as first-line cytoreduction for high-risk PV; Merck prefers interferons and restricts hydroxyurea to specialists. Harrison-era target is Hct under 45%; Merck gives under 42% for women."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polycythemia_vera_and_other_myeloprolifera-dx-mgmt",
+      "title": "Diagnosis and management of myeloproliferative neoplasms",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "High hemoglobin or high platelets on blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised hemoglobin (over 16.5 men, 16.0 women)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "JAK2 V617F and exon 12; serum EPO",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "JAK2 positive with low or normal EPO?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Seek secondary erythrocytosis: hypoxia, tumor, drugs",
+          "cite": "c4"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "PV: phlebotomy to target, aspirin, cytoreduce if high risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Iron studies, CRP; JAK2, CALR, MPL and BCR-ABL",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Clonal marker with no reactive cause?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Reactive thrombocytosis: treat cause",
+          "cite": "c5"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "High risk (thrombosis, or over 60 with JAK2)?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "ET: aspirin plus hydroxyurea or interferon",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "ET: aspirin if symptomatic, observe",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

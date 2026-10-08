@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for genetic epilepsy with febrile seizures plus (gefs+)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "genetic_epilepsy_febrile_seizures_plus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Three-generation family history of seizures",
+          "cells": [
+            {
+              "text": "Family pattern of seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel including SCN1A, SCN1B and GABRG2",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Characterises afebrile seizure types"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Focal features or atypical course, to exclude a structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Identifies severe-spectrum cases early"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "genetic_epilepsy_febrile_seizures_plus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dravet syndrome",
+          "cells": [
+            {
+              "text": "Severe end of the spectrum, with developmental slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple and complex febrile seizures",
+          "cells": [
+            {
+              "text": "Afebrile seizures beyond the expected febrile-seizure age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "genetic_epilepsy_febrile_seizures_plus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For afebrile seizures; broad-spectrum agents such as valproate or levetiracetam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Carbamazepine and lamotrigine where a Dravet-spectrum phenotype is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever management and rescue",
+          "cells": [
+            {
+              "text": "Antipyretics and a home rescue benzodiazepine protocol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive agents for severe disease",
+          "cells": [
+            {
+              "text": "Stiripentol, cannabidiol or fenfluramine in Dravet-spectrum disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental surveillance",
+          "cells": [
+            {
+              "text": "Identifies severe-spectrum cases early; educational and rehabilitative support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance with incomplete penetrance and variable expressivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neurology, epileptology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "genetic_epilepsy_febrile_seizures_plus-dx-mgmt",
+      "title": "Diagnosis and management of Genetic epilepsy with febrile seizures plus (GEFS+)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GEFS+: febrile seizures with afebrile seizures and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prolonged seizures, developmental slowing, severe family phenotype)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review for suspected Dravet-spectrum disease with developmental slowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three-generation family history, gene panel, EEG, MRI and developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the family history and gene testing fit the GEFS+ spectrum?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dravet syndrome, PCDH19 epilepsy or structural or metabolic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication for afebrile seizures, favouring broad-spectrum agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid carbamazepine and lamotrigine where a Dravet-spectrum phenotype is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fever management with antipyretics and a home rescue benzodiazepine protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance with variable expression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most have a good prognosis, with seizures often remitting in childhood or adolescence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

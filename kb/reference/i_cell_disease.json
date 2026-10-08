@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for i-cell disease (mucolipidosis ii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "i_cell_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma lysosomal enzyme assay",
+          "cells": [
+            {
+              "text": "Markedly raised enzyme activity in plasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultured fibroblast studies",
+          "cells": [
+            {
+              "text": "Low intracellular enzyme activity and inclusion bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary glycosaminoglycan analysis",
+          "cells": [
+            {
+              "text": "Typically not markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNPTAB gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and developmental assessment",
+          "cells": [
+            {
+              "text": "Valvular, myocardial and neurodevelopmental involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "i_cell_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe mucopolysaccharidoses (Hurler)",
+          "cells": [
+            {
+              "text": "Corneal clouding and urinary glycosaminoglycan excess, typically absent here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucolipidosis III (pseudo-Hurler polydystrophy)",
+          "cells": [
+            {
+              "text": "Milder phenotype than severe mucolipidosis II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital hypothyroidism",
+          "cells": [
+            {
+              "text": "Coarse features at birth should not be attributed to it alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "i_cell_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Symptom-directed care; no established enzyme or gene therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory infections and airway",
+          "cells": [
+            {
+              "text": "Aggressive management, as cardiorespiratory complications threaten survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and dental care",
+          "cells": [
+            {
+              "text": "Feeding difficulty and gingival hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal care",
+          "cells": [
+            {
+              "text": "Orthopaedic and physiotherapy input for dysostosis multiplex; monitor hip dysplasia and spinal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for valvular and myocardial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier and prenatal testing for autosomal recessive GNPTAB inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "i_cell_disease-dx-mgmt",
+      "title": "Diagnosis and management of I-cell disease (mucolipidosis II)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early coarse facies, dysostosis multiplex and organomegaly in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe growth failure, cardiorespiratory compromise or rapid neurodevelopmental decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Aggressive respiratory infection treatment; cardiorespiratory review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma lysosomal enzymes, fibroblast studies, urinary GAG, GNPTAB, skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised plasma enzymes with GNPTAB variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mucopolysaccharidosis, ML III or other storage disorders; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, symptom-directed care; no established enzyme or gene therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive management of respiratory infections and airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutrition and dental care for gingival hypertrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic and physiotherapy care for dysostosis multiplex",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Echocardiography surveillance and genetic counselling with carrier testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Care aimed at cardiorespiratory complications; palliative support as disease advances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

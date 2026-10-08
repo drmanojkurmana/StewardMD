@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for exfoliative dermatitis (erythroderma workup)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "exfoliative_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial skin biopsies",
+          "cells": [
+            {
+              "text": "A specific underlying dermatosis or lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, blood film, Sezary count and flow cytometry",
+          "cells": [
+            {
+              "text": "Circulating atypical lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, electrolytes, albumin and inflammatory markers",
+          "cells": [
+            {
+              "text": "Metabolic consequences"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history",
+          "cells": [
+            {
+              "text": "Recently introduced medications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of lymph nodes and organs",
+          "cells": [
+            {
+              "text": "Where lymphoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and blood cultures",
+          "cells": [
+            {
+              "text": "Secondary infection or sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exfoliative_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythrodermic psoriasis",
+          "cells": [
+            {
+              "text": "Nail and scalp changes suggest psoriasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous T-cell lymphoma (Sezary syndrome)",
+          "cells": [
+            {
+              "text": "Intense pruritus, lymphadenopathy or atypical circulating lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction with eosinophilia and systemic symptoms",
+          "cells": [
+            {
+              "text": "Systemic involvement after a drug"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exfoliative_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw culprit drug and treat the dermatosis",
+          "cells": [
+            {
+              "text": "Psoriasis or eczema treatment, or lymphoma-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients, wet wraps and mild topical corticosteroids",
+          "cells": [
+            {
+              "text": "Restore the skin barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid, electrolyte, warmth and nutritional support",
+          "cells": [
+            {
+              "text": "Prevents hypothermia and dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for secondary infection",
+          "cells": [
+            {
+              "text": "Monitor for sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for high-output cardiac failure",
+          "cells": [
+            {
+              "text": "Vulnerable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy by cause",
+          "cells": [
+            {
+              "text": "Immunosuppression or biologics for inflammatory disease; lymphoma treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology-led multidisciplinary admission",
+          "cells": [
+            {
+              "text": "Managed as a dermatological emergency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "exfoliative_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Exfoliative dermatitis (erythroderma workup)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Erythema and scaling covering at least 90 per cent of the body surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (instability, sepsis, cardiac failure, lymphoma, systemic drug reaction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit as a dermatological emergency; withdraw any culprit drug at once",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial skin biopsies; blood film and flow cytometry; electrolytes; drug history; cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Underlying dermatosis or drug identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat biopsy and lymphocyte studies to exclude cutaneous lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the cause: psoriasis, eczema or lymphoma-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients, wet wraps and mild topical steroids for barrier repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct fluid and electrolytes; keep warm; nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics for secondary infection; watch for sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for high-output cardiac failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on cause and comorbidity; a benign dermatosis or withdrawn drug usually settles",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

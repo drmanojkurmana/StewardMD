@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for phaeohyphomycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / ECMM-ISHAM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phaeohyphomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue biopsy with Fontana-Masson stain",
+          "cells": [
+            {
+              "text": "Melanised hyphae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture with molecular identification",
+          "cells": [
+            {
+              "text": "Species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal susceptibility testing",
+          "cells": [
+            {
+              "text": "Guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Cerebral abscess, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the sinuses",
+          "cells": [
+            {
+              "text": "Suspected fungal sinusitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Disseminated or invasive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phaeohyphomycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromoblastomycosis",
+          "cells": [
+            {
+              "text": "Distinct sclerotic bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive aspergillosis",
+          "cells": [
+            {
+              "text": "Hyaline (not melanised) mould infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phaeohyphomycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged systemic azole",
+          "cells": [
+            {
+              "text": "Voriconazole, itraconazole or posaconazole, guided by species identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision or drainage",
+          "cells": [
+            {
+              "text": "Localised subcutaneous nodules and cysts; neurosurgical resection of cerebral abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination therapy",
+          "cells": [
+            {
+              "text": "Amphotericin B and flucytosine for cerebral or disseminated disease, given the high mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce immunosuppression",
+          "cells": [
+            {
+              "text": "Where feasible in immunocompromised hosts, to aid fungal clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Neuroimaging and clinical response, with prolonged follow-up for relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune optimisation",
+          "cells": [
+            {
+              "text": "Assessment and optimisation of immune status in invasive or disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Infectious diseases; neurosurgery or ENT for cerebral or sinus disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phaeohyphomycosis-dx-mgmt",
+      "title": "Diagnosis and management of Phaeohyphomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subcutaneous, cerebral or sinus lesion with suspected dematiaceous fungus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new focal deficit, disseminated disease, invasive sinus disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and infectious diseases review for brain abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with Fontana-Masson stain; fungal culture; susceptibility testing; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show melanised hyphae and culture confirm a dematiaceous fungus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chromoblastomycosis, eumycetoma, aspergillosis or sporotrichosis; re-review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged systemic azole antifungal therapy, guided by species identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical excision or drainage of localised subcutaneous nodules and cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Amphotericin B and flucytosine combination for cerebral or disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reduce immunosuppression where feasible in immunocompromised hosts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neuroimaging and clinical monitoring with prolonged follow-up for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised subcutaneous disease responds well; cerebral disease carries high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

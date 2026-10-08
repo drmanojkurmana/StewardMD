@@ -174,6 +174,21 @@
       "label": "Merck Manual Professional, Celiac Disease",
       "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/celiac-disease",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 294-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 294-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -242,6 +257,30 @@
           "cite": "c2"
         },
         {
+          "parameter": "HLA association strength",
+          "cells": [
+            {
+              "text": "DQ2 (DQA1*0501), strength +++"
+            },
+            {
+              "text": "Strong class II association"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Steatorrhoea work-up",
+          "cells": [
+            {
+              "text": "D-xylose decreased, Schilling normal, duodenal biopsy flat"
+            },
+            {
+              "text": "Pattern separates from pancreatic and ileal causes"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
           "parameter": "First-degree relatives",
           "unit": "%",
           "cells": [
@@ -293,56 +332,119 @@
     {
       "id": "CELIAC_DISEASE-ddx",
       "kind": "ddx",
-      "title": "Other causes of villous atrophy and look-alikes",
+      "title": "Other causes of an abnormal small-bowel biopsy",
       "rowHeader": "Condition",
       "columns": [
-        "Key distinguishing feature"
+        "Biopsy finding"
       ],
       "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Short or absent villi, mononuclear infiltrate, epithelial damage, crypt hypertrophy (diffuse, non-specific)"
+            }
+          ],
+          "cite": "c3"
+        },
         {
           "parameter": "Tropical sprue",
           "cells": [
             {
-              "text": "Residence in tropics; negative coeliac serology"
+              "text": "Similar to coeliac disease"
             }
           ],
-          "cite": "c2"
+          "cite": "c3"
         },
         {
-          "parameter": "Small intestinal bacterial overgrowth",
+          "parameter": "Bacterial overgrowth",
           "cells": [
             {
-              "text": "Severe overgrowth can flatten villi"
+              "text": "Patchy villous damage, lymphocyte infiltration"
             }
           ],
-          "cite": "c2"
+          "cite": "c3"
         },
         {
-          "parameter": "Giardiasis and infectious enteritis",
+          "parameter": "Folate or vitamin B12 deficiency, radiation enteritis",
           "cells": [
             {
-              "text": "Organisms on stool testing or biopsy"
+              "text": "Short villi, fewer crypt mitoses, megalocytosis"
             }
           ],
-          "cite": "c2"
+          "cite": "c3"
         },
         {
-          "parameter": "Eosinophilic enteritis",
+          "parameter": "Zollinger-Ellison syndrome",
           "cells": [
             {
-              "text": "Eosinophilic infiltrate on biopsy"
+              "text": "Mucosal ulceration and erosion from acid"
             }
           ],
-          "cite": "c2"
+          "cite": "c3"
+        },
+        {
+          "parameter": "Protein-calorie malnutrition",
+          "cells": [
+            {
+              "text": "Villous atrophy with secondary bacterial overgrowth"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug-induced enteritis",
+          "cells": [
+            {
+              "text": "Variable histology"
+            }
+          ],
+          "cite": "c3"
         },
         {
           "parameter": "Intestinal lymphoma",
           "cells": [
             {
-              "text": "{{hy:Persistent atrophy or relapse despite strict diet}}"
+              "text": "{{hy:Malignant cells in lamina propria and submucosa; suspect if diet fails}}"
             }
           ],
-          "cite": "c2"
+          "cite": "c3"
+        },
+        {
+          "parameter": "Whipple disease",
+          "cells": [
+            {
+              "text": "PAS-positive macrophages in lamina propria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "No plasma cells; villi normal or flat"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Eosinophilic gastroenteritis",
+          "cells": [
+            {
+              "text": "Eosinophil infiltration of lamina propria and mucosa"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Giardiasis and other infections",
+          "cells": [
+            {
+              "text": "Specific organisms seen"
+            }
+          ],
+          "cite": "c3"
         },
         {
           "parameter": "Non-coeliac gluten sensitivity",

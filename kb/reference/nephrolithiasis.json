@@ -182,5 +182,503 @@
       "caption": "Overview comparison matrix for nephrolithiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Kidney Stones: Treatment and Prevention, 2019",
+      "kind": "web",
+      "url": "https://www.aafp.org/pubs/afp/issues/2019/0415/p490.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nephrolithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and evaluation of kidney stones",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Stone type: calcium oxalate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 75% (Harrison); 32 to 46% pure plus 29 to 40% mixed (AAFP)",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Not affected by urine pH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other stone types",
+          "cells": [
+            {
+              "text": "Calcium phosphate about 15%, uric acid about 8%, struvite about 1%, cystine under 1%"
+            },
+            {
+              "text": "Analyse every retrieved stone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Detects stones as small as 1 mm",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "{{hy:Gold standard; shows uric acid stones}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Acceptable first-line, no radiation"
+            },
+            {
+              "text": "Insensitive for ureteral stones; shows hydronephrosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Haematuria, crystals"
+            },
+            {
+              "text": "No haematuria does not exclude a stone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine pH",
+          "cells": [
+            {
+              "text": "Uric acid at pH 5.5 or less; calcium phosphate at 6.5 or more",
+              "range": [
+                5.5,
+                6.5
+              ]
+            },
+            {
+              "text": "Guides prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spontaneous passage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% under 6 mm; 59% over 6 mm",
+              "range": [
+                59,
+                90
+              ]
+            },
+            {
+              "text": "Size 6 mm or more lowers passage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metabolic work-up",
+          "cells": [
+            {
+              "text": "Two 24-h urines on usual diet; serum Ca, uric acid, creatinine, electrolytes"
+            },
+            {
+              "text": "PTH if calcium high or borderline"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Composition figures differ: Harrison 22e gives calcium oxalate about 75%; AAFP gives ranges for pure and mixed calcium oxalate."
+    },
+    {
+      "id": "nephrolithiasis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic renal colic",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal aortic aneurysm",
+          "cells": [
+            {
+              "text": "Older patient, pulsatile mass, hypotension"
+            },
+            {
+              "text": "{{hy:Ultrasound or CT angiography}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis or diverticulitis",
+          "cells": [
+            {
+              "text": "Fever, localised peritonism"
+            },
+            {
+              "text": "CT abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholecystitis",
+          "cells": [
+            {
+              "text": "RUQ pain, Murphy sign"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyelonephritis",
+          "cells": [
+            {
+              "text": "Fever, flank tenderness, pyuria"
+            },
+            {
+              "text": "Urine culture; CT if obstruction suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy or gynaecological cause",
+          "cells": [
+            {
+              "text": "Female of reproductive age"
+            },
+            {
+              "text": "hCG and pelvic ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes zoster",
+          "cells": [
+            {
+              "text": "Dermatomal pain before rash"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clot or sloughed papilla",
+          "cells": [
+            {
+              "text": "Haematuria with obstruction, papillary necrosis risk"
+            },
+            {
+              "text": "CT urography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrolithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management of kidney stones",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAID analgesia",
+          "cells": [
+            {
+              "text": "First line for renal colic"
+            },
+            {
+              "text": "For example ketorolac 30 to 60 mg IM; avoid meperidine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Medical expulsive therapy",
+          "cells": [
+            {
+              "text": "Distal ureteral stone 5 to 10 mm"
+            },
+            {
+              "text": "Tamsulosin 0.4 mg daily or doxazosin 4 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent decompression",
+          "cells": [
+            {
+              "text": "{{hy:Obstruction with infection, solitary kidney, anuria, bilateral obstruction}}"
+            },
+            {
+              "text": "Stent or nephrostomy with antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stone removal",
+          "cells": [
+            {
+              "text": "Over 10 mm, significant hydronephrosis or failure to pass"
+            },
+            {
+              "text": "Ureteroscopy, shockwave lithotripsy or PCNL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluids and diet",
+          "cells": [
+            {
+              "text": "All stone formers"
+            },
+            {
+              "text": "2.5 to 3 L/day fluid; sodium 4 to 5 g/day; normal calcium 1.0 to 1.2 g/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thiazide",
+          "cells": [
+            {
+              "text": "Hypercalciuric calcium stones"
+            },
+            {
+              "text": "Hydrochlorothiazide 50 mg/day or chlorthalidone 25 to 50 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium citrate",
+          "cells": [
+            {
+              "text": "Hypocitraturia, uric acid or cystine stones"
+            },
+            {
+              "text": "Start 9 g/day in 3 doses; target urine pH 6.0 to 7.5 (uric acid)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "Hyperuricosuria"
+            },
+            {
+              "text": "100 mg daily, up to 100 mg three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cystine or struvite stones",
+          "cells": [
+            {
+              "text": "Specific types"
+            },
+            {
+              "text": "Thiol agent for cystine; complete clearance and infection control for struvite"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nephrolithiasis-dx-mgmt",
+      "title": "Diagnosis and management of nephrolithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute flank pain with or without haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urinalysis, creatinine; pregnancy test if relevant",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Non-contrast CT or ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Stone confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Look for AAA, appendicitis, other mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Infection, anuria, solitary kidney or uncontrolled pain?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Urgent stent or nephrostomy plus antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Stone over 10 mm or significant hydronephrosis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Urology: ureteroscopy, ESWL or PCNL",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "NSAID; tamsulosin if distal 5 to 10 mm; strain urine",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Passed within about 4 to 6 weeks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Analyse stone; 24-h urine; targeted prevention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

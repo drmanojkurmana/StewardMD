@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for lithium toxicity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lithium_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial serum lithium levels",
+          "cells": [
+            {
+              "text": "Trend rather than a single value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, urea and creatinine",
+          "cells": [
+            {
+              "text": "Renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "T-wave changes, QT effects and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function",
+          "cells": [
+            {
+              "text": "Chronic use affects the thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for precipitants",
+          "cells": [
+            {
+              "text": "Dehydration and interacting medications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lithium_toxicity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Serotonin syndrome or neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Drug-related neurological mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellar stroke or other structural lesion",
+          "cells": [
+            {
+              "text": "Focal neurological signs point to a structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis with delirium",
+          "cells": [
+            {
+              "text": "Delirium with fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other encephalopathy (metabolic, infective)",
+          "cells": [
+            {
+              "text": "Metabolic or infective causes must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lithium_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop lithium",
+          "cells": [
+            {
+              "text": "Including sustained-release preparations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isotonic saline",
+          "cells": [
+            {
+              "text": "Generous intravenous saline to restore volume and enhance renal clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Severe neurotoxicity, markedly high or rising levels, or renal failure; watch for rebound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-bowel irrigation",
+          "cells": [
+            {
+              "text": "After sustained-release ingestion; activated charcoal does not bind lithium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitants",
+          "cells": [
+            {
+              "text": "Withdraw thiazides, ACE inhibitors, ARBs and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Airway, seizure control and cardiac monitoring for conduction and QT abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Critical care, toxicology or nephrology, with serial levels and neurological review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lithium_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Lithium toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tremor, ataxia, confusion or agitation in a patient on lithium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, reduced consciousness, AKI, arrhythmia, rising levels)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: critical care and haemodialysis review for severe neurotoxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial lithium levels, electrolytes, renal function, ECG, thyroid, precipitants",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is lithium toxicity confirmed by raised or rising serum levels?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider serotonin or neuroleptic malignant syndrome, sepsis or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop lithium and remove sustained-release sources",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Generous isotonic saline to restore volume",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Haemodialysis for severe neurotoxicity or renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withdraw interacting drugs such as thiazides, ACE inhibitors and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Supportive care with airway, seizure control and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute overdose often recovers; chronic toxicity risks lasting cerebellar deficit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for massive transfusion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "massive_transfusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial full blood count, PT/INR, APTT and fibrinogen",
+          "cells": [
+            {
+              "text": "Coagulation status and fibrinogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium, potassium, arterial blood gas with lactate and pH",
+          "cells": [
+            {
+              "text": "Calcium, potassium, lactate and pH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic haemostatic assays (TEG/ROTEM)",
+          "cells": [
+            {
+              "text": "Goal-directed replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hypothermia, part of the lethal triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type and crossmatch with repeat sampling",
+          "cells": [
+            {
+              "text": "Ongoing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Persistent coagulopathy despite balanced product resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical or mechanical bleeding",
+          "cells": [
+            {
+              "text": "Ongoing uncontrolled haemorrhage needing surgical or interventional haemostasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activate major haemorrhage protocol",
+          "cells": [
+            {
+              "text": "Early, balanced transfusion of red cells, plasma and platelets approximating whole blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Surgical, endoscopic or interventional radiology control of the bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Early, particularly in trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent the lethal triad",
+          "cells": [
+            {
+              "text": "Warm the patient and all fluids and products; correct metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised hypocalcaemia",
+          "cells": [
+            {
+              "text": "Monitor and correct citrate-induced hypocalcaemia with intravenous calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Monitor and treat, especially with rapidly infused older red cell units"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic-guided replacement",
+          "cells": [
+            {
+              "text": "Once bleeding is controlled; cryoprecipitate or fibrinogen concentrate for hypofibrinogenaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary involvement",
+          "cells": [
+            {
+              "text": "Transfusion, haematology and critical care teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "massive_transfusion-dx-mgmt",
+      "title": "Diagnosis and management of Massive transfusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Major haemorrhage with rapid transfusion of red cells, plasma and platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Uncontrolled bleeding, refractory hypocalcaemia or rising potassium with ECG change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical, endoscopic or interventional haemostasis; major haemorrhage protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, coagulation screen, fibrinogen, ionised calcium, blood gas and viscoelastic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is coagulopathy or ongoing loss confirmed on repeat tests?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat sampling and crossmatch to detect ongoing loss; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early balanced red cells, plasma and platelets approximating whole blood",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early tranexamic acid, particularly in trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Warm products; correct acidosis and ionised hypocalcaemia with IV calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Viscoelastic-guided replacement; fibrinogen concentrate or cryoprecipitate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Goal-directed component replacement once bleeding is controlled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

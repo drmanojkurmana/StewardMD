@@ -147,5 +147,344 @@
       "caption": "Overview comparison matrix for oesophagostomiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oesophagostomiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-sectional imaging or ultrasound",
+          "cells": [
+            {
+              "text": "Bowel wall nodules or an abdominal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Marked eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of excised or biopsied nodules",
+          "cells": [
+            {
+              "text": "Larvae within the nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Eggs and larvae may be absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Malignancy or inflammatory bowel disease, when considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Abscess formation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oesophagostomiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intestinal tuberculosis with an ileocaecal mass",
+          "cells": [
+            {
+              "text": "Mimics the nodular mass; histology of the nodules separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn's disease",
+          "cells": [
+            {
+              "text": "Stool examination is often negative; histology of the nodules confirms larvae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic or caecal carcinoma",
+          "cells": [
+            {
+              "text": "Mistaken for a nodular mass; histology of the nodules confirms larvae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oesophagostomiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzimidazole anthelmintic",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Albendazole or mebendazole as mainstay; pyrantel pamoate as alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision or drainage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For symptomatic nodules, abscesses (the Dapaong tumour) or an obstructing bowel mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Diarrhoea, abdominal pain, nutrition and associated losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm response",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Resolution of eosinophilia and follow-up imaging of bowel-wall nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Large abscess formation or bowel obstruction treated as they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention in endemic areas",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Safe food and water, sanitation and hand hygiene to prevent reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oesophagostomiasis-dx-mgmt",
+      "title": "Diagnosis and management of Oesophagostomiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal mass or colitis-like illness with eosinophilia; endemic exposure possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (enlarging mass, obstruction, perforation or sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical drainage or excision and obstruction care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Imaging for bowel wall nodules; FBC for eosinophilia; nodule histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does nodule histology show larvae, rather than carcinoma or tuberculosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intestinal TB, Crohn's disease, colonic carcinoma or amoeboma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzimidazole anthelmintic such as albendazole or mebendazole; pyrantel as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical excision or drainage of symptomatic nodules or abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for diarrhoea, pain and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm response by resolving eosinophilia and follow-up bowel imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prevent reinfection with safe food and water, sanitation and hand hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with anthelmintic and, where needed, surgery; abscess adds morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

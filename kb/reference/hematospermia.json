@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for haematospermia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hematospermia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and urine culture",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted infection screen with nucleic acid amplification",
+          "cells": [
+            {
+              "text": "Sexually transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination and blood pressure",
+          "cells": [
+            {
+              "text": "Prostate abnormality and hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSA",
+          "cells": [
+            {
+              "text": "Used in men over 40 or with risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the prostate and seminal vesicles",
+          "cells": [
+            {
+              "text": "Structural and inflammatory change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transrectal ultrasound, semen analysis and coagulation screen",
+          "cells": [
+            {
+              "text": "Used where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hematospermia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostatitis or seminal vesiculitis",
+          "cells": [
+            {
+              "text": "Common benign cause: inflammation or infection of the prostate or seminal vesicles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-prostate-biopsy or post-instrumentation bleeding",
+          "cells": [
+            {
+              "text": "Recent biopsy or instrumentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostate cancer",
+          "cells": [
+            {
+              "text": "Age over 40, abnormal prostate or raised PSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genitourinary tuberculosis",
+          "cells": [
+            {
+              "text": "Weight loss, fever or night sweats suggest tuberculosis or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ejaculatory duct obstruction, cyst or calculi",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hematospermia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Young men without risk factors, after basic assessment; an isolated episode is usually self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobials",
+          "cells": [
+            {
+              "text": "Treat identified infection or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate",
+          "cells": [
+            {
+              "text": "Persistent, recurrent or high-volume haematospermia, and any case in older men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control systemic factors",
+          "cells": [
+            {
+              "text": "Hypertension and any bleeding tendency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Post-procedural haematospermia after prostate biopsy or instrumentation typically resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urology referral",
+          "cells": [
+            {
+              "text": "Persistent or high-risk cases, and structural lesions or calculi"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hematospermia-dx-mgmt",
+      "title": "Diagnosis and management of Haematospermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blood in the ejaculate, most often benign in younger men",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Age over 40, haematuria, abnormal prostate or raised PSA present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for prostate cancer or tuberculosis with PSA and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, STI screen, digital rectal exam, PSA, prostate MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are infection and prostate cancer excluded on the workup?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue investigation for persistent or high-volume bleeding; refer to urology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure young men without risk factors after basic assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat identified infection or inflammation with antimicrobials",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control hypertension and correct any bleeding tendency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer to urology for persistent or high-risk cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign causes settle; high-risk cases referred for fuller evaluation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

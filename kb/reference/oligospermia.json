@@ -152,5 +152,356 @@
       "caption": "Overview comparison matrix for oligospermia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oligospermia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat semen analysis by WHO methods",
+          "cells": [
+            {
+              "text": "Concentration below the WHO reference; at least two properly collected samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine profile (testosterone, LH, FSH, prolactin)",
+          "cells": [
+            {
+              "text": "Localises the cause; a raised FSH signals impaired spermatogenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal and transrectal ultrasound",
+          "cells": [
+            {
+              "text": "Varicocele or ductal pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and Y-chromosome microdeletion analysis",
+          "cells": [
+            {
+              "text": "Chromosomal or Y-chromosome cause in severe oligospermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFTR gene testing",
+          "cells": [
+            {
+              "text": "When ductal or seminal-vesicle abnormalities are found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-ejaculatory urine examination",
+          "cells": [
+            {
+              "text": "A retrograde ejaculation component, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligospermia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Varicocele",
+          "cells": [
+            {
+              "text": "Common and correctable; sought on scrotal examination and confirmed on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypogonadotropic hypogonadism or hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Deficient gonadotropin drive; a raised FSH points to testicular impairment instead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotoxic exposure",
+          "cells": [
+            {
+              "text": "Anabolic steroids, chemotherapy or heat; these are modifiable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligospermia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systematic evaluation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Pre-testicular, testicular and post-testicular causes, before treating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct reversible factors",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Weight loss, stopping smoking, alcohol and anabolic steroids; reduce scrotal heat; withdraw gonadotoxic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine therapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Gonadotrophin or pulsatile GnRH for hypogonadotropic hypogonadism; dopamine agonist for hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicocele repair",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Varicocelectomy in selected men with clinical varicocele and abnormal semen parameters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assisted reproduction",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "IUI, IVF or ICSI with surgical sperm retrieval where needed, for persistent oligospermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing before ICSI",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Karyotype and Y-chromosome testing in severe oligospermia, with counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid empirical testosterone",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Suppresses spermatogenesis and worsens sperm counts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oligospermia-dx-mgmt",
+      "title": "Diagnosis and management of Oligospermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sperm concentration below the WHO reference on two properly collected samples",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (testicular mass, pituitary symptoms or very low count with high FSH)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent evaluation of a testicular mass or pituitary lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endocrine profile, scrotal ultrasound, karyotype and Y testing if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a reversible cause found, such as varicocele or endocrine deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ductal or ejaculatory obstruction; test CFTR and retrograde ejaculation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct reversible factors: weight, smoking, alcohol, anabolic steroids, scrotal heat",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endocrine therapy for hypogonadotropic hypogonadism or hyperprolactinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Varicocelectomy in selected men with clinical varicocele and abnormal semen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assisted conception (IUI, IVF or ICSI) for persistent oligospermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid empirical testosterone, which suppresses spermatogenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on cause; many couples conceive via assisted reproduction despite low counts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,347 @@
       "caption": "Overview comparison matrix for opsoclonus-myoclonus-ataxia syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opsoclonus_myoclonus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest, abdomen and pelvis imaging",
+          "cells": [
+            {
+              "text": "Neuroblastoma or other tumour, searched for in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic tumour imaging",
+          "cells": [
+            {
+              "text": "Neuroblastoma, which is strongly associated in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic antibody panel in serum and CSF",
+          "cells": [
+            {
+              "text": "Paraneoplastic antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural and inflammatory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body tumour screening in adults",
+          "cells": [
+            {
+              "text": "Small-cell lung and breast carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opsoclonus_myoclonus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nystagmus",
+          "cells": [
+            {
+              "text": "Opsoclonus is chaotic, involuntary, multidirectional saccades, not nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) movement disorder",
+          "cells": [
+            {
+              "text": "Opsoclonus persists during eye closure and sleep, which helps distinguish it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opsoclonus_myoclonus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying tumour",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Resection of neuroblastoma in children; treatment of small-cell lung or breast carcinoma in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Corticosteroids or corticotropin with intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Rituximab or additional immunosuppression such as cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Myoclonus, irritability, behavioural and sleep disturbance, especially in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Ataxia rehabilitation and neurodevelopmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse surveillance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Ongoing check for relapse or occult tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Neuro-oncology and neuroimmunology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opsoclonus_myoclonus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Opsoclonus-myoclonus-ataxia syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chaotic eye movements, myoclonus and ataxia, often with irritability in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (no tumour found yet, severe ataxia, regression or relapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neuro-oncology review for an occult tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Body imaging, metabolic tumour scan, paraneoplastic antibodies and brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a tumour found, such as neuroblastoma, or a paraneoplastic antibody positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Search again for an occult tumour; consider infective, toxic or functional causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the tumour: neuroblastoma resection, or cancer treatment in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "First-line corticosteroids or corticotropin with intravenous immunoglobulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Escalate to rituximab or cyclophosphamide for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic control of myoclonus, irritability and sleep disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for relapse and occult tumour; ataxia rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many improve with immunotherapy and tumour treatment; relapse and deficits are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

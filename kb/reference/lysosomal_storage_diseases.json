@@ -183,5 +183,522 @@
       "caption": "Overview comparison matrix for lysosomal storage diseases."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Gaucher Disease",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/inherited-disorders-of-metabolism/gaucher-disease"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 59-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lysosomal_storage_diseases-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic hallmarks of the main lysosomal storage diseases",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Key finding",
+        "Confirmatory test"
+      ],
+      "rows": [
+        {
+          "parameter": "When to suspect",
+          "cells": [
+            {
+              "text": "Unexplained hepatosplenomegaly, cardiomyopathy, skeletal dysplasia, neuro, renal or muscle degeneration"
+            },
+            {
+              "text": "Enzyme assay or genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gaucher disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Acid beta-glucosidase 0 to 20% of normal in nucleated cells",
+              "range": [
+                0,
+                20
+              ]
+            },
+            {
+              "text": "{{hy:Whole GBA1 sequencing}}; Gaucher cells look like wrinkled tissue paper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gaucher type 1 share",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% of patients",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Nonneuronopathic; Ashkenazi carrier frequency 1 in 12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Niemann-Pick A and B",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Acid sphingomyelinase 1 to 10% of normal",
+              "range": [
+                1,
+                10
+              ]
+            },
+            {
+              "text": "Enzyme assay in nucleated cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fabry disease",
+          "cells": [
+            {
+              "text": "Angiokeratomas in bathing suit area, acroparaesthesia, hypohidrosis, corneal opacity"
+            },
+            {
+              "text": "Alpha-galactosidase A; slit lamp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tay-Sachs disease",
+          "cells": [
+            {
+              "text": "Cherry-red macula, macrocephaly, exaggerated startle"
+            },
+            {
+              "text": "Hexosaminidase A; Ashkenazi carrier rate 1 in 30"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pompe disease",
+          "cells": [
+            {
+              "text": "Late onset mimics limb-girdle dystrophy with respiratory failure"
+            },
+            {
+              "text": "Acid alpha-glucosidase; newborn screening in many states"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morquio A vs B",
+          "cells": [
+            {
+              "text": "Skeletal dysplasia"
+            },
+            {
+              "text": "GALNS vs acid beta-galactosidase before therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inheritance",
+          "cells": [
+            {
+              "text": "Mostly autosomal recessive"
+            },
+            {
+              "text": "X-linked: Fabry, Hunter (MPS II), Danon"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck and Harrison both endorse DNA or leukocyte enzyme testing for Gaucher; Harrison adds that enzyme testing misses heterozygotes."
+    },
+    {
+      "id": "lysosomal_storage_diseases-ddx",
+      "kind": "ddx",
+      "title": "Common diagnoses that may hide a lysosomal storage disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clue to an LSD",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "About 1 to 3% have Fabry disease",
+              "range": [
+                1,
+                3
+              ]
+            },
+            {
+              "text": "Alpha-galactosidase A or GLA testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke at 35 to 50 years",
+          "cells": [
+            {
+              "text": "About 2 to 5% carry GLA mutations",
+              "range": [
+                2,
+                5
+              ]
+            },
+            {
+              "text": "GLA testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unexplained renal failure in men",
+          "cells": [
+            {
+              "text": "About 5% have GLA mutations",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "GLA testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb-girdle muscular dystrophy",
+          "cells": [
+            {
+              "text": "Early respiratory weakness"
+            },
+            {
+              "text": "Acid alpha-glucosidase assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptogenic cirrhosis or fatty liver",
+          "cells": [
+            {
+              "text": "Low HDL, high LDL in young patient"
+            },
+            {
+              "text": "Lysosomal acid lipase assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Massive splenomegaly",
+          "cells": [
+            {
+              "text": "Gaucher is in the list with CML, myelofibrosis, lymphoma, hairy cell"
+            },
+            {
+              "text": "Glucocerebrosidase assay"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Appendicitis or renal colic",
+          "cells": [
+            {
+              "text": "Recurrent abdominal pain with acroparaesthesia"
+            },
+            {
+              "text": "Alpha-galactosidase A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinson disease",
+          "cells": [
+            {
+              "text": "GBA1 carriers have higher risk"
+            },
+            {
+              "text": "GBA1 sequencing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysosomal_storage_diseases-treatment",
+      "kind": "treatment",
+      "title": "Treatment of lysosomal storage diseases",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy",
+          "cells": [
+            {
+              "text": "Gaucher types 1 and 3, Fabry, Pompe, MPS I, II, IVA"
+            },
+            {
+              "text": "{{hy:Does not cross the blood-brain barrier}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substrate reduction",
+          "cells": [
+            {
+              "text": "Gaucher when ERT not possible (miglustat) or as oral option (eliglustat)"
+            },
+            {
+              "text": "Oral glucosylceramide synthase inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chaperone therapy",
+          "cells": [
+            {
+              "text": "Fabry with amenable GLA variant"
+            },
+            {
+              "text": "Migalastat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Selected neuronopathic MPS such as Hurler, done early"
+            },
+            {
+              "text": "High morbidity; failed in MPS II CNS disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy or transfusion",
+          "cells": [
+            {
+              "text": "Gaucher cytopenias or painful spleen"
+            },
+            {
+              "text": "Raises risk of pulmonary Gaucher disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring on ERT",
+          "cells": [
+            {
+              "text": "Gaucher"
+            },
+            {
+              "text": "Hb, platelets, spleen and liver volume, bone MRI or DXA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive and genetic care",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Pain, cardiac, renal, orthopaedic care; carrier screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gaucher type 2",
+          "cells": [
+            {
+              "text": "Infantile neuronopathic"
+            },
+            {
+              "text": "No disease-modifying treatment"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lysosomal_storage_diseases-dx-mgmt",
+      "title": "Diagnosis and management of lysosomal storage diseases",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained organomegaly, cardiomyopathy, bone or neuro decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hepatosplenomegaly with cytopenia or bone disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Leukocyte glucocerebrosidase and sphingomyelinase; GBA1",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Pain crises, angiokeratoma, LVH, stroke or renal failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Alpha-galactosidase A (men) or GLA sequencing (women)",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Targeted enzyme panel or gene panel by phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Specific LSD confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Pursue other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Approved ERT, SRT or chaperone available?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Start therapy at a metabolic centre with organ monitoring",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care; consider early HSCT where indicated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

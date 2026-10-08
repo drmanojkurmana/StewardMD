@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for febrile seizure."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "febrile_seizure-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Assessment to identify and treat the source of fever",
+          "cells": [
+            {
+              "text": "Febrile illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose in a drowsy or slow-to-recover child",
+          "cells": [
+            {
+              "text": "Metabolic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture when CNS infection suspected or child very young",
+          "cells": [
+            {
+              "text": "Meningitis or encephalitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes when clinically indicated",
+          "cells": [
+            {
+              "text": "Dehydration or atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and neuroimaging for complex or focal features",
+          "cells": [
+            {
+              "text": "Abnormal neurological examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_seizure-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Neck stiffness, altered consciousness or a bulging fontanelle indicate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breath-holding spell or rigors",
+          "cells": [
+            {
+              "text": "Mistaken for seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic disturbance (hypoglycaemia, hyponatraemia)",
+          "cells": [
+            {
+              "text": "Excluded by blood glucose and electrolytes when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_seizure-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection and positioning",
+          "cells": [
+            {
+              "text": "During the acute seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepine rescue",
+          "cells": [
+            {
+              "text": "Only for a prolonged or ongoing seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipyretics for comfort",
+          "cells": [
+            {
+              "text": "Paracetamol or ibuprofen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical exclusion of CNS infection",
+          "cells": [
+            {
+              "text": "Lumbar puncture when meningeal signs are present, in very young or incompletely immunised infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine bloods, imaging and EEG in a simple febrile seizure",
+          "cells": [
+            {
+              "text": "Reserved for complex, focal or recurrent features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental reassurance and first-aid advice",
+          "cells": [
+            {
+              "text": "Safety and when to seek urgent help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric neurology referral",
+          "cells": [
+            {
+              "text": "Complex, atypical or recurrent seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "febrile_seizure-dx-mgmt",
+      "title": "Diagnosis and management of Febrile seizure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Generalised seizure with fever in a child about 6 months to 5 years old",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (meningeal signs, prolonged seizure, focal deficit, slow recovery, toxic child)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Benzodiazepine for prolonged seizure; urgent CNS infection assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Source of fever; glucose if drowsy; lumbar puncture if meningeal signs or very young",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Simple generalised seizure, under 15 minutes, with no CNS infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as complex seizure or CNS infection; consider EEG and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Airway protection and benzodiazepine only for prolonged seizure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antipyretic and treatment of the febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine investigations in a well child",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Parental reassurance and seizure first-aid advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; about a third have a recurrence, and development is normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

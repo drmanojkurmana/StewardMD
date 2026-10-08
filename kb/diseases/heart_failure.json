@@ -250,5 +250,557 @@
       "caption": "Diagnostic and clinical overview matrix for acute heart failure / pulmonary edema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Heart Failure",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/heart-failure-hf",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Pulmonary Edema",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 234-4 and NYHA classification table",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heart_failure-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and classifying acute heart failure",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "BNP",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "100 is a common threshold",
+              "op": ">=",
+              "value": 100
+            },
+            {
+              "text": "Up to 30% of acute HFpEF fall below it; normal BNP does not exclude HF in obesity or HFpEF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Very low BNP or NT-proBNP",
+          "cells": [
+            {
+              "text": "Non-obese patient"
+            },
+            {
+              "text": "Helps exclude HF as the cause of dyspnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HFrEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "EF <=40%",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "Reduced ejection fraction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HFpEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "EF >=50%",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Preserved; about half of HF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Interstitial oedema"
+            },
+            {
+              "text": "{{hy:Usually diagnostic in pulmonary oedema}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ABG",
+          "cells": [
+            {
+              "text": "Hypoxaemia; CO2 retention"
+            },
+            {
+              "text": "Rising CO2 is a late ominous sign"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Systolic BP",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "<100",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Ominous; may need inotropes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "EF, valves, wall motion"
+            },
+            {
+              "text": "Finds cause and guides therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "S3 gallop",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Volume overload, adverse prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NYHA I",
+          "cells": [
+            {
+              "text": "No limitation of ordinary activity"
+            },
+            {
+              "text": "Functional class"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NYHA II",
+          "cells": [
+            {
+              "text": "Slight limitation; comfortable at rest"
+            },
+            {
+              "text": "Functional class"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NYHA III",
+          "cells": [
+            {
+              "text": "Marked limitation; less than ordinary activity causes symptoms"
+            },
+            {
+              "text": "Functional class"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NYHA IV",
+          "cells": [
+            {
+              "text": "Symptoms at rest or with any activity"
+            },
+            {
+              "text": "Functional class"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "heart_failure-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic heart failure",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "COPD exacerbation",
+          "cells": [
+            {
+              "text": "{{hy:BNP normal in COPD}}; symptoms eased by coughing up sputum"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Fever, focal consolidation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary arterial hypertension",
+          "cells": [
+            {
+              "text": "Right heart signs without left-sided congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Low haemoglobin; high-output state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome or cirrhosis",
+          "cells": [
+            {
+              "text": "Oedema or ascites with low albumin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis or effusion",
+          "cells": [
+            {
+              "text": "Raised JVP with pericardial findings on echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous insufficiency, lymphoedema, DVT",
+          "cells": [
+            {
+              "text": "Leg oedema without raised JVP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heart_failure-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute heart failure and pulmonary oedema",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygen; BiPAP or CPAP",
+          "cells": [
+            {
+              "text": "{{hy:Hypoxaemia}}"
+            },
+            {
+              "text": "Intubate if CO2 retention or obtunded"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV loop diuretic (furosemide)",
+          "cells": [
+            {
+              "text": "Fluid overload"
+            },
+            {
+              "text": "Less useful in acute MI with normal volume; dose not stated"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nitrates or nitroprusside",
+          "cells": [
+            {
+              "text": "Hypertension or high afterload"
+            },
+            {
+              "text": "Avoid if SBP <100"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dobutamine or milrinone, IABP",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP <100 or shock",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Low-output state"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Morphine",
+          "cells": [
+            {
+              "text": "Decreasingly used"
+            },
+            {
+              "text": "Linked to poorer outcomes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treat precipitant",
+          "cells": [
+            {
+              "text": "Ischaemia, arrhythmia, hypertension, infection, anaemia, non-adherence, NSAIDs, verapamil or diltiazem, alcohol"
+            },
+            {
+              "text": "Tables PDF list"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Acute MI or ACS"
+            },
+            {
+              "text": "PCI or thrombolysis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cardioversion",
+          "cells": [
+            {
+              "text": "SVT, VT or rapid AF causing oedema"
+            },
+            {
+              "text": "Rhythm control"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GDMT for HFrEF: ARNI, beta-blocker, MRA, SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "After stabilisation"
+            },
+            {
+              "text": "Titrate rapidly during admission and first 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Drug doses are not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heart_failure-dx-mgmt",
+      "title": "Diagnosis and management of acute heart failure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute breathlessness with crackles, raised JVP or oedema",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Oxygen, ECG, troponin, chest x-ray, BNP, ABG",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Hypoxic or CO2 rising?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BiPAP; intubate if obtunded",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systolic BP <100 or shock?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Inotrope; consider IABP",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV diuretic; nitrates if BP allows",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat precipitant: ischaemia, arrhythmia, hypertension, drugs",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiogram for EF and cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "EF <=40%?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Start and titrate HFrEF GDMT",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat cause, BP and congestion (HFpEF)",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

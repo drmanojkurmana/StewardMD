@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for lipomatous hypertrophy of the atrial septum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Echobright septal thickening that spares the fossa ovalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Clearer characterisation of the septal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI with fat suppression",
+          "cells": [
+            {
+              "text": "Confirms the adipose nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT",
+          "cells": [
+            {
+              "text": "Fat density and dumbbell morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Benign brown-fat uptake; avoids misdiagnosis as tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac lipoma (encapsulated)",
+          "cells": [
+            {
+              "text": "Encapsulated, unlike this non-encapsulated deposit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial myxoma",
+          "cells": [
+            {
+              "text": "A tumour rather than fat; the fossa-sparing shape helps separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interatrial thrombus",
+          "cells": [
+            {
+              "text": "Thrombus rather than fat on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic deposit to the atrial septum",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Typical asymptomatic incidental finding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-suppression cardiac MRI or CT",
+          "cells": [
+            {
+              "text": "Confirms the fatty nature; excludes tumour or thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recognise FDG-avid brown fat",
+          "cells": [
+            {
+              "text": "Avoids unnecessary biopsy or intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia",
+          "cells": [
+            {
+              "text": "Standard rate or rhythm control and antiarrhythmics where bulky deposits provoke them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Rare cases with significant right atrial obstruction or refractory arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging follow-up",
+          "cells": [
+            {
+              "text": "Very bulky deposits that encroach on the atrium or sinus node region"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-dx-mgmt",
+      "title": "Diagnosis and management of Lipomatous hypertrophy of the atrial septum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental interatrial septal thickening on echo, sparing the fossa ovalis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bulky deposit obstructing inflow, refractory arrhythmia, rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cardiac surgical review for obstruction or refractory arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo, TOE, fat-suppression cardiac MRI or CT, FDG-PET awareness",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI or CT confirm fat density with fossa ovalis sparing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atrial myxoma, interatrial thrombus or infiltrative septal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance for the typical asymptomatic finding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat provoked arrhythmias with standard rate or rhythm control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Recognise benign FDG-avid brown fat to avoid unnecessary biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical resection only for significant obstruction or refractory arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic imaging follow-up for very bulky deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with an excellent prognosis; most patients remain asymptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

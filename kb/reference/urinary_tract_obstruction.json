@@ -181,5 +181,467 @@
       "caption": "Overview comparison matrix for urinary tract obstruction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Obstructive Uropathy",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/obstructive-uropathy/obstructive-uropathy"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urinary_tract_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing urinary tract obstruction",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-void residual",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "Over 50 mL",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Suggests outlet obstruction (higher cut-off in older adults)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% sensitive and specific for hydronephrosis",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "First imaging test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early or atypical obstruction",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Under 48 h, dehydration, retroperitoneal fibrosis",
+              "op": "<",
+              "value": 48
+            },
+            {
+              "text": "{{hy:Hydronephrosis may be absent; negative scan does not exclude}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Stones, retroperitoneal masses"
+            },
+            {
+              "text": "Test of choice for acute flank pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex Doppler",
+          "cells": [
+            {
+              "text": "Raised resistive index"
+            },
+            {
+              "text": "Can precede dilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diuretic renogram",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Washout half-time over 20 min (normal under 15)",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Obstruction; furosemide 0.5 mg/kg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Perfusion pressure (Whitaker)",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Pelvic pressure over 22 mm Hg at 10 mL/min",
+              "op": ">",
+              "value": 22
+            },
+            {
+              "text": "Positive for obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Often bland despite azotemia"
+            },
+            {
+              "text": "Do not rely on it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison quotes ultrasound at about 90% sensitivity and specificity; Merck cites a point-of-care study with 61% positive predictive value. Both kept."
+    },
+    {
+      "id": "urinary_tract_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic urinary tract obstruction",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Prerenal azotemia",
+          "cells": [
+            {
+              "text": "High BUN/creatinine ratio, concentrated urine (also in acute partial obstruction)"
+            },
+            {
+              "text": "Bladder scan, renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrarenal pelvis or renal cysts",
+          "cells": [
+            {
+              "text": "False-positive hydronephrosis"
+            },
+            {
+              "text": "CT or diuretic renogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vesicoureteral reflux",
+          "cells": [
+            {
+              "text": "Dilation without obstruction"
+            },
+            {
+              "text": "Voiding cystourethrogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuresis or pregnancy",
+          "cells": [
+            {
+              "text": "Physiological dilation"
+            },
+            {
+              "text": "Clinical context, renogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyelonephritis without obstruction",
+          "cells": [
+            {
+              "text": "Fever and flank pain"
+            },
+            {
+              "text": "Ultrasound or CT to exclude obstructed infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder",
+          "cells": [
+            {
+              "text": "Diabetes, spinal disease; large residual"
+            },
+            {
+              "text": "Urodynamics, neurological exam"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urinary_tract_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Relieving urinary tract obstruction",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bladder catheter",
+          "cells": [
+            {
+              "text": "Bladder outlet obstruction"
+            },
+            {
+              "text": "Complete prompt decompression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent drainage",
+          "cells": [
+            {
+              "text": "Obstruction with infection"
+            },
+            {
+              "text": "{{hy:Immediate nephrostomy or stent for infected obstructed kidney}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prompt drainage",
+          "cells": [
+            {
+              "text": "Renal impairment, persistent UTI, uncontrolled pain"
+            },
+            {
+              "text": "Stent or nephrostomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous nephrostomy",
+          "cells": [
+            {
+              "text": "Severe upper tract obstruction, stent not possible"
+            },
+            {
+              "text": "Temporary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ureteral stent",
+          "cells": [
+            {
+              "text": "Upper tract obstruction"
+            },
+            {
+              "text": "Acute or long-term drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat cause",
+          "cells": [
+            {
+              "text": "Stones, BPH, tumour, stricture"
+            },
+            {
+              "text": "Alpha-blocker or TURP for BPH; stone removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte replacement",
+          "cells": [
+            {
+              "text": "Post-obstructive diuresis after bilateral relief"
+            },
+            {
+              "text": "Monitor closely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urinary_tract_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of urinary tract obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained AKI, flank pain, anuria or poor stream",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Bladder scan or catheter for post-void residual",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Residual over 50 mL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Catheterise; find outlet cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Renal ultrasound; CT if flank pain or stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Hydronephrosis or obstructing lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "High suspicion despite negative scan?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Repeat imaging, CT or renogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Look for other cause of AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Infection, sepsis or anuric AKI?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Emergency nephrostomy or stent plus antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Planned drainage and treat cause; watch for diuresis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

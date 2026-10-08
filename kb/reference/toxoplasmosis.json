@@ -177,5 +177,473 @@
       "caption": "Overview comparison matrix for toxoplasmosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Toxoplasmosis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/toxoplasmosis/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxoplasmosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing toxoplasmosis by host",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "IgG plus IgM serology",
+          "cells": [
+            {
+              "text": "IgM by ELISA or ISAGA; IgA favours acute infection"
+            },
+            {
+              "text": "Acute vs past infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG avidity",
+          "cells": [
+            {
+              "text": "High avidity"
+            },
+            {
+              "text": "Infection acquired months earlier; key in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR (blood, CSF, ocular fluid, BAL)",
+          "cells": [
+            {
+              "text": "Specific"
+            },
+            {
+              "text": "Negative PCR does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amniotic fluid PCR",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "At about 18 weeks gestation",
+              "op": "=",
+              "value": 18
+            },
+            {
+              "text": "Fetal infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Encephalitis in AIDS",
+          "unit": "cells/microL",
+          "cells": [
+            {
+              "text": "CD4 usually under 100/microL, ring-enhancing lesions",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Treat empirically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary ring-enhancing lesion",
+          "cells": [
+            {
+              "text": "Single lesion"
+            },
+            {
+              "text": "{{hy:Raises likelihood of primary CNS lymphoma}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No improvement by day 7",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Day 7 of empirical therapy",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "Brain biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute infection in immunocompetent",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Asymptomatic in 80 to 90%",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "Cervical lymphadenopathy commonest sign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxoplasmosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic toxoplasmosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary CNS lymphoma",
+          "cells": [
+            {
+              "text": "Solitary lesion, no response to therapy"
+            },
+            {
+              "text": "Brain biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain abscess (bacterial, TB, fungal)",
+          "cells": [
+            {
+              "text": "Ring-enhancing lesion, other context"
+            },
+            {
+              "text": "Biopsy, cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PML",
+          "cells": [
+            {
+              "text": "JC virus brain infection in AIDS"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV or CMV mononucleosis",
+          "cells": [
+            {
+              "text": "Mononucleosis-like illness"
+            },
+            {
+              "text": "EBV and CMV serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cat-scratch disease or lymphoma",
+          "cells": [
+            {
+              "text": "Lymphadenopathy"
+            },
+            {
+              "text": "Bartonella serology, node biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TB, syphilis, histoplasmosis or CMV retinitis",
+          "cells": [
+            {
+              "text": "Chorioretinitis"
+            },
+            {
+              "text": "Serology, ophthalmic exam"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxoplasmosis-treatment",
+      "kind": "treatment",
+      "title": "Treating toxoplasmosis (CDC)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "Mild lymphadenopathic disease, immunocompetent"
+            },
+            {
+              "text": "2 to 4 weeks only if severe, persistent or visceral"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyrimethamine plus sulfadiazine plus leucovorin",
+          "cells": [
+            {
+              "text": "Encephalitis, ocular, severe disease"
+            },
+            {
+              "text": "Pyrimethamine 100 mg day 1 then 25 to 50 mg daily; leucovorin 5 to 25 mg per dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sulfadiazine dose (ocular, adult)",
+          "cells": [
+            {
+              "text": "With pyrimethamine"
+            },
+            {
+              "text": "2 to 4 g daily for 2 days, then 500 mg to 1 g four times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyrimethamine plus clindamycin",
+          "cells": [
+            {
+              "text": "Sulfa hypersensitivity"
+            },
+            {
+              "text": "Second-drug substitute"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP-SMX, atovaquone, or pyrimethamine plus azithromycin",
+          "cells": [
+            {
+              "text": "Alternatives"
+            },
+            {
+              "text": "Less studied"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Sight-threatening chorioretinitis or CNS oedema"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration in immunodeficiency",
+          "cells": [
+            {
+              "text": "AIDS or transplant"
+            },
+            {
+              "text": "4 to 6 weeks beyond resolution, then maintenance until immune recovery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spiramycin",
+          "cells": [
+            {
+              "text": "Pregnancy, infection before 18 weeks, fetus not infected"
+            },
+            {
+              "text": "Best within 8 weeks of seroconversion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyrimethamine, sulfadiazine, leucovorin in pregnancy",
+          "cells": [
+            {
+              "text": "At or after 18 weeks, or fetal infection"
+            },
+            {
+              "text": "Congenital infants treated about 12 months"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxoplasmosis-dx-mgmt",
+      "title": "Diagnosis and management of toxoplasmosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toxoplasmosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunocompromised (e.g. AIDS, CD4 under 100)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "MRI brain; empirical pyrimethamine-sulfadiazine-leucovorin",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Improved by day 7?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat 4 to 6 weeks past resolution, then maintenance",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Brain biopsy: consider CNS lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Pregnant?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "IgG avidity; spiramycin or pyrimethamine regimen by gestation",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Active chorioretinitis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Pyrimethamine, sulfadiazine, leucovorin 4 to 6 weeks; steroid",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lymphadenopathy: usually no treatment",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

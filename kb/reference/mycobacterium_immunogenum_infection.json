@@ -146,5 +146,323 @@
       "caption": "Overview comparison matrix for mycobacterium immunogenum infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_immunogenum_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterial culture",
+          "cells": [
+            {
+              "text": "Rapid growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification by rpoB or hsp65 sequencing",
+          "cells": [
+            {
+              "text": "Distinguishes it from related rapid growers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-susceptibility testing",
+          "cells": [
+            {
+              "text": "Detects inducible macrolide resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational history and metalworking fluid sampling",
+          "cells": [
+            {
+              "text": "In suspected outbreaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Lung assessment for hypersensitivity pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and device cultures",
+          "cells": [
+            {
+              "text": "Suspected catheter-related infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_immunogenum_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other rapidly growing mycobacteria, such as M. abscessus or M. chelonae",
+          "cells": [
+            {
+              "text": "Formerly indistinguishable without molecular methods; rpoB or hsp65 sequencing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypersensitivity pneumonitis from other causes",
+          "cells": [
+            {
+              "text": "Here caused by inhaled aerosols from contaminated metalworking fluid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_immunogenum_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the worker from the exposure",
+          "cells": [
+            {
+              "text": "Primary treatment for occupational hypersensitivity pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "For symptomatic inflammation in the occupational disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remediate the fluid system",
+          "cells": [
+            {
+              "text": "Address the contaminated metalworking-fluid source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility-guided multidrug therapy",
+          "cells": [
+            {
+              "text": "For genuine infection, as for related rapid growers, such as amikacin with a macrolide where susceptible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Remove infected intravascular catheters or other devices where biofilm sustains infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species confirmation",
+          "cells": [
+            {
+              "text": "rpoB or hsp65 sequencing to separate it from related rapid growers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source investigation",
+          "cells": [
+            {
+              "text": "Sample metalworking fluid and water systems in suspected outbreaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Response and drug toxicity across the prolonged course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_immunogenum_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium immunogenum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Clustered respiratory illness in machine-shop workers, or catheter-related infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (clustered respiratory illness, catheter bloodstream infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Remove the worker from the exposure; remove the infected catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture, rpoB or hsp65 sequencing, susceptibility with inducible macrolide test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rapid grower confirmed as M. immunogenum by molecular sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other rapid growers or hypersensitivity pneumonitis from other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the worker from metalworking-fluid exposure as primary treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic inflammation in occupational disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Susceptibility-guided multidrug therapy for genuine infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Remove infected catheters or devices where biofilm sustains infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Occupational disease usually improves with removal; genuine infection is hard to cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

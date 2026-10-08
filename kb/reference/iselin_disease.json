@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for iselin disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iselin_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Foot radiographs including an oblique view",
+          "cells": [
+            {
+              "text": "Apophysis appearance and fracture exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orientation of the apophyseal line",
+          "cells": [
+            {
+              "text": "Oblique line versus transverse fracture line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral foot views",
+          "cells": [
+            {
+              "text": "Normal apophyseal appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Atypical, unilateral or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resisted eversion test",
+          "cells": [
+            {
+              "text": "Peroneus brevis tension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Infection when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iselin_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Avulsion fracture of the fifth metatarsal base",
+          "cells": [
+            {
+              "text": "Transverse lucent line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jones fracture",
+          "cells": [
+            {
+              "text": "Proximal fifth metatarsal; risk of nonunion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis of the fifth metatarsal",
+          "cells": [
+            {
+              "text": "Swelling, warmth or systemic upset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iselin_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative rest",
+          "cells": [
+            {
+              "text": "Reduce running, jumping and cutting until symptoms settle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Ice and simple analgesia or non-steroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation",
+          "cells": [
+            {
+              "text": "Stiff-soled shoe or walking boot for more severe or persistent pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strengthening",
+          "cells": [
+            {
+              "text": "Peroneus brevis and calf stretching with graded strengthening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting; resolves once the apophysis fuses at skeletal maturity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Return to activity",
+          "cells": [
+            {
+              "text": "Graded and symptom-guided once local tenderness resolves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iselin_disease-dx-mgmt",
+      "title": "Diagnosis and management of Iselin disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral foot pain at the base of the fifth metatarsal in active children",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Transverse lucent line, inability to bear weight, rest pain or systemic upset?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of fracture or infection; orthopaedic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oblique and comparison foot radiographs, MRI if atypical, resisted eversion test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Oblique apophyseal line with no fracture or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat fracture or infection; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relative rest; reduce running, jumping and cutting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ice and simple analgesia or non-steroidal anti-inflammatory drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stiff-soled shoe or boot for severe pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Peroneus brevis and calf stretching with strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Graded return to sport once tender",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting; resolves as the apophysis fuses at skeletal maturity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

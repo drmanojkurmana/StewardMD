@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for light chain deposition disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "light_chain_deposition_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with immunofluorescence and electron microscopy",
+          "cells": [
+            {
+              "text": "Monoclonal light-chain restriction; granular deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congo red staining",
+          "cells": [
+            {
+              "text": "Excludes amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine electrophoresis with immunofixation",
+          "cells": [
+            {
+              "text": "Paraprotein identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and ratio",
+          "cells": [
+            {
+              "text": "Clone burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Plasma-cell clone and myeloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey and calcium",
+          "cells": [
+            {
+              "text": "Where myeloma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "light_chain_deposition_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic nodular glomerulosclerosis",
+          "cells": [
+            {
+              "text": "Nodular mimic; immunofluorescence separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal amyloidosis",
+          "cells": [
+            {
+              "text": "Congo-red positive; deposits differ in structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloma cast nephropathy",
+          "cells": [
+            {
+              "text": "Casts rather than deposits; overlaps with myeloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotactoid glomerulopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "light_chain_deposition_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clone-directed therapy",
+          "cells": [
+            {
+              "text": "Tailored to the clone; commonly bortezomib-based regimens with corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting myeloma",
+          "cells": [
+            {
+              "text": "Treated when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renoprotection",
+          "cells": [
+            {
+              "text": "RAS blockade, blood pressure control and nephrotic syndrome management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum free light chains and ratio as the key response marker, with renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrarenal deposition",
+          "cells": [
+            {
+              "text": "Assessed and treated accordingly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement",
+          "cells": [
+            {
+              "text": "For end-stage disease; transplantation after sustained clone remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint care",
+          "cells": [
+            {
+              "text": "Nephrology and haematology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "light_chain_deposition_disease-dx-mgmt",
+      "title": "Diagnosis and management of Light chain deposition disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nephrotic proteinuria and renal impairment with a monoclonal paraprotein",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (myeloma features, rapid renal decline, cardiac or hepatic deposition)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for myeloma features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy with immunofluorescence, Congo red, free light chains, marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is monoclonal light-chain restriction seen with Congo-red negative deposits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amyloidosis, diabetic nodular sclerosis or cast nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clone-directed therapy, commonly bortezomib-based with corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting myeloma when present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "RAS blockade and blood pressure control for renoprotection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor serum free light chains and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Renal replacement for end-stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on clone and response; suppressing the light chain can stabilise renal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

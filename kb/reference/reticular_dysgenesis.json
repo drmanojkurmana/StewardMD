@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for reticular dysgenesis (ak2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reticular_dysgenesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and differential",
+          "cells": [
+            {
+              "text": "Agranulocytosis and lymphopenia, with red cells and platelets preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Granulocytic maturation arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Absent or very low T and NK cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulins and newborn screening",
+          "cells": [
+            {
+              "text": "Immunoglobulin levels; TREC-based newborn screening abnormality in neonates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AK2 gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function AK2 variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reticular_dysgenesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical T-B-NK- or T-B+ severe combined immunodeficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe congenital neutropenia (ELANE, HAX1)",
+          "cells": [
+            {
+              "text": "Neutropenia alone; the lymphopenia is the point that separates it (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other mitochondrial disorders affecting haematopoiesis",
+          "cells": [
+            {
+              "text": "AK2 is a mitochondrial enzyme; here the cause is biallelic AK2 variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reticular_dysgenesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Early; the only curative treatment for the combined immune and myeloid failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Strict isolation and broad antimicrobial prophylaxis (bacteria, fungi, Pneumocystis, viruses) while awaiting transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin and blood products",
+          "cells": [
+            {
+              "text": "Immunoglobulin replacement; irradiated, CMV-negative, leucodepleted products only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Live vaccines",
+          "cells": [
+            {
+              "text": "Avoid all"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth factor",
+          "cells": [
+            {
+              "text": "Not effective; the agranulocytosis is unresponsive to granulocyte colony-stimulating factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological support",
+          "cells": [
+            {
+              "text": "Cochlear implantation, as deafness persists after transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening and prenatal testing; newborn screening for early detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reticular_dysgenesis-dx-mgmt",
+      "title": "Diagnosis and management of Reticular dysgenesis (AK2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with severe infection, agranulocytosis and lymphopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal sepsis, no response to G-CSF, graft-versus-host disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent referral: overwhelming infection and need for early transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, bone marrow, lymphocyte subsets, immunoglobulins, hearing test, AK2 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does AK2 sequencing show biallelic loss-of-function variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCID or severe congenital neutropenia; repeat the workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early allogeneic stem cell transplantation, the only curative option",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict isolation and broad antimicrobial prophylaxis while awaiting transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin; irradiated, CMV-negative, leucodepleted blood; no live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cochlear implantation and family genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Uniformly fatal in early infancy without treatment; transplant can be curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

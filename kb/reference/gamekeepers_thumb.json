@@ -142,5 +142,256 @@
       "caption": "Overview comparison matrix for gamekeeper's thumb."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hand surgery and sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gamekeepers_thumb-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Identify an avulsion fracture before stress testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress testing of the MCP joint in extension and slight flexion",
+          "cells": [
+            {
+              "text": "Ulnar collateral ligament stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Stener lesion or complete tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of pinch stability and strength",
+          "cells": [
+            {
+              "text": "Pinch strength and stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with the uninjured thumb",
+          "cells": [
+            {
+              "text": "Side-to-side comparison"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gamekeepers_thumb-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thumb spica cast or splint",
+          "cells": [
+            {
+              "text": "For partial, incomplete ulnar collateral ligament injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair or reattachment",
+          "cells": [
+            {
+              "text": "Complete tears and Stener lesion, which cannot heal without operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs before stress testing",
+          "cells": [
+            {
+              "text": "Identify an associated avulsion fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and protection of the MCP joint",
+          "cells": [
+            {
+              "text": "Initial management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Restores pinch strength and stability after immobilisation or repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery referral",
+          "cells": [
+            {
+              "text": "Complete tears, Stener lesions or chronic instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gamekeepers_thumb-dx-mgmt",
+      "title": "Diagnosis and management of Gamekeeper's thumb",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gamekeeper's thumb: ulnar collateral ligament injury at the thumb MCP joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (gross instability, Stener lesion, displaced avulsion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Hand surgery referral for suspected Stener lesion or complete tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs first, then MCP stress testing and ultrasound or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the ligament completely torn, with Stener lesion excluded on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Partial injury: immobilise in a thumb spica cast or splint",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Thumb spica cast or splint for partial, incomplete injuries",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical repair or reattachment of avulsion for complete tears and Stener lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy to restore pinch strength and stability",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Partial injuries recover well; repaired complete tears usually regain good stability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

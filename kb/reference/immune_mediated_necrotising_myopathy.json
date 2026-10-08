@@ -158,5 +158,325 @@
       "caption": "Overview comparison matrix for immune mediated necrotising myopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "immune_mediated_necrotising_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Markedly elevated; typically higher than in dermatomyositis or polymyositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myositis-specific antibody panel",
+          "cells": [
+            {
+              "text": "Anti-SRP or anti-HMGCR; a seronegative subgroup also exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Irritable myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Oedema; guides the biopsy site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "MHC-I and complement C5b-9 deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography or cardiac MRI",
+          "cells": [
+            {
+              "text": "Myocardial involvement, especially in anti-SRP disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screen and swallow assessment",
+          "cells": [
+            {
+              "text": "Associated malignancy and dysphagia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_mediated_necrotising_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Self-limited statin myopathy",
+          "cells": [
+            {
+              "text": "Resolves on withdrawal; anti-HMGCR weakness progresses despite withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb-girdle muscular dystrophy or dysferlinopathy",
+          "cells": [
+            {
+              "text": "Sparse inflammatory infiltrate can mimic a dystrophy; complement and MHC-I markers separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immune_mediated_necrotising_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Statin withdrawal",
+          "cells": [
+            {
+              "text": "Immediate in anti-HMGCR disease; immunotherapy still required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Initial steroids, then methotrexate, azathioprine or mycophenolate mofetil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Particularly effective in anti-HMGCR disease; may be an early or sole agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Rituximab for anti-SRP or treatment-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and graded rehabilitation to preserve strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase, antibody titres, muscle strength and cardiac surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "immune_mediated_necrotising_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of immune mediated necrotising myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute severe proximal weakness with very high creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dysphagia, respiratory weakness, cardiac involvement or malignancy features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow and respiratory assessment; cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, anti-SRP and anti-HMGCR panel, EMG, muscle MRI, biopsy with MHC-I and C5b-9",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Necrotising pattern with antibody or seronegative biopsy confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider statin myopathy or a dystrophy; review biopsy again",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw statin in anti-HMGCR disease; immunotherapy still required",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids, then methotrexate, azathioprine or mycophenolate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous immunoglobulin, particularly in anti-HMGCR disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rituximab for anti-SRP or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and cardiac surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Immunotherapy guided by CK and strength; tapered as disease responds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

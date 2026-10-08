@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for bisphosphoglycerate mutase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diphosphoglycerate_mutase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell 2,3-bisphosphoglycerate measurement",
+          "cells": [
+            {
+              "text": "The regulator of haemoglobin oxygen affinity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen dissociation curve (p50) analysis",
+          "cells": [
+            {
+              "text": "High oxygen affinity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with serum erythropoietin",
+          "cells": [
+            {
+              "text": "Erythrocytosis with erythropoietin measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin variant analysis",
+          "cells": [
+            {
+              "text": "Excludes a high-affinity variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BPGM gene molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diphosphoglycerate_mutase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-oxygen-affinity haemoglobin variant",
+          "cells": [
+            {
+              "text": "Alternative explanation, excluded by variant analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycythaemia vera",
+          "cells": [
+            {
+              "text": "Misclassification leads to inappropriate cytoreductive treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diphosphoglycerate_mutase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "The erythrocytosis is compensatory; usually no specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine venesection",
+          "cells": [
+            {
+              "text": "Would compromise compensation for impaired tissue oxygen delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from polycythaemia vera",
+          "cells": [
+            {
+              "text": "Avoids inappropriate cytoreductive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperviscosity",
+          "cells": [
+            {
+              "text": "Considered cautiously, and only if genuinely symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Periodic full blood count and symptom review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diphosphoglycerate_mutase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Bisphosphoglycerate mutase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected BPGM deficiency: erythrocytosis with high haemoglobin oxygen affinity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperviscosity symptoms or thrombosis from high haematocrit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review hyperviscosity or thrombosis; avoid aggressive venesection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "2,3-BPG level; oxygen dissociation curve (p50); FBC with erythropoietin; BPGM gene",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a BPGM variant found with high oxygen affinity on p50?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider high-affinity haemoglobin variant, polycythaemia vera or secondary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; the erythrocytosis is compensatory",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid routine venesection that would impair oxygen delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Distinguish from polycythaemia vera to avoid cytoreductive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider hyperviscosity management only if genuinely symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic full blood count, symptom review and family genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good; most patients remain well without specific intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

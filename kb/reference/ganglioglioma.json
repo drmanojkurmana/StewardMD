@@ -155,5 +155,312 @@
       "caption": "Overview comparison matrix for ganglioglioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganglioglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with epilepsy protocol",
+          "cells": [
+            {
+              "text": "Cystic and solid components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG",
+          "cells": [
+            {
+              "text": "Confirms and localises the seizure focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Dysplastic ganglion cells and a glial component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E immunohistochemistry or molecular testing",
+          "cells": [
+            {
+              "text": "BRAF V600E status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD34 immunostaining",
+          "cells": [
+            {
+              "text": "Frequently positive in glioneuronal tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67 index and grading",
+          "cells": [
+            {
+              "text": "Detects anaplastic change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglioglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Mainstay; usually curative when gross total resection is achieved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation after complete resection",
+          "cells": [
+            {
+              "text": "Most need no further therapy; histological anaplasia determines prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eloquent-region resection",
+          "cells": [
+            {
+              "text": "Technically harder; aided by intraoperative microscope and navigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Considered after subtotal resection; not required after gross total resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conformal radiotherapy",
+          "cells": [
+            {
+              "text": "Preferred to limit CNS toxicity in young patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "Option for limited recurrence after resection or at relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "Not first-line; mainly in children with subtotal resection and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF-targeted therapy",
+          "cells": [
+            {
+              "text": "Higher-grade or unresectable BRAF V600E-mutant tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Residual tumour, recurrence or transformation to higher grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-oncology referral",
+          "cells": [
+            {
+              "text": "Multidisciplinary team with neurosurgery and neuropathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganglioglioma-dx-mgmt",
+      "title": "Diagnosis and management of Ganglioglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ganglioglioma: drug-resistant focal seizures from a mixed neuronal-glial lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anaplastic features, progressive deficits, brainstem location)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neuro-oncology review for rapid growth, marked enhancement or oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy-protocol MRI, video-EEG, histology, BRAF V600E and CD34 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show dysplastic ganglion cells alongside a glial component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dysembryoplastic tumour, pilocytic astrocytoma or focal cortical dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the contrast-enhancing tumour, aiming for gross total resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy considered after subtotal resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "BRAF-targeted therapy for higher-grade or unresectable BRAF V600E tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance MRI, with seizure control through a dedicated epilepsy service",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent for typical grade 1 tumour; complete resection is often curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

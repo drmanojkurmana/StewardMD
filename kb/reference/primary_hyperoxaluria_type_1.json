@@ -154,5 +154,339 @@
       "caption": "Overview comparison matrix for primary hyperoxaluria type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_hyperoxaluria_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary oxalate and glycolate, age-adjusted and creatinine-corrected",
+          "cells": [
+            {
+              "text": "Oxalate and glycolate excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma oxalate measurement",
+          "cells": [
+            {
+              "text": "Rise as renal function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Stones and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AGXT molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirmatory diagnosis, often avoiding biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised assessment of pyridoxine responsiveness",
+          "cells": [
+            {
+              "text": "Pyridoxine response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography, ophthalmological review and bone assessment",
+          "cells": [
+            {
+              "text": "Systemic oxalosis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy for AGT enzyme activity (historical)",
+          "cells": [
+            {
+              "text": "AGT enzyme activity and subcellular localisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperoxaluria types 2 and 3",
+          "cells": [
+            {
+              "text": "Defect in a gene other than AGXT"
+            },
+            {
+              "text": "AGXT molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteric (secondary) hyperoxaluria",
+          "cells": [
+            {
+              "text": "Fat malabsorption, short bowel or bariatric surgery"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "RNA-interference therapy",
+          "cells": [
+            {
+              "text": "Lumasiran to suppress hepatic oxalate overproduction; disease-modifying mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised pyridoxine trial",
+          "cells": [
+            {
+              "text": "Particularly with the Gly170Arg allele; continued if urinary oxalate output falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and inhibitors",
+          "cells": [
+            {
+              "text": "Maintenance hyperhydration with potassium citrate, orthophosphate and magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone clearance and obstruction",
+          "cells": [
+            {
+              "text": "Nephron-sparing endourological techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified dialysis",
+          "cells": [
+            {
+              "text": "Clears oxalate load in advanced renal failure, where conventional dialysis is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver-kidney transplantation",
+          "cells": [
+            {
+              "text": "Combined or sequential, to correct the hepatic enzyme defect and replace failed kidneys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic oxalosis surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, ophthalmological review and bone assessment, with plasma and urinary oxalate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive AGXT inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_hyperoxaluria_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Primary Hyperoxaluria Type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary hyperoxaluria type 1: nephrocalcinosis or stones in early childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling GFR, raised plasma oxalate, cardiac or visual involvement, or graft loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensified dialysis and transplant planning for end-stage renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary oxalate and glycolate; plasma oxalate; renal ultrasound; AGXT genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does AGXT molecular testing confirm type 1 disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hyperoxaluria types 2 or 3, enteric or dietary causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lumasiran RNA-interference to suppress hepatic oxalate production",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supervised pyridoxine trial, particularly with the Gly170Arg allele",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintenance hyperhydration with crystallisation inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nephron-sparing stone clearance and relief of obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Systemic oxalosis surveillance; liver-kidney transplantation if renal failure progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

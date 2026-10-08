@@ -148,5 +148,347 @@
       "caption": "Overview comparison matrix for oculodentodigital dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculodentodigital_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GJA1 sequencing",
+          "cells": [
+            {
+              "text": "Variant in GJA1, encoding connexin-43, confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic assessment with intraocular pressure",
+          "cells": [
+            {
+              "text": "Raised pressure or glaucoma; microphthalmia and narrow palpebral fissures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Type III syndactyly and bone changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental assessment",
+          "cells": [
+            {
+              "text": "Enamel hypoplasia and small, malformed teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological evaluation and brain MRI",
+          "cells": [
+            {
+              "text": "Spasticity and white matter changes, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family evaluation",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; mildly affected relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculodentodigital_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypohidrotic ectodermal dysplasia",
+          "cells": [
+            {
+              "text": "Overlaps in dental and craniofacial features; syndactyly and small eyes distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated congenital glaucoma or microphthalmia",
+          "cells": [
+            {
+              "text": "Lacks the combined syndactyly, dental and nasal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculodentodigital_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive, coordinated care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "No disease-specific therapy; care coordinated across specialties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma surveillance",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Intraocular-pressure-lowering therapy or surgery; refractive and microphthalmia-related correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restorative dental care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For enamel hypoplasia and small malformed teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "To correct type III syndactyly and improve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Physiotherapy and antispasticity agents as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Autosomal dominant GJA1 variant; family evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Multidisciplinary review, given the progressive potential of ocular and neurological features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculodentodigital_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Oculodentodigital dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Syndactyly with small eyes, enamel hypoplasia and a narrow nose; ODDD suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (raised intraocular pressure, progressive spasticity or hand impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent glaucoma treatment for raised intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GJA1 sequencing, IOP and glaucoma screen, hand radiographs, dental and neuro review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GJA1 sequencing confirm oculodentodigital dysplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Apert syndrome, Hallermann-Streiff syndrome or a leukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, coordinated care; no disease-specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Glaucoma surveillance with IOP-lowering therapy or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restorative dental care for enamel hypoplasia and malformed teeth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand surgery for type III syndactyly to improve function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurological surveillance; genetic counselling and family evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy generally normal; vision and neurology need long-term follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

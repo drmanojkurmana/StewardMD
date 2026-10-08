@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for dock8 deficiency (autosomal recessive hyper-ige)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dock8_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flow cytometry for DOCK8 protein expression in lymphocytes",
+          "cells": [
+            {
+              "text": "Reduced DOCK8 protein expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins",
+          "cells": [
+            {
+              "text": "Very high IgE with variable IgM and specific antibody deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and differential",
+          "cells": [
+            {
+              "text": "Marked eosinophilia and lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset enumeration",
+          "cells": [
+            {
+              "text": "Reduced memory T and B cells; impaired NK function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DOCK8 gene analysis including copy-number assessment",
+          "cells": [
+            {
+              "text": "DOCK8 variants, including large deletions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dock8_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autosomal dominant hyper-IgE (STAT3) syndrome",
+          "cells": [
+            {
+              "text": "Very different management and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe atopic dermatitis with recurrent infection",
+          "cells": [
+            {
+              "text": "Misclassified as ordinary severe eczema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dock8_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive cure, performed before serious complications develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis and antivirals",
+          "cells": [
+            {
+              "text": "Bacterial and Pneumocystis cover; antivirals for herpes, molluscum, warts and zoster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Supports defective antibody memory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eczema and atopy care",
+          "cells": [
+            {
+              "text": "Skin care, topical therapy, allergen avoidance and an adrenaline auto-injector plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Virally driven squamous cell carcinoma and lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological monitoring",
+          "cells": [
+            {
+              "text": "CNS vasculitis and infective encephalitis carry a poor outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products and vaccines",
+          "cells": [
+            {
+              "text": "Irradiated, CMV-safe products; no live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DOCK8; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dock8_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of DOCK8 deficiency (autosomal recessive hyper-IgE)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DOCK8 deficiency: hyper-IgE with eczema, eosinophilia and viral infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated viral infection, neurological deficit, lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review and antiviral therapy for disseminated infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DOCK8 expression by flow; IgE and IgM; FBC; lymphocyte subsets; DOCK8 gene analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is reduced DOCK8 expression confirmed with DOCK8 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider STAT3 hyper-IgE, severe atopic eczema, Wiskott-Aldrich or Netherton",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Haematopoietic stem cell transplantation as the definitive cure, performed early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antimicrobial prophylaxis and antivirals for herpes, molluscum, warts and zoster",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin replacement for defective antibody memory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive eczema and atopy care with an adrenaline auto-injector plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for virally driven skin cancer and lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor prognosis untreated; transplant before serious complications gives best outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

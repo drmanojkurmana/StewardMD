@@ -164,5 +164,524 @@
       "caption": "Overview comparison matrix for malnutrition and nutritional assessment."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Protein-Energy Undernutrition",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/nutritional-disorders/undernutrition/protein-energy-undernutrition-peu"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 76-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malnutrition_and_nutritional_assessment-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and grading of adult malnutrition (GLIM)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "GLIM rule",
+          "cells": [
+            {
+              "text": "At least 1 phenotypic plus 1 aetiologic criterion"
+            },
+            {
+              "text": "{{hy:Phenotype: weight loss, low BMI or low muscle; aetiology: low intake or inflammation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight loss, moderate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 10% within 6 months, or 10 to 20% beyond 6 months",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "GLIM stage 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight loss, severe",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 10% within 6 months, or over 20% beyond",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "GLIM stage 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI, moderate (GLIM)",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "Below 20 if under 70 years; below 22 if 70 or older",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "GLIM stage 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI, severe (GLIM)",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "Below 18.5 if under 70 years; below 20 if 70 or older",
+              "op": "<",
+              "value": 18.5
+            },
+            {
+              "text": "GLIM stage 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI bands (older table)",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "Under 18.5 moderate, under 16 severe, under 13 (men) or 11 (women) lethal",
+              "op": "<",
+              "value": 16
+            },
+            {
+              "text": "Merck also grades BMI under 16 as severe"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reduced intake",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "50% or less of needs for over 1 week, or any reduction over 2 weeks",
+              "op": "<=",
+              "value": 50
+            },
+            {
+              "text": "GLIM aetiologic criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP for inflammation",
+          "unit": "mg/L",
+          "cells": [
+            {
+              "text": "Mild 3 to 9.9, moderate 10 to 50, severe over 50 mg/L",
+              "range": [
+                3,
+                50
+              ]
+            },
+            {
+              "text": "Supports the inflammation criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albumin and prealbumin",
+          "cells": [
+            {
+              "text": "Fall with inflammation"
+            },
+            {
+              "text": "Poor markers of malnutrition; predict outcome only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Handgrip strength and calf circumference",
+          "cells": [
+            {
+              "text": "Functional and muscle mass measures"
+            },
+            {
+              "text": "Easy bedside tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "BMI cutoffs differ: GLIM (Harrison 22e) calls BMI under 18.5 severe in adults under 70; Table 76-1 and Merck call under 18.5 moderate and under 16 severe. GLIM is the current consensus."
+    },
+    {
+      "id": "malnutrition_and_nutritional_assessment-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from malnutrition",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sarcopenia",
+          "cells": [
+            {
+              "text": "Loss of muscle mass and strength, often in older adults"
+            },
+            {
+              "text": "SARC-F, handgrip, muscle mass measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcopenic obesity",
+          "cells": [
+            {
+              "text": "Muscle loss hidden by normal or high BMI"
+            },
+            {
+              "text": "Body composition by BIA or DXA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cancer or organ failure cachexia",
+          "cells": [
+            {
+              "text": "Inflammation-driven wasting despite intake"
+            },
+            {
+              "text": "CRP and disease work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oedema or fluid overload",
+          "cells": [
+            {
+              "text": "Masks weight loss"
+            },
+            {
+              "text": "Estimate dry weight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoalbuminaemia from liver, kidney or gut loss",
+          "cells": [
+            {
+              "text": "Low albumin without poor intake"
+            },
+            {
+              "text": "Liver tests, urine protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Weight loss with good appetite"
+            },
+            {
+              "text": "Thyroid function tests"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "malnutrition_and_nutritional_assessment-treatment",
+      "kind": "treatment",
+      "title": "Nutrition support",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Screening",
+          "cells": [
+            {
+              "text": "All admissions"
+            },
+            {
+              "text": "MUST, NRS 2002, MNA or SGA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral diet and supplements",
+          "cells": [
+            {
+              "text": "Mild to moderate undernutrition"
+            },
+            {
+              "text": "Lactose-free liquid supplements at least 1 hour before meals; multivitamin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adult targets",
+          "cells": [
+            {
+              "text": "Rehabilitation feeding"
+            },
+            {
+              "text": "Merck states 60 kcal/kg/day and protein 1.2 to 2 g/kg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enteral tube feeding",
+          "cells": [
+            {
+              "text": "Inadequate oral intake with a working gut"
+            },
+            {
+              "text": "Feed slowly with head raised; gastrostomy for severe dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition",
+          "cells": [
+            {
+              "text": "Gut unusable"
+            },
+            {
+              "text": "Watch line infection, liver dysfunction, bone loss after 3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Refeeding precautions",
+          "cells": [
+            {
+              "text": "{{hy:Severe or prolonged starvation}}"
+            },
+            {
+              "text": "Thiamine first; replace phosphate, potassium, magnesium; check phosphate often"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrients",
+          "cells": [
+            {
+              "text": "Deficiency found"
+            },
+            {
+              "text": "Iron, B12, folate, vitamin C, vitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appetite and anabolic drugs",
+          "cells": [
+            {
+              "text": "Selected HIV, cancer or renal cachexia"
+            },
+            {
+              "text": "Megestrol under 3 months, dronabinol, testosterone"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck gives no thiamine or phosphate doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malnutrition_and_nutritional_assessment-dx-mgmt",
+      "title": "Diagnosis and management of malnutrition",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inpatient or at-risk outpatient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Screen with MUST, NRS 2002 or MNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "At risk on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Rescreen at intervals",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Assess weight loss, BMI, muscle, intake, inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "One phenotypic plus one aetiologic GLIM criterion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Not malnourished; treat cause, monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Severe malnutrition or long starvation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Admit; thiamine, slow feeding, check phosphate, K, Mg",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Oral intake adequate with supplements?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Enteral tube feeding; parenteral if gut unusable",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor weight, intake and handgrip strength",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

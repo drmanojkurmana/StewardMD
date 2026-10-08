@@ -152,5 +152,325 @@
       "caption": "Overview comparison matrix for lassa fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lassa_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR for Lassa virus RNA",
+          "cells": [
+            {
+              "text": "Early illness; performed under strict biosafety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lassa-specific IgM and IgG serology, antigen detection",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, liver and renal function, coagulation",
+          "cells": [
+            {
+              "text": "Gauges severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of malaria and typhoid",
+          "cells": [
+            {
+              "text": "Common, treatable co-considerations in endemic regions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lassa_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe malaria",
+          "cells": [
+            {
+              "text": "Common co-endemic mimic; treated empirically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Co-endemic mimic of early illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ebola virus disease",
+          "cells": [
+            {
+              "text": "Another viral haemorrhagic fever in the differential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Can mimic severe illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lassa_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ribavirin",
+          "cells": [
+            {
+              "text": "Given as early as possible; improves survival in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Fluid and electrolyte balance, correction of coagulopathy and bleeding, organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation and barrier nursing",
+          "cells": [
+            {
+              "text": "Personal protective equipment and safe specimen handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical co-endemic treatment",
+          "cells": [
+            {
+              "text": "Malaria and typhoid, which mimic early illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Early obstetric involvement; uterine evacuation may improve maternal outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing loss",
+          "cells": [
+            {
+              "text": "Monitor and rehabilitate sensorineural loss, which may appear during recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notify, trace contacts, offer ribavirin prophylaxis to high-risk contacts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lassa_fever-dx-mgmt",
+      "title": "Diagnosis and management of Lassa fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Febrile illness with headache and sore throat in an endemic West African setting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, facial oedema, effusion, encephalopathy, shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive support and immediate notification for suspected Lassa",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR under biosafety, Lassa IgM and IgG, FBC, liver and renal tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Lassa confirmed by RT-PCR or serology, with malaria and typhoid excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe malaria, typhoid or another viral haemorrhagic fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Give ribavirin as early as possible; benefit is greatest early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive supportive care: fluids, coagulopathy, organ support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strict isolation with barrier precautions and safe specimen handling",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat co-endemic malaria and typhoid empirically",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Early obstetric input in pregnancy; monitor and rehabilitate hearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most mild; severe cases have high fatality; hearing loss is often permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

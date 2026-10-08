@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for japanese encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "japanese_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "JEV-specific IgM capture ELISA",
+          "cells": [
+            {
+              "text": "Confirmation in CSF or serum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis, mildly raised protein, normal glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Bilateral thalamic and basal ganglia signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizure activity and encephalopathic patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV PCR and malaria films",
+          "cells": [
+            {
+              "text": "Treatable mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "japanese_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex encephalitis",
+          "cells": [
+            {
+              "text": "Treatable with aciclovir; excluded by HSV PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral malaria",
+          "cells": [
+            {
+              "text": "Excluded by malaria films"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-NMDA receptor encephalitis",
+          "cells": [
+            {
+              "text": "Autoimmune; antibody testing distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-convulsive status epilepticus",
+          "cells": [
+            {
+              "text": "EEG shows seizure activity without convulsions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "japanese_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive care",
+          "cells": [
+            {
+              "text": "Supportive care with airway protection and ventilation; no specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Benzodiazepines and maintenance anticonvulsants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Head positioning, osmotic therapy and neuroprotective measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy for motor and cognitive sequelae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Japanese encephalitis vaccination in endemic areas; mosquito-bite avoidance and vector control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical cover",
+          "cells": [
+            {
+              "text": "Aciclovir and malaria treatment while mimics are excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "japanese_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Japanese encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute encephalitis with fever and altered consciousness in a rice or pig-rearing area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coma, status epilepticus, raised intracranial pressure or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intensive care: airway, seizure control, raised pressure care; empirical aciclovir",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "JEV IgM in CSF or serum, CSF profile, MRI thalami, EEG, HSV PCR, malaria films",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "JEV IgM positive with HSV and malaria excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the alternative cause: HSV, malaria or autoimmune encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive intensive care with airway protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepines and maintenance anticonvulsants for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Raised intracranial pressure care with osmotic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early physiotherapy, occupational and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Vaccinate in endemic areas and prevent mosquito bites",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "No specific antiviral; survivors may have lasting motor and cognitive sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

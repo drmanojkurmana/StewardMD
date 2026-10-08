@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for laryngeal cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngeal_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible or rigid laryngoscopy",
+          "cells": [
+            {
+              "text": "Larynx inspection and vocal cord mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct laryngoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis and mapping of tumour extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the neck",
+          "cells": [
+            {
+              "text": "Local invasion, cartilage involvement and nodal spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest and PET-CT",
+          "cells": [
+            {
+              "text": "Distant staging and synchronous second primaries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice, swallowing and airway assessment",
+          "cells": [
+            {
+              "text": "Guides organ-preservation decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_cancer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign vocal cord lesions (nodules, polyps, cysts)",
+          "cells": [
+            {
+              "text": "Persistent hoarseness must be confirmed by laryngoscopy, not assumed benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopharyngeal or thyroid carcinoma involving the larynx",
+          "cells": [
+            {
+              "text": "Tumour arising outside the larynx that involves it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic laryngitis or reflux-related irritation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour board decision",
+          "cells": [
+            {
+              "text": "Based on subsite and T/N stage, by a head and neck multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoma in situ and microinvasive disease",
+          "cells": [
+            {
+              "text": "Transoral laser microsurgery or radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early glottic (T1-T2)",
+          "cells": [
+            {
+              "text": "Radiotherapy or transoral laser microsurgery as comparable options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early supraglottic",
+          "cells": [
+            {
+              "text": "T1-T2 and low-volume T3, roughly under 6 mL: definitive radiotherapy or supraglottic laryngectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced low-volume exophytic T3-T4",
+          "cells": [
+            {
+              "text": "Organ-preserving concurrent chemoradiotherapy with a platinum agent as radiosensitiser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T4a disease",
+          "cells": [
+            {
+              "text": "Primary total laryngectomy with adjuvant radiotherapy or chemoradiotherapy, the consensus-preferred approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or metastatic disease",
+          "cells": [
+            {
+              "text": "Platinum-based chemotherapy with an EGFR-targeted antibody and anti-PD-1 inhibition in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice rehabilitation after laryngectomy",
+          "cells": [
+            {
+              "text": "Tracheo-oesophageal voice prosthesis, electronic larynx or oesophageal speech"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngeal_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Laryngeal cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent hoarseness, neck mass or airway symptoms in a smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, hoarseness beyond weeks, firm neck node, dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway intervention for stridor or rapid obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy with biopsy, neck CT or MRI, CT chest and PET-CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is squamous cell carcinoma confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign vocal cord lesion, reflux irritation or hypopharyngeal carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tumour board decision by subsite and T/N stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early glottic or supraglottic disease: radiotherapy or conservation surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advanced low-volume disease: organ-preserving chemoradiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "T4a disease: primary total laryngectomy with adjuvant therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Voice rehabilitation after total laryngectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early glottic: high cure and voice preservation; advanced disease has a poorer outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

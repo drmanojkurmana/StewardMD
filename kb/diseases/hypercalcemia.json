@@ -216,5 +216,541 @@
       "caption": "Diagnostic and clinical overview matrix for hypercalcaemia of malignancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypercalcemia",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/electrolyte-disorders/hypercalcemia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypercalcemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading hypercalcaemia and finding the cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypercalcaemia",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Total Ca >10.4",
+              "op": ">",
+              "value": 10.4
+            },
+            {
+              "text": "Or ionised Ca >5.2 mg/dL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corrected calcium",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Add about 0.8 per 1 g/dL albumin below 4.0"
+            },
+            {
+              "text": "Exclude pseudohypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "10.5 to 11.9",
+              "range": [
+                10.5,
+                11.9
+              ]
+            },
+            {
+              "text": "Often asymptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "12.0 to 13.9",
+              "range": [
+                12.0,
+                13.9
+              ]
+            },
+            {
+              "text": "Confusion and weakness possible above 12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">14.0",
+              "op": ">",
+              "value": 14
+            },
+            {
+              "text": "Urgent treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Life-threatening",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">18",
+              "op": ">",
+              "value": 18
+            },
+            {
+              "text": "Shock, renal failure, death"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intact PTH",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Usually <20 in PTH-independent causes",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "High or high-normal means PTH-mediated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PTHrP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Raised in about 80% of hypercalcaemic cancer patients"
+            },
+            {
+              "text": "{{hy:Confirms humoral hypercalcaemia of malignancy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "1,25(OH)2D",
+          "cells": [
+            {
+              "text": "Raised or inappropriately normal"
+            },
+            {
+              "text": "Lymphoma or granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPEP and free light chains",
+          "cells": [
+            {
+              "text": "Paraprotein"
+            },
+            {
+              "text": "Myeloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Short QTc"
+            },
+            {
+              "text": "Arrhythmia risk, especially with digoxin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck's treatment section uses other cut-offs (mild <11.5, moderate 11.5 to 18, severe >18 mg/dL)."
+    },
+    {
+      "id": "hypercalcemia-ddx",
+      "kind": "ddx",
+      "title": "Causes of hypercalcaemia to separate from malignancy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Chronic mild rise, low phosphate"
+            },
+            {
+              "text": "{{hy:Raised or inappropriately normal PTH}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypocalciuric hypercalcaemia",
+          "cells": [
+            {
+              "text": "Lifelong, family history"
+            },
+            {
+              "text": "Ca/Cr clearance ratio <0.01"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple myeloma",
+          "cells": [
+            {
+              "text": "Anaemia, renal failure, bone pain"
+            },
+            {
+              "text": "SPEP and free light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatous disease (sarcoid, TB)",
+          "cells": [
+            {
+              "text": "Lung or systemic granulomas"
+            },
+            {
+              "text": "Raised 1,25(OH)2D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D intoxication",
+          "cells": [
+            {
+              "text": "Supplement use"
+            },
+            {
+              "text": "Raised 25(OH)D"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thiazides, lithium, vitamin A",
+          "cells": [
+            {
+              "text": "Drug history"
+            },
+            {
+              "text": "Stop and recheck"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milk-alkali syndrome",
+          "cells": [
+            {
+              "text": "High calcium and alkali intake"
+            },
+            {
+              "text": "History, alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyrotoxicosis or immobilisation",
+          "cells": [
+            {
+              "text": "Bone resorption"
+            },
+            {
+              "text": "TFTs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypercalcemia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of severe hypercalcaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV 0.9% saline",
+          "cells": [
+            {
+              "text": "{{hy:First step in symptomatic or severe cases}}"
+            },
+            {
+              "text": "1 to 2 L over 2 to 4 h unless heart failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Furosemide",
+          "cells": [
+            {
+              "text": "Only after volume repletion"
+            },
+            {
+              "text": "20 to 40 mg IV every 2 to 4 h for urine about 250 mL/h; check K and Mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Calcitonin",
+          "cells": [
+            {
+              "text": "Rapid effect needed"
+            },
+            {
+              "text": "4 to 8 IU/kg SC every 12 h; tachyphylaxis after about 48 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zoledronic acid",
+          "cells": [
+            {
+              "text": "Malignancy-related hypercalcaemia"
+            },
+            {
+              "text": "4 mg IV once; effect lasts >40 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pamidronate",
+          "cells": [
+            {
+              "text": "Alternative bisphosphonate"
+            },
+            {
+              "text": "60 to 90 mg IV once; repeat only after 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Denosumab",
+          "cells": [
+            {
+              "text": "Bisphosphonate-refractory or renal impairment"
+            },
+            {
+              "text": "120 mg SC every 4 weeks plus days 8 and 15 in month 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "Lymphoma, myeloma, granulomatous disease, vitamin D toxicity"
+            },
+            {
+              "text": "20 to 40 mg daily (40 to 60 mg in malignancy)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Ca >18 or severe symptoms, other treatment failed",
+              "op": ">",
+              "value": 18
+            },
+            {
+              "text": "Low-calcium dialysate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat the cancer",
+          "cells": [
+            {
+              "text": "Humoral hypercalcaemia of malignancy"
+            },
+            {
+              "text": "Definitive control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypercalcemia-dx-mgmt",
+      "title": "Diagnosis and management of hypercalcaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised calcium, confusion, polyuria or constipation",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Correct for albumin or check ionised Ca",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Ca >14 mg/dL or symptomatic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IV saline 1 to 2 L; calcitonin; zoledronic acid",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ca >18 or refractory?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Haemodialysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Measure intact PTH",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "PTH high or high-normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Primary hyperparathyroidism or FHH work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "PTHrP, 1,25(OH)2D, SPEP; find cancer or granuloma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

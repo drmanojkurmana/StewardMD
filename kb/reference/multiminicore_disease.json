@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for multiminicore disease (selenon/ryr1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiminicore_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Normal or only mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with oxidative histochemistry and electron microscopy",
+          "cells": [
+            {
+              "text": "Multiple small cores of reduced oxidative staining that do not extend the length of the fibre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Pattern of muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing",
+          "cells": [
+            {
+              "text": "Lying and sitting vital capacity; risk of respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of SELENON and RYR1",
+          "cells": [
+            {
+              "text": "Diagnosis integrates biopsy findings, phenotype and genetic result"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiminicore_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central core disease",
+          "cells": [
+            {
+              "text": "Long central cores on biopsy, whereas minicores are multiple and short"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other congenital myopathies, such as centronuclear or nemaline",
+          "cells": [
+            {
+              "text": "Minicores on biopsy distinguish the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital muscular dystrophy including rigid spine syndrome",
+          "cells": [
+            {
+              "text": "Early spinal rigidity is a SELENON-related feature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiminicore_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Lying and sitting vital capacity; nocturnal non-invasive ventilation for respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management of scoliosis",
+          "cells": [
+            {
+              "text": "Bracing and spinal fusion where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain mobility and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hyperthermia precautions",
+          "cells": [
+            {
+              "text": "RYR1 disease: avoid volatile anaesthetics and depolarising relaxants; use total intravenous anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, respiratory medicine, orthopaedics and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Recessive SELENON and dominant or recessive RYR1 inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalate respiratory support",
+          "cells": [
+            {
+              "text": "As ventilatory function declines; respiratory failure is the main prognostic factor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiminicore_disease-dx-mgmt",
+      "title": "Diagnosis and management of Multiminicore disease (SELENON/RYR1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital hypotonia with axial or neck weakness, scoliosis or respiratory weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory insufficiency, scoliosis, anaesthetic reaction history)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment; malignant hyperthermia precautions if RYR1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Creatine kinase, EMG, muscle biopsy for minicores, vital capacity testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multiple minicores on biopsy with a SELENON or RYR1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central core, centronuclear or other congenital myopathy; repeat genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Proactive respiratory surveillance and nocturnal non-invasive ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic management of scoliosis and spinal rigidity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to maintain mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Malignant hyperthermia precautions in RYR1 disease; avoid volatile agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many remain ambulant; respiratory failure is the main determinant of prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

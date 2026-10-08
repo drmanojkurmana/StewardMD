@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for immersion foot."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "immersion_foot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history and examination",
+          "cells": [
+            {
+              "text": "Prolonged water exposure and macerated feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for blistering and neurovascular status",
+          "cells": [
+            {
+              "text": "Secondary infection and tissue status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swabs or scrapings",
+          "cells": [
+            {
+              "text": "Bacterial or fungal infection when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Cellulitis or systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for cold injury",
+          "cells": [
+            {
+              "text": "Coexisting cold injury after cold-water exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immersion_foot-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Trench foot (cold non-freezing injury)",
+          "cells": [
+            {
+              "text": "Cold-water immersion; forms overlap with immersion foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frostbite",
+          "cells": [
+            {
+              "text": "Freezing injury, which can coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinea pedis",
+          "cells": [
+            {
+              "text": "Dermatophyte infection; treated with topical antifungals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Spreading infection with systemic signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immersion_foot-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Keep dry",
+          "cells": [
+            {
+              "text": "Remove from wet environment; dry, warm and rest the feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elevation and analgesia",
+          "cells": [
+            {
+              "text": "Reduce oedema; analgesia for pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Antistaphylococcal and antistreptococcal cover for secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungals",
+          "cells": [
+            {
+              "text": "Topical agents for dermatophyte or candidal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Inspection for blistering, cellulitis and tissue breakdown"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention and rewarming",
+          "cells": [
+            {
+              "text": "Change wet socks and footwear; gradual rewarming in cold injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "immersion_foot-dx-mgmt",
+      "title": "Diagnosis and management of Immersion foot",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful white, wrinkled, macerated feet after prolonged water immersion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Spreading cellulitis, deep necrosis or coexisting freezing injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics and surgical or vascular review for necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine maceration, blistering and neurovascular status; swabs if infection suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection and freezing injury excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat infection; manage freezing injury with gradual rewarming",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove from wet environment; dry, warm and rest the feet",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elevate to reduce oedema; analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antistaphylococcal and antistreptococcal antibiotics if infected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical antifungals for dermatophyte or candidal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Keep feet dry; change wet socks and footwear",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Skin barrier recovers when kept dry; prevent recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

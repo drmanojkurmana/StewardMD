@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for meconium aspiration syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meconium_aspiration_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Patchy infiltrates, hyperinflation and air leaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry (pre- and post-ductal) and blood gas",
+          "cells": [
+            {
+              "text": "Pre- to post-ductal saturation gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis screen",
+          "cells": [
+            {
+              "text": "Infection excluded where it cannot be dismissed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meconium_aspiration_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal pneumonia or sepsis",
+          "cells": [
+            {
+              "text": "Sepsis screen performed when infection cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Less mature infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air-leak syndromes",
+          "cells": [
+            {
+              "text": "Air leaks on chest radiograph"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meconium_aspiration_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graded respiratory support",
+          "cells": [
+            {
+              "text": "From supplemental oxygen and CPAP to mechanical ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous surfactant or surfactant lavage",
+          "cells": [
+            {
+              "text": "Counters meconium-induced surfactant inactivation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Inhaled nitric oxide, optimal oxygenation and avoidance of acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracorporeal membrane oxygenation",
+          "cells": [
+            {
+              "text": "Refractory hypoxaemic respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air-leak drainage",
+          "cells": [
+            {
+              "text": "Vigilance and prompt drainage of pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibacterials",
+          "cells": [
+            {
+              "text": "When sepsis cannot be excluded, with continuous monitoring in neonatal intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation guidance",
+          "cells": [
+            {
+              "text": "No routine intrapartum or tracheal suctioning of vigorous meconium-stained infants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meconium_aspiration_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Meconium Aspiration Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with meconium aspiration and respiratory distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory hypoxaemia, large pre- to post-ductal gradient or pneumothorax?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ECMO for refractory hypoxaemic failure; drain any pneumothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph, pre- and post-ductal oximetry, blood gas, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is infection excluded by the sepsis screen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Infection not excluded: empirical antibacterials, then reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graded respiratory support from oxygen and CPAP to mechanical ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surfactant replacement or lavage for meconium-induced inactivation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled nitric oxide for persistent pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow resuscitation guidance: no routine suctioning of vigorous infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refractory cases may need ECMO; care in neonatal intensive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

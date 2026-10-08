@@ -175,5 +175,506 @@
       "caption": "Overview comparison matrix for pneumocystis pneumonia (pcp)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pneumocystis jirovecii Pneumonia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 132-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumocystis_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging Pneumocystis pneumonia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "CD4 count in HIV",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "At least 80% of cases under 200/uL, most under 100/uL",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Non-HIV hosts get PCP at any CD4 count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional desaturation",
+          "cells": [
+            {
+              "text": "Falls on exercise even with near-normal radiograph"
+            },
+            {
+              "text": "Early clue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate to severe disease",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaO2 under 70 mmHg on room air or A-a gradient 35 mmHg or more",
+              "op": "<",
+              "value": 70
+            },
+            {
+              "text": "{{hy:Add corticosteroids}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry threshold",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 92% on room air",
+              "op": "<",
+              "value": 92
+            },
+            {
+              "text": "Merck alternative steroid trigger"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Diffuse ground-glass opacities"
+            },
+            {
+              "text": "Normal CT essentially excludes PCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL or induced sputum stains",
+          "cells": [
+            {
+              "text": "Silver, toluidine blue, Giemsa or immunofluorescence"
+            },
+            {
+              "text": "Confirms diagnosis; organism cannot be cultured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR",
+          "cells": [
+            {
+              "text": "Very sensitive"
+            },
+            {
+              "text": "Negative helps exclude; positive may be colonization"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH and beta-D-glucan",
+          "cells": [
+            {
+              "text": "Often raised"
+            },
+            {
+              "text": "Neither confirms nor excludes PCP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumocystis_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Pneumocystis pneumonia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial pneumonia",
+          "cells": [
+            {
+              "text": "Acute, productive cough, lobar consolidation"
+            },
+            {
+              "text": "Sputum and blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Upper-lobe cavities, night sweats"
+            },
+            {
+              "text": "Sputum AFB and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMV pneumonia",
+          "cells": [
+            {
+              "text": "Transplant recipients, viremia"
+            },
+            {
+              "text": "BAL CMV studies, blood PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive aspergillosis",
+          "cells": [
+            {
+              "text": "Neutropenia, nodules with halo"
+            },
+            {
+              "text": "Galactomannan, CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Edema, raised BNP, cardiomegaly"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced pneumonitis",
+          "cells": [
+            {
+              "text": "Exposure to a culprit drug"
+            },
+            {
+              "text": "Exclusion, BAL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LIP or NIP in HIV",
+          "cells": [
+            {
+              "text": "Chronic interstitial disease"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other post-transplant lung infections",
+          "cells": [
+            {
+              "text": "CMV and Aspergillus risk highest after lung transplant"
+            },
+            {
+              "text": "Timing after transplant, BAL"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "pneumocystis_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Treating and preventing Pneumocystis pneumonia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose TMP-SMX for 21 days",
+          "cells": [
+            {
+              "text": "First line, any severity"
+            },
+            {
+              "text": "Oral or IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral prednisone tapered over 21 days",
+          "cells": [
+            {
+              "text": "PaO2 under 70 mmHg or A-a gradient 35 mmHg or more"
+            },
+            {
+              "text": "Start with antimicrobial therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP plus dapsone, clindamycin plus primaquine, or atovaquone",
+          "cells": [
+            {
+              "text": "Sulfa intolerance; atovaquone for mild disease"
+            },
+            {
+              "text": "21-day courses; check G6PD before dapsone or primaquine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV pentamidine",
+          "cells": [
+            {
+              "text": "Severe disease when TMP-SMX fails or not tolerated"
+            },
+            {
+              "text": "Kidney injury, hypotension, hypoglycemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen and ventilatory support",
+          "cells": [
+            {
+              "text": "Hypoxemia, respiratory failure"
+            },
+            {
+              "text": "Pneumothorax raises mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "HIV"
+            },
+            {
+              "text": "Restores immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis with TMP-SMX",
+          "cells": [
+            {
+              "text": "Prior PCP; CD4 under 100/uL; CD4 100 to 200/uL with detectable viral load"
+            },
+            {
+              "text": "Dapsone or aerosolized pentamidine if intolerant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop prophylaxis",
+          "cells": [
+            {
+              "text": "CD4 200/uL or more for 3 months or more on ART"
+            },
+            {
+              "text": "Many non-HIV immunosuppressed hosts also need prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumocystis_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Pneumocystis pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunocompromised host with dyspnea, dry cough, fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Oximetry at rest and exertion, ABG, chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Radiograph normal but suspicion high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "High-resolution CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ground-glass opacities present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "PCP essentially excluded; seek other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induced sputum or BAL; start TMP-SMX",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "PaO2 under 70 mmHg or A-a gradient 35 or more?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add prednisone taper",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Worse at 3 to 4 days or not better by 7 to 10 days?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassess for other infection; switch regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete 21 days, then secondary prophylaxis and ART",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

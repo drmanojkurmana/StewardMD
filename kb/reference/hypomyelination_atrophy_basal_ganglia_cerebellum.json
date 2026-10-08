@@ -152,5 +152,316 @@
       "caption": "Overview comparison matrix for hypomyelination with atrophy of basal ganglia and cerebellum (h-abc, tubb4a)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypomyelination_atrophy_basal_ganglia_cerebellum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypomyelination with neostriatal and cerebellar atrophy; follows progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TUBB4A sequencing",
+          "cells": [
+            {
+              "text": "Recurrent variant tested first, then broader analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypomyelinating leukodystrophy panel or exome",
+          "cells": [
+            {
+              "text": "Used if TUBB4A is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and movement-disorder assessment",
+          "cells": [
+            {
+              "text": "Guides symptomatic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow and nutritional evaluation",
+          "cells": [
+            {
+              "text": "Feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomyelination_atrophy_basal_ganglia_cerebellum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral palsy",
+          "cells": [
+            {
+              "text": "Motor delay with movement disorder; MRI shows neostriatal atrophy and hypomyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other TUBB4A-related phenotypes",
+          "cells": [
+            {
+              "text": "Recurrent p.Asp249Asn variant defines the H-ABC pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomyelination_atrophy_basal_ganglia_cerebellum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Movement disorder",
+          "cells": [
+            {
+              "text": "Trial of levodopa, anticholinergics, baclofen and botulinum toxin for dystonia and rigidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity",
+          "cells": [
+            {
+              "text": "Physiotherapy, oral antispasticity agents and intrathecal baclofen when severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding",
+          "cells": [
+            {
+              "text": "Swallow assessment and gastrostomy where dysphagia threatens safe intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication if they occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Communication aids and mobility support as disease progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Anticipatory care as motor and cognitive decline advances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypomyelination_atrophy_basal_ganglia_cerebellum-dx-mgmt",
+      "title": "Diagnosis and management of Hypomyelination with atrophy of basal ganglia and cerebellum (H-ABC, TUBB4A)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with motor delay evolving into dystonia, rigidity and spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Status dystonicus, progressive dysphagia or rapid neurological regression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent dystonia management; assess aspiration and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, TUBB4A sequencing, metabolic screen, swallow review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TUBB4A variant confirmed with the H-ABC MRI pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Broaden to leukodystrophy panel or exome and exclude mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat dystonia and rigidity: levodopa, anticholinergics, baclofen, botulinum toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and intrathecal baclofen for severe spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Swallow assessment; gastrostomy if intake becomes unsafe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary neurorehabilitation and communication aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Palliative and anticipatory care as decline advances",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive course; symptomatic care and palliation as disease advances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

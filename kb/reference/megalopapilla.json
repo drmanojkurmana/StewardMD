@@ -147,5 +147,276 @@
       "caption": "Overview comparison matrix for megalopapilla."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "megalopapilla-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stereoscopic disc examination and disc photography",
+          "cells": [
+            {
+              "text": "Rim integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography of the disc and retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Retinal nerve fibre layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Glaucoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Enlarged blind spot; glaucomatous loss excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measurement of disc diameter and cup-to-disc ratio",
+          "cells": [
+            {
+              "text": "Disc size and cup-to-disc ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Basal encephalocoele or midline anomaly, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megalopapilla-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Stationary developmental disc variant; no active treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Excludes glaucoma masquerading behind a raised cup-to-disc ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereoscopic disc and OCT assessment",
+          "cells": [
+            {
+              "text": "Confirms a healthy neuroretinal rim"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline and interval perimetry",
+          "cells": [
+            {
+              "text": "Documents the enlarged blind spot and excludes progressive glaucomatous loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Where a basal encephalocoele or midline anomaly is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary treatment",
+          "cells": [
+            {
+              "text": "Correct recognition of the variant avoids anti-glaucoma treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "megalopapilla-dx-mgmt",
+      "title": "Diagnosis and management of megalopapilla",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large optic disc with an enlarged cup-to-disc ratio found on examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rim thinning, raised IOP, midline facial anomaly or a new visual field defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Glaucoma review; neuroimaging for suspected basal encephalocoele",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Disc photography, OCT of the nerve fibre layer, IOP, perimetry, disc diameter",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is glaucoma excluded, with a healthy neuroretinal rim on OCT and perimetry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat glaucoma if present; consider other disc anomalies; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe: a stationary developmental disc variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Measure intraocular pressure to exclude masquerading glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baseline and interval perimetry to document the enlarged blind spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid unnecessary anti-glaucoma treatment through correct recognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stable variant; neuroimaging only where encephalocoele or midline anomaly is suspected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -142,5 +142,325 @@
       "caption": "Overview comparison matrix for latrodectism (widow spider envenomation)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "latrodectism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from bite history and spasms",
+          "cells": [
+            {
+              "text": "Diffuse painful spasms with autonomic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vital signs",
+          "cells": [
+            {
+              "text": "Autonomic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for a surgical abdomen",
+          "cells": [
+            {
+              "text": "Where abdominal rigidity dominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basic bloods and electrolytes",
+          "cells": [
+            {
+              "text": "Excludes metabolic mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "Severe autonomic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "latrodectism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute abdomen from a surgical cause",
+          "cells": [
+            {
+              "text": "Severe abdominal rigidity mimics it; not to be operated on by default"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypocalcaemic or metabolic tetany",
+          "cells": [
+            {
+              "text": "Metabolic mimic; bloods and electrolytes exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sympathomimetic toxidrome",
+          "cells": [
+            {
+              "text": "Overlapping autonomic features, such as tachycardia and hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetanus",
+          "cells": [
+            {
+              "text": "Also causes spasm; tetanus prophylaxis is part of management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "latrodectism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and muscle relaxation",
+          "cells": [
+            {
+              "text": "Analgesia including opioids; benzodiazepines for cramps and spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antivenom",
+          "cells": [
+            {
+              "text": "Reserved for severe or refractory envenoming; weigh hypersensitivity risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic monitoring",
+          "cells": [
+            {
+              "text": "Control of hypertension and tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and tetanus",
+          "cells": [
+            {
+              "text": "Local wound care; tetanus prophylaxis kept up to date"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical abdomen check",
+          "cells": [
+            {
+              "text": "Excluded before attributing rigidity to envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring and reassurance",
+          "cells": [
+            {
+              "text": "For significant autonomic involvement; symptoms usually settle over hours to days"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "latrodectism-dx-mgmt",
+      "title": "Diagnosis and management of Latrodectism (widow spider envenomation)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful spreading cramps and abdominal rigidity after a spider bite, with autonomic upset",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypertension, chest pain, respiratory distress, priapism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac and respiratory support; consider antivenom",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bite history, vital signs, bloods and electrolytes, abdominal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a surgical abdomen excluded when rigidity dominates?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate and treat the surgical cause; do not attribute it to envenomation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia, including opioids, and benzodiazepines for cramps",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reserve antivenom for severe or refractory envenoming",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor and control hypertension and tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Local wound care and tetanus prophylaxis kept up to date",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiac monitoring for significant autonomic involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rarely fatal; symptoms usually settle over hours to a few days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for exploding head syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "exploding_head_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history distinguishing a painless sensory event from headache",
+          "cells": [
+            {
+              "text": "Painless event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep and symptom diary",
+          "cells": [
+            {
+              "text": "Timing relative to sleep onset or waking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Where the diagnosis is unclear or seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Only with atypical features or red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of sleep hygiene, stress and sleep deprivation",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exploding_head_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary or secondary thunderclap headache",
+          "cells": [
+            {
+              "text": "Pain distinguishes this condition; thunderclap headache must not be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal seizures, especially of temporal lobe origin",
+          "cells": [
+            {
+              "text": "Stereotyped events with other features suggest seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exploding_head_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and education",
+          "cells": [
+            {
+              "text": "Mainstay; benign and self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep hygiene",
+          "cells": [
+            {
+              "text": "Correcting sleep deprivation reduces episode frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relaxation techniques or cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Contributing stress and anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricyclic antidepressants",
+          "cells": [
+            {
+              "text": "Clomipramine or amitriptyline for frequent, distressing episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "If the diagnosis is uncertain or nocturnal seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Episodes wax and wane; often settle with reassurance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "exploding_head_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Exploding head syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden loud noise or explosion in the head on falling asleep or waking, without pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (significant pain, stereotyped events with seizure features, focal signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurology review; investigate for nocturnal seizures or a headache disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Event history and sleep diary; polysomnography if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Painless sensory event with no seizure or focal features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for thunderclap headache or nocturnal seizures; image if red flags",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and education on the benign course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sleep hygiene and correction of sleep deprivation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Relaxation techniques or CBT for stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Clomipramine or amitriptyline for frequent, distressing episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and often self-limiting; episodes wax and wane",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for mayer-rokitansky-küster-hauser syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Speroff's Clinical Gynecologic Endocrinology and Infertility",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mayer_rokitansky_kuster_hauser-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "46,XX, excluding androgen insensitivity and gonadal dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound and pelvic MRI",
+          "cells": [
+            {
+              "text": "Uterine remnants, functioning endometrium and vaginal length"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Associated renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum FSH, LH and oestradiol; serum testosterone",
+          "cells": [
+            {
+              "text": "FSH, LH and oestradiol expected normal; testosterone distinguishes androgen insensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal and skeletal imaging",
+          "cells": [
+            {
+              "text": "Vertebral or Klippel-Feil anomalies, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian reserve assessment",
+          "cells": [
+            {
+              "text": "Antral follicle count and anti-mullerian hormone, if assisted reproduction is planned"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mayer_rokitansky_kuster_hauser-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete androgen insensitivity syndrome",
+          "cells": [
+            {
+              "text": "46,XY karyotype; absent or scant pubic hair; testes present, absent uterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imperforate hymen with haematocolpos",
+          "cells": [
+            {
+              "text": "Haematocolpos"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated distal vaginal agenesis",
+          "cells": [
+            {
+              "text": "Intact uterus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mayer_rokitansky_kuster_hauser-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graduated vaginal self-dilation",
+          "cells": [
+            {
+              "text": "First line (Frank technique) to create a functional neovagina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical vaginoplasty",
+          "cells": [
+            {
+              "text": "Vecchietti, McIndoe skin-graft or bowel vaginoplasty where dilation fails or is declined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Diagnosis disclosure, body image and sexual identity; peer counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Assisted reproduction with own oocytes via gestational surrogacy, or uterus transplantation in selected centres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper urinary tract imaging and urology referral",
+          "cells": [
+            {
+              "text": "Associated renal anomalies; skeletal and cardiac assessment in atypical or MURCS forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Gynaecology, adolescent medicine, urology and clinical psychology into adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually sporadic, with occasional familial clustering"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mayer_rokitansky_kuster_hauser-dx-mgmt",
+      "title": "Diagnosis and management of Mayer-Rokitansky-Küster-Hauser syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Primary amenorrhoea with absent uterus or vagina in a 46,XX woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cyclical pelvic pain, renal anomaly or severe psychological distress present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical excision of an obstructed uterine remnant; urgent psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, pelvic MRI, renal tract imaging, FSH, LH, oestradiol and testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a 46,XX karyotype confirmed with normal ovarian function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider androgen insensitivity or gonadal dysgenesis; reassess the karyotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated vaginal self-dilation (Frank technique) as first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vaginoplasty where dilation fails or is declined",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychological support and peer counselling on diagnosis and body image",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Upper urinary tract imaging and urology referral for renal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary follow-up into adulthood; genetic counselling for the family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

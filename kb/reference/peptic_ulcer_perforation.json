@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for perforated peptic ulcer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peptic_ulcer_perforation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Erect chest radiograph",
+          "cells": [
+            {
+              "text": "Free subdiaphragmatic gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Most sensitive test for free air; localises the perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, urea and electrolytes, amylase or lipase, CRP, lactate",
+          "cells": [
+            {
+              "text": "Rising lactate indicates septic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and group and save or crossmatch",
+          "cells": [
+            {
+              "text": "Resuscitation and theatre readiness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori testing, then endoscopy",
+          "cells": [
+            {
+              "text": "H pylori status; ulcer healing and malignancy in gastric ulcers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peptic_ulcer_perforation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids, analgesia and nasogastric decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression and antibiotics",
+          "cells": [
+            {
+              "text": "Intravenous proton pump inhibition and broad-spectrum antibiotics covering enteric organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "Operative repair, typically omental (Graham) patch closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-operative management",
+          "cells": [
+            {
+              "text": "Only selected, stable, sealed perforations with close monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent recurrence",
+          "cells": [
+            {
+              "text": "Test for and eradicate Helicobacter pylori; withdraw NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative care",
+          "cells": [
+            {
+              "text": "Critical-care support for sepsis and organ dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up endoscopy",
+          "cells": [
+            {
+              "text": "Confirm healing and exclude malignancy in gastric ulcers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peptic_ulcer_perforation-dx-mgmt",
+      "title": "Diagnosis and management of Perforated peptic ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden severe epigastric pain with rigid abdomen and generalised peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (free gas, sepsis, rising lactate, or deterioration after a lull)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgery for established peritonitis or septic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Erect chest radiograph; CT abdomen and pelvis for free air; bloods and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is free intraperitoneal gas or perforation confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pancreatitis, cholecystitis, aortic aneurysm or mesenteric ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitate with intravenous fluids, analgesia and nasogastric decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start intravenous proton pump inhibition and broad-spectrum antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Omental (Graham) patch repair; non-operative care only if stable and sealed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Test for and eradicate Helicobacter pylori; withdraw NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Provide postoperative critical care and arrange follow-up endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early repair gives good recovery; delay with established peritonitis carries higher risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

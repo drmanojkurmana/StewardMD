@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for phacomorphic glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phacomorphic_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Intumescent or mature cataract and shallow chamber"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy of both eyes",
+          "cells": [
+            {
+              "text": "Angle closure, and the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior chamber depth and lens thickness comparison",
+          "cells": [
+            {
+              "text": "Asymmetry between eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Pressure rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Posterior pathology when the fundus is not visible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc assessment",
+          "cells": [
+            {
+              "text": "Glaucomatous damage once the media clear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phacomorphic_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Phacolytic glaucoma",
+          "cells": [
+            {
+              "text": "Leaking hypermature cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary acute angle-closure glaucoma",
+          "cells": [
+            {
+              "text": "Marked chamber depth asymmetry signals a lens-driven mechanism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phacomorphic_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cataract extraction",
+          "cells": [
+            {
+              "text": "Definitive treatment; removes the intumescent lens and relieves angle closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Initial pressure control",
+          "cells": [
+            {
+              "text": "Topical aqueous suppressants, systemic acetazolamide and hyperosmotic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammation and pupil",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and pupil management for the pupillary-block component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser iridotomy",
+          "cells": [
+            {
+              "text": "Temporising measure to relieve pupillary block before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal optimisation",
+          "cells": [
+            {
+              "text": "Corneal clearing before surgery; intraocular lens implantation once pressure and inflammation are controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative monitoring",
+          "cells": [
+            {
+              "text": "Pressure, drainage angle for peripheral anterior synechiae, and optic nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Assessment of the fellow eye angle and lens"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phacomorphic_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Phacomorphic glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful red eye with intumescent cataract and shallow anterior chamber",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (very high pressure, corneal oedema, optic nerve threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency pressure reduction to protect the optic nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp and gonioscopy of both eyes; chamber depth comparison; applanation tonometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does chamber depth asymmetry with an intumescent lens confirm lens-driven angle closure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary angle closure, phacolytic glaucoma, uveitic or neovascular glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Definitive cataract extraction to remove the intumescent lens and relieve angle closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Initial pressure control with topical suppressants, acetazolamide and hyperosmotic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser peripheral iridotomy as a temporising measure before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intraocular lens implantation once pressure and inflammation are controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Postoperative monitoring of pressure, the drainage angle and the optic nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prompt pressure control and extraction usually resolve it; delay risks optic nerve damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,335 @@
       "caption": "Overview comparison matrix for odontogenic sinusitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "odontogenic_sinusitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or CBCT",
+          "cells": [
+            {
+              "text": "Localises the dental source and the extent of sinus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental examination with pulp testing",
+          "cells": [
+            {
+              "text": "Vitality of upper posterior teeth adjacent to the sinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oroantral communication assessment",
+          "cells": [
+            {
+              "text": "Communication after recent extraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy and ENT assessment",
+          "cells": [
+            {
+              "text": "Sinus and ostiomeatal disease, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of purulent discharge",
+          "cells": [
+            {
+              "text": "Organisms guiding antibiotic choice in resistant or severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "odontogenic_sinusitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rhinogenic bacterial sinusitis",
+          "cells": [
+            {
+              "text": "Foul smell or taste and unilateral purulent discharge point to a dental origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive fungal sinusitis",
+          "cells": [
+            {
+              "text": "Features in immunocompromised or diabetic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinonasal tumour",
+          "cells": [
+            {
+              "text": "Persistent unilateral disease or a mass raises suspicion of malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "odontogenic_sinusitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eliminate the dental source",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Extraction or root-canal treatment of the culprit tooth; remove displaced roots, implants or foreign material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of oroantral communication",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Surgical closure of any communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for mixed flora",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Directed at mixed aerobic-anaerobic flora, such as amoxicillin-clavulanate or penicillin with metronidazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive nasal measures",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Saline irrigation, topical decongestants and intranasal corticosteroids to restore drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic sinus surgery",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For persistent disease or ostiomeatal obstruction after source control, with ENT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary co-management",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Dental or OMFS and ENT; watch for orbital or intracranial spread"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "odontogenic_sinusitis-dx-mgmt",
+      "title": "Diagnosis and management of Odontogenic sinusitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral maxillary sinusitis refractory to rhinological treatment; dental cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (orbital swelling, visual change, sepsis or intracranial spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT and OMFS review for orbital or intracranial spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or CBCT to localise the culprit tooth; pulp testing of upper posterior teeth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dental source confirmed, such as periapical infection or oroantral communication?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rhinogenic, allergic or fungal sinusitis, or a sinonasal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Extraction or root-canal treatment of the culprit tooth; remove displaced roots",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical repair of any oroantral communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics for mixed flora: amoxicillin-clavulanate, or penicillin with metronidazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Saline irrigation, decongestants and intranasal steroids to restore drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Endoscopic sinus surgery with ENT if disease persists after source control",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good prognosis once the dental cause is treated; sinus-directed therapy alone often fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

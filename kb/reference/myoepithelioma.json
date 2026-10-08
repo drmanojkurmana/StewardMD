@@ -158,5 +158,343 @@
       "caption": "Overview comparison matrix for soft-tissue myoepithelioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myoepithelioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunohistochemistry for cytokeratins, EMA and S100",
+          "cells": [
+            {
+              "text": "Core panel; dual epithelial and S100 immunophenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GFAP, calponin, p63 and smooth muscle actin",
+          "cells": [
+            {
+              "text": "Myoepithelial differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or molecular testing for EWSR1 and FUS",
+          "cells": [
+            {
+              "text": "EWSR1 rearrangement in a large proportion; FUS in a subset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMARCB1 (INI1) immunohistochemistry",
+          "cells": [
+            {
+              "text": "Loss in a subset of malignant tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Defines the mass; assesses for metastasis in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nuclear atypia and mitotic activity assessment",
+          "cells": [
+            {
+              "text": "Separates benign from malignant tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myoepithelioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Extraskeletal myxoid chondrosarcoma",
+          "cells": [
+            {
+              "text": "Confused with myoepithelioma on limited sampling; the dual immunophenotype favours myoepithelioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chordoma",
+          "cells": [
+            {
+              "text": "Parachordoma-like lesions are now regarded as part of the myoepithelial spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ewing sarcoma",
+          "cells": [
+            {
+              "text": "An EWSR1 rearrangement does not by itself mean Ewing sarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myoepithelioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign myoepithelioma",
+          "cells": [
+            {
+              "text": "Complete excision to negative margins, usually curative; no adjuvant therapy for a clear benign excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incompletely excised benign lesion",
+          "cells": [
+            {
+              "text": "Re-excision to achieve clear margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intermediate-risk myoepithelioma NOS",
+          "cells": [
+            {
+              "text": "Wide local excision rather than simple excision; radiotherapy considered if margins are close or positive and re-excision is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myoepithelial carcinoma surgery",
+          "cells": [
+            {
+              "text": "Wide resection to negative margins by an experienced sarcoma surgeon; the cornerstone of curative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy in carcinoma",
+          "cells": [
+            {
+              "text": "High-grade histology, large size, deep location, or close or positive margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Not routine adjuvant treatment for localised disease; for advanced disease, anthracycline-based therapy first line as in sarcoma practice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Sarcoma MDT before resection for marked atypia, rapid growth or SMARCB1 loss; paediatric oncology for children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Clinical review and imaging of the primary site and chest at decreasing intervals"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myoepithelioma-dx-mgmt",
+      "title": "Diagnosis and management of Soft-tissue myoepithelioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft-tissue or skin mass with myoepithelial differentiation, in limbs or trunk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked atypia, rapid growth, recurrence, metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Sarcoma MDT referral before resection; paediatric oncology if a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cytokeratin, EMA and S100 panel; EWSR1 or FUS testing; SMARCB1; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dual epithelial and S100 immunophenotype confirmed on expert pathology review?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Expert soft-tissue pathology review before finalising; consider overlapping entities",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benign: complete excision to negative margins, usually curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Incompletely excised benign lesion: re-excision to clear margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Carcinoma: wide resection by an experienced sarcoma surgeon",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy for high-grade, large, deep or close-margin carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Advanced disease: anthracycline-based therapy first line, as in sarcoma practice",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign lesions are usually cured by excision; carcinoma carries recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

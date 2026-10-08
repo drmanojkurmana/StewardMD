@@ -141,5 +141,305 @@
       "caption": "Overview comparison matrix for gustatory rhinitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rhinology and allergy reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gustatory_rhinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of temporal link to eating",
+          "cells": [
+            {
+              "text": "Clear link to eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy testing when needed",
+          "cells": [
+            {
+              "text": "Distinguishes from allergic rhinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for CSF rhinorrhoea",
+          "cells": [
+            {
+              "text": "Persistent or unilateral discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal examination",
+          "cells": [
+            {
+              "text": "Structural or inflammatory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Contributing drugs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gustatory_rhinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic rhinitis",
+          "cells": [
+            {
+              "text": "Allergy-driven; separated by history and testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid rhinorrhoea",
+          "cells": [
+            {
+              "text": "Unilateral clear discharge needs exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-related rhinitis",
+          "cells": [
+            {
+              "text": "Drug-induced nasal discharge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gustatory_rhinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pre-meal intranasal anticholinergic spray",
+          "cells": [
+            {
+              "text": "Ipratropium bromide to block the cholinergic glandular reflex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger food avoidance",
+          "cells": [
+            {
+              "text": "Hot and spicy meals in particular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and non-allergic; allergy testing generally unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication rationalisation",
+          "cells": [
+            {
+              "text": "Drugs contributing to rhinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude CSF leak",
+          "cells": [
+            {
+              "text": "When discharge is persistent or unilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Otolaryngology or allergy if refractory or uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gustatory_rhinitis-dx-mgmt",
+      "title": "Diagnosis and management of Gustatory rhinitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gustatory rhinitis: clear nasal discharge triggered by eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unilateral clear discharge, bleeding, mass, neurological features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for unilateral clear discharge raising CSF leak concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical history, nasal examination and CSF leak assessment if discharge is unilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the discharge occur only with eating, with CSF leak excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic rhinitis, vasomotor rhinitis or CSF rhinorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pre-meal intranasal ipratropium to block the glandular reflex",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoidance of hot and spicy trigger foods",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassurance that the condition is benign and non-allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and rationalise medications contributing to rhinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and readily controlled with pre-meal anticholinergic spray and dietary awareness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

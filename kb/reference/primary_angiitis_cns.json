@@ -147,5 +147,333 @@
       "caption": "Overview comparison matrix for primary angiitis of the central nervous system."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / CNS vasculitis literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_angiitis_cns-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast MRI",
+          "cells": [
+            {
+              "text": "Multifocal infarcts, white-matter change or vessel-wall enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Segmental stenoses; limited sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis; excludes infection and malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and leptomeningeal biopsy",
+          "cells": [
+            {
+              "text": "Definitive histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic vasculitis and infection screen",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_angiitis_cns-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective arteritis (varicella-zoster, tuberculous vasculopathy)",
+          "cells": [
+            {
+              "text": "Infection excluded by CSF analysis"
+            },
+            {
+              "text": "CSF analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravascular lymphoma or neoplastic mimic",
+          "cells": [
+            {
+              "text": "Malignancy excluded by CSF analysis"
+            },
+            {
+              "text": "CSF analysis and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary CNS vasculitis from systemic disease",
+          "cells": [
+            {
+              "text": "Systemic vasculitis or infection on screening"
+            },
+            {
+              "text": "Systemic vasculitis and infection screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_angiitis_cns-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids combined with cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Steroid-sparing agent such as azathioprine or mycophenolate mofetil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or relapsing disease",
+          "cells": [
+            {
+              "text": "Consider rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics first",
+          "cells": [
+            {
+              "text": "Infection, reversible cerebral vasoconstriction syndrome and malignancy before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial MRI and clinical review; watch for relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis pneumonia, osteoporosis and gastric ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Stroke prevention, vascular risk-factor management and neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Neurology and rheumatology multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_angiitis_cns-dx-mgmt",
+      "title": "Diagnosis and management of Primary angiitis of the central nervous system",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary CNS angiitis: multifocal strokes with encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive encephalopathy, recurrent strokes, new haemorrhage or rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and rheumatology input for rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, angiography, CSF analysis; biopsy for definitive diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are infection and malignancy excluded, with supportive MRI or CSF findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat mimics such as infection, RCVS or lymphoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids with cyclophosphamide to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azathioprine or mycophenolate mofetil to maintain remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MRI, prophylaxis and secondary stroke prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary follow-up with relapse surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

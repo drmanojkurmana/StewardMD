@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for lenz-majewski hyperostotic dwarfism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lenz_majewski_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PTDSS1 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis within a skeletal dysplasia panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Progressive hyperostosis and diaphyseal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging",
+          "cells": [
+            {
+              "text": "Skull-base thickening and neural foramina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and dermal histology",
+          "cells": [
+            {
+              "text": "Lax skin of cutis laxa; elastic tissue where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review",
+          "cells": [
+            {
+              "text": "Enamel hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lenz_majewski_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniodiaphyseal dysplasia and other sclerosing bone dysplasias",
+          "cells": [
+            {
+              "text": "Lacks the cutis laxa and digital anomalies this syndrome shows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutis laxa syndromes",
+          "cells": [
+            {
+              "text": "Lax skin without the progressive hyperostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopetrosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lenz_majewski_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-specific drug; structured surveillance for progressive hyperostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and cranial nerve surveillance",
+          "cells": [
+            {
+              "text": "Cranial imaging, as skull-base hyperostosis can compress cranial nerves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical decompression",
+          "cells": [
+            {
+              "text": "When progressive hyperostosis threatens cranial nerves or the skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Educational support for intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and hand care",
+          "cells": [
+            {
+              "text": "Enamel hypoplasia; orthopaedic or hand-surgery assessment for syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Dominant PTDSS1-related condition, usually de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lenz_majewski_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lenz-Majewski hyperostotic dwarfism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dense skeletal hyperostosis with loose, wrinkled skin, syndactyly and growth failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cranial nerve loss, raised ICP, feeding or airway difficulty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurosurgical review for progressive skull-base hyperostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PTDSS1 sequencing, skeletal survey, cranial imaging, dental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PTDSS1 sequencing confirm a gain-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider craniodiaphyseal dysplasia, cutis laxa or osteopetrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with structured surveillance for hyperostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cranial nerve and neurological surveillance with cranial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurosurgical decompression when cranial nerves or skull base are threatened",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and educational support for intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dental, orthopaedic and hand-surgery care; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive; survival into adulthood, with hyperostosis and cranial nerve morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

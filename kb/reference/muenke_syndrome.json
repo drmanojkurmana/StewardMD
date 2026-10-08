@@ -147,5 +147,352 @@
       "caption": "Overview comparison matrix for muenke syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "muenke_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted molecular testing for FGFR3 P250R",
+          "cells": [
+            {
+              "text": "Recurrent mutation defines the syndrome; offer when coronal synostosis has no other cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss, under-recognised and to be screened for actively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-dimensional cranial CT",
+          "cells": [
+            {
+              "text": "Defines coronal suture involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Where indicated; mild developmental or learning difficulties may be present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of hands and feet",
+          "cells": [
+            {
+              "text": "Carpal or tarsal fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Only if raised intracranial pressure is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muenke_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Saethre-Chotzen syndrome",
+          "cells": [
+            {
+              "text": "Considerable clinical overlap; molecular testing needed rather than clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crouzon syndrome",
+          "cells": [
+            {
+              "text": "Caused by FGFR2 rather than the FGFR3 P250R change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pfeiffer syndrome",
+          "cells": [
+            {
+              "text": "Broad thumbs and toes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-syndromic uni- or bicoronal craniosynostosis",
+          "cells": [
+            {
+              "text": "Coronal synostosis with no other cause; molecular testing still offered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofrontonasal syndrome",
+          "cells": [
+            {
+              "text": "Caused by EFNB1 rather than FGFR3"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muenke_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniofacial surgery",
+          "cells": [
+            {
+              "text": "Cranial vault remodelling and suture release for coronal synostosis and any raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological management",
+          "cells": [
+            {
+              "text": "Hearing aids and speech and language support for sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early intervention and educational support for learning difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial pressure surveillance",
+          "cells": [
+            {
+              "text": "Clinical review, fundoscopy and neuroimaging where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Surgery, ENT and audiology, ophthalmology and neurodevelopment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; test at-risk relatives given variable penetrance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular audiological screening",
+          "cells": [
+            {
+              "text": "Unrecognised hearing loss can impair development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "muenke_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Muenke syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Uni- or bicoronal craniosynostosis with variable craniofacial features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised intracranial pressure, hearing loss or delay)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent craniofacial team review for raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FGFR3 P250R testing, audiology, 3D cranial CT, hand and foot radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recurrent FGFR3 P250R variant confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Saethre-Chotzen, Crouzon, Pfeiffer or non-syndromic synostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cranial vault remodelling and suture release for coronal synostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Audiological management of sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and educational support with early intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for raised intracranial pressure with fundoscopy and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling; test at-risk relatives given variable penetrance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome ranges from unaffected carrier to craniofacial surgery; cognition usually normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for erectile dysfunction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erectile_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting glucose or HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Cardiovascular and metabolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morning serum testosterone, with prolactin if deficiency suspected",
+          "cells": [
+            {
+              "text": "Hypogonadism or hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and cardiovascular risk assessment",
+          "cells": [
+            {
+              "text": "Vascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "International Index of Erectile Function questionnaire",
+          "cells": [
+            {
+              "text": "Validated measure of erectile function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Selected complex or younger patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erectile_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychogenic erectile dysfunction",
+          "cells": [
+            {
+              "text": "Sudden, situational onset, whereas organic dysfunction develops gradually"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic causes (diabetic neuropathy, pelvic surgery, spinal cord disease)",
+          "cells": [
+            {
+              "text": "Neurological signs suggest spinal or cauda equina pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erectile_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle modification",
+          "cells": [
+            {
+              "text": "Smoking cessation, weight reduction, exercise and alcohol moderation, with cardiovascular and metabolic optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Antihypertensives, antidepressants and antiandrogens; substitution where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphodiesterase type 5 inhibitors",
+          "cells": [
+            {
+              "text": "First-line pharmacological treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Where hypogonadism is confirmed biochemically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosexual counselling",
+          "cells": [
+            {
+              "text": "Cognitive behavioural approaches where a psychogenic component is prominent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alprostadil or vacuum erection device",
+          "cells": [
+            {
+              "text": "Second-line when oral agents fail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile prosthesis",
+          "cells": [
+            {
+              "text": "Refractory disease unresponsive to other measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk referral",
+          "cells": [
+            {
+              "text": "Erectile dysfunction may be an early marker of occult vascular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erectile_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Erectile dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent inability to achieve or maintain an erection in an adult man",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (neurological signs, nitrate use, pituitary features, cardiovascular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiovascular risk assessment, or neurology or endocrine referral as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose or HbA1c, lipids, morning testosterone, blood pressure and IIEF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gradual onset with organic risk factors or hypogonadism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Psychosexual assessment for a predominantly psychogenic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifestyle change, smoking cessation and cardiometabolic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Substitute medications with erectile side effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PDE5 inhibitor first-line; avoid with nitrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Testosterone replacement if hypogonadism is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Alprostadil, vacuum device or penile prosthesis when oral therapy fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highly treatable; many men respond to PDE5 inhibitors and risk-factor change",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

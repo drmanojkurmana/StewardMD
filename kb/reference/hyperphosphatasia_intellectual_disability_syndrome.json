@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for hyperphosphatasia with intellectual disability (mabry, pigv/gpi-anchor)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nyhan's Atlas of Inherited Metabolic Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial serum alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Persistently and unexplainedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry of GPI-anchored surface proteins",
+          "cells": [
+            {
+              "text": "Expression on blood cells, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Structural abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung or anorectal evaluation",
+          "cells": [
+            {
+              "text": "Hirschsprung disease or anorectal anomalies when suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIGV and GPI-anchor pathway gene testing",
+          "cells": [
+            {
+              "text": "Confirms a GPI-anchor pathway variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bone or liver source of raised alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Raised ALP from shedding of a GPI-anchored enzyme when the anchor is defective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Increased bone turnover",
+          "cells": [
+            {
+              "text": "Not the explanation for the raised ALP; treatment is not needed for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "For seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental intervention",
+          "cells": [
+            {
+              "text": "Early developmental intervention, educational support and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Hirschsprung disease and anorectal or other structural anomalies where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malformation assessment",
+          "cells": [
+            {
+              "text": "Brain imaging and evaluation of digital and skeletal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology, clinical genetics, surgery and developmental services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance with family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent raised serum ALP with intellectual disability and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Poorly controlled epilepsy, regression, or feeding difficulty with obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and surgical review; assess for Hirschsprung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial ALP, flow cytometry, EEG, brain imaging and PIGV sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "GPI-anchor pathway variant, such as PIGV, identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other glycosylation disorders or transient hyperphosphatasaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticonvulsants; trial of pyridoxine for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early developmental intervention, physiotherapy and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for Hirschsprung disease or anorectal anomalies if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Coordinated care across neurology, genetics, surgery and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome set by seizure control and developmental support; family counselled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

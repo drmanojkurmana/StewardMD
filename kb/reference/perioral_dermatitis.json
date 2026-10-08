@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for perioral dermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perioral_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from morphology and distribution",
+          "cells": [
+            {
+              "text": "Diagnosis in most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed history of corticosteroid and cosmetic exposure",
+          "cells": [
+            {
+              "text": "Topical, inhaled and intranasal steroids, and cosmetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swab",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection or marked pustulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Allergic contact dermatitis, when a differential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical or granulomatous presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin scraping or examination for Demodex",
+          "cells": [
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perioral_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous sarcoidosis (granulomatous variant)",
+          "cells": [
+            {
+              "text": "Granulomatous features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic or irritant contact dermatitis",
+          "cells": [
+            {
+              "text": "Separated by patch testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perioral_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Zero therapy",
+          "cells": [
+            {
+              "text": "Stop all topical corticosteroids, heavy occlusive cosmetics and skin-care products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage rebound flare",
+          "cells": [
+            {
+              "text": "Expect and explain the rebound flare on withdrawal of topical corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical anti-inflammatory",
+          "cells": [
+            {
+              "text": "Metronidazole, azelaic acid or a topical calcineurin inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral tetracycline",
+          "cells": [
+            {
+              "text": "Moderate, severe or refractory disease in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide alternative",
+          "cells": [
+            {
+              "text": "Young children and pregnancy, where tetracyclines are contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care and relapse prevention",
+          "cells": [
+            {
+              "text": "Gentle skin care; avoid fluorinated dental products and provoking factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Demodex-directed treatment",
+          "cells": [
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perioral_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of perioral dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Papular and pustular facial eruption around the mouth, often after topical steroid use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ocular involvement, no response to therapy, granulomatous features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Ophthalmology assessment for blepharitis or conjunctivitis; reconsider diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; history of corticosteroid and cosmetic exposure; swab if pustular",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does history and morphology fit perioral dermatitis without a granulomatous picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rosacea, acne, contact dermatitis or sarcoidosis; biopsy or patch test",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop all topical corticosteroids and heavy occlusive cosmetics (zero therapy)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Explain and manage the rebound flare on corticosteroid withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Use topical metronidazole, azelaic acid or a calcineurin inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Give an oral tetracycline for moderate, severe or refractory disease in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Use a macrolide in young children and pregnancy, where tetracyclines are contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good prognosis; resolves over weeks to months once steroids are withdrawn",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

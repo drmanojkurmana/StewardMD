@@ -155,5 +155,342 @@
       "caption": "Overview comparison matrix for primary cutaneous gamma-delta t-cell lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cutaneous_gamma_delta_t_cell_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with assessment of epidermotropic, dermal and subcutaneous involvement",
+          "cells": [
+            {
+              "text": "Layers of skin involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for TCR gamma-delta",
+          "cells": [
+            {
+              "text": "Gamma-delta expression; cytotoxic CD4-negative CD8-negative phenotype; frequent CD56"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor clonality studies",
+          "cells": [
+            {
+              "text": "Clonal T-cell population"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin, triglycerides and fibrinogen; bone marrow if suspected",
+          "cells": [
+            {
+              "text": "Haemophagocytic lymphohistiocytosis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT and staging",
+          "cells": [
+            {
+              "text": "Extracutaneous and mucosal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and organ-function testing",
+          "cells": [
+            {
+              "text": "Baseline before systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cutaneous_gamma_delta_t_cell_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Extranodal NK/T-cell lymphoma, nasal type, involving skin",
+          "cells": [
+            {
+              "text": "Mucosal and extranodal involvement"
+            },
+            {
+              "text": "PET-CT and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary cutaneous CD8-positive aggressive epidermotropic cytotoxic T-cell lymphoma",
+          "cells": [
+            {
+              "text": "CD8-negative, gamma-delta phenotype"
+            },
+            {
+              "text": "TCR gamma-delta immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous involvement by systemic T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Systemic disease on PET-CT and staging"
+            },
+            {
+              "text": "PET-CT and staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cutaneous_gamma_delta_t_cell_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive course",
+          "cells": [
+            {
+              "text": "Disseminated disease with frequent mucosal and extranodal involvement, unlike indolent alpha/beta subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognosis",
+          "cells": [
+            {
+              "text": "Outcomes remain poor despite aggressive chemotherapy; median survival around 15 months in reported series"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment intent",
+          "cells": [
+            {
+              "text": "Systemic disease control rather than local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Aggressive multiagent systemic chemotherapy as the mainstay of initial treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "Fit patients who respond to induction chemotherapy; associated with the longest survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autologous transplant",
+          "cells": [
+            {
+              "text": "Alternative option in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLH evaluation",
+          "cells": [
+            {
+              "text": "High fever, cytopenias or markedly raised ferritin; standard HLH-directed immunosuppression if confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team and referral",
+          "cells": [
+            {
+              "text": "Haemato-oncology multidisciplinary team; early transplant evaluation; consider trial enrolment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cutaneous_gamma_delta_t_cell_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary cutaneous gamma-delta T-cell lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PCGD-TCL: rapidly progressive or ulcerating skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "HLH features, mucosal or visceral spread, or cytopenias suggesting marrow disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent HLH-directed therapy and haemato-oncology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with gamma-delta staining; clonality; ferritin; PET-CT staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biopsy and staging fit PCGD-TCL?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other cutaneous T-cell lymphomas or panniculitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aggressive multiagent systemic chemotherapy as initial mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat for systemic control, not local control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allogeneic transplant in fit patients who respond to induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "HLH-directed immunosuppression if HLH is identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Poor outcomes with standard chemotherapy; transplant or trial enrolment considered",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

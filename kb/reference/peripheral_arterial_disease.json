@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for peripheral arterial disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peripheral_arterial_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "Arterial pressure ratio at rest; exercise testing if equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Localises and grades stenoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography, or invasive angiography",
+          "cells": [
+            {
+              "text": "Planning revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk factor assessment",
+          "cells": [
+            {
+              "text": "Lipids, glucose and smoking status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toe-brachial index",
+          "cells": [
+            {
+              "text": "Used when arteries are incompressible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and infection assessment",
+          "cells": [
+            {
+              "text": "Ulcers or tissue loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peripheral_arterial_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk reduction foundation",
+          "cells": [
+            {
+              "text": "Statin therapy, antiplatelet therapy and control of blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "The single most important modifiable measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised walking",
+          "cells": [
+            {
+              "text": "Improves claudication distance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cilostazol",
+          "cells": [
+            {
+              "text": "Symptomatic claudication where not contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Endovascular angioplasty or stenting, or surgical bypass, for lifestyle-limiting claudication refractory to conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute limb ischaemia",
+          "cells": [
+            {
+              "text": "Vascular emergency: anticoagulation and urgent embolectomy, thrombolysis or revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot care and tissue loss",
+          "cells": [
+            {
+              "text": "Foot care, wound management and treatment of infection; refer to vascular surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peripheral_arterial_disease-dx-mgmt",
+      "title": "Diagnosis and management of Peripheral arterial disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leg pain on walking or at rest, or ulceration in a patient with vascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pale pulseless cold limb, rest pain, gangrene, sudden embolic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vascular emergency: anticoagulation and urgent embolectomy or revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ankle-brachial index; duplex ultrasound; CT or MR angiography for planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is peripheral arterial disease confirmed on ankle-brachial index or duplex?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lumbar spinal stenosis, venous disease, arthritic pain or neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Statin, antiplatelet therapy and blood pressure control as the foundation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Support smoking cessation as the most important modifiable measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prescribe supervised walking exercise to improve claudication distance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer cilostazol for symptomatic claudication where not contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Revascularise by angioplasty, stenting or bypass for lifestyle-limiting claudication",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Claudication is often stable with risk control; PAD raises risk of MI, stroke and death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -158,5 +158,409 @@
       "caption": "Overview comparison matrix for primary aldosteronism (conn syndrome)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Primary Aldosteronism",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/primary-aldosteronism",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PRIMARY_ALDOSTERONISM-diagnostic",
+      "kind": "diagnostic",
+      "title": "Screening and confirmation of primary aldosteronism",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Who to test",
+          "cells": [
+            {
+              "text": "Hypertension with hypokalaemia, or resistant hypertension even with normal potassium"
+            },
+            {
+              "text": "Adenomas may cause up to 10% of hypertension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug washout",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Hold thiazides, ACE inhibitors, ARBs, beta-blockers for 4 to 6",
+              "range": [
+                4,
+                6
+              ]
+            },
+            {
+              "text": "They distort renin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma aldosterone",
+          "unit": "ng/dL",
+          "cells": [
+            {
+              "text": "Above 15 with low renin",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Morning, recumbent sample"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aldosterone to renin ratio",
+          "cells": [
+            {
+              "text": "Above 20 (ng/dL per ng/mL/h)",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "{{hy:Screening test; cutoff depends on assay and units}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Confirmatory test",
+          "cells": [
+            {
+              "text": "4-hour saline infusion or 3-day oral salt load"
+            },
+            {
+              "text": "Aldosterone fails to suppress"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal CT or MRI",
+          "cells": [
+            {
+              "text": "Adenoma vs hyperplasia"
+            },
+            {
+              "text": "Relatively insensitive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal vein sampling",
+          "cells": [
+            {
+              "text": "Aldosterone and cortisol from both adrenal veins"
+            },
+            {
+              "text": "Needed by most to prove a unilateral source before surgery"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PRIMARY_ALDOSTERONISM-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis by renin and aldosterone pattern",
+      "rowHeader": "Condition",
+      "columns": [
+        "Renin and aldosterone",
+        "Clue"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary aldosteronism",
+          "cells": [
+            {
+              "text": "Low renin, high aldosterone"
+            },
+            {
+              "text": "Adenoma or bilateral hyperplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liquorice, Cushing syndrome, Liddle syndrome",
+          "cells": [
+            {
+              "text": "{{hy:Low renin and low aldosterone}}"
+            },
+            {
+              "text": "Non-aldosterone mineralocorticoid excess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary hyperaldosteronism (renovascular, accelerated hypertension)",
+          "cells": [
+            {
+              "text": "High renin and high aldosterone"
+            },
+            {
+              "text": "Renal artery disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oedematous disorders",
+          "cells": [
+            {
+              "text": "High renin and high aldosterone"
+            },
+            {
+              "text": "Oedema present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bartter or Gitelman syndrome",
+          "cells": [
+            {
+              "text": "Marked renin rise"
+            },
+            {
+              "text": "No hypertension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Other mineralocorticoids raised"
+            },
+            {
+              "text": "Similar picture"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PRIMARY_ALDOSTERONISM-treatment",
+      "kind": "treatment",
+      "title": "Treatment of primary aldosteronism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Laparoscopic adrenalectomy",
+          "cells": [
+            {
+              "text": "{{hy:Unilateral aldosterone-producing adenoma}}"
+            },
+            {
+              "text": "Potassium normalises in all; BP normal off drugs in 50% to 70%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spironolactone",
+          "cells": [
+            {
+              "text": "Bilateral hyperplasia or not operable"
+            },
+            {
+              "text": "Start 50 mg daily, build over 1 to 3 months to 50 to 100 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eplerenone",
+          "cells": [
+            {
+              "text": "Long-term use in men, no anti-androgen effect"
+            },
+            {
+              "text": "50 mg daily up to 200 mg twice daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amiloride",
+          "cells": [
+            {
+              "text": "Alternative potassium-sparing agent"
+            },
+            {
+              "text": "5 to 10 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Additional antihypertensives",
+          "cells": [
+            {
+              "text": "About half of hyperplasia patients"
+            },
+            {
+              "text": "Bilateral adrenalectomy not advised; 70% stay hypertensive"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PRIMARY_ALDOSTERONISM-dx-mgmt",
+      "title": "Diagnosis and management of primary aldosteronism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypertension with hypokalaemia, or resistant hypertension",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stop interfering drugs; morning aldosterone and renin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Aldosterone above 15 ng/dL with ratio above 20?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Interpret renin pattern for other mineralocorticoid causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Saline infusion or oral salt load",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Aldosterone fails to suppress?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Primary aldosteronism unlikely",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adrenal CT, then adrenal vein sampling if surgery considered",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Unilateral source?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Laparoscopic adrenalectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Spironolactone or eplerenone, plus other drugs as needed",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

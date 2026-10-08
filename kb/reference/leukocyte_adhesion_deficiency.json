@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for leukocyte adhesion deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leukocyte_adhesion_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flow cytometry for CD18 and CD11 on neutrophils",
+          "cells": [
+            {
+              "text": "Reduced or absent in LAD-1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Marked neutrophil leucocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (ITGB2, SLC35C1, FERMT3)",
+          "cells": [
+            {
+              "text": "Identifies LAD-1, LAD-2 or LAD-3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophil adhesion and chemotaxis assays",
+          "cells": [
+            {
+              "text": "Functional migration defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialyl-Lewis X expression and blood group testing",
+          "cells": [
+            {
+              "text": "Where LAD-2 is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation studies",
+          "cells": [
+            {
+              "text": "Where LAD-3 is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukocyte_adhesion_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic granulomatous disease",
+          "cells": [
+            {
+              "text": "Another neutrophil functional disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital or cyclic neutropenia",
+          "cells": [
+            {
+              "text": "Neutropenia rather than the marked leucocytosis of LAD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glanzmann thrombasthenia",
+          "cells": [
+            {
+              "text": "Bleeding seen in LAD-3; platelet aggregation studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukocyte_adhesion_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Definitive curative treatment for severe LAD-1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial treatment",
+          "cells": [
+            {
+              "text": "Broad-spectrum antibacterials and antifungals for soft-tissue infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Long-term antibacterial and antifungal prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fucose supplementation",
+          "cells": [
+            {
+              "text": "Specific therapy in LAD-2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral and wound care",
+          "cells": [
+            {
+              "text": "Meticulous periodontal care and careful wound management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LAD-3 bleeding",
+          "cells": [
+            {
+              "text": "Surveillance for infection; management of the bleeding tendency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "ITGB2, SLC35C1, FERMT3; gene therapy where available, under immunology care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leukocyte_adhesion_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Leukocyte adhesion deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with delayed cord separation, or soft-tissue infection without pus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (omphalitis, invasive infection without pus, sepsis, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent antimicrobial therapy and sepsis care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flow cytometry for CD18 and CD11, FBC, ITGB2, SLC35C1, FERMT3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CD18 and CD11 reduced or absent on neutrophils?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic granulomatous disease, cyclic neutropenia or Glanzmann",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt broad-spectrum antibacterial and antifungal treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term antibacterial and antifungal prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral fucose supplementation for LAD-2",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Meticulous oral care and careful wound management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Transplant referral for severe LAD-1; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe LAD-1 carries high early fatal infection risk unless transplanted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

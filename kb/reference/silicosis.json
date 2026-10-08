@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for silicosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "silicosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiography",
+          "cells": [
+            {
+              "text": "Small upper-zone nodular opacities; eggshell calcification of hilar nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Nodule characterisation and progressive massive fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Restrictive, obstructive or mixed impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis screening",
+          "cells": [
+            {
+              "text": "Latent or active infection, given the heightened silicotuberculosis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational exposure history",
+          "cells": [
+            {
+              "text": "Silica exposure, including engineered-stone and sandblasting work"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silicosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Haemoptysis, cavitation or constitutional symptoms; may coexist with silicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic or malignant nodular disease",
+          "cells": [
+            {
+              "text": "Malignancy must be considered rather than attributing all nodular change to silicosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silicosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop silica exposure",
+          "cells": [
+            {
+              "text": "Permanent removal, with dust control and respiratory protection; no therapy reverses the fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation and vaccination",
+          "cells": [
+            {
+              "text": "Influenza and pneumococcal vaccines to limit decline and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis screening and treatment",
+          "cells": [
+            {
+              "text": "Includes latent infection, given the heightened silicotuberculosis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive respiratory care",
+          "cells": [
+            {
+              "text": "Bronchodilators, pulmonary rehabilitation and supplemental oxygen for hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging and lung function",
+          "cells": [
+            {
+              "text": "Monitors for progressive massive fibrosis and lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplant assessment",
+          "cells": [
+            {
+              "text": "Advanced or progressive fibrosis with respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health notification",
+          "cells": [
+            {
+              "text": "Compensation advice and workplace exposure reduction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "silicosis-dx-mgmt",
+      "title": "Diagnosis and management of Silicosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nodular lung disease after crystalline silica exposure: suspected silicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoptysis, cavitation, rapid breathlessness, cor pulmonale)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected tuberculosis, malignancy or accelerated silicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiography, HRCT, lung function, tuberculosis screen and exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and exposure history fit silicosis, with tuberculosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coexisting tuberculosis, malignancy or other pneumoconioses; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Permanent removal from silica exposure with dust control and respiratory protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Active screening and treatment for tuberculosis, including latent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care: bronchodilators, pulmonary rehabilitation and oxygen if hypoxaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial imaging and lung function to detect massive fibrosis or lung cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Transplant referral for advanced fibrosis with respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic simple silicosis may stay stable; massive fibrosis carries a poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for internuclear ophthalmoplegia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "internuclear_ophthalmoplegia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brainstem, dorsal pons and midbrain",
+          "cells": [
+            {
+              "text": "Lesion localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and spinal cord",
+          "cells": [
+            {
+              "text": "Demyelinating lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF oligoclonal bands",
+          "cells": [
+            {
+              "text": "When demyelination is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine receptor antibodies and repetitive nerve stimulation",
+          "cells": [
+            {
+              "text": "Myasthenia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular risk assessment and stroke work-up",
+          "cells": [
+            {
+              "text": "Ischaemic cause in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine status",
+          "cells": [
+            {
+              "text": "Where nutritional deficiency is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "internuclear_ophthalmoplegia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Partial oculomotor nerve palsy",
+          "cells": [
+            {
+              "text": "Medial rectus weakness from a third-nerve lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis (pseudo-INO)",
+          "cells": [
+            {
+              "text": "Fluctuating weakness; acetylcholine receptor antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "One-and-a-half syndrome",
+          "cells": [
+            {
+              "text": "Horizontal gaze palsy coexisting with the INO"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "internuclear_ophthalmoplegia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Corticosteroids for acute demyelinating relapse; disease-modifying therapy for multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic INO",
+          "cells": [
+            {
+              "text": "Antiplatelet therapy and vascular risk factor control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine",
+          "cells": [
+            {
+              "text": "Prompt correction where Wernicke encephalopathy is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diplopia",
+          "cells": [
+            {
+              "text": "Prisms or temporary occlusion while the process is treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation",
+          "cells": [
+            {
+              "text": "Neuroimaging and CSF analysis; exclude myasthenia gravis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Neurology and neuro-ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "internuclear_ophthalmoplegia-dx-mgmt",
+      "title": "Diagnosis and management of Internuclear ophthalmoplegia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Impaired adduction with dissociated abducting nystagmus on horizontal gaze",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute brainstem signs, bilateral INO in a young adult, or reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway or multiple sclerosis work-up; thiamine if Wernicke possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brainstem, brain and spine, CSF oligoclonal bands, AChR antibodies, vascular work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Demyelinating or ischaemic cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude myasthenia, skew or nutritional causes; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids for acute relapse; disease-modifying therapy for MS",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet therapy and vascular risk control for ischaemic INO",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt thiamine where Wernicke encephalopathy is possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prisms or temporary occlusion for diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurology and neuro-ophthalmology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Recovery depends on cause; long-term neurology care for the underlying disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

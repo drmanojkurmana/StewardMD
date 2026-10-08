@@ -166,5 +166,469 @@
       "caption": "Overview comparison matrix for porphyria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Porphyrias",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/porphyrias/acute-porphyrias"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "porphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing the porphyrias",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Spot urine porphobilinogen (PBG)",
+          "cells": [
+            {
+              "text": "Always raised in an acute AIP, HCP or VP attack"
+            },
+            {
+              "text": "{{hy:First-line test; 24 h urine not needed}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine ALA and PBG per creatinine",
+          "unit": "mg/g",
+          "cells": [
+            {
+              "text": "Over 10 mg/g creatinine",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Acute attack unless a carrier with latent high levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total urinary porphyrins",
+          "cells": [
+            {
+              "text": "Often nonspecifically raised (liver disease)"
+            },
+            {
+              "text": "Do not use alone for screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fecal porphyrins",
+          "cells": [
+            {
+              "text": "Normal or minimal in AIP, raised in HCP and VP"
+            },
+            {
+              "text": "Separates acute porphyria types"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma fluorescence scan",
+          "unit": "nm",
+          "cells": [
+            {
+              "text": "Emission peak about 626 nm in VP",
+              "op": "=",
+              "value": 626
+            },
+            {
+              "text": "Separates VP from PCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte protoporphyrin",
+          "cells": [
+            {
+              "text": "Raised, mostly free protoporphyrin"
+            },
+            {
+              "text": "EPP and XLP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium during attack",
+          "cells": [
+            {
+              "text": "Hyponatremia from SIADH or losses"
+            },
+            {
+              "text": "Seizure risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "HMBS, CPOX, PPOX and others"
+            },
+            {
+              "text": "Confirms type; cascade test relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "porphyria-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute porphyria",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Intestinal obstruction",
+          "cells": [
+            {
+              "text": "Hyperperistalsis and pain in both"
+            },
+            {
+              "text": "Imaging; urine PBG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead poisoning",
+          "cells": [
+            {
+              "text": "Colic and neuropathy; raised urine ALA but normal PBG"
+            },
+            {
+              "text": "Blood lead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary tyrosinemia type 1",
+          "cells": [
+            {
+              "text": "Succinylacetone inhibits ALA dehydratase"
+            },
+            {
+              "text": "Urine succinylacetone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Ascending weakness"
+            },
+            {
+              "text": "Urine PBG, CSF protein, nerve studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic liver disease",
+          "cells": [
+            {
+              "text": "Mild nonspecific rise in urine porphyrins"
+            },
+            {
+              "text": "Normal PBG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda versus VP or HCP",
+          "cells": [
+            {
+              "text": "Same blistering skin lesions"
+            },
+            {
+              "text": "Plasma fluorescence peak, fecal porphyrins, urine PBG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "porphyria-treatment",
+      "kind": "treatment",
+      "title": "Treating porphyrias",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV hemin or heme arginate",
+          "cells": [
+            {
+              "text": "Severe attack, weakness, hyponatremia"
+            },
+            {
+              "text": "3 to 4 mg/kg IV once daily for 4 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV dextrose",
+          "cells": [
+            {
+              "text": "Mild attacks"
+            },
+            {
+              "text": "300 to 500 g/day, e.g. 3 L of 10% over 24 h or 1 L of 50% to limit hyponatremia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Withdraw precipitants",
+          "cells": [
+            {
+              "text": "Every attack"
+            },
+            {
+              "text": "Barbiturates, hydantoins, trimethoprim, progestogens, alcohol, fasting, smoking"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioids, antiemetics, beta blocker",
+          "cells": [
+            {
+              "text": "Pain, vomiting, tachycardia and hypertension"
+            },
+            {
+              "text": "Correct hyponatremia cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Givosiran",
+          "cells": [
+            {
+              "text": "Prevent recurrent acute attacks in adults"
+            },
+            {
+              "text": "2.5 mg/kg SC monthly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "GnRH analogue",
+          "cells": [
+            {
+              "text": "Cyclical premenstrual attacks"
+            },
+            {
+              "text": "Specialist use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phlebotomy or low-dose hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Porphyria cutanea tarda"
+            },
+            {
+              "text": "Also stop alcohol and estrogens, treat hepatitis C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic imaging",
+          "cells": [
+            {
+              "text": "Long-term AIP"
+            },
+            {
+              "text": "At least every 6 months for liver cancer risk; CKD in up to 59%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "porphyria-dx-mgmt",
+      "title": "Diagnosis and management of acute porphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe abdominal pain with tachycardia, weakness or psychiatric change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Spot urine PBG and ALA with creatinine",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "PBG markedly raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Acute porphyria unlikely; consider lead, obstruction, GBS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Stop porphyrinogenic drugs; analgesia; check sodium",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Weakness, hyponatremia, seizures or severe attack?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV hemin 3 to 4 mg/kg daily for 4 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV dextrose 300 to 500 g/day",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fecal and plasma porphyrins, genetics to type",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Recurrent attacks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Givosiran prophylaxis; screen relatives",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Trigger avoidance, liver and kidney surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

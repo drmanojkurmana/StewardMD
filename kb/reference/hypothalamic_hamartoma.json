@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for hypothalamic hamartoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypothalamic_hamartoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with hypothalamic views",
+          "cells": [
+            {
+              "text": "Non-enhancing mass isointense to grey matter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation of the hypothalamic-pituitary-gonadal axis",
+          "cells": [
+            {
+              "text": "Precocious puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and video-EEG",
+          "cells": [
+            {
+              "text": "Gelastic and other seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognitive and behavioural comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Syndromic association such as Pallister-Hall, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Lesion stability and exclusion of neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypothalamic_hamartoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothalamic or optic pathway glioma",
+          "cells": [
+            {
+              "text": "Growing or enhancing mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic central precocious puberty",
+          "cells": [
+            {
+              "text": "Precocious puberty without gelastic seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypothalamic_hamartoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "GnRH agonist",
+          "cells": [
+            {
+              "text": "Suppresses premature activation of the hypothalamic-pituitary-gonadal axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For gelastic and other seizures, often drug-resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesional treatment for refractory epilepsy",
+          "cells": [
+            {
+              "text": "MRI-guided laser ablation, radiosurgery, radiofrequency ablation or surgical disconnection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological support",
+          "cells": [
+            {
+              "text": "Cognitive decline and behaviour management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial MRI",
+          "cells": [
+            {
+              "text": "Confirms lesion stability and distinguishes from neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where a syndromic association is identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypothalamic_hamartoma-dx-mgmt",
+      "title": "Diagnosis and management of Hypothalamic hamartoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gelastic seizures, often from infancy, with central precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Drug-resistant seizures, cognitive regression or a growing enhancing mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Epilepsy surgery referral; exclude neoplasm on serial MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with hypothalamic views, endocrine evaluation, video-EEG, neuropsychology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-enhancing hypothalamic mass with precocious puberty confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other mass lesions; serial MRI to confirm stability",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "GnRH agonist to suppress precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication for gelastic and other seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lesional ablation or disconnection for refractory epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuropsychological support and behaviour management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial MRI to confirm stability",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Puberty and seizures controlled; stable lesion on serial imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

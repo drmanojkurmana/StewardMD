@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for disseminated mycobacterium avium complex infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / IDSA-ATS non-tuberculous mycobacteria guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disseminated_mac_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterial blood cultures for Mycobacterium avium complex",
+          "cells": [
+            {
+              "text": "M. avium complex in blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow, lymph node or liver biopsy with acid-fast staining",
+          "cells": [
+            {
+              "text": "Organisms in marrow, node or liver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD4 count and HIV viral load",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and liver function tests with alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Cytopenias and cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly and abdominal lymphadenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species identification and susceptibility testing",
+          "cells": [
+            {
+              "text": "Distinguishes it from tuberculosis and guides therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_mac_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated tuberculosis",
+          "cells": [
+            {
+              "text": "Overlapping features; urgent differentiation required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Bulky lymphadenopathy and hepatosplenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasmosis or talaromycosis",
+          "cells": [
+            {
+              "text": "Disseminated fungal infection in advanced HIV"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_mac_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide-based combination",
+          "cells": [
+            {
+              "text": "Azithromycin or clarithromycin with ethambutol and often rifabutin; never macrolide monotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Starts or is optimised to restore CD4-driven immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune reconstitution syndrome",
+          "cells": [
+            {
+              "text": "Anticipated and managed once antiretroviral therapy begins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Wasting, anaemia and cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Continue until sustained immune recovery and clinical and microbiological response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species and susceptibility",
+          "cells": [
+            {
+              "text": "Distinguishes from tuberculosis and guides the regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases follow-up",
+          "cells": [
+            {
+              "text": "Adherence support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disseminated_mac_infection-dx-mgmt",
+      "title": "Diagnosis and management of Disseminated Mycobacterium avium complex infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected disseminated MAC: febrile wasting in advanced HIV with low CD4 count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe cytopenias, marked organomegaly, worsening after ART)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent differentiation from tuberculosis and start antimycobacterial therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mycobacterial blood cultures; tissue biopsy; CD4 count; species and susceptibility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is M. avium complex confirmed in blood or tissue culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider disseminated TB, lymphoma, histoplasmosis or talaromycosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Macrolide with ethambutol and often rifabutin; never macrolide monotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start or optimise antiretroviral therapy to restore immunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticipate and manage immune reconstitution inflammatory syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care for wasting, anaemia and cholestasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continue therapy until sustained immune recovery and microbiological response",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally controllable with combination therapy and antiretroviral treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

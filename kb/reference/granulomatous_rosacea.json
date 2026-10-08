@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for granulomatous rosacea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granulomatous_rosacea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal granulomata and any necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Special stains and culture",
+          "cells": [
+            {
+              "text": "Mycobacterial and fungal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Demodex density assessment",
+          "cells": [
+            {
+              "text": "Skin scraping or biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging when granulomata are found",
+          "cells": [
+            {
+              "text": "Sarcoidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior topical corticosteroid use",
+          "cells": [
+            {
+              "text": "Aggravating factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular assessment",
+          "cells": [
+            {
+              "text": "Periocular lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulomatous_rosacea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lupus miliaris disseminatus faciei",
+          "cells": [
+            {
+              "text": "Facial granulomatous papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous sarcoidosis of the face",
+          "cells": [
+            {
+              "text": "Granulomatous facial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous tuberculosis (lupus vulgaris)",
+          "cells": [
+            {
+              "text": "Caseating granulomas on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulomatous_rosacea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral tetracyclines",
+          "cells": [
+            {
+              "text": "Doxycycline for anti-inflammatory effect; first-line systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical agents",
+          "cells": [
+            {
+              "text": "Metronidazole, azelaic acid or ivermectin; ivermectin reduces Demodex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral isotretinoin",
+          "cells": [
+            {
+              "text": "Reserved for antibiotic-resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop topical corticosteroids",
+          "cells": [
+            {
+              "text": "Aggravate the eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance and photoprotection",
+          "cells": [
+            {
+              "text": "General rosacea measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular rosacea",
+          "cells": [
+            {
+              "text": "Assess and treat, particularly with periocular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Chronic, treatment-resistant course with risk of scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granulomatous_rosacea-dx-mgmt",
+      "title": "Diagnosis and management of Granulomatous rosacea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granulomatous rosacea: facial dermal granulomata with rosacea features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (granulomata suggesting TB or sarcoidosis, scarring, ocular threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Systemic work-up for necrotising granulomata or ocular inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with special stains and culture, Demodex assessment and chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show dermal granulomata with negative cultures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lupus miliaris, cutaneous sarcoidosis or cutaneous tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral doxycycline as first-line systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical metronidazole, azelaic acid or ivermectin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw topical corticosteroids, which worsen the eruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral isotretinoin for antibiotic-resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often chronic and treatment-resistant, needing prolonged therapy; scarring can remain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

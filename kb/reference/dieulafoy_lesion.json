@@ -146,5 +146,278 @@
       "caption": "Overview comparison matrix for dieulafoy lesion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dieulafoy_lesion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Active spurting or adherent clot over normal mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic tattoo or clip",
+          "cells": [
+            {
+              "text": "Marks the lesion for relocation if bleeding recurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography or catheter angiography",
+          "cells": [
+            {
+              "text": "Used when endoscopy is unrevealing during active bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tagged red-cell scintigraphy",
+          "cells": [
+            {
+              "text": "Intermittent obscure bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, coagulation profile and group-and-save",
+          "cells": [
+            {
+              "text": "Blood loss, coagulopathy and crossmatch needs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dieulafoy_lesion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "IV fluids and blood products; correct any coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic haemostasis, first line",
+          "cells": [
+            {
+              "text": "Clips or band ligation combined with thermal or injection therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic marking",
+          "cells": [
+            {
+              "text": "Tattoo or clip to aid relocation should bleeding recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography with embolisation",
+          "cells": [
+            {
+              "text": "For rebleeding or lesions inaccessible to endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical wedge resection",
+          "cells": [
+            {
+              "text": "Only for lesions refractory to endoscopic and radiological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for rebleeding",
+          "cells": [
+            {
+              "text": "The lesion has a notable tendency to rebleed; repeat endoscopy if suspicion persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dieulafoy_lesion-dx-mgmt",
+      "title": "Diagnosis and management of Dieulafoy lesion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dieulafoy lesion: brisk upper GI bleeding from normal-looking mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (massive haematemesis, instability, rebleeding after therapy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate, correct coagulopathy and arrange urgent endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy; CT or catheter angiography if unrevealing; FBC and crossmatch",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an active spurting point or adherent clot seen over normal mucosa?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bleeding ulcer, angiodysplasia, Mallory-Weiss tear or varices",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitate with fluids and blood; correct coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic haemostasis with clips or band ligation plus thermal or injection therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mark the lesion with a tattoo or clip for relocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transarterial embolisation for rebleeding or endoscopically inaccessible lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical wedge resection only if endoscopic and radiological therapy fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Endoscopic haemostasis gives definitive control in most; rebleeding is notable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

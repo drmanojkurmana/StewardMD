@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for paediatric intussusception."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intussusception_pediatric-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Target and pseudokidney signs; lead point"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal radiograph before reduction",
+          "cells": [
+            {
+              "text": "Obstruction or free air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air or contrast enema",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basic bloods and hydration assessment",
+          "cells": [
+            {
+              "text": "Guides resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for a pathological lead point",
+          "cells": [
+            {
+              "text": "Older or recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-reduction observation and repeat imaging",
+          "cells": [
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intussusception_pediatric-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malrotation with volvulus",
+          "cells": [
+            {
+              "text": "Bilious vomiting; needs urgent imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Henoch-Schonlein purpura",
+          "cells": [
+            {
+              "text": "Purpura; can trigger intussusception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meckel diverticulum with bleeding",
+          "cells": [
+            {
+              "text": "Lead point in older children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intussusception_pediatric-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids and electrolyte correction; nasogastric decompression if obstructed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-operative reduction",
+          "cells": [
+            {
+              "text": "Pneumatic or hydrostatic enema in the stable child without peritonitis or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Operative reduction",
+          "cells": [
+            {
+              "text": "Resection of non-viable bowel when enema fails, or peritonitis, perforation or ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cover and analgesia",
+          "cells": [
+            {
+              "text": "Peri-procedural antibiotics and analgesia where perforation or ischaemia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead point",
+          "cells": [
+            {
+              "text": "Meckel diverticulum, duplication cyst or polyp in older children and recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Paediatric surgery in a centre with radiological and surgical capability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intussusception_pediatric-dx-mgmt",
+      "title": "Diagnosis and management of Paediatric intussusception",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with intermittent colic, vomiting and a sausage-shaped abdominal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonitis, rigidity, perforation, shock or recurrent intussusception?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate; paediatric surgical referral; avoid enema if perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound target and pseudokidney signs, radiograph, bloods, hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stable child without peritonitis or perforation for reduction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Operative reduction or resection if non-viable; re-image after resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pneumatic or hydrostatic enema reduction first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous fluids and electrolyte correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Peri-procedural antibiotics if ischaemia suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Seek a lead point in older children and recurrent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Observe after reduction for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Non-operative reduction in most; recurrence watched; referral if enema fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

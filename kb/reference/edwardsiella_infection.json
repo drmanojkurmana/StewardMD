@@ -146,5 +146,343 @@
       "caption": "Overview comparison matrix for edwardsiella tarda infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "edwardsiella_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Diarrhoeal illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood, abscess pus or wound culture",
+          "cells": [
+            {
+              "text": "Invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and biochemical identification",
+          "cells": [
+            {
+              "text": "Hydrogen sulphide production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of abscesses",
+          "cells": [
+            {
+              "text": "Hepatobiliary or soft-tissue collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and iron studies",
+          "cells": [
+            {
+              "text": "Predisposing hepatic disease or iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial susceptibility testing",
+          "cells": [
+            {
+              "text": "Directed therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "edwardsiella_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Salmonella gastroenteritis or enteric fever",
+          "cells": [
+            {
+              "text": "Enteric pathogen with similar diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aeromonas infection",
+          "cells": [
+            {
+              "text": "Gastroenteritis or wound infection after water exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vibrio infection",
+          "cells": [
+            {
+              "text": "Marine or freshwater exposure with wound or diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shigella or Campylobacter dysentery",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Yersinia enterocolitica infection",
+          "cells": [
+            {
+              "text": "Mesenteric adenitis or terminal ileitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "edwardsiella_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "Fluoroquinolone, third-generation cephalosporin or aminoglycoside by susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral rehydration",
+          "cells": [
+            {
+              "text": "Self-limiting gastroenteritis; antibiotics for severe or dysenteric disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess drainage",
+          "cells": [
+            {
+              "text": "Surgical or radiological drainage alongside antimicrobials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis care",
+          "cells": [
+            {
+              "text": "Resuscitation and organ support for bacteraemia in compromised hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing conditions",
+          "cells": [
+            {
+              "text": "Hepatic disease and iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Safe handling and thorough cooking of freshwater fish; wound care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "edwardsiella_infection-dx-mgmt",
+      "title": "Diagnosis and management of Edwardsiella tarda infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Edwardsiella tarda infection: diarrhoea or wound after freshwater exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sepsis with liver disease, deep abscess, severe dehydration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent blood cultures, antibiotics and resuscitation for sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool or blood culture; biochemical identification; imaging; liver and iron studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Edwardsiella tarda isolated from stool, blood, pus or wound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Salmonella, Aeromonas, Vibrio, Shigella or Yersinia infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Targeted antibiotics chosen by susceptibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral rehydration for self-limiting gastroenteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain hepatobiliary and soft-tissue abscesses with antimicrobials",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resuscitate and support organs in bacteraemia and sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review liver disease and iron overload as predisposing factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Gastroenteritis self-limiting; invasive disease in compromised hosts can be severe",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

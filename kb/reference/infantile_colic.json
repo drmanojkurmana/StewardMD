@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for infantile colic."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_colic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History and full physical examination",
+          "cells": [
+            {
+              "text": "Colic is a clinical diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth assessment",
+          "cells": [
+            {
+              "text": "Normal weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted tests",
+          "cells": [
+            {
+              "text": "Only when history or examination suggests an organic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary modification trial",
+          "cells": [
+            {
+              "text": "Cow's milk protein allergy suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Infection concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_colic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cow's milk protein allergy",
+          "cells": [
+            {
+              "text": "Responds to a time-limited elimination trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Regurgitation with poor weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intussusception or incarcerated hernia",
+          "cells": [
+            {
+              "text": "Bilious vomiting, distension or lethargy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection, including urinary tract infection",
+          "cells": [
+            {
+              "text": "Fever or systemic illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_colic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; resolves by around three to four months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soothing techniques",
+          "cells": [
+            {
+              "text": "Holding, rhythmic rocking, gentle motion, swaddling; reduce overstimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding technique",
+          "cells": [
+            {
+              "text": "Winding and burping; avoid overfeeding and air swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Time-limited exclusion",
+          "cells": [
+            {
+              "text": "Cow's milk protein exclusion only where allergy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Confirms normal thriving and helps exclude an organic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caregiver support",
+          "cells": [
+            {
+              "text": "Screen for carer exhaustion and low mood; safety-netting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_colic-dx-mgmt",
+      "title": "Diagnosis and management of Infantile Colic",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged inconsolable crying in a well-fed, thriving infant, often in the evening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Poor weight gain, fever, bilious vomiting, blood in stool or lethargy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric assessment for infection, intussusception or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full history and examination, growth assessment, urinalysis if infection concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thriving infant with no organic cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate the organic cause identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, self-limiting, resolves by three to four months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Soothing: holding, rocking, swaddling, less overstimulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding technique: winding, avoid overfeeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Time-limited cow's milk exclusion only if allergy suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Support caregivers; screen for carer distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; resolves by about three to four months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

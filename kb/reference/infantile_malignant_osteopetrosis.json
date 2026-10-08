@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for infantile malignant osteopetrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_malignant_osteopetrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Diffuse osteosclerosis, bone-in-bone, rugger-jersey spine, loss of corticomedullary differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Anaemia, thrombocytopenia and leucoerythroblastic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, phosphate, PTH and vitamin D",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and secondary hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (TCIRG1, CLCN7, OSTM1, SNX10, TNFSF11, TNFRSF11A)",
+          "cells": [
+            {
+              "text": "Causal gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial CT or MRI",
+          "cells": [
+            {
+              "text": "Foraminal stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and audiological assessment",
+          "cells": [
+            {
+              "text": "Cranial nerve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy",
+          "cells": [
+            {
+              "text": "Osteoclast-rich versus osteoclast-poor disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_malignant_osteopetrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbonic anhydrase II deficiency",
+          "cells": [
+            {
+              "text": "Renal tubular acidosis and cerebral calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyknodysostosis",
+          "cells": [
+            {
+              "text": "Cathepsin K deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant (adult) osteopetrosis",
+          "cells": [
+            {
+              "text": "Adult-onset form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_malignant_osteopetrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Urgent allogeneic haematopoietic stem cell transplant; potentially curative in osteoclast-rich subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion and infection",
+          "cells": [
+            {
+              "text": "Support for anaemia and thrombocytopenia; prompt treatment of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium",
+          "cells": [
+            {
+              "text": "Correct hypocalcaemia and manage secondary hyperparathyroidism; treat tetany or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial nerves",
+          "cells": [
+            {
+              "text": "Regular ophthalmological and audiological checks; decompress foraminal stenosis if indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractures",
+          "cells": [
+            {
+              "text": "Orthopaedic care; dense bone is mechanically brittle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoclast-poor RANKL disease",
+          "cells": [
+            {
+              "text": "Not correctable by transplant; alternative supportive strategies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_malignant_osteopetrosis-dx-mgmt",
+      "title": "Diagnosis and management of Infantile malignant osteopetrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with faltering growth, frontal bossing, macrocephaly and pancytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Visual loss, bleeding or sepsis, raised intracranial pressure, or tetany?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transfusion, infection treatment, calcium correction and eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, blood film, calcium and PTH, gene panel, bone biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Osteoclast-rich subtype confirmed, suitable for transplant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Osteoclast-poor RANKL disease: transplant will not correct it; supportive plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent allogeneic stem cell transplant for suitable subtypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfusion support and prompt infection treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct hypocalcaemia; treat tetany or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular eye and hearing checks; decompress foraminal stenosis if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthopaedic care for brittle fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Transplant potentially curative in suitable subtypes; supportive care otherwise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

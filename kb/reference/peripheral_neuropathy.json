@@ -176,5 +176,488 @@
       "caption": "Overview comparison matrix for peripheral neuropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 384-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 11-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 385-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peripheral_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Localising and classifying peripheral neuropathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Pattern 1: symmetric proximal and distal weakness with sensory loss",
+          "cells": [
+            {
+              "text": "GBS if acute, CIDP if chronic"
+            },
+            {
+              "text": "{{hy:Treatable; GBS can need ventilation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pattern 2: length-dependent distal sensory loss",
+          "cells": [
+            {
+              "text": "Diabetes, drugs, toxins, alcohol, hereditary"
+            },
+            {
+              "text": "Commonest pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pattern 3: asymmetric multifocal deficits",
+          "cells": [
+            {
+              "text": "Mononeuropathy multiplex"
+            },
+            {
+              "text": "Urgent vasculitis workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axonal degeneration on NCS",
+          "cells": [
+            {
+              "text": "Low CMAP and SNAP amplitudes, near-normal velocity and latency"
+            },
+            {
+              "text": "Denervation on needle EMG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Segmental demyelination on NCS",
+          "cells": [
+            {
+              "text": "Slow conduction velocity, long distal latency, conduction block, temporal dispersion, prolonged or absent F wave and H reflex"
+            },
+            {
+              "text": "Suggests GBS, CIDP or hereditary demyelination"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Time course",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Acute up to 4 weeks, subacute 4 to 8 weeks, chronic over 8 weeks",
+              "op": ">",
+              "value": 8
+            },
+            {
+              "text": "Acute course needs prompt evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline labs",
+          "cells": [
+            {
+              "text": "CBC, renal and liver tests, glucose and HbA1c, TSH, B12, folate, ESR, ANA, RF, SPEP with immunofixation, free light chains"
+            },
+            {
+              "text": "Screens for treatable causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose tolerance test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in about one-third of painful sensory neuropathy with normal HbA1c",
+              "op": "=",
+              "value": 33
+            },
+            {
+              "text": "Detects impaired glucose tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylmalonic acid and homocysteine",
+          "cells": [
+            {
+              "text": "Raised in B12 deficiency"
+            },
+            {
+              "text": "Anemia or macrocytosis absent in up to 40%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic testing, skin biopsy",
+          "cells": [
+            {
+              "text": "Small-fiber neuropathy with normal NCS"
+            },
+            {
+              "text": "Deep breathing, Valsalva, tilt, sudomotor testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No cause is found in about half of patients despite full evaluation."
+    },
+    {
+      "id": "peripheral_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic peripheral neuropathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor neuron disease (ALS)",
+          "cells": [
+            {
+              "text": "Asymmetric distal weakness without sensory loss, upper motor neuron signs"
+            },
+            {
+              "text": "EMG widespread denervation, normal SNAPs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multifocal motor neuropathy",
+          "cells": [
+            {
+              "text": "Pure motor, treatable ALS mimic"
+            },
+            {
+              "text": "Conduction block on NCS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiculopathy or plexopathy",
+          "cells": [
+            {
+              "text": "Dermatomal or plexus distribution"
+            },
+            {
+              "text": "EMG with paraspinal muscles, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis or LEMS",
+          "cells": [
+            {
+              "text": "Fatigable weakness, no sensory loss"
+            },
+            {
+              "text": "Repetitive stimulation, antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "Proximal weakness, normal sensation"
+            },
+            {
+              "text": "CK, EMG myopathic units"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined system degeneration",
+          "cells": [
+            {
+              "text": "Distal sensory signs plus upper motor neuron signs"
+            },
+            {
+              "text": "B12, copper, vitamin E levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory ganglionopathy",
+          "cells": [
+            {
+              "text": "Non-length-dependent sensory loss and ataxia"
+            },
+            {
+              "text": "Anti-Hu; search for small-cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other acute weakness (botulism, polio, toxic neuropathy)",
+          "cells": [
+            {
+              "text": "Exclusions in GBS criteria"
+            },
+            {
+              "text": "Clinical context, CSF cytology"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "peripheral_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Treating peripheral neuropathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Diabetes, B12 or folate deficiency, drugs, toxins, alcohol"
+            },
+            {
+              "text": "B12 deficits often persist in at least 50%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IVIG or plasma exchange",
+          "cells": [
+            {
+              "text": "Guillain-Barre syndrome"
+            },
+            {
+              "text": "Monitor respiratory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids, IVIG or plasma exchange",
+          "cells": [
+            {
+              "text": "CIDP"
+            },
+            {
+              "text": "Relapsing course common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gabapentinoid, duloxetine or tricyclic",
+          "cells": [
+            {
+              "text": "Neuropathic pain"
+            },
+            {
+              "text": "Tricyclics help diabetic neuropathy and postherpetic neuralgia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Immunosuppression for vasculitis",
+          "cells": [
+            {
+              "text": "Mononeuropathy multiplex from vasculitis"
+            },
+            {
+              "text": "After nerve and muscle biopsy if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot care and rehabilitation",
+          "cells": [
+            {
+              "text": "All with sensory loss or weakness"
+            },
+            {
+              "text": "Protect insensate skin, gait aids, physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic symptom management",
+          "cells": [
+            {
+              "text": "Postural hypotension, bowel and bladder dysfunction"
+            },
+            {
+              "text": "Consider amyloid if no diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peripheral_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of peripheral neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Numbness, pain or weakness in the limbs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid symmetric proximal and distal weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Suspect GBS: admit, monitor breathing, IVIG or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Asymmetric multifocal deficits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Urgent vasculitis workup; consider nerve biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Baseline labs including glucose, B12, SPEP, free light chains",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nerve conduction studies and EMG",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Demyelinating features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Consider CIDP or hereditary neuropathy; immunotherapy for CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Axonal: treat cause, pain control, foot care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

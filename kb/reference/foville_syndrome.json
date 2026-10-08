@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for foville syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "foville_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI of the dorsal caudal pons",
+          "cells": [
+            {
+              "text": "Localises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography of the basilar artery",
+          "cells": [
+            {
+              "text": "Assesses the posterior circulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjugate horizontal gaze and vestibulo-ocular reflex assessment",
+          "cells": [
+            {
+              "text": "Characterises the conjugate gaze defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial nerve examination",
+          "cells": [
+            {
+              "text": "Distinguishes upper from lower motor neurone weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vessel wall imaging",
+          "cells": [
+            {
+              "text": "Where basilar atherosclerosis or dissection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foville_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Millard-Gubler syndrome",
+          "cells": [
+            {
+              "text": "Isolated abduction deficit, without the conjugate gaze defect of Foville"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hemispheric lesion",
+          "cells": [
+            {
+              "text": "Contralateral gaze preference rather than ipsilateral gaze palsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foville_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperacute reperfusion",
+          "cells": [
+            {
+              "text": "IV thrombolysis, or mechanical thrombectomy for basilar or posterior-circulation occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet; anticoagulant for cardioembolic or dissection-related stroke; statin and vascular risk control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical-care monitoring",
+          "cells": [
+            {
+              "text": "Close monitoring for basilar-territory progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye protection and diplopia",
+          "cells": [
+            {
+              "text": "Lubrication, prisms or occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing and airway",
+          "cells": [
+            {
+              "text": "Assess swallowing and protect the airway against aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular cause",
+          "cells": [
+            {
+              "text": "Investigate and treat basilar atherosclerosis or dissection through a stroke service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "foville_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Foville syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Foville syndrome: ipsilateral conjugate gaze palsy with facial weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drowsiness, quadriparesis, bilateral pontine signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway: evolving basilar thrombosis or pontine haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diffusion-weighted MRI and CT or MR angiography of the basilar artery",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does diffusion MRI localise a dorsal caudal pontine lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Millard-Gubler syndrome, one-and-a-half syndrome or a hemispheric lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hyperacute reperfusion with thrombolysis or thrombectomy where eligible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet, or anticoagulant if cardioembolic, plus statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Critical-care monitoring for basilar-territory progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurorehabilitation with physiotherapy, occupational and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Limited infarcts may recover limb function, but the horizontal gaze palsy can persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

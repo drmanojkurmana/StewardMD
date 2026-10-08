@@ -143,5 +143,296 @@
       "caption": "Overview comparison matrix for euthyroid sick syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and critical care references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "euthyroid_sick_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid tests interpreted against the acute illness",
+          "cells": [
+            {
+              "text": "Low T3 with normal or low TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat thyroid tests after recovery",
+          "cells": [
+            {
+              "text": "Normalisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of drugs affecting thyroid tests",
+          "cells": [
+            {
+              "text": "Glucocorticoids, dopamine and amiodarone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for genuine thyroid disease",
+          "cells": [
+            {
+              "text": "Only where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correlation with the clinical picture",
+          "cells": [
+            {
+              "text": "Rather than treating the numbers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "euthyroid_sick_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central (secondary) hypothyroidism",
+          "cells": [
+            {
+              "text": "Suspected when other pituitary deficits are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug effects on thyroid tests",
+          "cells": [
+            {
+              "text": "Steroids, dopamine and amiodarone alter results"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "euthyroid_sick_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying acute illness",
+          "cells": [
+            {
+              "text": "The test changes are adaptive and resolve with recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid thyroid hormone replacement",
+          "cells": [
+            {
+              "text": "Generally not indicated and may be harmful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine thyroid testing in acutely ill patients",
+          "cells": [
+            {
+              "text": "Unless intrinsic thyroid disease is genuinely suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review drugs that alter thyroid tests",
+          "cells": [
+            {
+              "text": "Glucocorticoids, dopamine and amiodarone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat thyroid function after recovery",
+          "cells": [
+            {
+              "text": "Confirms normalisation rather than treating numbers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care for very low thyroxine",
+          "cells": [
+            {
+              "text": "A marker of severe illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "euthyroid_sick_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Euthyroid sick syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abnormal thyroid tests in an acutely or chronically unwell patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (very low thyroxine, genuine thyroid features, suspected central disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intensive supportive care for severe illness; endocrine input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Interpret tests against the illness; drug review; avoid routine testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low T3 with no intrinsic thyroid disease and no thyroid-altering drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for genuine thyroid disease, central hypothyroidism or drug effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying acute illness; changes resolve with recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid thyroid hormone replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine thyroid testing in acutely ill patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat thyroid tests after recovery rather than treating numbers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Test abnormalities are benign; a very low thyroxine reflects severe illness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

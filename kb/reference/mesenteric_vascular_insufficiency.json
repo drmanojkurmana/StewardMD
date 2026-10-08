@@ -171,5 +171,518 @@
       "caption": "Overview comparison matrix for mesenteric vascular insufficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Mesenteric Ischemia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/acute-mesenteric-ischemia"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mesenteric_vascular_insufficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of mesenteric ischaemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain out of proportion to examination",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in about 95% of acute arterial ischaemia",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "{{hy:Act on suspicion; peritonism is late}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial embolus share of AMI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 40% (Merck); about half (Harrison)",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Lodges in mid to distal SMA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Arterial thrombosis share",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 25 to 30%",
+              "range": [
+                25,
+                30
+              ]
+            },
+            {
+              "text": "Acute on chronic atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous thrombosis and NOMI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 15% each (Merck)",
+              "op": "=",
+              "value": 15
+            },
+            {
+              "text": "Harrison gives venous thrombosis under 10%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT angiography",
+          "cells": [
+            {
+              "text": "Thin 1 mm cuts with venous phase"
+            },
+            {
+              "text": "Gold standard for arterial and venous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting mesenteric duplex",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "High SMA velocity has about 80% PPV",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Negative study virtually excludes chronic ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate, WBC, acidosis",
+          "cells": [
+            {
+              "text": "Rise late with necrosis"
+            },
+            {
+              "text": "Normal values do not exclude ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Postprandial pain, food fear, weight loss over 6 to 12 months"
+            },
+            {
+              "text": "CTA; endoscopy to exclude cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic colitis on colonoscopy",
+          "cells": [
+            {
+              "text": "Mild: erythema; moderate: pale ulcers; severe: black or green mucosa"
+            },
+            {
+              "text": "Black or green means full-thickness necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mortality of AMI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50 to 80%",
+              "range": [
+                50,
+                80
+              ]
+            },
+            {
+              "text": "Lower if treated before infarction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Cause proportions differ: Merck (citing Lendzion 2022) gives embolus over 40%, venous 15%, NOMI 15%; Harrison 22e gives embolus about 50% and venous under 10%."
+    },
+    {
+      "id": "mesenteric_vascular_insufficiency-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mesenteric ischaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Epigastric pain to back, high lipase"
+            },
+            {
+              "text": "Lipase and CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary colic or cholecystitis",
+          "cells": [
+            {
+              "text": "RUQ pain, Murphy sign"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic ulcer or perforation",
+          "cells": [
+            {
+              "text": "Epigastric pain, free air if perforated"
+            },
+            {
+              "text": "Endoscopy or CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strangulated bowel obstruction",
+          "cells": [
+            {
+              "text": "Distension, vomiting, prior surgery or hernia"
+            },
+            {
+              "text": "CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Often confused with ischaemic colitis; younger, chronic"
+            },
+            {
+              "text": "Colonoscopy with biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious colitis",
+          "cells": [
+            {
+              "text": "Fever, travel or food exposure"
+            },
+            {
+              "text": "Stool tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GI malignancy (for CMI)",
+          "cells": [
+            {
+              "text": "Weight loss with postprandial pain"
+            },
+            {
+              "text": "Endoscopy and CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mesenteric_vascular_insufficiency-treatment",
+      "kind": "treatment",
+      "title": "Treatment of mesenteric ischaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation and antibiotics",
+          "cells": [
+            {
+              "text": "All suspected AMI"
+            },
+            {
+              "text": "IV fluids, broad-spectrum antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic heparin",
+          "cells": [
+            {
+              "text": "Suspected AMI without contraindication"
+            },
+            {
+              "text": "Start early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immediate laparotomy",
+          "cells": [
+            {
+              "text": "{{hy:Peritoneal signs at any point}}"
+            },
+            {
+              "text": "Resect dead bowel; plan second look"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Embolectomy, thrombolysis or endovascular revascularisation",
+          "cells": [
+            {
+              "text": "Arterial embolus or thrombosis"
+            },
+            {
+              "text": "Restore SMA flow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intra-arterial papaverine",
+          "cells": [
+            {
+              "text": "Nonocclusive ischaemia"
+            },
+            {
+              "text": "Via angiography catheter; correct low flow, avoid vasoconstrictors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Mesenteric venous thrombosis without peritonitis"
+            },
+            {
+              "text": "Test for hypercoagulable state"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Long-term antithrombotics",
+          "cells": [
+            {
+              "text": "After arterial embolism or venous thrombosis"
+            },
+            {
+              "text": "Long-term anticoagulation and dual antiplatelet therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Elective stent or bypass",
+          "cells": [
+            {
+              "text": "Chronic mesenteric ischaemia"
+            },
+            {
+              "text": "Nutritional repletion; risk factor control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no doses for heparin, papaverine or thrombolytics."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mesenteric_vascular_insufficiency-dx-mgmt",
+      "title": "Diagnosis and management of mesenteric vascular insufficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe abdominal pain out of proportion to examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Resuscitate, antibiotics, heparin; ECG for AF",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Peritoneal signs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Laparotomy, revascularise, resect, second look",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT angiography with venous phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Arterial occlusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Embolectomy, thrombolysis or endovascular repair",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Mesenteric venous thrombosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Anticoagulate; thrombophilia work-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Low-flow state with vasospasm on angiography?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "NOMI: intra-arterial papaverine, restore perfusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Seek other cause: pancreatitis, obstruction, perforation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

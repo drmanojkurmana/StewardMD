@@ -146,5 +146,334 @@
       "caption": "Overview comparison matrix for hypersomnia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypersomnia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleep history and sleep diary, sometimes with actigraphy",
+          "cells": [
+            {
+              "text": "Excludes insufficient sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epworth Sleepiness Scale",
+          "cells": [
+            {
+              "text": "Quantifies subjective daytime sleepiness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight polysomnography",
+          "cells": [
+            {
+              "text": "Sleep apnoea and other fragmenting disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Objective sleepiness and early REM onsets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF orexin or HLA typing",
+          "cells": [
+            {
+              "text": "Investigates narcolepsy when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypersomnia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic insufficient sleep",
+          "cells": [
+            {
+              "text": "Most common cause overall; exclude before a primary disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Treatable cause of daytime sleepiness; treated with CPAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narcolepsy type 1",
+          "cells": [
+            {
+              "text": "Cataplexy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication or substance effects",
+          "cells": [
+            {
+              "text": "Sedating medication or substances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression",
+          "cells": [
+            {
+              "text": "Hypersomnia masking depression with suicide risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypersomnia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat secondary cause",
+          "cells": [
+            {
+              "text": "CPAP for obstructive sleep apnoea, review sedating medication, address depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep opportunity and hygiene",
+          "cells": [
+            {
+              "text": "Scheduled short naps in central disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wake-promoting agents",
+          "cells": [
+            {
+              "text": "Modafinil or armodafinil, or amphetamine-type stimulants, for narcolepsy and idiopathic hypersomnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataplexy treatment",
+          "cells": [
+            {
+              "text": "Sodium oxybate, pitolisant or noradrenergic-serotonergic antidepressants in narcolepsy type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety counselling",
+          "cells": [
+            {
+              "text": "Driving and occupational hazards while sleepiness is uncontrolled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptom scales and specialist sleep-medicine follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypersomnia-dx-mgmt",
+      "title": "Diagnosis and management of Hypersomnia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Excessive daytime sleepiness not explained by sleep opportunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cataplexy, new neurological signs or sleepiness causing accidents?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for narcolepsy type 1 or CNS cause; address driving safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep history, Epworth scale, polysomnography and multiple sleep latency test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause or primary hypersomnia disorder identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider narcolepsy testing with CSF orexin or HLA typing, then repeat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat secondary cause: CPAP, medication review, depression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ensure sleep opportunity and sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Wake-promoting agents for narcolepsy and idiopathic hypersomnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cataplexy treatment in narcolepsy type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Driving and occupational safety counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Symptom control and safety, with specialist sleep follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

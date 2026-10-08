@@ -146,5 +146,276 @@
       "caption": "Overview comparison matrix for ovarian follicular cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "follicular_cyst_ovary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the cyst as simple and unilocular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval follow-up ultrasound",
+          "cells": [
+            {
+              "text": "Confirms spontaneous resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test",
+          "cells": [
+            {
+              "text": "Helps interpret ovarian findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Used where the appearance is atypical or the woman is postmenopausal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured adnexal mass risk assessment",
+          "cells": [
+            {
+              "text": "Used when malignancy cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "follicular_cyst_ovary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Most simple cysts in premenopausal women regress over subsequent cycles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Confirms resolution and gives reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia",
+          "cells": [
+            {
+              "text": "For cyst-related pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined hormonal contraception",
+          "cells": [
+            {
+              "text": "Reduces new functional cysts in women with recurrent symptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic cystectomy or drainage",
+          "cells": [
+            {
+              "text": "For cysts that are large, persistent, symptomatic or diagnostically uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of complications",
+          "cells": [
+            {
+              "text": "Torsion needs emergency surgery; rupture with haemoperitoneum needs urgent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral for malignancy risk",
+          "cells": [
+            {
+              "text": "Atypical or postmenopausal cases; gynae-oncology opinion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "follicular_cyst_ovary-dx-mgmt",
+      "title": "Diagnosis and management of Ovarian follicular cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ovarian follicular cyst: adnexal mass found on pelvic ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (solid components, thick septations, severe pain, rupture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: suspected torsion or rupture with haemoperitoneum needs urgent surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound, with tumour markers if the appearance is atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the cyst simple and unilocular, and does it resolve on follow-up?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Structured malignancy risk assessment and gynae-oncology opinion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management with interval transvaginal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia for cyst-related pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider combined hormonal contraception for recurrent cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laparoscopic cystectomy or drainage if large, persistent or symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cysts resolve spontaneously; outlook is excellent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,341 @@
       "caption": "Overview comparison matrix for hand infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hand_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory markers and white cell count",
+          "cells": [
+            {
+              "text": "Gauge severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and intraoperative cultures",
+          "cells": [
+            {
+              "text": "Organisms, including anaerobes when exposure suggests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Foreign body, gas, retained tooth fragment or osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Used if systemic sepsis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Collections or fluid within the flexor sheath"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration and crystal analysis",
+          "cells": [
+            {
+              "text": "Used when gout or septic arthritis is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_infections-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute gout or pseudogout of the hand",
+          "cells": [
+            {
+              "text": "Crystal analysis on joint aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic whitlow",
+          "cells": [
+            {
+              "text": "Viral infection that should not be incised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body reaction or retained foreign body",
+          "cells": [
+            {
+              "text": "Detected on plain radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute calcific tendinitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complex regional pain syndrome or reactive swelling",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_infections-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Cover Staphylococcus aureus and streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incision and drainage",
+          "cells": [
+            {
+              "text": "Established closed-space collections such as felon, paronychia, web space or deep palmar abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency flexor sheath decompression",
+          "cells": [
+            {
+              "text": "Pyogenic flexor tenosynovitis, to preserve tendon function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elevation, splinting and analgesia",
+          "cells": [
+            {
+              "text": "Early localised infection, often settling on antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fight-bite wounds",
+          "cells": [
+            {
+              "text": "Formal exploration, irrigation and open management, with tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional cover",
+          "cells": [
+            {
+              "text": "MRSA cover where risk factors exist; atypical or anaerobic cover after aquatic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Limits stiffness and contracture; theatre if infection spreads"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hand_infections-dx-mgmt",
+      "title": "Diagnosis and management of Hand infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hand infection: finger swelling, pain, or a fight bite over a knuckle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Kanavel's signs, fight bite, spreading infection, sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency decompression for flexor tenosynovitis or necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inflammatory markers, cultures, radiographs; ultrasound for flexor sheath collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there an established closed-space collection such as a felon or paronychia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpetic whitlow, gout, foreign body or calcific tendinitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical antibiotics covering Staphylococcus aureus and streptococci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Incision and drainage of felon, paronychia or deep space abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elevation, splinting and analgesia for early localised infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy and serial review to limit stiffness and contracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infection controlled; function preserved with hand therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

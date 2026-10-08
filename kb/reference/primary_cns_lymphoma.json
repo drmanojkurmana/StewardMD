@@ -156,5 +156,339 @@
       "caption": "Overview comparison matrix for primary cns lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cns_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI of the brain and whole neuraxis",
+          "cells": [
+            {
+              "text": "Extent of brain and neuraxis disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic brain biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Histological diagnosis, ideally before corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF cytology and flow cytometry with clonality studies",
+          "cells": [
+            {
+              "text": "Cytology, flow cytometry and clonality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination and vitreous sampling",
+          "cells": [
+            {
+              "text": "Ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and EBV studies",
+          "cells": [
+            {
+              "text": "HIV and EBV association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic staging (PET-CT, bone marrow, testicular assessment in men)",
+          "cells": [
+            {
+              "text": "Whether disease is CNS-limited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cns_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral toxoplasmosis",
+          "cells": [
+            {
+              "text": "HIV infection"
+            },
+            {
+              "text": "HIV testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary CNS involvement by systemic lymphoma",
+          "cells": [
+            {
+              "text": "Disease outside the CNS on systemic staging"
+            },
+            {
+              "text": "Systemic staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cns_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Steroid timing",
+          "cells": [
+            {
+              "text": "Avoid corticosteroids before biopsy where possible, as they can obscure the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnosis",
+          "cells": [
+            {
+              "text": "Stereotactic brain biopsy; CSF markers only raise suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fitness assessment",
+          "cells": [
+            {
+              "text": "Baseline fitness, cognition and organ function before choosing treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Induction in fit patients",
+          "cells": [
+            {
+              "text": "High-dose methotrexate, typically with cytarabine, an alkylating agent and or an anti-CD20 antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consolidation in fit patients",
+          "cells": [
+            {
+              "text": "High-dose chemotherapy with autologous stem-cell transplant, or reduced-dose whole-brain radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Less fit or elderly patients",
+          "cells": [
+            {
+              "text": "Methotrexate-based induction when organ function allows; oral alkylating agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal radiation",
+          "cells": [
+            {
+              "text": "Avoid focal radiation or radiosurgery given infiltrative, often multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular involvement",
+          "cells": [
+            {
+              "text": "Intravitreal chemotherapy or ocular radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse or refractory disease",
+          "cells": [
+            {
+              "text": "Clinical trial enrolment first; otherwise methotrexate-based rechallenge or transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cns_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary CNS lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary CNS lymphoma: progressive focal or encephalopathic brain disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised intracranial pressure, obtundation, status epilepticus or ocular spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical and oncology review for raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of brain and neuraxis; CSF cytology; systemic staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does stereotactic biopsy confirm lymphoma with CNS-limited disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glioma, toxoplasmosis or metastasis; repeat diagnostic biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stereotactic biopsy, ideally before corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Assess fitness, cognition and organ function to select therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fit: high-dose methotrexate with cytarabine, then consolidation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Less fit: methotrexate-based induction or oral alkylating agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance imaging after treatment; trials or rechallenge for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,323 @@
       "caption": "Overview comparison matrix for haemobilia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemobilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-sectional contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Imaging of the bleeding source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter hepatic angiography",
+          "cells": [
+            {
+              "text": "Diagnostic, and therapeutic through embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal or side-viewing endoscopy",
+          "cells": [
+            {
+              "text": "Blood issuing from the ampulla"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Obstructive pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, coagulation studies and crossmatch",
+          "cells": [
+            {
+              "text": "Blood loss and clotting status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Ductal clot, dilatation or an underlying lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemobilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer or varices",
+          "cells": [
+            {
+              "text": "Quincke triad (right upper quadrant pain, jaundice, gastrointestinal bleeding) favours haemobilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemosuccus pancreaticus",
+          "cells": [
+            {
+              "text": "Bleeding via the pancreatic duct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choledocholithiasis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortoenteric fistula",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemobilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Catheter hepatic angiography with embolisation",
+          "cells": [
+            {
+              "text": "Controls active arterial bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluids and blood transfusion",
+          "cells": [
+            {
+              "text": "Resuscitation and correction of any coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCP with clot extraction and stenting",
+          "cells": [
+            {
+              "text": "Relieves biliary obstruction from clot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Vessel ligation or hepatic resection, for failed embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Hepatic artery pseudoaneurysm, tumour or gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Recurrent bleeding, biliary sepsis and haemodynamic deterioration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemobilia-dx-mgmt",
+      "title": "Diagnosis and management of Haemobilia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Upper gastrointestinal bleeding with right upper quadrant pain and jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamic instability, delayed bleed after procedure, or cholangitis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent angiographic embolisation for major arterial bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or angiography; endoscopy for ampullary bleeding; LFTs; crossmatch",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an arterial source or pseudoaneurysm identified on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemosuccus pancreaticus, duodenal tumour or choledocholithiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Catheter hepatic angiography and transarterial embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluids, blood transfusion and correction of coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ERCP with clot extraction and stenting for biliary obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery such as vessel ligation if embolisation fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeding controlled; underlying cause treated and recurrence monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for lipodermatosclerosis (sclerosing panniculitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipodermatosclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous duplex ultrasound",
+          "cells": [
+            {
+              "text": "Venous reflux; excludes thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial pressure index",
+          "cells": [
+            {
+              "text": "Required before applying compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Only if the diagnosis is unclear, given poor healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Helps distinguish from cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound swab",
+          "cells": [
+            {
+              "text": "Where an ulcer shows signs of infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipodermatosclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis or erysipelas",
+          "cells": [
+            {
+              "text": "Usually unilateral and febrile; this condition is often bilateral and afebrile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Acute unilateral swelling; duplex excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morphoea (localised scleroderma)",
+          "cells": [
+            {
+              "text": "Sclerosis without the venous signs of this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema nodosum",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipodermatosclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graduated compression",
+          "cells": [
+            {
+              "text": "Mainstay, applied after ABPI has excluded significant arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous treatment",
+          "cells": [
+            {
+              "text": "Leg elevation; duplex-guided endovenous ablation for correctable reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Emollients; dressings for venous ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute inflammatory phase",
+          "cells": [
+            {
+              "text": "Analgesia; an anabolic agent or pentoxifylline, with monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calf muscle pump",
+          "cells": [
+            {
+              "text": "Exercise and weight management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary antibiotics",
+          "cells": [
+            {
+              "text": "Acute episodes are usually bilateral, recurrent and afebrile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist venous review",
+          "cells": [
+            {
+              "text": "Where reflux or ulceration is not controlled conservatively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipodermatosclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Lipodermatosclerosis (sclerosing panniculitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Induration, pigmentation and tenderness above the medial malleolus in older adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, DVT, significant arterial disease, atypical ulcer)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for cellulitis or DVT; avoid compression if arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex ultrasound, ABPI, inflammatory markers, biopsy only if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does duplex show venous reflux with ABPI acceptable for compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cellulitis, DVT, morphoea or stasis dermatitis alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated compression once ABPI excludes arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Leg elevation and endovenous ablation for correctable reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emollients and dressings for ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia and treatment of the painful inflammatory phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Specialist venous review where reflux or ulceration is uncontrolled",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive if untreated; compression relieves pain and halts progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

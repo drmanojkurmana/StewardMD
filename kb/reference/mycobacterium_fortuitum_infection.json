@@ -146,5 +146,323 @@
       "caption": "Overview comparison matrix for mycobacterium fortuitum infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_fortuitum_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Culture of wound, tissue or sputum",
+          "cells": [
+            {
+              "text": "Rapid mycobacterial growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Species identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-susceptibility testing",
+          "cells": [
+            {
+              "text": "Detects inducible macrolide resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the surgical site or affected area",
+          "cells": [
+            {
+              "text": "Defines collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for oesophageal or aspiration disorder",
+          "cells": [
+            {
+              "text": "In pulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for common environmental or procedural source",
+          "cells": [
+            {
+              "text": "In clustered cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_fortuitum_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other rapidly growing mycobacteria, such as M. abscessus and M. chelonae",
+          "cells": [
+            {
+              "text": "Often susceptible to a broader range of oral agents than M. abscessus; inducible macrolide resistance must still be tested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign-body or suture granuloma",
+          "cells": [
+            {
+              "text": "Retained foreign material and undrained collections allow persistent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration pneumonia from conventional pathogens",
+          "cells": [
+            {
+              "text": "Pulmonary disease is linked to achalasia, reflux and chronic aspiration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_fortuitum_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Susceptibility-guided oral combination",
+          "cells": [
+            {
+              "text": "Fluoroquinolones, tetracyclines such as doxycycline or minocycline, and sulfonamides such as co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test for inducible macrolide resistance",
+          "cells": [
+            {
+              "text": "Before relying on a macrolide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Debride or drain infected surgical sites; remove infected catheters or prosthetic material such as breast implants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing conditions",
+          "cells": [
+            {
+              "text": "Investigate and manage an oesophageal or aspiration disorder where pulmonary disease is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Response and drug toxicity across the prolonged course; imaging to define collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common source",
+          "cells": [
+            {
+              "text": "Investigate environmental or procedural sources, such as nail-salon footbaths, in clusters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases referral",
+          "cells": [
+            {
+              "text": "Deep, prosthesis-related and pulmonary disease depend heavily on source control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_fortuitum_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium fortuitum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Wound infection or leg furunculosis with rapid mycobacterial growth on culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sternal or mediastinal infection, device infection, clusters)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review; remove infected device or debride the sternal wound",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture for rapid growth, species identification, susceptibility with macrolide test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Species identified and inducible macrolide resistance excluded on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat susceptibility testing with prolonged incubation; reassess macrolide use",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Susceptibility-guided oral combination: fluoroquinolone, tetracycline or co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Test for inducible macrolide resistance before any macrolide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Debride or drain infected sites; remove infected catheters or implants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate oesophageal or aspiration disorder in pulmonary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised skin and wound disease has a good prognosis; deep disease needs source control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -157,5 +157,352 @@
       "caption": "Overview comparison matrix for lipoid congenital adrenal hyperplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic and endocrine medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoid_congenital_adrenal_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes",
+          "cells": [
+            {
+              "text": "Hyponatraemia and hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum cortisol with raised ACTH",
+          "cells": [
+            {
+              "text": "Primary adrenal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Mineralocorticoid deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal and gonadal steroid profile",
+          "cells": [
+            {
+              "text": "Broadly low across all pathways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal imaging",
+          "cells": [
+            {
+              "text": "Enlarged, lipid-laden glands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype with pelvic and gonadal imaging",
+          "cells": [
+            {
+              "text": "Gonadal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAR and CYP11A1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoid_congenital_adrenal_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "P450 side-chain cleavage (CYP11A1) deficiency",
+          "cells": [
+            {
+              "text": "Separated by STAR and CYP11A1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "21-hydroxylase deficiency (salt-wasting CAH)",
+          "cells": [
+            {
+              "text": "Typically raises precursors; here essentially all steroids are low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete androgen insensitivity syndrome",
+          "cells": [
+            {
+              "text": "46,XY infant with female-appearing genitalia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial glucocorticoid deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoid_congenital_adrenal_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "Lifelong glucocorticoid replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fludrocortisone and salt",
+          "cells": [
+            {
+              "text": "Mineralocorticoid replacement; sodium chloride supplementation in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone, fluid resuscitation, correction of electrolytes and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-steroid replacement",
+          "cells": [
+            {
+              "text": "From the expected time of puberty, guided by karyotype, gonadal status and sex of rearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, electrolytes, renin and pubertal development to titrate replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology, with sex assignment and fertility counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive STAR or CYP11A1 defect; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoid_congenital_adrenal_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of Lipoid congenital adrenal hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with salt-wasting crisis, or 46,XY infant with female-appearing genitalia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (salt-wasting crisis, hyperpigmentation, intra-abdominal gonads, shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency hydrocortisone, fluid and electrolyte correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, cortisol with ACTH, renin and aldosterone, karyotype, STAR and CYP11A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are cortisol low with raised ACTH, and STAR or CYP11A1 variants found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider 21-hydroxylase deficiency or complete androgen insensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong hydrocortisone replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fludrocortisone with infant sodium supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency parenteral hydrocortisone for crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sex-steroid replacement from the expected time of puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary endocrine care and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated classic disease is fatal in infancy; early diagnosis allows replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

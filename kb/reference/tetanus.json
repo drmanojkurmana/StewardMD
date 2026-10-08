@@ -164,5 +164,506 @@
       "caption": "Overview comparison matrix for tetanus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Tetanus",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/anaerobic-bacteria/tetanus"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tetanus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading tetanus",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Trismus, rigidity, spasms with clear sensorium"
+            },
+            {
+              "text": "{{hy:Diagnosis is clinical; do not wait for tests}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in only about 30%",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Neither confirms nor excludes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-tetanus IgG before antitoxin",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "Over 0.1 IU/mL is protective",
+              "op": ">",
+              "value": 0.1
+            },
+            {
+              "text": "Argues against tetanus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No wound found",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 30% of cases",
+              "range": [
+                20,
+                30
+              ]
+            },
+            {
+              "text": "Does not exclude tetanus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablett grade II (moderate)",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Short spasms, mild dysphagia, RR over 30/min",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Moderate respiratory involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablett grade III (severe)",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Prolonged spasms, apnoeic spells, pulse over 120, RR over 40/min",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Severe dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablett grade IV",
+          "cells": [
+            {
+              "text": "Grade III plus autonomic dysfunction"
+            },
+            {
+              "text": "Highest cardiovascular mortality, usually week 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical forms",
+          "cells": [
+            {
+              "text": "Generalised, localised, cephalic (CN VII), neonatal"
+            },
+            {
+              "text": "Neonatal onset within 2 weeks with poor feeding"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "tetanus-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tetanus",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningoencephalitis",
+          "cells": [
+            {
+              "text": "Altered sensorium, abnormal CSF"
+            },
+            {
+              "text": "Lumbar puncture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peritonsillar or retropharyngeal abscess",
+          "cells": [
+            {
+              "text": "Local cause of trismus"
+            },
+            {
+              "text": "Examination, CT neck"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug dystonia or neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Phenothiazine or antidopaminergic exposure"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Strychnine poisoning",
+          "cells": [
+            {
+              "text": "Similar spasms"
+            },
+            {
+              "text": "Toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff person syndrome",
+          "cells": [
+            {
+              "text": "Chronic progressive rigidity"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypocalcaemia (neonate)",
+          "cells": [
+            {
+              "text": "Tetany"
+            },
+            {
+              "text": "Serum calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tetanus-treatment",
+      "kind": "treatment",
+      "title": "Treating tetanus",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Human tetanus immunoglobulin",
+          "unit": "units",
+          "cells": [
+            {
+              "text": "All cases, at once"
+            },
+            {
+              "text": "500 units IM once (as good as 3000 to 6000 units)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound debridement",
+          "cells": [
+            {
+              "text": "Any wound found"
+            },
+            {
+              "text": "More important than antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Preferred antibiotic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepine (diazepam, midazolam)",
+          "cells": [
+            {
+              "text": "Rigidity and spasms"
+            },
+            {
+              "text": "Midazolam for prolonged infusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Magnesium sulfate infusion",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Spasms and autonomic instability"
+            },
+            {
+              "text": "Serum 4 to 8 mEq/L; watch patellar reflex"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation, vecuronium, ventilation",
+          "cells": [
+            {
+              "text": "Moderate to severe disease, laryngeal spasm"
+            },
+            {
+              "text": "{{hy:Respiratory failure is the commonest cause of death}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Esmolol, morphine infusion, atropine, clonidine",
+          "cells": [
+            {
+              "text": "Autonomic instability"
+            },
+            {
+              "text": "Avoid long-acting propranolol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Full tetanus toxoid course",
+          "cells": [
+            {
+              "text": "After recovery"
+            },
+            {
+              "text": "Disease gives no immunity; separate site from TIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound prophylaxis: dirty wound, under 3 doses",
+          "cells": [
+            {
+              "text": "Unknown or under 3 toxoid doses"
+            },
+            {
+              "text": "Vaccine plus TIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound prophylaxis: 3 or more doses",
+          "cells": [
+            {
+              "text": "Booster if last dose 10 years ago (clean) or 5 years (dirty)"
+            },
+            {
+              "text": "TIG not needed unless immunodeficient"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tetanus-dx-mgmt",
+      "title": "Diagnosis and management of tetanus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Trismus, rigidity or spasms with clear mind, or tetanus-prone wound",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Clinical tetanus present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Under 3 toxoid doses or unknown?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Toxoid plus TIG if dirty wound; toxoid alone if clean",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Booster if 10 years (clean) or 5 years (dirty) since last dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "TIG 500 units IM, debride wound, metronidazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzodiazepine sedation in quiet room; magnesium",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Laryngeal spasm or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intubate, ventilate, vecuronium",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Autonomic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Esmolol, morphine, magnesium; then full vaccine course",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Supportive care; full vaccine course after recovery",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

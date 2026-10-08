@@ -150,5 +150,357 @@
       "caption": "Overview comparison matrix for priapism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "priapism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cavernosal blood gas analysis",
+          "cells": [
+            {
+              "text": "Ischaemic versus non-ischaemic priapism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile colour Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Cavernosal blood flow and fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film with sickle cell testing",
+          "cells": [
+            {
+              "text": "Haemoglobinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology and medication review",
+          "cells": [
+            {
+              "text": "Causative agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective pudendal arteriography",
+          "cells": [
+            {
+              "text": "High-flow fistula, if embolisation is planned"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "priapism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-ischaemic (high-flow) priapism",
+          "cells": [
+            {
+              "text": "High-flow cavernosal fistula"
+            },
+            {
+              "text": "Cavernosal blood gas and colour Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile trauma with fistula",
+          "cells": [
+            {
+              "text": "Penile trauma"
+            },
+            {
+              "text": "Colour Doppler to identify a fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced erection",
+          "cells": [
+            {
+              "text": "Intracavernosal agents, psychotropics or recreational drugs"
+            },
+            {
+              "text": "Toxicology and medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell disease or other haemoglobinopathy",
+          "cells": [
+            {
+              "text": "Haemoglobinopathy"
+            },
+            {
+              "text": "Full blood count and sickle cell testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stuttering (recurrent) priapism",
+          "cells": [
+            {
+              "text": "Recurrent episodes"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "priapism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent subtype distinction",
+          "cells": [
+            {
+              "text": "Cavernosal blood gas and colour Doppler to direct therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic: aspiration and irrigation",
+          "cells": [
+            {
+              "text": "Corporal aspiration and saline irrigation, then intracavernosal sympathomimetic such as phenylephrine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical shunting",
+          "cells": [
+            {
+              "text": "When aspiration and sympathomimetics fail; early penile prosthesis in prolonged refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Hydration, oxygenation and exchange transfusion for sickle cell disease; withdraw causative drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-ischaemic management",
+          "cells": [
+            {
+              "text": "Conservative care or selective arterial embolisation of the cavernosal fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Pain relief and management of the compartment-syndrome state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urology referral",
+          "cells": [
+            {
+              "text": "Emergent, with haematology input for haemoglobinopathy-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and prophylaxis",
+          "cells": [
+            {
+              "text": "Recurrence and erectile dysfunction; prophylaxis for recurrent or stuttering priapism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "priapism-dx-mgmt",
+      "title": "Diagnosis and management of Priapism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Priapism: rigid, painful erection persisting beyond four hours",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ischaemic priapism, sickle cell crisis, or failed aspiration and sympathomimetics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review; surgical shunting if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cavernosal blood gas, colour Doppler, FBC with sickle cell screen, drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does blood gas and Doppler show ischaemic (low-flow) priapism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-ischaemic: conservative care or embolisation; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corporal aspiration and irrigation, then intracavernosal phenylephrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical shunting if aspiration and sympathomimetics fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying cause, including sickle cell disease and drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-ischaemic: conservative care or selective arterial embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt treatment limits corporal fibrosis; counsel on recurrence and erectile dysfunction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

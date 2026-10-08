@@ -146,5 +146,287 @@
       "caption": "Overview comparison matrix for epididymal cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epididymal_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Thin-walled anechoic cyst separate from the testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transillumination test at the bedside",
+          "cells": [
+            {
+              "text": "Bright transillumination from clear fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Painless, smooth, mobile swelling separate from the testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular tumour markers",
+          "cells": [
+            {
+              "text": "Only if a solid component is seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval review",
+          "cells": [
+            {
+              "text": "Where diagnostic uncertainty remains"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymal_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spermatocele",
+          "cells": [
+            {
+              "text": "Distinction rests on content rather than behaviour; both are benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular or epididymal tumour",
+          "cells": [
+            {
+              "text": "A solid or vascular component on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymal_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and conservative management",
+          "cells": [
+            {
+              "text": "Benign with no malignant potential; often remains stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound confirmation",
+          "cells": [
+            {
+              "text": "Thin-walled anechoic cyst separate from the testis; interval review if uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia and scrotal support",
+          "cells": [
+            {
+              "text": "For discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Large or persistently symptomatic cysts; counsel on the small risk to ipsilateral epididymal function and fertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers and referral",
+          "cells": [
+            {
+              "text": "Investigate any solid component; prompt referral to exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epididymal_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Epididymal cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless, smooth, mobile scrotal swelling felt separate from the testis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (solid or vascular component, hard painful mass, rapid enlargement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt referral to exclude malignancy; tumour markers for any solid component",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal ultrasound with Doppler and bedside transillumination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thin-walled anechoic cyst separate from the testis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Interval review; consider spermatocele, hydrocele or varicocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and manage conservatively; cysts are often stable",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia and scrotal support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision for large or persistently symptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on the small risk to epididymal function and fertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis; benign, often stable or fluctuating in size",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

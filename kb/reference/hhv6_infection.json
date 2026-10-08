@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for hhv-6 infection (roseola/encephalitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hhv6_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HHV-6 DNA PCR from cerebrospinal fluid",
+          "cells": [
+            {
+              "text": "Encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative HHV-6 DNA PCR from plasma or blood",
+          "cells": [
+            {
+              "text": "Viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Limbic and medial temporal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for chromosomally integrated HHV-6",
+          "cells": [
+            {
+              "text": "Integrated viral genome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and full metabolic panel",
+          "cells": [
+            {
+              "text": "Hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizures or encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhv6_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex virus encephalitis",
+          "cells": [
+            {
+              "text": "CSF PCR separates the two viruses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune or paraneoplastic limbic encephalitis",
+          "cells": [
+            {
+              "text": "Limbic signal change on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction with eosinophilia and systemic symptoms",
+          "cells": [
+            {
+              "text": "Drug exposure; eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles, rubella and other viral exanthems",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhv6_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Serious disease, such as post-transplant limbic encephalitis",
+          "cells": [
+            {
+              "text": "Specialist treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Roseola infantum",
+          "cells": [
+            {
+              "text": "Supportive management in healthy children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-6 related febrile seizures",
+          "cells": [
+            {
+              "text": "Supportive management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant recipients",
+          "cells": [
+            {
+              "text": "Monitor blood viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyponatraemia",
+          "cells": [
+            {
+              "text": "Corrected in limbic encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Integrated HHV-6 identification",
+          "cells": [
+            {
+              "text": "Avoids misinterpretation of viral load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Specialist and critical care for encephalitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hhv6_infection-dx-mgmt",
+      "title": "Diagnosis and management of HHV-6 infection (roseola/encephalitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with rash in a child, or limbic encephalitis with amnesia or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Limbic signs, status epilepticus, falling consciousness, or severe hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: specialist and critical care for encephalitis or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF and plasma HHV-6 PCR; MRI brain; sodium; EEG; integrated HHV-6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is HHV-6 DNA detected in CSF with limbic MRI change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HSV encephalitis, autoimmune limbic encephalitis or DRESS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care for roseola and febrile seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specialist treatment for serious disease such as post-transplant limbic encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor viral load in transplant recipients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct hyponatraemia that accompanies limbic encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serious disease treated; roseola settles with supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

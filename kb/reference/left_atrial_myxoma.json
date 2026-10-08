@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for left atrial myxoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cardiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "left_atrial_myxoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Size, attachment site and mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Tissue characterisation; helps separate thrombus or malignant tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT",
+          "cells": [
+            {
+              "text": "Where MRI is unavailable or contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of resected mass or embolectomy specimen",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Anaemia and a raised acute-phase response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment for Carney complex",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "left_atrial_myxoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatic mitral stenosis",
+          "cells": [
+            {
+              "text": "Obstructive presentation can closely imitate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis",
+          "cells": [
+            {
+              "text": "Constitutional symptoms can mimic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoma or metastatic tumour",
+          "cells": [
+            {
+              "text": "Broad-based, infiltrative, right-sided or multiple lesions suggest malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left atrial thrombus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "left_atrial_myxoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Prompt excision with its base of attachment, on cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expedite surgery",
+          "cells": [
+            {
+              "text": "Ongoing risk of valvular obstruction and systemic embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care while waiting",
+          "cells": [
+            {
+              "text": "Obstructive heart failure and positional symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embolic complications",
+          "cells": [
+            {
+              "text": "Treat cerebral or peripheral ischaemia; embolectomy where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Confirms the resected mass or embolectomy specimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for recurrence, especially in familial and Carney-complex disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex screening",
+          "cells": [
+            {
+              "text": "Genetic counselling and family screening when a heritable syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "left_atrial_myxoma-dx-mgmt",
+      "title": "Diagnosis and management of Left Atrial Myxoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Left atrial mass with valve obstruction, embolism or constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (embolic stroke, syncope, pulmonary oedema, malignant features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical referral for embolism or critical obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE and TOE, cardiac MRI, FBC and inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pedunculated mass from the fossa ovalis confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rheumatic mitral stenosis, left atrial thrombus or endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt surgical excision with its base of attachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expedite surgery given risk of obstruction and embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for obstructive symptoms pending resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histopathology of the resected mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term echo surveillance; screen for Carney complex",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent after complete excision; familial and Carney-complex cases may recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

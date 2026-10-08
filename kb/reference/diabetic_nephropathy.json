@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for diabetic nephropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetic_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine albumin-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Albuminuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine with eGFR",
+          "cells": [
+            {
+              "text": "Declining GFR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for haematuria or active sediment",
+          "cells": [
+            {
+              "text": "Haematuria or active sediment suggests another cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated retinal examination",
+          "cells": [
+            {
+              "text": "Retinopathy supports a diabetic cause; its absence raises doubt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Renal imaging; biopsy considered in atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glomerulonephritis",
+          "cells": [
+            {
+              "text": "Active sediment or red cell casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membranous nephropathy or minimal change disease",
+          "cells": [
+            {
+              "text": "Nephrotic-range proteinuria without retinopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Renoprotective in albuminuric patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Slows progression and reduces cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tight glucose and blood pressure control",
+          "cells": [
+            {
+              "text": "Slows the decline in filtration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-steroidal MRA",
+          "cells": [
+            {
+              "text": "Reduces residual albuminuria in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Annual screening",
+          "cells": [
+            {
+              "text": "Urine albumin-to-creatinine ratio and eGFR; check potassium on RAS blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid-lowering and lifestyle",
+          "cells": [
+            {
+              "text": "Manages cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Atypical or advancing disease; prepare for dialysis or transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetic_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Diabetic nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diabetic nephropathy: albuminuria and declining GFR in long-standing diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid GFR fall, red cell casts or nephrosis without retinopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology review for rapid decline, active sediment or nephrotic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine albumin-to-creatinine ratio; creatinine and eGFR; urinalysis; retinal exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are albuminuria and retinopathy present with a bland urinary sediment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glomerulonephritis, membranous nephropathy, obstruction or drug nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or ARB, renoprotective in albuminuric patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "SGLT2 inhibitor to slow progression and reduce cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tight glucose and blood pressure control to slow filtration decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider non-steroidal MRA for residual albuminuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Annual urine ACR and eGFR; check potassium on RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated, progresses to end-stage renal disease; early control slows decline",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

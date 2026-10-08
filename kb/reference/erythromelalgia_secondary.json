@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for erythromelalgia secondary."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythromelalgia_secondary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and peripheral blood film",
+          "cells": [
+            {
+              "text": "Myeloproliferative neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK2 V617F and related mutation testing",
+          "cells": [
+            {
+              "text": "Myeloproliferative mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes mellitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology including antinuclear antibodies",
+          "cells": [
+            {
+              "text": "Connective-tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and small-fibre assessment",
+          "cells": [
+            {
+              "text": "Neuropathy; skin biopsy for nerve fibre density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Vasodilator or other drug triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for occult malignancy",
+          "cells": [
+            {
+              "text": "Where a paraneoplastic cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythromelalgia_secondary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary (hereditary SCN9A) erythromelalgia",
+          "cells": [
+            {
+              "text": "No identifiable underlying disorder; the secondary form has one"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or other localised infection",
+          "cells": [
+            {
+              "text": "A warm red painful limb is erythromelalgia; antibiotics are unnecessary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythromelalgia_secondary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Myeloproliferative neoplasm, connective-tissue disease, diabetes or peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "Dramatically effective in myeloproliferative-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw provoking drugs",
+          "cells": [
+            {
+              "text": "Calcium-channel blockers and other vasodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cooling and elevation",
+          "cells": [
+            {
+              "text": "Counsel against cold-water immersion, which causes maceration and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Where a myeloproliferative neoplasm is suspected; repeat blood counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and wound care",
+          "cells": [
+            {
+              "text": "Treatment of secondary infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythromelalgia_secondary-dx-mgmt",
+      "title": "Diagnosis and management of erythromelalgia secondary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Episodic burning pain and redness of the limbs in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (abnormal blood count, splenomegaly, digital ulceration, neurological deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology referral; wound care for ulceration or gangrene",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, JAK2, glucose or HbA1c, ANA, nerve studies, drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Underlying cause identified (myeloproliferative, connective tissue, diabetes, drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary SCN9A disease; repeat counts and screen for malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause; withdraw provoking drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-dose aspirin, dramatically effective in myeloproliferative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cooling and elevation; avoid prolonged cold-water immersion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haematology referral and repeated blood counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Largely follows the cause; the myeloproliferative form often improves with treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

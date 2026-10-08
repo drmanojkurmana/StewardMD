@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for dry eye disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dry_eye_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tear film break-up time",
+          "cells": [
+            {
+              "text": "Tear stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface staining with fluorescein and lissamine green",
+          "cells": [
+            {
+              "text": "Surface damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schirmer test",
+          "cells": [
+            {
+              "text": "Aqueous tear production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tear osmolarity measurement where available",
+          "cells": [
+            {
+              "text": "Tear film hyperosmolarity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meibomian gland assessment and expression",
+          "cells": [
+            {
+              "text": "Meibomian gland dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dry_eye_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic conjunctivitis",
+          "cells": [
+            {
+              "text": "Itch rather than dryness; allergy must be considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blepharitis and meibomian gland dysfunction",
+          "cells": [
+            {
+              "text": "Lid disease that drives evaporative dry eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurotrophic keratopathy",
+          "cells": [
+            {
+              "text": "Marked reduction in corneal sensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dry_eye_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Preservative-free artificial tears and ointments",
+          "cells": [
+            {
+              "text": "Surface lubrication, with viscosity escalated by severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid care for evaporative disease",
+          "cells": [
+            {
+              "text": "Warm compresses, lid hygiene and massage; oral tetracyclines for refractory posterior blepharitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental and behavioural measures",
+          "cells": [
+            {
+              "text": "Humidification, deliberate blinking and screen breaks; review drying medications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "Topical ciclosporin or lifitegrast; short corticosteroid pulses for flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Punctal occlusion and serum drops",
+          "cells": [
+            {
+              "text": "Aqueous-deficient disease; autologous serum drops or scleral lenses for severe breakdown"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren screening",
+          "cells": [
+            {
+              "text": "Dry mouth and arthralgia prompt autoantibody testing and referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface monitoring",
+          "cells": [
+            {
+              "text": "Staining and tear film break-up time; watch for infection and epithelial defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dry_eye_disease-dx-mgmt",
+      "title": "Diagnosis and management of Dry eye disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dry eye disease: ocular discomfort with tear film instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (persistent epithelial defect, corneal thinning, reduced sensation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmic review for corneal melt, epithelial defect or secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Break-up time; fluorescein and lissamine staining; Schirmer test; meibomian gland check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does staining or Schirmer testing confirm tear film or aqueous deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergy, blepharitis, chronic conjunctivitis or neurotrophic keratopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Preservative-free artificial tears and lubricating ointments, escalated by severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warm compresses, lid hygiene and massage for meibomian gland dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical ciclosporin or lifitegrast for persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Punctal occlusion or autologous serum drops for severe surface breakdown",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer for suspected Sjogren syndrome with autoantibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually chronic; most achieve good control, but autoimmune disease can damage the surface",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for fibrous dysplasia of bone (gnas)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrous_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Ground-glass lucency, cortical thinning and shepherd's-crook deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body bone scintigraphy",
+          "cells": [
+            {
+              "text": "Polyostotic disease map"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alkaline phosphatase and bone turnover markers",
+          "cells": [
+            {
+              "text": "Metabolic activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum phosphate and FGF23",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screening",
+          "cells": [
+            {
+              "text": "Precocious puberty, thyroid, growth-hormone or cortisol excess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrous_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paget disease of bone",
+          "cells": [
+            {
+              "text": "Other metabolic bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ossifying fibroma of the jaw",
+          "cells": [
+            {
+              "text": "Fibro-osseous jaw lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade central osteosarcoma",
+          "cells": [
+            {
+              "text": "Malignant mimic; targeted imaging or biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrous_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Bone pain from metabolically active lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral phosphate and active vitamin D",
+          "cells": [
+            {
+              "text": "FGF23-driven hypophosphataemic osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Fracture fixation and correction of deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aromatase inhibitors or tamoxifen",
+          "cells": [
+            {
+              "text": "Precocious puberty in McCune-Albright syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial surveillance",
+          "cells": [
+            {
+              "text": "Optic nerve or auditory canal compromise; decompression if progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular bone turnover and phosphate monitoring",
+          "cells": [
+            {
+              "text": "Progression and rare malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic bone, endocrinology, orthopaedics and craniofacial"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrous_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Fibrous dysplasia of bone (GNAS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bone lesion with ground-glass appearance, possibly with cafe-au-lait spots",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new pain or swelling, cranial lesion, pathological fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for malignant change or cranial nerve compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; bone scintigraphy; ALP and turnover markers; phosphate, FGF23; endocrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Polyostotic or monostotic lesion with GNAS-related features on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Paget disease, fibro-osseous jaw lesion or low-grade osteosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bisphosphonates for painful metabolically active lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral phosphate and active vitamin D for FGF23 phosphate wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic correction of deformity and fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat associated endocrinopathy, such as precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monostotic disease often mild; polyostotic and McCune-Albright disease can progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

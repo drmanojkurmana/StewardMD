@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for interstitial granulomatous dermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interstitial_granulomatous_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Interstitial and palisaded histiocytic infiltrate with collagen degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA, rheumatoid factor and anti-CCP",
+          "cells": [
+            {
+              "text": "Associated connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for arthritis",
+          "cells": [
+            {
+              "text": "Rheumatology referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed medication history",
+          "cells": [
+            {
+              "text": "Possible drug trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated systemic disease",
+          "cells": [
+            {
+              "text": "Guided by symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Disease activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_granulomatous_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Interstitial granuloma annulare",
+          "cells": [
+            {
+              "text": "Histologically similar; lacks the systemic associations of this disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid nodules or necrobiosis lipoidica",
+          "cells": [
+            {
+              "text": "Nodular lesions in rheumatoid disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_granulomatous_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw culprit drug",
+          "cells": [
+            {
+              "text": "Antihypertensives, lipid-lowering agents or tumour necrosis factor inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying disease",
+          "cells": [
+            {
+              "text": "Treat rheumatoid arthritis or systemic lupus erythematosus as the main determinant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised lesions",
+          "cells": [
+            {
+              "text": "Topical or intralesional corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Widespread disease",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids, hydroxychloroquine or other immunomodulators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthritis",
+          "cells": [
+            {
+              "text": "Rheumatology referral for accompanying arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Cutaneous activity as a marker of disease control and recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interstitial_granulomatous_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Interstitial granulomatous dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Erythematous to violaceous plaques on trunk and flanks, sometimes rope-like bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Systemic symptoms, active autoimmune disease or atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rheumatology referral; biopsy to exclude infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, ANA, rheumatoid factor, anti-CCP, drug history, inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Associated autoimmune disease or culprit drug identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider granuloma annulare or another granulomatous dermatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw culprit drug such as an antihypertensive or TNF inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat underlying rheumatoid arthritis or lupus as main determinant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical or intralesional corticosteroids for localised lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic corticosteroids, hydroxychloroquine or immunomodulators for widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor cutaneous activity and rheumatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Skin activity tracks underlying disease control; recurrence monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

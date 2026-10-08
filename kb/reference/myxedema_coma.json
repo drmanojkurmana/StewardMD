@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for myxoedema coma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / endocrine society guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myxedema_coma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH and free thyroxine, with cortisol drawn before steroids",
+          "cells": [
+            {
+              "text": "Confirmatory; the diagnosis should not wait for these results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature and blood glucose",
+          "cells": [
+            {
+              "text": "Hypothermia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and full electrolyte panel",
+          "cells": [
+            {
+              "text": "Hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Hypoventilation and carbon-dioxide retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic screen and chest imaging",
+          "cells": [
+            {
+              "text": "Identifies a precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and, where indicated, echocardiography",
+          "cells": [
+            {
+              "text": "Bradyarrhythmia and pericardial effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxedema_coma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis with encephalopathy",
+          "cells": [
+            {
+              "text": "Infection is a common precipitant; the septic screen identifies it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Coexisting adrenal insufficiency must be covered with stress steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedative or opioid intoxication",
+          "cells": [
+            {
+              "text": "Sedatives are a precipitant; offending drugs must be withdrawn"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxedema_coma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous thyroid hormone",
+          "cells": [
+            {
+              "text": "Levothyroxine, with or without liothyronine, given without awaiting confirmatory tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress-dose hydrocortisone",
+          "cells": [
+            {
+              "text": "Given alongside thyroid hormone until adrenal insufficiency is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilatory support",
+          "cells": [
+            {
+              "text": "Airway protection and ventilation for hypoventilation and carbon-dioxide retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gradual passive rewarming",
+          "cells": [
+            {
+              "text": "Cautious correction of hyponatraemia, hypoglycaemia and hypotension with fluid and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the precipitant",
+          "cells": [
+            {
+              "text": "Antimicrobials for infection; withdraw offending sedative drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care monitoring",
+          "cells": [
+            {
+              "text": "Cardiac monitoring for bradyarrhythmia; echocardiography for pericardial effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Oral thyroid hormone on recovery, with endocrinology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myxedema_coma-dx-mgmt",
+      "title": "Diagnosis and management of Myxoedema coma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypothermia, drowsiness and hypoventilation in a patient with known hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypothermia not rewarming, type 2 respiratory failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care; give IV thyroid hormone and stress-dose hydrocortisone",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TSH and free thyroxine with cortisol, temperature, glucose, sodium, arterial gas, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Features of longstanding hypothyroidism present with decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sepsis, adrenal crisis or sedative intoxication; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV levothyroxine without awaiting confirmatory thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stress-dose hydrocortisone until adrenal insufficiency is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ventilatory support for hypoventilation and carbon-dioxide retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gradual passive rewarming; cautious correction of sodium and glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the precipitant and withdraw offending sedatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mortality remains substantial; depends on early hormone replacement and precipitant care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

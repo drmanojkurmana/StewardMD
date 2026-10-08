@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for granulomatosis with polyangiitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granulomatosis_polyangiitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA testing with PR3 and MPO specificity",
+          "cells": [
+            {
+              "text": "Antigen specificity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and microscopy with renal function",
+          "cells": [
+            {
+              "text": "Dysmorphic red cells and casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Nodules, cavities and haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy (renal, lung or ENT)",
+          "cells": [
+            {
+              "text": "Necrotising granulomatous vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasendoscopy and airway assessment",
+          "cells": [
+            {
+              "text": "Subglottic stenosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis_polyangiitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Microscopic polyangiitis",
+          "cells": [
+            {
+              "text": "Overlapping ANCA-associated vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GBM disease",
+          "cells": [
+            {
+              "text": "Pulmonary-renal syndrome; antibody-negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy of the upper airway or lung",
+          "cells": [
+            {
+              "text": "Upper airway or lung mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis_polyangiitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction",
+          "cells": [
+            {
+              "text": "High-dose glucocorticoids with rituximab or cyclophosphamide for organ-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avacopan",
+          "cells": [
+            {
+              "text": "C5a receptor antagonist as a glucocorticoid-sparing adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Severe rapidly progressive glomerulonephritis or diffuse alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Rituximab, azathioprine or methotrexate while tapering glucocorticoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Co-trimoxazole prophylaxis, bone protection and vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Respiratory support for alveolar haemorrhage; renal replacement for advanced renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinary sediment and ANCA titres"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granulomatosis_polyangiitis-dx-mgmt",
+      "title": "Diagnosis and management of Granulomatosis with polyangiitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granulomatosis with polyangiitis: sinus disease with haematuria or lung nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (alveolar haemorrhage, rapid glomerulonephritis, airway stenosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunosuppression for rapidly progressive glomerulonephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PR3 and MPO ANCA, urinalysis, chest CT, tissue biopsy and nasendoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show necrotising granulomatous vasculitis with ANCA positivity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider microscopic polyangiitis, anti-GBM disease, infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induction with high-dose glucocorticoids plus rituximab or cyclophosphamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avacopan as a glucocorticoid-sparing adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plasma exchange for severe glomerulonephritis or alveolar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Maintenance therapy while tapering glucocorticoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Now good remission rates with induction; relapse is common and needs surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

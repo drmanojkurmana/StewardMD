@@ -169,5 +169,505 @@
       "caption": "Overview comparison matrix for heavy metal poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Lead Poisoning",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heavy_metal_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing heavy metal poisoning",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-blood lead, child action level",
+          "unit": "ug/dL",
+          "cells": [
+            {
+              "text": "Above 3.5 ug/dL",
+              "op": ">",
+              "value": 3.5
+            },
+            {
+              "text": "{{hy:Measure whole blood, not serum (95 to 99% in red cells)}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood lead, encephalopathy",
+          "unit": "ug/dL",
+          "cells": [
+            {
+              "text": "Likely above 100 ug/dL; Harrison 80 to 120 ug/dL",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Convulsions, coma, death"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood lead, adult work removal",
+          "unit": "ug/dL",
+          "cells": [
+            {
+              "text": "Above 40 ug/dL (proposed: removal above 20)",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Occupational standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead supportive findings",
+          "cells": [
+            {
+              "text": "Basophilic stippling, raised zinc protoporphyrin, metaphyseal lead lines"
+            },
+            {
+              "text": "Insensitive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "24 h urinary arsenic",
+          "unit": "ug/day",
+          "cells": [
+            {
+              "text": "Toxic above 50 ug/day after 24 h without seafood",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Seafood arsenobetaine is nontoxic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arsenic clinical clues",
+          "cells": [
+            {
+              "text": "Garlic breath, Mees lines, QT prolongation, radiopaque on x-ray"
+            },
+            {
+              "text": "Haemorrhagic gastroenteritis acutely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary cadmium",
+          "unit": "ug/g creat",
+          "cells": [
+            {
+              "text": "Above 10 ug/g creatinine",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Beta-2-microglobulin above 750 ug/g creatinine supports"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mercury",
+          "cells": [
+            {
+              "text": "Blood for recent, hair for chronic organic, urine for inorganic"
+            },
+            {
+              "text": "Tremor, erethism; acrodynia in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manganese",
+          "cells": [
+            {
+              "text": "Parkinsonism in miners and welders"
+            },
+            {
+              "text": "No L-dopa response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison 22e describes a succimer provocation test for remote mercury exposure; Merck states provocative urine metal testing is not validated and may be harmful. Both kept."
+    },
+    {
+      "id": "heavy_metal_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes for heavy metal poisoning",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infectious gastroenteritis",
+          "cells": [
+            {
+              "text": "Mimics acute arsenic, mercuric salt or cadmium ingestion"
+            },
+            {
+              "text": "Exposure history, urine or blood metal levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other toxic neuropathy (thallium)",
+          "cells": [
+            {
+              "text": "Painful neuropathy with alopecia"
+            },
+            {
+              "text": "Urine thallium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency anaemia",
+          "cells": [
+            {
+              "text": "Microcytosis; cadmium anaemia unresponsive to iron"
+            },
+            {
+              "text": "Ferritin, blood lead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic Parkinson disease",
+          "cells": [
+            {
+              "text": "L-dopa responsive"
+            },
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Mimics cadmium or mercury vapour pneumonitis"
+            },
+            {
+              "text": "Exposure history, chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other proximal tubulopathy",
+          "cells": [
+            {
+              "text": "Raised beta-2-microglobulin from pyelonephritis"
+            },
+            {
+              "text": "Urinary cadmium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heavy_metal_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Treating heavy metal poisoning",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop exposure",
+          "cells": [
+            {
+              "text": "All metals"
+            },
+            {
+              "text": "{{hy:Most important step}}; charcoal does not bind metals (thallium exception)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead: succimer",
+          "unit": "ug/dL",
+          "cells": [
+            {
+              "text": "Child blood lead above 45 ug/dL without encephalopathy",
+              "op": ">",
+              "value": 45
+            },
+            {
+              "text": "10 mg/kg orally every 8 h for 5 days, then every 12 h for 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lead: dimercaprol plus CaNa2EDTA",
+          "cells": [
+            {
+              "text": "Encephalopathy"
+            },
+            {
+              "text": "Dimercaprol 75 mg/m2 IM every 4 h, first dose 4 h before EDTA 1000 to 1500 mg/m2 IV daily; 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lead: adult chelation",
+          "unit": "ug/dL",
+          "cells": [
+            {
+              "text": "Symptoms with blood lead above 70 ug/dL",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Hospitalise children above 70 ug/dL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Whole-bowel irrigation",
+          "cells": [
+            {
+              "text": "Lead chips on abdominal x-ray"
+            },
+            {
+              "text": "PEG 1 to 2 L/h adults, 25 to 40 mL/kg/h children"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Arsenic chelation",
+          "cells": [
+            {
+              "text": "Significant acute or chronic arsenic"
+            },
+            {
+              "text": "Dimercaprol, succimer or DMPS plus fluids and cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mercury chelation",
+          "cells": [
+            {
+              "text": "Inorganic or elemental mercury"
+            },
+            {
+              "text": "Succimer or DMPS; avoid dimercaprol in methylmercury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cadmium",
+          "cells": [
+            {
+              "text": "Cadmium poisoning"
+            },
+            {
+              "text": "No chelation; dimercaprol worsens nephrotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prussian blue",
+          "cells": [
+            {
+              "text": "Thallium"
+            },
+            {
+              "text": "Plus charcoal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic childhood lead 20 to 40 ug/dL",
+          "cells": [
+            {
+              "text": "Children"
+            },
+            {
+              "text": "Chelation did not improve IQ; remove source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heavy_metal_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of heavy metal poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exposure history or neuropathy, anaemia, GI or renal toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Remove from exposure; call poisons service",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Measure metal: whole-blood lead, 24 h urine arsenic, blood or urine mercury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Which metal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Encephalopathy present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "ICU; dimercaprol then CaNa2EDTA",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Blood lead above chelation threshold?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Oral succimer course; recheck levels",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Source removal, nutrition, serial lead levels",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Arsenic or mercury: chelate, fluids, ECG and renal monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cadmium: supportive care only, no chelation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Lead"
+        },
+        {
+          "from": "n4",
+          "to": "n10",
+          "label": "Arsenic or mercury"
+        },
+        {
+          "from": "n4",
+          "to": "n11",
+          "label": "Cadmium"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

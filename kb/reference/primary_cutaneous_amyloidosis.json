@@ -152,5 +152,321 @@
       "caption": "Overview comparison matrix for primary cutaneous amyloidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Weedon's Skin Pathology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cutaneous_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with Congo red staining",
+          "cells": [
+            {
+              "text": "Apple-green birefringence under polarised light"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for cytokeratins",
+          "cells": [
+            {
+              "text": "Keratin-derived amyloid in the keratinic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Systemic disease, particularly in nodular amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains",
+          "cells": [
+            {
+              "text": "AL amyloid, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for multiple endocrine neoplasia type 2A",
+          "cells": [
+            {
+              "text": "Suggestive family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring of nodular amyloidosis",
+          "cells": [
+            {
+              "text": "Progression to systemic amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cutaneous_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic amyloidosis with cutaneous deposits",
+          "cells": [
+            {
+              "text": "Macroglossia, cardiac or renal involvement, or monoclonal paraprotein"
+            },
+            {
+              "text": "Serum and urine electrophoresis; free light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular basal cell carcinoma or adnexal tumour",
+          "cells": [
+            {
+              "text": "Rapidly changing or ulcerating nodules"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cutaneous_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Break the itch-scratch cycle",
+          "cells": [
+            {
+              "text": "Topical or intralesional corticosteroids and antipruritics, including antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and friction avoidance",
+          "cells": [
+            {
+              "text": "Avoid friction from towels and brushes that perpetuate keratinic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy or retinoids",
+          "cells": [
+            {
+              "text": "Ultraviolet B, or topical or systemic retinoids, for refractory lichen and macular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular amyloidosis",
+          "cells": [
+            {
+              "text": "Surgical excision or laser, with long-term surveillance for systemic progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN 2A screening",
+          "cells": [
+            {
+              "text": "When the family history or features are suggestive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Familial disease associated with OSMR and IL31RA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Ongoing dermatology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cutaneous_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of primary cutaneous amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary cutaneous amyloidosis: pruritic keratinic or nodular skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Macroglossia, cardiac or renal involvement, paraprotein, or ulcerating nodules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: systemic amyloid and haematology review; exclude neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with Congo red; cytokeratin staining; serum and urine electrophoresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show amyloid with apple-green birefringence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichen simplex chronicus, prurigo or neoplasm; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids and antipruritics to break the itch-scratch cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and avoidance of friction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "UVB or retinoids for refractory lichen and macular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical excision or laser for nodular amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term surveillance for progression to systemic amyloidosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

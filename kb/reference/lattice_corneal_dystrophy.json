@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for lattice corneal dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lattice_corneal_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy with retroillumination",
+          "cells": [
+            {
+              "text": "Branching refractile lattice lines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal histology with Congo red staining",
+          "cells": [
+            {
+              "text": "Apple-green birefringence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TGFBI genetic testing",
+          "cells": [
+            {
+              "text": "Confirms type and separates it from gelsolin type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT",
+          "cells": [
+            {
+              "text": "Depth of deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation for neuropathy and skin change",
+          "cells": [
+            {
+              "text": "Where Meretoja syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography",
+          "cells": [
+            {
+              "text": "Irregular astigmatism, before surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lattice_corneal_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granular corneal dystrophy and Avellino dystrophy",
+          "cells": [
+            {
+              "text": "Shares the TGFBI origin; relevant to mixed phenotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymorphic amyloid degeneration",
+          "cells": [
+            {
+              "text": "Amyloid secondary to chronic ocular surface disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular corneal dystrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lattice_corneal_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lubrication and erosion care",
+          "cells": [
+            {
+              "text": "Ocular lubricants, hypertonic saline, bandage contact lenses, epithelial debridement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapeutic keratectomy",
+          "cells": [
+            {
+              "text": "Removes superficial deposits; for recurrent erosions and mild visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoplasty",
+          "cells": [
+            {
+              "text": "Lamellar or penetrating for advanced visual decline; deposits often recur in the graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Astigmatism planning",
+          "cells": [
+            {
+              "text": "Topography-guided planning before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meretoja (type II) disease",
+          "cells": [
+            {
+              "text": "Systemic gelsolin amyloidosis with neuropathy and skin involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant TGFBI inheritance; screen affected relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp surveillance",
+          "cells": [
+            {
+              "text": "Deposit progression and graft health"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lattice_corneal_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Lattice corneal dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent corneal erosions with branching lattice lines and stromal haze",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid visual loss, neuropathy, non-healing defect, graft recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent infection review for non-healing epithelial defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp retroillumination, Congo red histology, TGFBI genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a TGFBI mutation confirmed on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Meretoja gelsolin amyloidosis, granular or macular dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lubricants, hypertonic saline and bandage lenses for recurrent erosions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phototherapeutic keratectomy for superficial deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lamellar or penetrating keratoplasty for advanced visual decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topography-guided planning for irregular astigmatism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and screening of affected relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vision declines over decades; recurrent erosions often precede visual loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

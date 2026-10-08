@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for infantile esotropia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_esotropia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cover and alternate cover testing with corneal light reflex",
+          "cells": [
+            {
+              "text": "Confirms and measures the deviation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Hypermetropia; accommodative component excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus and red reflex examination",
+          "cells": [
+            {
+              "text": "Retinoblastoma and other organic causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fixation preference and visual acuity",
+          "cells": [
+            {
+              "text": "Amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility examination",
+          "cells": [
+            {
+              "text": "Inferior oblique overaction, dissociated vertical deviation, abduction limitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Only if abduction deficit or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_esotropia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudoesotropia",
+          "cells": [
+            {
+              "text": "Epicanthal folds or wide nasal bridge; excluded by corneal light reflex and cover test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accommodative esotropia",
+          "cells": [
+            {
+              "text": "Later onset with hypermetropia; improves with spectacles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sixth nerve (abducens) palsy",
+          "cells": [
+            {
+              "text": "Limitation of abduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory esotropia from a monocular organic lesion",
+          "cells": [
+            {
+              "text": "Cataract, retinoblastoma or optic nerve hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_esotropia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Spectacles",
+          "cells": [
+            {
+              "text": "Significant hypermetropia on cycloplegic refraction; esotropia not fully abolished by glasses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Occlusion or penalisation of the preferred eye before surgical alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early surgery",
+          "cells": [
+            {
+              "text": "Typically bilateral medial rectus recession in early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated motor findings",
+          "cells": [
+            {
+              "text": "Inferior oblique overaction and dissociated vertical deviation treated surgically as they emerge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Orthoptic and ophthalmological follow-up for recurrence and residual amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Neuroimaging if an abduction deficit or neurological signs are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_esotropia-dx-mgmt",
+      "title": "Diagnosis and management of Infantile esotropia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Constant convergent squint before six months in a neurologically normal infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Absent red reflex, limited abduction, neurological signs or diplopia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fundus examination; neuroimaging for abducens palsy or raised ICP",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cover test, corneal light reflex, cycloplegic refraction, fundus and motility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Normal abduction and red reflex with infantile esotropia pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sixth nerve palsy, sensory or accommodative esotropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Spectacles for significant hypermetropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occlusion or penalisation for amblyopia before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early bilateral medial rectus recession",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for oblique overaction and vertical deviation as they emerge",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term orthoptic follow-up for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Alignment and binocular development targeted; amblyopia and recurrence monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

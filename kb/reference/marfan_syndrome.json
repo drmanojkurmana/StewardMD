@@ -151,5 +151,294 @@
       "caption": "Overview comparison matrix for marfan syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marfan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with aortic root measurement",
+          "cells": [
+            {
+              "text": "Aortic root diameter, indexed to body size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination through a dilated pupil",
+          "cells": [
+            {
+              "text": "Ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional aortic imaging (CT or MR angiography)",
+          "cells": [
+            {
+              "text": "The whole aorta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of FBN1",
+          "cells": [
+            {
+              "text": "FBN1 variant; a wider aortopathy panel where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma homocysteine or urine amino acids",
+          "cells": [
+            {
+              "text": "Homocystinuria excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for dural ectasia and skeletal review",
+          "cells": [
+            {
+              "text": "Dural ectasia; scoliosis and protrusio acetabuli"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marfan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Medical aortic protection",
+          "cells": [
+            {
+              "text": "Beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Serial transthoracic echocardiography, blood pressure control and periodic whole-aorta imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid isometric exertion and high-intensity contact or competitive sport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic aortic root surgery",
+          "cells": [
+            {
+              "text": "At the surgical threshold, with rapid growth, or with a family history of dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute aortic dissection",
+          "cells": [
+            {
+              "text": "Emergency heart-rate and blood-pressure control; immediate surgery for type A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic care",
+          "cells": [
+            {
+              "text": "Refractive correction and amblyopia management for ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and dural features",
+          "cells": [
+            {
+              "text": "Scoliosis, pectus deformity and symptomatic dural ectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FBN1 disease; cascade screening; pre-pregnancy counselling and close monitoring in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marfan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Marfan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tall, marfanoid patient with ectopia lentis or aortic root dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute chest or back pain, rapidly enlarging root or sudden painless visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: heart-rate and blood-pressure control; urgent surgery for type A dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography with indexed root size, slit-lamp, whole-aorta imaging, FBN1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm an FBN1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude homocystinuria, Loeys-Dietz or vascular Ehlers-Danlos; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockers and/or angiotensin-receptor blockers to slow root dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong echo surveillance, blood pressure control and periodic whole-aorta imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid isometric exertion and competitive contact sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylactic aortic root surgery at the surgical threshold or with rapid growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong follow-up with cascade family screening and pre-pregnancy counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

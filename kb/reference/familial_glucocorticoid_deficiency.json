@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for familial glucocorticoid deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology texts and adrenal insufficiency guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_glucocorticoid_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired serum cortisol and plasma ACTH",
+          "cells": [
+            {
+              "text": "Low cortisol with markedly raised ACTH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short synacthen test",
+          "cells": [
+            {
+              "text": "Absent cortisol response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Preserved mineralocorticoid function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose during illness",
+          "cells": [
+            {
+              "text": "Hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of MC2R, MRAP and related genes",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Very-long-chain fatty acids and adrenal antibodies",
+          "cells": [
+            {
+              "text": "Exclude mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_glucocorticoid_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune primary adrenal insufficiency (Addison disease)",
+          "cells": [
+            {
+              "text": "Adrenal antibodies are tested to exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenoleukodystrophy",
+          "cells": [
+            {
+              "text": "Very-long-chain fatty acids are tested to exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "A distinct adrenal enzyme defect considered in the differential"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_glucocorticoid_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone replacement",
+          "cells": [
+            {
+              "text": "Definitive therapy for isolated cortisol deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Generally not required, as aldosterone production is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules with stress-dose glucocorticoid",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone and intravenous glucose for crisis and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency hydrocortisone injection kit",
+          "cells": [
+            {
+              "text": "Medical-alert identification and caregiver training"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of growth and pigmentation",
+          "cells": [
+            {
+              "text": "Adequacy of replacement to avoid over- or under-treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "MC2R and MRAP testing and family screening; autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrinology follow-up",
+          "cells": [
+            {
+              "text": "Early diagnosis prevents hypoglycaemic neurological injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_glucocorticoid_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Familial glucocorticoid deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant or child with hypoglycaemia, prolonged jaundice or collapse during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypoglycaemia, seizures or collapse indicating adrenal crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Parenteral hydrocortisone and intravenous glucose for adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired cortisol and ACTH; short synacthen test; electrolytes; renin and aldosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low cortisol with high ACTH and absent response to synacthen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital adrenal hyperplasia, Addison disease or ACTH-deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydrocortisone replacement as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mineralocorticoid replacement generally not required",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sick-day rules with stress-dose glucocorticoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emergency hydrocortisone kit and medical-alert identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with MC2R and MRAP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good with early diagnosis, reliable replacement and sick-day education",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

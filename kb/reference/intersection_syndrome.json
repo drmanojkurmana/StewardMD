@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for intersection syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intersection_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical localisation of tenderness with crepitus",
+          "cells": [
+            {
+              "text": "Tenderness proximal to the wrist at the crossover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Peritendinous fluid and oedema at the intersection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Uncertain diagnosis or other pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Bony cause such as fracture or arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Finkelstein test",
+          "cells": [
+            {
+              "text": "Differentiates from de Quervain tenosynovitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intersection_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "De Quervain tenosynovitis",
+          "cells": [
+            {
+              "text": "Radial styloid site; positive Finkelstein test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wartenberg syndrome",
+          "cells": [
+            {
+              "text": "Superficial radial nerve irritation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal radius stress injury or fracture",
+          "cells": [
+            {
+              "text": "Bony cause shown on radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intersection_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative rest",
+          "cells": [
+            {
+              "text": "Avoid the provoking repetitive wrist flexion and extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splinting",
+          "cells": [
+            {
+              "text": "Thumb-spica or wrist splint to rest the first and second compartment tendons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory",
+          "cells": [
+            {
+              "text": "Ice and non-steroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Second-compartment tendon sheath for refractory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Graded stretching, strengthening and technique correction before return to sport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Decompression and tenosynovectomy of the second compartment after failed conservative care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intersection_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Intersection syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dorsoradial forearm pain and swelling a short distance above the wrist",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Signs of infection, fracture or compartment compromise after trauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude septic tenosynovitis or fracture; urgent orthopaedic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical localisation, ultrasound, radiographs, Finkelstein test, MRI if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pain at second-compartment crossover with no bony or styloid cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider de Quervain tenosynovitis, Wartenberg syndrome or fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relative rest and avoidance of repetitive wrist movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thumb-spica or wrist splint",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ice and non-steroidal anti-inflammatory drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroid injection into second-compartment sheath if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy before return to sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Settles with rest and splinting; surgery reserved for failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

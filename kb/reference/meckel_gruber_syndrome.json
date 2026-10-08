@@ -152,5 +152,285 @@
       "caption": "Overview comparison matrix for meckel-gruber syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meckel_gruber_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed foetal ultrasound and foetal MRI",
+          "cells": [
+            {
+              "text": "Encephalocele and renal cystic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postnatal or post-mortem examination and imaging",
+          "cells": [
+            {
+              "text": "Classic triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliopathy panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Cystic dysplasia and kidney size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver imaging and histology",
+          "cells": [
+            {
+              "text": "Ductal plate malformation and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype or microarray",
+          "cells": [
+            {
+              "text": "Chromosomal differentials such as trisomy 13 excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meckel_gruber_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No curative therapy",
+          "cells": [
+            {
+              "text": "Prenatal diagnosis, compassionate perinatal management and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal counselling",
+          "cells": [
+            {
+              "text": "Option of termination once the diagnosis is established on ultrasound and molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compassionate perinatal palliative care",
+          "cells": [
+            {
+              "text": "For liveborn infants, given uniformly lethal pulmonary hypoplasia and renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "Foetal imaging, postnatal or post-mortem examination and ciliopathy-panel testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; quantify the recurrence risk to parents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal or preimplantation testing",
+          "cells": [
+            {
+              "text": "Subsequent pregnancies, once the familial variants are known"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary involvement",
+          "cells": [
+            {
+              "text": "Foetal medicine, neonatology, clinical genetics and bereavement support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meckel_gruber_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Meckel-Gruber syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Antenatal encephalocele with renal cystic disease; suspected Meckel-Gruber syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe oligohydramnios with pulmonary hypoplasia, or a large encephalocele?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Sensitive counselling and compassionate perinatal palliative care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Foetal ultrasound or MRI, ciliopathy panel or exome, karyotype, renal and liver review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the diagnosis confirmed by genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Joubert, trisomy 13, Bardet-Biedl or hydrolethalus syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Detailed prenatal counselling, including the option of termination",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compassionate perinatal palliative care for liveborn infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic counselling quantifying the recurrence risk to parents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prenatal or preimplantation testing in later pregnancies once variants are known",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Support from foetal medicine, neonatology, genetics and bereavement services",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

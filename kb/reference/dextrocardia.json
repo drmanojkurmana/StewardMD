@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for dextrocardia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dextrocardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with full segmental analysis",
+          "cells": [
+            {
+              "text": "Atrial situs, ventricular loop and great-artery connection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Apex, gastric bubble and aortic arch position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG with right-sided or mirror-image leads",
+          "cells": [
+            {
+              "text": "A readable ECG in the reversed heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Visceral situs and spleen number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for primary ciliary dyskinesia",
+          "cells": [
+            {
+              "text": "Situs inversus with chronic respiratory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dextrocardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypoplasia, agenesis or diaphragmatic hernia",
+          "cells": [
+            {
+              "text": "Dextroposition from an underlying pulmonary or diaphragmatic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal shift from effusion or pneumothorax",
+          "cells": [
+            {
+              "text": "Shift of the heart, not true dextrocardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Situs inversus totalis",
+          "cells": [
+            {
+              "text": "Mirror-image heart with normal structure; excellent outlook"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenitally corrected transposition",
+          "cells": [
+            {
+              "text": "Late complications are easily overlooked"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dextrocardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Full segmental analysis",
+          "cells": [
+            {
+              "text": "Characterise atrial situs, ventricular loop and great-artery connection before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated situs inversus",
+          "cells": [
+            {
+              "text": "Normal heart needs documentation and reassurance only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated lesions",
+          "cells": [
+            {
+              "text": "Surgically correct or palliate congenitally corrected transposition, VSD or pulmonary stenosis as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and procedural flagging",
+          "cells": [
+            {
+              "text": "Right-sided or mirror-image leads; flag the reversed position for future procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prophylaxis and rhythm surveillance",
+          "cells": [
+            {
+              "text": "Where a structural or conduction abnormality is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliary dyskinesia assessment",
+          "cells": [
+            {
+              "text": "When situs inversus coexists with chronic respiratory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complex disease referral",
+          "cells": [
+            {
+              "text": "Congenital cardiology and cardiac surgery team; specialist centres for complex repairs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dextrocardia-dx-mgmt",
+      "title": "Diagnosis and management of dextrocardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dextrocardia: heart on the right side of the chest on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal cyanosis, heart failure, or chronic sinopulmonary disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent echocardiography and congenital cardiology review for cyanosis or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Segmental echocardiography; chest X-ray; right-sided ECG; abdominal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does segmental analysis show situs inversus with a structurally normal heart?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider situs solitus with complex heart disease, or dextroposition from lung",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Full segmental analysis of situs, ventricular loop and great arteries",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isolated situs inversus with a normal heart needs documentation and reassurance only",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgically correct or palliate associated lesions as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Right-sided or mirror-image ECG leads; flag the reversed position for procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assess for primary ciliary dyskinesia when chronic respiratory disease coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with situs inversus and a normal heart; otherwise set by associated lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,332 @@
       "caption": "Overview comparison matrix for mast cell activation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / WHO classification of haematolymphoid tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mast_cell_activation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial serum tryptase",
+          "cells": [
+            {
+              "text": "Rise above baseline during an event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary mediators such as N-methylhistamine and prostaglandin metabolites",
+          "cells": [
+            {
+              "text": "Mediator release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT D816V mutation testing in blood or marrow",
+          "cells": [
+            {
+              "text": "KIT D816V mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination with mast cell immunophenotyping",
+          "cells": [
+            {
+              "text": "Clonal disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy evaluation",
+          "cells": [
+            {
+              "text": "Secondary triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion tests for carcinoid and phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Carcinoid and phaeochromocytoma excluded, where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mast_cell_activation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Organomegaly or cytopenias; persistently and markedly raised baseline tryptase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid syndrome",
+          "cells": [
+            {
+              "text": "Excluded by carcinoid testing where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Excluded by phaeochromocytoma testing where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgE-mediated allergy or idiopathic anaphylaxis",
+          "cells": [
+            {
+              "text": "Assessed by allergy evaluation for secondary triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mast_cell_activation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid individual triggers",
+          "cells": [
+            {
+              "text": "Foods, drugs and physical stimuli that precipitate mediator release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "H1-antihistamines first line",
+          "cells": [
+            {
+              "text": "Add H2-antihistamines for gastrointestinal and cutaneous symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mast cell stabilisers and leukotriene antagonists",
+          "cells": [
+            {
+              "text": "Oral sodium cromoglicate and leukotriene receptor antagonists for incomplete control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-IgE therapy",
+          "cells": [
+            {
+              "text": "Omalizumab for refractory symptoms or recurrent anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Self-injectable adrenaline",
+          "cells": [
+            {
+              "text": "Prescribe and train the patient, with a written anaphylaxis action plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary triggers and clonal disease",
+          "cells": [
+            {
+              "text": "Treat secondary allergic triggers; evaluate for an underlying clonal mast cell disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Allergy and immunology or haematology; escalate where anaphylaxis or clonal disease is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mast_cell_activation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mast cell activation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent anaphylaxis or unexplained hypotensive collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised baseline tryptase, organomegaly, cytopenias or refractory symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology referral for suspected clonal mast cell disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial tryptase, urinary mediators, KIT D816V testing, marrow if clonal disease suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a tryptase rise above baseline during an event confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IgE-mediated allergy, idiopathic anaphylaxis or carcinoid; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and avoid triggers: foods, drugs and physical stimuli",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "H1-antihistamines first line, adding H2-antihistamines for GI and skin symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mast cell stabilisers and leukotriene antagonists for incomplete control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Omalizumab for refractory symptoms; self-injectable adrenaline with action plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to allergy and immunology or haematology; escalate where clonal disease is present",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

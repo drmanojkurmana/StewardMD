@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for food allergy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "food_allergy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin prick testing",
+          "cells": [
+            {
+              "text": "Interpreted alongside the clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum allergen-specific IgE",
+          "cells": [
+            {
+              "text": "Includes component-resolved testing where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised oral food challenge",
+          "cells": [
+            {
+              "text": "Definitive diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tryptase",
+          "cells": [
+            {
+              "text": "Measured during and after a suspected anaphylactic event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elimination and reintroduction trial",
+          "cells": [
+            {
+              "text": "Used for suspected non-IgE disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "food_allergy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Food intolerance, e.g. lactase deficiency",
+          "cells": [
+            {
+              "text": "No immune mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbohydrate (alpha-gal) allergy",
+          "cells": [
+            {
+              "text": "Delayed reactions to mammalian meat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scombroid (histamine) poisoning",
+          "cells": [
+            {
+              "text": "Food toxin reaction rather than allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panic or vasovagal episode",
+          "cells": [
+            {
+              "text": "Mimics a systemic reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "food_allergy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict avoidance of culprit food",
+          "cells": [
+            {
+              "text": "Education on label reading, cross-contamination and hidden exposures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Written action plan and adrenaline auto-injectors",
+          "cells": [
+            {
+              "text": "Prescribed, with training for the patient and carers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines for mild reactions",
+          "cells": [
+            {
+              "text": "Adrenaline is first line for any feature of anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergen-specific oral immunotherapy",
+          "cells": [
+            {
+              "text": "Desensitisation, for example to peanut, within a specialist service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise atopic conditions",
+          "cells": [
+            {
+              "text": "Eczema and asthma; poorly controlled asthma worsens anaphylaxis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian input",
+          "cells": [
+            {
+              "text": "Ensures nutritional adequacy and avoids unnecessary restriction, particularly in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist follow-up",
+          "cells": [
+            {
+              "text": "Periodic reassessment with supervised oral food challenges"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "food_allergy-dx-mgmt",
+      "title": "Diagnosis and management of Food allergy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected food allergy: reaction after a known food trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway compromise, hypotension, biphasic or repeated reactions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Give intramuscular adrenaline now for anaphylaxis with airway or circulatory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin prick testing, serum specific IgE and tryptase during the reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does supervised oral food challenge confirm the allergy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider food intolerance, histamine poisoning or eosinophilic gastrointestinal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance of the culprit food with label-reading education",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Written anaphylaxis plan and prescribed adrenaline auto-injectors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider oral immunotherapy within a specialist service",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietitian input and specialist follow-up with supervised food challenges",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milk, egg, wheat and soy often resolve in childhood; peanut and tree nut usually persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

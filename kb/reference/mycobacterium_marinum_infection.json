@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for mycobacterium marinum infection (fish-tank granuloma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_marinum_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy for histopathology",
+          "cells": [
+            {
+              "text": "Granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial culture at a lower temperature, around 30 degrees Celsius",
+          "cells": [
+            {
+              "text": "Recovers the organism when the laboratory is asked to incubate cool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid-fast staining of tissue",
+          "cells": [
+            {
+              "text": "Yield is often low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification",
+          "cells": [
+            {
+              "text": "Speciates the isolate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Deep structures such as tendon sheaths or bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "When disease is extensive or atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_marinum_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporotrichosis",
+          "cells": [
+            {
+              "text": "Sporotrichoid spread of nodules mimics it; the exposure history is the key clue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocardiosis",
+          "cells": [
+            {
+              "text": "Can also spread in a sporotrichoid pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous tuberculosis",
+          "cells": [
+            {
+              "text": "Positive interferon-gamma assay is expected here (ESAT-6 and CFP-10), so it should not be read as tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_marinum_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide-based combination",
+          "cells": [
+            {
+              "text": "Clarithromycin with ethambutol or rifampicin, for several months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternatives",
+          "cells": [
+            {
+              "text": "Tetracyclines such as doxycycline, or co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory alert",
+          "cells": [
+            {
+              "text": "Incubate cultures at a lower temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement",
+          "cells": [
+            {
+              "text": "Where infection extends to tendon sheaths, joints or bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure avoidance",
+          "cells": [
+            {
+              "text": "Waterproof gloves when handling aquaria or fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged therapy",
+          "cells": [
+            {
+              "text": "Continue well beyond clinical resolution; monitor for drug toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune and specialist review",
+          "cells": [
+            {
+              "text": "Assess immune status when extensive or atypical; infectious diseases or dermatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_marinum_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium marinum infection (fish-tank granuloma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Papule or verrucous nodule on a hand or finger after aquarium or fish exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tenosynovitis, septic arthritis, osteomyelitis, extensive disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical referral for deep infection; debride tendon sheath or joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, culture at about 30 degrees C, molecular identification, ultrasound or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Granulomatous lesion with organism recovered on low-temperature culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat biopsy and low-temperature culture; consider sporotrichosis or nocardiosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clarithromycin with ethambutol or rifampicin, for several months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Doxycycline or co-trimoxazole as alternatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical debridement where tendon sheaths, joints or bone are involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continue therapy well beyond clinical resolution; watch for toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised skin disease responds well but slowly; deep infection can leave impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

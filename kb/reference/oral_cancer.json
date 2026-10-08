@@ -154,5 +154,314 @@
       "caption": "Overview comparison matrix for oral cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy of the primary lesion",
+          "cells": [
+            {
+              "text": "Histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the head, neck and oral cavity",
+          "cells": [
+            {
+              "text": "Local extent, bony invasion and nodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and PET-CT",
+          "cells": [
+            {
+              "text": "Distant staging and second primaries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia and panendoscopy",
+          "cells": [
+            {
+              "text": "Extent of disease and synchronous tumours, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and nutritional evaluation",
+          "cells": [
+            {
+              "text": "Dental and nutritional status before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_cancer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Traumatic ulcer or other non-healing ulcer",
+          "cells": [
+            {
+              "text": "Ulcer that fails to heal within a few weeks; biopsy rather than assume trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral leukoplakia or erythroplakia",
+          "cells": [
+            {
+              "text": "Premalignant; monitored and biopsied"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Head and neck multidisciplinary tumour board",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Discuss every case before a treatment plan is finalised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary surgical resection",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Favoured for most resectable oral cavity disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery over radiotherapy for early superficial lesions",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Primary radiotherapy is less favoured given the comparative risk of soft-tissue toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy and selective chemotherapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Radiotherapy mainly adjuvant; chemotherapy added in selected cases, not as a routine third arm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and rehabilitation input",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Before and after treatment, covering speech, swallowing and dental care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Oral cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Oral ulcer or red or white patch that fails to heal within a few weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (firm fixed neck node, tooth loosening, numbness or weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent head and neck referral for suspected cancer with nodal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy, flexible laryngoscopy, CT or MRI, chest imaging and PET-CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show squamous cell carcinoma of the oral cavity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider traumatic ulcer, aphthous ulcer, leukoplakia or lichen planus; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Discuss at the head and neck multidisciplinary tumour board before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Favour primary surgical resection for most resectable oral cavity disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery over primary radiotherapy for early superficial lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy mainly adjuvant; chemotherapy added in selected cases only",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dental, nutritional and rehabilitation input before and after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stage, tumour thickness and nodal status set prognosis; nodal spread worsens outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

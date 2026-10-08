@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for multiple system atrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_system_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Putaminal, pontine and cerebellar atrophy; hot cross bun sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing",
+          "cells": [
+            {
+              "text": "Orthostatic blood pressure measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder function and post-void residual",
+          "cells": [
+            {
+              "text": "Urinary retention or incontinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of dopaminergic therapy",
+          "cells": [
+            {
+              "text": "Documents the limited response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep evaluation",
+          "cells": [
+            {
+              "text": "Stridor and REM sleep behaviour disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of secondary causes",
+          "cells": [
+            {
+              "text": "Of ataxia or parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_system_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parkinson disease",
+          "cells": [
+            {
+              "text": "Early severe autonomic failure, poor levodopa response and cerebellar or pyramidal signs favour MSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic and hereditary cerebellar ataxias",
+          "cells": [
+            {
+              "text": "Secondary causes of ataxia are excluded during the work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_system_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supervised levodopa trial",
+          "cells": [
+            {
+              "text": "Parkinsonism may respond briefly; response is usually poor and transient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-pharmacological orthostatic measures",
+          "cells": [
+            {
+              "text": "Compression garments, head-up tilt of the bed, increased salt and fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pressor agents",
+          "cells": [
+            {
+              "text": "Fludrocortisone, midodrine or droxidopa for orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder",
+          "cells": [
+            {
+              "text": "Intermittent catheterisation for retention; agents for detrusor overactivity; monitor post-void residual"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stridor and airway care",
+          "cells": [
+            {
+              "text": "Sleep evaluation, continuous positive airway pressure, consideration of tracheostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary therapy",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, speech and language therapy, falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting problems",
+          "cells": [
+            {
+              "text": "REM sleep behaviour disorder and depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance-care planning",
+          "cells": [
+            {
+              "text": "Early, with palliative care involvement given rapid progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_system_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Multiple system atrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive parkinsonism or ataxia with early autonomic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (inspiratory stridor, severe orthostatic hypotension, dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and sleep assessment; manage orthostatic syncope and falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, orthostatic blood pressure, bladder residual, levodopa trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Early autonomic failure with cerebellar or pyramidal signs, poor levodopa response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Parkinson disease or another ataxia; exclude secondary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supervised levodopa trial; response is usually poor and transient",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compression garments, head-up tilt and increased salt and fluid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fludrocortisone, midodrine or droxidopa for orthostatic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intermittent catheterisation for retention; monitor post-void residual",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "CPAP for stridor and sleep-related obstruction; consider tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Faster than Parkinson disease; median survival roughly a decade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,325 @@
       "caption": "Overview comparison matrix for iqsec2-related developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iqsec2_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome sequencing or epilepsy gene panel including IQSEC2",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged and video EEG",
+          "cells": [
+            {
+              "text": "Seizure and epilepsy syndrome characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Often normal; excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, neuropsychological and autism assessment",
+          "cells": [
+            {
+              "text": "Developmental profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental segregation testing",
+          "cells": [
+            {
+              "text": "De novo versus inherited status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "X-inactivation studies in affected females",
+          "cells": [
+            {
+              "text": "Interpretive adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted metabolic screen",
+          "cells": [
+            {
+              "text": "Mimics excluded when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iqsec2_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rett syndrome (MECP2-related)",
+          "cells": [
+            {
+              "text": "Rett-like features and hand stereotypies; separated by MECP2 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Early seizures; separated by CDKL5 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iqsec2_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Hormonal therapy or vigabatrin for infantile spasms; rational combination for others"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-resistant seizures",
+          "cells": [
+            {
+              "text": "Ketogenic diet considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early intervention, physiotherapy, occupational therapy and augmentative communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural features",
+          "cells": [
+            {
+              "text": "Tailored support for stereotypies and autistic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnosis",
+          "cells": [
+            {
+              "text": "Molecular confirmation and prolonged or video EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental segregation testing to inform family planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iqsec2_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of IQSEC2-related developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Developmental delay with drug-resistant epilepsy; girls may show Rett-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Prolonged seizures, regression, head growth deceleration or aspiration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent seizure management and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or epilepsy gene panel including IQSEC2, video-EEG, MRI, development",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic IQSEC2 variant confirmed with segregation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test Rett, CDKL5 or other developmental epileptic encephalopathy genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medicines; hormonal therapy or vigabatrin for infantile spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ketogenic diet and rational combination therapy for drug resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early intervention, physiotherapy and communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Behavioural support for stereotypies and autistic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with parental segregation testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong developmental and epilepsy care; severity varies with variant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,341 @@
       "caption": "Overview comparison matrix for hepatoerythropoietic porphyria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatoerythropoietic_porphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary porphyrin fractionation",
+          "cells": [
+            {
+              "text": "Predominant uroporphyrin and heptacarboxyl-porphyrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal porphyrin analysis",
+          "cells": [
+            {
+              "text": "Raised isocoproporphyrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte porphyrins",
+          "cells": [
+            {
+              "text": "Raised zinc-protoporphyrin fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma porphyrin fluorescence scan",
+          "cells": [
+            {
+              "text": "Confirmation, and distinction from other porphyrias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte UROD activity assay",
+          "cells": [
+            {
+              "text": "Grossly reduced enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UROD molecular genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocytes and iron studies",
+          "cells": [
+            {
+              "text": "Haemolysis and iron overload"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatoerythropoietic_porphyria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital erythropoietic porphyria (Gunther disease)",
+          "cells": [
+            {
+              "text": "Clinical overlap; enzyme and genetic testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythropoietic protoporphyria",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermolysis bullosa and other inherited blistering disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatoerythropoietic_porphyria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong photoprotection",
+          "cells": [
+            {
+              "text": "Opaque physical sunblocks and tightly woven clothing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aggravating factors",
+          "cells": [
+            {
+              "text": "Alcohol, oestrogens and iron, which increase porphyrin load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phlebotomy or antimalarials",
+          "cells": [
+            {
+              "text": "Cautious phlebotomy or low-dose antimalarials to reduce hepatic porphyrin burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Gentle wound management of blisters and erosions; prompt treatment of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Porphyrins, iron studies and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Specialist porphyria centre, with dermatology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade family screening for biallelic UROD variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatoerythropoietic_porphyria-dx-mgmt",
+      "title": "Diagnosis and management of Hepatoerythropoietic porphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe blistering photosensitivity with scarring from infancy or early childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Mutilating scarring with infection, haemolysis with splenomegaly, or iron overload?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat secondary infection; assess for iron overload and liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary and faecal porphyrin profiling; erythrocyte porphyrins; UROD genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic UROD variants found, with other porphyrias excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital erythropoietic porphyria, porphyria cutanea tarda or EPP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong photoprotection with opaque sunblocks and tightly woven clothing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid alcohol, oestrogens and iron that increase porphyrin load",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious phlebotomy or low-dose antimalarials to reduce porphyrin burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gentle wound care, prompt treatment of infection and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Photoprotection and porphyrin control; skin fragility managed long term",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

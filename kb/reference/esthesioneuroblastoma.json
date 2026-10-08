@@ -159,5 +159,350 @@
       "caption": "Overview comparison matrix for esthesioneuroblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "esthesioneuroblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasal endoscopy with biopsy of the vault mass",
+          "cells": [
+            {
+              "text": "Representative tissue for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced MRI of sinuses and brain",
+          "cells": [
+            {
+              "text": "Dural, intracranial and orbital extension; interface cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the sinuses",
+          "cells": [
+            {
+              "text": "Erosion of the cribriform plate and lamina papyracea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry (synaptophysin, chromogranin, S100, cytokeratin)",
+          "cells": [
+            {
+              "text": "Neuroendocrine markers; S100 sustentacular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body PET-CT",
+          "cells": [
+            {
+              "text": "Staging and distant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck imaging and ultrasound",
+          "cells": [
+            {
+              "text": "Regional nodal assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "esthesioneuroblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Olfactory groove meningioma or pituitary adenoma",
+          "cells": [
+            {
+              "text": "A dumbbell-shaped mass straddling the cribriform plate with intracranial and intranasal parts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign inflammatory nasal polyp",
+          "cells": [
+            {
+              "text": "Easily mistaken for this tumour, delaying biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "esthesioneuroblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery alone for Kadish A or B disease",
+          "cells": [
+            {
+              "text": "Confined to the nasal cavity or sinuses; radiotherapy alone in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection for skull base extension (Kadish C)",
+          "cells": [
+            {
+              "text": "Aims for negative skull base margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive radiotherapy",
+          "cells": [
+            {
+              "text": "Cranial nerve involvement, invasion near the optic chiasm, or cavernous or sphenoid sinus invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective neck irradiation",
+          "cells": [
+            {
+              "text": "Recommended even in clinically node-negative patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic endonasal approach",
+          "cells": [
+            {
+              "text": "Has largely replaced open craniofacial approaches in many cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull base reconstruction",
+          "cells": [
+            {
+              "text": "Pericranial, nasoseptal or free flap, in the same procedure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy or chemoradiation",
+          "cells": [
+            {
+              "text": "Unresectable disease or patients unfit for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Metastatic or advanced disease; regimen individualised by the MDT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence after surgery alone",
+          "cells": [
+            {
+              "text": "Chemoradiation, or craniofacial resection with postoperative radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged surveillance",
+          "cells": [
+            {
+              "text": "Beyond two to three years, given late local recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Tertiary head and neck centre with skull base surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "esthesioneuroblastoma-dx-mgmt",
+      "title": "Diagnosis and management of esthesioneuroblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral nasal obstruction, epistaxis and anosmia in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intracranial or orbital extension, cranial neuropathy, neck node, CSF leak)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer promptly to a tertiary skull base and head and neck oncology centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopic biopsy; MRI brain and sinuses; CT; PET-CT; neuroendocrine markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neuroendocrine immunohistochemistry confirms the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sinonasal carcinoma, lymphoma or meningioma; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgery alone for Kadish A or B disease; radiotherapy in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resection for skull base extension with negative margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elective neck irradiation even if node-negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant radiotherapy after craniofacial or expanded endoscopic resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low Kadish stage and Hyams grade with complete resection and radiotherapy is favourable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

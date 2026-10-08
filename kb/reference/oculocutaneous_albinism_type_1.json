@@ -152,5 +152,342 @@
       "caption": "Overview comparison matrix for oculocutaneous albinism type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculocutaneous_albinism_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TYR molecular testing",
+          "cells": [
+            {
+              "text": "Variants in TYR, separating OCA1A (no tyrosinase activity) from OCA1B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic assessment",
+          "cells": [
+            {
+              "text": "Acuity, nystagmus and iris transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Foveal hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual-evoked potentials",
+          "cells": [
+            {
+              "text": "Abnormal chiasmal misrouting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological examination",
+          "cells": [
+            {
+              "text": "Actinic damage and skin cancer risk; regular surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet function studies",
+          "cells": [
+            {
+              "text": "Hermansky-Pudlak phenotype, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculocutaneous_albinism_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hermansky-Pudlak syndrome",
+          "cells": [
+            {
+              "text": "Bleeding tendency and pulmonary fibrosis; not seen in non-syndromic OCA1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chediak-Higashi syndrome",
+          "cells": [
+            {
+              "text": "Immune deficiency and giant granules; not seen in OCA1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular albinism",
+          "cells": [
+            {
+              "text": "X-linked, with predominantly ocular hypopigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waardenburg syndrome",
+          "cells": [
+            {
+              "text": "Patchy depigmentation with deafness; deafness points away from albinism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculocutaneous_albinism_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong strict photoprotection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Sunscreen, protective clothing and sun avoidance; critical in OCA1A, which lacks protective melanin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy surveillance",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For actinic damage, basal and squamous cell carcinoma and melanoma; early excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vision support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Refractive correction, tinted lenses and low-vision aids for photophobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic and surgical care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Nystagmus null-point surgery where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Distinguishes OCA1A from OCA1B for prognosis; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary support",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Educational and occupational low-vision support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculocutaneous_albinism_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Oculocutaneous albinism type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital nystagmus, reduced acuity and hypopigmentation; OCA1 suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (bleeding, infections, changing skin lesion or asymmetric nystagmus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: test for Hermansky-Pudlak or Chediak-Higashi; urgent dermatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TYR testing, OCT for foveal hypoplasia, VEP and dermatological examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TYR testing confirm OCA1 with ocular and VEP features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other OCA types or ocular albinism; review the genetic results",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong strict photoprotection, critical in OCA1A which lacks protective melanin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dermoscopy surveillance and early excision of suspicious skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refractive correction, tinted lenses and low-vision aids for photophobia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nystagmus surgery where indicated; genetic counselling for relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal life expectancy with photoprotection; acuity permanently reduced but often stable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

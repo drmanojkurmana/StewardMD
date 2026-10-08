@@ -144,5 +144,325 @@
       "caption": "Overview comparison matrix for edwards syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "edwards_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype or chromosomal microarray",
+          "cells": [
+            {
+              "text": "Trisomy 18 and mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cell-free DNA, amniocentesis or chorionic villus sampling",
+          "cells": [
+            {
+              "text": "Prenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cranial imaging",
+          "cells": [
+            {
+              "text": "Associated malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental karyotyping",
+          "cells": [
+            {
+              "text": "Translocation inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "edwards_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Patau syndrome (trisomy 13)",
+          "cells": [
+            {
+              "text": "Different chromosome and characteristic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trisomy 18 mosaicism",
+          "cells": [
+            {
+              "text": "Milder course with a mixed cell line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pena-Shokeir phenotype",
+          "cells": [
+            {
+              "text": "Fetal akinesia with arthrogryposis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "Coloboma, choanal atresia and ear anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "edwards_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Goals-of-care discussion",
+          "cells": [
+            {
+              "text": "Early, compassionate counselling on comfort or active care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding as agreed in the care plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Echocardiography; surgery only in selected infants after discussion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment",
+          "cells": [
+            {
+              "text": "Infections, seizures and reflux managed as they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary support",
+          "cells": [
+            {
+              "text": "Neonatology, palliative care, cardiology and allied health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Karyotype confirmation and parental testing if translocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "edwards_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Edwards syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Edwards syndrome: trisomy 18 features with growth and cardiac anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiorespiratory compromise, apnoea, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal review and early goals-of-care discussion with the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype or microarray; echocardiography; renal and cranial imaging; parental karyotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is trisomy 18 or mosaicism confirmed on karyotype or microarray?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Patau syndrome, other chromosomal syndromes or CHARGE syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early goals-of-care discussion: comfort-focused or selected active care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding to support nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiography; cardiac surgery only in selected infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic treatment of infection, seizures and reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Parental karyotyping if translocation to assess recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor prognosis; most die in early weeks or months, mosaic forms may fare better",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

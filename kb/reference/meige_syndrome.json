@@ -144,5 +144,296 @@
       "caption": "Overview comparison matrix for meige syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meige_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from the characteristic combination of signs",
+          "cells": [
+            {
+              "text": "Characteristic signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication history",
+          "cells": [
+            {
+              "text": "Drug-induced tardive syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain, if features suggest a secondary cause",
+          "cells": [
+            {
+              "text": "Secondary cause, if suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of functional impact",
+          "cells": [
+            {
+              "text": "Impact on vision, speech and eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for sensory tricks",
+          "cells": [
+            {
+              "text": "Sensory tricks that support a dystonic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meige_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tardive dyskinesia or tardive dystonia",
+          "cells": [
+            {
+              "text": "Dopamine-receptor-blocking drug use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporomandibular joint disorder",
+          "cells": [
+            {
+              "text": "Jaw symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meige_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Periocular and oromandibular muscles; the mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral adjunctive agents",
+          "cells": [
+            {
+              "text": "Anticholinergics, benzodiazepines, baclofen or tetrabenazine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory tricks",
+          "cells": [
+            {
+              "text": "Geste antagoniste transiently relieves spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw causative drugs",
+          "cells": [
+            {
+              "text": "Where a tardive or drug-induced cranial dystonia is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Globus pallidus, for severe refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Vision, speech and swallowing with neurology, ophthalmology and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meige_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Meige syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blepharospasm with oromandibular involvement; suspected Meige syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid progression, drug exposure, functional blindness or marked speech impairment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review for secondary dystonia or a drug-induced cause; withdraw causative drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis, medication history, MRI if a secondary cause is suggested",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is primary dystonia confirmed without a secondary or drug-induced cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Secondary or drug-induced dystonia: withdraw the drug and investigate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Botulinum toxin into periocular and oromandibular muscles as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral agents such as anticholinergics, benzodiazepines, baclofen or tetrabenazine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Teach sensory tricks that transiently relieve the spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider deep brain stimulation of the globus pallidus for severe refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology, ophthalmology and speech therapy support for vision, speech and swallowing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

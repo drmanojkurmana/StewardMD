@@ -147,5 +147,278 @@
       "caption": "Overview comparison matrix for retinal arterial macroaneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinal_macroaneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Focal arteriolar dilatation and the pattern of haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular oedema and the level of haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Fusiform arteriolar dilatation with leakage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinal_macroaneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neovascular (wet) age-related macular degeneration",
+          "cells": [
+            {
+              "text": "Pitfall: a macroaneurysm mistaken for it leads to unnecessary long-term injections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreous haemorrhage from another cause",
+          "cells": [
+            {
+              "text": "Pitfall: unexplained haemorrhage in an elderly patient can be misattributed; look for the macroaneurysm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinal_macroaneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic or non-foveal lesions, as many thrombose and involute spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control hypertension",
+          "cells": [
+            {
+              "text": "Treat the underlying hypertension and cardiovascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exudative maculopathy",
+          "cells": [
+            {
+              "text": "Focal laser photocoagulation and/or intravitreal anti-VEGF therapy for sight-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dense vitreous haemorrhage",
+          "cells": [
+            {
+              "text": "Observation or pars plana vitrectomy; Nd:YAG membranotomy or pneumatic displacement for premacular haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Optical coherence tomography and fundus examination for macular oedema and resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Medical retina specialist for treatment decisions and systemic vascular risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinal_macroaneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Retinal arterial macroaneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Elderly hypertensive patient with focal retinal arteriolar dilatation and haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dense vitreous or submacular haemorrhage, uncontrolled BP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: sight-threatening haemorrhage; refer to medical retina specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus examination, OCT and fluorescein angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography show fusiform arteriolar dilatation with leakage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider wet AMD, diabetic maculopathy or branch vein occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic or non-foveal lesions; many involute spontaneously",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Control hypertension and cardiovascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser and/or intravitreal anti-VEGF for sight-threatening exudative maculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observe or vitrectomy for dense haemorrhage; monitor with OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often favourable; visual outcome depends on fovea involvement by exudate or haemorrhage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

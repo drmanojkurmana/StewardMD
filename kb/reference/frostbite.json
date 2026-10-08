@@ -148,5 +148,276 @@
       "caption": "Overview comparison matrix for frostbite."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frostbite-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of tissue viability and blister character",
+          "cells": [
+            {
+              "text": "During and after rewarming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature measurement",
+          "cells": [
+            {
+              "text": "Detects and treats associated hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiography or bone and technetium scanning",
+          "cells": [
+            {
+              "text": "Assesses perfusion and predicts tissue viability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or MR angiography",
+          "cells": [
+            {
+              "text": "Delineates viable from nonviable tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and wound cultures",
+          "cells": [
+            {
+              "text": "If secondary infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frostbite-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rapid rewarming",
+          "cells": [
+            {
+              "text": "Warm-water bath, started only once refreezing is no longer a risk; refreezing markedly worsens injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat systemic hypothermia first",
+          "cells": [
+            {
+              "text": "Concurrent resuscitation before focusing on the frozen part"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and tetanus prophylaxis",
+          "cells": [
+            {
+              "text": "Opioids for intensely painful rewarming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostacyclin (iloprost) vasodilator therapy",
+          "cells": [
+            {
+              "text": "Thrombolysis is considered for severe deep injury within the therapeutic window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Careful blister management, elevation and treatment of secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed debridement and amputation",
+          "cells": [
+            {
+              "text": "Deferred until tissue has demarcated, guided by perfusion imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Plastic surgery and rehabilitation; counselling on long-term cold sensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frostbite-dx-mgmt",
+      "title": "Diagnosis and management of Frostbite",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected frostbite: cold-injured digits with blistering after cold exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (systemic hypothermia, deep injury, infection or gangrene)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent core rewarming and resuscitation for systemic hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perfusion imaging and bone scan to predict tissue viability",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there no ongoing risk of refreezing, so warm-water rewarming can begin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-freezing cold injury, chilblains, arterial occlusion or Raynaud",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rapid rewarming in a warm-water bath, once refreezing is no longer a risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia with opioids and tetanus prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Iloprost vasodilator therapy; thrombolysis for severe deep injury in the window",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delay debridement and amputation until the tissue has demarcated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Superficial injury usually recovers; long-term cold sensitivity is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

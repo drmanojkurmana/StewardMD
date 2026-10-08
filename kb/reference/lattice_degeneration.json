@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for lattice degeneration."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Ophthalmology Preferred Practice Pattern / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lattice_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated indirect ophthalmoscopy with scleral indentation",
+          "cells": [
+            {
+              "text": "Examines the peripheral retina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp with wide-field or three-mirror lens",
+          "cells": [
+            {
+              "text": "Characterises lesions and their margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide-field fundus imaging",
+          "cells": [
+            {
+              "text": "Documents extent and monitors change over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the fellow eye",
+          "cells": [
+            {
+              "text": "Frequent bilaterality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Associated retinoschisis or subclinical detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Shafer sign and subretinal fluid",
+          "cells": [
+            {
+              "text": "Symptomatic break, if new symptoms develop"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lattice_degeneration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Snailtrack, paving-stone or white-without-pressure degeneration",
+          "cells": [
+            {
+              "text": "Other peripheral retinal degenerations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral chorioretinal changes of high myopia",
+          "cells": [
+            {
+              "text": "Lattice is a sharply demarcated, spindle-shaped thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital hypertrophy of the retinal pigment epithelium",
+          "cells": [
+            {
+              "text": "Pigmented lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral retinoschisis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lattice_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Most asymptomatic eyes; only a minority progress to detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic laser or cryotherapy",
+          "cells": [
+            {
+              "text": "Higher-risk situations: symptomatic tears, the fellow eye after detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom education",
+          "cells": [
+            {
+              "text": "Flashes, new floaters or a visual-field shadow prompt urgent review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detachment repair",
+          "cells": [
+            {
+              "text": "Prompt vitreoretinal surgery for any rhegmatogenous detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Dilated indirect ophthalmoscopy with scleral indentation, including the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High myopes",
+          "cells": [
+            {
+              "text": "Greater detachment risk; escalate on new symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lattice_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Lattice degeneration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Peripheral retinal thinning found on examination, often in a myopic eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (flashes, shower of floaters, field defect, Shafer sign)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal review for suspected tear or detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Indentation exam of both eyes, wide-field imaging, OCT if available",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lattice asymptomatic, with no break or subretinal fluid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Break or subretinal fluid: urgent vitreoretinal review, laser or repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic lattice; most eyes never detach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic laser or cryotherapy for symptomatic tears or the fellow eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Teach detachment warning symptoms and urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repair any detachment promptly with vitreoretinal surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Closer monitoring in high myopes with indentation examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most eyes remain stable; overall prognosis good, with higher risk in high myopes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

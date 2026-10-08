@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for elder abuse."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "elder_abuse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Interview of the older person alone",
+          "cells": [
+            {
+              "text": "Account compared with observed injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full examination with dated documentation",
+          "cells": [
+            {
+              "text": "Injury pattern, nutrition, hydration and skin integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognition and decision-making capacity assessment",
+          "cells": [
+            {
+              "text": "Capacity for consent and protective decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and financial review",
+          "cells": [
+            {
+              "text": "Mismanagement and financial exploitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted investigations and imaging",
+          "cells": [
+            {
+              "text": "Injury characterisation and medical mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "elder_abuse-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Accidental injury or falls",
+          "cells": [
+            {
+              "text": "Explanation consistent with the injury pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulant or thrombocytopenic bruising",
+          "cells": [
+            {
+              "text": "Bruising with a known bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight loss from malignancy or dementia",
+          "cells": [
+            {
+              "text": "Neglect-like findings from underlying illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Self-neglect when living alone",
+          "cells": [
+            {
+              "text": "No external perpetrator"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "elder_abuse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate safety",
+          "cells": [
+            {
+              "text": "Admission or emergency safeguarding placement for imminent risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation",
+          "cells": [
+            {
+              "text": "Detailed, dated record of injuries, nutrition and disclosures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding report",
+          "cells": [
+            {
+              "text": "Adult protective services under local law; police if a crime is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capacity assessment",
+          "cells": [
+            {
+              "text": "Guides consent and protective decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical treatment",
+          "cells": [
+            {
+              "text": "Injuries, pressure injuries, malnutrition, dehydration and medication errors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Separate interview",
+          "cells": [
+            {
+              "text": "Safe disclosure away from a controlling companion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Social work, geriatric medicine, legal and community services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "elder_abuse-dx-mgmt",
+      "title": "Diagnosis and management of Elder abuse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected elder abuse: injuries or neglect inconsistent with the explanation given",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (imminent risk, controlling carer, financial exploitation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate safety: admission or safeguarding placement if risk is imminent",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Separate interview; full examination; capacity; medication and finance review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the account conflict with the injury pattern on separate interview?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider accidental injury, anticoagulant bruising, malignancy or self-neglect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure immediate safety with admission or safeguarding placement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Document injuries, nutrition and disclosures with dates",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Report to adult safeguarding under local statutory obligations",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess decision-making capacity to guide consent and protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat medical consequences; multidisciplinary safeguarding follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Unrecognised abuse raises morbidity, hospitalisation, institutionalisation and mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

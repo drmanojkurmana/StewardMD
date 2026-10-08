@@ -166,5 +166,499 @@
       "caption": "Overview comparison matrix for prostate disease (bph & cancer)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Benign Prostatic Hyperplasia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/benign-prostate-disease/benign-prostatic-hyperplasia-bph"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prostate_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing BPH and prostate cancer",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "AUA symptom score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "Mild 1 to 7, moderate 8 to 19, severe 20 to 35",
+              "range": [
+                1,
+                35
+              ]
+            },
+            {
+              "text": "Grades BPH symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peak urine flow",
+          "unit": "mL/s",
+          "cells": [
+            {
+              "text": "Under 15 mL/s",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Suggests obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postvoid residual",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "Over 100 mL",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Suggests retention"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PSA biopsy threshold",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "4 ng/mL or more (over 2.5 ng/mL under age 50 or high risk)",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "{{hy:No PSA level means zero cancer risk}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiparametric MRI with PI-RADS",
+          "cells": [
+            {
+              "text": "Before biopsy"
+            },
+            {
+              "text": "MRI-targeted biopsy beats ultrasound-guided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade group",
+          "cells": [
+            {
+              "text": "GG1 Gleason 6 or less; GG2 3+4; GG3 4+3; GG4 8; GG5 9 to 10"
+            },
+            {
+              "text": "Predicts prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low risk",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "PSA under 10, grade group 1, organ confined",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Active surveillance candidate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High risk",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "PSA over 20, grade group 4 to 5, or extraprostatic",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Radical treatment plus systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Castration resistance",
+          "unit": "ng/dL",
+          "cells": [
+            {
+              "text": "Progression with testosterone 50 ng/dL or less",
+              "op": "<=",
+              "value": 50
+            },
+            {
+              "text": "CRPC"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prostate_cancer-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic prostate cancer or BPH",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "BPH",
+          "cells": [
+            {
+              "text": "Smooth enlarged gland, transition zone"
+            },
+            {
+              "text": "MRI, biopsy if PSA high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial prostatitis",
+          "cells": [
+            {
+              "text": "Fever, tender prostate, raised PSA"
+            },
+            {
+              "text": "Urine culture; treat then repeat PSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overactive bladder",
+          "cells": [
+            {
+              "text": "Urgency without obstruction"
+            },
+            {
+              "text": "Urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral stricture or bladder-neck contracture",
+          "cells": [
+            {
+              "text": "Obstruction after instrumentation"
+            },
+            {
+              "text": "Cystoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostatic calculi",
+          "cells": [
+            {
+              "text": "Hard nodule on DRE"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degenerative spine disease",
+          "cells": [
+            {
+              "text": "Back pain mimicking bone metastasis"
+            },
+            {
+              "text": "Bone scan or PSMA PET, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder or colon cancer invading prostate",
+          "cells": [
+            {
+              "text": "Direct extension"
+            },
+            {
+              "text": "Imaging and biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prostate_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treating BPH and prostate cancer",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpha-blocker (tamsulosin, alfuzosin, silodosin)",
+          "cells": [
+            {
+              "text": "Bothersome BPH symptoms"
+            },
+            {
+              "text": "Rapid relief"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add 5-alpha-reductase inhibitor",
+          "cells": [
+            {
+              "text": "Gland over 30 mL"
+            },
+            {
+              "text": "Combination beats either alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TURP, enucleation or prostatectomy",
+          "cells": [
+            {
+              "text": "Drug failure, retention, stones, recurrent infection, upper tract dilation"
+            },
+            {
+              "text": "Open or robotic for glands over 75 g"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "Low-risk cancer"
+            },
+            {
+              "text": "Serial PSA, MRI and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical prostatectomy or radiotherapy",
+          "cells": [
+            {
+              "text": "Intermediate or high-risk localized cancer"
+            },
+            {
+              "text": "ADT added with radiotherapy for higher risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen deprivation therapy",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "GnRH agonist flare: add antiandrogen or use antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADT intensification",
+          "cells": [
+            {
+              "text": "Metastatic hormone-sensitive or CRPC"
+            },
+            {
+              "text": "Abiraterone or AR inhibitor, docetaxel; PARP inhibitor for DNA-repair mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency steroids and radiotherapy or surgery",
+          "cells": [
+            {
+              "text": "Spinal cord compression"
+            },
+            {
+              "text": "Neurologic loss may be permanent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prostate_cancer-dx-mgmt",
+      "title": "Diagnosis and management of prostate disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower urinary tract symptoms or raised PSA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "DRE, urinalysis, PSA, symptom score",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "PSA raised or abnormal DRE?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exclude prostatitis; mpMRI then targeted biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cancer found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Metastatic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "ADT with intensification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Risk-adapted: surveillance, surgery or radiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Bothersome BPH symptoms or complications?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Alpha-blocker plus 5-ARI if large; surgery if refractory",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Watchful waiting",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

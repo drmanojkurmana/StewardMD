@@ -163,5 +163,332 @@
       "caption": "Overview comparison matrix for granulosa cell tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours; Berek & Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granulosa_cell_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum inhibin B and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Tumour markers for diagnosis and recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum oestradiol",
+          "cells": [
+            {
+              "text": "Oestrogen output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal and abdominal pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Adnexal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial biopsy or hysteroscopic sampling",
+          "cells": [
+            {
+              "text": "Concurrent endometrial pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT or MRI of abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FOXL2 mutation analysis and immunohistochemistry",
+          "cells": [
+            {
+              "text": "Tumour confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulosa_cell_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thecoma and fibrothecoma",
+          "cells": [
+            {
+              "text": "Sex-cord stromal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sertoli-Leydig cell tumour",
+          "cells": [
+            {
+              "text": "Virilising sex-cord tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic breast carcinoma to the ovary",
+          "cells": [
+            {
+              "text": "Metastatic ovarian mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulosa_cell_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Comprehensive staging surgery",
+          "cells": [
+            {
+              "text": "Salpingo-oophorectomy as the standard surgical approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphadenectomy",
+          "cells": [
+            {
+              "text": "Generally omitted unless nodes are grossly enlarged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility-preserving surgery",
+          "cells": [
+            {
+              "text": "Unilateral salpingo-oophorectomy for young women with disease confined to one ovary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial sampling",
+          "cells": [
+            {
+              "text": "Rules out concurrent hyperplasia or carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Reserved for advanced, recurrent or incompletely resected disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-based combination",
+          "cells": [
+            {
+              "text": "Reasonable option for advanced or incompletely resected tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal therapy",
+          "cells": [
+            {
+              "text": "Aromatase inhibitors for hormonally driven recurrence, extrapolated from practice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Long-term, given late recurrence; inhibin and anti-Mullerian hormone as markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granulosa_cell_tumour-dx-mgmt",
+      "title": "Diagnosis and management of granulosa cell tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granulosa cell tumour: adnexal mass with oestrogen excess or inhibin rise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (postmenopausal bleeding, haemoperitoneum, rapid growth, virilisation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for tumour rupture with haemoperitoneum",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inhibin B, anti-Mullerian hormone, oestradiol, ultrasound and endometrial sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology with FOXL2 testing confirm a granulosa cell tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thecoma, Sertoli-Leydig tumour, carcinoma or metastatic breast cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Comprehensive staging surgery with salpingo-oophorectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endometrial sampling to rule out concurrent hyperplasia or carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Platinum-based systemic therapy for advanced or incompletely resected disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance with inhibin and anti-Mullerian hormone monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable, as most present early; late relapse can occur years after treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

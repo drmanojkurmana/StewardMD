@@ -156,5 +156,325 @@
       "caption": "Overview comparison matrix for familial melanoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_melanoma_cdkn2a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline CDKN2A sequencing with deletion or duplication analysis",
+          "cells": [
+            {
+              "text": "Causative variant; CDK4 if negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total-body skin examination with dermoscopy and baseline photography",
+          "cells": [
+            {
+              "text": "Naevi and new lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and histopathology of suspicious lesions",
+          "cells": [
+            {
+              "text": "Suspicious pigmented lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic imaging surveillance in CDKN2A families",
+          "cells": [
+            {
+              "text": "Pancreatic cancer risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Uveal involvement or BAP1-related disease suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_melanoma_cdkn2a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic melanoma with heavy sun exposure",
+          "cells": [
+            {
+              "text": "Without a germline cause; family history and testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDK4-related familial melanoma",
+          "cells": [
+            {
+              "text": "Germline CDK4 testing when CDKN2A is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAP1 tumour predisposition syndrome",
+          "cells": [
+            {
+              "text": "Uveal disease and other tumours point to BAP1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_melanoma_cdkn2a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline CDKN2A testing with genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade testing of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic surveillance and smoking cessation",
+          "cells": [
+            {
+              "text": "Confirmed carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong photoprotection and surveillance",
+          "cells": [
+            {
+              "text": "Self-examination and clinician total-body examination with dermoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt excisional biopsy",
+          "cells": [
+            {
+              "text": "New, changing or atypical pigmented lesions rather than observation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanoma excision scaled to depth",
+          "cells": [
+            {
+              "text": "Sentinel node assessment for localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant anti-PD-1 for resected high-risk stage III",
+          "cells": [
+            {
+              "text": "Standard; BRAF/MEK combination alternative for BRAF-mutant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune checkpoint inhibition for stage IV disease",
+          "cells": [
+            {
+              "text": "Anti-PD-1 alone or with anti-CTLA-4; BRAF/MEK for BRAF V600-mutant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_melanoma_cdkn2a-dx-mgmt",
+      "title": "Diagnosis and management of Familial melanoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple primary melanomas or several affected relatives with early-onset melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (changing pigmented lesion, new melanoma, pancreatic signs, enlarging nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Excisional biopsy; oncology referral for biopsy-proven melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CDKN2A sequencing with deletion analysis; CDK4 if negative; skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic CDKN2A or CDK4 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic melanoma, BAP1, MITF or other susceptibility",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong photoprotection and total-body skin surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt excisional biopsy of new or atypical lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision with sentinel node assessment for localised melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant anti-PD-1 for resected high-risk stage III disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Immune checkpoint inhibition or BRAF/MEK therapy for metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifetime risk is high; early excision gives excellent outcomes for thin lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

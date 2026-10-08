@@ -172,5 +172,483 @@
       "caption": "Overview comparison matrix for superficial fungal infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 52-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Overview of Dermatophytoses",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/overview-of-dermatophytoses"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Tinea Capitis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-capitis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superficial_fungal_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing superficial fungal infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatophytosis",
+          "cells": [
+            {
+              "text": "Annular scaly plaques, may have hair loss; groin form spares scrotum"
+            },
+            {
+              "text": "KOH shows hyphae"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Candidiasis",
+          "cells": [
+            {
+              "text": "Inflamed plaques with satellite pustules in skin folds; may involve scrotum"
+            },
+            {
+              "text": "KOH shows pseudohyphae"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tinea (pityriasis) versicolor",
+          "cells": [
+            {
+              "text": "Hyper- or hypopigmented scaly patches on trunk"
+            },
+            {
+              "text": "{{hy:KOH shows spaghetti and meatballs (Malassezia)}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "KOH of lesion edge scrapings",
+          "cells": [
+            {
+              "text": "Hyphae"
+            },
+            {
+              "text": "Confirms dermatophyte"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nail clippings",
+          "cells": [
+            {
+              "text": "KOH of pared nail plate; PAS stain most sensitive"
+            },
+            {
+              "text": "Confirms onychomycosis before oral therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Wood lamp",
+          "cells": [
+            {
+              "text": "Blue-green glow with M. canis and M. audouinii"
+            },
+            {
+              "text": "T. tonsurans does not fluoresce"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Fungal culture",
+          "cells": [
+            {
+              "text": "Scalp, nails, outbreaks, treatment failure"
+            },
+            {
+              "text": "Nails may harbour non-dermatophytes"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "superficial_fungal_infections-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic superficial fungal infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Psoriasis",
+          "cells": [
+            {
+              "text": "Mimics tinea corporis and nail fungus; other skin plaques"
+            },
+            {
+              "text": "KOH negative; nail PAS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eczema or contact dermatitis",
+          "cells": [
+            {
+              "text": "Itchy, ill-defined, no active scaly edge"
+            },
+            {
+              "text": "KOH negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrasma",
+          "cells": [
+            {
+              "text": "Bacterial intertrigo resembling tinea cruris"
+            },
+            {
+              "text": "Wood lamp separates it from tinea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Depigmented without scale (vs versicolor)"
+            },
+            {
+              "text": "Clinical; KOH negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seborrhoeic dermatitis",
+          "cells": [
+            {
+              "text": "Greasy scale of scalp and face"
+            },
+            {
+              "text": "KOH; response to therapy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Discoid lupus, lichen planopilaris (scalp)",
+          "cells": [
+            {
+              "text": "Scarring alopecia"
+            },
+            {
+              "text": "Scalp biopsy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mycosis fungoides",
+          "cells": [
+            {
+              "text": "Persistent patches not responding"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "superficial_fungal_infections-treatment",
+      "kind": "treatment",
+      "title": "Treating superficial fungal infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical azole or terbinafine",
+          "cells": [
+            {
+              "text": "Tinea corporis, cruris, pedis"
+            },
+            {
+              "text": "Terbinafine is fungicidal and shorter"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Econazole or ciclopirox",
+          "cells": [
+            {
+              "text": "When candida cannot be excluded"
+            },
+            {
+              "text": "Covers both"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Topical nystatin or azole",
+          "cells": [
+            {
+              "text": "Cutaneous candidiasis"
+            },
+            {
+              "text": "Systemic azole if resistant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Selenium sulfide lotion or topical azole",
+          "cells": [
+            {
+              "text": "Tinea versicolor"
+            },
+            {
+              "text": "Oral azole for extensive disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral terbinafine",
+          "cells": [
+            {
+              "text": "Tinea capitis (Trichophyton), onychomycosis"
+            },
+            {
+              "text": "LFTs if over 4 weeks"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral griseofulvin",
+          "cells": [
+            {
+              "text": "Tinea capitis from Microsporum in children"
+            },
+            {
+              "text": "Preferred for Microsporum"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "Adults with tinea capitis or nail infection"
+            },
+            {
+              "text": "Alternative to terbinafine"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Selenium sulfide 2.5% shampoo",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Adjunct for tinea capitis"
+            },
+            {
+              "text": "At least twice weekly; not monotherapy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Short prednisone taper",
+          "cells": [
+            {
+              "text": "Kerion or severe inflammation"
+            },
+            {
+              "text": "Tapered over 2 weeks"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Oral antifungal doses and durations were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superficial_fungal_infections-dx-mgmt",
+      "title": "Diagnosis and management of superficial fungal infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Scaly, itchy or discoloured skin, scalp or nail lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "KOH of scrapings, hairs or nail clippings",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Fungal elements seen?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider psoriasis, eczema, erythrasma; biopsy if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Scalp or nail involved?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral terbinafine, griseofulvin or itraconazole; culture first",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Pseudohyphae with satellite pustules?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Candidiasis: topical nystatin or azole",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Spaghetti and meatballs on trunk patches?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Versicolor: selenium sulfide or topical azole",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Tinea of skin: topical terbinafine or azole",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor LFTs if oral course over 4 weeks",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

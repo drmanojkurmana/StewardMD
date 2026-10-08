@@ -166,5 +166,424 @@
       "caption": "Overview comparison matrix for status epilepticus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Seizure Disorders (status epilepticus section)",
+      "url": "https://www.merckmanuals.com/en-ca/professional/neurologic-disorders/seizure-disorders/seizure-disorders",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "STATUS_EPILEPTICUS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and assessing status epilepticus",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Convulsive status epilepticus",
+          "unit": "minutes",
+          "cells": [
+            {
+              "text": "Tonic-clonic activity above 5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "{{hy:Or 2 or more seizures without full recovery between}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Older definition",
+          "unit": "minutes",
+          "cells": [
+            {
+              "text": "30",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Shortened to prompt earlier treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brain injury risk",
+          "unit": "minutes",
+          "cells": [
+            {
+              "text": "Untreated generalised seizures above 60",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "May cause permanent damage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonconvulsive status",
+          "cells": [
+            {
+              "text": "Prolonged altered mental status"
+            },
+            {
+              "text": "EEG needed to diagnose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Refractory status",
+          "cells": [
+            {
+              "text": "Seizures continue after a benzodiazepine and a second agent"
+            },
+            {
+              "text": "Escalate to third agent or anaesthesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initial work-up",
+          "cells": [
+            {
+              "text": "Glucose, electrolytes, calcium, magnesium, phosphate, renal and liver tests, head CT"
+            },
+            {
+              "text": "Lumbar puncture if CNS infection suspected and imaging normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "STATUS_EPILEPTICUS-ddx",
+      "kind": "ddx",
+      "title": "Mimics of status epilepticus",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychogenic non-epileptic seizures",
+          "cells": [
+            {
+              "text": "{{hy:Waxing-waning movements, resisted eye opening, normal vitals, no postictal confusion}}"
+            },
+            {
+              "text": "Video-EEG monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Convulsive syncope or arrhythmia",
+          "cells": [
+            {
+              "text": "Brief loss of consciousness with myoclonic jerks"
+            },
+            {
+              "text": "ECG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Toxic-metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Altered consciousness without electrographic seizures"
+            },
+            {
+              "text": "EEG and metabolic panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Encephalitis",
+          "cells": [
+            {
+              "text": "Fever, CSF pleocytosis; may also cause status"
+            },
+            {
+              "text": "Lumbar puncture"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "STATUS_EPILEPTICUS-treatment",
+      "kind": "treatment",
+      "title": "Stepwise treatment of convulsive status epilepticus",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Lorazepam IV",
+          "cells": [
+            {
+              "text": "{{hy:First line}}"
+            },
+            {
+              "text": "0.05 to 0.1 mg/kg (typically 4 mg in adults) at 2 mg/minute"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Midazolam",
+          "cells": [
+            {
+              "text": "Alternative benzodiazepine"
+            },
+            {
+              "text": "0.2 mg/kg, up to 10 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diazepam IV",
+          "cells": [
+            {
+              "text": "Alternative benzodiazepine"
+            },
+            {
+              "text": "0.15 to 0.2 mg/kg, up to 10 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No IV access",
+          "cells": [
+            {
+              "text": "Prehospital or difficult access"
+            },
+            {
+              "text": "IM fosphenytoin, sublingual or rectal benzodiazepine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fosphenytoin, phenytoin, levetiracetam or valproate",
+          "cells": [
+            {
+              "text": "Second line after benzodiazepine"
+            },
+            {
+              "text": "No agent clearly preferred"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lacosamide, phenobarbital or another second-line drug",
+          "cells": [
+            {
+              "text": "Refractory status"
+            },
+            {
+              "text": "Third agent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation with propofol, midazolam or pentobarbital",
+          "cells": [
+            {
+              "text": "Ongoing seizures"
+            },
+            {
+              "text": "Continue at least 24 hours, then stop and repeat EEG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "After seizure control"
+            },
+            {
+              "text": "Metabolic, structural, infective or toxic"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses for second-line and anaesthetic agents were not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "STATUS_EPILEPTICUS-dx-mgmt",
+      "title": "Diagnosis and management of status epilepticus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Seizure above 5 minutes or repeated without recovery",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Airway, IV access, glucose and bloods",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "IV access available?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lorazepam 0.05 to 0.1 mg/kg IV",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "IM fosphenytoin or sublingual or rectal benzodiazepine",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Second agent: fosphenytoin, levetiracetam or valproate",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Seizures stopped?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Third agent: lacosamide, phenobarbital or other",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Still seizing?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intubate; propofol or pentobarbital with EEG monitoring",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Head CT, find and treat cause; EEG if not waking",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

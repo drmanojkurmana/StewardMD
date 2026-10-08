@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for isolated acth deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "isolated_acth_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired morning serum cortisol and plasma ACTH",
+          "cells": [
+            {
+              "text": "Low ACTH with low cortisol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic cortisol reserve testing (synacthen, insulin tolerance or CRH)",
+          "cells": [
+            {
+              "text": "Cortisol reserve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other anterior pituitary axes",
+          "cells": [
+            {
+              "text": "Confirms the deficiency is isolated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and glucose",
+          "cells": [
+            {
+              "text": "Hyponatraemia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of glucocorticoid and checkpoint inhibitor exposure",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Hypophysitis or structural lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_acth_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary adrenal insufficiency (Addison disease)",
+          "cells": [
+            {
+              "text": "High ACTH, hyperpigmentation and mineralocorticoid deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous glucocorticoid suppression",
+          "cells": [
+            {
+              "text": "Commonest cause of secondary adrenal insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panhypopituitarism",
+          "cells": [
+            {
+              "text": "Multiple pituitary hormone deficiencies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_acth_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "Lifelong glucocorticoid replacement; mineralocorticoid unnecessary as aldosterone is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Dose escalation in intercurrent illness; parenteral steroid for vomiting or major stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone and intravenous fluid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education",
+          "cells": [
+            {
+              "text": "Steroid emergency card and injectable hydrocortisone for home use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitants",
+          "cells": [
+            {
+              "text": "Review checkpoint inhibitor and exogenous glucocorticoid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Other pituitary axes reviewed periodically; endocrinology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "isolated_acth_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Isolated ACTH deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue, weight loss, anorexia, hypoglycaemia and hyponatraemia; no hyperpigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Adrenal crisis with hypotension, collapse or severe hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Parenteral hydrocortisone and intravenous fluid resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired morning cortisol and ACTH, dynamic cortisol reserve, other axes, pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low ACTH and cortisol with other axes intact confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary adrenal insufficiency or drug suppression; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong hydrocortisone; no mineralocorticoid needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sick-day rules with dose escalation and parenteral steroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Steroid emergency card and home injectable hydrocortisone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review checkpoint inhibitor and glucocorticoid precipitants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Endocrinology follow-up and periodic pituitary axis review",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong replacement; crisis prevention and education are key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

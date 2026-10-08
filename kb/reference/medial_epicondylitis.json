@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for medial epicondylitis (golfer elbow)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medial_epicondylitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Provocative tests: resisted wrist flexion and pronation, palpation",
+          "cells": [
+            {
+              "text": "Medial epicondyle tenderness on resisted wrist flexion and pronation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar nerve assessment: Tinel sign and sensory testing",
+          "cells": [
+            {
+              "text": "Ulnar neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Common flexor tendinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI in unclear or refractory cases",
+          "cells": [
+            {
+              "text": "Ulnar collateral ligament, in unclear or refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Ulnar neuropathy, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medial_epicondylitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ulnar neuropathy (cubital tunnel syndrome)",
+          "cells": [
+            {
+              "text": "Little and ring finger numbness or intrinsic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar collateral ligament injury or insufficiency",
+          "cells": [
+            {
+              "text": "Valgus instability suggests collateral ligament failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medial_epicondylitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification and load management",
+          "cells": [
+            {
+              "text": "Offloads the flexor-pronator origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive eccentric loading",
+          "cells": [
+            {
+              "text": "Flexor-pronator rehabilitation, the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-term analgesia, ice and counterforce bracing",
+          "cells": [
+            {
+              "text": "NSAIDs and ice, plus correction of technique and ergonomics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting ulnar neuropathy",
+          "cells": [
+            {
+              "text": "Assess for and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Short-term relief in refractory cases; limited long-term benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement",
+          "cells": [
+            {
+              "text": "Degenerate tendon, for cases refractory to prolonged conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient counselling",
+          "cells": [
+            {
+              "text": "Recovery is often slow"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medial_epicondylitis-dx-mgmt",
+      "title": "Diagnosis and management of Medial epicondylitis (golfer elbow)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Medial elbow pain with tenderness over the medial epicondyle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulnar nerve symptoms, valgus instability or night pain present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review the diagnosis; assess ulnar neuropathy or collateral ligament failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Provocative tests, ulnar nerve assessment, ultrasound for flexor tendinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is flexor-pronator tendinopathy confirmed on examination and ultrasound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cubital tunnel syndrome or UCL injury; MRI if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification and load management of the flexor-pronator origin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive eccentric loading of the flexor-pronator muscles as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-term NSAIDs and ice, with counterforce bracing and technique correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroid injection for refractory cases, weighing limited long-term benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgical debridement for refractory cases; recovery is often slow",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -174,5 +174,452 @@
       "caption": "Overview comparison matrix for measles (rubeola)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Overview of Measles",
+      "kind": "web",
+      "url": "https://www.cdc.gov/measles/hcp/clinical-overview/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "measles-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of measles",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Prodrome",
+          "cells": [
+            {
+              "text": "Fever with cough, coryza and conjunctivitis for about 4 days"
+            },
+            {
+              "text": "Fever up to 105 F"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Koplik spots",
+          "cells": [
+            {
+              "text": "Blue-white dots on buccal mucosa about 2 days before rash"
+            },
+            {
+              "text": "{{hy:Pathognomonic}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rash",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "About 14 days after exposure",
+              "op": "=",
+              "value": 14
+            },
+            {
+              "text": "Starts at hairline and behind ears, spreads to feet by day 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles IgM",
+          "cells": [
+            {
+              "text": "Single serum positive confirms"
+            },
+            {
+              "text": "May be negative in first 4 to 5 days of rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR",
+          "cells": [
+            {
+              "text": "Throat or nasopharyngeal swab plus urine"
+            },
+            {
+              "text": "Collect with serum at first contact; genotype separates vaccine strain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paired IgG",
+          "cells": [
+            {
+              "text": "Fourfold rise between acute and convalescent sera"
+            },
+            {
+              "text": "Retrospective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious period",
+          "cells": [
+            {
+              "text": "4 days before to 4 days after rash onset"
+            },
+            {
+              "text": "Airborne isolation for 4 days after rash"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atypical hosts",
+          "cells": [
+            {
+              "text": "Rash may be absent in immunocompromised or malnourished"
+            },
+            {
+              "text": "Rely on PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "measles-ddx",
+      "kind": "ddx",
+      "title": "Rash illnesses that mimic measles",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Rubella",
+          "cells": [
+            {
+              "text": "Milder, no cough, posterior auricular and suboccipital nodes"
+            },
+            {
+              "text": "Rubella IgM or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Roseola",
+          "cells": [
+            {
+              "text": "Rash appears after fever settles"
+            },
+            {
+              "text": "Clinical; HHV-6 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Atypical lymphocytes, pharyngitis, rash after amoxicillin"
+            },
+            {
+              "text": "Heterophile or EBV serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scarlet fever",
+          "cells": [
+            {
+              "text": "Sandpaper rash, strawberry tongue"
+            },
+            {
+              "text": "Throat culture or rapid strep test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kawasaki disease",
+          "cells": [
+            {
+              "text": "Fever 5 days or more, red lips, extremity changes"
+            },
+            {
+              "text": "Clinical criteria, echocardiogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rocky Mountain spotted fever or meningococcaemia",
+          "cells": [
+            {
+              "text": "Rash becomes petechial; tick exposure or shock"
+            },
+            {
+              "text": "Blood culture, rickettsial testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug eruption",
+          "cells": [
+            {
+              "text": "New drug, no Koplik spots"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "measles-treatment",
+      "kind": "treatment",
+      "title": "Management of measles",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Antipyretics, fluids; no proven antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin A, under 6 months",
+          "cells": [
+            {
+              "text": "Child with measles"
+            },
+            {
+              "text": "50,000 IU on diagnosis and again next day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vitamin A, 6 to 11 months",
+          "cells": [
+            {
+              "text": "Child with measles"
+            },
+            {
+              "text": "100,000 IU on diagnosis and again next day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vitamin A, 12 months or older",
+          "cells": [
+            {
+              "text": "{{hy:Every child with measles, especially if severe}}"
+            },
+            {
+              "text": "200,000 IU on diagnosis and again next day; avoid high dose in pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Secondary bacterial pneumonia or otitis"
+            },
+            {
+              "text": "Fever returning after rash suggests bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation and notification",
+          "cells": [
+            {
+              "text": "All suspected cases"
+            },
+            {
+              "text": "Airborne precautions for 4 days after rash; notify public health"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-exposure immunoglobulin",
+          "cells": [
+            {
+              "text": "Susceptible high-risk contacts: infants, pregnancy, immunocompromised"
+            },
+            {
+              "text": "Within 72 h usually prevents; up to 6 days may modify"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribavirin",
+          "cells": [
+            {
+              "text": "Severe disease or immunocompromised"
+            },
+            {
+              "text": "Benefit not proven"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "CDC overview gives no PEP doses; Harrison gives timing only."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "measles-dx-mgmt",
+      "title": "Diagnosis and management of measles",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with rash, cough, coryza or conjunctivitis",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Airborne isolation at first contact",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Serum IgM plus throat swab and urine RT-PCR",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "IgM or PCR positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider rubella, roseola, scarlet fever, drug rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Notify public health; trace contacts",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care plus vitamin A 2 doses for children",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Pneumonia, croup, encephalitis or immunocompromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Admit; antibiotics for bacterial infection; consider ribavirin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Home care; isolate until 4 days after rash",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for gestational thyroid disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gestational_thyroid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trimester-specific TSH and free thyroid hormone measurement",
+          "cells": [
+            {
+              "text": "Trimester-specific thyroid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH-receptor antibody testing",
+          "cells": [
+            {
+              "text": "When Graves disease is suspected or to assess fetal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid peroxidase antibodies",
+          "cells": [
+            {
+              "text": "Autoimmune thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal ultrasound",
+          "cells": [
+            {
+              "text": "Goitre or growth concerns in antibody-positive pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_thyroid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperemesis gravidarum with transient gestational thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Self-limiting and hCG-mediated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graves disease in pregnancy",
+          "cells": [
+            {
+              "text": "Needs antithyroid treatment; TSH-receptor antibodies assess fetal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational trophoblastic disease",
+          "cells": [
+            {
+              "text": "Marked hCG-driven thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_thyroid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levothyroxine for overt hypothyroidism",
+          "cells": [
+            {
+              "text": "Requirements rise in pregnancy; targets are trimester-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithyroid drug for Graves hyperthyroidism",
+          "cells": [
+            {
+              "text": "Lowest effective dose; propylthiouracil in the first trimester"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Self-limiting gestational thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Supportive care without antithyroid drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trimester-specific monitoring",
+          "cells": [
+            {
+              "text": "TSH and free thyroid hormone levels, with therapy adjusted accordingly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal and neonatal risk assessment",
+          "cells": [
+            {
+              "text": "TSH-receptor antibodies and fetal ultrasound for goitre or growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid radionuclide treatment",
+          "cells": [
+            {
+              "text": "Radionuclide scanning and radioiodine avoided in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal thyroid assessment",
+          "cells": [
+            {
+              "text": "After delivery, coordinated with endocrine and obstetric care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gestational_thyroid-dx-mgmt",
+      "title": "Diagnosis and management of Gestational thyroid disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gestational thyroid disease: abnormal TSH or thyroid hormones in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (thyroid storm, uncontrolled thyrotoxicosis, fetal goitre)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine and obstetric review for thyroid storm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trimester-specific TSH and free T4, TSH-receptor and TPO antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are trimester-specific TSH and free hormones outside the normal range for pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hyperemesis-related gestational thyrotoxicosis or postpartum thyroiditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levothyroxine for overt hypothyroidism, with higher requirements in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lowest effective antithyroid drug for Graves; propylthiouracil in the first trimester",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No antithyroid drugs for self-limiting gestational thyrotoxicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trimester-specific TSH and free hormone monitoring; avoid radionuclide scanning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good maternal and fetal outcomes with monitoring; poorly controlled disease raises risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

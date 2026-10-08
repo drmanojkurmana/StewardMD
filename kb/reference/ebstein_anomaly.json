@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for ebstein anomaly."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ebstein_anomaly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Leaflet displacement, regurgitation and right ventricular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Pre-excitation, right atrial enlargement and conduction changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Right ventricular volumes and the atrialised segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiological study",
+          "cells": [
+            {
+              "text": "Accessory pathways or tachyarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Marked cardiomegaly with a globular heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of atrial-level shunt",
+          "cells": [
+            {
+              "text": "Direction of shunt and cyanosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ebstein_anomaly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tricuspid valve dysplasia without displacement",
+          "cells": [
+            {
+              "text": "Tricuspid abnormality without apical displacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uhl anomaly or arrhythmogenic right ventricular cardiomyopathy",
+          "cells": [
+            {
+              "text": "Right ventricular disease without displacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial effusion",
+          "cells": [
+            {
+              "text": "Enlarged silhouette without valve displacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ebstein_anomaly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin infusion",
+          "cells": [
+            {
+              "text": "Ductal pulmonary flow in the critically cyanotic neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary vasodilators",
+          "cells": [
+            {
+              "text": "Inhaled nitric oxide while pulmonary resistance falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart failure care",
+          "cells": [
+            {
+              "text": "Diuretics, careful fluids and treatment of hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid repair or replacement",
+          "cells": [
+            {
+              "text": "Cone reconstruction or replacement with atrial closure; staged palliation if unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accessory pathway ablation",
+          "cells": [
+            {
+              "text": "Catheter ablation for WPW pre-excitation tachyarrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Serial echo and ECG; endocarditis prophylaxis where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy assessment",
+          "cells": [
+            {
+              "text": "Pre-pregnancy cardiac assessment and counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ebstein_anomaly-dx-mgmt",
+      "title": "Diagnosis and management of Ebstein anomaly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ebstein anomaly: cyanosis or heart failure with a massively enlarged heart",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal cyanosis with low output, tachyarrhythmia, collapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent prostaglandin in the critically cyanotic neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography for leaflet displacement; ECG for pre-excitation; cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is apical displacement of the tricuspid leaflets seen on echocardiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tricuspid dysplasia, tricuspid atresia or pericardial effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prostaglandin and inhaled nitric oxide in the critically cyanotic neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics and careful fluids for right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tricuspid cone repair or replacement for severe regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Catheter ablation for accessory-pathway tachyarrhythmias",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong echo and ECG surveillance within a congenital cardiology team",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mild disease allows a normal life; severe neonatal presentations carry high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

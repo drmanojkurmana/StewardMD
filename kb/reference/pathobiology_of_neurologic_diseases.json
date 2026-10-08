@@ -163,5 +163,465 @@
       "caption": "Overview comparison matrix for pathobiology of neurologic diseases."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pathobiology_of_neurologic_diseases-diagnostic",
+      "kind": "diagnostic",
+      "title": "Molecular hallmarks of neurodegenerative and channel disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Hallmark",
+        "Clinical link"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-amyloid and tau",
+          "cells": [
+            {
+              "text": "Plaques and neurofibrillary tangles; a double-prion disease"
+            },
+            {
+              "text": "Alzheimer disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-synuclein",
+          "cells": [
+            {
+              "text": "Lewy bodies; glial cytoplasmic inclusions in MSA"
+            },
+            {
+              "text": "PD, dementia with Lewy bodies, MSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TDP-43, FUS, C9orf72, SOD1",
+          "cells": [
+            {
+              "text": "Ubiquitinated inclusions"
+            },
+            {
+              "text": "ALS and frontotemporal degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progranulin (GRN) haploinsufficiency",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10% of FTD",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Lysosomal and microglial dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GBA mutations",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5% of PD and 8 to 9% of DLB",
+              "range": [
+                5,
+                9
+              ]
+            },
+            {
+              "text": "Lysosomal failure with alpha-synuclein build-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TREM2 loss of function",
+          "unit": "fold",
+          "cells": [
+            {
+              "text": "Up to about fourfold Alzheimer risk",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "{{hy:Places microglia as primary drivers}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PrP prions",
+          "cells": [
+            {
+              "text": "Nucleic acid-free host protein that templates misfolding"
+            },
+            {
+              "text": "CJD, kuru, GSS, fatal insomnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Channelopathy genes",
+          "cells": [
+            {
+              "text": "Ataxias (EA1, EA2, SCA6), migraine (FHM1, FHM3), epilepsy (BNFC, GEFS+), periodic paralysis, myotonia, deafness"
+            },
+            {
+              "text": "Paraneoplastic forms target Kv1 and P/Q channels (limbic encephalitis, neuromyotonia, LEMS)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Toxic oligomers",
+          "cells": [
+            {
+              "text": "Soluble species rather than visible aggregates"
+            },
+            {
+              "text": "Aggregates may be protective sequestration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pathobiology_of_neurologic_diseases-ddx",
+      "kind": "ddx",
+      "title": "Mechanism-based groups to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyloid and tau dementias",
+          "cells": [
+            {
+              "text": "Progressive memory-led decline"
+            },
+            {
+              "text": "Genetic testing (APP, MAPT) where familial; pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-synucleinopathies",
+          "cells": [
+            {
+              "text": "Parkinsonism, dysautonomia, Lewy body dementia"
+            },
+            {
+              "text": "SNCA, LRRK2, GBA testing where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FTD and ALS spectrum",
+          "cells": [
+            {
+              "text": "Behavior, language or motor neuron signs; strong family history"
+            },
+            {
+              "text": "C9orf72, GRN, SOD1, TDP-43, FUS testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prion disease",
+          "cells": [
+            {
+              "text": "Rapidly progressive dementia"
+            },
+            {
+              "text": "PRNP genetics, pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sclerosis and neuroinflammation",
+          "cells": [
+            {
+              "text": "Relapsing demyelination"
+            },
+            {
+              "text": "MRI and CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial neurodegeneration",
+          "cells": [
+            {
+              "text": "Friedreich ataxia, MFN2 CMT2A, OPA1 optic atrophy"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental disorders",
+          "cells": [
+            {
+              "text": "Microcephaly, lissencephaly, fragile X, Rett, Timothy syndrome"
+            },
+            {
+              "text": "FMR1, MECP2, CACNA1C testing; congenital Zika serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Channelopathies",
+          "cells": [
+            {
+              "text": "Episodic attacks with normal interictal state"
+            },
+            {
+              "text": "Channel gene testing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "pathobiology_of_neurologic_diseases-treatment",
+      "kind": "treatment",
+      "title": "Therapeutic strategies by mechanism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-amyloid monoclonal antibodies",
+          "cells": [
+            {
+              "text": "Alzheimer disease"
+            },
+            {
+              "text": "Promote beta-amyloid clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement and microglia-directed therapy",
+          "cells": [
+            {
+              "text": "Synapse loss driven by C1q and C3"
+            },
+            {
+              "text": "Anti-C1q and anti-TREM2 antibodies in trials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progranulin-directed and gene or protein replacement",
+          "cells": [
+            {
+              "text": "GRN-related FTD and monogenic disease"
+            },
+            {
+              "text": "Investigational"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic syndrome-based therapy",
+          "cells": [
+            {
+              "text": "Parkinsonism, MS and others"
+            },
+            {
+              "text": "Dopamine replacement in PD; immunomodulation in MS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep optimisation",
+          "cells": [
+            {
+              "text": "All neurodegenerative disease"
+            },
+            {
+              "text": "Glymphatic clearance of interstitial amyloid is greatest in sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Progressive motor and cognitive decline"
+            },
+            {
+              "text": "Physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Familial or early-onset disease"
+            },
+            {
+              "text": "Cascade testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "This is a mechanisms chapter; specific drugs and doses belong to the disease entries."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pathobiology_of_neurologic_diseases-dx-mgmt",
+      "title": "Diagnosis and management of neurodegenerative disease by mechanism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive cognitive, motor or behavioral decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly progressive over weeks to months?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for prion disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Strong family history or early onset?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Targeted genetic testing and counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Classify by syndrome and protein: amyloid-tau, synuclein, TDP-43",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Disease-modifying therapy available?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Start it, e.g. anti-amyloid antibody in eligible Alzheimer disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Symptomatic therapy, sleep, rehabilitation, trial referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

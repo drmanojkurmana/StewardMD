@@ -154,5 +154,323 @@
       "caption": "Overview comparison matrix for microcystic adnexal carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microcystic_adnexal_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional biopsy reaching the reticular dermis or subcutis",
+          "cells": [
+            {
+              "text": "Depth of infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology assessing depth and perineural invasion",
+          "cells": [
+            {
+              "text": "Depth of infiltration and perineural invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Distinguishes morphoeic BCC and desmoplastic trichoepithelioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery with margin mapping",
+          "cells": [
+            {
+              "text": "Margin status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for deep, bony or perineural extension",
+          "cells": [
+            {
+              "text": "Extension in advanced lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment when perineural symptoms are present",
+          "cells": [
+            {
+              "text": "Perineural symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microcystic_adnexal_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Desmoplastic trichoepithelioma",
+          "cells": [
+            {
+              "text": "Distinguished by immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morphoeic (sclerosing) basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Sclerosing pattern; immunohistochemistry separates the two"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microcystic_adnexal_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Standard of care for localised disease whenever feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery",
+          "cells": [
+            {
+              "text": "Preferred over wide local excision where available; full margin assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generous margins for wide local excision",
+          "cells": [
+            {
+              "text": "Reports range from a few millimetres up to 3 to 5 cm, as subclinical extension is unpredictable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI before surgery",
+          "cells": [
+            {
+              "text": "Deep or perineural extension when suspected; a negative scan does not rule out spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep biopsy",
+          "cells": [
+            {
+              "text": "Not a superficial shave; superficial sampling can miss the infiltrative component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Adjuvant after incomplete or high-risk margins, or monotherapy if not surgical candidates; evidence limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "No established chemotherapy or targeted regimen; routine systemic staging is not standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Skin and regional nodes; late local recurrence can occur decades after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microcystic_adnexal_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Microcystic adnexal carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Indurated facial plaque; suspected microcystic adnexal carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Perineural symptoms, recurrence after excision, or fixation to deeper structures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Deep biopsy and multidisciplinary review; assess cranial nerve and bone involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep incisional biopsy; histopathology for depth and perineural invasion; IHC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the diagnosis confirmed on deep biopsy with immunohistochemistry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider desmoplastic trichoepithelioma or morphoeic BCC; repeat deep biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, with Mohs surgery preferred where available",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Generous margins for wide local excision, as subclinical extension is unpredictable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "MRI before surgery for suspected deep or perineural extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy after incomplete margins, or as monotherapy if not operable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong skin and regional node surveillance; late recurrence can occur for decades",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,323 @@
       "caption": "Overview comparison matrix for mycobacterium xenopi infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_xenopi_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterial culture incubated at a higher temperature",
+          "cells": [
+            {
+              "text": "Improves recovery of this thermophilic organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Species identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated respiratory cultures",
+          "cells": [
+            {
+              "text": "Distinguish disease from colonisation or contamination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Cavitary or fibronodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of water systems and bronchoscope decontamination",
+          "cells": [
+            {
+              "text": "In clustered cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of underlying lung disease and immune status",
+          "cells": [
+            {
+              "text": "Strongly influence outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_xenopi_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterium avium complex or M. kansasii lung disease",
+          "cells": [
+            {
+              "text": "Similar pattern; outcomes here are less favourable than for M. kansasii"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other cavitary NTM lung disease, such as M. malmoense",
+          "cells": [
+            {
+              "text": "Cavitary disease from another species; molecular speciation separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonisation or laboratory pseudo-infection",
+          "cells": [
+            {
+              "text": "Isolates often come from hot-water systems and bronchoscopes; diagnostic criteria are needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_xenopi_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged multidrug therapy",
+          "cells": [
+            {
+              "text": "Rifampicin and ethambutol with a macrolide and/or moxifloxacin; the optimal regimen is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic criteria before treatment",
+          "cells": [
+            {
+              "text": "Repeated respiratory cultures to separate disease from colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Higher-temperature incubation",
+          "cells": [
+            {
+              "text": "Requested from the laboratory to improve recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "For localised cavitary disease in suitable candidates, as an adjunct to drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying lung disease and comorbidity",
+          "cells": [
+            {
+              "text": "Strongly influence outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water system investigation",
+          "cells": [
+            {
+              "text": "Hot-water systems and bronchoscope decontamination when isolates cluster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases or respiratory medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_xenopi_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium xenopi infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cavitary upper-lobe disease in a middle-aged man with lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive cavitation, weight loss, haemoptysis, clusters)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review; investigate hot-water systems and bronchoscopes if clustered",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture at higher temperature, molecular identification, repeated cultures, chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diagnostic criteria met on repeated cultures, not a single isolate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as colonisation or pseudo-infection; investigate the water source if clustered",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rifampicin and ethambutol with a macrolide and or moxifloxacin; regimen uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider surgical resection of localised cavitary disease in suitable candidates",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage underlying lung disease and comorbidity, which strongly affect outcome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate hospital hot-water systems if isolates cluster",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded prognosis with relatively high mortality, shaped by comorbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

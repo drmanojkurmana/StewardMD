@@ -154,5 +154,336 @@
       "caption": "Overview comparison matrix for oesophageal web."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oesophageal_web-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium swallow with lateral cervical views",
+          "cells": [
+            {
+              "text": "Web in the cervical oesophagus; more sensitive than endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with iron studies",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia, the classic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy of the cervical oesophagus",
+          "cells": [
+            {
+              "text": "Web, though a thin web can be disrupted if not recognised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal biopsies",
+          "cells": [
+            {
+              "text": "Eosinophilic oesophagitis or a mucocutaneous disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution manometry",
+          "cells": [
+            {
+              "text": "Coexisting motility disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult blood loss and coeliac screening",
+          "cells": [
+            {
+              "text": "Source of unexplained iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oesophageal_web-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Schatzki ring",
+          "cells": [
+            {
+              "text": "Distal and circumferential, whereas a web is cervical, partial and eccentric"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal carcinoma or post-cricoid malignancy",
+          "cells": [
+            {
+              "text": "Progressive dysphagia, weight loss, odynophagia or haematemesis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oesophageal_web-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic dilatation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Mechanical disruption by through-the-scope balloon or bougie dilatation; usually curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Central to Plummer-Vinson (Paterson-Brown-Kelly) syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source of iron deficiency",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Occult gastrointestinal blood loss and coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing mucosal disease",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Acid suppression for reflux, eosinophilic oesophagitis or a mucocutaneous blistering disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary advice",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Careful chewing and adequate fluids around dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up for recurrence",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Symptoms may recur and need repeat dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cancer surveillance",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Heightened long-term upper aerodigestive squamous cell carcinoma risk in Plummer-Vinson syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oesophageal_web-dx-mgmt",
+      "title": "Diagnosis and management of oesophageal web",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Solid-food dysphagia with possible iron deficiency; cervical web suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive dysphagia, weight loss, blood loss or neck mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude carcinoma with urgent endoscopy and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Barium swallow with lateral cervical views, FBC, iron studies and endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does barium or endoscopy show a thin, eccentric cervical web?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Schatzki ring, peptic stricture, eosinophilic oesophagitis or extrinsic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Through-the-scope balloon or bougie dilatation; usually curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and search for the cause of iron deficiency, including coeliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat contributing disease: reflux, eosinophilic oesophagitis or blistering disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Careful chewing and adequate fluids around dilatation; repeat dilatation if it recurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent for isolated webs; Plummer-Vinson carries a heightened long-term cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

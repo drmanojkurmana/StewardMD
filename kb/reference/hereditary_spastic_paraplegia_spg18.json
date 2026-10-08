@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for hereditary spastic paraplegia type 18 (spg18, erlin2-related)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg18-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of brain and spinal cord",
+          "cells": [
+            {
+              "text": "Corpus callosum and white matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERLIN2 molecular analysis",
+          "cells": [
+            {
+              "text": "Genetic cause, typically within an HSP panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Motor neuron involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and developmental assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of contractures",
+          "cells": [
+            {
+              "text": "Rehabilitation and orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Used where seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg18-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG62 (ERLIN1-related)",
+          "cells": [
+            {
+              "text": "Closely related sibling disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile primary lateral sclerosis and juvenile ALS",
+          "cells": [
+            {
+              "text": "ERLIN2 is allelic with a juvenile motor neuron disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spastic cerebral palsy",
+          "cells": [
+            {
+              "text": "Used where the early history is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg18-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral antispasticity agents",
+          "cells": [
+            {
+              "text": "For spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive physiotherapy, serial stretching and orthoses",
+          "cells": [
+            {
+              "text": "Spasticity and contractures, with orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Epilepsy seen in the complicated recessive form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological support",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for juvenile motor neuron overlap",
+          "cells": [
+            {
+              "text": "Respiratory and nutritional review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance with cascade ERLIN2 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric neurology escalation",
+          "cells": [
+            {
+              "text": "For contracture surgery or motor overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg18-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia type 18 (SPG18, ERLIN2-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early childhood complicated spastic paraplegia with intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar signs, breathing decline, rapid motor deterioration or uncontrolled seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory and nutritional support; paediatric neurology for motor overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spinal cord; ERLIN2 testing; EMG and nerve conduction; development",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic ERLIN2 variants found, with juvenile motor neuron disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG62 (ERLIN1), juvenile primary lateral sclerosis or cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral antispasticity agents and intensive physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication for epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and neuropsychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for motor overlap with respiratory and nutritional review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Spasticity and seizures managed; motor overlap monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

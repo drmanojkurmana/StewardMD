@@ -169,5 +169,457 @@
       "caption": "Overview comparison matrix for classification of cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 239-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "classification_of_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining features of cardiomyopathy phenotypes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Defining value",
+        "Other features"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypertrophic (HCM)",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "LV wall about 13 to 15 or more",
+              "range": [
+                13,
+                15
+              ]
+            },
+            {
+              "text": "EF usually >0.60; normal or small cavity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated (DCM)",
+          "cells": [
+            {
+              "text": "LVEF <=0.50",
+              "op": "<=",
+              "value": 0.5
+            },
+            {
+              "text": "Most present at LVEF <=0.40"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mid-range LVEF",
+          "cells": [
+            {
+              "text": "0.40 to 0.50",
+              "range": [
+                0.4,
+                0.5
+              ]
+            },
+            {
+              "text": "Transition: early DCM or remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary-prevention ICD threshold",
+          "cells": [
+            {
+              "text": "LVEF persistently <=0.30 to 0.35",
+              "range": [
+                0.3,
+                0.35
+              ]
+            },
+            {
+              "text": "Lower threshold not needed in ACM-LV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restrictive (RCM)",
+          "cells": [
+            {
+              "text": "{{hy:Defined by physiology: diastolic dysfunction, high filling pressures}}"
+            },
+            {
+              "text": "Marked atrial enlargement; EF mildly reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmogenic (ACM-RV, ACM-LV, biventricular)",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmias with RV or LV structural change"
+            },
+            {
+              "text": "Arrhythmias may precede low EF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LV noncompaction ratio",
+          "cells": [
+            {
+              "text": ">2.3 noncompacted to compacted",
+              "op": ">",
+              "value": 2.3
+            },
+            {
+              "text": "A trait; also in athletes and pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HCM evolving to reduced EF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5%"
+            },
+            {
+              "text": "HCM-rEF, more restrictive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography then cardiac MRI",
+          "cells": [
+            {
+              "text": "MRI LGE for fibrosis, T1 and T2 for inflammation"
+            },
+            {
+              "text": "Plus multigene panel and family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "classification_of_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Phenotype mimics and restrictive versus constrictive features",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Athlete's heart",
+          "cells": [
+            {
+              "text": "Mimics HCM; may show noncompaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertension or aortic stenosis",
+          "cells": [
+            {
+              "text": "Secondary LVH mimicking HCM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis and storage diseases (Fabry, PRKAG2, Danon)",
+          "cells": [
+            {
+              "text": "{{hy:Marked thickening, may mimic HCM or cause RCM}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or valvular disease",
+          "cells": [
+            {
+              "text": "Mimic DCM; coronary angiography if ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoidosis or Chagas",
+          "cells": [
+            {
+              "text": "DCM pattern, regional wall motion change, arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PVC-induced cardiomyopathy",
+          "cells": [
+            {
+              "text": "Frequent PVCs without genetic ACM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis (vs RCM)",
+          "cells": [
+            {
+              "text": "Thick or calcified pericardium, knock, exaggerated respiratory flow variation, equal diastolic pressures; RCM has thick myocardium and no respiratory variation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "classification_of_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Phenotype-directed treatment of cardiomyopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker or verapamil; mavacamten",
+          "cells": [
+            {
+              "text": "HCM symptoms"
+            },
+            {
+              "text": "Avoid dehydration and vasodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myectomy or alcohol septal ablation",
+          "cells": [
+            {
+              "text": "Obstructive HCM"
+            },
+            {
+              "text": "Septal reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARNI or ACE inhibitor, beta-blocker, MRA, SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "{{hy:DCM}}"
+            },
+            {
+              "text": "May reverse remodel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious diuresis and cause-specific therapy",
+          "cells": [
+            {
+              "text": "RCM"
+            },
+            {
+              "text": "For example amyloid-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmics and exercise restriction",
+          "cells": [
+            {
+              "text": "Arrhythmogenic cardiomyopathy"
+            },
+            {
+              "text": "ICD often earlier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD with or without CRT",
+          "cells": [
+            {
+              "text": "Sudden death risk criteria"
+            },
+            {
+              "text": "LVEF <=0.30 to 0.35 in DCM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "AF or intracardiac thrombus"
+            },
+            {
+              "text": "Embolism can be the presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "Familial disease"
+            },
+            {
+              "text": "Multigene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical support or transplant",
+          "cells": [
+            {
+              "text": "End-stage disease"
+            },
+            {
+              "text": "Advanced heart failure referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Built from Harrison text and Tables PDF only; no doses stated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "classification_of_cardiomyopathy-dx-mgmt",
+      "title": "Classifying a suspected cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure, arrhythmia or abnormal ECG suggesting myocardial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Echo, ECG, bloods; exclude ischaemic, valvular, hypertensive causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "LVEF <=0.50 with dilated LV?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "DCM: guideline heart failure therapy; ICD if EF <=0.35",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Wall thickness about 13 to 15 mm or more with EF >0.60?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "HCM: exclude athlete, AS, amyloid, storage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Diastolic dysfunction with biatrial enlargement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "RCM: exclude constriction; seek amyloid or other cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Ventricular arrhythmia with RV or LV scar: arrhythmogenic CM",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

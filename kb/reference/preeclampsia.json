@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for pre-eclampsia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "preeclampsia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial blood pressure and urine protein quantification",
+          "cells": [
+            {
+              "text": "Hypertension and proteinuria, quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Thrombocytopenia and haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transaminases and lactate dehydrogenase",
+          "cells": [
+            {
+              "text": "Liver involvement and haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function (creatinine and urate)",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiogenic markers (sFlt-1/PlGF ratio)",
+          "cells": [
+            {
+              "text": "Risk stratification, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal ultrasound and umbilical artery Doppler",
+          "cells": [
+            {
+              "text": "Fetal growth, amniotic fluid volume and umbilical artery flow"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "preeclampsia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic (pre-existing) hypertension",
+          "cells": [
+            {
+              "text": "Hypertension present before pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational hypertension",
+          "cells": [
+            {
+              "text": "Without organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic kidney disease with proteinuria",
+          "cells": [
+            {
+              "text": "Chronic kidney disease with proteinuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "preeclampsia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Delivery of the placenta",
+          "cells": [
+            {
+              "text": "Only definitive cure; timing balances gestational age against maternal and fetal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Labetalol, nifedipine or methyldopa; intravenous hydralazine or labetalol for acute severe hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium sulfate",
+          "cells": [
+            {
+              "text": "Seizure prophylaxis in severe disease and treatment of eclamptic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal corticosteroids",
+          "cells": [
+            {
+              "text": "Fetal lung maturity when preterm delivery is anticipated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive surveillance",
+          "cells": [
+            {
+              "text": "Blood pressure, platelets, liver and renal function; growth scans and umbilical artery Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage severe complications",
+          "cells": [
+            {
+              "text": "HELLP syndrome, pulmonary oedema and eclampsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum follow-up",
+          "cells": [
+            {
+              "text": "Low-dose aspirin prophylaxis and cardiovascular-risk follow-up for future pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "preeclampsia-dx-mgmt",
+      "title": "Diagnosis and management of Pre-eclampsia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pre-eclampsia: new-onset hypertension in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypertension, neurological signs, HELLP features or organ failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat severe hypertension, eclampsia or HELLP, and pulmonary oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial BP, urine protein ratio, FBC, liver enzymes, LDH, creatinine, fetal scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do results confirm pre-eclampsia with proteinuria or organ involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic hypertension, gestational hypertension or CKD; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antihypertensives: labetalol, nifedipine or methyldopa",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Magnesium sulfate for seizure prophylaxis and eclamptic seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antenatal corticosteroids if preterm delivery is anticipated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive maternal and fetal surveillance with growth scans",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Delivery of the placenta is the only definitive cure; timing balances risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

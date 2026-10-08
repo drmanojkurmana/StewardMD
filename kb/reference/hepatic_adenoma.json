@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for hepatocellular adenoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / EASL benign liver tumour guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatic_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent",
+          "cells": [
+            {
+              "text": "Characterises the lesion and helps subtype it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion size and subcapsular location",
+          "cells": [
+            {
+              "text": "Estimates bleeding risk; lesions larger than about 5 cm are a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests, and evaluation for glycogen storage disease in adenomatosis",
+          "cells": [
+            {
+              "text": "Metabolic association in multiple adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-fetoprotein and imaging surveillance",
+          "cells": [
+            {
+              "text": "Monitors for malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy in selected cases",
+          "cells": [
+            {
+              "text": "Confirms subtype when management depends on it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Well-differentiated hepatocellular carcinoma",
+          "cells": [
+            {
+              "text": "Beta-catenin-activated adenomas carry the greatest risk of malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal nodular hyperplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrolamellar carcinoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw hormonal drivers",
+          "cells": [
+            {
+              "text": "Stop oestrogen-containing contraceptives and anabolic steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection",
+          "cells": [
+            {
+              "text": "Large, subcapsular, enlarging or beta-catenin-activated lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemorrhage",
+          "cells": [
+            {
+              "text": "Resuscitation and transarterial embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial contrast-enhanced MRI and alpha-fetoprotein for smaller lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy counselling",
+          "cells": [
+            {
+              "text": "Risk of enlargement and rupture in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic management",
+          "cells": [
+            {
+              "text": "Glycogen storage disease in adenomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary team",
+          "cells": [
+            {
+              "text": "Decision between resection and surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatic_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of Hepatocellular adenoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hepatic lesion in a woman taking oestrogen-containing contraception",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rupture with instability, lesion over 5 cm, or rising alpha-fetoprotein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: resuscitate and transarterial embolisation for ruptured adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multiphase contrast MRI; lesion size and location; alpha-fetoprotein; biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a benign adenoma subtype confirmed, with carcinoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider focal nodular hyperplasia, hepatocellular carcinoma or fibrolamellar carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop oestrogen-containing contraceptives and anabolic steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect large, subcapsular, enlarging or beta-catenin-activated lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial contrast MRI and alpha-fetoprotein for smaller lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pregnancy counselling and hepatobiliary team review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign adenoma managed by removal or surveillance; bleeding risk reduced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

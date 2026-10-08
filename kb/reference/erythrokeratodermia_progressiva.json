@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for progressive symmetric erythrokeratodermia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythrokeratodermia_progressiva-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis, acanthosis and papillomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of connexin, LOR and keratin genes",
+          "cells": [
+            {
+              "text": "Causative variant, as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree analysis",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for palmoplantar keratoderma",
+          "cells": [
+            {
+              "text": "Associated keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography",
+          "cells": [
+            {
+              "text": "Progression and symmetry of plaques over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythrokeratodermia_progressiva-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythrokeratodermia variabilis",
+          "cells": [
+            {
+              "text": "Its migratory erythema is absent; these plaques are stable in position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis and pityriasis rubra pilaris",
+          "cells": [
+            {
+              "text": "Excluded where the presentation is clinically uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythrokeratodermia_progressiva-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral retinoid (acitretin)",
+          "cells": [
+            {
+              "text": "Mainstay for extensive hyperkeratotic disease; normalises keratinisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics and emollients",
+          "cells": [
+            {
+              "text": "Urea, salicylic acid or lactic acid, with regular emollients to reduce scale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical retinoids or vitamin D analogues",
+          "cells": [
+            {
+              "text": "Localised plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palmoplantar keratoderma care",
+          "cells": [
+            {
+              "text": "Preserves hand and foot function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Usually autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Relapse on retinoid withdrawal, and retinoid adverse effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and clinical genetics follow-up",
+          "cells": [
+            {
+              "text": "Documents progression and guides therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythrokeratodermia_progressiva-dx-mgmt",
+      "title": "Diagnosis and management of Progressive symmetric erythrokeratodermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fixed, symmetrical, erythematous hyperkeratotic plaques from childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid extension, painful fissuring, secondary infection, atypical features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist dermatology review; treat secondary infection of plaques",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; pedigree; palmoplantar assessment; genetic testing as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology and family history support the diagnosis without psoriasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider psoriasis, pityriasis rubra pilaris or a syndromic keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral acitretin for extensive hyperkeratotic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical keratolytics and emollients to reduce scale",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Care for associated palmoplantar keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for relapse and retinoid adverse effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic; progresses through childhood then stabilises; not life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

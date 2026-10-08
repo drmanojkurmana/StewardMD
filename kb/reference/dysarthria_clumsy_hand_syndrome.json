@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for dysarthria-clumsy hand syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysarthria_clumsy_hand_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI",
+          "cells": [
+            {
+              "text": "Small pontine or capsular infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular risk factor assessment",
+          "cells": [
+            {
+              "text": "Blood pressure, glucose and lipids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography and carotid imaging",
+          "cells": [
+            {
+              "text": "Excludes large-vessel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Embolic source screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallowing assessment",
+          "cells": [
+            {
+              "text": "Marked dysarthria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysarthria_clumsy_hand_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure motor lacunar syndrome",
+          "cells": [
+            {
+              "text": "Motor-only lacunar pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellar lesion causing dysarthria and limb incoordination",
+          "cells": [
+            {
+              "text": "Incoordination of the limb and speech"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortical infarct affecting the face and hand area",
+          "cells": [
+            {
+              "text": "Cortical signs that reclassify the syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysarthria_clumsy_hand_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke treatment",
+          "cells": [
+            {
+              "text": "Intravenous thrombolysis within the treatment window if no contraindication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin, then long-term clopidogrel or short dual antiplatelet therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-vessel risk control",
+          "cells": [
+            {
+              "text": "Blood pressure lowering, statin therapy and glycaemic optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "Smoking cessation as secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Speech and language therapy; occupational therapy and physiotherapy for dexterity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source screening",
+          "cells": [
+            {
+              "text": "Vascular and cardiac imaging where lacunar mechanism is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reimaging",
+          "cells": [
+            {
+              "text": "If deficits progress or recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysarthria_clumsy_hand_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dysarthria-clumsy hand syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysarthria-clumsy hand syndrome: dysarthria with clumsy hand after a lacune",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive deficit, cortical signs, dysphagia, reduced consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent acute stroke assessment for thrombolysis within the window",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diffusion-weighted MRI; vascular risk assessment; angiography; ECG; swallow test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does diffusion MRI show a small deep infarct with no large-vessel source?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cardioembolic or large-vessel source, cortical infarct or cerebellar lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat as acute ischaemic stroke, with thrombolysis if within the window",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirin, then long-term clopidogrel or short dual antiplatelet therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control blood pressure, glucose and lipids; statin therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and language therapy, occupational therapy and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Smoking cessation and reassessment if deficits progress or recur",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable after one lacune; recurrent small-vessel disease causes disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

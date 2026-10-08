@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for high-altitude cerebral oedema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "high_altitude_cerebral_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Heel-to-toe walk and truncal ataxia assessment",
+          "cells": [
+            {
+              "text": "Truncal ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry",
+          "cells": [
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Excludes hypoglycaemia as a cause of altered mentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for high-altitude pulmonary oedema",
+          "cells": [
+            {
+              "text": "Concurrent pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging after evacuation",
+          "cells": [
+            {
+              "text": "Excludes alternative intracranial causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focused neurological examination",
+          "cells": [
+            {
+              "text": "Focal deficits suggesting stroke"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_cerebral_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe acute mountain sickness without encephalopathy",
+          "cells": [
+            {
+              "text": "No ataxia or confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or haemorrhagic stroke",
+          "cells": [
+            {
+              "text": "Focal neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or other metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Excluded by blood glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_cerebral_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate descent",
+          "cells": [
+            {
+              "text": "The definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-flow supplemental oxygen",
+          "cells": [
+            {
+              "text": "Corrects hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "Reduces cerebral vasogenic oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portable hyperbaric (Gamow) bag",
+          "cells": [
+            {
+              "text": "Temporises when descent is delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting high-altitude pulmonary oedema",
+          "cells": [
+            {
+              "text": "Assessed and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Staged gradual ascent and acetazolamide prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evacuation and neuroimaging",
+          "cells": [
+            {
+              "text": "Exclude alternative intracranial causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "high_altitude_cerebral_edema-dx-mgmt",
+      "title": "Diagnosis and management of High-altitude cerebral oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ataxia, confusion or drowsiness at altitude",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling consciousness, coma, focal deficit, or pulmonary oedema with hypoxaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate descent and evacuation; treat hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Truncal ataxia test; pulse oximetry; glucose; pulmonary oedema check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ataxia or confusion present at altitude, with hypoglycaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe mountain sickness, stroke, CNS infection or metabolic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate descent as the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-flow oxygen to correct hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dexamethasone to reduce cerebral vasogenic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Portable hyperbaric bag to temporise when descent is delayed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery after descent; prevention with staged ascent and acetazolamide",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

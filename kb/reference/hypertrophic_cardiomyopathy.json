@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for hypertrophic cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypertrophic_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Hypertrophy pattern, outflow gradient, systolic anterior motion, diastolic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Wall thickness and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Frequently abnormal even in early disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Non-sustained ventricular tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise testing",
+          "cells": [
+            {
+              "text": "Provocable obstruction and blood pressure response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and cascade screening",
+          "cells": [
+            {
+              "text": "Familial variant and relatives at risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypertensive heart disease",
+          "cells": [
+            {
+              "text": "Hypertrophy from loading conditions; HCM is asymmetric and septal and not explained by hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic stenosis",
+          "cells": [
+            {
+              "text": "Loading condition; HCM is not explained by it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Athlete's heart",
+          "cells": [
+            {
+              "text": "Physiological hypertrophy; HCM must not be misclassified as this"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infiltrative cardiomyopathy (amyloidosis, Fabry disease)",
+          "cells": [
+            {
+              "text": "Infiltrative mimic such as cardiac amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Negative inotropes",
+          "cells": [
+            {
+              "text": "Beta-blockers or verapamil, with disopyramide added to relieve symptoms and outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mavacamten",
+          "cells": [
+            {
+              "text": "Cardiac myosin inhibitor for symptomatic obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid preload and afterload reducers",
+          "cells": [
+            {
+              "text": "These can worsen the dynamic gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septal reduction",
+          "cells": [
+            {
+              "text": "Surgical myectomy or alcohol septal ablation for drug-refractory obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sudden death prevention",
+          "cells": [
+            {
+              "text": "Implantable cardioverter-defibrillator in high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "Rate or rhythm control and anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade family screening and advice on exercise and competitive sport"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypertrophic_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of Hypertrophic cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained asymmetric left ventricular hypertrophy, often with exertional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Syncope, ventricular tachycardia, family sudden death or aborted arrest?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sudden-death risk assessment and ICD consideration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo with gradient, cardiac MRI, ECG, ambulatory monitoring, exercise test, genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypertrophy not explained by loading conditions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypertensive, athlete's or infiltrative hypertrophy; repeat work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockers or verapamil, with disopyramide for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mavacamten for symptomatic obstructive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid preload and afterload reducers that worsen the gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Septal reduction if drug-refractory obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "ICD for high-risk patients; cascade genetic screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Risk-stratified care to prevent sudden death, with family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,285 @@
       "caption": "Overview comparison matrix for gastric angiodysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastric_angiodysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Identifies ectasias; distinguishes antral vascular ectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Quantifies chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Aortic stenosis where Heyde syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and connective tissue disease screen",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired von Willebrand factor testing",
+          "cells": [
+            {
+              "text": "In the appropriate context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsule endoscopy or device-assisted enteroscopy",
+          "cells": [
+            {
+              "text": "Small-bowel angiodysplasia suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_angiodysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic ablation",
+          "cells": [
+            {
+              "text": "Typically argon plasma coagulation, the mainstay; often repeated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement and transfusion",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia; red-cell transfusion as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heyde syndrome treatment",
+          "cells": [
+            {
+              "text": "Aortic valve replacement, which can reverse the acquired von Willebrand deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide-type antiangiogenic therapy for diffuse or refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of antithrombotic drugs",
+          "cells": [
+            {
+              "text": "Minimise antiplatelet and anticoagulant drugs where bleeding recurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Chronic kidney disease and cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic surveillance",
+          "cells": [
+            {
+              "text": "Re-treatment for recurrent lesions and ongoing transfusion need"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastric_angiodysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Gastric angiodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastric angiodysplasia: recurrent GI bleeding with iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (transfusion-dependent bleeding, instability, aortic stenosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent resuscitation and endoscopic haemostasis for overt haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper endoscopy, full blood count, iron studies and echocardiography if Heyde",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do endoscopic findings confirm ectasias rather than portal or ulcer disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider portal hypertensive gastropathy, Dieulafoy lesion or peptic ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic ablation, typically argon plasma coagulation, often repeated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and red-cell transfusion as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aortic valve replacement for Heyde syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Somatostatin analogue for diffuse or refractory bleeding; minimise antithrombotic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and recurrent; ablation controls bleeding in many, with frequent retreatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for kleine-levin syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kleine_levin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Episode history and sleep diary",
+          "cells": [
+            {
+              "text": "Recurrent, stereotyped pattern of episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography and multiple sleep latency testing",
+          "cells": [
+            {
+              "text": "Sleep pattern compared within and between episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Excludes a hypothalamic or thalamic structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection, metabolic and substance screen",
+          "cells": [
+            {
+              "text": "Triggers screened around episode onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment",
+          "cells": [
+            {
+              "text": "Excludes a primary mood disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kleine_levin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Depression with hypersomnic features, or bipolar depression",
+          "cells": [
+            {
+              "text": "Primary mood disorder, excluded by psychiatric assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance intoxication or withdrawal",
+          "cells": [
+            {
+              "text": "Substance use screened around episode onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Encephalitis or structural hypothalamic lesion",
+          "cells": [
+            {
+              "text": "Fever, meningism, focal signs or a structural lesion on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypersomnia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kleine_levin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care during episodes",
+          "cells": [
+            {
+              "text": "Safe, low-stimulation environment with supervision and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient and family education",
+          "cells": [
+            {
+              "text": "Episodic, self-limiting nature; avoid triggers such as alcohol, sleep deprivation and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat precipitating infection",
+          "cells": [
+            {
+              "text": "Prompt treatment of infections that trigger episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant trial",
+          "cells": [
+            {
+              "text": "Modafinil or amfetamines for disabling hypersomnolence; benefit may be limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lithium",
+          "cells": [
+            {
+              "text": "Considered for prophylaxis with frequent or severely disruptive episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Practical and sleep medicine support",
+          "cells": [
+            {
+              "text": "Protect education and employment; track episode frequency over years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kleine_levin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kleine-Levin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Kleine-Levin: recurrent profound hypersomnia with cognitive change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal signs, fever or meningism, structural lesion, atypical course)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent exclusion of encephalitis or a structural hypothalamic lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Episode history, sleep diary, polysomnography, MRI brain, infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do recurrent stereotyped episodes remain after other causes are excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic hypersomnia, mood disorder or substance-related causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, low-stimulation care and supervision during episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Educate patient and family; avoid alcohol, sleep deprivation and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any precipitating infection promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trial of modafinil or amfetamines for disabling hypersomnolence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider lithium for frequent or severely disruptive episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Sleep medicine follow-up tracking episode frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Generally favourable; episodes shorten and become less frequent over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

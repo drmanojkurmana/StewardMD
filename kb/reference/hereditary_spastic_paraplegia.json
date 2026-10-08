@@ -149,5 +149,341 @@
       "caption": "Overview comparison matrix for hereditary spastic paraplegia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinal cord and brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural and demyelinating disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel testing for SPG and related genes",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Very-long-chain fatty acids and vitamin B12",
+          "cells": [
+            {
+              "text": "Excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Used where a complicated form with neuropathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Used in complicated forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and examination of relatives",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Compressive or structural spinal cord lesion",
+          "cells": [
+            {
+              "text": "Rapid or asymmetric progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sclerosis and other inflammatory myelopathies",
+          "cells": [
+            {
+              "text": "Sensory level or sphincter failure points to an acquired myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenomyeloneuropathy",
+          "cells": [
+            {
+              "text": "Excluded by very-long-chain fatty acid testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Excluded by vitamin B12 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopa-responsive dystonia or primary lateral sclerosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral antispasticity agents",
+          "cells": [
+            {
+              "text": "Baclofen or another antispasticity agent for lower-limb spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Maintains function and prevents contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder management",
+          "cells": [
+            {
+              "text": "Antimuscarinic agents and bladder training for urgency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic input",
+          "cells": [
+            {
+              "text": "Orthoses and tendon-lengthening surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complicated forms",
+          "cells": [
+            {
+              "text": "Targets ataxia, peripheral neuropathy and other associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurorehabilitation",
+          "cells": [
+            {
+              "text": "Team-based care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant, recessive or X-linked patterns"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive lower-limb spasticity and stiff gait, with a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid or asymmetric progression, sensory level, sphincter failure or bulbar signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude compressive or inflammatory myelopathy urgently with MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spinal and brain MRI; SPG gene panel; very-long-chain fatty acids; vitamin B12",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic SPG gene variant confirmed, with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MS, adrenomyeloneuropathy, B12-related myelopathy or dopa-responsive dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral antispasticity agents such as baclofen for lower-limb spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and stretching to maintain function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antimuscarinic agents and bladder training for urgency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthoses and tendon-lengthening surgery where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Spasticity and function managed; genetic counselling for inheritance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for familial cold autoinflammatory syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NLRP3 gene analysis, with NLRP12 if NLRP3 is negative",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised (evaporative) cold provocation",
+          "cells": [
+            {
+              "text": "Symptoms and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local ice-cube contact test",
+          "cells": [
+            {
+              "text": "Negative here; separates it from acquired cold urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants before and after cold challenge",
+          "cells": [
+            {
+              "text": "Systemic inflammatory response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Neutrophilic urticarial dermatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline audiometry",
+          "cells": [
+            {
+              "text": "Overlap with Muckle-Wells syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired cold contact urticaria",
+          "cells": [
+            {
+              "text": "The local ice-cube test is negative in this syndrome, unlike acquired cold urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muckle-Wells syndrome",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss and amyloidosis can overlap; audiometry is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra, canakinumab or rilonacept for frequent or severe attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of generalised cold exposure",
+          "cells": [
+            {
+              "text": "First-line preventive measure, including air-conditioned and refrigerated environments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Relief of arthralgia and fever in milder attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AA amyloidosis surveillance",
+          "cells": [
+            {
+              "text": "Periodic urinalysis for proteinuria and renal monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Baseline and periodic, for sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "NLRP3 or NLRP12 testing and family screening; autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology or rheumatology follow-up",
+          "cells": [
+            {
+              "text": "Escalate to interleukin-1 blockade if amyloidosis risk emerges"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of familial cold autoinflammatory syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urticarial rash, fever and arthralgia after generalised cold exposure, hours later",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hearing loss, proteinuria, atypical neurological features, raised markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immunology review; renal assessment for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NLRP3 testing; cold provocation with markers; local ice-cube test; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic cold provocation triggers attacks, with a negative local ice test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired cold urticaria, cryoglobulinaemia or Muckle-Wells syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade for frequent or severe attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid generalised cold exposure as first-line prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAIDs for arthralgia and fever in milder attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urinalysis and renal monitoring for AA amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Audiometry and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable; cold avoidance and interleukin-1 blockade give effective control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

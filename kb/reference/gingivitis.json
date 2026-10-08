@@ -144,5 +144,305 @@
       "caption": "Overview comparison matrix for gingivitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gingivitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bleeding on probing and plaque indices",
+          "cells": [
+            {
+              "text": "Gingival inflammation and plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodontal probing",
+          "cells": [
+            {
+              "text": "Absence of attachment loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications and hormonal or systemic factors",
+          "cells": [
+            {
+              "text": "Aggravating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Excludes bone loss where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood investigations",
+          "cells": [
+            {
+              "text": "Where systemic disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gingivitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Early periodontitis",
+          "cells": [
+            {
+              "text": "Attachment loss on periodontal probing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising ulcerative gingivitis",
+          "cells": [
+            {
+              "text": "Painful necrotising gingivitis, especially in immunocompromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia or other systemic illness",
+          "cells": [
+            {
+              "text": "Spontaneous gingival bleeding or florid enlargement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gingivitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical biofilm removal",
+          "cells": [
+            {
+              "text": "Mainstay, with professional scaling and supragingival debridement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Daily plaque control",
+          "cells": [
+            {
+              "text": "Toothbrushing and interdental cleaning, which usually reverses inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseptic mouthrinse",
+          "cells": [
+            {
+              "text": "Chlorhexidine short term where mechanical control is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modify aggravating factors",
+          "cells": [
+            {
+              "text": "Review medications; manage hormonal or systemic contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured dental recall",
+          "cells": [
+            {
+              "text": "Reassessment of bleeding on probing and plaque indices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Hygienist or periodontist if attachment loss or pocketing emerges"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gingivitis-dx-mgmt",
+      "title": "Diagnosis and management of Gingivitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gingivitis: gingival bleeding on probing with plaque",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spontaneous bleeding, necrosis, failure to resolve)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent medical review for florid enlargement or spontaneous bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bleeding on probing, plaque indices, periodontal probing and medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there no attachment loss, with inflammation reversing on plaque control?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider early periodontitis, necrotising gingivitis or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mechanical biofilm removal with professional scaling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Daily toothbrushing and interdental cleaning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-term chlorhexidine where mechanical control is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review medications and manage hormonal or systemic contributors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fully reversible with plaque control; if neglected it can progress to periodontitis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

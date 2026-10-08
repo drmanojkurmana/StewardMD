@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for hereditary stomatocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_stomatocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film review",
+          "cells": [
+            {
+              "text": "Stomatocytes and their proportion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocytes and haemolysis markers",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic fragility or ektacytometry",
+          "cells": [
+            {
+              "text": "Membrane behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell cation content and membrane transport studies",
+          "cells": [
+            {
+              "text": "Membrane transport defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies and hepatic iron assessment",
+          "cells": [
+            {
+              "text": "Iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIEZO1, KCNN4 and related membrane gene testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_stomatocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired stomatocytosis (alcohol, liver disease, medications)",
+          "cells": [
+            {
+              "text": "Acquired causes present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis",
+          "cells": [
+            {
+              "text": "Spherocytes rather than stomatocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryohydrocytosis and familial pseudohyperkalaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_stomatocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care with folic acid",
+          "cells": [
+            {
+              "text": "No specific therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid splenectomy",
+          "cells": [
+            {
+              "text": "Linked to thromboembolic events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "For iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis awareness",
+          "cells": [
+            {
+              "text": "Treatment of venous thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological review",
+          "cells": [
+            {
+              "text": "Haemoglobin, reticulocytes and haemolysis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_stomatocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary stomatocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stomatocytes on blood film with haemolytic anaemia and possible iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Thromboembolic events, organ iron overload, transfusion-dependent anaemia or oedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology for thrombosis or transfusion-dependent anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; haemolysis markers; osmotic fragility or ektacytometry; iron studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PIEZO1 or KCNN4 variant found, with acquired stomatocytosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired stomatocytosis, spherocytosis, elliptocytosis or autoimmune haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with folic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid splenectomy, which is linked to thromboembolic events",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Iron chelation for iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thromboprophylaxis awareness and treatment of venous thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anaemia supported; iron and thrombotic risks monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

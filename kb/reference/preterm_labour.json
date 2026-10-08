@@ -152,5 +152,354 @@
       "caption": "Overview comparison matrix for preterm labour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "preterm_labour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound cervical length",
+          "cells": [
+            {
+              "text": "Cervical length"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal fibronectin testing",
+          "cells": [
+            {
+              "text": "Prediction of imminent delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiotocography and tocography",
+          "cells": [
+            {
+              "text": "Contractions and fetal wellbeing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speculum examination and genital tract swabs",
+          "cells": [
+            {
+              "text": "Ruptured membranes and genital tract infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis, culture and group B streptococcus status",
+          "cells": [
+            {
+              "text": "Infection screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal ultrasound",
+          "cells": [
+            {
+              "text": "Presentation, growth and amniotic fluid volume"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "preterm_labour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Braxton Hicks (physiological) contractions",
+          "cells": [
+            {
+              "text": "Physiological contractions"
+            },
+            {
+              "text": "Cardiotocography and tocography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract infection or pyelonephritis",
+          "cells": [
+            {
+              "text": "Infection provoking uterine irritability"
+            },
+            {
+              "text": "Urinalysis and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Placental abruption",
+          "cells": [
+            {
+              "text": "Vaginal bleeding suggesting abruption or praevia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preterm prelabour rupture of membranes",
+          "cells": [
+            {
+              "text": "Ruptured membranes with cord prolapse risk"
+            },
+            {
+              "text": "Speculum examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "preterm_labour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal corticosteroids",
+          "cells": [
+            {
+              "text": "Accelerate fetal lung maturation and improve neonatal outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium sulfate",
+          "cells": [
+            {
+              "text": "Fetal neuroprotection before anticipated early preterm birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tocolysis",
+          "cells": [
+            {
+              "text": "Calcium-channel blocker or oxytocin-receptor antagonist to delay birth briefly for steroids and transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In-utero transfer",
+          "cells": [
+            {
+              "text": "To a unit with neonatal intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection treatment and prophylaxis",
+          "cells": [
+            {
+              "text": "Treat intrauterine and genital-tract infection; intrapartum antibiotics for group B streptococcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progesterone, cerclage or pessary",
+          "cells": [
+            {
+              "text": "For a short cervix or prior preterm birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal monitoring",
+          "cells": [
+            {
+              "text": "Cardiotocography; plan mode and timing of delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team and counselling",
+          "cells": [
+            {
+              "text": "Obstetric and neonatal teams; counsel parents on prematurity risks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "preterm_labour-dx-mgmt",
+      "title": "Diagnosis and management of Preterm labour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected preterm labour: regular uterine contractions before term",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Chorioamnionitis, PPROM, bleeding, non-reassuring fetal status or advanced dilatation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent obstetric review for chorioamnionitis, abruption or delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cervical length; fetal fibronectin; CTG and tocography; speculum; infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does assessment confirm preterm labour rather than a non-labour cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Braxton Hicks, UTI or other abdominal pain; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antenatal corticosteroids to accelerate fetal lung maturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Magnesium sulfate for fetal neuroprotection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tocolysis to delay birth briefly, allowing steroids and transfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat infection; intrapartum antibiotics for group B streptococcus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transfer to a unit with neonatal intensive care; progesterone or cerclage if indicated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

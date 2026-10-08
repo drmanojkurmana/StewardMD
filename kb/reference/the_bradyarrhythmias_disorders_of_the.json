@@ -178,5 +178,499 @@
       "caption": "Overview comparison matrix for the bradyarrhythmias: disorders of the atrioventricular node."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Atrioventricular Block",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/atrioventricular-block"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading atrioventricular block on ECG",
+      "rowHeader": "Criterion",
+      "columns": [
+        "ECG finding",
+        "Level and risk"
+      ],
+      "rows": [
+        {
+          "parameter": "First-degree",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "PR over 0.20 s, every P conducted",
+              "op": ">",
+              "value": 0.2
+            },
+            {
+              "text": "AV node; benign unless PR over 0.3 s causes symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mobitz I (Wenckebach)",
+          "cells": [
+            {
+              "text": "PR lengthens until a P is dropped"
+            },
+            {
+              "text": "Narrow QRS almost always AV nodal; escape 35 to 55/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mobitz I with wide QRS",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "QRS over 0.12 s",
+              "op": ">",
+              "value": 0.12
+            },
+            {
+              "text": "His-Purkinje in 60 to 70%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mobitz II",
+          "cells": [
+            {
+              "text": "Fixed PR with intermittent dropped P"
+            },
+            {
+              "text": "{{hy:Always pathological; infranodal; may suddenly go to complete block}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "2:1 or high-grade block",
+          "cells": [
+            {
+              "text": "Every second or more P blocked"
+            },
+            {
+              "text": "Cannot separate type I from II on surface ECG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete block, narrow escape",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "Escape 35 to 50/min",
+              "range": [
+                35,
+                50
+              ]
+            },
+            {
+              "text": "Above His bifurcation; reliable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete block, wide escape",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "Escape 20 to 40/min",
+              "range": [
+                20,
+                40
+              ]
+            },
+            {
+              "text": "Below bifurcation; unreliable, syncope risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HV interval on EP study",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Over 100 ms",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Annual complete block risk near 10%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age 60 or under with new high-grade block",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Up to one third have cardiac sarcoidosis",
+              "op": "<=",
+              "value": 60
+            },
+            {
+              "text": "Cardiac MRI or FDG-PET"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of AV block",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sinus node dysfunction",
+          "cells": [
+            {
+              "text": "Slow P rate rather than blocked P waves"
+            },
+            {
+              "text": "ECG and ambulatory monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug effect",
+          "cells": [
+            {
+              "text": "Beta-blocker, verapamil, diltiazem, digoxin, amiodarone"
+            },
+            {
+              "text": "Withdraw drug and observe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High vagal tone",
+          "cells": [
+            {
+              "text": "Athletes, sleep; Mobitz I improves with exercise"
+            },
+            {
+              "text": "Exercise or atropine response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior MI",
+          "cells": [
+            {
+              "text": "Nodal block from vagal tone; resolves in days"
+            },
+            {
+              "text": "ECG, troponin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anterior MI",
+          "cells": [
+            {
+              "text": "Infranodal block, wide unstable escape"
+            },
+            {
+              "text": "ECG; needs transvenous pacing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lyme carditis",
+          "cells": [
+            {
+              "text": "Tick exposure; narrow escape over 40/min; improves on antibiotics"
+            },
+            {
+              "text": "Lyme serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis with root abscess",
+          "cells": [
+            {
+              "text": "New block with valve infection"
+            },
+            {
+              "text": "Echocardiography; urgent surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoidosis or amyloidosis",
+          "cells": [
+            {
+              "text": "Younger patient or infiltrative features"
+            },
+            {
+              "text": "Cardiac MRI, FDG-PET, pyrophosphate scan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-treatment",
+      "kind": "treatment",
+      "title": "Treating AV block",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop AV-nodal blocking drugs, correct causes",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Electrolytes, ischaemia, hypothyroidism, Lyme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atropine",
+          "cells": [
+            {
+              "text": "Symptomatic nodal block, inferior MI"
+            },
+            {
+              "text": "Aminophylline also may help in inferior MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isoprenaline",
+          "cells": [
+            {
+              "text": "Atropine inadequate"
+            },
+            {
+              "text": "Bridge to pacing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcutaneous then transvenous pacing",
+          "cells": [
+            {
+              "text": "Unstable bradycardia, anterior MI with block"
+            },
+            {
+              "text": "Immediate transvenous pacing in anterior MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Mobitz II, high-grade or complete block without reversible cause"
+            },
+            {
+              "text": "{{hy:Indicated even without symptoms}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Symptomatic Mobitz I after transient causes excluded"
+            },
+            {
+              "text": "First-degree block rarely needs pacing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics for Lyme carditis",
+          "cells": [
+            {
+              "text": "Lyme-related block"
+            },
+            {
+              "text": "Usually improves within about a week"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Atropine and isoprenaline doses were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-dx-mgmt",
+      "title": "Diagnosis and management of atrioventricular block",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bradycardia, syncope or AV block on ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Atropine, isoprenaline, transcutaneous then transvenous pacing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Classify block on 12-lead ECG; check drugs, electrolytes, MI",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reversible cause (drug, Lyme, inferior MI, vagal)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat cause and monitor; pace temporarily if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Mobitz II, high-grade or complete block?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Permanent pacemaker; image for sarcoid if 60 or under",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptoms correlate with bradycardia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Permanent pacemaker",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "First-degree or Mobitz I: observe",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -156,5 +156,461 @@
       "caption": "Overview comparison matrix for multiple and mixed valvular heart disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Tricuspid Regurgitation (2020 ACC/AHA, 2021 ESC/EACTS)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/tricuspid-regurgitation"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 230-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 322-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_and_mixed_valvular_heart-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing multiple and mixed valve disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Dominant lesion",
+          "cells": [
+            {
+              "text": "AR or MR dominant: dilated LV; AS or MS dominant: normal or small LV"
+            },
+            {
+              "text": "{{hy:Grade and treat by the dominant lesion}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Masking",
+          "cells": [
+            {
+              "text": "Low output from a proximal lesion hides severity of a distal one"
+            },
+            {
+              "text": "Mitral disease can make aortic disease look milder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional TR with mitral disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Secondary TR is over 80% of TR",
+              "op": ">",
+              "value": 80
+            },
+            {
+              "text": "Normal leaflets; RV and annular dilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe TR",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Vena contracta over 7 mm or jet 50% or more of RA area",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Hepatic vein systolic reversal is specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RV dysfunction",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "TAPSE under 16 mm",
+              "op": "<",
+              "value": 16
+            },
+            {
+              "text": "Or annular systolic velocity under 10 cm/s"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mixed AS and AR gradients",
+          "cells": [
+            {
+              "text": "Doppler gradient and Gorlin area overstate stenosis when AR raises flow"
+            },
+            {
+              "text": "Integrate all findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTE then TEE",
+          "cells": [
+            {
+              "text": "Morphology, calcification, chambers, PA pressure"
+            },
+            {
+              "text": "TEE for mitral detail or endocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheterisation",
+          "cells": [
+            {
+              "text": "Clinical and echo findings disagree in a symptomatic patient"
+            },
+            {
+              "text": "Indicated for suspected valve disease with symptoms"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "multiple_and_mixed_valvular_heart-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes for combined valve lesions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Patent ductus arteriosus",
+          "cells": [
+            {
+              "text": "Continuous machinery murmur mimics AS plus AR"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured sinus of Valsalva aneurysm",
+          "cells": [
+            {
+              "text": "Continuous murmur after acute chest pain"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AR with flow murmur only",
+          "cells": [
+            {
+              "text": "Midsystolic outflow murmur without true AS"
+            },
+            {
+              "text": "Echo valve area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe MR mimicking MS",
+          "cells": [
+            {
+              "text": "High mitral E-wave from flow, not stenosis"
+            },
+            {
+              "text": "Planimetry of mitral area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral annular calcification",
+          "cells": [
+            {
+              "text": "Elderly; MR plus mild to moderate MS"
+            },
+            {
+              "text": "Echo or CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension from lung disease",
+          "cells": [
+            {
+              "text": "Right heart signs without left valve severity"
+            },
+            {
+              "text": "Right heart catheterisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_and_mixed_valvular_heart-treatment",
+      "kind": "treatment",
+      "title": "Management of multiple and mixed valve disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart team review",
+          "cells": [
+            {
+              "text": "All significant multivalve disease"
+            },
+            {
+              "text": "Catheterisation if noninvasive data disagree"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat dominant lesion",
+          "cells": [
+            {
+              "text": "Severe dominant lesion meeting single-valve criteria"
+            },
+            {
+              "text": "Surgery or transcatheter; address other valves at the same operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid annuloplasty at left-sided surgery",
+          "cells": [
+            {
+              "text": "{{hy:Annulus over 40 mm even if TR mild or moderate}}"
+            },
+            {
+              "text": "About five-fold higher risk of permanent pacing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Balloon valvotomy",
+          "cells": [
+            {
+              "text": "Suitable rheumatic MS"
+            },
+            {
+              "text": "May precede aortic surgery decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Congestion"
+            },
+            {
+              "text": "Diuretics, afterload reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "Especially with rheumatic mitral plus aortic disease"
+            },
+            {
+              "text": "Rate or rhythm control; anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatic secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Rheumatic valve disease"
+            },
+            {
+              "text": "10 years after last attack or to age 40, whichever is longer"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Moderate lesions"
+            },
+            {
+              "text": "Serial echo of all valves; symptoms can appear earlier than single-valve disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Double valve replacement carries higher perioperative mortality than single valve surgery."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_and_mixed_valvular_heart-dx-mgmt",
+      "title": "Diagnosis and management of multiple and mixed valvular heart disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Murmurs suggesting more than one valve lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "TTE of all valves, LV and RV size, PA pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Echo findings match symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TEE, stress echo or right and left heart catheterisation",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Identify the dominant lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Dominant lesion severe by single-valve criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Medical therapy, AF care, serial echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Left-sided surgery with tricuspid annulus over 40 mm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Intervene on dominant lesion plus tricuspid annuloplasty",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Intervene on dominant lesion; reassess others after",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

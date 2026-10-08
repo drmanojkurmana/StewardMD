@@ -152,5 +152,325 @@
       "caption": "Overview comparison matrix for junctional epidermolysis bullosa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "junctional_epidermolysis_bullosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with immunofluorescence antigen mapping",
+          "cells": [
+            {
+              "text": "Split within the lamina lucida"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transmission electron microscopy",
+          "cells": [
+            {
+              "text": "Hemidesmosomal abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LAMA3, LAMB3, LAMC2 and COL17A1 genetic testing",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and growth assessment",
+          "cells": [
+            {
+              "text": "Anaemia and micronutrient deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway, dental and mucosal evaluation",
+          "cells": [
+            {
+              "text": "Extracutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological swabs",
+          "cells": [
+            {
+              "text": "Infection when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "junctional_epidermolysis_bullosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidermolysis bullosa simplex",
+          "cells": [
+            {
+              "text": "Split within the epidermis rather than at the junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystrophic epidermolysis bullosa",
+          "cells": [
+            {
+              "text": "Split below the lamina densa, with scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal infective blistering (staphylococcal scalded skin syndrome)",
+          "cells": [
+            {
+              "text": "Separated by cultures and skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "junctional_epidermolysis_bullosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Atraumatic care with non-adherent dressings, blister lancing and protection from shearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Surveillance swabs, topical antiseptics and culture-directed antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Aggressive nutritional support; correction of anaemia and micronutrient deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "Monitoring for laryngeal and tracheal granulation tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and analgesia",
+          "cells": [
+            {
+              "text": "Specialist dental care and proactive analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and palliation",
+          "cells": [
+            {
+              "text": "Autosomal recessive genetic counselling, prenatal testing; palliative care in severe subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "junctional_epidermolysis_bullosa-dx-mgmt",
+      "title": "Diagnosis and management of Junctional epidermolysis bullosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with widespread blistering and granulation tissue around the mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway granulation or stridor, sepsis, failure to thrive or severe anaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Airway protection and ENT review; sepsis management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with immunofluorescence, electron microscopy, LAMA3, LAMB3, LAMC2, COL17A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Junctional split with a LAMA3, LAMB3, LAMC2 or COL17A1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epidermolysis bullosa simplex, dystrophic EB or infective blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Atraumatic wound care with non-adherent dressings and blister lancing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surveillance swabs and culture-directed antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive nutrition; treat anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Airway monitoring for laryngeal granulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling, prenatal testing and palliative input in severe subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe generalised subtype carries high infant mortality; supportive care and palliation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

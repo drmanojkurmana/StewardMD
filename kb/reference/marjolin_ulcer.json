@@ -158,5 +158,341 @@
       "caption": "Overview comparison matrix for marjolin ulcer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Dermatology / plastic surgery oncology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marjolin_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple deep incisional or wedge biopsies from the margin and base",
+          "cells": [
+            {
+              "text": "Malignant transformation, which can be focal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional lymph node ultrasound with fine-needle aspiration or core biopsy",
+          "cells": [
+            {
+              "text": "Abnormal regional nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Local invasion and metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for underlying osteomyelitis",
+          "cells": [
+            {
+              "text": "Underlying osteomyelitis, where a sinus is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological assessment of excision margins",
+          "cells": [
+            {
+              "text": "Clear histologic margins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marjolin_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic non-healing venous, arterial, pressure or neuropathic ulcer",
+          "cells": [
+            {
+              "text": "Benign unless new nodularity, everted edges, bleeding or rapid change appear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic osteomyelitis with a discharging sinus",
+          "cells": [
+            {
+              "text": "Discharging sinus; imaging for underlying osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary cutaneous squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Arises unrelated to a wound; scar-related SCC behaves more aggressively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marjolin_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy any changing lesion",
+          "cells": [
+            {
+              "text": "Chronic wound, burn scar, venous or pressure ulcer, or osteomyelitis sinus that changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple deep biopsies",
+          "cells": [
+            {
+              "text": "From the margin and base; malignant transformation can be focal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging",
+          "cells": [
+            {
+              "text": "Regional nodes, and cross-sectional imaging when deep invasion or metastasis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Localised disease; clear histologic margins as the primary, usually curative approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstruction",
+          "cells": [
+            {
+              "text": "Local flap, skin graft or free flap once clear margins are confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amputation",
+          "cells": [
+            {
+              "text": "Extensive limb involvement, or deep chronic osteomyelitis where clear margins cannot otherwise be achieved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional lymph node dissection",
+          "cells": [
+            {
+              "text": "Proven or strongly suspected nodal metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "High-risk features: poor differentiation, deep invasion, perineural or lymphovascular invasion, close margins, or nodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Advanced, unresectable or metastatic disease, individualised through multidisciplinary discussion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Local recurrence and nodal or distant metastasis, given more aggressive behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marjolin_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Marjolin ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Long-standing ulcer or burn scar that fails to heal, or an osteomyelitis sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New nodularity, everted edges, bleeding, rapid change or palpable nodes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Multiple deep biopsies from the margin and base; refer to multidisciplinary team",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep biopsies from margin and base, nodal assessment, CT or MRI if deep",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is squamous cell carcinoma confirmed on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Benign ulcer or sinus: continue wound care; re-biopsy if it changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stage with regional nodes and cross-sectional imaging if deep invasion is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wide local excision to clear histologic margins as the primary treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reconstruct with local flap, skin graft or free flap once margins are clear",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regional lymph node dissection for proven or strongly suspected nodal metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to plastic surgery, surgical oncology and dermatology, plus oncology if advanced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

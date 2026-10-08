@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for mycobacterium genavense infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_genavense_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and tissue culture in liquid medium with mycobactin J",
+          "cells": [
+            {
+              "text": "Prolonged incubation; grows poorly on solid media"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "16S ribosomal RNA gene sequencing",
+          "cells": [
+            {
+              "text": "Often required when culture is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of liver, marrow or lymph node",
+          "cells": [
+            {
+              "text": "Acid-fast bacilli with a poor granulomatous response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD4 count and HIV testing",
+          "cells": [
+            {
+              "text": "Profound immunosuppression, such as a very low CD4 count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Organomegaly and lymphadenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for gastrointestinal involvement",
+          "cells": [
+            {
+              "text": "Prominent in this disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_genavense_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated Mycobacterium avium complex infection",
+          "cells": [
+            {
+              "text": "Clinically and pathologically mimics it; species confirmation separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated tuberculosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_genavense_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide-based multidrug therapy",
+          "cells": [
+            {
+              "text": "Clarithromycin with ethambutol and a rifamycin such as rifabutin, sometimes with a fluoroquinolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restore cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Antiretroviral therapy in advanced HIV; reduce immunosuppression in transplant recipients where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Nutrition, transfusion for anaemia and management of gastrointestinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune reconstitution inflammatory syndrome",
+          "cells": [
+            {
+              "text": "Anticipate and manage when antiretroviral therapy is introduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug interactions",
+          "cells": [
+            {
+              "text": "Rifamycins interact with antiretrovirals; adjust agents and doses under specialist guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged therapy",
+          "cells": [
+            {
+              "text": "Continue for a prolonged period; monitor response clinically and radiologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Infectious diseases and HIV specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_genavense_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium genavense infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, weight loss, hepatosplenomegaly and GI features in advanced HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (very low CD4 count, progressive wasting, organ dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review; start antiretroviral therapy to restore immunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liquid culture with mycobactin J, 16S rRNA sequencing, tissue biopsy, CD4 count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organism confirmed by molecular sequencing where culture is negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider disseminated MAC or tuberculosis; repeat sampling and molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Macrolide with ethambutol and rifabutin, sometimes with a fluoroquinolone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Restore cell-mediated immunity, starting antiretroviral therapy in advanced HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticipate immune reconstitution inflammatory syndrome after antiretrovirals",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjust rifamycin and antiretroviral agents under specialist guidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome set by the immunodeficiency; untreated profound immunosuppression fares poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

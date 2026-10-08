@@ -155,5 +155,334 @@
       "caption": "Overview comparison matrix for li-fraumeni syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "li_fraumeni_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline TP53 sequencing and deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms carrier state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body MRI",
+          "cells": [
+            {
+              "text": "Structured surveillance protocol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Annual breast MRI",
+          "cells": [
+            {
+              "text": "Adult female carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dedicated brain MRI and neurological review",
+          "cells": [
+            {
+              "text": "Brain tumour surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound and biochemical adrenal screening",
+          "cells": [
+            {
+              "text": "In children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedigree assessment against classic and Chompret criteria",
+          "cells": [
+            {
+              "text": "Eligibility for testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "li_fraumeni_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary breast and ovarian cancer (BRCA1/BRCA2)",
+          "cells": [
+            {
+              "text": "A different germline gene for breast and ovarian cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional mismatch repair deficiency syndrome",
+          "cells": [
+            {
+              "text": "Another childhood cancer predisposition syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann spectrum with embryonal tumours",
+          "cells": [
+            {
+              "text": "Embryonal tumours within an overgrowth syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "li_fraumeni_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Site-specific standard treatment",
+          "cells": [
+            {
+              "text": "Each cancer treated per standard for site and histology; TP53 status informs choices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise radiotherapy",
+          "cells": [
+            {
+              "text": "Avoid where possible, given the radiation-induced second malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery over radiotherapy",
+          "cells": [
+            {
+              "text": "Such as mastectomy rather than breast-conserving therapy plus radiotherapy, where reasonable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body MRI surveillance",
+          "cells": [
+            {
+              "text": "Sarcoma surveillance; MRI preferred over CT where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast MRI",
+          "cells": [
+            {
+              "text": "Annual breast MRI with mammography for affected women and first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic referral and cascade testing",
+          "cells": [
+            {
+              "text": "Clinical genetics for TP53 testing and first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary review",
+          "cells": [
+            {
+              "text": "When radiotherapy is the only feasible local control option"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "li_fraumeni_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Li-Fraumeni syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple primary cancers, or early-onset sarcoma, breast cancer or adrenocortical tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (childhood adrenocortical or choroid plexus tumour, second primary)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent TP53 testing and multidisciplinary oncology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline TP53 sequencing and deletion analysis, pedigree review, surveillance imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic germline TP53 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider BRCA1/2, constitutional mismatch-repair deficiency or NF1",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat each cancer per standard, with TP53 status informing choices",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Minimise radiotherapy given second-malignancy risk; favour surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Whole-body MRI sarcoma surveillance; prefer MRI to CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Annual breast MRI with mammography for carriers and relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical genetics referral and cascade testing of first-degree relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Very high lifetime cancer risk; surveillance aids early detection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

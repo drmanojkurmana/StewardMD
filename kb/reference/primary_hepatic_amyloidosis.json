@@ -149,5 +149,330 @@
       "caption": "Overview comparison matrix for primary hepatic amyloidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_hepatic_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum free light-chain ratio with serum and urine immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congo red staining of tissue with typing",
+          "cells": [
+            {
+              "text": "Amyloid and its type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac evaluation with biomarkers and echocardiography",
+          "cells": [
+            {
+              "text": "Extrahepatic cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal fat pad or bone marrow sampling",
+          "cells": [
+            {
+              "text": "Lower-risk alternative to liver biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Plasma cell clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Hepatomegaly and focal lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hepatic_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infiltrative malignancy such as lymphoma or metastatic disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Bone marrow examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congestive hepatopathy from right heart failure",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Cardiac evaluation with biomarkers and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hepatic_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clone-directed chemotherapy",
+          "cells": [
+            {
+              "text": "Bortezomib-based proteasome-inhibitor regimen with an anti-CD38 agent for AL amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autologous stem-cell transplant",
+          "cells": [
+            {
+              "text": "Carefully selected patients with adequate organ reserve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AA and hereditary forms",
+          "cells": [
+            {
+              "text": "AA: suppress the underlying inflammatory disorder; hereditary transthyretin: TTR stabiliser or gene-silencing therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Nutritional support and fat-soluble vitamin replacement for cholestasis and malnutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognostic monitoring",
+          "cells": [
+            {
+              "text": "Cardiac and renal involvement, and serum free light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensation and bleeding",
+          "cells": [
+            {
+              "text": "Careful management; avoid invasive procedures where perivascular deposition adds risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Haematology, hepatology and cardiology, with a specialist amyloidosis centre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening where a hereditary transthyretin form is identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_hepatic_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of Primary hepatic amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected hepatic amyloidosis: hepatomegaly with or without jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid hepatomegaly with jaundice, heart failure, bruising or bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology and hepatology review for decompensation or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Free light-chain ratio and immunofixation; tissue Congo red; cardiac assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does tissue Congo red with typing confirm amyloid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphoma, congestive hepatopathy or other infiltrative disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clone-directed bortezomib-based chemotherapy for AL amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Autologous stem-cell transplant in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support and fat-soluble vitamin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor cardiac and renal involvement and free light chains",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist amyloidosis centre care; genetic counselling where hereditary disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

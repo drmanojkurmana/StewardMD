@@ -247,5 +247,535 @@
       "caption": "Diagnostic and clinical overview matrix for inflammatory bowel disease flare."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ulcerative Colitis",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/ulcerative-colitis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 295-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ibd_flare-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading an ulcerative colitis flare (Montreal) and key tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "S1 mild",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": "Up to 4, with or without blood",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "No systemic illness, normal ESR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S2 moderate",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": ">=4",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Minimal systemic toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S3 severe: stools",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": ">=6 bloody",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "{{hy:Plus systemic signs = acute severe colitis; admit}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S3 severe: pulse",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": ">=90",
+              "op": ">=",
+              "value": 90
+            },
+            {
+              "text": "Severe-flare criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S3 severe: temperature",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">=37.5",
+              "op": ">=",
+              "value": 37.5
+            },
+            {
+              "text": "Severe-flare criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S3 severe: haemoglobin",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<10.5",
+              "op": "<",
+              "value": 10.5
+            },
+            {
+              "text": "Severe-flare criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S3 severe: ESR",
+          "unit": "mm/h",
+          "cells": [
+            {
+              "text": ">=30",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Severe-flare criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fulminant colitis",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": ">10 with continuous bleeding",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Colonic dilation, fever, tachycardia, anaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colon diameter",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">6 cm transverse colon",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Toxic megacolon"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stool tests",
+          "cells": [
+            {
+              "text": "C. difficile toxin, cultures, E. histolytica"
+            },
+            {
+              "text": "Exclude infection in every flare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Faecal calprotectin, CRP, albumin",
+          "cells": [
+            {
+              "text": "Raised calprotectin, falling albumin"
+            },
+            {
+              "text": "Activity and severity markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Continuous from rectum (UC) versus skip lesions (Crohn)"
+            },
+            {
+              "text": "Chronic crypt distortion supports IBD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ibd_flare-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic an IBD flare",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Clostridioides difficile colitis",
+          "cells": [
+            {
+              "text": "{{hy:Toxin positive; can complicate IBD}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CMV colitis",
+          "cells": [
+            {
+              "text": "Immunosuppressed patients; exclude in severe disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infectious colitis or amoebiasis",
+          "cells": [
+            {
+              "text": "Stool culture, E. histolytica on fresh stool"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ischaemic colitis",
+          "cells": [
+            {
+              "text": "Elderly, abrupt left-sided pain, rectum spared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAID or checkpoint-inhibitor colitis",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diverticulitis",
+          "cells": [
+            {
+              "text": "Can mimic Crohn's clinically and on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopic colitis",
+          "cells": [
+            {
+              "text": "Watery diarrhoea with normal-looking mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colorectal cancer or lymphoma",
+          "cells": [
+            {
+              "text": "Stricture that blocks the scope"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UC versus Crohn's disease",
+          "cells": [
+            {
+              "text": "Smoking may protect against UC but causes Crohn's"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "ibd_flare-treatment",
+      "kind": "treatment",
+      "title": "Management of a severe ulcerative colitis flare",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Admit; high-dose IV glucocorticoid",
+          "cells": [
+            {
+              "text": "{{hy:>6 bloody stools, tachycardia, fever or severe pain}}"
+            },
+            {
+              "text": "Switch to prednisone 40 mg daily within about a week, then taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "VTE prophylaxis",
+          "cells": [
+            {
+              "text": "All admitted patients"
+            },
+            {
+              "text": "Enoxaparin in entry drug list"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop antidiarrhoeals, opioids, anticholinergics",
+          "cells": [
+            {
+              "text": "Severe flare"
+            },
+            {
+              "text": "Can precipitate toxic dilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biologic (infliximab) or IV ciclosporin rescue",
+          "cells": [
+            {
+              "text": "No response in 3 to 7 days"
+            },
+            {
+              "text": "Ciclosporin responders move to oral plus azathioprine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fulminant colitis bundle",
+          "cells": [
+            {
+              "text": "Fulminant colitis"
+            },
+            {
+              "text": "Nil by mouth, IV fluids, steroids, metronidazole 500 mg IV every 6 to 8 h plus ciprofloxacin 500 mg IV every 12 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emergency colectomy",
+          "cells": [
+            {
+              "text": "Perforation, massive bleeding, toxic colitis, no improvement in 24 to 48 h of intensive therapy"
+            },
+            {
+              "text": "Subtotal colectomy usually"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mild to moderate: 5-ASA oral and rectal",
+          "cells": [
+            {
+              "text": "Proctitis, left-sided or extensive mild disease"
+            },
+            {
+              "text": "Budesonide MMX 9 mg/day if needed"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "IV steroid, infliximab and ciclosporin doses are not stated in the source opened. Crohn's flare management is not covered in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ibd_flare-dx-mgmt",
+      "title": "Assessment and management of an IBD flare",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known IBD with more diarrhoea, bleeding or pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool C. difficile and cultures; CBC, CRP, albumin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat infection; reassess IBD activity",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe: >=6 bloody stools plus systemic signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Outpatient 5-ASA or oral steroid by extent",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit: IV steroid, VTE prophylaxis, stop opioids",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Perforation, megacolon >6 cm or massive bleed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Emergency colectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Response by 3 to 7 days?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oral prednisone 40 mg and taper",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Infliximab or ciclosporin rescue, or colectomy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for interstitial keratitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interstitial_keratitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Stromal oedema, infiltrate, and deep or ghost vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology",
+          "cells": [
+            {
+              "text": "Treponemal and non-treponemal tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis testing with chest imaging",
+          "cells": [
+            {
+              "text": "Active tuberculosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme serology and exposure-based infective work-up",
+          "cells": [
+            {
+              "text": "Targeted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiovestibular assessment",
+          "cells": [
+            {
+              "text": "Cogan syndrome when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic inflammatory and vasculitis screen",
+          "cells": [
+            {
+              "text": "Autoimmune cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_keratitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective stromal keratitis (herpetic, bacterial or fungal)",
+          "cells": [
+            {
+              "text": "Active infection with stromal infiltrate; immune stromal disease is not infective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral ulcerative keratitis from systemic vasculitis",
+          "cells": [
+            {
+              "text": "Peripheral ulceration, unlike the non-ulcerative stromal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_keratitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic cause first",
+          "cells": [
+            {
+              "text": "Penicillin for syphilis; standard antitubercular therapy for tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroid",
+          "cells": [
+            {
+              "text": "Suppresses stromal inflammation; limits scarring and deep vascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic",
+          "cells": [
+            {
+              "text": "Pain relief and prevention of posterior synechiae during active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cogan syndrome",
+          "cells": [
+            {
+              "text": "Urgent systemic immunosuppression to preserve hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated disease",
+          "cells": [
+            {
+              "text": "Audiovestibular and systemic evaluation for Cogan syndrome or vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term care",
+          "cells": [
+            {
+              "text": "Residual scarring, lipid keratopathy and astigmatism; keratoplasty for dense central scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interstitial_keratitis-dx-mgmt",
+      "title": "Diagnosis and management of Interstitial keratitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-ulcerative corneal stromal inflammation with deep or ghost vessels",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Vestibular or hearing symptoms, active systemic infection, or perforation risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic treatment; hearing and vasculitis review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, syphilis serology, tuberculosis testing, audiovestibular and vasculitis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic cause such as syphilis or tuberculosis identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Cogan syndrome or vasculitis; keep infective keratitis excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat syphilis with penicillin or tuberculosis with standard therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroid to suppress stromal inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cycloplegic for pain and to prevent synechiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent systemic immunosuppression for Cogan syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Partner notification where syphilis is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Scarring and irregular astigmatism may follow; keratoplasty for dense scarring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

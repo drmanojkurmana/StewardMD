@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for dubin-johnson syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dubin_johnson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fractionated bilirubin",
+          "cells": [
+            {
+              "text": "Conjugated predominance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver enzymes and synthetic function",
+          "cells": [
+            {
+              "text": "Normal, excluding hepatocellular or obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary coproporphyrin analysis",
+          "cells": [
+            {
+              "text": "Raised proportion of coproporphyrin I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary scintigraphy",
+          "cells": [
+            {
+              "text": "Typical excretory pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCC2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "ABCC2 variant where confirmation is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dubin_johnson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotor syndrome",
+          "cells": [
+            {
+              "text": "Separated by the coproporphyrin isomer pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign recurrent intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "Recurrent cholestasis with normal enzymes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholestasis of pregnancy",
+          "cells": [
+            {
+              "text": "Jaundice in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dubin_johnson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign disorder of conjugated bilirubin excretion; no specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigation",
+          "cells": [
+            {
+              "text": "Once diagnosis is established by fractionated bilirubin and coproporphyrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on precipitants",
+          "cells": [
+            {
+              "text": "Pregnancy, oestrogen contraceptives and illness can worsen jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm normal enzymes",
+          "cells": [
+            {
+              "text": "Distinguishes it from hepatocellular or obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy reassurance",
+          "cells": [
+            {
+              "text": "Normal life expectancy; no progression to cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dubin_johnson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dubin-Johnson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dubin-Johnson syndrome: fluctuating jaundice with conjugated bilirubin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abnormal transaminases, pruritus, weight loss, worsening jaundice)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for obstruction or malignancy if red flags present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fractionated bilirubin; liver enzymes; urinary coproporphyrin I; scintigraphy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is conjugated bilirubin raised with normal enzymes and coproporphyrin I raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rotor syndrome, obstructive or hepatocellular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign disorder of bilirubin excretion requiring no specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid invasive investigation once the diagnosis is established",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counsel that pregnancy and oestrogen contraceptives may precipitate jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Routine reassurance in pregnancy; no progression to cirrhosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with normal life expectancy; no progression to cirrhosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

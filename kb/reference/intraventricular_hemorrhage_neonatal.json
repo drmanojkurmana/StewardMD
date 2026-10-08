@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for neonatal intraventricular haemorrhage."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cloherty and Stark Manual of Neonatal Care / Volpe's Neurology of the Newborn",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intraventricular_hemorrhage_neonatal-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cranial ultrasound",
+          "cells": [
+            {
+              "text": "Screening, grading and ventricular size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference",
+          "cells": [
+            {
+              "text": "Post-haemorrhagic ventricular dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Anaemia or bleeding tendency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas monitoring",
+          "cells": [
+            {
+              "text": "Hypercarbia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Parenchymal injury and prognosis when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid assessment",
+          "cells": [
+            {
+              "text": "Infection or progressive hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraventricular_hemorrhage_neonatal-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Periventricular leukomalacia",
+          "cells": [
+            {
+              "text": "White matter injury rather than germinal matrix bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or meningitis",
+          "cells": [
+            {
+              "text": "Acute deterioration; cerebrospinal fluid assessment separates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraventricular_hemorrhage_neonatal-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Antenatal corticosteroids; gentle handling; avoid swings in blood pressure, carbon dioxide and volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stability",
+          "cells": [
+            {
+              "text": "Lung-protective ventilation; avoid hypercarbia and hypoxia; cautious fluids and inotropes; correct coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening",
+          "cells": [
+            {
+              "text": "Early cranial ultrasound, repeated serially in at-risk preterm infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventricular dilatation",
+          "cells": [
+            {
+              "text": "Serial head circumference and cranial ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF drainage",
+          "cells": [
+            {
+              "text": "Lumbar punctures or ventricular access device; ventriculoperitoneal shunt if hydrocephalus persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and neuroprotection",
+          "cells": [
+            {
+              "text": "Anticonvulsants and supportive neuroprotective intensive care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intraventricular_hemorrhage_neonatal-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal intraventricular haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Preterm infant in the first days with sudden collapse or bulging fontanelle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling haematocrit, seizures, raised intracranial pressure or rapid head growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal stabilisation; neurosurgical review for ventricular dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cranial ultrasound with grading, head circumference, blood count, coagulation, gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Haemorrhage graded and ventricles stable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Progressive dilatation: CSF drainage, then re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antenatal corticosteroids and gentle handling in at-risk infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lung-protective ventilation; avoid hypercarbia and hypoxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial cranial ultrasound in at-risk preterm infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial head circumference to detect post-haemorrhagic dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Anticonvulsants and neuroprotective intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome depends on grade and ventricular course; shunt if hydrocephalus persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

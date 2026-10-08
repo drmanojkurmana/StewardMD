@@ -156,5 +156,332 @@
       "caption": "Overview comparison matrix for mature cystic teratoma of the ovary."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mature_cystic_teratoma_ovary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Fat, hair and the Rokitansky nodule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI with fat-suppression sequences",
+          "cells": [
+            {
+              "text": "Used when imaging is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers (CA125, AFP, beta-hCG, LDH)",
+          "cells": [
+            {
+              "text": "Helps exclude a malignant germ-cell component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler assessment of ovarian blood flow",
+          "cells": [
+            {
+              "text": "Blood flow when torsion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination of the excised specimen",
+          "cells": [
+            {
+              "text": "Maturity of all elements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Struma ovarii component, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mature_cystic_teratoma_ovary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immature (malignant) teratoma",
+          "cells": [
+            {
+              "text": "Immature elements on histology; treated with staging and platinum-based chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Struma ovarii",
+          "cells": [
+            {
+              "text": "Thyroid tissue component; thyroid function tested if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mature_cystic_teratoma_ovary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical and expectant management",
+          "cells": [
+            {
+              "text": "Benign germ cell tumour with no FIGO stage; no chemotherapy or radiotherapy role"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for small lesions",
+          "cells": [
+            {
+              "text": "Small, asymptomatic lesion with classic benign features: echogenic Rokitansky nodule, fat fluid level, dense shadowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Larger lesions, growth on serial imaging, symptoms, or atypical or complex features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility-sparing cystectomy",
+          "cells": [
+            {
+              "text": "Preserves normal ovarian tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oophorectomy",
+          "cells": [
+            {
+              "text": "Lesions not amenable to cystectomy, completed childbearing, or malignancy not excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsion: prompt detorsion",
+          "cells": [
+            {
+              "text": "Cystectomy if the ovary is viable; salpingo-oophorectomy if necrotic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rupture: surgical washout",
+          "cells": [
+            {
+              "text": "Chemical peritonitis from sebaceous or keratin material; remove the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative follow-up",
+          "cells": [
+            {
+              "text": "Confirm complete excision; monitor the contralateral ovary for bilateral dermoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecologic oncology referral",
+          "cells": [
+            {
+              "text": "Atypical or complex imaging, malignancy not excluded, or large or bilateral lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mature_cystic_teratoma_ovary-dx-mgmt",
+      "title": "Diagnosis and management of Mature cystic teratoma of the ovary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adnexal mass with fat, hair or Rokitansky nodule on transvaginal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Torsion, rupture with peritonitis, solid vascular areas or anti-NMDA encephalitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery: detorsion or washout; gynaecologic oncology if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound, pelvic MRI if equivocal, tumour markers, Doppler if torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are classic benign sonographic features present without atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Atypical or complex features: gynaecologic oncology referral and further imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surveillance for small asymptomatic lesions with classic benign features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgery for larger, growing, symptomatic or atypical lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fertility-sparing ovarian cystectomy, preserving normal ovarian tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oophorectomy only if cystectomy is not feasible or malignancy cannot be excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Postoperative check confirms complete excision; monitor the contralateral ovary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

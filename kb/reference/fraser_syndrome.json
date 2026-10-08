@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for fraser syndrome (cryptophthalmos-syndactyly)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fraser_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "May show renal anomalies, oligohydramnios and other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of FRAS-FREM complex genes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and urinary tract ultrasound",
+          "cells": [
+            {
+              "text": "Assesses renal and urinary tract anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway endoscopy",
+          "cells": [
+            {
+              "text": "Laryngeal patency in the neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and orbital imaging",
+          "cells": [
+            {
+              "text": "Defines the ocular anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs and examination",
+          "cells": [
+            {
+              "text": "Characterise syndactyly and skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fraser_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate neonatal airway assessment",
+          "cells": [
+            {
+              "text": "Securing the airway for laryngeal atresia or stenosis, including tracheostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal support",
+          "cells": [
+            {
+              "text": "Dialysis, and transplantation consideration for significant impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged ophthalmic surgery",
+          "cells": [
+            {
+              "text": "For cryptophthalmos; vision is often not salvageable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndactyly and skeletal surgery",
+          "cells": [
+            {
+              "text": "Surgical release of cutaneous syndactyly; correction of skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genitourinary and disorder-of-sex-development care",
+          "cells": [
+            {
+              "text": "Within a multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Urology, ophthalmology, ENT and reconstructive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive FRAS-FREM disorder; recurrence and antenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fraser_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fraser syndrome (cryptophthalmos-syndactyly)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fraser syndrome: cryptophthalmos with syndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway obstruction, bilateral renal agenesis, severe oligohydramnios)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate neonatal airway assessment and securing of the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal and renal ultrasound, airway endoscopy and FRAS-FREM gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does molecular testing of FRAS-FREM genes confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Potter sequence, Fryns syndrome or amniotic band sequence",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure the airway for laryngeal atresia or stenosis, including tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Support renal function; dialysis and transplantation consideration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged ophthalmic surgery for cryptophthalmos",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Release of cutaneous syndactyly and correction of skeletal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bilateral renal agenesis or laryngeal atresia often causes perinatal death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

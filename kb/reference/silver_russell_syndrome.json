@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for silver-russell syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "silver_russell_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Methylation analysis of the 11p15 IC1 region",
+          "cells": [
+            {
+              "text": "Loss of methylation, which explains most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for maternal uniparental disomy of chromosome 7",
+          "cells": [
+            {
+              "text": "The other common molecular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Copy-number causes of growth restriction are excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose monitoring",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and asymmetry assessment",
+          "cells": [
+            {
+              "text": "Body asymmetry and limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation",
+          "cells": [
+            {
+              "text": "Growth hormone axis status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silver_russell_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constitutional small-for-gestational-age",
+          "cells": [
+            {
+              "text": "Growth restriction without catch-up growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann syndrome",
+          "cells": [
+            {
+              "text": "Molecular mirror image, with increased rather than reduced IGF2-driven growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "silver_russell_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Feeding support and enteral feeding where needed; avoid rapid catch-up adiposity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent fasting hypoglycaemia",
+          "cells": [
+            {
+              "text": "Regular feeds, uncooked cornstarch and an emergency regimen during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant growth hormone",
+          "cells": [
+            {
+              "text": "Improves growth velocity, body composition and final stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management of asymmetry",
+          "cells": [
+            {
+              "text": "Shoe raise or surgery for limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Puberty monitoring",
+          "cells": [
+            {
+              "text": "Early or precocious puberty treated with a GnRH analogue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated multidisciplinary care",
+          "cells": [
+            {
+              "text": "Genetics, endocrinology, dietetics, gastroenterology and orthopaedics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Confirm 11p15 hypomethylation or maternal UPD7; discuss recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "silver_russell_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Silver-Russell syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe growth restriction with head sparing and asymmetry: suspected Silver-Russell",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fasting hypoglycaemia, severe failure to thrive, raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of hypoglycaemia and intensive nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Methylation analysis of 11p15 IC1, maternal UPD7 testing and chromosomal microarray",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does 11p15 hypomethylation or maternal UPD7 confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other imprinting disorders or constitutional short stature; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nutritional rehabilitation with feeding support, avoiding rapid catch-up adiposity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prevent fasting hypoglycaemia with regular feeds and an illness regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Recombinant growth hormone to improve growth velocity and final stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for asymmetry and early or precocious puberty monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early nutritional and endocrine care improves growth; final stature often below average",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

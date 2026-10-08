@@ -184,5 +184,509 @@
       "caption": "Overview comparison matrix for thrombotic renovascular disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Thrombotic Thrombocytopenic Purpura",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/thrombocytopenia-and-platelet-dysfunction/thrombotic-thrombocytopenic-purpura-ttp"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Hemolytic-Uremic Syndrome",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/thrombocytopenia-and-platelet-dysfunction/hemolytic-uremic-syndrome-hus"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thrombotic_renovascular_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing renal thrombotic microangiopathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Microangiopathic haemolysis",
+          "cells": [
+            {
+              "text": "Schistocytes, high LDH, low haptoglobin, negative DAT, normal clotting"
+            },
+            {
+              "text": "Defines TMA (may be absent in APS)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ADAMTS13 activity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 10% of normal",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "{{hy:TTP; do not wait for the result to start plasma exchange}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ADAMTS13 in HELLP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Reduced only to 30 to 60%",
+              "range": [
+                30,
+                60
+              ]
+            },
+            {
+              "text": "Milder than TTP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 10% or more, no inhibitor",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10% or more",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "TTP therapy unlikely to work; think HUS or drug TMA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Full TTP pentad",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 5% of immune TTP",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Do not wait for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shiga toxin or E. coli O157:H7 in stool",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% of HUS follows haemorrhagic colitis",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "STEC HUS, usually children, about 1 week after diarrhoea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Complement C3, C4 and gene testing",
+          "cells": [
+            {
+              "text": "Low C3 with normal C4 suggests alternative pathway"
+            },
+            {
+              "text": "Atypical HUS; at least half have no mutation found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSCT-associated TMA",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Schistocytes over 4% plus thrombocytopenia, rising LDH, falling Hb",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "International Working Group criteria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombotic_renovascular_disorders-ddx",
+      "kind": "ddx",
+      "title": "Causes of TMA to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "TTP",
+          "cells": [
+            {
+              "text": "Neurological features, milder kidney injury"
+            },
+            {
+              "text": "ADAMTS13 activity and inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "STEC HUS",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea, severe AKI"
+            },
+            {
+              "text": "Stool Shiga toxin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Atypical (complement) HUS",
+          "cells": [
+            {
+              "text": "No infection, recurrent"
+            },
+            {
+              "text": "Complement studies and genetics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "DIC or sepsis",
+          "cells": [
+            {
+              "text": "Abnormal PT, PTT, fibrinogen"
+            },
+            {
+              "text": "Coagulation profile"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant hypertension or scleroderma renal crisis",
+          "cells": [
+            {
+              "text": "Severe hypertension, SSc skin"
+            },
+            {
+              "text": "Clinical; renal biopsy if atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced TMA",
+          "cells": [
+            {
+              "text": "Quinine, ciclosporin, tacrolimus, chemotherapy"
+            },
+            {
+              "text": "Normal ADAMTS13; stop drug"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Preeclampsia or HELLP",
+          "cells": [
+            {
+              "text": "Pregnancy, liver enzymes raised"
+            },
+            {
+              "text": "ADAMTS13 30 to 60%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Renal TMA often without haemolysis"
+            },
+            {
+              "text": "Lupus anticoagulant, anticardiolipin, anti-beta2GP1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombotic_renovascular_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treating renal thrombotic microangiopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Suspected TTP, at once"
+            },
+            {
+              "text": "Daily until platelets and LDH normalise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoid plus rituximab",
+          "cells": [
+            {
+              "text": "Immune TTP in adults"
+            },
+            {
+              "text": "Rituximab also for relapse (about 40%)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Caplacizumab",
+          "cells": [
+            {
+              "text": "Immune TTP adjunct"
+            },
+            {
+              "text": "Faster platelet recovery; more bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma infusion or recombinant ADAMTS13",
+          "cells": [
+            {
+              "text": "Congenital TTP"
+            },
+            {
+              "text": "Not plasma exchange or immunosuppression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care and dialysis",
+          "cells": [
+            {
+              "text": "STEC HUS"
+            },
+            {
+              "text": "No antibiotics in typical diarrhoeal HUS; over half need dialysis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Eculizumab or ravulizumab",
+          "cells": [
+            {
+              "text": "Atypical complement HUS"
+            },
+            {
+              "text": "{{hy:Vaccinate against meningococcus first}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ACE inhibitor",
+          "cells": [
+            {
+              "text": "Scleroderma renal crisis"
+            },
+            {
+              "text": "Blood pressure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop offending drug",
+          "cells": [
+            {
+              "text": "Drug-induced TMA"
+            },
+            {
+              "text": "No response to TTP therapy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Untreated TTP is over 90% fatal; over 95% recover completely with current therapy."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thrombotic_renovascular_disorders-dx-mgmt",
+      "title": "Diagnosis and management of renal thrombotic microangiopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "AKI with anaemia and thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Film, LDH, haptoglobin, DAT, PT, PTT, fibrinogen",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Schistocytes with DAT-negative haemolysis, normal clotting?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Not TMA: consider DIC, sepsis, other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Send ADAMTS13; start plasma exchange if TTP possible",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ADAMTS13 under 10%?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "TTP: plasma exchange, steroid, rituximab, consider caplacizumab",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Bloody diarrhoea with Shiga toxin?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "STEC HUS: supportive care and dialysis, no antibiotics",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Drug, pregnancy, hypertension, scleroderma or APS cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat the specific cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Atypical HUS: complement tests, eculizumab after vaccination",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

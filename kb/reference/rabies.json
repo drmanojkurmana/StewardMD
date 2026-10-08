@@ -169,5 +169,424 @@
       "caption": "Overview comparison matrix for rabies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO Rabies fact sheet",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/rabies"
+    },
+    {
+      "id": "c3",
+      "label": "CDC Health Alert Network 00533, rabies PEP",
+      "kind": "web",
+      "url": "https://www.cdc.gov/han/php/notices/han00533.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rabies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Exposure grading and diagnosis of rabies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Definition",
+        "Action"
+      ],
+      "rows": [
+        {
+          "parameter": "WHO category I",
+          "cells": [
+            {
+              "text": "Touching or feeding animals, licks on intact skin"
+            },
+            {
+              "text": "Wash skin; no PEP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "WHO category II",
+          "cells": [
+            {
+              "text": "Nibbling of bare skin, minor scratch or abrasion without bleeding"
+            },
+            {
+              "text": "Wash wound and vaccinate now"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "WHO category III",
+          "cells": [
+            {
+              "text": "Transdermal bite or scratch, saliva on mucosa or broken skin, direct bat contact"
+            },
+            {
+              "text": "{{hy:Wash, vaccinate and give RIG into the wound}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually 20 to 90 days",
+              "range": [
+                20,
+                90
+              ]
+            },
+            {
+              "text": "Rarely days or over 1 year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical forms",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Encephalitic about 80%, paralytic about 20%",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Hydrophobia or aerophobia with lucid intervals is near diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antemortem tests",
+          "cells": [
+            {
+              "text": "Saliva RT-PCR, nuchal skin biopsy DFA or PCR, serum and CSF neutralizing antibody"
+            },
+            {
+              "text": "Negative tests never exclude rabies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF pleocytosis",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Over 1000 cells/uL is unusual",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Look for another diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rabies-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic rabies",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex encephalitis",
+          "cells": [
+            {
+              "text": "Temporal lobe signs, no hydrophobia"
+            },
+            {
+              "text": "CSF HSV PCR, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arboviral encephalitis (West Nile)",
+          "cells": [
+            {
+              "text": "Seasonal, mosquito exposure"
+            },
+            {
+              "text": "CSF IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-NMDA receptor encephalitis",
+          "cells": [
+            {
+              "text": "Young women, dyskinesias, seizures"
+            },
+            {
+              "text": "CSF NMDA receptor antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Mimics paralytic rabies; no encephalopathy"
+            },
+            {
+              "text": "Nerve studies, CSF protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postinfectious encephalomyelitis",
+          "cells": [
+            {
+              "text": "After viral infection or nerve-tissue vaccine"
+            },
+            {
+              "text": "MRI white matter lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rabies hysteria",
+          "cells": [
+            {
+              "text": "Shorter course and recovery"
+            },
+            {
+              "text": "Clinical course, negative tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rabies-treatment",
+      "kind": "treatment",
+      "title": "Rabies prophylaxis and care",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wound washing",
+          "cells": [
+            {
+              "text": "Every exposure, at once"
+            },
+            {
+              "text": "Soap and water for a long time; povidone-iodine if available; delay closure until RIG given"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Human rabies immune globulin",
+          "cells": [
+            {
+              "text": "Category III, never vaccinated"
+            },
+            {
+              "text": "20 IU/kg infiltrated into and around wounds (max 40 IU/kg); up to day 7 of vaccine"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vaccine, never vaccinated",
+          "cells": [
+            {
+              "text": "Category II or III exposure"
+            },
+            {
+              "text": "1 mL IM deltoid on days 0, 3, 7 and 14; never gluteal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vaccine, immunocompromised",
+          "cells": [
+            {
+              "text": "Impaired immune response"
+            },
+            {
+              "text": "Days 0, 3, 7, 14 and 28 with serologic check"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vaccine, previously vaccinated",
+          "cells": [
+            {
+              "text": "Any exposure needing PEP"
+            },
+            {
+              "text": "Days 0 and 3; no RIG"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pre-exposure vaccination",
+          "cells": [
+            {
+              "text": "Veterinarians, lab workers, travellers"
+            },
+            {
+              "text": "Simplifies later PEP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical and palliative care",
+          "cells": [
+            {
+              "text": "Symptomatic rabies"
+            },
+            {
+              "text": "Almost always fatal; no proven antiviral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "WHO now prefers intradermal schedules where available; this table gives the CDC intramuscular schedule. Deaths: entry cites about 59,000 per year; WHO 2021 estimate is 44,203."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rabies-dx-mgmt",
+      "title": "Diagnosis and management of possible rabies exposure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Animal bite, scratch, lick on broken skin or bat contact",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Wash the wound immediately and thoroughly",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "WHO category I (intact skin only)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "No PEP",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Previously fully vaccinated?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Vaccine days 0 and 3; no RIG",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Category III?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "HRIG 20 IU/kg into wounds",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Vaccine days 0, 3, 7, 14 (plus 28 if immunocompromised)",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

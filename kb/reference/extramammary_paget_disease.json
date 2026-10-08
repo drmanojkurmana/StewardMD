@@ -157,5 +157,350 @@
       "caption": "Overview comparison matrix for extramammary paget disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "extramammary_paget_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Punch or full-thickness biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "CK7, CK20, GCDFP-15, CDX2, GATA3, uroplakin, HER2, S100 and melan-A define origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of apocrine-bearing sites and regional nodes",
+          "cells": [
+            {
+              "text": "Extent and nodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and anorectal examination",
+          "cells": [
+            {
+              "text": "Perianal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy and urine cytology",
+          "cells": [
+            {
+              "text": "Penoscrotal or periurethral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological examination and pelvic imaging",
+          "cells": [
+            {
+              "text": "Vulval disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Invasive or nodal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "extramammary_paget_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic eczema or allergic contact dermatitis",
+          "cells": [
+            {
+              "text": "Itchy eczematous plaque; prolonged empirical eczema treatment delays biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superficial spreading or amelanotic melanoma",
+          "cells": [
+            {
+              "text": "Pagetoid cells can be misread as melanoma; confirmatory immunohistochemistry is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "extramammary_paget_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Establish invasion and primary versus secondary disease",
+          "cells": [
+            {
+              "text": "Determines the treatment pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay for in situ disease, with wide margins because of subclinical spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical imiquimod for extensive in situ disease in poor surgical candidates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery",
+          "cells": [
+            {
+              "text": "Lower reported local recurrence where expertise is available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive disease",
+          "cells": [
+            {
+              "text": "Treated as invasive adenocarcinoma of the site; surgery remains the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Invasive, nodal or metastatic disease, per site-specific guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary EMPD",
+          "cells": [
+            {
+              "text": "Surgery to the skin, with treatment of the underlying visceral adenocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-treatment screening",
+          "cells": [
+            {
+              "text": "Colonoscopy and genitourinary malignancy screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-biopsy of new nodules or induration",
+          "cells": [
+            {
+              "text": "Reassesses for dermal invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "High local recurrence from subclinical multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Dermato-oncology, surgical oncology and the site specialist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "extramammary_paget_disease-dx-mgmt",
+      "title": "Diagnosis and management of extramammary paget disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic itchy plaque in an apocrine-rich area (vulva, perianal, penoscrotal)",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (palpable nodule, lymphadenopathy, visceral symptoms, rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Multidisciplinary referral; invasive disease needs site-specific cancer care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-thickness biopsy with immunohistochemistry; colonoscopy; imaging if invasive",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Paget cells confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-biopsy; exclude eczema, Bowen disease or melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical excision with wide margins for in situ disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mohs micrographic surgery where expertise is available",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colonoscopy and genitourinary screening before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic therapy for invasive, nodal or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Non-invasive disease has a good prognosis but high local recurrence; invasion worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

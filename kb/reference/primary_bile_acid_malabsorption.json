@@ -152,5 +152,339 @@
       "caption": "Overview comparison matrix for primary bile acid malabsorption."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_bile_acid_malabsorption-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SeHCAT (selenium-75 homotaurocholic acid) retention scan",
+          "cells": [
+            {
+              "text": "Bile acid retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum C4 and FGF19",
+          "cells": [
+            {
+              "text": "Bile acid synthesis marker and FGF19 level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal bile acid measurement and faecal fat estimation",
+          "cells": [
+            {
+              "text": "Faecal bile acid and fat loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels and plasma cholesterol",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamin and cholesterol status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC10A2 molecular testing",
+          "cells": [
+            {
+              "text": "Genetic basis of the congenital form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic trial of a bile-acid sequestrant",
+          "cells": [
+            {
+              "text": "Response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ileocolonoscopy and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_bile_acid_malabsorption-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary bile acid malabsorption from ileal Crohn's disease or resection",
+          "cells": [
+            {
+              "text": "Ileal Crohn's disease or resection"
+            },
+            {
+              "text": "Ileocolonoscopy and cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exocrine pancreatic insufficiency (e.g. cystic fibrosis)",
+          "cells": [
+            {
+              "text": "Exocrine pancreatic insufficiency"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_bile_acid_malabsorption-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bile-acid sequestrant (mainstay)",
+          "cells": [
+            {
+              "text": "Colestyramine, colesevelam or colestipol to bind luminal bile acids and control secretory diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamins",
+          "cells": [
+            {
+              "text": "Supplement and monitor vitamins A, D, E and K"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduced-fat diet",
+          "cells": [
+            {
+              "text": "Limits steatorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Affected infants and children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholesterol and residual deficiency",
+          "cells": [
+            {
+              "text": "Track plasma cholesterol; correct residual deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult idiopathic (type 2) bile acid diarrhoea",
+          "cells": [
+            {
+              "text": "Also treated with a sequestrant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive congenital form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Gastroenterology and dietetic follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_bile_acid_malabsorption-dx-mgmt",
+      "title": "Diagnosis and management of Primary bile acid malabsorption",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary bile acid malabsorption: chronic secretory diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dehydration, faltering growth, vitamin deficiency or alarm features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric review for dehydration and electrolyte disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SeHCAT retention scan; serum C4 and FGF19; faecal bile acids; vitamins and cholesterol",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the scan or sequestrant trial confirm bile acid malabsorption?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude ileal Crohn's disease, pancreatic insufficiency or coeliac disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bile-acid sequestrant such as colestyramine as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supplement and monitor vitamins A, D, E and K",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reduced-fat diet to limit steatorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor growth and nutrition in affected children",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Gastroenterology and dietetic follow-up; genetic counselling for congenital form",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

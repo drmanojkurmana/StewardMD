@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for hyposplenism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Society for Haematology guideline / Postgraduate Haematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyposplenism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Howell-Jolly bodies, target cells and Pappenheimer bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pitted red cell count",
+          "cells": [
+            {
+              "text": "Quantifies splenic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Splenic size or absence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology (tissue transglutaminase antibodies)",
+          "cells": [
+            {
+              "text": "Coeliac disease as cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobinopathy screen",
+          "cells": [
+            {
+              "text": "Sickle cell disease or other haemoglobinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin and vaccine-response studies",
+          "cells": [
+            {
+              "text": "Immune function where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Associated cytopenias or thrombocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyposplenism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sickle cell disease and haemoglobinopathies",
+          "cells": [
+            {
+              "text": "Classic cause of autosplenectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Commonest non-haematological cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune disease (lupus, rheumatoid arthritis)",
+          "cells": [
+            {
+              "text": "Associated with functional hyposplenism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis or infiltration",
+          "cells": [
+            {
+              "text": "Infiltrative cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyposplenism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Pneumococcal, Haemophilus influenzae type b, meningococcal (including B) and annual influenza; ideally before elective splenectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "Phenoxymethylpenicillin, or a macrolide if penicillin-allergic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standby antibiotics",
+          "cells": [
+            {
+              "text": "Start at onset of fever or rigors and seek urgent care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong sepsis education",
+          "cells": [
+            {
+              "text": "Malaria chemoprophylaxis, prompt care after animal bites and tick exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overwhelming sepsis",
+          "cells": [
+            {
+              "text": "Immediate broad-spectrum parenteral antibiotics before investigations return"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Identify and manage the cause of the hyposplenism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyposplenism-dx-mgmt",
+      "title": "Diagnosis and management of hyposplenism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asplenic or hyposplenic patient, with or without underlying disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, rigors, flu-like illness, shock with DIC, or recent dog bite?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency broad-spectrum parenteral antibiotics before results",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film for Howell-Jolly bodies, pitted cell count, splenic imaging, coeliac serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Functional or anatomical asplenia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test for other causes such as coeliac disease or haemoglobinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vaccinate against pneumococcus, Hib, meningococcus and influenza",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term antibiotic prophylaxis: penicillin or macrolide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Standby antibiotics and an alert card",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Malaria prophylaxis and advice on dog bites and ticks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong infection risk; vaccination, prophylaxis and alert cards maintained",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

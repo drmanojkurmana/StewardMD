@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for latex allergy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "latex_allergy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum latex-specific IgE",
+          "cells": [
+            {
+              "text": "Confirms IgE sensitisation alongside a compatible history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin prick testing with standardised latex extract",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Delayed contact dermatitis to rubber chemicals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tryptase",
+          "cells": [
+            {
+              "text": "During a suspected acute systemic reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised glove use or challenge testing",
+          "cells": [
+            {
+              "text": "Specialist settings, when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "latex_allergy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type IV allergic contact dermatitis to rubber accelerators",
+          "cells": [
+            {
+              "text": "Delayed eczema; confirmed by patch testing, not IgE testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis from perioperative drugs or antiseptics",
+          "cells": [
+            {
+              "text": "Other causes of intraoperative reaction, including chlorhexidine and antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latex-fruit cross-reactive allergy",
+          "cells": [
+            {
+              "text": "Banana, avocado, kiwi and chestnut cross-react with latex proteins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "latex_allergy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict avoidance",
+          "cells": [
+            {
+              "text": "Latex-safe environment; powder-free nitrile or vinyl gloves and equipment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis preparedness",
+          "cells": [
+            {
+              "text": "Adrenaline auto-injector and antihistamine; written emergency action plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latex-free perioperative pathway",
+          "cells": [
+            {
+              "text": "Affected patients scheduled first; allergy flagged prominently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latex-fruit cross-reactivity",
+          "cells": [
+            {
+              "text": "Caution with banana, avocado, kiwi and chestnut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational exposure",
+          "cells": [
+            {
+              "text": "Powder-free low-protein or non-latex gloves for at-risk healthcare workers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical alert",
+          "cells": [
+            {
+              "text": "Identifier; allergy documented across all care settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Allergy and immunology for confirmatory latex-specific IgE and skin testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "latex_allergy-dx-mgmt",
+      "title": "Diagnosis and management of Latex allergy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reaction on latex contact, mucosal exposure or during a procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (procedural anaphylaxis, airway symptoms, recurrent reactions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate intramuscular adrenaline and removal of all latex sources",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum latex-specific IgE, skin prick test, patch testing, serum tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is latex-specific IgE or skin testing positive, with a compatible history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider contact dermatitis from rubber chemicals or latex-fruit allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance in a latex-safe environment with non-latex gloves",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adrenaline auto-injector, antihistamine and a written emergency plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Latex-free perioperative pathway with the allergy flagged",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on latex-fruit cross-reactivity: banana, avocado, kiwi, chestnut",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Medical-alert identification documented in all care settings",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With avoidance, most avoid further reactions; occupational sensitisation often improves",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

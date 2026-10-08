@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hereditary spherocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spherocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count, reticulocytes and blood film",
+          "cells": [
+            {
+              "text": "Spherocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Confirms haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune-mediated haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EMA-binding flow cytometry or osmotic fragility",
+          "cells": [
+            {
+              "text": "Red-cell membrane defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies and molecular analysis",
+          "cells": [
+            {
+              "text": "Inheritance and membrane gene variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the gallbladder",
+          "cells": [
+            {
+              "text": "Pigment gallstones; monitoring for aplastic crisis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spherocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Spherocytes with a positive direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hereditary red cell membrane disorders (elliptocytosis)",
+          "cells": [
+            {
+              "text": "Separated by morphology and membrane testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD deficiency and other enzymopathies",
+          "cells": [
+            {
+              "text": "Enzyme defect rather than membrane defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spherocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong folic acid",
+          "cells": [
+            {
+              "text": "Meets the increased erythropoietic demand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Reserved for moderate-to-severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholecystectomy",
+          "cells": [
+            {
+              "text": "Symptomatic pigment gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion for aplastic crisis",
+          "cells": [
+            {
+              "text": "Monitored and urgently treated; often parvovirus B19"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal jaundice",
+          "cells": [
+            {
+              "text": "Phototherapy and, where severe, exchange transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Predominantly autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology follow-up",
+          "cells": [
+            {
+              "text": "Escalated for worsening anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spherocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spherocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spherocytes with haemolysis, anaemia and jaundice, often with family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Aplastic crisis, acute haemolysis, sepsis after splenectomy, or symptomatic gallstones?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transfusion for aplastic crisis; treat sepsis after splenectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full blood count and film; bilirubin, LDH, haptoglobin; DAT; EMA or osmotic fragility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a membrane defect confirmed with immune haemolysis excluded by DAT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autoimmune haemolysis, elliptocytosis, G6PD deficiency or other haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong folic acid supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Splenectomy reserved for moderate-to-severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cholecystectomy for symptomatic pigment gallstones",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent transfusion for aplastic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haemolysis controlled; splenectomy and gallstone risk managed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

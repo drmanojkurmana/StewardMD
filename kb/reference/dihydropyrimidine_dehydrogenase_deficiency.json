@@ -149,5 +149,287 @@
       "caption": "Overview comparison matrix for dihydropyrimidine dehydrogenase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "DPYD genotyping for common deleterious variants",
+          "cells": [
+            {
+              "text": "Deleterious DPYD variants before fluoropyrimidines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma uracil or uracil-to-dihydrouracil ratio",
+          "cells": [
+            {
+              "text": "Phenotype test, which can add information beyond genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary uracil and thymine",
+          "cells": [
+            {
+              "text": "Accumulation of uracil and thymine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DPD enzyme activity in peripheral blood mononuclear cells",
+          "cells": [
+            {
+              "text": "Reduced DPD enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid pyrimidine analysis",
+          "cells": [
+            {
+              "text": "The neurological phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid or dose-reduce fluoropyrimidines",
+          "cells": [
+            {
+              "text": "5-fluorouracil and capecitabine, guided by DPYD genotype and phenotype testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uridine triacetate",
+          "cells": [
+            {
+              "text": "Antidote for fluoropyrimidine overexposure or emerging severe toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "G-CSF and transfusion for myelosuppression; mucositis, diarrhoea and neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional paediatric phenotype",
+          "cells": [
+            {
+              "text": "Supportive and anticonvulsant care with developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flag the intolerance",
+          "cells": [
+            {
+              "text": "Record it prominently and review medications carefully"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count and mucosal or GI toxicity during any unavoidable exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Dihydropyrimidine dehydrogenase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DPD deficiency: severe early toxicity during fluoropyrimidine therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid myelosuppression, mucositis, neurotoxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent uridine triacetate and intensive supportive care for severe toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DPYD genotyping; plasma uracil or uracil-to-dihydrouracil ratio; DPD activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are DPYD variants found or plasma uracil raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other causes of chemotherapy toxicity, sepsis or pyrimidine defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid fluoropyrimidines or dose-reduce, guided by DPYD and phenotype testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Uridine triacetate as antidote for overexposure or severe toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "G-CSF and transfusion with mucositis and diarrhoea management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Flag the drug intolerance in the record; careful medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Close blood count and mucosal monitoring during any exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Recognition before exposure determines outcome; unrecognised deficiency can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

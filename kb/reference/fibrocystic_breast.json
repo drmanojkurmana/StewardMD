@@ -156,5 +156,305 @@
       "caption": "Overview comparison matrix for fibrocystic breast change."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrocystic_breast-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical breast examination with triple assessment",
+          "cells": [
+            {
+              "text": "Dominant or discrete lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast ultrasound in younger women",
+          "cells": [
+            {
+              "text": "Cysts and solid lesions characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography in older women",
+          "cells": [
+            {
+              "text": "Malignancy concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration or core biopsy",
+          "cells": [
+            {
+              "text": "Dominant, solid or suspicious lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst aspiration with cytology",
+          "cells": [
+            {
+              "text": "Bloodstained fluid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrocystic_breast-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibroadenoma",
+          "cells": [
+            {
+              "text": "Solid lump; needs triple assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast carcinoma",
+          "cells": [
+            {
+              "text": "New hard, fixed or non-cyclical lump"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast abscess, fat necrosis or phyllodes tumour",
+          "cells": [
+            {
+              "text": "Other breast lumps"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrocystic_breast-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance once malignancy excluded",
+          "cells": [
+            {
+              "text": "Benign, hormonally driven change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bra and simple analgesia",
+          "cells": [
+            {
+              "text": "Symptomatic relief; reduced caffeine where it helps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of symptomatic cysts",
+          "cells": [
+            {
+              "text": "Bloodstained fluid sent for cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical NSAIDs for cyclical mastalgia",
+          "cells": [
+            {
+              "text": "Hormonal agents in refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy and surveillance for atypia",
+          "cells": [
+            {
+              "text": "Proliferative change with atypia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast clinic referral",
+          "cells": [
+            {
+              "text": "Dominant, complex or suspicious lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrocystic_breast-dx-mgmt",
+      "title": "Diagnosis and management of Fibrocystic Breast Change",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lumpy, tender breasts that vary with the menstrual cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hard or fixed lump, bloody discharge, skin change, recurrent cyst)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Breast clinic urgent review for suspicious lesion or bloody discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Triple assessment; ultrasound or mammography by age; aspiration; core biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cyclical nodularity with benign imaging and no suspicious lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate further: biopsy, aspiration cytology or referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance once malignancy is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive bra, analgesia and topical NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspirate symptomatic cysts; cytology if bloodstained",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Core biopsy and surveillance for atypical change",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; common forms carry no increased breast cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

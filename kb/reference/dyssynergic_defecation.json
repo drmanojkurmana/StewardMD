@@ -144,5 +144,325 @@
       "caption": "Overview comparison matrix for dyssynergic defecation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyssynergic_defecation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anorectal manometry",
+          "cells": [
+            {
+              "text": "Dyssynergic pattern of defecation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon expulsion test",
+          "cells": [
+            {
+              "text": "Ability to expel a balloon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defecography where outlet problems suspected",
+          "cells": [
+            {
+              "text": "Structural outlet problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic transit study",
+          "cells": [
+            {
+              "text": "Coexisting slow transit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Impaired relaxation on initial screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyssynergic_defecation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Slow-transit constipation",
+          "cells": [
+            {
+              "text": "Coexisting slow transit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural outlet obstruction (rectocele, intussusception)",
+          "cells": [
+            {
+              "text": "Structural outlet problem on defecography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Features in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyssynergic_defecation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biofeedback pelvic floor retraining",
+          "cells": [
+            {
+              "text": "First-line; corrects paradoxical contraction or poor relaxation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel retraining",
+          "cells": [
+            {
+              "text": "Toileting posture and technique; discourage straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool consistency",
+          "cells": [
+            {
+              "text": "Fibre and osmotic agents so retraining works; avoid relying on stimulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiology confirmation",
+          "cells": [
+            {
+              "text": "Manometry and balloon expulsion before retraining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting problems",
+          "cells": [
+            {
+              "text": "Treat slow transit or structural outlet problems found on testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal sensory retraining",
+          "cells": [
+            {
+              "text": "Where rectal hyposensitivity is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Refractory cases and psychological contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyssynergic_defecation-dx-mgmt",
+      "title": "Diagnosis and management of Dyssynergic defecation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dyssynergic defecation: straining and incomplete evacuation on a normal colon",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (alarm features, suspected outlet obstruction, neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation for alarm features or suspected structural obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anorectal manometry; balloon expulsion test; defecography if outlet problem suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does manometry show the dyssynergic pattern on balloon expulsion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider slow-transit constipation, structural outlet obstruction or Hirschsprung",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Biofeedback pelvic floor retraining as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bowel retraining with toileting posture and discouraging straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fibre and osmotic agents to optimise stool consistency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting slow transit or structural outlet problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer refractory cases to a specialist pelvic floor service",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good prognosis; most improve with biofeedback, while laxatives alone do poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,296 @@
       "caption": "Overview comparison matrix for flail chest."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "flail_chest-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Rib fractures and pulmonary contusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Oxygenation and ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or haemothorax assessment",
+          "cells": [
+            {
+              "text": "Associated injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial evaluation",
+          "cells": [
+            {
+              "text": "Contusion typically worsens over days"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flail_chest-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple rib fractures without a flail segment",
+          "cells": [
+            {
+              "text": "No true flail; no paradoxical movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated pulmonary contusion",
+          "cells": [
+            {
+              "text": "Lung injury without chest wall instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or haemothorax",
+          "cells": [
+            {
+              "text": "Associated thoracic injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flail_chest-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multimodal analgesia with regional blockade",
+          "cells": [
+            {
+              "text": "Thoracic epidural or paravertebral block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and escalating respiratory support",
+          "cells": [
+            {
+              "text": "From non-invasive ventilation to intubation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest physiotherapy and pulmonary hygiene",
+          "cells": [
+            {
+              "text": "Prevent atelectasis and retained secretions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical rib fixation in selected patients",
+          "cells": [
+            {
+              "text": "Severe deformity or ventilator dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intercostal chest drain",
+          "cells": [
+            {
+              "text": "Associated pneumothorax or haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial gas exchange monitoring",
+          "cells": [
+            {
+              "text": "Anticipate worsening contusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "flail_chest-dx-mgmt",
+      "title": "Diagnosis and management of Flail chest",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Segment of chest wall with paradoxical movement after multiple rib fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive hypoxaemia, fatigue, tension pneumothorax, great-vessel injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate respiratory support for progressive hypoxaemia or fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph and CT; arterial blood gas; pneumothorax assessment; serial review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Paradoxical movement with a flail segment on examination and imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rib fractures without a flail or isolated contusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multimodal analgesia, including regional blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oxygen and escalating ventilatory support as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chest physiotherapy and pulmonary hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical rib fixation for severe deformity or ventilator dependence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Largely set by the severity of the underlying lung contusion and associated injuries",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

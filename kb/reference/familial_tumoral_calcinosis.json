@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for familial tumoral calcinosis (galnt3/fgf23/kl)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_tumoral_calcinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum phosphate with tubular phosphate reabsorption indices",
+          "cells": [
+            {
+              "text": "Hyperphosphataemia with increased tubular reabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, PTH and 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "Normal or high active vitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact versus C-terminal FGF23",
+          "cells": [
+            {
+              "text": "Excess cleavage in GALNT3 or FGF23 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs and cross-sectional imaging of periarticular masses",
+          "cells": [
+            {
+              "text": "Calcified lobulated masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function",
+          "cells": [
+            {
+              "text": "Excludes secondary tumoral calcinosis of chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sequencing of GALNT3, FGF23 and KL",
+          "cells": [
+            {
+              "text": "Causative genotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_tumoral_calcinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary (dystrophic) tumoral calcinosis from chronic kidney disease",
+          "cells": [
+            {
+              "text": "Far commoner; renal function excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcinosis of connective tissue disease",
+          "cells": [
+            {
+              "text": "Dermatomyositis or systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or calcium pyrophosphate deposition disease",
+          "cells": [
+            {
+              "text": "Listed in the differential of periarticular calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_tumoral_calcinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary phosphate restriction",
+          "cells": [
+            {
+              "text": "With non-calcium-based phosphate binders to lower the calcium-phosphate product"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide",
+          "cells": [
+            {
+              "text": "Phosphaturic agent that promotes renal phosphate excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agents suppressing 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "To reduce intestinal phosphate absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision of disabling masses",
+          "cells": [
+            {
+              "text": "Recurrence likely if hyperphosphataemia is not corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Painful masses and diaphyseal lesions in the hyperostosis variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic phosphate, calcium and renal monitoring",
+          "cells": [
+            {
+              "text": "Guides phosphate-lowering therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_tumoral_calcinosis-dx-mgmt",
+      "title": "Diagnosis and management of Familial tumoral calcinosis (GALNT3/FGF23/KL)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive calcified periarticular masses with raised serum phosphate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ulcerating or infected masses, nerve compression, vascular calcification)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical review for infected or ulcerating masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phosphate and tubular reabsorption indices; intact and C-terminal FGF23; imaging; genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hyperphosphataemia with GALNT3, FGF23 or KL variant and normal renal function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary calcinosis of CKD or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary phosphate restriction with non-calcium phosphate binders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acetazolamide to promote renal phosphate excretion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Suppression of 1,25-dihydroxyvitamin D where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical excision of disabling masses, with phosphate control to limit recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and progressive; phosphate lowering and selective surgery control disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

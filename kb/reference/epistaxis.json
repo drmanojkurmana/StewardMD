@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for epistaxis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epistaxis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior rhinoscopy and nasal endoscopy",
+          "cells": [
+            {
+              "text": "Localises the bleeding point"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and haemodynamic assessment",
+          "cells": [
+            {
+              "text": "Systemic contributors and severity of bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, coagulation profile and group and save",
+          "cells": [
+            {
+              "text": "Significant bleeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of anticoagulant and antiplatelet medication",
+          "cells": [
+            {
+              "text": "Anticoagulant-related bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Sinonasal tumour or vascular lesion suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epistaxis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sinonasal tumour or juvenile nasopharyngeal angiofibroma",
+          "cells": [
+            {
+              "text": "Recurrent unilateral bleeding with a mass suggests malignancy or angiofibroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy or anticoagulant-related bleeding",
+          "cells": [
+            {
+              "text": "Bleeding on anticoagulant or antiplatelet therapy; check the coagulation profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epistaxis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First aid",
+          "cells": [
+            {
+              "text": "Sit upright, lean forward, pinch the soft part of the nose continuously, apply ice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautery of the anterior bleeding point",
+          "cells": [
+            {
+              "text": "Silver nitrate or electrocautery in Little's area once the source is localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior packing",
+          "cells": [
+            {
+              "text": "Nasal tampon, balloon or ribbon gauze when cautery fails or the point is not seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior packing or balloon catheter",
+          "cells": [
+            {
+              "text": "Posterior bleeds, with admission and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct systemic contributors",
+          "cells": [
+            {
+              "text": "Control hypertension; adjust anticoagulant and antiplatelet therapy; correct coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid resuscitation and transfusion",
+          "cells": [
+            {
+              "text": "Haemodynamically significant blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Endoscopic sphenopalatine artery ligation or arterial embolisation; ENT with imaging for suspected tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Nasal emollient or antiseptic cream, humidification, avoidance of nose-picking"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epistaxis-dx-mgmt",
+      "title": "Diagnosis and management of Epistaxis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nosebleed, most often anterior from Little's area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (profuse or posterior bleed, instability, recurrent unilateral bleed)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate with fluids and transfusion; protect the airway; admit posterior bleeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasal endoscopy to localise the point; blood pressure; FBC and coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bleeding point identified and controlled by cautery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Anterior packing; posterior packing or embolisation if it fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct blood pressure, anticoagulants and any coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate refractory bleeding to sphenopalatine artery ligation or embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refer to ENT with imaging for suspected sinonasal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollient, humidification and no nose-picking to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most anterior bleeds settle with first aid or cautery; posterior bleeds need more",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for falls in the elderly."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "falls_in_elderly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Multifactorial falls assessment",
+          "cells": [
+            {
+              "text": "Gait, balance and lower-limb strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthostatic blood pressure, lying and standing",
+          "cells": [
+            {
+              "text": "Orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Psychoactive and hypotensive agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vision and cognitive screening",
+          "cells": [
+            {
+              "text": "Visual and cognitive contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and further cardiac testing",
+          "cells": [
+            {
+              "text": "Where syncope is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health assessment and DXA",
+          "cells": [
+            {
+              "text": "Fracture risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "falls_in_elderly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Syncope from arrhythmia, structural heart disease or vasovagal cause",
+          "cells": [
+            {
+              "text": "Loss of consciousness with the fall points to cardiac or neurological causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Lying and standing blood pressure, and culprit drugs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "falls_in_elderly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multifactorial intervention",
+          "cells": [
+            {
+              "text": "Targeted to each identified risk factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive strength and balance training",
+          "cells": [
+            {
+              "text": "Otago-style programme through physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Withdraw or reduce psychoactive, sedative and hypotensive agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of orthostatic hypotension and cardiac syncope",
+          "cells": [
+            {
+              "text": "Correction of visual impairment as well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-health optimisation",
+          "cells": [
+            {
+              "text": "Calcium, vitamin D, fracture-risk assessment; bisphosphonates where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home hazard and footwear assessment",
+          "cells": [
+            {
+              "text": "Walking aids and podiatry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fear of falling and falls service",
+          "cells": [
+            {
+              "text": "Recurrent or injurious falls; multidisciplinary falls service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "falls_in_elderly-dx-mgmt",
+      "title": "Diagnosis and management of Falls in the elderly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fall in an older adult, with or without loss of consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (head injury on anticoagulant, fracture, syncope, long lie, focal signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess urgently for head injury, fracture or stroke; syncope evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gait and balance; lying and standing BP; medication review; vision and cognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Modifiable multifactorial risks identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate for syncope, TIA, seizure or vestibular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Progressive strength and balance training (Otago-style)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce psychoactive, sedative and hypotensive medicines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat orthostatic hypotension and correct visual impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone-health optimisation with calcium, vitamin D and fracture-risk review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Home hazard assessment, footwear and walking aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Major cause of injury and lost independence; hip fracture is a serious risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

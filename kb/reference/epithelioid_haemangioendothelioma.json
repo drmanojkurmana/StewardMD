@@ -158,5 +158,343 @@
       "caption": "Overview comparison matrix for epithelioid haemangioendothelioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Soft tissue and vascular tumour pathology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epithelioid_haemangioendothelioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT or MRI",
+          "cells": [
+            {
+              "text": "Hepatic lesions may show a target or halo appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Epithelioid endothelial cells with intracytoplasmic vacuoles ('blister cells')"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry (CD31, CD34, ERG, FLI-1, CAMTA1)",
+          "cells": [
+            {
+              "text": "Endothelial markers positive; nuclear CAMTA1 strongly supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for WWTR1-CAMTA1 or YAP1-TFE3 fusion",
+          "cells": [
+            {
+              "text": "Fusion confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET/CT",
+          "cells": [
+            {
+              "text": "Staging and multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dedicated chest imaging",
+          "cells": [
+            {
+              "text": "Multiple bilateral pulmonary nodules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epithelioid_haemangioendothelioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angiosarcoma",
+          "cells": [
+            {
+              "text": "A higher-grade vascular malignancy; this tumour is of intermediate grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic adenocarcinoma or cholangiocarcinoma (hepatic form)",
+          "cells": [
+            {
+              "text": "Hepatic disease often mimics metastatic carcinoma; keratin positivity is occasional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelioid sarcoma",
+          "cells": [
+            {
+              "text": "Nuclear CAMTA1 staining favours this tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epithelioid_haemangioendothelioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation for indolent disease",
+          "cells": [
+            {
+              "text": "Multifocal disease is not necessarily metastasis; monitor for change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Localised resectable bone or soft tissue disease, or a solitary hepatic lesion; best chance of durable control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for unresectable multifocal hepatic disease",
+          "cells": [
+            {
+              "text": "Helps decide on the next option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Disease confined to the liver but not resectable, even with distant metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy for progressive or symptomatic disease",
+          "cells": [
+            {
+              "text": "Chemotherapy, antiangiogenic therapy or immune checkpoint inhibitors; evidence is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiangiogenic therapy",
+          "cells": [
+            {
+              "text": "Reasonable option for progressive disease, based on phase II data"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative radiotherapy",
+          "cells": [
+            {
+              "text": "Painful bony lesions not amenable to surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Centre experienced with vascular tumours or sarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epithelioid_haemangioendothelioma-dx-mgmt",
+      "title": "Diagnosis and management of Epithelioid haemangioendothelioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multifocal vascular tumour in liver, lung or bone, often mistaken for carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pleural or peritoneal effusion, rapid growth, weight loss, haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to a vascular tumour centre; early transplant review if liver-confined",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI, FDG-PET/CT, and biopsy with CD31, CD34, ERG, FLI-1 and CAMTA1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Nuclear CAMTA1 staining or WWTR1-CAMTA1 fusion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider angiosarcoma, metastatic carcinoma or epithelioid sarcoma; re-test",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection for localised resectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe unresectable multifocal hepatic disease with close monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Liver transplantation for liver-confined, non-resectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic therapy only for progressive or symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Palliative radiotherapy for painful bony lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highly variable course, from indolent over years to rapidly progressive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

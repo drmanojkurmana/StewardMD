@@ -146,5 +146,265 @@
       "caption": "Overview comparison matrix for hangman fracture (c2 traumatic spondylolisthesis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hangman_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral and anteroposterior cervical radiographs",
+          "cells": [
+            {
+              "text": "C2 translation and angulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the cervical spine",
+          "cells": [
+            {
+              "text": "Defines the fracture pattern and supports classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Disco-ligamentous injury and the spinal cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Vertebral artery injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the whole spine",
+          "cells": [
+            {
+              "text": "Associated injuries"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hangman_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rigid collar or orthosis",
+          "cells": [
+            {
+              "text": "Stable, minimally displaced injuries, until union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closed reduction and halo-vest",
+          "cells": [
+            {
+              "text": "Displaced or angulated patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical stabilisation",
+          "cells": [
+            {
+              "text": "Unstable injuries, with anterior C2-3 fusion or posterior fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral artery injury",
+          "cells": [
+            {
+              "text": "Assess and manage; consider antithrombotic therapy where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine screening",
+          "cells": [
+            {
+              "text": "Concomitant fractures; spinal precautions until cleared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levine-Edwards classification",
+          "cells": [
+            {
+              "text": "Guides treatment, with early spinal surgery input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Confirms union; fixation for non-union or progressive displacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hangman_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Hangman fracture (C2 traumatic spondylolisthesis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neck pain after trauma with a C2 fracture on cervical radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (vertebral artery injury, unstable translation, facet dislocation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: manage vertebral artery injury and obtain urgent spinal surgery input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT cervical spine; MRI for disco-ligamentous injury; CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the injury stable, with minimal translation or angulation (Levine-Edwards)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Displaced or unstable: closed reduction with halo-vest, or surgical stabilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rigid collar or orthosis for stable, minimally displaced injuries",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Whole-spine screening and spinal precautions until cleared",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial imaging to confirm union; fixation for non-union",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Bony union; fixation if unstable or non-union",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

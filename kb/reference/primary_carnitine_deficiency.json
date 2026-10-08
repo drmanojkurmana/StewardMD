@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for primary carnitine deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_carnitine_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma total and free carnitine",
+          "cells": [
+            {
+              "text": "Markedly low carnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Globally low acylcarnitines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine carnitine with fractional excretion",
+          "cells": [
+            {
+              "text": "Renal carnitine handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC22A5 molecular testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine transport assay in cultured fibroblasts",
+          "cells": [
+            {
+              "text": "Transport function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and electrocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_carnitine_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary carnitine deficiency (other fatty-acid-oxidation disorders, organic acidaemias, valproate)",
+          "cells": [
+            {
+              "text": "Carnitine deficiency secondary to another metabolic disorder or valproate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine palmitoyltransferase 1 deficiency and other hypoketotic hypoglycaemias",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia with encephalopathy in infancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_carnitine_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong oral L-carnitine",
+          "cells": [
+            {
+              "text": "Definitive replacement; reverses cardiomyopathy and prevents metabolic crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prolonged fasting",
+          "cells": [
+            {
+              "text": "Frequent carbohydrate-rich feeds, especially during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Intravenous glucose to correct hypoketotic hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma free carnitine; adjust supplementation and adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and ECG for cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Sibling testing; test the mother when detected through newborn screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day plan",
+          "cells": [
+            {
+              "text": "Emergency plan and alert documentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Metabolic medicine and cardiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_carnitine_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Primary carnitine deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary carnitine deficiency: low plasma free carnitine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiomyopathy, hypoketotic hypoglycaemia with encephalopathy, or sudden collapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent IV glucose and cardiac assessment for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma carnitine; acylcarnitine profile; SLC22A5 testing; echo and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do carnitine levels and genetic or transport tests confirm the deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary carnitine deficiency or other metabolic disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral L-carnitine as definitive replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid prolonged fasting; frequent carbohydrate-rich feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous glucose for hypoketotic hypoglycaemia during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography and ECG surveillance for cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Metabolic and cardiology follow-up; genetic counselling and sibling testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

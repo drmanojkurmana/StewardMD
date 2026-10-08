@@ -167,5 +167,510 @@
       "caption": "Overview comparison matrix for the hyperbilirubinemias."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Jaundice",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/jaundice"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "the_hyperbilirubinemias-diagnostic",
+      "kind": "diagnostic",
+      "title": "Separating the hyperbilirubinaemias",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Visible jaundice",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Bilirubin about 2 to 3 mg/dL (34 to 51 micromol/L)",
+              "range": [
+                2,
+                3
+              ]
+            },
+            {
+              "text": "Scleral icterus from 2 to 2.5 mg/dL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bilirubinuria",
+          "cells": [
+            {
+              "text": "Present only with conjugated excess"
+            },
+            {
+              "text": "Dark urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular pattern",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": "Aminotransferases over 500 U/L, ALP under 3x normal",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "Hepatitis, toxins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholestatic pattern",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": "Aminotransferases under 200 U/L, ALP over 3x normal",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Image for obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemolysis alone",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Sustained bilirubin above 4 mg/dL implies liver dysfunction too",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Hemolysis usually under 3.5 mg/dL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gilbert syndrome",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Bilirubin usually 4 mg/dL or less, UGT1A1 activity 10 to 35%",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "{{hy:Normal enzymes; rises with fasting or illness}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crigler-Najjar type II",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Bilirubin 6 to 25 mg/dL",
+              "range": [
+                6,
+                25
+              ]
+            },
+            {
+              "text": "Over 25% fall with phenobarbital"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crigler-Najjar type I",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Bilirubin 20 to 45 mg/dL",
+              "range": [
+                20,
+                45
+              ]
+            },
+            {
+              "text": "No phenobarbital response; kernicterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dubin-Johnson vs Rotor",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Dubin-Johnson: 80% or more urinary coproporphyrin isomer I",
+              "op": ">=",
+              "value": 80
+            },
+            {
+              "text": "Rotor: high total coproporphyrin, isomer I usually under 70%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_hyperbilirubinemias-ddx",
+      "kind": "ddx",
+      "title": "Causes to separate from inherited hyperbilirubinaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemolysis",
+          "cells": [
+            {
+              "text": "Unconjugated rise with anaemia"
+            },
+            {
+              "text": "Reticulocytes, haptoglobin, blood film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ineffective erythropoiesis",
+          "cells": [
+            {
+              "text": "Thalassaemia, megaloblastic anaemia"
+            },
+            {
+              "text": "Blood count, B12, folate, Hb studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced unconjugated rise",
+          "cells": [
+            {
+              "text": "Rifampin, atazanavir, indinavir"
+            },
+            {
+              "text": "Drug history; resolves off drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure or portosystemic shunt",
+          "cells": [
+            {
+              "text": "Reduced hepatic uptake"
+            },
+            {
+              "text": "Echocardiography, imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatocellular disease",
+          "cells": [
+            {
+              "text": "Raised aminotransferases"
+            },
+            {
+              "text": "Viral, autoimmune serology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extrahepatic obstruction",
+          "cells": [
+            {
+              "text": "Cholestatic pattern, pain, dilated ducts"
+            },
+            {
+              "text": "Ultrasound, then MRCP, EUS or ERCP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benign recurrent intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "First episodes mimic viral hepatitis"
+            },
+            {
+              "text": "Recurrence, normal imaging, genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_hyperbilirubinemias-treatment",
+      "kind": "treatment",
+      "title": "Managing hyperbilirubinaemias",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Gilbert, Dubin-Johnson, Rotor"
+            },
+            {
+              "text": "Benign; avoid fasting and dehydration in Gilbert"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenobarbital",
+          "cells": [
+            {
+              "text": "Crigler-Najjar type II"
+            },
+            {
+              "text": "Induces residual UGT1A1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive phototherapy, exchange transfusion",
+          "cells": [
+            {
+              "text": "Crigler-Najjar type I"
+            },
+            {
+              "text": "Prevents kernicterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Crigler-Najjar type I"
+            },
+            {
+              "text": "{{hy:Definitive cure, ideally before brain injury}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat cause",
+          "cells": [
+            {
+              "text": "Acquired hepatocellular or obstructive jaundice"
+            },
+            {
+              "text": "ERCP for stones or stenting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholestyramine",
+          "cells": [
+            {
+              "text": "Cholestatic itch"
+            },
+            {
+              "text": "2 to 8 g orally twice daily; useless in complete obstruction"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "the_hyperbilirubinemias-dx-mgmt",
+      "title": "Diagnosis and management of hyperbilirubinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised bilirubin or jaundice",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fractionate bilirubin; ALT, AST, ALP; urine bilirubin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Mainly unconjugated with normal enzymes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Haemolysis on reticulocytes, haptoglobin, film?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat haemolytic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Bilirubin 4 mg/dL or less, worse with fasting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Gilbert syndrome: reassure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Crigler-Najjar: phenobarbital trial; transplant for type I",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Liver enzymes normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Dubin-Johnson or Rotor: urinary coproporphyrins; benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ultrasound for duct dilatation",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Extrahepatic obstruction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "MRCP or EUS; ERCP to clear or stent",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Hepatocellular or intrahepatic: serology, drug review",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

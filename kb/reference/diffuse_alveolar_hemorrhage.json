@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for diffuse alveolar haemorrhage."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine / Fishman's Pulmonary Diseases and Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diffuse_alveolar_hemorrhage-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchoalveolar lavage with sequential aliquots",
+          "cells": [
+            {
+              "text": "Progressively bloodier return and haemosiderin-laden macrophages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA, anti-GBM, ANA and complement testing",
+          "cells": [
+            {
+              "text": "Defines an immune cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Associated glomerulonephritis (pulmonary-renal syndrome)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Falling haematocrit suggests ongoing bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Diffuse ground-glass opacity and consolidation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusing capacity for carbon monoxide",
+          "cells": [
+            {
+              "text": "Typically elevated during active bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diffuse_alveolar_hemorrhage-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiogenic pulmonary oedema",
+          "cells": [
+            {
+              "text": "Infiltrates mistaken for oedema; underlying vasculitis missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse pneumonia or ARDS",
+          "cells": [
+            {
+              "text": "Infiltrates mistaken for pneumonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy-related bleeding",
+          "cells": [
+            {
+              "text": "A distinct bleeding cause that needs correction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diffuse_alveolar_hemorrhage-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Prompt for suspected immune-mediated capillaritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional immunosuppression",
+          "cells": [
+            {
+              "text": "Cyclophosphamide or rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Anti-GBM disease and severe ANCA vasculitis with renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gas exchange support",
+          "cells": [
+            {
+              "text": "Supplemental oxygen and mechanical ventilation for severe hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy and causes",
+          "cells": [
+            {
+              "text": "Correct coagulopathy; treat raised pulmonary venous pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw offending agents",
+          "cells": [
+            {
+              "text": "Stop drugs or toxins; treat any underlying infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICU monitoring",
+          "cells": [
+            {
+              "text": "Haematocrit, oxygenation and infiltrates; respiratory, rheumatology and nephrology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diffuse_alveolar_hemorrhage-dx-mgmt",
+      "title": "Diagnosis and management of Diffuse alveolar haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diffuse alveolar haemorrhage: hypoxaemic respiratory failure with infiltrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ventilatory failure, acute kidney injury, falling haematocrit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ICU care; high-dose corticosteroids and plasma exchange where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sequential BAL aliquots; ANCA, anti-GBM and complement; urinalysis; HRCT; DLCO",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do BAL aliquots show progressively bloodier return with haemosiderin macrophages?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cardiogenic oedema, pneumonia, PE infarction or malignant infiltration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt high-dose corticosteroids for suspected immune capillaritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyclophosphamide or rituximab as additional immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plasma exchange for anti-GBM disease or severe ANCA vasculitis with renal involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oxygen and mechanical ventilation for severe hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Withdraw offending drugs and treat any underlying infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Immune capillaritis can respond well to early immunosuppression; renal disease adds risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

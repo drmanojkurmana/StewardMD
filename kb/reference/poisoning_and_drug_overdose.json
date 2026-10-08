@@ -173,5 +173,530 @@
       "caption": "Overview comparison matrix for poisoning and drug overdose."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, General Principles of Poisoning",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/poisoning/general-principles-of-poisoning"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 47-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, drug-induced hyperthermia list",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "poisoning_and_drug_overdose-diagnostic",
+      "kind": "diagnostic",
+      "title": "Toxidromes and key laboratory clues",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Features",
+        "Typical agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Sympathomimetic",
+          "cells": [
+            {
+              "text": "Tachycardia, hypertension, mydriasis, agitation, sweating, hyperthermia, seizures"
+            },
+            {
+              "text": "Amphetamines, cocaine, MDMA, caffeine, cathinones"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticholinergic",
+          "cells": [
+            {
+              "text": "Tachycardia, hyperthermia, mydriasis, dry warm skin, retention, ileus, delirium"
+            },
+            {
+              "text": "Antihistamines, atropine, scopolamine, tricyclics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholinergic muscarinic",
+          "cells": [
+            {
+              "text": "Salivation, lacrimation, urination, diarrhea, miosis, bronchorrhea, bradycardia"
+            },
+            {
+              "text": "Organophosphates, carbamates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioid",
+          "cells": [
+            {
+              "text": "Hypoventilation, miosis, sedation, hypotension"
+            },
+            {
+              "text": "Opioids including fentanyl analogues"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthermia",
+          "cells": [
+            {
+              "text": "{{hy:Raised temperature is the best predictor of poor outcome in stimulant poisoning}}"
+            },
+            {
+              "text": "Amphetamines, cocaine, PCP, MDMA, LSD, salicylates, lithium, anticholinergics"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "High anion gap acidosis",
+          "cells": [
+            {
+              "text": "Toxic alcohols, salicylates, organ failure, seizures, shock"
+            },
+            {
+              "text": "Ethylene glycol, methanol, salicylate, propylene glycol, pyroglutamic acid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Osmolal gap",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Over 10 mmol/L",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Toxic alcohol or glycol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low anion gap",
+          "cells": [
+            {
+              "text": "Abnormally low"
+            },
+            {
+              "text": "Bromide, calcium, iodine, lithium, magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "QRS or QT prolongation, AV block, ventricular arrhythmia"
+            },
+            {
+              "text": "Membrane-active drugs, hyperkalemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug screen",
+          "cells": [
+            {
+              "text": "Qualitative screen can be falsely negative or positive"
+            },
+            {
+              "text": "Get quantitative acetaminophen level in all intentional overdoses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "poisoning_and_drug_overdose-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic poisoning",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Structural CNS lesion",
+          "cells": [
+            {
+              "text": "Focal neurologic signs (uncommon in poisoning)"
+            },
+            {
+              "text": "CT or MRI brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis",
+          "cells": [
+            {
+              "text": "Fever, source of infection"
+            },
+            {
+              "text": "Cultures, lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Liver, kidney or respiratory failure"
+            },
+            {
+              "text": "Ammonia, creatinine, blood gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycemia",
+          "cells": [
+            {
+              "text": "Low glucose from non-toxic causes"
+            },
+            {
+              "text": "Bedside glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid storm",
+          "cells": [
+            {
+              "text": "Mimics sympathomimetic toxidrome"
+            },
+            {
+              "text": "TSH, free T4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroleptic malignant or serotonin syndrome",
+          "cells": [
+            {
+              "text": "Rigidity or clonus after drug exposure"
+            },
+            {
+              "text": "Drug history, examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head injury",
+          "cells": [
+            {
+              "text": "Signs of trauma"
+            },
+            {
+              "text": "CT head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychogenic illness",
+          "cells": [
+            {
+              "text": "Mild stimulation without objective toxicity"
+            },
+            {
+              "text": "Observation and normal tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "poisoning_and_drug_overdose-treatment",
+      "kind": "treatment",
+      "title": "Treating poisoning and overdose",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway, breathing, circulation",
+          "cells": [
+            {
+              "text": "Every patient first"
+            },
+            {
+              "text": "Gag reflex is not a reliable guide to intubation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dextrose and thiamine",
+          "cells": [
+            {
+              "text": "Altered consciousness unless hypoglycemia excluded"
+            },
+            {
+              "text": "50 mL of 50% dextrose; thiamine 100 mg IV with or before glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Naloxone",
+          "cells": [
+            {
+              "text": "Opioid toxidrome"
+            },
+            {
+              "text": "0.4 to 2 mg IV every 2 to 3 min, maximum 10 mg (children under 5 or 20 kg: 0.1 mg/kg)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Within 1 to 2 h of a toxic ingestion with protected airway"
+            },
+            {
+              "text": "0.5 to 2 g/kg; not for caustics, alcohols, iron, lithium, metals"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Whole-bowel irrigation",
+          "cells": [
+            {
+              "text": "Sustained-release products, metals, body packers"
+            },
+            {
+              "text": "Polyethylene glycol until effluent clear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Specific antidotes",
+          "cells": [
+            {
+              "text": "Identified agent"
+            },
+            {
+              "text": "NAC for acetaminophen, fomepizole for toxic alcohols, bicarbonate for tricyclics, atropine and pralidoxime for organophosphates, digoxin Fab, hydroxocobalamin for cyanide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hemodialysis",
+          "cells": [
+            {
+              "text": "Ethylene glycol, methanol, lithium, salicylate, theophylline"
+            },
+            {
+              "text": "Poor for protein-bound or large-volume drugs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepines and cooling",
+          "cells": [
+            {
+              "text": "Agitation, seizures, hyperthermia"
+            },
+            {
+              "text": "Measure core temperature repeatedly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment",
+          "cells": [
+            {
+              "text": "Intentional overdose"
+            },
+            {
+              "text": "Continuous observation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "poisoning_and_drug_overdose-dx-mgmt",
+      "title": "Diagnosis and management of poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected poisoning or unexplained altered state",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Secure airway, breathing, circulation; core temperature",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Glucose check; dextrose and thiamine if low",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Opioid toxidrome with hypoventilation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Naloxone titrated to breathing",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ECG, anion and osmolal gaps, acetaminophen and salicylate levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Recent ingestion within 1 to 2 h, airway protected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activated charcoal if agent binds",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Agent with specific antidote or dialysable toxin?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Give antidote or arrange hemodialysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care, monitoring; psychiatric review if intentional",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

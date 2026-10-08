@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for hereditary spastic paraplegia type 32 (spg32)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg32-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of brain",
+          "cells": [
+            {
+              "text": "Thin corpus callosum, and cortical and cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of thin-corpus-callosum HSP genes (SPG11, SPG15)",
+          "cells": [
+            {
+              "text": "Excludes related genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and cognitive assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of spine",
+          "cells": [
+            {
+              "text": "Excludes structural myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Leukoencephalopathies and congenital disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg32-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG11 (spatacsin)",
+          "cells": [
+            {
+              "text": "Recessive HSP with thin corpus callosum and cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG15 (ZFYVE26)",
+          "cells": [
+            {
+              "text": "Recessive HSP with thin corpus callosum and Kjellin features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG21 (maspardin, Mast syndrome)",
+          "cells": [
+            {
+              "text": "Recessive complicated HSP with cognitive involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy",
+          "cells": [
+            {
+              "text": "Non-progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg32-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral antispasticity agents",
+          "cells": [
+            {
+              "text": "For lower-limb spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, stretching, orthoses and walking aids",
+          "cells": [
+            {
+              "text": "Maintains gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and neuropsychological support",
+          "cells": [
+            {
+              "text": "Mild intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and mobility monitoring",
+          "cells": [
+            {
+              "text": "Periodic rehabilitation review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrathecal baclofen",
+          "cells": [
+            {
+              "text": "Spasticity refractory to oral and focal therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance, with carrier testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurology",
+          "cells": [
+            {
+              "text": "Escalated as disability accrues"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg32-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia type 32 (SPG32)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spastic paraplegia with thin corpus callosum and mild intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Regression, seizures, rapid cognitive decline, fast motor decline or raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for regression or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine; SPG11 and SPG15 testing; neuropsychological assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a recessive variant found, with SPG11 and SPG15 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG11, SPG15, SPG21, SPG35 or another leukoencephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral antispasticity agents for lower-limb spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, stretching, orthoses and walking aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Educational and neuropsychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intrathecal baclofen for spasticity refractory to oral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Spasticity managed; developmental and cognitive support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

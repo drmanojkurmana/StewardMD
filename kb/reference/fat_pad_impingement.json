@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for fat pad impingement."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner & Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fat_pad_impingement-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with fluid-sensitive sequences",
+          "cells": [
+            {
+              "text": "Fat pad oedema and impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral radiograph",
+          "cells": [
+            {
+              "text": "Patella alta and fat pad calcification or ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skyline or Merchant views",
+          "cells": [
+            {
+              "text": "Patellar tracking and tilt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound of the anterior knee",
+          "cells": [
+            {
+              "text": "Dynamic impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic local anaesthetic infiltration of the fat pad",
+          "cells": [
+            {
+              "text": "Confirms the source of pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing alignment views",
+          "cells": [
+            {
+              "text": "Genu recurvatum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopy",
+          "cells": [
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fat_pad_impingement-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Patellar tendinopathy (jumper's knee)",
+          "cells": [
+            {
+              "text": "Pain on either side of the tendon; loading aggravates impingement, so distinction matters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patellofemoral pain or chondromalacia patellae",
+          "cells": [
+            {
+              "text": "Listed in the differential of anterior knee pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osgood-Schlatter or Sinding-Larsen-Johansson disease",
+          "cells": [
+            {
+              "text": "Adolescent apophyseal pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fat_pad_impingement-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity and load modification",
+          "cells": [
+            {
+              "text": "Avoid provocative hyperextension and prolonged standing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and patellar taping",
+          "cells": [
+            {
+              "text": "Quadriceps and vastus medialis strengthening; offloads and de-tilts the patella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory analgesia and corticosteroid infiltration",
+          "cells": [
+            {
+              "text": "Persistent pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing factors",
+          "cells": [
+            {
+              "text": "Patella alta, maltracking or genu recurvatum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic resection or debridement",
+          "cells": [
+            {
+              "text": "Impingement refractory to conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and sports medicine referral",
+          "cells": [
+            {
+              "text": "Refractory or recurrent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fat_pad_impingement-dx-mgmt",
+      "title": "Diagnosis and management of fat pad impingement",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anterior knee pain either side of the patellar tendon, worse with hyperextension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (enlarging mass, systemic symptoms, true locking, warm effusion with erythema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Orthopaedic review for mass, infection or mechanical locking",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluid-sensitive MRI; lateral radiograph; skyline views; Hoffa test; local anaesthetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fat pad oedema with impingement and pain reproduced by fat pad pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider patellar tendinopathy, patellofemoral pain or bursitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Modify activity and avoid hyperextension and prolonged standing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and patellar taping to offload the fat pad",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-inflammatory analgesia; corticosteroid infiltration if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address patella alta, maltracking or genu recurvatum",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Arthroscopic resection for refractory impingement",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most improve with conservative measures; arthroscopic resection helps refractory cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

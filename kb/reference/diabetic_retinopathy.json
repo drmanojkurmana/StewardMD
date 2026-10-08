@@ -150,5 +150,287 @@
       "caption": "Overview comparison matrix for diabetic retinopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetic_retinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundoscopy and fundus photography",
+          "cells": [
+            {
+              "text": "Retinopathy screening and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular oedema, detected and quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Ischaemia and neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity assessment",
+          "cells": [
+            {
+              "text": "Functional vision status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HbA1c, blood pressure, lipids and renal function",
+          "cells": [
+            {
+              "text": "Systemic control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_retinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic control",
+          "cells": [
+            {
+              "text": "Glycaemia, blood pressure and lipids to slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening photography",
+          "cells": [
+            {
+              "text": "Detects asymptomatic disease and stages progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-VEGF for centre-involving macular oedema",
+          "cells": [
+            {
+              "text": "First line; intravitreal corticosteroid as alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panretinal laser photocoagulation",
+          "cells": [
+            {
+              "text": "Induces regression of neovascularisation in proliferative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitrectomy",
+          "cells": [
+            {
+              "text": "Non-clearing vitreous haemorrhage or tractional retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT-guided monitoring",
+          "cells": [
+            {
+              "text": "Visual acuity and OCT to guide macular oedema treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt referral",
+          "cells": [
+            {
+              "text": "Any proliferative change, maculopathy or sudden visual loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetic_retinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Diabetic retinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diabetic retinopathy: visual symptoms or screening-detected retinal change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden visual loss, new vessels, central oedema, rubeosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology referral for proliferative disease or sudden visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundoscopy and photography; OCT for macular oedema; fluorescein angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is centre-involving macular oedema or proliferative change confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-sight-threatening retinopathy: systemic control and routine screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise glycaemia, blood pressure and lipids to slow progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-VEGF injections first line for centre-involving macular oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Panretinal laser photocoagulation for proliferative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vitrectomy for non-clearing vitreous haemorrhage or tractional detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Regular screening photography to detect and stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With timely screening and treatment most severe visual loss is preventable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

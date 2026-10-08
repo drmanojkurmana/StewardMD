@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for episodic ataxia (types 1 and 2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "episodic_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted KCNA1 and CACNA1A genetic testing",
+          "cells": [
+            {
+              "text": "Guided by attack duration and associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy; structural lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myokymia, supporting EA1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular and oculomotor testing",
+          "cells": [
+            {
+              "text": "Interictal nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "When a metabolic episodic ataxia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of acetazolamide",
+          "cells": [
+            {
+              "text": "Supportive diagnostic and therapeutic measure in EA2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Early progressive spinocerebellar ataxia (SCA6)",
+          "cells": [
+            {
+              "text": "Progressive fixed ataxia developing between attacks suggests degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient ischaemic attacks (posterior circulation)",
+          "cells": [
+            {
+              "text": "Focal deficit or first presentation in later life suggests cerebrovascular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acetazolamide prophylaxis",
+          "cells": [
+            {
+              "text": "Reduces attack frequency; particularly effective in EA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbamazepine or another anticonvulsant",
+          "cells": [
+            {
+              "text": "EA1: lessens attacks and interictal myokymia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "4-aminopyridine",
+          "cells": [
+            {
+              "text": "Alternative prophylaxis in EA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Startle and exertion in EA1; stress, exercise, caffeine and alcohol in EA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular and balance physiotherapy",
+          "cells": [
+            {
+              "text": "With falls-prevention advice for recurrent ataxia and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring in EA2",
+          "cells": [
+            {
+              "text": "Slowly progressive cerebellar atrophy; manage coexisting migraine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KCNA1 and CACNA1A inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "episodic_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of Episodic ataxia (types 1 and 2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent discrete episodes of ataxia with normal function between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (focal deficit, progressive fixed ataxia, impaired consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for cerebrovascular disease, hemiplegic migraine, seizures or metabolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attack history, KCNA1 and CACNA1A testing, MRI brain, EMG and nystagmus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myokymia (EA1) or interictal nystagmus (EA2) with a matching gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vestibular migraine, paroxysmal disorders or metabolic ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acetazolamide prophylaxis, particularly effective in EA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbamazepine for EA1 attacks and myokymia; 4-aminopyridine in EA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trigger avoidance and vestibular physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor EA2 for slowly progressive cerebellar atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Attacks often lessen with prophylaxis; EA1 generally leaves no fixed deficit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

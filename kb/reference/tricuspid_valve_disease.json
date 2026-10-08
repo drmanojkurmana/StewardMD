@@ -160,5 +160,479 @@
       "caption": "Overview comparison matrix for tricuspid valve disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Tricuspid Regurgitation",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/tricuspid-regurgitation"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tricuspid_valve_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading tricuspid valve disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe TS: valve area",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": "1 cm2 or less",
+              "op": "<=",
+              "value": 1
+            },
+            {
+              "text": "Severe stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe TS: pressure half-time",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "190 ms or more",
+              "op": ">=",
+              "value": 190
+            },
+            {
+              "text": "Severe stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TS mean gradient",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "About 4 mm Hg",
+              "op": "=",
+              "value": 4
+            },
+            {
+              "text": "Haemodynamically significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe TR: vena contracta",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 7 mm",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "One of the severe criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe TR: colour jet",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "50% or more of right atrial area",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Severe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatic vein systolic flow reversal",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "{{hy:Specific for severe TR}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Annular dilation",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 40 mm (over 21 mm/m2) on TTE; over 70 mm intraoperatively",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Repair at left-sided valve surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RV dysfunction",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "TAPSE under 16 mm or annular S velocity under 10 cm/s",
+              "op": "<",
+              "value": 16
+            },
+            {
+              "text": "Cardiac MRI preferred for RV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carvallo sign",
+          "cells": [
+            {
+              "text": "Holosystolic murmur louder on inspiration"
+            },
+            {
+              "text": "Separates TR from MR"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "tricuspid_valve_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tricuspid disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitral regurgitation",
+          "cells": [
+            {
+              "text": "Murmur does not increase with inspiration"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral stenosis",
+          "cells": [
+            {
+              "text": "Often coexists with TS and masks it"
+            },
+            {
+              "text": "Echocardiography of both valves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis or restrictive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Right-sided congestion without valve lesion"
+            },
+            {
+              "text": "Echo, cardiac MRI, catheterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid heart disease",
+          "cells": [
+            {
+              "text": "Retracted fixed leaflets, flushing"
+            },
+            {
+              "text": "Urinary 5-HIAA, echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid endocarditis",
+          "cells": [
+            {
+              "text": "Fever, injection drug use, septic emboli"
+            },
+            {
+              "text": "Blood cultures, echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ebstein anomaly",
+          "cells": [
+            {
+              "text": "Apically displaced leaflet, pre-excitation"
+            },
+            {
+              "text": "Echo, ECG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricuspid_valve_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating tricuspid valve disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Loop diuretic and salt restriction",
+          "cells": [
+            {
+              "text": "Congestion from TS or TR"
+            },
+            {
+              "text": "Aldosterone antagonist may add benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat the driver",
+          "cells": [
+            {
+              "text": "Secondary TR (over 80% of cases)"
+            },
+            {
+              "text": "Left heart disease, pulmonary hypertension, AF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rate or rhythm control and anticoagulation",
+          "cells": [
+            {
+              "text": "Atrial fibrillation"
+            },
+            {
+              "text": "AF also drives annular TR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid surgery",
+          "cells": [
+            {
+              "text": "Severe TR with symptoms despite therapy, or progressive RV dilation"
+            },
+            {
+              "text": "Repair preferred to replacement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Annuloplasty at left-sided surgery",
+          "cells": [
+            {
+              "text": "Mild or moderate TR with annulus over 40 mm"
+            },
+            {
+              "text": "About fivefold more pacemakers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Balloon valvotomy or surgery for TS",
+          "cells": [
+            {
+              "text": "Significant TS"
+            },
+            {
+              "text": "Usually at mitral surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous edge-to-edge repair",
+          "cells": [
+            {
+              "text": "Ventricular secondary TR, high surgical risk"
+            },
+            {
+              "text": "Still developing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tricuspid_valve_disease-dx-mgmt",
+      "title": "Diagnosis and management of tricuspid valve disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised JVP, oedema, ascites or systolic murmur louder on inspiration",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Transthoracic echo with Doppler; assess left heart and PA pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Tricuspid stenosis (area 1 cm2 or less)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Diuretics; valvotomy or surgery, usually with mitral surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe TR (vena contracta over 7 mm, hepatic flow reversal)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Left-sided valve surgery planned with annulus over 40 mm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Add tricuspid annuloplasty",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Treat cause; serial echo",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics; treat left heart disease and AF",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Symptoms persist or RV enlarging?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Tricuspid repair or replacement",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Medical therapy and surveillance",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for lipoprotein glomerulopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoprotein_glomerulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with lipid stains (oil red O on frozen tissue)",
+          "cells": [
+            {
+              "text": "Laminated intracapillary lipoprotein thrombi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Layered lipid vacuoles within dilated capillary lumina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid profile and lipoprotein electrophoresis",
+          "cells": [
+            {
+              "text": "Type III-like lipoprotein pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apolipoprotein E genotyping and serum level",
+          "cells": [
+            {
+              "text": "APOE variant and raised apolipoprotein E"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantified proteinuria and renal function",
+          "cells": [
+            {
+              "text": "Severity and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of secondary nephrotic causes",
+          "cells": [
+            {
+              "text": "Required before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein_glomerulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombotic microangiopathy",
+          "cells": [
+            {
+              "text": "Capillary thrombi; lipid stains separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type III hyperlipoproteinaemia with renal change",
+          "cells": [
+            {
+              "text": "Lipid disorder without the specific intracapillary lipoprotein thrombi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulinaemic glomerulonephritis",
+          "cells": [
+            {
+              "text": "Intracapillary thrombi of a different nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membranoproliferative glomerulonephritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein_glomerulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive lipid lowering",
+          "cells": [
+            {
+              "text": "Fibrates and statins to lower the triglyceride-rich lipoproteins that form the thrombi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAS blockade",
+          "cells": [
+            {
+              "text": "ACE inhibitors or ARBs for proteinuria and blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoprotein apheresis",
+          "cells": [
+            {
+              "text": "Additional measure in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "Proteinuria and renal function; standard CKD measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology follow-up",
+          "cells": [
+            {
+              "text": "Diagnosis rests on renal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "APOE variants; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "High recurrence risk; lipid control continued after transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoprotein_glomerulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Lipoprotein Glomerulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nephrotic proteinuria with progressive renal impairment and hyperlipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nephrotic oedema, steady decline, graft recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: nephrology review and planning for renal replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy with lipid stains, EM, lipid profile, APOE genotyping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are laminated intracapillary lipoprotein thrombi seen, with an APOE variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thrombotic microangiopathy, cryoglobulinaemia or other nephrotic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive lipid lowering with fibrates and statins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB to reduce proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lipoprotein apheresis in refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor proteinuria and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continue lipid control after transplantation; counsel on recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often progresses to kidney failure without lipid-directed therapy; recurs in grafts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

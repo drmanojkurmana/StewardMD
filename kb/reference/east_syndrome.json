@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for east/sesame syndrome (kcnj10)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "east_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes including magnesium",
+          "cells": [
+            {
+              "text": "Hypokalaemia and hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous blood gas",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spot urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypocalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and brainstem auditory evoked responses",
+          "cells": [
+            {
+              "text": "Sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and EEG",
+          "cells": [
+            {
+              "text": "Seizures and cerebellar signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNJ10 gene sequencing",
+          "cells": [
+            {
+              "text": "KCNJ10 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "east_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gitelman syndrome",
+          "cells": [
+            {
+              "text": "Salt-losing tubulopathy without neurological features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bartter syndrome",
+          "cells": [
+            {
+              "text": "Salt-losing tubulopathy with a different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pendred or Usher syndrome",
+          "cells": [
+            {
+              "text": "Deafness without the tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "east_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For infantile-onset seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral potassium and magnesium",
+          "cells": [
+            {
+              "text": "Corrects the Gitelman-like tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing or aldosterone antagonist",
+          "cells": [
+            {
+              "text": "Renal salt wasting and hypokalaemic alkalosis, with sodium as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and educational support for ataxia and delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Electrolytes, magnesium and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive KCNJ10; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "east_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of EAST/SeSAME syndrome (KCNJ10)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected EAST/SeSAME syndrome: infant seizures with salt-losing tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, severe hypokalaemia, profound hypomagnesaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium and magnesium replacement with cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes with magnesium; venous gas; urine calcium ratio; audiometry; KCNJ10",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a KCNJ10 variant found with hypokalaemia and hypocalciuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gitelman, Bartter, mitochondrial tubulopathy or other epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication for infantile-onset seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral potassium and magnesium to correct the tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium-sparing agent and sodium supplementation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for sensorineural deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term electrolyte, magnesium and renal monitoring; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Seizures and electrolytes manageable; deafness and developmental delay add disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

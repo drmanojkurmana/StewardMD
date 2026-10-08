@@ -158,5 +158,325 @@
       "caption": "Overview comparison matrix for isovaleric acidaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "isovaleric_acidaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Raised isovalerylcarnitine (C5)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Isovalerylglycine and 3-hydroxyisovaleric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas, anion gap, glucose, ketones, lactate and ammonia",
+          "cells": [
+            {
+              "text": "Crisis monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Neutropenia or thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and carnitine status",
+          "cells": [
+            {
+              "text": "Carnitine status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IVD gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmation and family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening review",
+          "cells": [
+            {
+              "text": "Detection history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isovaleric_acidaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other organic acidaemias (methylmalonic, propionic)",
+          "cells": [
+            {
+              "text": "Separated by acylcarnitine and urine organic acid profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urea cycle disorders",
+          "cells": [
+            {
+              "text": "Hyperammonaemia; isovalerylcarnitine raised here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isovaleric_acidaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucine restriction",
+          "cells": [
+            {
+              "text": "Lifelong, with specialised metabolic formula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detoxifying supplements",
+          "cells": [
+            {
+              "text": "Glycine and L-carnitine to conjugate isovaleric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day regimen",
+          "cells": [
+            {
+              "text": "Temporary withdrawal of natural protein with high-energy intake and intravenous glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute crisis",
+          "cells": [
+            {
+              "text": "Fluids, glucose, acidosis correction, ammonia lowering; haemodialysis for severe hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, acylcarnitine profile, ammonia and full blood count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family and sibling screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "isovaleric_acidaemia-dx-mgmt",
+      "title": "Diagnosis and management of Isovaleric acidaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lethargy, sweaty-feet odour and high anion-gap acidosis in an infant or child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coma, seizures, severe acidosis, hyperammonaemia or neutropenic sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency fluids, glucose, acidosis and ammonia control; dialysis if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile (C5), urine organic acids, gas, ammonia, glucose, blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised C5 acylcarnitine with IVD variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other organic acidaemias or urea cycle disorders; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong leucine restriction with specialised metabolic formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Glycine and L-carnitine to excrete isovaleric acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sick-day regimen with natural protein withdrawal and high-energy intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor growth, acylcarnitines, ammonia and blood counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Crisis-prone; long-term diet and sick-day planning essential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

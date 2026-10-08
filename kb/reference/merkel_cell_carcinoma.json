@@ -158,5 +158,312 @@
       "caption": "Overview comparison matrix for merkel cell carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "merkel_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Small round blue cell morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry: cytokeratin 20, neuroendocrine markers and TTF-1",
+          "cells": [
+            {
+              "text": "CK20 paranuclear dot; TTF-1 excludes pulmonary origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel lymph node biopsy in clinically node-negative disease",
+          "cells": [
+            {
+              "text": "Regional nodal staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional or functional imaging",
+          "cells": [
+            {
+              "text": "Nodal and distant metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Merkel-cell polyomavirus status or oncoprotein antibody testing",
+          "cells": [
+            {
+              "text": "Prognosis and surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Immunosuppression or occult malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "merkel_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Baseline staging",
+          "cells": [
+            {
+              "text": "Full skin and nodal examination, blood counts, liver function, cross-sectional or PET imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Localised disease; margins in the 1 to 2 cm range; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery",
+          "cells": [
+            {
+              "text": "Cosmetically sensitive sites; local control appears comparable but is less well studied"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel lymph node biopsy",
+          "cells": [
+            {
+              "text": "Node-negative disease, to avoid understaging; sequenced before or alongside excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Completion dissection or nodal radiotherapy",
+          "cells": [
+            {
+              "text": "Decided at tumour board; outcomes broadly similar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Primary site at risk of local recurrence or positive margins; nodal radiotherapy if SLNB is declined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PD-1 or PD-L1 checkpoint immunotherapy",
+          "cells": [
+            {
+              "text": "First line for metastatic or unresectable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytotoxic chemotherapy",
+          "cells": [
+            {
+              "text": "Small-cell lung regimens, mainly for palliation after checkpoint failure; no survival benefit shown"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Skin and nodal examination every few months for two to three years, then less often"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address immunosuppression",
+          "cells": [
+            {
+              "text": "Where feasible; HIV, chronic lymphocytic leukaemia or transplant status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "merkel_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Merkel cell carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless, rapidly growing nodule in an older or immunosuppressed patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Palpable regional nodes, in-transit lesions, or signs of distant metastasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent staging imaging and multidisciplinary review for metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with CK20 paranuclear dot and TTF-1 staining; sentinel node biopsy; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a small round blue cell tumour with CK20 paranuclear dot confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metastatic small-cell lung carcinoma, lymphoma or amelanotic melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, typically wide local excision with 1 to 2 cm margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sentinel lymph node biopsy in node-negative disease to avoid understaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for primary sites at risk of local recurrence or positive margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PD-1 or PD-L1 checkpoint immunotherapy first line for metastatic or unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Skin and nodal surveillance every few months for two to three years, then less often",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -224,5 +224,508 @@
       "caption": "Diagnostic and clinical overview matrix for acute glomerulonephritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Rapidly Progressive Glomerulonephritis",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/rapidly-progressive-glomerulonephritis-rpgn",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 283-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glomerulonephritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute glomerulonephritis and RPGN",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Dysmorphic red cells, RBC casts, proteinuria"
+            },
+            {
+              "text": "{{hy:Nephritic urine; examine fresh spun sediment}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proteinuria with dysmorphic RBC and casts",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": ">500",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "Essentially diagnostic of GN; serology and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early serology",
+          "cells": [
+            {
+              "text": "ANCA, anti-GBM, C3 and C4"
+            },
+            {
+              "text": "Triage RPGN types before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low C3",
+          "cells": [
+            {
+              "text": "Post-infectious GN, lupus, endocarditis, MPGN"
+            },
+            {
+              "text": "Normal C3 favours IgA nephropathy, ANCA or anti-GBM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low C4 with high rheumatoid factor",
+          "cells": [
+            {
+              "text": "Cryoglobulinaemic GN"
+            },
+            {
+              "text": "Check hepatitis C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crescents on biopsy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">50% of glomeruli",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Defines RPGN"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-GBM type",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20% of RPGN; linear IgG"
+            },
+            {
+              "text": "Goodpasture if lung haemorrhage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immune complex type",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50%; granular IgG and C3"
+            },
+            {
+              "text": "ASO, anti-DNA, cryoglobulins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pauci-immune type",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 30%; ANCA (PR3 or MPO)"
+            },
+            {
+              "text": "No deposits"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Timing after infection",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "IgA: day 1 to 3; post-streptococcal: 10 days to 3 weeks"
+            },
+            {
+              "text": "Separates IgA from post-infectious GN"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomerulonephritis-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of acute glomerulonephritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-streptococcal GN",
+          "cells": [
+            {
+              "text": "Latent period after infection; low C3; raised ASO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA nephropathy or IgA vasculitis",
+          "cells": [
+            {
+              "text": "{{hy:Haematuria during pharyngitis; normal C3}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA vasculitis",
+          "cells": [
+            {
+              "text": "Positive ANCA, pauci-immune biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GBM disease",
+          "cells": [
+            {
+              "text": "Anti-GBM antibody, lung haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus nephritis",
+          "cells": [
+            {
+              "text": "SLE features, anti-DNA, low complement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MPGN type I",
+          "cells": [
+            {
+              "text": "Endocarditis, SLE, hepatitis B or C, cryoglobulinaemia, cancers"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MPGN type II (dense deposit)",
+          "cells": [
+            {
+              "text": "C3 nephritic factor, partial lipodystrophy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HUS or TTP",
+          "cells": [
+            {
+              "text": "Schistocytes, low platelets, high LDH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hypertension",
+          "cells": [
+            {
+              "text": "Severe hypertension with retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-glomerular haematuria",
+          "cells": [
+            {
+              "text": "Stones, tumour, TB; normal red cell shape"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomerulonephritis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of RPGN and acute glomerulonephritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent nephrology and early biopsy",
+          "cells": [
+            {
+              "text": "{{hy:Nephritic urine with rising creatinine}}"
+            },
+            {
+              "text": "Treat as crescentic GN until proven otherwise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylprednisolone then prednisone",
+          "cells": [
+            {
+              "text": "Immune complex or pauci-immune RPGN"
+            },
+            {
+              "text": "1 g IV daily for 3 to 5 days, then prednisone 1 mg/kg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cyclophosphamide",
+          "cells": [
+            {
+              "text": "With steroids, especially ANCA-positive"
+            },
+            {
+              "text": "IV monthly pulses may cause fewer adverse effects"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Alternative to cyclophosphamide"
+            },
+            {
+              "text": "375 mg/m2 weekly x4, or 1 g twice 2 weeks apart"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Anti-GBM disease"
+            },
+            {
+              "text": "For 14 days; debated in ANCA RPGN"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Start early",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Ideally creatinine <5",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Still treat aggressively if higher but not on dialysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACE inhibitor and supportive care",
+          "cells": [
+            {
+              "text": "Proteinuria, hypertension"
+            },
+            {
+              "text": "Ramipril in entry drug list"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "Kidney failure"
+            },
+            {
+              "text": "Usual indications"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Cyclophosphamide dose is not stated in the source opened. Up to 90% of untreated RPGN progresses to kidney failure."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glomerulonephritis-dx-mgmt",
+      "title": "Diagnosis and management of acute glomerulonephritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria, oedema, hypertension or rising creatinine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fresh urine sediment and urine protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Dysmorphic RBC, RBC casts or proteinuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for non-glomerular bleeding source",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "ANCA, anti-GBM, C3, C4, ASO, ANA",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Creatinine rising quickly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent biopsy; methylprednisolone pulse",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Anti-GBM positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Plasma exchange plus steroids and cyclophosphamide",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Steroids with cyclophosphamide or rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat cause; ACE inhibitor; biopsy if unclear",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

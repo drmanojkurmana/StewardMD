@@ -142,5 +142,305 @@
       "caption": "Overview comparison matrix for frosted branch angiitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / uveitis literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frosted_branch_angiitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Maps leakage, occlusion and ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective screen",
+          "cells": [
+            {
+              "text": "Herpesviruses, cytomegalovirus, toxoplasma and syphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and systemic vasculitis workup",
+          "cells": [
+            {
+              "text": "Screens for systemic vasculitis or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular sampling",
+          "cells": [
+            {
+              "text": "If masquerade is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frosted_branch_angiitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytomegalovirus retinitis",
+          "cells": [
+            {
+              "text": "Vascular sheathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular lymphoma",
+          "cells": [
+            {
+              "text": "Features suggesting lymphoma masquerade; sampling if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frosted_branch_angiitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay for the idiopathic immune-mediated form, which usually responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of secondary causes",
+          "cells": [
+            {
+              "text": "Antivirals for herpesviruses and cytomegalovirus; anti-toxoplasma therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for systemic disease",
+          "cells": [
+            {
+              "text": "For underlying systemic vasculitis or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma treatment",
+          "cells": [
+            {
+              "text": "Where lymphoma is masquerading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular oedema and ischaemia monitoring",
+          "cells": [
+            {
+              "text": "Watches for retinal ischaemia and neovascular complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial angiography and OCT",
+          "cells": [
+            {
+              "text": "Surveillance of leakage, occlusion and macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Uveitis specialists and physicians to treat the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frosted_branch_angiitis-dx-mgmt",
+      "title": "Diagnosis and management of Frosted branch angiitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected frosted branch angiitis: retinal vasculitis on fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infective cause, severe ischaemia, lymphoma features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat any infective cause before starting steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein angiography, infective screen and vasculitis workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a secondary infective or systemic cause excluded on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for secondary causes such as infection, lymphoma or vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids, the mainstay for the idiopathic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antivirals or anti-toxoplasma therapy for a secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for systemic vasculitis or autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor macular oedema and retinal ischaemia with angiography and OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good visual prognosis in idiopathic steroid-responsive form; secondary disease varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

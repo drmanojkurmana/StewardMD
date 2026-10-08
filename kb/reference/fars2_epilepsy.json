@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for fars2-related epilepsy and mitochondrial encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fars2_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate with paired pyruvate",
+          "cells": [
+            {
+              "text": "Raised lactate; combined oxidative phosphorylation deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine organic acids",
+          "cells": [
+            {
+              "text": "Metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Epileptic encephalopathy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with MR spectroscopy",
+          "cells": [
+            {
+              "text": "Atrophy and white-matter, thalamic or brainstem change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with respiratory chain enzyme assays",
+          "cells": [
+            {
+              "text": "Combined complex deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FARS2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant; genetic diagnosis is required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fars2_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other aminoacyl-tRNA synthetase mitochondrial disorders (AARS2, EARS2, DARS2, RARS2, NARS2)",
+          "cells": [
+            {
+              "text": "Share the mitochondrial translation mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine-dependent epilepsies",
+          "cells": [
+            {
+              "text": "Listed in the differential; a treatable cause to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegias",
+          "cells": [
+            {
+              "text": "For the SPG77 phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fars2_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication, avoiding sodium valproate",
+          "cells": [
+            {
+              "text": "Refractory seizures; valproate avoided because of mitochondrial hepatotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial cofactor and vitamin cocktail",
+          "cells": [
+            {
+              "text": "Supportive metabolic care with lactic acidosis management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agents and physiotherapy",
+          "cells": [
+            {
+              "text": "SPG77 phenotype; baclofen with orthoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Development, nutrition, feeding and respiratory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology, metabolic and palliative care",
+          "cells": [
+            {
+              "text": "Poor prognosis of the early-infantile form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fars2_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of FARS2-related epilepsy and mitochondrial encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Refractory seizures, hypotonia or regression in infancy with raised lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (status epilepticus, rapid regression, worsening acidosis, respiratory failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat seizures and acidosis; involve neurology and metabolic medicine",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate; amino acids; EEG; MRI with spectroscopy; FARS2 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic FARS2 variants confirmed by molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other mitochondrial or early-infantile epileptic encephalopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication, avoiding sodium valproate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mitochondrial cofactor and vitamin cocktail with lactate management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baclofen and physiotherapy for SPG77 spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation for development and feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early-infantile form carries a poor prognosis; SPG77 progresses slowly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

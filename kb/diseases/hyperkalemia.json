@@ -230,5 +230,528 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hyperkalemia",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/electrolyte-disorders/hyperkalemia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperkalemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading hyperkalaemia and ECG changes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperkalaemia",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": ">5.5",
+              "op": ">",
+              "value": 5.5
+            },
+            {
+              "text": "Definition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mild",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<6 with normal ECG",
+              "op": "<",
+              "value": 6
+            },
+            {
+              "text": "Reduce intake, stop culprit drugs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate to severe",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "6 to 6.5",
+              "range": [
+                6,
+                6.5
+              ]
+            },
+            {
+              "text": "Prompt treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": ">6.5",
+              "op": ">",
+              "value": 6.5
+            },
+            {
+              "text": "Aggressive therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG at K >5.5",
+          "cells": [
+            {
+              "text": "Peaked T waves, long PR, short QT"
+            },
+            {
+              "text": "Early change"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG at K >6.5",
+          "cells": [
+            {
+              "text": "QRS widening, loss of P waves, escape rhythms"
+            },
+            {
+              "text": "Give calcium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Late ECG",
+          "cells": [
+            {
+              "text": "Sine wave, VF or asystole"
+            },
+            {
+              "text": "Imminent arrest"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal ECG",
+          "cells": [
+            {
+              "text": "Does not exclude danger"
+            },
+            {
+              "text": "{{hy:ECG is insensitive, especially in CKD}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine sodium",
+          "unit": "mM",
+          "cells": [
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Low distal Na delivery; fluids or loop diuretic may help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat sample",
+          "cells": [
+            {
+              "text": "Haemolysis, fist clenching, tourniquet, high platelets or WBC"
+            },
+            {
+              "text": "Exclude pseudohyperkalaemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia-ddx",
+      "kind": "ddx",
+      "title": "Causes of hyperkalaemia to identify",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudohyperkalaemia",
+          "cells": [
+            {
+              "text": "{{hy:Haemolysed or delayed sample; normal ECG}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reduced renal excretion: AKI or CKD",
+          "cells": [
+            {
+              "text": "Raised creatinine; commonest cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drugs: ACE inhibitor, ARB, spironolactone, NSAID, trimethoprim, heparin",
+          "cells": [
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyporeninaemic hypoaldosteronism",
+          "cells": [
+            {
+              "text": "Diabetes, elderly; K high for the GFR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Low sodium, hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cell shift: acidosis, insulin lack, beta-blocker, digoxin",
+          "cells": [
+            {
+              "text": "Clinical context"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tissue breakdown: tumour lysis, rhabdomyolysis, haemolysis",
+          "cells": [
+            {
+              "text": "High CK, urate or LDH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperkalaemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Weakness after K intake or rest after exercise"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia-treatment",
+      "kind": "treatment",
+      "title": "Emergency treatment of hyperkalaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium gluconate 10%",
+          "cells": [
+            {
+              "text": "{{hy:Loss of P waves or wide QRS}}"
+            },
+            {
+              "text": "10 to 20 mL IV over 5 to 10 min; lasts 20 to 30 min; repeat as needed; care with digoxin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin with glucose",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "K >6.5",
+              "op": ">",
+              "value": 6.5
+            },
+            {
+              "text": "Regular insulin 5 to 10 units IV with 50 mL of 50% glucose, then 10% dextrose 50 mL/h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nebulised albuterol",
+          "cells": [
+            {
+              "text": "Adjunct"
+            },
+            {
+              "text": "10 to 20 mg over 10 min; lowers K 0.5 to 1.5 mEq/L; avoid in unstable angina or MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Acidaemia"
+            },
+            {
+              "text": "Limited evidence; sodium load"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium polystyrene sulfonate",
+          "cells": [
+            {
+              "text": "K removal"
+            },
+            {
+              "text": "15 to 30 g orally every 4 to 6 h; avoid enema if acute abdomen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Patiromer or sodium zirconium cyclosilicate",
+          "cells": [
+            {
+              "text": "Prevention, for example to continue ACEi or ARB"
+            },
+            {
+              "text": "Not for emergencies; slow onset"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loop diuretic",
+          "cells": [
+            {
+              "text": "Not volume depleted"
+            },
+            {
+              "text": "Increases renal K loss"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Failure of medical therapy, severe AKI or CKD, ESRD with ECG changes"
+            },
+            {
+              "text": "Definitive removal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop culprit drugs and K intake",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Including salt substitutes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperkalemia-dx-mgmt",
+      "title": "Emergency management of hyperkalaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Potassium >5.5 mEq/L",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sample haemolysed or result unexpected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Repeat sample; urgent ECG meanwhile",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG and cardiac monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Wide QRS, lost P waves or sine wave?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "IV calcium gluconate; repeat as needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "K >6.5 mEq/L?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin with glucose; nebulised albuterol",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove K: binder, loop diuretic; stop culprit drugs",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Refractory, or severe AKI or ESRD?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haemodialysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor K and glucose; treat cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Confirmed"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for febrile urinary tract infection in children."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "febrile_uti_children-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis or dipstick for leucocyte esterase and nitrites, with microscopy",
+          "cells": [
+            {
+              "text": "Pyuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine culture from an appropriately collected specimen",
+          "cells": [
+            {
+              "text": "Significant single uropathogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and blood culture when systemically unwell",
+          "cells": [
+            {
+              "text": "Systemic illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Structural abnormality or hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voiding cystourethrography or DMSA scintigraphy",
+          "cells": [
+            {
+              "text": "Selected or recurrent cases; reflux and scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_uti_children-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacteraemia or pneumonia as occult fever",
+          "cells": [
+            {
+              "text": "Other sources to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contaminated specimen giving a false-positive culture",
+          "cells": [
+            {
+              "text": "A bag or non-clean-catch sample misleads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis or intra-abdominal infection",
+          "cells": [
+            {
+              "text": "Other intra-abdominal sources of fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_uti_children-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt empirical antibiotics for E. coli and common uropathogens",
+          "cells": [
+            {
+              "text": "Guided by local resistance, narrowed when culture returns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral antibiotics if systemically unwell or unable to take oral",
+          "cells": [
+            {
+              "text": "Switch to oral once clinically stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration, antipyretics and analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol for fever and discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Structural abnormality, obstruction or hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystourethrography or DMSA for atypical or recurrent infection",
+          "cells": [
+            {
+              "text": "Vesicoureteric reflux and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis and specialist referral",
+          "cells": [
+            {
+              "text": "Significant reflux, recurrent infection or established scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and renal surveillance",
+          "cells": [
+            {
+              "text": "Where scarring is confirmed; safety-net advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "febrile_uti_children-dx-mgmt",
+      "title": "Diagnosis and management of Febrile Urinary Tract Infection in Children",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with pyuria in a young child, or unexplained fever in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (toxic appearance, sepsis, very young infant, failure to improve)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Parenteral antibiotics for sepsis or inability to take oral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dipstick and microscopy; urine culture from a proper specimen; renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pyuria with significant growth of a single uropathogen on a clean specimen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider contaminated specimen, viral illness or another source of fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical antibiotics for E. coli, narrowed on culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydration, paracetamol and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Renal and bladder ultrasound to detect structural abnormality",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cystourethrography or DMSA in recurrent or atypical infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prophylaxis and referral for significant reflux or scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover fully after prompt treatment; recurrence and scarring affect outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

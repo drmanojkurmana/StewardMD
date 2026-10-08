@@ -145,5 +145,314 @@
       "caption": "Overview comparison matrix for fibrothorax."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Shields' General Thoracic Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrothorax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Contracted hemithorax with pleural thickening or calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the thorax",
+          "cells": [
+            {
+              "text": "Extent and thickness of the pleural peel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Restrictive pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Fibrous peel versus fluid or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural sampling or biopsy",
+          "cells": [
+            {
+              "text": "Malignancy or ongoing infection suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrothorax-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignant pleural mesothelioma",
+          "cells": [
+            {
+              "text": "Enlarging mass or bloody effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse pleural thickening from asbestos",
+          "cells": [
+            {
+              "text": "Asbestos exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic organising empyema",
+          "cells": [
+            {
+              "text": "Ongoing infection beneath the peel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrothorax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical decortication",
+          "cells": [
+            {
+              "text": "Definitive treatment when the trapped lung is salvageable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete drainage of empyema or haemothorax",
+          "cells": [
+            {
+              "text": "Treats the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antituberculous chemotherapy",
+          "cells": [
+            {
+              "text": "Where tuberculosis is the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest physiotherapy and lung-expansion techniques",
+          "cells": [
+            {
+              "text": "Optimise ventilation and re-expansion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary rehabilitation",
+          "cells": [
+            {
+              "text": "Exertional breathlessness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial pulmonary function tests and imaging",
+          "cells": [
+            {
+              "text": "Monitor restriction and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic surgical referral",
+          "cells": [
+            {
+              "text": "Decortication candidacy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrothorax-dx-mgmt",
+      "title": "Diagnosis and management of Fibrothorax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness and shrunken hemithorax after empyema or haemothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (enlarging mass, bloody effusion, ongoing pleural infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of empyema or retained haemothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; CT thorax; pulmonary function tests; pleural biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thick pleural peel with restriction and no malignancy on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mesothelioma, organising empyema or metastatic pleural disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical decortication where the lung can re-expand",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete drainage and treatment of the underlying cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and pulmonary rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial lung function and imaging follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Decortication restores substantial function if the underlying lung is healthy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

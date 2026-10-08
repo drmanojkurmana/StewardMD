@@ -148,5 +148,352 @@
       "caption": "Overview comparison matrix for multicentric reticulohistiocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multicentric_reticulohistiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or synovial biopsy",
+          "cells": [
+            {
+              "text": "Giant cells and histiocytes with ground-glass eosinophilic cytoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of affected joints",
+          "cells": [
+            {
+              "text": "Well-marginated erosions and joint destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and autoimmune serology",
+          "cells": [
+            {
+              "text": "Assess associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "Association with hyperlipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age-appropriate malignancy screening",
+          "cells": [
+            {
+              "text": "Paraneoplastic association; search for occult malignancy is essential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculin testing",
+          "cells": [
+            {
+              "text": "Where clinically relevant; positive response in some patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multicentric_reticulohistiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatoid arthritis, particularly erosive disease",
+          "cells": [
+            {
+              "text": "Skin and mucosal papulonodules, with ground-glass histiocytes on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriatic arthritis with arthritis mutilans",
+          "cells": [
+            {
+              "text": "Diagnostic skin nodules are the clue that is easily missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout with tophi",
+          "cells": [
+            {
+              "text": "Nodules attributed to tophi without biopsy is a recognised error"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multicentric_reticulohistiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids with a disease-modifying agent",
+          "cells": [
+            {
+              "text": "Such as methotrexate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunosuppression",
+          "cells": [
+            {
+              "text": "Leflunomide or cyclophosphamide for resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF-targeting biologic therapy",
+          "cells": [
+            {
+              "text": "For refractory or aggressive arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Inhibit osteoclast and RANK-ligand-driven bone destruction in refractory or aggressive arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult malignancy work-up",
+          "cells": [
+            {
+              "text": "Investigate and treat, given the paraneoplastic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic joint care",
+          "cells": [
+            {
+              "text": "Analgesia and physiotherapy to preserve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Screen for and manage hyperlipidaemia and autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint monitoring",
+          "cells": [
+            {
+              "text": "Radiographs and function to detect progression toward arthritis mutilans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Rheumatology-led"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multicentric_reticulohistiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Multicentric reticulohistiocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Destructive polyarthritis with firm reddish-brown papulonodules near nail folds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid joint destruction, weight loss, fever, extensive disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rheumatology review to prevent arthritis mutilans; start immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin or synovial biopsy, joint radiographs, lipid profile, malignancy screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Giant cells and histiocytes with ground-glass cytoplasm on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rheumatoid, psoriatic or gouty arthritis; biopsy the nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids with a disease-modifying agent such as methotrexate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Leflunomide or cyclophosphamide for resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "TNF-targeting biologic therapy for refractory arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bisphosphonates against RANK-ligand-driven bone destruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Investigate and treat occult malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Joint disease can progress rapidly; outlook depends on any malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

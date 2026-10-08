@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for myh9-related disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myh9_related_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film review",
+          "cells": [
+            {
+              "text": "Giant platelets and neutrophil Dohle-like inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunofluorescence for myosin IIA in neutrophils",
+          "cells": [
+            {
+              "text": "Myosin IIA distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYH9 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and correlates genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function tests",
+          "cells": [
+            {
+              "text": "Screen for nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myh9_related_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Mislabelling leads to steroids, immunoglobulin or splenectomy, which are inappropriate here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alport syndrome",
+          "cells": [
+            {
+              "text": "Shares renal and auditory features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other inherited macrothrombocytopenias, such as Bernard-Soulier or gray platelet syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myh9_related_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the inherited macrothrombocytopenia",
+          "cells": [
+            {
+              "text": "Do not give corticosteroids, immunosuppression or splenectomy for presumed ITP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemostasis",
+          "cells": [
+            {
+              "text": "Platelet transfusions and tranexamic acid for surgery or delivery; a thrombopoietin-receptor agonist can raise counts before procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "Urinalysis and renal function; renin-angiotensin blockade for emerging nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological care",
+          "cells": [
+            {
+              "text": "Serial audiometry; hearing aids or cochlear implantation for progressive deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Cataract surgery when visually significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "As chronic kidney disease advances; dialysis or transplant considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myh9_related_disorder-dx-mgmt",
+      "title": "Diagnosis and management of MYH9-related disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Low platelet count with large platelets and neutrophil inclusions on the film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (proteinuria or falling renal function, progressive hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology and audiology review; stop any unnecessary immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Film review, myosin IIA immunofluorescence, MYH9 sequencing, urinalysis, audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MYH9 variant confirmed with giant platelets and neutrophil inclusions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ITP, Bernard-Soulier, Alport or other macrothrombocytopenia; test further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Do not give steroids, immunosuppression or splenectomy for presumed ITP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Platelets and tranexamic acid for surgery; thrombopoietin agonist before procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor urinalysis and renal function; renin-angiotensin blockade if nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry with hearing aids or cochlear implantation for deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign; long-term outlook shaped by renal and hearing disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

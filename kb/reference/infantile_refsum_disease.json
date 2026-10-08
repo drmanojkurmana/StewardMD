@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for infantile refsum disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_refsum_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Raised; first-line screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma phytanic and pristanic acids",
+          "cells": [
+            {
+              "text": "Raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma pipecolic acid and bile-acid intermediates",
+          "cells": [
+            {
+              "text": "Peroxisomal markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell plasmalogen levels",
+          "cells": [
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PEX gene sequencing",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography and audiology",
+          "cells": [
+            {
+              "text": "Retinal and hearing involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function, coagulation and cortisol",
+          "cells": [
+            {
+              "text": "Liver, coagulation and adrenal status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_refsum_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic adult Refsum disease (PHYH or PEX7)",
+          "cells": [
+            {
+              "text": "Isolated phytanic-acid elevation from a single-enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-bifunctional protein deficiency",
+          "cells": [
+            {
+              "text": "Single-enzyme peroxisomal beta-oxidation defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Usher syndrome",
+          "cells": [
+            {
+              "text": "Retinitis pigmentosa with deafness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_refsum_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary phytanic acid restriction",
+          "cells": [
+            {
+              "text": "Limits accumulation of the toxic branched-chain fatty acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamins",
+          "cells": [
+            {
+              "text": "Vitamins A, D, E and K for malabsorption and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Adrenocortical insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory support",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation; low-vision services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver care",
+          "cells": [
+            {
+              "text": "Cholestatic liver disease management, coagulation monitoring and bile-acid therapy where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and counselling",
+          "cells": [
+            {
+              "text": "Visual, auditory, hepatic, adrenal and neurological review; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_refsum_disease-dx-mgmt",
+      "title": "Diagnosis and management of Infantile Refsum disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Retinitis pigmentosa, sensorineural hearing loss and hypotonia in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding, adrenal insufficiency, liver failure, rapid vision or hearing loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitamin K, glucocorticoid cover and liver review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VLCFA, phytanic and pristanic acids, plasmalogens, PEX sequencing, ERG, audiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised VLCFA with PEX variant defining infantile Refsum disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adult Refsum disease, D-bifunctional protein deficiency or Usher syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrict dietary phytanic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace fat-soluble vitamins A, D, E and K",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucocorticoid replacement for adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids or cochlear implant; low-vision services",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cholestatic liver management and coagulation monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive sensory loss and liver disease; supportive management and surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for multiple evanescent white dot syndrome (mewds)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_evanescent_white_dot_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Multiple white dots across the posterior pole, and foveal granularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Hyperautofluorescent dots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Ellipsoid zone disruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Wreath-like hyperfluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Hypofluorescent spots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Enlarged blind spot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_evanescent_white_dot_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute zonal occult outer retinopathy spectrum",
+          "cells": [
+            {
+              "text": "Progressive or persistent visual loss points toward this spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis as an infective cause",
+          "cells": [
+            {
+              "text": "Excluded in atypical cases; features of infection are a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other white-dot syndromes, such as multifocal choroiditis",
+          "cells": [
+            {
+              "text": "Confusion is a recognised pitfall; the fundus findings and autofluorescence separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_evanescent_white_dot_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Self-limiting; vision recovers over weeks to months in most patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No specific pharmacological therapy",
+          "cells": [
+            {
+              "text": "Corticosteroids are not routinely indicated given spontaneous resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial optical coherence tomography and autofluorescence",
+          "cells": [
+            {
+              "text": "Document recovery of the ellipsoid zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Monitor resolution of the enlarged blind spot and scotoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics",
+          "cells": [
+            {
+              "text": "Alternative white-dot syndromes and infective or inflammatory mimics before settling on the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal follow-up",
+          "cells": [
+            {
+              "text": "Confirm recovery and identify the rare recurrence or progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_evanescent_white_dot_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Multiple evanescent white dot syndrome (MEWDS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute painless unilateral visual loss with photopsia in a young woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bilateral or recurrent disease, persistent loss, infective features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider diagnosis; exclude syphilis and AZOOR-spectrum disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus exam, autofluorescence, OCT for the ellipsoid zone, visual fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "White dots, enlarged blind spot and ellipsoid zone disruption on OCT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other white-dot syndromes; repeat OCT and visual fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation; vision recovers over weeks to months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids not routinely indicated given spontaneous resolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial OCT and fundus autofluorescence to document ellipsoid zone recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Visual field testing to monitor the blind spot and scotoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis; mild residual symptoms occasionally persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

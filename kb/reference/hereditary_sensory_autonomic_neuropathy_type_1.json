@@ -155,5 +155,276 @@
       "caption": "Overview comparison matrix for hereditary sensory and autonomic neuropathy type 1 (hsan1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_sensory_autonomic_neuropathy_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and quantitative sensory testing",
+          "cells": [
+            {
+              "text": "Length-dependent sensory neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPTLC1 and SPTLC2 targeted genetic testing",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma 1-deoxysphinganine measurement",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy for intraepidermal nerve fibre density",
+          "cells": [
+            {
+              "text": "Small-fibre loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing, including sudomotor assessment",
+          "cells": [
+            {
+              "text": "Autonomic involvement, usually mild"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot radiographs and imaging",
+          "cells": [
+            {
+              "text": "Osteomyelitis or Charcot neuroarthropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_sensory_autonomic_neuropathy_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Preventive foot care",
+          "cells": [
+            {
+              "text": "Daily inspection and protective footwear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulceration, osteomyelitis and Charcot treatment",
+          "cells": [
+            {
+              "text": "Aggressive, multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents",
+          "cells": [
+            {
+              "text": "Lancinating and burning pain, with agents such as gabapentin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-serine supplementation",
+          "cells": [
+            {
+              "text": "Substrate-based therapy that lowers toxic deoxysphingolipids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, podiatry, orthopaedics and pain services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant SPTLC1 and SPTLC2 inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_sensory_autonomic_neuropathy_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary Sensory and Autonomic Neuropathy Type 1 (HSAN1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Distal sensory loss with painless foot injuries and ulceration from early adulthood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Non-healing foot ulcer with osteomyelitis, hot swollen foot, or hearing loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat osteomyelitis and Charcot foot urgently, with orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NCS and quantitative sensory testing; SPTLC1 and SPTLC2 testing; foot imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an SPTLC1 or SPTLC2 variant confirmed, with other neuropathies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other HSAN, CMT, diabetic neuropathy, leprosy or hereditary amyloid neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Daily foot inspection and protective footwear as preventive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive treatment of ulceration, osteomyelitis and Charcot foot",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gabapentin for lancinating and burning pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "L-serine supplementation as substrate-based therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ulcers and infection controlled; neuropathic pain reduced; lifelong foot care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

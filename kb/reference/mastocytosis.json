@@ -153,5 +153,461 @@
       "caption": "Overview comparison matrix for mastocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Mastocytosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/mastocytosis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mastocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for systemic mastocytosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Rule",
+          "cells": [
+            {
+              "text": "1 major plus 1 minor, or 3 minor criteria"
+            },
+            {
+              "text": "{{hy:Tissue biopsy is required}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major: mast cell aggregates",
+          "unit": "cells",
+          "cells": [
+            {
+              "text": "Multifocal dense aggregates of over 15 mast cells",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Bone marrow preferred"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: atypical morphology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Spindle or atypical shape in over 25% of mast cells",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "Marrow section or aspirate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: KIT codon 816 mutation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "D816V in over 90% of patients",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Confers imatinib resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minor: aberrant phenotype",
+          "cells": [
+            {
+              "text": "Mast cells express CD25, CD2 or CD30"
+            },
+            {
+              "text": "Flow or immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minor: baseline tryptase",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Above 20 ng/mL",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Most labs call over 11.4 ng/mL raised; check for hereditary alpha-tryptasaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smouldering SM (B findings)",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Marrow infiltration over 30%, tryptase over 200 ng/mL, KIT VAF over 10%",
+              "op": ">",
+              "value": 200
+            },
+            {
+              "text": "Two or more B findings, no C findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mast cell activation syndrome",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Tryptase rise of 20% plus 2 ng/mL above baseline in an event",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Also symptoms and response to anti-mediator therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Darier sign",
+          "cells": [
+            {
+              "text": "Lesion urticates when rubbed"
+            },
+            {
+              "text": "Maculopapular cutaneous mastocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck lists CD2 and CD25 only; Harrison 22e adds CD30 as an aberrant marker."
+    },
+    {
+      "id": "mastocytosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mastocytosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Carcinoid syndrome",
+          "cells": [
+            {
+              "text": "Flushing and diarrhoea with liver metastases"
+            },
+            {
+              "text": "24-h urine 5-HIAA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Paroxysmal hypertension, sweating, tachycardia"
+            },
+            {
+              "text": "Plasma or urine metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary alpha-tryptasaemia",
+          "cells": [
+            {
+              "text": "Raised baseline tryptase from extra TPSAB1 copies"
+            },
+            {
+              "text": "TPSAB1 copy number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgE-mediated or idiopathic anaphylaxis",
+          "cells": [
+            {
+              "text": "Urticaria, angioedema, bronchospasm, less typical in SM"
+            },
+            {
+              "text": "Baseline tryptase, allergy testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monoclonal mast cell activation syndrome",
+          "cells": [
+            {
+              "text": "KIT D816V with episodes but criteria for SM not met"
+            },
+            {
+              "text": "Marrow biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mastocytosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of mastocytosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Hymenoptera stings, NSAIDs, alcohol, heat, some opioids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epinephrine autoinjector",
+          "cells": [
+            {
+              "text": "{{hy:All systemic mastocytosis patients}}"
+            },
+            {
+              "text": "Written anaphylaxis plan"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "H1 and H2 blockers",
+          "cells": [
+            {
+              "text": "All patients with mediator symptoms"
+            },
+            {
+              "text": "H2 blocker or PPI for acid hypersecretion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cromolyn",
+          "cells": [
+            {
+              "text": "GI symptoms, MCAS"
+            },
+            {
+              "text": "Mast cell stabiliser"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cutaneous disease",
+          "cells": [
+            {
+              "text": "Skin lesions"
+            },
+            {
+              "text": "H1 blockers; PUVA or topical steroids in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bone protection",
+          "cells": [
+            {
+              "text": "Osteoporosis"
+            },
+            {
+              "text": "Bisphosphonate; interferon alfa may regress bone lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avapritinib or midostaurin",
+          "cells": [
+            {
+              "text": "Aggressive SM, SM with associated neoplasm, mast cell leukaemia"
+            },
+            {
+              "text": "KIT-targeted"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imatinib",
+          "cells": [
+            {
+              "text": "Aggressive SM without D816V"
+            },
+            {
+              "text": "Ineffective with D816V"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck gives no drug doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mastocytosis-dx-mgmt",
+      "title": "Diagnosis and management of mastocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flushing, anaphylaxis, urticaria pigmentosa or unexplained osteoporosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Baseline serum tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Tryptase over 20 ng/mL or skin lesions in an adult?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exclude carcinoid, phaeochromocytoma, alpha-tryptasaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Marrow biopsy: aggregates, CD25, KIT D816V",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "1 major plus 1 minor, or 3 minor criteria?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Consider MCAS or monoclonal mast cell activation",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Any C finding or associated neoplasm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Advanced SM: avapritinib or midostaurin, haematology care",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Indolent SM: avoid triggers, antihistamines, epinephrine pen",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

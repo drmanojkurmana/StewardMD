@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for multicystic dysplastic kidney."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multicystic_dysplastic_kidney-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Non-communicating cysts and no identifiable normal parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DMSA or MAG3 scintigraphy",
+          "cells": [
+            {
+              "text": "Absent function in the affected kidney"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Reflux, where contralateral or ipsilateral reflux is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ultrasound",
+          "cells": [
+            {
+              "text": "Progressive involution, and the contralateral kidney"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring",
+          "cells": [
+            {
+              "text": "Hypertension during follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multicystic_dysplastic_kidney-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe hydronephrosis from ureteropelvic junction obstruction",
+          "cells": [
+            {
+              "text": "Central dilated pelvis draining the cysts; no non-communicating cyst pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic renal tumour, such as cystic nephroma or cystic Wilms",
+          "cells": [
+            {
+              "text": "Enlarging or solid components raise concern for malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructed dysplastic kidney with retained function",
+          "cells": [
+            {
+              "text": "Multicystic kidney has no functioning nephrons; scintigraphy confirms absent function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multicystic_dysplastic_kidney-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Serial renal ultrasound to follow expected involution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring",
+          "cells": [
+            {
+              "text": "Antihypertensive treatment if hypertension develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral kidney assessment",
+          "cells": [
+            {
+              "text": "Manage coexisting vesicoureteric reflux or pelviureteric junction obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrectomy",
+          "cells": [
+            {
+              "text": "Reserved for uncontrolled hypertension, mass effect or diagnostic doubt about malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Where reflux is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function monitoring",
+          "cells": [
+            {
+              "text": "Prognosis depends chiefly on the healthy contralateral kidney"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Paediatric nephrology and urology for surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multicystic_dysplastic_kidney-dx-mgmt",
+      "title": "Diagnosis and management of Multicystic dysplastic kidney",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral cystic kidney on antenatal or neonatal ultrasound, non-functioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abnormal contralateral kidney, new hypertension, solid components)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of contralateral kidney; exclude bilateral disease or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal ultrasound, DMSA or MAG3 scan, MCUG if reflux is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-communicating cysts with absent function on DMSA or MAG3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe hydronephrosis or cystic tumour; MRI if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative management with serial renal ultrasound for involution",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor blood pressure; antihypertensives if hypertension develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess and protect the contralateral kidney",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nephrectomy only for uncontrolled hypertension, mass effect or malignancy doubt",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Unilateral disease with a normal contralateral kidney has an excellent outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

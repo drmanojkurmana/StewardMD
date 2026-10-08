@@ -155,5 +155,325 @@
       "caption": "Overview comparison matrix for desmoplastic infantile ganglioglioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "desmoplastic_infantile_ganglioglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI of the brain",
+          "cells": [
+            {
+              "text": "Large cyst with a peripheral cortical-based solid nodule abutting the dura"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification and osseous remodelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with reticulin staining",
+          "cells": [
+            {
+              "text": "Desmoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GFAP, synaptophysin, neurofilament and NeuN immunohistochemistry",
+          "cells": [
+            {
+              "text": "Astrocytic and neuronal components; low proliferation index in differentiated areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E and MAPK-pathway molecular testing",
+          "cells": [
+            {
+              "text": "BRAF or wider MAPK-pathway alteration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoplastic_infantile_ganglioglioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CNS embryonal tumour",
+          "cells": [
+            {
+              "text": "Primitive small-cell component can be mistaken for a malignant embryonal tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immature teratoma",
+          "cells": [
+            {
+              "text": "Germ cell markers (alpha-fetoprotein, beta-hCG) when teratoma is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoplastic_infantile_ganglioglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Upfront maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "First choice for resectable cases; typically curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unresectable, recurrent or progressive disease",
+          "cells": [
+            {
+              "text": "Molecular-directed therapy; radiotherapy or chemotherapy used less often"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure and hydrocephalus",
+          "cells": [
+            {
+              "text": "CSF diversion or shunting where required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Not first-line because of neurocognitive harm in infancy; reserved for rare refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "For progressive or incompletely resected tumours; stabilisation counts as success"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF or MEK inhibitor",
+          "cells": [
+            {
+              "text": "Targeted option in unresectable or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and seizure control",
+          "cells": [
+            {
+              "text": "Post-operative MRI; antiepileptic therapy where seizures have occurred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric neurosurgery, neuro-oncology or neurology, and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "desmoplastic_infantile_ganglioglioma-dx-mgmt",
+      "title": "Diagnosis and management of Desmoplastic infantile ganglioglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected desmoplastic infantile ganglioglioma: infant cortical cyst with solid nodule",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised intracranial pressure, new seizures, haemorrhage)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for raised intracranial pressure or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI; CT for calcification; reticulin, GFAP, synaptophysin; BRAF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a desmoplastic cortical tumour with reticulin desmoplasia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ependymoma, pleomorphic xanthoastrocytoma or atypical teratoid tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection as first-line for resectable cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CSF diversion or shunting for raised pressure or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Test for BRAF V600E and MAPK alterations for targeted options",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chemotherapy only for progressive or incompletely resected tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Post-operative MRI and seizure control with the neuro-oncology team",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with gross total resection; stabilisation counts as success if progressive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

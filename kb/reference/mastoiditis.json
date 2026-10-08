@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for acute mastoiditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mastoiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Air cell coalescence and abscess formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with venography, when suspected",
+          "cells": [
+            {
+              "text": "Intracranial extension or sinus thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Sagging canal wall, drum changes and discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture and sensitivity of ear or abscess pus",
+          "cells": [
+            {
+              "text": "Guides antibiotic choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Severity and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry once the acute phase settles",
+          "cells": [
+            {
+              "text": "Hearing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mastoiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe acute otitis media without true mastoid coalescence",
+          "cells": [
+            {
+              "text": "No coalescence on temporal bone CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Furunculosis of the external canal",
+          "cells": [
+            {
+              "text": "Periauricular swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otitis externa with surrounding cellulitis",
+          "cells": [
+            {
+              "text": "Surrounding cellulitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mastoiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt IV broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Cover common acute otitis media pathogens, refined by culture and sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myringotomy",
+          "cells": [
+            {
+              "text": "With or without grommet insertion, to drain the middle ear and obtain pus for culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortical mastoidectomy",
+          "cells": [
+            {
+              "text": "Coalescent disease, subperiosteal abscess, or failure to respond to medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of subperiosteal or Bezold abscess",
+          "cells": [
+            {
+              "text": "Surgical drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and supportive care",
+          "cells": [
+            {
+              "text": "Analgesia, antipyretics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and specialist input for intracranial extension",
+          "cells": [
+            {
+              "text": "Contrast imaging with urgent neurosurgical and ENT input; anticoagulation considered for sinus thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry follow-up",
+          "cells": [
+            {
+              "text": "Once the acute phase settles, to document hearing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mastoiditis-dx-mgmt",
+      "title": "Diagnosis and management of Acute mastoiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute otitis media with mastoid tenderness, fever and postauricular swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Meningitis signs, sinus thrombosis, Bezold abscess or facial nerve weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and ENT input; contrast imaging for intracranial spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT temporal bone, otoscopy, culture of pus, full blood count and markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is air cell coalescence or abscess shown on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe otitis media without coalescence, otitis externa or furunculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt IV broad-spectrum antibiotics, refined by culture and sensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Myringotomy with or without grommet insertion to drain and culture pus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cortical mastoidectomy for coalescent disease or subperiosteal abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical drainage of a subperiosteal or Bezold abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Audiometry once the acute phase settles to document hearing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

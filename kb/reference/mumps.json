@@ -188,5 +188,451 @@
       "caption": "Overview comparison matrix for mumps."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Overview of Mumps",
+      "kind": "web",
+      "url": "https://www.cdc.gov/mumps/hcp/clinical-overview/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mumps-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of mumps",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Average 16 to 18 days; range 12 to 25",
+              "range": [
+                12,
+                25
+              ]
+            },
+            {
+              "text": "Infectious 2 days before to 5 days after parotitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parotitis",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Lasts about 5 days (3 to 7)",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Unilateral in about one-third; fills space behind jaw angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20% of unvaccinated",
+              "op": "=",
+              "value": 20
+            },
+            {
+              "text": "Vaccinated people can still get mumps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Buccal swab RT-PCR",
+          "cells": [
+            {
+              "text": "Massage parotid 30 s, swab early (peak shedding within 5 days)"
+            },
+            {
+              "text": "{{hy:Preferred confirmation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mumps IgM",
+          "cells": [
+            {
+              "text": "Often absent or delayed in vaccinated people"
+            },
+            {
+              "text": "A negative test does not exclude mumps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG",
+          "cells": [
+            {
+              "text": "Shows past exposure only"
+            },
+            {
+              "text": "Not used to judge immunity of contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amylase and lipase",
+          "cells": [
+            {
+              "text": "Both high suggests pancreatitis"
+            },
+            {
+              "text": "Amylase alone rises with parotitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchitis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 30% of unvaccinated postpubertal males; 6% vaccinated",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Commonest complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aseptic meningitis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10% unvaccinated; 1% or less vaccinated",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "CSF pleocytosis in up to 55% without symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mumps-ddx",
+      "kind": "ddx",
+      "title": "Causes of parotid swelling and orchitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Suppurative bacterial parotitis",
+          "cells": [
+            {
+              "text": "Pus from Stensen duct, very tender, unilateral"
+            },
+            {
+              "text": "Culture of duct pus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other viral parotitis (influenza A H3N2, parainfluenza, EBV, HIV)",
+          "cells": [
+            {
+              "text": "Same picture with different virus"
+            },
+            {
+              "text": "Respiratory or viral PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salivary stone, cyst or tumour",
+          "cells": [
+            {
+              "text": "Unilateral, often painless or meal-related"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome or sarcoidosis",
+          "cells": [
+            {
+              "text": "Chronic bilateral swelling, dry eyes"
+            },
+            {
+              "text": "Autoantibodies or biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular torsion",
+          "cells": [
+            {
+              "text": "Sudden severe pain, absent cremasteric reflex"
+            },
+            {
+              "text": "{{hy:Urgent Doppler ultrasound}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Urinary or STI symptoms"
+            },
+            {
+              "text": "Urine culture, GC and chlamydia NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteroviral meningitis",
+          "cells": [
+            {
+              "text": "Indistinguishable from mumps meningitis"
+            },
+            {
+              "text": "CSF PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mumps-treatment",
+      "kind": "treatment",
+      "title": "Management of mumps",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "{{hy:All cases; no specific antiviral}}"
+            },
+            {
+              "text": "Analgesia, antipyretics, fluids, avoid acidic foods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchitis care",
+          "cells": [
+            {
+              "text": "Painful testis"
+            },
+            {
+              "text": "Scrotal support, anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Until 5 days after parotitis onset"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Admission",
+          "cells": [
+            {
+              "text": "Encephalitis, meningitis with severe features, pancreatitis"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health notification",
+          "cells": [
+            {
+              "text": "All suspected cases"
+            },
+            {
+              "text": "Contact tracing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Third MMR dose",
+          "cells": [
+            {
+              "text": "People at increased risk during an outbreak"
+            },
+            {
+              "text": "Per ACIP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-exposure MMR or immunoglobulin",
+          "cells": [
+            {
+              "text": "Exposed contacts"
+            },
+            {
+              "text": "Not shown to prevent or modify illness; not recommended as PEP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The entry management list mentions post-exposure MMR for contacts, but Harrison pitfalls and CDC state MMR is not recommended as post-exposure prophylaxis; routine and outbreak doses are recommended."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mumps-dx-mgmt",
+      "title": "Diagnosis and management of mumps",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Parotid or salivary swelling, orchitis or aseptic meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Buccal swab RT-PCR after parotid massage; consider IgM",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Isolate until 5 days after parotitis onset",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Acute scrotal pain without parotitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Urgent Doppler to exclude torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Encephalitis, pancreatitis or hearing loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Admit for supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Home supportive care; notify public health",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

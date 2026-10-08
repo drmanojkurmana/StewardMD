@@ -153,5 +153,359 @@
       "caption": "Overview comparison matrix for hallux valgus (bunion)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hallux_valgus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing dorsoplantar and lateral radiographs",
+          "cells": [
+            {
+              "text": "Hallux valgus and intermetatarsal angles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographic joint congruence and sesamoid position",
+          "cells": [
+            {
+              "text": "First metatarsophalangeal joint congruence, sesamoid position and degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing clinical examination",
+          "cells": [
+            {
+              "text": "First-ray mobility, lesser-toe deformity and transfer metatarsalgia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedobarography or plantar pressure mapping",
+          "cells": [
+            {
+              "text": "Forefoot overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate and inflammatory markers",
+          "cells": [
+            {
+              "text": "Relevant when crystal or inflammatory arthropathy is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "Required before planned surgical correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Soft-tissue masses or occult pathology, in atypical cases only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hallux_valgus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hallux rigidus",
+          "cells": [
+            {
+              "text": "Osteoarthritis with a dorsal osteophyte, not lateral deviation of the great toe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or other crystal arthropathy of the first metatarsophalangeal joint",
+          "cells": [
+            {
+              "text": "Hot, swollen, exquisitely tender joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthritis such as rheumatoid or psoriatic disease",
+          "cells": [
+            {
+              "text": "Rapidly progressive or symmetrical forefoot deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or infected bursa of the first metatarsophalangeal joint",
+          "cells": [
+            {
+              "text": "Hot, swollen, exquisitely tender joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sesamoiditis or sesamoid disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interdigital (Morton's) neuroma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hallux_valgus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Wide accommodative footwear, bunion pads, toe spacers and orthoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and offloading",
+          "cells": [
+            {
+              "text": "For a painful, inflamed medial eminence bursa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First metatarsal osteotomy",
+          "cells": [
+            {
+              "text": "With soft-tissue realignment for symptomatic deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lapidus first tarsometatarsal arthrodesis",
+          "cells": [
+            {
+              "text": "First-ray hypermobility; joint arthrodesis for severe or arthritic deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesser-toe and transfer metatarsalgia",
+          "cells": [
+            {
+              "text": "Addressed as part of forefoot reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "Before any surgical correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "When pain and limitation persist despite footwear and orthoses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hallux_valgus-dx-mgmt",
+      "title": "Diagnosis and management of Hallux valgus (bunion)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful lateral deviation of the great toe with a prominent medial bunion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hot swollen joint, rapidly progressive deformity, skin breakdown)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude septic arthritis, infected bursa or inflammatory arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs; standing exam; vascular and neurological checks",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pain or functional limitation persist despite footwear and orthoses?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue conservative care: wide footwear, toe spacers, bunion pads, orthoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vascular and neurological assessment before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "First metatarsal osteotomy with soft-tissue realignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lapidus arthrodesis for first-ray hypermobility or severe arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address lesser-toe deformity and transfer metatarsalgia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic deformity corrected; forefoot reconstruction addresses associated lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

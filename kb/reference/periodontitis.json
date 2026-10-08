@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for periodontitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "periodontitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-mouth periodontal charting",
+          "cells": [
+            {
+              "text": "Probing depths and attachment loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding on probing and plaque indices",
+          "cells": [
+            {
+              "text": "Bleeding and plaque levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periapical and bitewing radiographs",
+          "cells": [
+            {
+              "text": "Bone loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tooth mobility and furcation assessment",
+          "cells": [
+            {
+              "text": "Mobility and furcation involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for diabetes and smoking status",
+          "cells": [
+            {
+              "text": "Risk modifiers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periodontitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gingivitis without attachment loss",
+          "cells": [
+            {
+              "text": "No attachment loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising periodontal disease",
+          "cells": [
+            {
+              "text": "Pain, ulceration and tissue destruction, especially in immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periodontitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biofilm control",
+          "cells": [
+            {
+              "text": "Oral hygiene instruction and daily mechanical plaque removal by the patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subgingival instrumentation",
+          "cells": [
+            {
+              "text": "Scaling and root surface debridement; cornerstone of non-surgical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive antimicrobials",
+          "cells": [
+            {
+              "text": "Antiseptic mouthrinses or systemic antibiotics, selectively, in aggressive or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor modification",
+          "cells": [
+            {
+              "text": "Smoking cessation and glycaemic control in diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodontal surgery",
+          "cells": [
+            {
+              "text": "Flap, resective or regenerative procedures for residual deep pockets and furcation involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive maintenance",
+          "cells": [
+            {
+              "text": "Structured periodontal maintenance with regular monitoring of probing depths and attachment levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extraction",
+          "cells": [
+            {
+              "text": "Teeth of hopeless prognosis, with prosthetic replacement planned"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "periodontitis-dx-mgmt",
+      "title": "Diagnosis and management of Periodontitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bleeding gums with probing depths and attachment loss on charting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid attachment loss in a young patient, necrotising disease, diabetes signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for necrotising periodontal disease or undiagnosed diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-mouth charting; bitewing and periapical radiographs; mobility and furcation check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is attachment loss and bone loss confirmed on charting and radiographs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as gingivitis without attachment loss; reinforce plaque control and review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Teach oral hygiene and daily mechanical plaque removal to control biofilm",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Scaling and root surface debridement as the cornerstone of non-surgical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop smoking and optimise glycaemic control to modify risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodontal surgery for residual deep pockets and furcation involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Enrol in supportive periodontal maintenance with regular monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progression can usually be halted and teeth retained; lost bone does not regenerate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -166,5 +166,524 @@
       "caption": "Overview comparison matrix for myasthenia gravis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Myasthenia Gravis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/peripheral-nervous-system-and-motor-unit-disorders/myasthenia-gravis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myasthenia_gravis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of myasthenia gravis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical pattern",
+          "cells": [
+            {
+              "text": "Fatigable fluctuating weakness, ptosis and diplopia, worse late in day"
+            },
+            {
+              "text": "Ocular-only for 3 years rarely generalises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AChR antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "80 to 90% of generalised; about 50% of ocular MG",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "{{hy:Negative test does not exclude MG}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MuSK antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 60% of AChR-negative patients",
+              "range": [
+                30,
+                60
+              ]
+            },
+            {
+              "text": "Bulbar, neck and breathing weakness; poor anticholinesterase response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repetitive nerve stimulation 2 to 3 Hz",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "CMAP decrement over 10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Seen in about 60%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single-fibre EMG",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in over 95%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Sensitive, not specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ice pack test",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Lid rise of 2 mm or more after 2 minutes",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Sensitivity about 80%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT or MRI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Thymoma in about 10 to 15%",
+              "range": [
+                10,
+                15
+              ]
+            },
+            {
+              "text": "Thymic enlargement after 40 suggests thymoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Graves disease coexists or mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FVC",
+          "cells": [
+            {
+              "text": "Track ventilatory weakness"
+            },
+            {
+              "text": "Crisis = need for ventilation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "AChR positivity: Merck gives 80 to 90%, Harrison 22e about 85%. Thymoma: Harrison 10 to 15%."
+    },
+    {
+      "id": "myasthenia_gravis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic myasthenia gravis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Proximal leg weakness, low reflexes, dry mouth; strength improves with effort"
+            },
+            {
+              "text": "Increment after exercise or 20 to 50 Hz stimulation; VGCC antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Bulbar weakness with dilated pupils and autonomic signs"
+            },
+            {
+              "text": "Toxin assay; EMG increment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myasthenic syndrome",
+          "cells": [
+            {
+              "text": "Childhood onset, antibody negative"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial PEO or Kearns-Sayre",
+          "cells": [
+            {
+              "text": "Slow symmetric ophthalmoplegia without diplopia or fatigability"
+            },
+            {
+              "text": "Muscle biopsy, genetics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oculopharyngeal dystrophy",
+          "cells": [
+            {
+              "text": "Late-onset ptosis and dysphagia, not fatigable"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Graves ophthalmopathy",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia without ptosis, proptosis"
+            },
+            {
+              "text": "TFTs and orbital imaging"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Intracranial mass",
+          "cells": [
+            {
+              "text": "Fixed cranial nerve palsy"
+            },
+            {
+              "text": "MRI brain and orbits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced or checkpoint inhibitor MG",
+          "cells": [
+            {
+              "text": "Penicillamine or checkpoint inhibitor exposure"
+            },
+            {
+              "text": "Drug history; troponin for myocarditis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myasthenia_gravis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of myasthenia gravis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyridostigmine",
+          "cells": [
+            {
+              "text": "Symptom control, first step"
+            },
+            {
+              "text": "Titrate to response; less useful in MuSK MG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "Generalised or disabling ocular MG"
+            },
+            {
+              "text": "Start 10 mg daily, raise 10 mg weekly to 60 mg, about 2 months, then slow taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azathioprine",
+          "cells": [
+            {
+              "text": "Steroid-sparing"
+            },
+            {
+              "text": "2.5 to 3.5 mg/kg PO once daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thymectomy",
+          "cells": [
+            {
+              "text": "{{hy:All thymomas; generalised MG under 65}}"
+            },
+            {
+              "text": "Remission or lower drug need in 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG or plasma exchange",
+          "cells": [
+            {
+              "text": "Crisis, severe exacerbation, before surgery"
+            },
+            {
+              "text": "IVIG 400 mg/kg daily for 5 days; PLEX over 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complement inhibitors or FcRn blockers",
+          "cells": [
+            {
+              "text": "Refractory generalised MG by antibody status"
+            },
+            {
+              "text": "Meningococcal vaccination before complement inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "MuSK MG or refractory disease"
+            },
+            {
+              "text": "Off-label"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid precipitating drugs",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Aminoglycosides, quinine, magnesium, procainamide, calcium channel blockers, checkpoint inhibitors"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck gives no pyridostigmine or biologic doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myasthenia_gravis-dx-mgmt",
+      "title": "Diagnosis and management of myasthenia gravis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigable ptosis, diplopia, bulbar or limb weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory or severe bulbar weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "ICU, ventilatory support, IVIG or plasma exchange",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AChR antibodies, ice test, TFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AChR antibody positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "MuSK antibodies, RNS and single-fibre EMG",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "MuSK positive or EMG confirms NMJ defect?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Consider LEMS, botulism, myopathy, mass lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chest CT or MRI for thymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pyridostigmine, then prednisone and steroid-sparing agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Thymectomy if thymoma or generalised MG under 65",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

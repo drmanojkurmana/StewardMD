@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for perianal haematoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perianal_haematoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inspection and gentle digital examination",
+          "cells": [
+            {
+              "text": "Tense subcutaneous clot at the verge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctoscopy once acute pain allows",
+          "cells": [
+            {
+              "text": "Internal haemorrhoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of excised tissue",
+          "cells": [
+            {
+              "text": "Used if the lesion is atypical or pigmented"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for constipation and straining",
+          "cells": [
+            {
+              "text": "Contributory factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation review",
+          "cells": [
+            {
+              "text": "Recurrent or spontaneous thromboses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination and imaging for infection",
+          "cells": [
+            {
+              "text": "Exclusion of abscess when infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perianal_haematoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolapsed and thrombosed internal haemorrhoids",
+          "cells": [
+            {
+              "text": "Internal haemorrhoids seen on proctoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal or ischiorectal abscess",
+          "cells": [
+            {
+              "text": "Spreading erythema, fluctuance, fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal carcinoma or pigmented perianal lesion",
+          "cells": [
+            {
+              "text": "Pigmented, indurated or ulcerated lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perianal_haematoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision or evacuation of clot",
+          "cells": [
+            {
+              "text": "Rapid relief when presenting early with severe pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Analgesia, warm baths, stool softeners and topical measures when presenting later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent recurrence",
+          "cells": [
+            {
+              "text": "Treat constipation, avoid straining, dietary fibre and hydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Spontaneous resolution; a residual skin tag may remain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection",
+          "cells": [
+            {
+              "text": "Proctoscopy once acute pain settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation review",
+          "cells": [
+            {
+              "text": "If thromboses are recurrent or spontaneous"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perianal_haematoma-dx-mgmt",
+      "title": "Diagnosis and management of Perianal haematoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute severe perianal pain with a tense subcutaneous clot at the anal verge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (abscess signs, pigmented or ulcerated lesion, recurrent thromboses)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude abscess; specialist review for malignancy or a bleeding disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Digital examination; proctoscopy once pain allows; coagulation review if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a simple clot with no atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider abscess, malignancy or pigmented lesion; histology if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excise or evacuate the clot for rapid relief if presenting early with severe pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage conservatively with analgesia, warm baths and stool softeners if presenting later",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat constipation and avoid straining, with dietary fibre and hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure about spontaneous resolution; a residual skin tag may remain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Perform proctoscopy once acute pain settles to assess internal haemorrhoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and self-limiting; pain usually settles within days to a week",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -161,5 +161,478 @@
       "caption": "Overview comparison matrix for listeriosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Listeria: Clinical Care and Treatment",
+      "kind": "web",
+      "url": "https://www.cdc.gov/listeria/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "listeriosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of invasive listeriosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk group",
+          "cells": [
+            {
+              "text": "Pregnancy, neonate, older adult, impaired cellular immunity"
+            },
+            {
+              "text": "Risk rises each decade after 59"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture",
+          "cells": [
+            {
+              "text": "Isolation from a sterile site confirms"
+            },
+            {
+              "text": "Positive only about half the time in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF white cell count",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Under 1000/uL in about 60 to 75%",
+              "op": "<",
+              "value": 1000
+            },
+            {
+              "text": "{{hy:Bland CSF does not exclude Listeria}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF glucose",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Low in only about 30 to 40%",
+              "range": [
+                30,
+                40
+              ]
+            },
+            {
+              "text": "Mononuclear CSF can mimic TB or fungal meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF Gram stain",
+          "cells": [
+            {
+              "text": "Often negative; may look like cocci or diphtheroids"
+            },
+            {
+              "text": "Multiplex PCR includes Listeria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Better than CT for rhombencephalitis and abscess"
+            },
+            {
+              "text": "Brainstem and cerebellar lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever after exposure",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Above 38.1 C (100.6 F)",
+              "op": ">",
+              "value": 38.1
+            },
+            {
+              "text": "Presumptive listeriosis if no other cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stool culture and serology",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Not validated for invasive disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monocytes",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Below 200/uL",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "With multiorgan failure, marks risk of death"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "listeriosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic listeriosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumococcal or meningococcal meningitis",
+          "cells": [
+            {
+              "text": "Higher CSF neutrophil count, organisms on Gram stain"
+            },
+            {
+              "text": "CSF Gram stain, culture, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "Subacute course, low glucose with lymphocytes"
+            },
+            {
+              "text": "CSF AFB, Xpert, culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptococcal meningitis",
+          "cells": [
+            {
+              "text": "Immunosuppressed host, raised opening pressure"
+            },
+            {
+              "text": "CSF cryptococcal antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain tumour",
+          "cells": [
+            {
+              "text": "Listeria abscess can mimic a mass"
+            },
+            {
+              "text": "MRI and blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral or autoimmune brainstem encephalitis",
+          "cells": [
+            {
+              "text": "Rhombencephalitis is biphasic with fever first"
+            },
+            {
+              "text": "Blood and CSF cultures, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diphtheroid contamination",
+          "cells": [
+            {
+              "text": "Gram-positive rods dismissed as skin flora"
+            },
+            {
+              "text": "MALDI-TOF identification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "listeriosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of listeriosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV ampicillin plus gentamicin",
+          "cells": [
+            {
+              "text": "Invasive or presumptive listeriosis"
+            },
+            {
+              "text": "CDC: typically 14 to 21 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add ampicillin to empiric meningitis therapy",
+          "cells": [
+            {
+              "text": "{{hy:Age over 50 or immunocompromised}}"
+            },
+            {
+              "text": "Ceftriaxone and vancomycin do not cover Listeria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trimethoprim-sulfamethoxazole",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "Test susceptibility; resistance reported"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged course",
+          "cells": [
+            {
+              "text": "Neurolisteriosis, endocarditis, immunocompromise"
+            },
+            {
+              "text": "Longer than bacteraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid dexamethasone",
+          "cells": [
+            {
+              "text": "Neurolisteriosis"
+            },
+            {
+              "text": "Linked with lower survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Fever or fetal distress in a pregnant woman"
+            },
+            {
+              "text": "Treat urgently; neonatal assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic exposed person",
+          "cells": [
+            {
+              "text": "Ate a recalled product, no symptoms"
+            },
+            {
+              "text": "No testing or treatment; return if symptoms within 2 months"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Neither CDC nor the entry gives mg doses; dose per local guidance. Meropenem failures reported despite susceptibility."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "listeriosis-dx-mgmt",
+      "title": "Diagnosis and management of listeriosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, possible Listeria exposure or high-risk host",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Symptomatic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "No tests or antibiotics; return if symptoms within 2 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Fever above 38.1 C or meningitis signs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Blood cultures; MRI and LP if neurologic signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "IV ampicillin plus gentamicin; no dexamethasone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant care or blood culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Listeria isolated?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "CNS infection, endocarditis or immunocompromised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Prolonged IV course with specialist input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete 14 to 21 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stop antibiotics if cultures negative and well",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

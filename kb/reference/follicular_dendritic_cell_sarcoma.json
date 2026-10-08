@@ -155,5 +155,323 @@
       "caption": "Overview comparison matrix for follicular dendritic cell sarcoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "follicular_dendritic_cell_sarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional or core biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Profile for CD21, CD23, CD35, clusterin and podoplanin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epstein-Barr virus studies",
+          "cells": [
+            {
+              "text": "Particularly for the inflammatory pseudotumour-like variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging and PET-CT",
+          "cells": [
+            {
+              "text": "Defines local extent and detects metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Castleman disease",
+          "cells": [
+            {
+              "text": "Identifies associated Castleman disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marker profile",
+          "cells": [
+            {
+              "text": "Excludes interdigitating dendritic cell and histiocytic sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline blood tests and staging",
+          "cells": [
+            {
+              "text": "Baseline status before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "follicular_dendritic_cell_sarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Interdigitating dendritic cell sarcoma",
+          "cells": [
+            {
+              "text": "Separated by the immunohistochemical marker profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histiocytic sarcoma",
+          "cells": [
+            {
+              "text": "Separated by the immunohistochemical marker profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "follicular_dendritic_cell_sarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Primary and usually curative; wide local excision preferred over simple enucleation, with clear margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "After positive or close margins, or high-risk features such as large size or deep location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy for unresectable disease",
+          "cells": [
+            {
+              "text": "Curative or durable local control intent for localised or locoregional disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Reserved for unresectable, recurrent, high-grade or metastatic disease; borrows from soft tissue sarcoma practice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection of EBV-associated variant",
+          "cells": [
+            {
+              "text": "Pseudotumour-like variant is often hepatic or splenic and more indolent; resect where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address coexisting Castleman disease",
+          "cells": [
+            {
+              "text": "Include in the overall plan if identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged surveillance",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging for late local recurrence and distant metastasis, particularly to lung"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Sarcoma and haemato-oncology multidisciplinary team, given rarity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "follicular_dendritic_cell_sarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Follicular dendritic cell sarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected follicular dendritic cell sarcoma: tumour with dendritic-cell features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, deep site, high-grade features, metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer urgently: large, rapidly enlarging, deep or high-grade tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with CD21, CD23, CD35, clusterin and podoplanin staining; EBV studies; PET-CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the marker profile confirm the diagnosis and exclude histiocytic sarcoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider carcinoma, melanoma, soft tissue sarcoma or other dendritic-cell sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision with clear margins as primary treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider adjuvant radiotherapy after positive or close margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reserve systemic therapy for unresectable, recurrent or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prolonged surveillance with cross-sectional imaging for late recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-to-intermediate grade sarcomas, usually curable by excision; recurrence is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

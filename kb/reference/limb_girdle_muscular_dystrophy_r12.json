@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r12 (anoctamin-5-related)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r12-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Characteristically high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NGS panel or exome including ANO5 and DYSF",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Asymmetric posterior thigh and calf involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with dysferlin and anoctamin studies",
+          "cells": [
+            {
+              "text": "Protein-level assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Baseline cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinary myoglobin",
+          "cells": [
+            {
+              "text": "During rhabdomyolysis episodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r12-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "LGMD R2 (dysferlinopathy)",
+          "cells": [
+            {
+              "text": "Overlapping distal Miyoshi phenotype; genetic testing needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LGMD R1 (calpainopathy, CAPN3)",
+          "cells": [
+            {
+              "text": "Phenotypic overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and glycogen-storage myopathies",
+          "cells": [
+            {
+              "text": "Can present with rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic inflammatory myopathy",
+          "cells": [
+            {
+              "text": "Considered when asymmetry raises suspicion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r12-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain strength; avoid overexertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis",
+          "cells": [
+            {
+              "text": "Prompt fluid resuscitation and renal protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded exercise",
+          "cells": [
+            {
+              "text": "Avoid muscle-injury triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and respiratory baseline",
+          "cells": [
+            {
+              "text": "ECG, echocardiography and respiratory monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular rehabilitation",
+          "cells": [
+            {
+              "text": "Ambulation usually retained for many years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r12-dx-mgmt",
+      "title": "Diagnosis and management of Limb-girdle muscular dystrophy R12 (anoctamin-5-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asymmetric calf and quadriceps weakness with exercise myalgia and very high CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dark urine with rhabdomyolysis, breathlessness, rapid weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent renal protection and fluid resuscitation for rhabdomyolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, ANO5 and DYSF sequencing, muscle MRI, biopsy, renal function, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biallelic ANO5 variant identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dysferlinopathy, calpainopathy or a metabolic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; avoid overexertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt fluids and renal protection in rhabdomyolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Graded exercise and avoidance of muscle-injury triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Baseline ECG, echocardiography and respiratory monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable; slow progression with ambulation retained for many years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

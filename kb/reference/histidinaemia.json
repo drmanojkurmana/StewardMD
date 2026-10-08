@@ -157,5 +157,332 @@
       "caption": "Overview comparison matrix for histidinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inborn errors of metabolism references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "histidinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative plasma amino acids",
+          "cells": [
+            {
+              "text": "Isolated elevated histidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino acid and organic acid analysis",
+          "cells": [
+            {
+              "text": "Imidazole compounds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urocanic acid in sweat or skin",
+          "cells": [
+            {
+              "text": "Urocanic acid level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histidase enzyme activity in skin",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood phenylalanine",
+          "cells": [
+            {
+              "text": "Excludes phenylketonuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HAL gene analysis",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental follow-up",
+          "cells": [
+            {
+              "text": "Reassurance for families"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "histidinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenylketonuria",
+          "cells": [
+            {
+              "text": "Shares a positive urinary ferric chloride test; phenylalanine separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urocanic aciduria (UROC1 deficiency)",
+          "cells": [
+            {
+              "text": "Next enzyme block in the pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formiminotransferase deficiency",
+          "cells": [
+            {
+              "text": "Raised formiminoglutamate (FIGLU)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient neonatal hyperhistidinaemia",
+          "cells": [
+            {
+              "text": "Related to prematurity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "histidinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign inborn error",
+          "cells": [
+            {
+              "text": "No specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Avoids unnecessary treatment or investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "Exclude phenylketonuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental or speech problems",
+          "cells": [
+            {
+              "text": "Investigated separately if present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine follow-up",
+          "cells": [
+            {
+              "text": "No routine long-term metabolic follow-up once confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "histidinaemia-dx-mgmt",
+      "title": "Diagnosis and management of Histidinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised plasma histidine found on newborn screen or amino acid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Developmental delay, neurological signs, raised FIGLU, or a distal enzyme block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: metabolic review for developmental delay or raised FIGLU",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma amino acids; urine organic acids; urocanic acid; phenylalanine; HAL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is isolated histidine elevation confirmed, with phenylalanine normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PKU, urocanic aciduria, formiminotransferase deficiency or transient rise",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure the family; no specific treatment is needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm the diagnosis and exclude phenylketonuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Investigate any unrelated developmental or speech problem",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign course; no routine long-term metabolic follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

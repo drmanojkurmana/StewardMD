@@ -154,5 +154,470 @@
       "caption": "Overview comparison matrix for nocardiosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Nocardiosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-positive-bacilli/nocardiosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nocardiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of nocardiosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Host",
+          "cells": [
+            {
+              "text": "Transplant, steroids, other immunosuppression, HIV"
+            },
+            {
+              "text": "No risk factor: test HIV and for chronic granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary picture",
+          "cells": [
+            {
+              "text": "Subacute cough, purulent sputum, nodules or masses that cavitate"
+            },
+            {
+              "text": "Effusion or empyema in about a third"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dissemination",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to a third of pneumonias; CNS in up to two-thirds of those",
+              "op": "=",
+              "value": 33
+            },
+            {
+              "text": "Brain abscess may be silent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smear",
+          "unit": "um",
+          "cells": [
+            {
+              "text": "Beaded branching Gram-positive filaments about 1 um wide, up to 50 um long",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "{{hy:Modified (weak) acid-fast positive}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Hold 2 to 4 weeks",
+              "range": [
+                2,
+                4
+              ]
+            },
+            {
+              "text": "Tell the lab; avoid mycobacterial decontamination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species and susceptibility",
+          "cells": [
+            {
+              "text": "MALDI-TOF or gene sequencing; broth dilution testing"
+            },
+            {
+              "text": "Resistance varies by species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with contrast",
+          "cells": [
+            {
+              "text": "All non-cutaneous, non-ocular cases"
+            },
+            {
+              "text": "Ring-enhancing multilobulated abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL or biopsy",
+          "cells": [
+            {
+              "text": "When sputum smear negative"
+            },
+            {
+              "text": "Smears often negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonisation",
+          "cells": [
+            {
+              "text": "Bronchiectasis or structural lung disease"
+            },
+            {
+              "text": "Isolation does not always mean infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nocardiosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic nocardiosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other cavitary lung infection in immunocompromised host",
+          "cells": [
+            {
+              "text": "TB, Rhodococcus, Legionella, Pseudomonas, Klebsiella, Aspergillus, Cryptococcus"
+            },
+            {
+              "text": "Cultures, AFB, fungal tests"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lung or brain metastases",
+          "cells": [
+            {
+              "text": "Known primary, no infection features"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxoplasmosis or fungal brain abscess",
+          "cells": [
+            {
+              "text": "Advanced HIV or transplant"
+            },
+            {
+              "text": "Serology, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporotrichosis or M. marinum",
+          "cells": [
+            {
+              "text": "Lymphocutaneous spread after garden or water injury"
+            },
+            {
+              "text": "Culture of lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eumycetoma or botryomycosis",
+          "cells": [
+            {
+              "text": "Grains in chronic foot lesion"
+            },
+            {
+              "text": "Granule microscopy and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Actinomycosis",
+          "cells": [
+            {
+              "text": "Anaerobic, not acid-fast, sulfur granules, immunocompetent"
+            },
+            {
+              "text": "Anaerobic culture, modified AFB negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nocardiosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of nocardiosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trimethoprim-sulfamethoxazole",
+          "cells": [
+            {
+              "text": "{{hy:Mainstay for most cases}}"
+            },
+            {
+              "text": "Every 6 to 12 h depending on extent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combination therapy",
+          "cells": [
+            {
+              "text": "Severe, disseminated or CNS disease"
+            },
+            {
+              "text": "Add imipenem or meropenem with amikacin, or ceftriaxone, or linezolid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linezolid",
+          "cells": [
+            {
+              "text": "Amikacin nephrotoxicity concern"
+            },
+            {
+              "text": "Alternative partner"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tailor to susceptibility",
+          "cells": [
+            {
+              "text": "Once species known"
+            },
+            {
+              "text": "Resistance varies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Prolonged, many months"
+            },
+            {
+              "text": "Cutaneous often 6 to 24 months; longer for CNS or immunocompromise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage and debridement",
+          "cells": [
+            {
+              "text": "Abscess or empyema; non-responding brain abscess"
+            },
+            {
+              "text": "Surgical"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reduce immunosuppression",
+          "cells": [
+            {
+              "text": "Transplant or steroid patients"
+            },
+            {
+              "text": "When feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratitis",
+          "cells": [
+            {
+              "text": "Ocular disease"
+            },
+            {
+              "text": "No topical steroids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no mg doses; dose per ID guidance."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nocardiosis-dx-mgmt",
+      "title": "Diagnosis and management of nocardiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunocompromised host with nodules, cavity, brain or skin lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Sputum, BAL or pus: Gram and modified AFB; long culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Beaded branching weak-AFB filaments?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Pursue TB, fungi, malignancy",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Contrast brain MRI in all non-skin cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "CNS, disseminated or severe disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "TMP-SMX plus carbapenem and amikacin, or linezolid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "TMP-SMX alone",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Species and susceptibility; drain abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Months of therapy; cut immunosuppression; reimage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

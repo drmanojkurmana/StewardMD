@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for dpm1-cdg (congenital disorder of glycosylation type ie)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurometabolic and glycosylation references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dpm1_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing or carbohydrate-deficient transferrin",
+          "cells": [
+            {
+              "text": "Type I pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Persistently elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing or exome sequencing for biallelic DPM1 variants",
+          "cells": [
+            {
+              "text": "Biallelic DPM1 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with alpha-dystroglycan immunostaining",
+          "cells": [
+            {
+              "text": "Alpha-dystroglycan glycosylation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and MRI brain",
+          "cells": [
+            {
+              "text": "Structural, migrational and atrophic changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dpm1_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "DPM2-CDG and DPM3-CDG",
+          "cells": [
+            {
+              "text": "Other DPM synthase subunit defects, the closest relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMM2-CDG",
+          "cells": [
+            {
+              "text": "Prototypic type I CDG; muscle and dystroglycan involvement separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary alpha-dystroglycanopathies (POMT1, FKTN, FKRP)",
+          "cells": [
+            {
+              "text": "Muscle-eye-brain and Walker-Warburg spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dpm1_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For the early epileptic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and seating",
+          "cells": [
+            {
+              "text": "Central hypotonia, with posture and seating support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safe-feeding measures",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding where swallowing is unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech therapy",
+          "cells": [
+            {
+              "text": "Severe neurodevelopmental impairment and muscular dystrophy phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "EEG, creatine kinase, neuroimaging and optic atrophy surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Dystroglycanopathy overlap carries cardiac risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier and prenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dpm1_cdg-dx-mgmt",
+      "title": "Diagnosis and management of DPM1-CDG (congenital disorder of glycosylation type Ie)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DPM1-CDG: refractory seizures and muscle weakness with raised creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory seizures, respiratory weakness, cardiomyopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support and cardiac review for weakness or cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin focusing; creatine kinase; DPM1 testing; muscle biopsy; EEG and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic DPM1 variants found with a type I transferrin pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DPM2 or DPM3 CDG, other dystroglycanopathies or PMM2-CDG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication for the early epileptic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, posture and seating support for central hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Safe-feeding measures; nasogastric or gastrostomy feeding if swallowing unsafe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental, occupational and speech therapy for the muscular phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial EEG, creatine kinase, neuroimaging and cardiac surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally severe, with reduced survival; varies with residual enzyme activity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

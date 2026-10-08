@@ -173,5 +173,456 @@
       "caption": "Overview comparison matrix for acute infectious diarrheal diseases and bacterial food poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC Yellow Book, Travelers' Diarrhea",
+      "url": "https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travelers-diarrhea.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 149-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_infectious_diarrheal_diseases_and-diagnostic",
+      "kind": "diagnostic",
+      "title": "Bacterial food poisoning by incubation period",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Organisms",
+        "Symptoms and foods"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation 1 to 6 hours",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "{{hy:Staphylococcus aureus; Bacillus cereus (emetic)}}"
+            },
+            {
+              "text": "Nausea, vomiting, diarrhoea; ham, poultry, egg or potato salad, mayonnaise, cream pastries; fried rice for B. cereus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Incubation 8 to 16 hours",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Clostridium perfringens; B. cereus (diarrhoeal)"
+            },
+            {
+              "text": "Cramps and diarrhoea, vomiting rare; beef, poultry, legumes, gravies, meats, vegetables, dried beans, cereals"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Incubation over 16 hours, watery",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Vibrio cholerae; enterotoxigenic E. coli"
+            },
+            {
+              "text": "Watery diarrhoea; shellfish and water; salads, cheese, meats, water"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Incubation over 16 hours, bloody",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Enterohaemorrhagic E. coli"
+            },
+            {
+              "text": "Bloody diarrhoea; ground beef, roast beef, salami, raw milk, raw vegetables, apple juice"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Incubation over 16 hours, inflammatory",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Salmonella; Campylobacter jejuni"
+            },
+            {
+              "text": "Inflammatory diarrhoea; beef, poultry, eggs, dairy; poultry"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Severity by dehydration",
+          "cells": [
+            {
+              "text": "Mild: thirst, dry mouth; moderate: orthostatic fall, skin tenting, sunken eyes; severe: lethargy, feeble pulse, shock"
+            },
+            {
+              "text": "Guides fluid route"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory stool markers",
+          "cells": [
+            {
+              "text": "Faecal leukocytes or lactoferrin; blood or mucus"
+            },
+            {
+              "text": "Prompt stool culture in febrile dysentery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloody stool, no faecal leukocytes",
+          "cells": [
+            {
+              "text": "Test for Shiga toxin or E. coli O157:H7"
+            },
+            {
+              "text": "Risk of haemolytic uraemic syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_infectious_diarrheal_diseases_and-ddx",
+      "kind": "ddx",
+      "title": "Diarrhoeagenic E. coli pathotypes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Epidemiology",
+        "Clinical syndrome"
+      ],
+      "rows": [
+        {
+          "parameter": "STEC/EHEC",
+          "cells": [
+            {
+              "text": "Food, water, person to person; all ages, industrialised countries"
+            },
+            {
+              "text": "{{hy:Haemorrhagic colitis and haemolytic uraemic syndrome (Shiga toxin)}}"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "ETEC",
+          "cells": [
+            {
+              "text": "Food, water; young children and travellers to developing countries"
+            },
+            {
+              "text": "Traveller's diarrhoea (heat-stable and heat-labile toxins)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "EPEC",
+          "cells": [
+            {
+              "text": "Person to person; young children and neonates in developing countries"
+            },
+            {
+              "text": "Watery or persistent diarrhoea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "EIEC",
+          "cells": [
+            {
+              "text": "Food, water; children and travellers in developing countries"
+            },
+            {
+              "text": "Dysentery"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "EAEC",
+          "cells": [
+            {
+              "text": "Food, water; travellers and all ages in industrialised countries"
+            },
+            {
+              "text": "Traveller's, acute or persistent diarrhoea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Clostridioides difficile",
+          "cells": [
+            {
+              "text": "Hospital or recent antibiotics"
+            },
+            {
+              "text": "Inflammatory diarrhoea; toxin A/B or PCR testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_infectious_diarrheal_diseases_and-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute infectious diarrhoea",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration solution",
+          "cells": [
+            {
+              "text": "{{hy:All patients; IV fluids if severe dehydration}}"
+            },
+            {
+              "text": "1 packet in the stated volume, generally 1 L, of safe water"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loperamide",
+          "cells": [
+            {
+              "text": "Non-inflammatory watery diarrhoea"
+            },
+            {
+              "text": "4 mg, then 2 mg after each loose stool, max 16 mg/24 h; adjunct only if bloody or febrile"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Dysentery, febrile diarrhoea, or fluoroquinolone resistance (e.g. South and Southeast Asia)"
+            },
+            {
+              "text": "1000 mg single dose, or 500 mg daily for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin or levofloxacin",
+          "cells": [
+            {
+              "text": "Moderate to severe non-dysenteric traveller's diarrhoea"
+            },
+            {
+              "text": "Cipro 750 mg once or 500 mg twice daily for 3 days; levo 500 mg daily 1 to 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifaximin",
+          "cells": [
+            {
+              "text": "Non-invasive traveller's diarrhoea"
+            },
+            {
+              "text": "200 mg three times daily for 3 days; not if invasive pathogen suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid antibiotics and antimotility drugs",
+          "cells": [
+            {
+              "text": "Suspected Shiga toxin-producing E. coli"
+            },
+            {
+              "text": "Risk of haemolytic uraemic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral vancomycin or metronidazole",
+          "cells": [
+            {
+              "text": "C. difficile infection"
+            },
+            {
+              "text": "Stop the precipitating antibiotic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zinc",
+          "cells": [
+            {
+              "text": "Children with diarrhoea"
+            },
+            {
+              "text": "With rehydration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_infectious_diarrheal_diseases_and-dx-mgmt",
+      "title": "Diagnosis and management of acute infectious diarrhoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute diarrhoea with or without vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Assess dehydration; start oral rehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe dehydration or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IV fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever, blood or mucus (dysentery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Watery: ORS, loperamide if needed; no routine antibiotic",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stool culture or multiplex PCR; Shiga toxin test if bloody",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Shiga toxin E. coli suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "No antibiotics or antimotility drugs; watch for HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Azithromycin; tailor to culture",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

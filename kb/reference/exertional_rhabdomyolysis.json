@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for exertional rhabdomyolysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tintinalli's Emergency Medicine / ACSM guidance on exertional rhabdomyolysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "exertional_rhabdomyolysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase, serially",
+          "cells": [
+            {
+              "text": "Course of the disease; markedly raised CK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Potassium, phosphate and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis dipstick",
+          "cells": [
+            {
+              "text": "Blood on dipstick without red cells indicates myoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Changes of hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status and core temperature",
+          "cells": [
+            {
+              "text": "Concurrent heat illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment pressure measurement",
+          "cells": [
+            {
+              "text": "Where compartment syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exertional_rhabdomyolysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute compartment syndrome",
+          "cells": [
+            {
+              "text": "A tense, painful limb with pain on passive stretch; pain can be mistaken for soreness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional heat stroke",
+          "cells": [
+            {
+              "text": "Concurrent hyperthermia and altered mental state"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exertional_rhabdomyolysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive intravenous crystalloid",
+          "cells": [
+            {
+              "text": "Maintains urine output and prevents pigment nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase, renal function and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of hyperkalaemia",
+          "cells": [
+            {
+              "text": "Calcium and insulin-dextrose with ECG monitoring; management of phosphate and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Refractory acute kidney injury or life-threatening electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency fasciotomy",
+          "cells": [
+            {
+              "text": "Acute compartment syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove precipitants",
+          "cells": [
+            {
+              "text": "Stop offending drugs and supplements; cool if there is heat illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluate recurrent episodes",
+          "cells": [
+            {
+              "text": "Metabolic myopathy or malignant hyperthermia susceptibility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "exertional_rhabdomyolysis-dx-mgmt",
+      "title": "Diagnosis and management of Exertional rhabdomyolysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Muscle pain, weakness and dark urine after intense or unaccustomed exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (oliguria, rising creatinine, hyperkalaemia, tense painful limb, heat illness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium treatment; fasciotomy if compartment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum CK, renal function, electrolytes, urine dipstick and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Markedly raised CK with myoglobinuria on the dipstick?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider compartment syndrome, myositis or a metabolic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early aggressive intravenous fluids to protect the kidneys",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial monitoring of CK, renal function and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove drugs and supplements; cool if heat illness is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy for refractory kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Evaluate recurrent episodes for metabolic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover fully with early fluids; renal function usually normalises",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

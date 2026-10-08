@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for generalized anxiety disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalized_anxiety_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standardised anxiety rating scales",
+          "cells": [
+            {
+              "text": "Quantifies severity and monitors response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Thyroid status; hyperthyroidism is a mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression and other anxiety disorders",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance and caffeine use history",
+          "cells": [
+            {
+              "text": "Modifiable contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted cardiac evaluation",
+          "cells": [
+            {
+              "text": "Where palpitations or chest symptoms predominate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_anxiety_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Excluded by thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caffeine, stimulant or substance-related anxiety",
+          "cells": [
+            {
+              "text": "Caffeine and stimulant intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia",
+          "cells": [
+            {
+              "text": "Palpitations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_anxiety_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "First-line psychological treatment, with worry-focused techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SSRI or SNRI",
+          "cells": [
+            {
+              "text": "First-line maintenance pharmacotherapy; allow adequate time for response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregabalin or buspirone",
+          "cells": [
+            {
+              "text": "Second-line options; avoid long-term benzodiazepines because of dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modifiable contributors",
+          "cells": [
+            {
+              "text": "Caffeine and stimulant intake; exclude medical mimics such as hyperthyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid depression and substance misuse",
+          "cells": [
+            {
+              "text": "Worsen chronicity and disability; identify and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Severity with standardised scales; assess suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Severe, refractory or highly comorbid presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalized_anxiety_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Generalized anxiety disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected generalised anxiety disorder: persistent, excessive worry",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suicidal ideation, escalating benzodiazepine or alcohol use)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent risk assessment for emergent suicidal ideation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standardised anxiety scales, thyroid function, depression and substance screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are medical mimics and substance causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider depression, panic disorder, social anxiety or obsessive-compulsive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cognitive behavioural therapy as first-line psychological treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "SSRI or SNRI as maintenance pharmacotherapy, allowing time for response",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pregabalin or buspirone second line; avoid long-term benzodiazepines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address caffeine, stimulants and comorbid depression or substance misuse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and fluctuating; outcomes improve with sustained psychotherapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

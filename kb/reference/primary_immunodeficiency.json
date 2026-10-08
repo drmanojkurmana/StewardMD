@@ -188,5 +188,468 @@
       "caption": "Overview comparison matrix for primary immunodeficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Common Variable Immunodeficiency",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/immunology-allergic-disorders/immunodeficiency-disorders/common-variable-immunodeficiency-cvid"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_immunodeficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Tests that localise a primary immunodeficiency",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Abnormal result",
+        "Points to"
+      ],
+      "rows": [
+        {
+          "parameter": "Infection pattern",
+          "cells": [
+            {
+              "text": "Sinopulmonary pyogenic infection"
+            },
+            {
+              "text": "Antibody defect; opportunistic infection points to T-cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CVID criteria",
+          "cells": [
+            {
+              "text": "IgG 2 SD or more below mean, low IgA or IgM, poor vaccine responses, other causes excluded"
+            },
+            {
+              "text": "Onset usually age 20 to 40"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum IgG, IgA, IgM, IgE",
+          "cells": [
+            {
+              "text": "Low or absent"
+            },
+            {
+              "text": "Agammaglobulinemia, CVID, IgA deficiency, hyper-IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccine antibody responses",
+          "cells": [
+            {
+              "text": "Poor response to tetanus or pneumococcal polysaccharide"
+            },
+            {
+              "text": "Functional antibody defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Low T cells; low switched memory B cells"
+            },
+            {
+              "text": "SCID, combined defects; CVID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infant lymphocytopenia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Lymphopenia suggests SCID in over 90%",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Urgent: SCID is fatal untreated}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DHR or NBT test",
+          "cells": [
+            {
+              "text": "Absent oxidative burst"
+            },
+            {
+              "text": "Chronic granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CH50 and AP50",
+          "cells": [
+            {
+              "text": "Absent classic or alternative pathway activity"
+            },
+            {
+              "text": "Complement deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement defect patterns",
+          "cells": [
+            {
+              "text": "Classic pathway: immune-complex disease; C3, factor H or I: pyogenic infection, HUS; C5 to C9 or properdin: Neisseria"
+            },
+            {
+              "text": "Measure single components"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Howell-Jolly bodies",
+          "cells": [
+            {
+              "text": "On blood smear"
+            },
+            {
+              "text": "Asplenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_immunodeficiency-ddx",
+      "kind": "ddx",
+      "title": "Secondary and mimicking causes of recurrent infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "HIV infection",
+          "cells": [
+            {
+              "text": "Opportunistic infections, low CD4"
+            },
+            {
+              "text": "HIV test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-losing states",
+          "cells": [
+            {
+              "text": "Nephrotic syndrome or enteropathy with low IgG and albumin"
+            },
+            {
+              "text": "Urine protein, stool alpha-1 antitrypsin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymoma or MDS hypogammaglobulinemia",
+          "cells": [
+            {
+              "text": "Adult onset, mediastinal mass or cytopenias"
+            },
+            {
+              "text": "CT chest, marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLL, myeloma or lymphoma",
+          "cells": [
+            {
+              "text": "Clonal B cells or M-protein"
+            },
+            {
+              "text": "Flow cytometry, SPEP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug-induced immunosuppression",
+          "cells": [
+            {
+              "text": "Rituximab, steroids, anticonvulsants"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomic causes (cystic fibrosis, bronchiectasis)",
+          "cells": [
+            {
+              "text": "Recurrent infection at one site"
+            },
+            {
+              "text": "Sweat test, CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-cytokine autoantibodies",
+          "cells": [
+            {
+              "text": "Adult-onset mycobacterial or fungal infection"
+            },
+            {
+              "text": "Anti-IFN-gamma antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "X-linked agammaglobulinemia versus CVID",
+          "cells": [
+            {
+              "text": "Onset in infancy, absent B cells"
+            },
+            {
+              "text": "B-cell count, BTK testing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "primary_immunodeficiency-treatment",
+      "kind": "treatment",
+      "title": "Treating primary immunodeficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IgG replacement (IV or SC)",
+          "cells": [
+            {
+              "text": "Antibody deficiency including CVID and XLA"
+            },
+            {
+              "text": "Lifelong; do not test vaccine titers within 6 months of IVIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prophylactic antibiotics",
+          "cells": [
+            {
+              "text": "Recurrent infection; azithromycin in selected antibody deficiency"
+            },
+            {
+              "text": "TMP-SMX against Pneumocystis in T-cell defects"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allogeneic HSCT or gene therapy",
+          "cells": [
+            {
+              "text": "SCID and profound cellular defects"
+            },
+            {
+              "text": "Gene therapy for ADA-SCID, X-SCID, Artemis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid live vaccines; irradiated CMV-safe blood",
+          "cells": [
+            {
+              "text": "T-cell or combined defects"
+            },
+            {
+              "text": "BCG can disseminate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for complications",
+          "cells": [
+            {
+              "text": "CVID autoimmunity, granulomas, enteropathy"
+            },
+            {
+              "text": "Rituximab, vedolizumab, TNF inhibitors or steroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "CVID"
+            },
+            {
+              "text": "Yearly spirometry, CBC, liver tests; gastric cancer or lymphoma in about 10%"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_immunodeficiency-dx-mgmt",
+      "title": "Diagnosis and management of suspected primary immunodeficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent, severe or unusual infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Exclude HIV, drugs, protein loss, anatomic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "CBC with smear, IgG, IgA, IgM",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Infant with lymphopenia or opportunistic infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Urgent T- and B-cell subsets; HSCT pathway for SCID",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Low immunoglobulins or poor vaccine response?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Antibody defect: B-cell subsets, IgG replacement",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Neisseria or recurrent pyogenic sepsis?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "CH50 and AP50; vaccinate; antibiotic plan",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Phagocyte tests (DHR) and specialist review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

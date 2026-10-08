@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hollow visceral myopathy (chronic intestinal pseudo-obstruction)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hollow_visceral_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiography and contrast studies",
+          "cells": [
+            {
+              "text": "Dilated bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Excludes a mechanical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-thickness intestinal biopsy",
+          "cells": [
+            {
+              "text": "Histology and immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal manometry",
+          "cells": [
+            {
+              "text": "Low-amplitude contractions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment and bacterial overgrowth testing",
+          "cells": [
+            {
+              "text": "Malnutrition and overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hollow_visceral_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical intestinal obstruction",
+          "cells": [
+            {
+              "text": "Excluded by imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial neurogastrointestinal encephalomyopathy",
+          "cells": [
+            {
+              "text": "Mitochondrial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal neuronal dysplasia and other dysganglionoses",
+          "cells": [
+            {
+              "text": "Dysganglionosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis and other connective tissue disease",
+          "cells": [
+            {
+              "text": "Connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hollow_visceral_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Small frequent meals; prioritised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical antibiotics",
+          "cells": [
+            {
+              "text": "Small-intestinal bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel rest and nasogastric decompression",
+          "cells": [
+            {
+              "text": "Pseudo-obstructive episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetic agents",
+          "cells": [
+            {
+              "text": "Cautious trial given limited efficacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract involvement",
+          "cells": [
+            {
+              "text": "Smooth-muscle involvement, managed concurrently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition complications",
+          "cells": [
+            {
+              "text": "Monitored long term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist intestinal failure service",
+          "cells": [
+            {
+              "text": "Gut motility referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hollow_visceral_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Hollow visceral myopathy (chronic intestinal pseudo-obstruction)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent intestinal pseudo-obstruction with dilated bowel and malnutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Perforation, sepsis, severe malnutrition, or urinary retention?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: bowel rest, decompression and surgical review for perforation or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal imaging for mechanical cause; full-thickness biopsy; manometry; SIBO testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a non-mechanical neuromuscular cause confirmed on biopsy or manometry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical obstruction, mitochondrial disease, dysganglionosis or scleroderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nutritional support with small frequent feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyclical antibiotics for small-intestinal bacterial overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bowel rest and nasogastric decompression for episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cautious trial of prokinetic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Nutrition maintained; referral to intestinal failure service",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for laron syndrome (gh receptor / gh insensitivity)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laron_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal growth hormone and IGF-1",
+          "cells": [
+            {
+              "text": "High or normal growth hormone with low IGF-1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGF-1 generation test",
+          "cells": [
+            {
+              "text": "Fails to raise IGF-1 after growth hormone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGFBP-3 and acid-labile subunit levels",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GHR gene sequencing",
+          "cells": [
+            {
+              "text": "Growth hormone receptor mutation, the most common cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose monitoring",
+          "cells": [
+            {
+              "text": "Hypoglycaemia in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age and growth velocity",
+          "cells": [
+            {
+              "text": "Growth pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laron_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated growth hormone deficiency",
+          "cells": [
+            {
+              "text": "Growth hormone itself is low and replacement works; here it is high or normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGF-1 gene or IGF-1 receptor defects",
+          "cells": [
+            {
+              "text": "Distinguished from GHR defects by genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laron_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recombinant IGF-1 (mecasermin)",
+          "cells": [
+            {
+              "text": "Specific treatment; growth hormone replacement is ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia prevention",
+          "cells": [
+            {
+              "text": "Regular feeding; IGF-1 given with food, as it can itself cause hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and treatment monitoring",
+          "cells": [
+            {
+              "text": "Growth velocity and bone age; lymphoid or tonsillar hypertrophy, raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology, dietetics and auxology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial support",
+          "cells": [
+            {
+              "text": "For the effects of short stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually autosomal recessive; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laron_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Laron syndrome (GH receptor / GH insensitivity)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe postnatal growth failure with high GH, low IGF-1 and infantile hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent fasting hypoglycaemia, seizure, falling centiles)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent glucose management and paediatric endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Basal GH and IGF-1, IGF-1 generation test, GHR sequencing, glucose monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the IGF-1 generation test fail, with a GHR variant on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated GH deficiency or IGF-1 gene or receptor defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant IGF-1 (mecasermin), as GH replacement is ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prevent fasting hypoglycaemia with regular feeds and IGF-1 given with food",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor growth velocity, bone age and IGF-1 treatment effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary care with endocrinology, dietetics and auxology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Psychosocial support and genetic counselling with family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Marked short stature; favourable metabolic profile, low diabetes and cancer rates",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

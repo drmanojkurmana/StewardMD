@@ -150,5 +150,342 @@
       "caption": "Overview comparison matrix for primary myelofibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_myelofibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Leucoerythroblastic changes and teardrop cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow trephine biopsy with reticulin and collagen staining",
+          "cells": [
+            {
+              "text": "Grade of fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for JAK2, CALR and MPL",
+          "cells": [
+            {
+              "text": "Driver mutations and high-molecular-risk panels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCR-ABL1 testing",
+          "cells": [
+            {
+              "text": "Exclusion of chronic myeloid leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetic analysis",
+          "cells": [
+            {
+              "text": "Prognostic stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Splenomegaly and extramedullary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_myelofibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic myeloid leukaemia",
+          "cells": [
+            {
+              "text": "BCR-ABL1 positive"
+            },
+            {
+              "text": "BCR-ABL1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary (reactive) myelofibrosis",
+          "cells": [
+            {
+              "text": "Metastatic cancer or infection"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-polycythaemia vera or post-essential thrombocythaemia myelofibrosis",
+          "cells": [
+            {
+              "text": "Preceding polycythaemia vera or essential thrombocythaemia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_myelofibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Prognostic scores such as DIPSS to direct treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "Only curative option; offered to eligible higher-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruxolitinib",
+          "cells": [
+            {
+              "text": "JAK inhibition to reduce symptomatic splenomegaly and constitutional symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Erythropoiesis-stimulating agents, danazol, luspatercept or red cell transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spleen",
+          "cells": [
+            {
+              "text": "Splenic irradiation or splenectomy for massive symptomatic splenomegaly refractory to drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Transfusion; iron chelation for transfusional iron overload; treatment of extramedullary haematopoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood counts, spleen size and blast proportion for progression and transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Haematology-led care with early symptom-focused and palliative support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_myelofibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Primary myelofibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary myelofibrosis: marrow fibrosis with leucoerythroblastic film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising blasts, severe anaemia with bleeding, massive spleen or portal hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for transformation or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; trephine biopsy with reticulin; JAK2, CALR, MPL; BCR-ABL1; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do marrow biopsy and molecular tests confirm primary myelofibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CML, reactive or post-PV or post-ET myelofibrosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prognostic scoring such as DIPSS to direct treatment intensity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allogeneic transplant as the only curative option",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ruxolitinib to reduce splenomegaly and constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anaemia management, transfusion, and splenic irradiation if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haematology-led care with early symptom-focused and palliative support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

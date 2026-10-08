@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for eccrine poroma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eccrine_poroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Vascular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for EMA and CEA",
+          "cells": [
+            {
+              "text": "Ductal differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel lymph node assessment",
+          "cells": [
+            {
+              "text": "Nodal spread if porocarcinoma confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Metastatic potential when malignancy is diagnosed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eccrine_poroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic granuloma",
+          "cells": [
+            {
+              "text": "Bleeding vascular lesion that can be mistaken for poroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amelanotic melanoma",
+          "cells": [
+            {
+              "text": "Non-pigmented lesion that must be excluded by histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porocarcinoma",
+          "cells": [
+            {
+              "text": "Malignant change within a poroma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eccrine_poroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Curative for benign poroma, with low recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Distinguishes poroma from porocarcinoma and amelanotic melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Confirmed porocarcinoma with clear margins; Mohs for critical sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodal and staging assessment",
+          "cells": [
+            {
+              "text": "Sentinel node and imaging when metastatic potential is diagnosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referrals",
+          "cells": [
+            {
+              "text": "Dermatology or plastic surgery for excision; oncology for nodal or distant spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Local recurrence and, in porocarcinoma, metastasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eccrine_poroma-dx-mgmt",
+      "title": "Diagnosis and management of eccrine poroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected eccrine poroma: vascular nodule on the skin of an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, ulceration, infiltration, regional lymph nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent excision and histology for suspected porocarcinoma; check nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy; excisional biopsy with histology; EMA and CEA staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm a benign poroma rather than porocarcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyogenic granuloma, amelanotic melanoma or basal or squamous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, which is curative for benign poroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Histological confirmation to exclude porocarcinoma and melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Wide local excision with clear margins if porocarcinoma is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sentinel node assessment and staging imaging for metastatic potential",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oncology referral for nodal or distant spread; local follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign poroma is cured by complete excision; porocarcinoma can metastasise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

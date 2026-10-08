@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for foix-chavany-marie (opercular) syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "foix_chavany_marie_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Bilateral opercular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Cerebrovascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG, especially in children",
+          "cells": [
+            {
+              "text": "Reversible epileptic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Infective or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow assessment",
+          "cells": [
+            {
+              "text": "Feeding safety"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foix_chavany_marie_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brainstem (true) bulbar palsy",
+          "cells": [
+            {
+              "text": "Lower motor neuron pattern; automatic movements lost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis with bulbar onset",
+          "cells": [
+            {
+              "text": "Progressive motor neuron disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis with bulbar weakness",
+          "cells": [
+            {
+              "text": "Fatigable bulbar weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foix_chavany_marie_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperacute stroke reperfusion",
+          "cells": [
+            {
+              "text": "Thrombolysis or thrombectomy where eligible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary stroke prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet or anticoagulant, statin and vascular risk control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal swallow assessment and modified feeding",
+          "cells": [
+            {
+              "text": "Texture modification and enteral feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy with augmentative communication",
+          "cells": [
+            {
+              "text": "Anarthria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinic therapy and positioning for drooling",
+          "cells": [
+            {
+              "text": "Plus oral care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and dietetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "foix_chavany_marie_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Foix-Chavany-Marie (opercular) syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anarthria, drooling and dysphagia with preserved comprehension after bilateral insult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway compromise, acute new onset, inability to manage secretions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway review and stroke pathway for acute onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain; CT or MR angiography; EEG in children; CSF if infective; swallow study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bilateral opercular lesion on MRI with automatic-voluntary dissociation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider brainstem bulbar palsy, motor neuron disease or myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reperfusion therapy for acute stroke when eligible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Secondary prevention with antiplatelet or anticoagulant and statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Swallow assessment and modified or enteral feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and language therapy with augmentative communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on cause and extent; childhood epileptic form may be reversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

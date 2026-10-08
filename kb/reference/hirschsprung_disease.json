@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hirschsprung disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hirschsprung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Rectal suction biopsy",
+          "cells": [
+            {
+              "text": "Absent ganglion cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast enema, unprepped",
+          "cells": [
+            {
+              "text": "Transition zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry in older children",
+          "cells": [
+            {
+              "text": "Rectoanal reflex pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Distal obstruction with dilated bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and syndrome evaluation",
+          "cells": [
+            {
+              "text": "Associated syndromes where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hirschsprung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meconium ileus",
+          "cells": [
+            {
+              "text": "Often associated with cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meconium plug or small left colon syndrome",
+          "cells": [
+            {
+              "text": "Meconium plug without aganglionosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional constipation",
+          "cells": [
+            {
+              "text": "Older children, without aganglionosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal malformation",
+          "cells": [
+            {
+              "text": "Anatomical anorectal defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hirschsprung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive pull-through",
+          "cells": [
+            {
+              "text": "Resects the aganglionic segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative decompression",
+          "cells": [
+            {
+              "text": "Rectal irrigations and washouts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterocolitis",
+          "cells": [
+            {
+              "text": "Prompt recognition and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative bowel management",
+          "cells": [
+            {
+              "text": "Persistent constipation or incontinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Internal sphincter injection for postoperative obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RET association and family risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric surgery, continence and nutrition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hirschsprung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hirschsprung Disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with no meconium within 48 hours, or distension and bilious vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, explosive diarrhoea, sepsis, shock or toxic megacolon?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and decompression for enterocolitis or toxic megacolon",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph; contrast enema; rectal suction biopsy; genetic evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are ganglion cells absent on rectal suction biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meconium ileus, meconium plug, anorectal malformation or functional constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Definitive pull-through resecting the aganglionic bowel",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preoperative decompression with rectal irrigations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vigilant prevention and treatment of enterocolitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Botulinum toxin to the internal sphincter for postoperative obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bowel function restored after pull-through; continence and nutrition follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

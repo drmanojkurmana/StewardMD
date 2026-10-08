@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for hereditary xanthinuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_xanthinuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and urinary uric acid",
+          "cells": [
+            {
+              "text": "Characteristically very low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary xanthine and hypoxanthine quantification",
+          "cells": [
+            {
+              "text": "Xanthine excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone analysis",
+          "cells": [
+            {
+              "text": "Xanthine composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound or low-dose imaging",
+          "cells": [
+            {
+              "text": "Radiolucent calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assay or allopurinol loading test",
+          "cells": [
+            {
+              "text": "Distinguishes xanthine oxidase deficiency types"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "XDH and MOCOS molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_xanthinuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Xanthine oxidase inhibitor-induced xanthinuria",
+          "cells": [
+            {
+              "text": "Iatrogenic, from xanthine oxidase inhibitor therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molybdenum cofactor deficiency",
+          "cells": [
+            {
+              "text": "Severe neonatal encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Purine nucleoside phosphorylase deficiency",
+          "cells": [
+            {
+              "text": "Disordered purine metabolism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_xanthinuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Generous fluid intake",
+          "cells": [
+            {
+              "text": "Keeps urine dilute; the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-purine diet",
+          "cells": [
+            {
+              "text": "Limits the substrate load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid xanthine oxidase inhibitors",
+          "cells": [
+            {
+              "text": "Such as allopurinol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urological intervention",
+          "cells": [
+            {
+              "text": "Symptomatic urinary calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal surveillance",
+          "cells": [
+            {
+              "text": "Renal function and periodic imaging for radiolucent stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xanthine myopathy",
+          "cells": [
+            {
+              "text": "Symptomatic pain relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_xanthinuria-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary xanthinuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent xanthine stones or renal impairment with very low uric acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Obstructing stones with kidney injury, recurrent infection, or progressive renal decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urology for obstructing stones; treat acute kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and urinary uric acid; urinary xanthine; stone analysis; XDH and MOCOS testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is xanthine found in stones, with an XDH or MOCOS variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider renal hypouricaemia, MoCo deficiency, PNP deficiency or idiopathic stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Generous fluid intake to keep urine dilute",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-purine diet to limit the substrate load",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid xanthine oxidase inhibitors such as allopurinol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urological intervention for symptomatic calculi",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stones controlled with hydration; renal function monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

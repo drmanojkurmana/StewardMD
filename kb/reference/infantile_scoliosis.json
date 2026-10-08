@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for infantile idiopathic scoliosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_scoliosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing or supine PA and lateral radiographs",
+          "cells": [
+            {
+              "text": "Cobb angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rib-vertebral angle difference",
+          "cells": [
+            {
+              "text": "Progression risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine MRI",
+          "cells": [
+            {
+              "text": "Intraspinal or neural-axis anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Signs of cord abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, chest shape and respiratory assessment",
+          "cells": [
+            {
+              "text": "Progressive curves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital, syndromic or genetic evaluation",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_scoliosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intraspinal anomaly (syrinx, tethered cord)",
+          "cells": [
+            {
+              "text": "Left thoracic curve or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular scoliosis",
+          "cells": [
+            {
+              "text": "Cerebral palsy or spinal muscular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compensatory curve from leg-length discrepancy",
+          "cells": [
+            {
+              "text": "Postural curve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_scoliosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Curves at low progression risk, with serial Cobb angle measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial casting",
+          "cells": [
+            {
+              "text": "Elongation-derotation-flexion casting as first-line for progressive curves in young children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing",
+          "cells": [
+            {
+              "text": "Holds correction between casting phases or after casting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine MRI",
+          "cells": [
+            {
+              "text": "Excludes Chiari malformation, syrinx or tethered cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growing rods",
+          "cells": [
+            {
+              "text": "Severe progressive curves, preserving spinal and thoracic growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest monitoring",
+          "cells": [
+            {
+              "text": "Chest shape and respiratory function for thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_scoliosis-dx-mgmt",
+      "title": "Diagnosis and management of Infantile idiopathic scoliosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral spinal curve detected before three years of age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive curve, left thoracic curve, neurological signs or poor chest growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Whole-spine MRI and neurosurgical review; monitor respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cobb angle, rib-vertebral angle difference, neurological examination, whole-spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Idiopathic pattern with no intraspinal anomaly on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the intraspinal, congenital or neuromuscular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe low-risk curves with serial Cobb measurement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial elongation-derotation-flexion casting for progressive curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing between casting phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Growing rods for severe progressive curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor chest shape and respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Low-risk curves observed; progressive curves treated to protect chest growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

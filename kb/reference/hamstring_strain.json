@@ -142,5 +142,312 @@
       "caption": "Overview comparison matrix for hamstring strain."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hamstring_strain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of site, strength and mechanism",
+          "cells": [
+            {
+              "text": "Site, strength and mechanism of injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Grades the injury and identifies tendon or avulsion involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for proximal avulsion",
+          "cells": [
+            {
+              "text": "Avulsion requiring surgical referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar spine evaluation",
+          "cells": [
+            {
+              "text": "Used if referred pain is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional testing",
+          "cells": [
+            {
+              "text": "Guides return to sport"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hamstring_strain-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proximal hamstring tendon avulsion",
+          "cells": [
+            {
+              "text": "Tendon retraction; prompt orthopaedic assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischial apophyseal avulsion",
+          "cells": [
+            {
+              "text": "Adolescent presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referred pain from the lumbar spine or sciatic nerve",
+          "cells": [
+            {
+              "text": "Lumbar spine evaluated when referral is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adductor or other thigh muscle strain",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Posterior leg pain and swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hamstring_strain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute care",
+          "cells": [
+            {
+              "text": "Protection, relative rest, ice, compression and elevation, with simple analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive rehabilitation",
+          "cells": [
+            {
+              "text": "Eccentric hamstring strengthening and graded loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to sport",
+          "cells": [
+            {
+              "text": "Criteria-based, guided by functional testing, to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Ongoing eccentric strength and conditioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic referral",
+          "cells": [
+            {
+              "text": "Large proximal free-tendon avulsion, especially with retraction; may need surgical repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar spine assessment",
+          "cells": [
+            {
+              "text": "When referred symptoms are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hamstring_strain-dx-mgmt",
+      "title": "Diagnosis and management of Hamstring strain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden sharp posterior thigh pain during sprinting or sudden stretching",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tendon retraction, large haematoma, leg swelling, adolescent)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: prompt orthopaedic referral for proximal avulsion; assess for DVT",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment of site and strength; ultrasound or MRI to grade the injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a proximal avulsion ruled out on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Proximal avulsion suspected: refer for surgical assessment and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protection, relative rest, ice, compression and elevation, with simple analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive eccentric hamstring strengthening and graded loading",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Criteria-based graded return to sport guided by functional testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Return to sport; ongoing eccentric conditioning to reduce recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

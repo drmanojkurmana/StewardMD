@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for gelatinous drop-like corneal dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gelatinous_drop_like_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy",
+          "cells": [
+            {
+              "text": "Mulberry-like subepithelial nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with Congo red staining",
+          "cells": [
+            {
+              "text": "Subepithelial amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TACSTD2 genetic testing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT",
+          "cells": [
+            {
+              "text": "Maps subepithelial deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In vivo confocal microscopy",
+          "cells": [
+            {
+              "text": "Epithelial and subepithelial layers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelial barrier and surface staining",
+          "cells": [
+            {
+              "text": "Surface barrier function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gelatinous_drop_like_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Band keratopathy",
+          "cells": [
+            {
+              "text": "Can be confused with subepithelial amyloid nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salzmann nodular degeneration",
+          "cells": [
+            {
+              "text": "Can be confused with subepithelial amyloid nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lattice corneal dystrophy",
+          "cells": [
+            {
+              "text": "Stromal amyloid deposition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gelatinous_drop_like_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Superficial keratectomy",
+          "cells": [
+            {
+              "text": "Removes mulberry-like subepithelial amyloid to improve vision; recurrence is rapid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lamellar or penetrating keratoplasty",
+          "cells": [
+            {
+              "text": "For severe visual loss; monitor for recurrence in the graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rigid contact lens",
+          "cells": [
+            {
+              "text": "Protective barrier to reduce amyloid re-accumulation after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Lubricants and tinted lenses for photophobia, tearing and foreign-body sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment imaging",
+          "cells": [
+            {
+              "text": "Maps deposits and detects recurrence for timely re-intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm corneal localisation",
+          "cells": [
+            {
+              "text": "Excludes systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TACSTD2 inheritance; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gelatinous_drop_like_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Gelatinous drop-like corneal dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gelatinous drop-like corneal dystrophy: mulberry-like subepithelial nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (confluent amyloid, disabling photophobia, rapid recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Keratoplasty referral for severe early visual loss from confluent deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, Congo red histology, OCT and TACSTD2 genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show subepithelial amyloid by Congo red staining?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider band keratopathy, Salzmann degeneration or lattice dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Superficial keratectomy, with expected rapid recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lamellar or penetrating keratoplasty for severe visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rigid contact lens wear as a protective barrier after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lubricants and tinted lenses for photophobia and surface symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early severe visual impairment; more aggressive than classic stromal dystrophies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for leydig cell tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leydig_cell_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum testosterone with LH and FSH",
+          "cells": [
+            {
+              "text": "Androgen excess with suppressed gonadotrophins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH (LHRH) stimulation test",
+          "cells": [
+            {
+              "text": "Prepubertal, suppressed response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Testicular mass and its characteristics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal androgen profile with 17-hydroxyprogesterone",
+          "cells": [
+            {
+              "text": "Excludes congenital adrenal hyperplasia and rest tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-hCG",
+          "cells": [
+            {
+              "text": "Excludes an hCG-driven process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the resected lesion",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; assesses atypical features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leydig_cell_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial male-limited precocious puberty (testotoxicosis)",
+          "cells": [
+            {
+              "text": "Activating LHCGR mutation rather than a tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leydig cell hyperplasia",
+          "cells": [
+            {
+              "text": "Chronic hCG or LH-receptor stimulation rather than a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular adrenal rest tumour in congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Responds to glucocorticoid control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central precocious puberty",
+          "cells": [
+            {
+              "text": "Gonadotrophin-dependent; the GnRH test distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leydig_cell_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testis-sparing enucleation",
+          "cells": [
+            {
+              "text": "Definitive treatment, reversing sex-steroid excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "Where organ preservation is not feasible or malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; assesses atypical or malignant features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative distinction",
+          "cells": [
+            {
+              "text": "From Leydig cell hyperplasia, adrenal rest tumours and testotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Resolution of virilisation or gynaecomastia; recovery of the gonadotrophin axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age and height",
+          "cells": [
+            {
+              "text": "Accelerated bone age and predicted final height"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology and urology with postoperative surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leydig_cell_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Leydig cell tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Boy with precocious pseudopuberty and asymmetric testicular enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (malignant features, rapid virilisation, very high testosterone)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for suspected malignant or recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Testosterone, LH and FSH, GnRH stimulation test, scrotal ultrasound, hCG, 17-OHP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is gonadotrophin-independent androgen excess confirmed on stimulation testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central precocious puberty or congenital adrenal hyperplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testis-sparing enucleation as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orchidectomy where organ preservation is not feasible or malignancy is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histological confirmation with assessment for atypia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor virilisation, gynaecomastia and gonadotrophin recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assess bone age and predicted final height",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most childhood tumours are benign; removal reverses the hormonal effects",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

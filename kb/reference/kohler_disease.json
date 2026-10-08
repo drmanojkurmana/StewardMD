@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for kohler disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kohler_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Navicular sclerosis, flattening and fragmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral foot comparison views",
+          "cells": [
+            {
+              "text": "Separates disease from normal ossification variation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain or infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and full blood count",
+          "cells": [
+            {
+              "text": "Septic arthritis or osteomyelitis, if a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up radiographs",
+          "cells": [
+            {
+              "text": "Reconstitution of the navicular"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kohler_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mueller-Weiss syndrome",
+          "cells": [
+            {
+              "text": "Adult navicular osteonecrosis; more serious and not this childhood condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or osteomyelitis of the midfoot",
+          "cells": [
+            {
+              "text": "Fever, marked swelling or systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal irregular ossification of the navicular",
+          "cells": [
+            {
+              "text": "Physiological variant; avoid over-investigating an asymptomatic child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tarsal navicular stress fracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kohler_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting, with excellent prognosis and near-universal reconstitution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and activity modification",
+          "cells": [
+            {
+              "text": "Simple analgesia; weight-bearing modification for pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-leg walking cast",
+          "cells": [
+            {
+              "text": "For a period in more painful cases, to hasten symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arch support or orthoses",
+          "cells": [
+            {
+              "text": "For comfort once immobilisation is stopped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Not indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical and radiographic follow-up",
+          "cells": [
+            {
+              "text": "Confirms reconstitution; radiographic change lags clinical improvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kohler_disease-dx-mgmt",
+      "title": "Diagnosis and management of Kohler disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Kohler disease: painful limp and medial midfoot tenderness in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, marked swelling, rest or night pain, bilateral disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude septic arthritis or osteomyelitis with inflammatory markers and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing foot radiographs, contralateral views, MRI if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do radiographs show a flattened, sclerotic and fragmented navicular?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Mueller-Weiss syndrome, stress fracture or normal ossification variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance: the condition is self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia and weight-bearing modification for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-leg walking cast in more painful cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Arch support once immobilisation is stopped",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical and radiographic follow-up for reconstitution",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis; the navicular almost always reconstitutes to a normal shape",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

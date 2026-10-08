@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for dupuytren disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dupuytren_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Diagnosis is clinical; imaging rarely required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial goniometric measurement of MCP and PIP angles",
+          "cells": [
+            {
+              "text": "Contracture progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hueston tabletop test documentation",
+          "cells": [
+            {
+              "text": "Functional significance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound for atypical palmar mass",
+          "cells": [
+            {
+              "text": "Atypical palmar mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI for suspected sarcoma",
+          "cells": [
+            {
+              "text": "Atypical rapidly enlarging lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dupuytren_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Stenosing tenosynovitis (trigger finger)",
+          "cells": [
+            {
+              "text": "Palpable nodule that can be mismanaged as Dupuytren"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar nerve palsy causing clawing",
+          "cells": [
+            {
+              "text": "Clawing from nerve palsy rather than cords"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelioid sarcoma of the hand",
+          "cells": [
+            {
+              "text": "Palmar mass that is not Dupuytren tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dupuytren_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Nodular or non-disabling disease; intervene when contracture is significant or tabletop test positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimally invasive treatment",
+          "cells": [
+            {
+              "text": "Percutaneous needle fasciotomy or collagenase injection followed by cord manipulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limited fasciectomy",
+          "cells": [
+            {
+              "text": "Significant joint contracture; PIP contractures are more resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermofasciectomy",
+          "cells": [
+            {
+              "text": "Recurrent disease or marked diathesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured hand therapy",
+          "cells": [
+            {
+              "text": "Night extension splinting after intervention; protect the neurovascular bundle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Diabetes, alcohol and tobacco optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Controlled rather than cured; follow up for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dupuytren_disease-dx-mgmt",
+      "title": "Diagnosis and management of Dupuytren disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dupuytren disease: palmar nodule with progressive fixed PIP flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly enlarging painful mass, digital neurovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a rapidly enlarging mass; MRI to exclude sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; serial goniometry; Hueston tabletop test; ultrasound if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the contracture functionally significant on serial measurement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe; consider trigger finger, ulnar nerve palsy or a palmar tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Monitor non-disabling disease; intervene when contracture becomes significant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle fasciotomy or collagenase injection for a defined cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limited fasciectomy for joint contracture; PIP is recurrence-prone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reserve dermofasciectomy for recurrent or marked diathesis disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Structured hand therapy with night splinting after intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, chronic and progressive; function generally preserved with appropriate treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -162,5 +162,372 @@
       "caption": "Overview comparison matrix for krukenberg tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours; Robbins & Cotran Pathologic Basis of Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "krukenberg_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Gastric or other primary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and appendix assessment",
+          "cells": [
+            {
+              "text": "Colorectal or appendiceal primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast examination and mammography",
+          "cells": [
+            {
+              "text": "Breast primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Primary site and extent of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry (CK7, CK20, CDX2)",
+          "cells": [
+            {
+              "text": "Signet-ring cells typically express CK20 and CDX2, confirming GI origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tumour markers (CA19-9, CEA, CA125)",
+          "cells": [
+            {
+              "text": "Tumour markers; CA125 sometimes followed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Bilateral solid adnexal masses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "krukenberg_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary ovarian mucinous carcinoma",
+          "cells": [
+            {
+              "text": "Bilateral ovarian involvement and a search for an occult primary separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other metastatic carcinomas to the ovary (colorectal, breast, pancreatobiliary)",
+          "cells": [
+            {
+              "text": "Also metastatic; primary located by endoscopy and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-cord stromal tumour with luteinised stroma",
+          "cells": [
+            {
+              "text": "Virilisation or bleeding comes from metastatic stroma, not a primary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma involving the ovary",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "krukenberg_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Identify and stage the primary",
+          "cells": [
+            {
+              "text": "Endoscopy, imaging and immunohistochemistry first; treatment follows the primary type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative systemic therapy",
+          "cells": [
+            {
+              "text": "Treated as stage IV disease of the primary in essentially all cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curative intent, rarely",
+          "cells": [
+            {
+              "text": "Solitary resectable primary with isolated resectable ovarian disease and no other metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line chemotherapy for gastric primary",
+          "cells": [
+            {
+              "text": "Fluoropyrimidine and platinum-based combination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biomarker-directed therapy",
+          "cells": [
+            {
+              "text": "HER2, mismatch repair or microsatellite instability, and PD-L1 status where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian surgery",
+          "cells": [
+            {
+              "text": "Generally palliative: pain, torsion, mass effect, bowel obstruction or bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Palliative symptom control, such as pelvic pain or bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and team review",
+          "cells": [
+            {
+              "text": "Serial imaging and primary-appropriate tumour markers; multidisciplinary team with early palliative support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "krukenberg_tumour-dx-mgmt",
+      "title": "Diagnosis and management of krukenberg tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral solid ovarian masses with signet-ring cells: suspected Krukenberg tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bilateral solid masses, virilisation, weight loss, peritoneal disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endoscopy and CT to find the primary; palliative planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy, colonoscopy, breast imaging, CT, immunohistochemistry, markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunohistochemistry confirm a gastrointestinal origin (CK20, CDX2)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary ovarian mucinous carcinoma or other ovarian metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and stage the primary before choosing treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic palliative treatment as the default for stage IV disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fluoropyrimidine and platinum-based chemotherapy for a gastric primary",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biomarker-directed therapy where relevant (HER2, MMR or MSI, PD-L1)",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ovarian surgery, generally palliative, for pain, torsion or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Serial imaging, tumour markers and multidisciplinary review",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Generally poor; survival is measured in months for most, by site, stage and treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

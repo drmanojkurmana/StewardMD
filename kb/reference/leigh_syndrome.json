@@ -148,5 +148,352 @@
       "caption": "Overview comparison matrix for leigh syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leigh_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate, with lactate/pyruvate ratio",
+          "cells": [
+            {
+              "text": "Commonly raised lactate; the ratio can be informative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with spectroscopy",
+          "cells": [
+            {
+              "text": "Symmetrical basal ganglia and brainstem lesions with a lactate peak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine organic acids",
+          "cells": [
+            {
+              "text": "Excludes mimicking metabolic disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (mtDNA and nuclear panels)",
+          "cells": [
+            {
+              "text": "Genetically heterogeneous; for example SURF1 or MT-ATP6"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal muscle biopsy for respiratory-chain enzymes",
+          "cells": [
+            {
+              "text": "Where genetics are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyruvate dehydrogenase complex activity",
+          "cells": [
+            {
+              "text": "When a PDH defect is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leigh_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biotin-thiamine-responsive basal ganglia disease",
+          "cells": [
+            {
+              "text": "Treatable phenocopy that must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyruvate dehydrogenase complex deficiency",
+          "cells": [
+            {
+              "text": "Treatable phenocopy; enzyme activity testing is available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS and MERRF",
+          "cells": [
+            {
+              "text": "Other mitochondrial encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glutaric aciduria",
+          "cells": [
+            {
+              "text": "Organic acidaemia; urine organic acids separate it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leigh_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive supplements",
+          "cells": [
+            {
+              "text": "Thiamine, riboflavin, coenzyme Q10 and biotin; ketogenic diet also considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid toxins",
+          "cells": [
+            {
+              "text": "Mitochondrial toxins and aggravating drugs such as sodium valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent catabolism",
+          "cells": [
+            {
+              "text": "Intravenous glucose and prompt treatment of intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding for swallowing difficulty; treat seizures and spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Correction of lactic acidosis and treatment of the precipitating stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Brainstem-related irregularity and central apnoea; support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology, respiratory, physiotherapy and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal mtDNA and autosomal recessive nuclear inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leigh_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Leigh syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with psychomotor regression, hypotonia and feeding difficulty after infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (apnoea, rapid regression, bulbar weakness, lactic acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic decompensation care and respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate, MRI with spectroscopy, amino acids, organic acids, genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mitochondrial gene defect found, with treatable phenocopies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider biotin-thiamine-responsive disease, PDH deficiency or MELAS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mitochondrial supplements: thiamine, riboflavin, coenzyme Q10, biotin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid toxins such as valproate; prevent catabolism with IV glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding for swallowing difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct lactic acidosis and treat the precipitating stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor brainstem respiratory irregularity and central apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally progressive with a guarded outlook; classic infantile form has reduced survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

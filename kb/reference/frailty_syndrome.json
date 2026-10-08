@@ -148,5 +148,332 @@
       "caption": "Overview comparison matrix for frailty syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frailty_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Comprehensive geriatric assessment",
+          "cells": [
+            {
+              "text": "Functional, cognitive, psychological and social domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait speed, timed up-and-go and grip strength",
+          "cells": [
+            {
+              "text": "Objective performance measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment",
+          "cells": [
+            {
+              "text": "Screens for unintentional weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basic laboratory panel",
+          "cells": [
+            {
+              "text": "Excludes reversible contributors such as anaemia, thyroid dysfunction and renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Identifies drugs contributing to weakness, sedation or hypotension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frailty_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Depression",
+          "cells": [
+            {
+              "text": "Presents with fatigue, withdrawal and weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult malignancy",
+          "cells": [
+            {
+              "text": "Cachexia and functional decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Fatigue and reduced exercise tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic heart failure or COPD",
+          "cells": [
+            {
+              "text": "Limits activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frailty_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Comprehensive geriatric assessment",
+          "cells": [
+            {
+              "text": "Individualised, goal-oriented plan across medical, functional, cognitive and social domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive resistance and balance exercise",
+          "cells": [
+            {
+              "text": "Counters sarcopenia; improves gait speed and strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional optimisation",
+          "cells": [
+            {
+              "text": "Adequate protein and energy, correction of deficiencies, dietetic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review and deprescribing",
+          "cells": [
+            {
+              "text": "Reduces polypharmacy, sedation, hypotension and falls risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat reversible contributors",
+          "cells": [
+            {
+              "text": "Anaemia, thyroid dysfunction, vitamin deficiencies and depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, home hazard assessment and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute stressor management",
+          "cells": [
+            {
+              "text": "Infection, new drugs or hospitalisation; active delirium prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "Palliative care discussion in advanced frailty, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frailty_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Frailty syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected frailty in an older adult: reduced function on geriatric assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline, recurrent falls, weight loss, new confusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for intercurrent illness such as infection or delirium",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Geriatric assessment, gait speed, grip strength, nutrition and laboratory panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are reversible contributors excluded on laboratory and medication review?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider depression, occult malignancy or chronic heart or lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Comprehensive geriatric assessment for an individualised, goal-oriented plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive resistance and balance exercise to counter sarcopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional optimisation and medication review with deprescribing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat reversible contributors and prevent falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Strong independent predictor of falls, hospitalisation, delirium and death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for gallbladder adenomyomatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gallbladder_adenomyomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Intramural cystic spaces and comet-tail reverberation artefact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with MRCP",
+          "cells": [
+            {
+              "text": "Pearl-necklace sign of Rokitansky-Aschoff sinuses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Wall thickening; helps exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced or high-resolution ultrasound",
+          "cells": [
+            {
+              "text": "Characterises indeterminate focal thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biochemistry",
+          "cells": [
+            {
+              "text": "Coexisting biliary or hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the cholecystectomy specimen",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder_adenomyomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gallbladder carcinoma",
+          "cells": [
+            {
+              "text": "Focal or segmental wall thickening with disrupted wall layers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porcelain gallbladder",
+          "cells": [
+            {
+              "text": "Mural calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholecystitis",
+          "cells": [
+            {
+              "text": "Oedematous wall thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary wall thickening",
+          "cells": [
+            {
+              "text": "From hepatitis, heart failure or hypoalbuminaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder_adenomyomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "No intervention for confidently diagnosed asymptomatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholecystectomy",
+          "cells": [
+            {
+              "text": "Usually laparoscopic; for symptomatic disease or where malignancy cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful imaging characterisation",
+          "cells": [
+            {
+              "text": "MRI with MRCP for the pearl-necklace sign, to distinguish focal or segmental disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging",
+          "cells": [
+            {
+              "text": "For indeterminate focal wall thickening where malignancy is not confidently excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting gallstones and chronic cholecystitis",
+          "cells": [
+            {
+              "text": "Often account for the attributed symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary surgery referral",
+          "cells": [
+            {
+              "text": "Symptomatic or indeterminate lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gallbladder_adenomyomatosis-dx-mgmt",
+      "title": "Diagnosis and management of gallbladder adenomyomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gallbladder adenomyomatosis: wall thickening with intramural cystic spaces",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal wall thickening, enlarging lesion, jaundice, lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatobiliary review for suspected carcinoma or biliary obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, MRI with MRCP and contrast CT to characterise wall thickening",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show the pearl-necklace sign, with malignancy not suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Interval imaging, or cholecystectomy if malignancy is not confidently excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and no intervention for confidently diagnosed asymptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Usually laparoscopic cholecystectomy for symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Interval imaging surveillance of indeterminate focal wall thickening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting gallstones and chronic cholecystitis, which often cause symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with excellent prognosis; asymptomatic disease needs no treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

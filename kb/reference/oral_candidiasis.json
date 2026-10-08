@@ -146,5 +146,338 @@
       "caption": "Overview comparison matrix for oral candidiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_candidiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral swab, smear or rinse for microscopy and culture",
+          "cells": [
+            {
+              "text": "Candida on the mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of adherent white patches",
+          "cells": [
+            {
+              "text": "Hyperplastic candidiasis and any dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and diabetes screen",
+          "cells": [
+            {
+              "text": "Diabetes as a predisposing factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematinics (iron, folate, B12)",
+          "cells": [
+            {
+              "text": "Deficiency in atrophic or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunodeficiency screen including HIV",
+          "cells": [
+            {
+              "text": "Unexplained, severe or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_candidiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral leukoplakia",
+          "cells": [
+            {
+              "text": "Adherent white patch that will not rub off; biopsy needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal anaemia or nutritional deficiency",
+          "cells": [
+            {
+              "text": "Atrophic or recurrent disease; check iron, folate and B12"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_candidiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical antifungals",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Nystatin suspension or miconazole oral gel for localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic azole",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Fluconazole for extensive, refractory or immunocompromised cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local predisposing factors",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Rinse after inhaled corticosteroids, improve denture hygiene, remove dentures overnight, manage xerostomia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angular cheilitis",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Topical antifungal, with antibacterial cover where bacteria colonise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic drivers",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Glycaemic control in diabetes; correct iron, folate and B12; review antibiotics and steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Denture stomatitis",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Disinfect the denture and apply antifungal to its fitting surface"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and monitoring",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Chronic hyperplastic plaques, for dysplasia; investigate immunodeficiency including HIV"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_candidiasis-dx-mgmt",
+      "title": "Diagnosis and management of Oral candidiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "White or red oral patches with soreness, often after inhaled steroids or antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe disease in a healthy adult, dysplasia or oesophageal extension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immunodeficiency screen including HIV, with systemic azole treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oral swab or rinse for microscopy and culture; biopsy adherent plaques; glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microscopy or culture confirm Candida on the mucosa?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider leukoplakia, lichen planus, geographic tongue or burns; biopsy if adherent",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nystatin or miconazole gel for localised disease; fluconazole for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rinse after inhaled steroids, improve denture hygiene and manage dry mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat angular cheilitis with antifungal, adding antibacterial cover if colonised",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control diabetes; correct iron, folate and B12 deficiency; review antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy chronic hyperplastic plaques and monitor for dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Responds well once predisposing factors are corrected; recurrence is common otherwise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

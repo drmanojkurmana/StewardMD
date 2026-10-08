@@ -145,5 +145,324 @@
       "caption": "Overview comparison matrix for one-and-a-half syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "one_and_a_half_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the pons and brainstem",
+          "cells": [
+            {
+              "text": "Localises the paramedian pontine lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and cord, CSF oligoclonal bands",
+          "cells": [
+            {
+              "text": "Demyelinating disease, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging and stroke workup",
+          "cells": [
+            {
+              "text": "Vascular cause in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine receptor antibodies",
+          "cells": [
+            {
+              "text": "Excludes myasthenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial nerve assessment",
+          "cells": [
+            {
+              "text": "Facial palsy from spread to the facial colliculus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "one_and_a_half_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated horizontal gaze palsy",
+          "cells": [
+            {
+              "text": "Lacks the internuclear component; this syndrome has both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral internuclear ophthalmoplegia",
+          "cells": [
+            {
+              "text": "Involves both medial longitudinal fasciculi, rather than one gaze palsy plus one INO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable weakness; antibody testing excludes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "one_and_a_half_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the pontine cause",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Acute stroke pathway for ischaemia; corticosteroids and disease-modifying therapy for demyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic diplopia relief",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Monocular occlusion or prisms during recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent paralytic pontine exotropia",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Botulinum toxin or strabismus surgery when disabling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention in ischaemia",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Antiplatelet or anticoagulant therapy and vascular risk factor control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude myasthenia",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Acetylcholine receptor antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmology follow-up",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Monitor partial spontaneous recovery of horizontal movement over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "one_and_a_half_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of One-and-a-half syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Horizontal gaze palsy to one side with internuclear ophthalmoplegia on the other",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (extra brainstem signs, reduced consciousness or new facial weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent stroke pathway for suspected pontine infarction or haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of pons and brainstem, vascular imaging, AChR antibodies if myasthenia possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show one paramedian pontine lesion explaining both signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bilateral INO, myasthenia gravis or thyroid eye disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the pontine cause: stroke pathway, steroids or disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monocular occlusion or prisms for troublesome diplopia during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Botulinum toxin or strabismus surgery for persistent paralytic pontine exotropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy and risk-factor control for ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Partial horizontal recovery over weeks to months; residual exotropia may remain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

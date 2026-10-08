@@ -165,5 +165,462 @@
       "caption": "Overview comparison matrix for neuroimaging in neurologic disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Radiographic Contrast Agents and Contrast Reactions",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/special-subjects/principles-of-radiologic-imaging/radiographic-contrast-agents-and-contrast-reactions"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 370-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuroimaging_in_neurologic_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Choosing the neuroimaging test",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Best first test",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute haemorrhage, trauma, sudden change in consciousness",
+          "cells": [
+            {
+              "text": "Noncontrast CT"
+            },
+            {
+              "text": "Fast; blood and bone appear bright"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute ischaemic stroke",
+          "cells": [
+            {
+              "text": "Noncontrast CT to exclude bleed, then CTA or perfusion"
+            },
+            {
+              "text": "{{hy:DWI MRI is the most sensitive for ischaemia (under about 7 days)}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombolysis CT criterion",
+          "cells": [
+            {
+              "text": "No haemorrhage and no oedema over one-third of MCA territory"
+            },
+            {
+              "text": "Onset to drug 3 h or less in the printed table"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Encephalitis, abscess, CJD",
+          "cells": [
+            {
+              "text": "MRI with DWI"
+            },
+            {
+              "text": "Restricted diffusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Demyelination",
+          "cells": [
+            {
+              "text": "MRI with FLAIR and contrast"
+            },
+            {
+              "text": "FLAIR shows periventricular plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microhaemorrhages",
+          "cells": [
+            {
+              "text": "MRI with SWI"
+            },
+            {
+              "text": "Amyloid angiopathy, hypertension, DAI, haemorrhagic metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "CT then CTA; LP if CT negative"
+            },
+            {
+              "text": "Look for aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone detail, conductive hearing loss",
+          "cells": [
+            {
+              "text": "CT"
+            },
+            {
+              "text": "MRI better for marrow infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-associated AKI (KDIGO)",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Creatinine rise 0.3 mg/dL or more, or 1.5-fold, within 48 h",
+              "op": ">=",
+              "value": 0.3
+            },
+            {
+              "text": "Highest risk with eGFR under 30"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 370-1 reflects the older 3 h thrombolysis window; current stroke pathways extend this with advanced imaging, see the ischaemic stroke entry."
+    },
+    {
+      "id": "neuroimaging_in_neurologic_disorders-ddx",
+      "kind": "ddx",
+      "title": "Imaging look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Distinguishing imaging feature",
+        "Best next test"
+      ],
+      "rows": [
+        {
+          "parameter": "Abscess vs glioma or metastasis",
+          "cells": [
+            {
+              "text": "Central restricted diffusion favours abscess"
+            },
+            {
+              "text": "DWI and perfusion MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV encephalitis vs infarct",
+          "cells": [
+            {
+              "text": "Medial temporal involvement beyond a vascular territory"
+            },
+            {
+              "text": "CSF HSV PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid angiopathy vs hypertensive microbleeds",
+          "cells": [
+            {
+              "text": "Lobar vs deep distribution on SWI"
+            },
+            {
+              "text": "Clinical context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitis vs RCVS vs atherosclerosis",
+          "cells": [
+            {
+              "text": "Wall enhancement and reversibility differ"
+            },
+            {
+              "text": "Vessel wall MRI; repeat angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse axonal injury vs haemorrhagic metastases",
+          "cells": [
+            {
+              "text": "Trauma history, grey-white junction foci"
+            },
+            {
+              "text": "Contrast MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuroimaging_in_neurologic_disorders-treatment",
+      "kind": "treatment",
+      "title": "Safe use of imaging and contrast",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prior contrast reaction",
+          "cells": [
+            {
+              "text": "{{hy:Strongest predictor of a new reaction}}"
+            },
+            {
+              "text": "Shellfish or iodine allergy does not raise risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Elective premedication",
+          "cells": [
+            {
+              "text": "Moderate or severe prior immediate reaction"
+            },
+            {
+              "text": "Prednisone 50 mg PO at 13, 7 and 1 h plus diphenhydramine 50 mg 1 h before; switch agent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent premedication",
+          "cells": [
+            {
+              "text": "Contrast needed quickly"
+            },
+            {
+              "text": "Hydrocortisone 200 mg IV every 4 h plus diphenhydramine 50 mg; under 4 to 5 h has no proven benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mild reaction",
+          "cells": [
+            {
+              "text": "Urticaria or itch"
+            },
+            {
+              "text": "Stop infusion; diphenhydramine 25 to 50 mg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate or severe reaction",
+          "cells": [
+            {
+              "text": "Bronchospasm, hypotension, anaphylaxis"
+            },
+            {
+              "text": "Oxygen, epinephrine, IV fluids; tryptase within 2 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nephropathy prevention",
+          "cells": [
+            {
+              "text": "Renal impairment, diabetes, myeloma, heart failure, age over 70"
+            },
+            {
+              "text": "Saline 100 mL/h for 6 to 12 h before and 4 to 12 h after; NAC not effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "eGFR under 30 or AKI"
+            },
+            {
+              "text": "Withhold 48 h after contrast"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gadolinium caution",
+          "cells": [
+            {
+              "text": "eGFR under 30 or dialysis"
+            },
+            {
+              "text": "Avoid linear agents (nephrogenic systemic fibrosis)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI safety screen",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Ferromagnetic implants, non-conditional devices, orbital metal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuroimaging_in_neurologic_disorders-dx-mgmt",
+      "title": "Diagnosis and management of neurologic disorders by neuroimaging",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neurologic problem needing imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute deficit, trauma or sudden change in consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Noncontrast CT now",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Haemorrhage seen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "CTA for cause; neurosurgical or stroke team",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "CTA or perfusion and stroke pathway; DWI MRI if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for MRI safety and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Prior contrast reaction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Premedicate and switch contrast agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Tailored MRI: DWI, FLAIR, SWI, contrast as needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

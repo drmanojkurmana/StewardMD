@@ -152,5 +152,431 @@
       "caption": "Overview comparison matrix for mitral valve prolapse."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Mitral Valve Prolapse",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/mitral-valve-prolapse-mvp"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitral_valve_prolapse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and risk markers in mitral valve prolapse",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevalence",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 2.4% of the population",
+              "op": "=",
+              "value": 2.4
+            },
+            {
+              "text": "Depends on echo criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo definition",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Leaflet belly 2 mm or more above annular plane",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:Parasternal long-axis view}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thickened leaflets",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "5 mm or more",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Myxomatous; higher MR and endocarditis risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Click timing",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "0.14 s or more after S1",
+              "op": ">=",
+              "value": 0.14
+            },
+            {
+              "text": "Mid to late systolic click then late systolic murmur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic auscultation",
+          "cells": [
+            {
+              "text": "Standing or Valsalva: click earlier; squatting or handgrip: later"
+            },
+            {
+              "text": "Maneuvers that cut LV volume move the click earlier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Often normal; inferior T-wave inversion, ectopics"
+            },
+            {
+              "text": "With MAD and papillary fibrosis marks arrhythmic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac events with significant MR",
+          "unit": "%/yr",
+          "cells": [
+            {
+              "text": "Up to 4% per year",
+              "op": "=",
+              "value": 4
+            },
+            {
+              "text": "Endocarditis, stroke, embolism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sudden death",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 1%",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Highest with severe MR, low EF, flail leaflet"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Sex distribution: Merck says equal in men and women; Harrison 22e says more common in women."
+    },
+    {
+      "id": "mitral_valve_prolapse-ddx",
+      "kind": "ddx",
+      "title": "Conditions confused with mitral valve prolapse",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other primary MR",
+          "cells": [
+            {
+              "text": "Holosystolic murmur without click"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatic mitral disease",
+          "cells": [
+            {
+              "text": "Fused, thickened chordae; rheumatic history"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Innocent systolic murmur",
+          "cells": [
+            {
+              "text": "Early systolic, no click, no change with standing"
+            },
+            {
+              "text": "Echocardiography if doubt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Murmur louder with Valsalva but no click; LVH"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angina",
+          "cells": [
+            {
+              "text": "Exertional pain; MVP pain is prolonged and non-exertional"
+            },
+            {
+              "text": "Stress testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_valve_prolapse-treatment",
+      "kind": "treatment",
+      "title": "Management of mitral valve prolapse",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "{{hy:Most patients: no significant MR}}"
+            },
+            {
+              "text": "Periodic review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "Palpitations, chest pain"
+            },
+            {
+              "text": "Atenolol or propranolol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Atrial fibrillation or prior TIA or stroke"
+            },
+            {
+              "text": "Not otherwise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mitral valve repair",
+          "cells": [
+            {
+              "text": "Severe primary MR, often after chordal rupture"
+            },
+            {
+              "text": "Same timing as degenerative MR; MAD is repaired surgically, not by TEER"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Arrhythmic MVP",
+          "cells": [
+            {
+              "text": "MAD, papillary fibrosis, high ectopic burden"
+            },
+            {
+              "text": "Antiarrhythmics or ICD if high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prophylaxis",
+          "cells": [
+            {
+              "text": "Only after valve replacement"
+            },
+            {
+              "text": "Good dental hygiene for all"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Known MR"
+            },
+            {
+              "text": "Interval by severity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitral_valve_prolapse-dx-mgmt",
+      "title": "Diagnosis and management of mitral valve prolapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mid-systolic click or late systolic murmur",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "TTE: leaflet displacement, thickness, MR severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Prolapse 2 mm or more confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for another cause of murmur",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe MR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Mitral repair by MR timing rules",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Syncope, high ectopy, MAD or AF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Holter and cardiac MRI for fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Antiarrhythmic or ICD; anticoagulate if AF or stroke",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Reassure; beta-blocker for symptoms; periodic echo",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

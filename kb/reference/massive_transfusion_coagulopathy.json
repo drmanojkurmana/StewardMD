@@ -151,5 +151,332 @@
       "caption": "Overview comparison matrix for massive transfusion coagulopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Society for Haematology guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "massive_transfusion_coagulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with platelet count",
+          "cells": [
+            {
+              "text": "Platelet count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Coagulation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen concentration",
+          "cells": [
+            {
+              "text": "Fibrinogen, which falls first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic testing (TEG or ROTEM)",
+          "cells": [
+            {
+              "text": "Targets component therapy and avoids unnecessary transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium, temperature and arterial blood gas",
+          "cells": [
+            {
+              "text": "Components of the lethal triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-dimer and fibrin degradation products",
+          "cells": [
+            {
+              "text": "Where disseminated intravascular coagulation is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion_coagulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Diffuse microvascular oozing from wounds, puncture sites and mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma-induced coagulopathy",
+          "cells": [
+            {
+              "text": "Trauma setting, where tranexamic acid is given for hyperfibrinolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperfibrinolysis",
+          "cells": [
+            {
+              "text": "Counter with tranexamic acid, especially in trauma-induced coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion_coagulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Balanced component ratios",
+          "cells": [
+            {
+              "text": "Red cells, plasma and platelets within a major haemorrhage protocol, rather than red cells alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early fibrinogen replacement",
+          "cells": [
+            {
+              "text": "Cryoprecipitate or fibrinogen concentrate, as fibrinogen falls first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Counters hyperfibrinolysis, especially in trauma-induced coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reverse the lethal triad",
+          "cells": [
+            {
+              "text": "Warming and restoring perfusion to correct acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium",
+          "cells": [
+            {
+              "text": "Monitor and replace to support calcium-dependent clotting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic testing",
+          "cells": [
+            {
+              "text": "Point-of-care TEG or ROTEM to target component therapy and avoid unnecessary transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage source control",
+          "cells": [
+            {
+              "text": "Rapid control of the bleeding source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Haematology and transfusion specialists alongside critical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "massive_transfusion_coagulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Massive transfusion coagulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Major haemorrhage with diffuse oozing from wounds, puncture sites or mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Critically low fibrinogen, core hypothermia or severe acidosis during bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to critical care and haematology; source control and fibrinogen replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with platelets, PT and APTT, fibrinogen, viscoelastic testing, D-dimer if DIC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is coagulopathy confirmed on coagulation or viscoelastic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inherited disorder, anticoagulant effect or haemolytic reaction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Balanced red cells, plasma and platelets within a major haemorrhage protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early empirical fibrinogen replacement, as fibrinogen falls first",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tranexamic acid to counter hyperfibrinolysis, especially in trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Warm, restore perfusion, replace ionised calcium; target therapy with TEG or ROTEM",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rapid haemorrhage source control with haematology and transfusion specialists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

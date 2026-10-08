@@ -151,5 +151,285 @@
       "caption": "Overview comparison matrix for meester-loeys syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meester_loeys_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "BGN molecular genetic testing",
+          "cells": [
+            {
+              "text": "BGN variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Aortic root and cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body MR or CT angiography",
+          "cells": [
+            {
+              "text": "Aneurysms and tortuosity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Scoliosis and chest-wall deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Connective-tissue features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meester_loeys_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade or angiotensin receptor blocker",
+          "cells": [
+            {
+              "text": "Beta-blockade and/or losartan to reduce aortic wall stress and slow aneurysm growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-arterial surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and MR or CT angiography; aneurysms extend beyond the root"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic repair",
+          "cells": [
+            {
+              "text": "Aortic root or aneurysms once size or growth thresholds are reached"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid isometric straining and contact or competitive sports"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute aortic dissection",
+          "cells": [
+            {
+              "text": "Emergency recognition and management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and connective-tissue features",
+          "cells": [
+            {
+              "text": "Scoliosis, pectus deformity and joint hypermobility with orthopaedic and physiotherapy input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance with cascade family screening; more severe disease in males"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Cardiology, cardiothoracic surgery and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meester_loeys_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Meester-Loeys syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aortic dilatation or aneurysm with connective-tissue features; suspected BGN disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute chest, back or abdominal pain, rapidly enlarging root or aortic regurgitation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency management of suspected aortic dissection or rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BGN testing; echocardiography; whole-body MR or CT angiography; skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a BGN variant confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Marfan, Loeys-Dietz or vascular Ehlers-Danlos syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockade and/or losartan to reduce aortic wall stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surveillance with echocardiography and MR or CT angiography of the whole arterial tree",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prophylactic surgical repair once size or growth thresholds are reached",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid isometric straining and competitive contact sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cascade family screening for X-linked inheritance; more severe disease in males",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

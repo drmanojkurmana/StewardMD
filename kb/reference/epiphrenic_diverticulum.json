@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for epiphrenic diverticulum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epiphrenic_diverticulum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium swallow",
+          "cells": [
+            {
+              "text": "The sac, its neck and associated dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution oesophageal manometry",
+          "cells": [
+            {
+              "text": "The underlying motility disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Malignancy and mucosal disease within the sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Mediastinal anatomy before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory pH or reflux monitoring",
+          "cells": [
+            {
+              "text": "Where reflux is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timed barium oesophagogram",
+          "cells": [
+            {
+              "text": "Emptying, if achalasia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epiphrenic_diverticulum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal oesophageal spasm or hypercontractile oesophagus",
+          "cells": [
+            {
+              "text": "An outflow-obstruction disorder identified by manometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic or malignant distal oesophageal stricture",
+          "cells": [
+            {
+              "text": "Progressive dysphagia with significant weight loss suggests malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epiphrenic_diverticulum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small asymptomatic diverticula carry a good prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diverticulectomy or diverticulopexy with extended myotomy",
+          "cells": [
+            {
+              "text": "Symptomatic disease; myotomy across the lower oesophageal sphincter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the causative motility disorder",
+          "cells": [
+            {
+              "text": "For example Heller myotomy or per-oral endoscopic myotomy for achalasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and posture measures",
+          "cells": [
+            {
+              "text": "Thorough chewing, upright posture after meals, avoiding late-night eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude malignancy",
+          "cells": [
+            {
+              "text": "Endoscopy before intervention, with surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative monitoring",
+          "cells": [
+            {
+              "text": "Staple-line leak and recurrence; upper gastrointestinal surgical service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epiphrenic_diverticulum-dx-mgmt",
+      "title": "Diagnosis and management of epiphrenic diverticulum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dysphagia, food regurgitation and nocturnal aspiration in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (weight loss, recurrent aspiration, haematemesis, perforation signs, sac mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for perforation or malignancy within the sac",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Barium swallow and high-resolution manometry; endoscopy; CT of the chest",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Motility disorder found on manometry and malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reflux or other causes; repeat manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small asymptomatic diverticula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diverticulectomy or diverticulopexy with extended myotomy for symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the causative motility disorder, such as Heller myotomy for achalasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary modification, upright posture and avoidance of late-night eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Postoperative monitoring for staple-line leak and recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Small asymptomatic diverticula do well; symptomatic ones need combined surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

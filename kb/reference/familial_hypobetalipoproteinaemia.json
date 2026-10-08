@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for familial hypobetalipoproteinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and lipidology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hypobetalipoproteinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid profile with apolipoprotein B",
+          "cells": [
+            {
+              "text": "Very low LDL cholesterol and apoB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APOB sequencing with family cascade testing",
+          "cells": [
+            {
+              "text": "Causative variant; MTTP if recessive severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels, particularly vitamin E; clotting studies",
+          "cells": [
+            {
+              "text": "Vitamin K status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver imaging and liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic steatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Acanthocytes in suspected severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and retinal assessment",
+          "cells": [
+            {
+              "text": "Advanced deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypobetalipoproteinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Abetalipoproteinaemia (MTTP deficiency)",
+          "cells": [
+            {
+              "text": "A recessive disorder; heterozygotes differ in inheritance and gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCSK9 loss-of-function hypocholesterolaemia",
+          "cells": [
+            {
+              "text": "Genetic cause of low cholesterol to distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary hypocholesterolaemia from malnutrition, malabsorption or liver disease",
+          "cells": [
+            {
+              "text": "Acquired causes of low lipids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypobetalipoproteinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restriction of dietary long-chain fat with medium-chain triglycerides",
+          "cells": [
+            {
+              "text": "Severe biallelic disease; reduces steatorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong fat-soluble vitamin replacement",
+          "cells": [
+            {
+              "text": "Prioritising vitamin E to prevent spinocerebellar degeneration and neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring in heterozygotes",
+          "cells": [
+            {
+              "text": "Steatosis; avoid alcohol and hepatotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy surveillance",
+          "cells": [
+            {
+              "text": "Vitamin K-dependent coagulopathy correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ophthalmological monitoring",
+          "cells": [
+            {
+              "text": "Neuropathy and retinitis pigmentosa in advanced deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic support",
+          "cells": [
+            {
+              "text": "Caloric intake and growth in affected infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and APOB cascade testing",
+          "cells": [
+            {
+              "text": "Co-dominant inheritance; gene dosage predicts severity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hypobetalipoproteinaemia-dx-mgmt",
+      "title": "Diagnosis and management of Familial hypobetalipoproteinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Very low LDL with hepatic steatosis, or failure to thrive with steatorrhoea in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (infant steatorrhoea, ataxia or neuropathy, night blindness, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Start fat-soluble vitamin replacement early; dietetic support for growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Apolipoprotein B and LDL; APOB sequencing; vitamin E and A, D, K; liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low apoB with APOB or MTTP variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PCSK9 loss-of-function or acquired hypocholesterolaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrict long-chain fat and substitute medium-chain triglycerides in severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong fat-soluble vitamin replacement, prioritising vitamin E",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Liver monitoring in heterozygotes; avoid alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological and retinal monitoring in advanced deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with APOB cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Heterozygotes usually live normally; steatosis is the main long-term issue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

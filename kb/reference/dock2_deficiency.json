@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for dock2 deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dock2_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subset enumeration with naive and memory T cells",
+          "cells": [
+            {
+              "text": "Lymphopenia and T-cell subset abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell proliferation and activation assays",
+          "cells": [
+            {
+              "text": "Abnormal T-cell function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative immunoglobulins and specific antibody responses",
+          "cells": [
+            {
+              "text": "Defective antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Natural killer cell number and cytotoxicity testing",
+          "cells": [
+            {
+              "text": "NK cell function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic sequencing of DOCK2",
+          "cells": [
+            {
+              "text": "DOCK2 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dock2_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyper-IgE combined immunodeficiency (DOCK8 deficiency)",
+          "cells": [
+            {
+              "text": "Separated by DOCK8 gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired immunodeficiency including HIV",
+          "cells": [
+            {
+              "text": "An acquired cause must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dock2_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive, potentially curative; undertake early before infective damage accumulates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad antimicrobial prophylaxis",
+          "cells": [
+            {
+              "text": "Bacterial, viral (including herpesviruses), fungal and Pneumocystis cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Supports defective antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early treatment of infection",
+          "cells": [
+            {
+              "text": "Targeted antimicrobials, including antivirals for severe viral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products and vaccines",
+          "cells": [
+            {
+              "text": "Irradiated, CMV-safe products; no live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist monitoring",
+          "cells": [
+            {
+              "text": "Growth, immune reconstitution and infective complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DOCK2 inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dock2_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of DOCK2 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DOCK2 deficiency: severe viral or invasive infection in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated viral or recurrent invasive infection, lymphopenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology referral and antimicrobial prophylaxis; plan early transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets; T-cell proliferation; immunoglobulins; NK function; DOCK2 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DOCK2 variant found with T-cell and NK abnormalities?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DOCK8 deficiency, Wiskott-Aldrich syndrome or acquired immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Haematopoietic stem cell transplantation, the curative treatment, performed early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad antimicrobial prophylaxis including antivirals and Pneumocystis cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin replacement for defective antibody responses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Irradiated, CMV-safe blood products; no live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal recessive DOCK2",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated: poor prognosis with early life-threatening infection; transplant offers cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

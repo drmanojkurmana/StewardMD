@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for gerstmann syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gerstmann_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain focused on the dominant parietal lobe",
+          "cells": [
+            {
+              "text": "Dominant parietal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal neuropsychological assessment",
+          "cells": [
+            {
+              "text": "The four component deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging and stroke workup",
+          "cells": [
+            {
+              "text": "Where infarction is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive screening for language and praxis deficits",
+          "cells": [
+            {
+              "text": "Coexisting language and praxis deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting alexia and aphasia",
+          "cells": [
+            {
+              "text": "Coexisting alexia and aphasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerstmann_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Broader aphasic syndromes",
+          "cells": [
+            {
+              "text": "From dominant parietal or temporal lesions; presentations are often partial or mixed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alexia with or without agraphia",
+          "cells": [
+            {
+              "text": "Reading loss, with or without writing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confusional state or delirium",
+          "cells": [
+            {
+              "text": "Impairs performance globally rather than focally"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerstmann_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Acute stroke care and secondary prevention, or tumour resection and oncological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Occupational and cognitive rehabilitation for finger agnosia, agraphia and acalculia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compensatory strategies",
+          "cells": [
+            {
+              "text": "Assistive aids for writing and calculation difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational support",
+          "cells": [
+            {
+              "text": "For the developmental form in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Guides rehabilitation and tracks recovery or progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Neurology, neuropsychology and rehabilitation services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gerstmann_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Gerstmann syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gerstmann syndrome: focal deficits from a dominant parietal lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute onset, progressive decline, headache or mass signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke assessment for acute onset from a dominant parietal lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the dominant parietal lobe, neuropsychological testing and vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a dominant parietal lesion matching the deficits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aphasic syndromes, delirium, posterior cortical atrophy or learning disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause: stroke care, tumour resection or oncological therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neurorehabilitation with occupational and cognitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Compensatory strategies and assistive aids for writing and calculation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial neuropsychological assessment to guide rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on the cause; stroke deficits may partly recover with rehabilitation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

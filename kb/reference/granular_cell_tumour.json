@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for granular cell tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granular_cell_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional or incisional biopsy with histology",
+          "cells": [
+            {
+              "text": "Histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S100 and SOX10 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Schwann cell origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PAS staining with diastase",
+          "cells": [
+            {
+              "text": "Diastase-resistant granules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathological review",
+          "cells": [
+            {
+              "text": "Avoids overcalling pseudoepitheliomatous hyperplasia as carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of deep or large lesions",
+          "cells": [
+            {
+              "text": "Regional structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy criteria assessment",
+          "cells": [
+            {
+              "text": "When features are worrying"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granular_cell_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Mimicked by overlying pseudoepitheliomatous hyperplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schwannoma",
+          "cells": [
+            {
+              "text": "Peripheral nerve sheath tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant granular cell tumour",
+          "cells": [
+            {
+              "text": "Uncommon malignant variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granular_cell_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete excision",
+          "cells": [
+            {
+              "text": "Definitive treatment with histologically clear margins; generally curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry confirmation",
+          "cells": [
+            {
+              "text": "S100 and SOX10 for Schwann cell origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathology review",
+          "cells": [
+            {
+              "text": "Avoid misreading overlying hyperplasia as invasive carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and malignancy assessment",
+          "cells": [
+            {
+              "text": "For deep or large lesions and worrying features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant variant",
+          "cells": [
+            {
+              "text": "Wide surgical resection and regional nodal assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "For recurrence, which usually reflects incomplete removal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granular_cell_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Granular cell tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granular cell tumour: firm lesion with overlying epithelial change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, ulceration, fixation, nodal or metastatic spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to soft tissue sarcoma team for suspected malignant variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with S100 and SOX10 staining and PAS with diastase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology with S100 and SOX10 confirm a benign granular cell tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider squamous carcinoma, schwannoma or malignant granular cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision with histologically clear margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm Schwann cell origin with S100 and SOX10 staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid misreading overlying pseudoepitheliomatous hyperplasia as carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wide resection and nodal assessment for the rare malignant variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most are benign and cured by excision; recurrence reflects incomplete removal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

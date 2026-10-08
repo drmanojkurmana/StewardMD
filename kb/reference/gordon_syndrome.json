@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for gordon syndrome (pseudohypoaldosteronism type ii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gordon_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium, chloride and bicarbonate with blood gas",
+          "cells": [
+            {
+              "text": "Hyperkalaemic acidosis pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Renin and aldosterone levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and eGFR",
+          "cells": [
+            {
+              "text": "Preserved renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium excretion",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of adrenal insufficiency and medication review",
+          "cells": [
+            {
+              "text": "Other causes of hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WNK1, WNK4, KLHL3 and CUL3 genetic testing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gordon_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic kidney disease with hyperkalaemia",
+          "cells": [
+            {
+              "text": "Renal function is preserved in this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced hyperkalaemia",
+          "cells": [
+            {
+              "text": "Renin-angiotensin blockers and potassium-sparing diuretics; excluded by medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liddle syndrome",
+          "cells": [
+            {
+              "text": "Hypertension with hypokalaemia and low renin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gordon_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose thiazide diuretic",
+          "cells": [
+            {
+              "text": "First-line; corrects hypertension, hyperkalaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sodium and potassium restriction",
+          "cells": [
+            {
+              "text": "Supports control of volume expansion and hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Potassium, chloride, bicarbonate and blood pressure to titrate treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for hypercalciuria and bone density",
+          "cells": [
+            {
+              "text": "Dental review in CUL3-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant WNK1, WNK4, KLHL3 and CUL3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology follow-up",
+          "cells": [
+            {
+              "text": "Long-term cardiovascular risk management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gordon_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Gordon Syndrome (Pseudohypoaldosteronism Type II)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gordon syndrome: hyperkalaemia with hypertension and preserved renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hyperkalaemia with ECG change, malignant hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of severe hyperkalaemia with ECG changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, blood gas, renin and aldosterone, renal function and gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the pattern with preserved renal function and low renin confirm it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CKD, type IV RTA, drug-induced hyperkalaemia or Liddle syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose thiazide diuretic as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sodium and potassium restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor potassium, bicarbonate and blood pressure to titrate treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic testing and family screening for autosomal dominant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent with treatment; thiazides normalise blood pressure, potassium and acidosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

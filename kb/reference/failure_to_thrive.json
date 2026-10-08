@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for failure to thrive."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "failure_to_thrive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Feeding and dietary assessment with an observed feed",
+          "cells": [
+            {
+              "text": "Intake and feeding technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial weight, length or height and head circumference",
+          "cells": [
+            {
+              "text": "Growth trajectory on the chart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, electrolytes and urinalysis",
+          "cells": [
+            {
+              "text": "Targeted first-line tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and stool studies",
+          "cells": [
+            {
+              "text": "Where malabsorption is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further specific testing",
+          "cells": [
+            {
+              "text": "As directed by history and examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "failure_to_thrive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constitutional growth pattern or familial short stature",
+          "cells": [
+            {
+              "text": "Not true failure to thrive; genetically small children are not failing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption (coeliac disease, cystic fibrosis)",
+          "cells": [
+            {
+              "text": "Confirmed by coeliac serology and stool studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neglect or psychosocial deprivation",
+          "cells": [
+            {
+              "text": "A safeguarding assessment is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "failure_to_thrive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Energy-dense feeds and a structured plan aimed at catch-up growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian-led feeding support",
+          "cells": [
+            {
+              "text": "Feed preparation, technique and feeding difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any underlying organic cause",
+          "cells": [
+            {
+              "text": "Coeliac disease, cow's milk protein allergy, reflux, chronic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial and caregiving support",
+          "cells": [
+            {
+              "text": "Health visitor and social support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Serial growth charts; refeeding vigilance in severe undernutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Paediatrics, dietetics, speech and language therapy and social care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding and escalation",
+          "cells": [
+            {
+              "text": "Where neglect is suspected or community management fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "failure_to_thrive-dx-mgmt",
+      "title": "Diagnosis and management of Failure to Thrive",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Poor weight gain across serial measurements in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe wasting, dehydration, developmental regression, abuse or neglect)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit or escalate for severe faltering growth; safeguarding assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Observed feed and diet history; growth charts; FBC, electrolytes, urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inadequate intake, malabsorption or losses identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Targeted tests as history directs; review for a constitutional growth pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Energy-dense nutritional rehabilitation with a structured feeding plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietitian-led feeding support and technique correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat organic causes such as coeliac disease or reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychosocial and caregiving support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial growth monitoring with refeeding vigilance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most achieve catch-up with timely rehabilitation; prolonged undernutrition does worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

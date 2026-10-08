@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for manganese toxicity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "manganese_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-blood manganese concentration",
+          "cells": [
+            {
+              "text": "An imperfect marker of brain burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Symmetrical pallidal T1 hyperintensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and nutritional exposure history",
+          "cells": [
+            {
+              "text": "Source of exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function assessment",
+          "cells": [
+            {
+              "text": "Liver failure impairing biliary excretion, where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of parenteral nutrition manganese content",
+          "cells": [
+            {
+              "text": "Manganese content, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of Wilson disease",
+          "cells": [
+            {
+              "text": "Wilson disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "manganese_toxicity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Must be excluded during the workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of basal ganglia T1 hyperintensity",
+          "cells": [
+            {
+              "text": "Chronic liver disease and parenteral nutrition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "manganese_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the source of exposure",
+          "cells": [
+            {
+              "text": "Occupational exposure, manganese in parenteral nutrition, or treat the liver failure impairing biliary excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Calcium disodium EDTA to enhance urinary excretion, with limited neurological benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial and symptomatic treatment",
+          "cells": [
+            {
+              "text": "Extrapyramidal syndrome often poorly responsive; treat parkinsonism and dystonia symptomatically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic dysfunction",
+          "cells": [
+            {
+              "text": "Manage the dysfunction that contributes to impaired manganese clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric and behavioural support",
+          "cells": [
+            {
+              "text": "Irritability and mood disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health measures",
+          "cells": [
+            {
+              "text": "Workplace exposure limits and biological monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Neurology and toxicology; monitor whole-blood manganese and pallidal signal on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "manganese_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Manganese toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Manganese exposure with parkinsonism, dystonia or psychiatric change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly progressive parkinsonism or dystonia, or high ongoing exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology and toxicology review; remove the exposure source",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-blood manganese, brain MRI for pallidal T1 signal, exposure and liver history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pallidal T1 hyperintensity present with raised whole-blood manganese?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude Wilson disease and other basal ganglia causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and remove the source: occupational, parenteral nutrition or liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider chelation with calcium disodium EDTA; limited neurological benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Levodopa trial and symptomatic treatment of parkinsonism and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychiatric and behavioural support for irritability and mood disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology and toxicology follow-up with serial manganese and pallidal MRI signal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for discoid lupus erythematosus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "discoid_lupus_erythematosus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with histology and direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Interface dermatitis on histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody screen",
+          "cells": [
+            {
+              "text": "Assesses for systemic lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline bloods and urinalysis",
+          "cells": [
+            {
+              "text": "Systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological screening",
+          "cells": [
+            {
+              "text": "Before and during antimalarial therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat biopsy of a non-healing or ulcerated plaque",
+          "cells": [
+            {
+              "text": "Excludes squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "discoid_lupus_erythematosus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lichen planopilaris (scalp lichen planus)",
+          "cells": [
+            {
+              "text": "Scalp involvement with scarring alopecia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Non-healing, ulcerated or enlarging plaque, especially on the lip"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis or actinic keratoses",
+          "cells": [
+            {
+              "text": "Sun-exposed sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "discoid_lupus_erythematosus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, protective clothing and broad-spectrum sunscreen; cornerstone of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or intralesional steroids and calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "For active plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "First-line systemic therapy for widespread or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunomodulation",
+          "cells": [
+            {
+              "text": "Methotrexate, mycophenolate, dapsone or oral retinoids for resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Smoking worsens activity and reduces treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye screening",
+          "cells": [
+            {
+              "text": "Before and during antimalarial therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Bloods and urinalysis to detect progression to systemic lupus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "discoid_lupus_erythematosus-dx-mgmt",
+      "title": "Diagnosis and management of Discoid Lupus Erythematosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected discoid lupus: chronic scarring plaques on sun-exposed skin or scalp",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ulcerated plaque, systemic lupus signs, rapid scalp scarring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy of a non-healing or ulcerated plaque to exclude squamous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with histology and immunofluorescence; ANA; bloods and urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show interface dermatitis with a lymphocytic response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SLE, subacute cutaneous lupus, sarcoidosis, lichen planus or psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict photoprotection as the cornerstone of care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical or intralesional steroids and calcineurin inhibitors for active plaques",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydroxychloroquine first-line for widespread or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Methotrexate, mycophenolate, dapsone or oral retinoids for resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Smoking cessation advice and eye screening on antimalarials",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and relapsing; scarring and alopecia may be permanent; a minority evolve to SLE",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

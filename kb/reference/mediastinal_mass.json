@@ -144,5 +144,296 @@
       "caption": "Overview comparison matrix for mediastinal mass."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mediastinal_mass-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph followed by CT or MRI",
+          "cells": [
+            {
+              "text": "Localises and characterises the mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spine for posterior masses",
+          "cells": [
+            {
+              "text": "Intraspinal extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers: alpha-fetoprotein, beta-hCG and urinary catecholamine metabolites",
+          "cells": [
+            {
+              "text": "Germ cell tumours (AFP, beta-hCG); neuroblastoma (catecholamines)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue sampling by the safest feasible route, with bone marrow where relevant",
+          "cells": [
+            {
+              "text": "Tissue diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway assessment and echocardiography before anaesthesia",
+          "cells": [
+            {
+              "text": "Airway and cardiac status before anaesthesia in large anterior masses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediastinal_mass-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Germ cell tumour (including teratoma)",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein and beta-hCG markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroblastoma, ganglioneuroblastoma or ganglioneuroma",
+          "cells": [
+            {
+              "text": "Urinary catecholamine metabolites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediastinal_mass-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying pathology",
+          "cells": [
+            {
+              "text": "Chemotherapy for lymphoma; surgical resection for cysts, neurogenic tumours and teratomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Least invasive safe tissue diagnosis",
+          "cells": [
+            {
+              "text": "Peripheral samples such as bone marrow or effusion cytology where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and cardiovascular assessment before sedation",
+          "cells": [
+            {
+              "text": "Avoid general anaesthesia in high-risk anterior masses; keep the child upright"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute airway or SVC obstruction",
+          "cells": [
+            {
+              "text": "Positioning and empirical corticosteroids or radiotherapy to shrink a compressing tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "CT or MRI to localise the compartment; spinal MRI for posterior masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric surgery, oncology and anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mediastinal_mass-dx-mgmt",
+      "title": "Diagnosis and management of Mediastinal mass",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with a mediastinal mass on chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway or great-vessel compression, SVC obstruction or intraspinal extension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway and SVC obstruction care; avoid general anaesthesia in high-risk masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI to localise; tumour markers; airway assessment and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the mass characterised by markers or tissue sampling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Obtain tissue by the least invasive safe route, such as bone marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat by underlying pathology: chemotherapy for lymphoma, resection for teratoma or cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Least invasive, safest feasible tissue diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Keep the child upright; avoid general anaesthesia in high-risk anterior masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Positioning and empirical corticosteroids or radiotherapy for acute compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary paediatric surgery, oncology and anaesthesia care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

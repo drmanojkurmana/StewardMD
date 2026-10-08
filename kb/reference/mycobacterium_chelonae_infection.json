@@ -146,5 +146,323 @@
       "caption": "Overview comparison matrix for mycobacterium chelonae infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_chelonae_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Culture of skin or tissue",
+          "cells": [
+            {
+              "text": "Rapid mycobacterial growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular speciation",
+          "cells": [
+            {
+              "text": "Distinguishes it from other rapid growers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-susceptibility testing",
+          "cells": [
+            {
+              "text": "Macrolides, tobramycin and amikacin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy for histology and staining",
+          "cells": [
+            {
+              "text": "Histology and staining of the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status and medication review",
+          "cells": [
+            {
+              "text": "In disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal scrape and culture",
+          "cells": [
+            {
+              "text": "Suspected post-surgical keratitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_chelonae_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other rapidly growing mycobacteria, such as M. abscessus and M. fortuitum",
+          "cells": [
+            {
+              "text": "Usually lacks a functional inducible macrolide-resistance gene, unlike M. abscessus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial furunculosis or abscess",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_chelonae_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Susceptibility-guided macrolide",
+          "cells": [
+            {
+              "text": "Clarithromycin or azithromycin; usually macrolide-susceptible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tobramycin",
+          "cells": [
+            {
+              "text": "Often more active than amikacin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination therapy",
+          "cells": [
+            {
+              "text": "Rather than monotherapy, particularly for disseminated cutaneous disease, to prevent emergent resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Surgical debridement or drainage of abscesses; removal of infected catheters or prosthetic material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce immunosuppression",
+          "cells": [
+            {
+              "text": "Taper corticosteroids or minimise transplant immunosuppression where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-surgical keratitis",
+          "cells": [
+            {
+              "text": "Topical antimycobacterial therapy under ophthalmology guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Repeat cultures and watch for drug toxicity during prolonged treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases referral",
+          "cells": [
+            {
+              "text": "Outcome in disseminated disease depends on control of the immunocompromising condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_chelonae_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium chelonae infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Skin nodules or abscess after a procedure, or disseminated nodules when immunosuppressed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated nodules, device infection, post-operative keratitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Remove infected device; urgent ophthalmology review for keratitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture for rapid growth, molecular speciation, susceptibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rapid grower identified as M. chelonae by molecular speciation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other rapid growers or nocardiosis; repeat speciation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Susceptibility-guided macrolide, such as clarithromycin or azithromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combination antimicrobial therapy rather than monotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical debridement and removal of infected catheters or prosthetic material",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reduce immunosuppression where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised disease responds well; disseminated disease depends on immune status",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

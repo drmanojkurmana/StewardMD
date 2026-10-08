@@ -170,5 +170,486 @@
       "caption": "Overview comparison matrix for neuromyelitis optica."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Neuromyelitis Optica Spectrum Disorder",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/demyelinating-disorders/neuromyelitis-optica-spectrum-disorder-nmosd"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuromyelitis_optica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of NMOSD (2015 international criteria)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "AQP4-IgG positive NMOSD",
+          "cells": [
+            {
+              "text": "At least 1 core clinical feature plus positive AQP4-IgG, alternatives excluded"
+            },
+            {
+              "text": "{{hy:Cell-based assay preferred}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AQP4-IgG negative NMOSD",
+          "unit": "features",
+          "cells": [
+            {
+              "text": "At least 2 core features, one being optic neuritis, LETM or area postrema syndrome",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Plus dissemination in space and MRI requirements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core features",
+          "cells": [
+            {
+              "text": "Optic neuritis, acute myelitis, area postrema, brainstem, diencephalic, cerebral syndromes"
+            },
+            {
+              "text": "Area postrema: intractable hiccups or vomiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AQP4 antibody",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in about 90%",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Highly specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal MRI",
+          "unit": "segments",
+          "cells": [
+            {
+              "text": "Lesion over 3 or more contiguous segments, central grey matter",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "MS usually spans 1 segment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Optic nerve MRI",
+          "cells": [
+            {
+              "text": "Lesion over half the nerve length or chiasm"
+            },
+            {
+              "text": "Bilateral severe optic neuritis suggests NMO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Oligoclonal bands in under 20%",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Pleocytosis can include neutrophils, eosinophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MOG-IgG",
+          "cells": [
+            {
+              "text": "Test in AQP4-negative patients"
+            },
+            {
+              "text": "MOG antibody-associated disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sex ratio",
+          "cells": [
+            {
+              "text": "Women to men about 9 to 1",
+              "op": "=",
+              "value": 9
+            },
+            {
+              "text": "Mean onset about 40"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuromyelitis_optica-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic NMOSD",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "Short cord lesions, oligoclonal bands, progressive course possible"
+            },
+            {
+              "text": "MRI pattern, CSF bands, AQP4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MOG antibody-associated disease",
+          "cells": [
+            {
+              "text": "AQP4 negative, ADEM-like or optic neuritis"
+            },
+            {
+              "text": "MOG-IgG cell-based assay"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis",
+          "cells": [
+            {
+              "text": "Monophasic, post-infectious, encephalopathy"
+            },
+            {
+              "text": "MRI, MOG-IgG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosarcoidosis",
+          "cells": [
+            {
+              "text": "Systemic sarcoid, meningeal enhancement"
+            },
+            {
+              "text": "Chest CT, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLE or Sjogren myelopathy",
+          "cells": [
+            {
+              "text": "Systemic autoimmune features"
+            },
+            {
+              "text": "ANA, anti-Ro; may coexist with NMO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord infarction",
+          "cells": [
+            {
+              "text": "Sudden onset, anterior cord pattern"
+            },
+            {
+              "text": "DWI MRI of cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious myelitis (HSV-2, TB, HIV)",
+          "cells": [
+            {
+              "text": "Fever, immunosuppression"
+            },
+            {
+              "text": "CSF PCR and cultures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuromyelitis_optica-treatment",
+      "kind": "treatment",
+      "title": "Treatment of NMOSD",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose IV methylprednisolone",
+          "cells": [
+            {
+              "text": "{{hy:Every acute attack, promptly}}"
+            },
+            {
+              "text": "Attacks cause the disability"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Severe or steroid-refractory attack"
+            },
+            {
+              "text": "Early"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eculizumab or ravulizumab",
+          "cells": [
+            {
+              "text": "AQP4-positive relapse prevention"
+            },
+            {
+              "text": "Meningococcal vaccination first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Satralizumab or inebilizumab",
+          "cells": [
+            {
+              "text": "AQP4-positive relapse prevention"
+            },
+            {
+              "text": "IL-6 receptor or CD19 antibodies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Relapse prevention"
+            },
+            {
+              "text": "Reduces relapses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azathioprine or mycophenolate",
+          "cells": [
+            {
+              "text": "If monoclonals unavailable"
+            },
+            {
+              "text": "With or without glucocorticoids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid MS drugs",
+          "cells": [
+            {
+              "text": "All NMOSD"
+            },
+            {
+              "text": "Natalizumab and fingolimod ineffective and may harm; interferon-beta may worsen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Residual deficits"
+            },
+            {
+              "text": "Spasticity, pain, bladder, vision; watch cervical myelitis breathing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuromyelitis_optica-dx-mgmt",
+      "title": "Diagnosis and management of neuromyelitis optica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Optic neuritis, myelitis or area postrema syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "IV methylprednisolone now; MRI brain, orbits, spine",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Serum AQP4-IgG cell-based assay; CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "AQP4-IgG positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "AQP4 NMOSD: complement, IL-6R or CD19 antibody, or rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test MOG-IgG",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "MOG-IgG positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "MOG antibody-associated disease pathway",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Two core features with LETM, optic neuritis or area postrema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Seronegative NMOSD: immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reconsider MS, ADEM, sarcoid, infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

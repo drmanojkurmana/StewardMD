@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for glucagonoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glucagonoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting plasma glucagon",
+          "cells": [
+            {
+              "text": "Glucagon concentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and glycaemic assessment",
+          "cells": [
+            {
+              "text": "Glycaemic status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, serum zinc and amino acid profile",
+          "cells": [
+            {
+              "text": "Normocytic anaemia; zinc and amino acid levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of the rash",
+          "cells": [
+            {
+              "text": "When the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of pancreas and liver",
+          "cells": [
+            {
+              "text": "Localisation and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin-receptor imaging and MEN1 screening",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glucagonoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Zinc deficiency (acrodermatitis enteropathica)",
+          "cells": [
+            {
+              "text": "Necrolytic migratory-like rash; zinc level distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 2 diabetes mellitus with weight loss",
+          "cells": [
+            {
+              "text": "Typical diabetes is a pitfall; glucagon level is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glucagonoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Localised tumour; can be curative and reverses the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide or lanreotide to suppress glucagon and control the rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional correction",
+          "cells": [
+            {
+              "text": "Amino acid, zinc and essential fatty acid deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis",
+          "cells": [
+            {
+              "text": "VTE prophylaxis or anticoagulation given the prothrombotic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "Liver-directed therapy, peptide receptor radionuclide therapy or targeted agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Fasting glucagon, glycaemic control and cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN1 screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glucagonoma-dx-mgmt",
+      "title": "Diagnosis and management of Glucagonoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glucagonoma: necrolytic migratory rash with diabetes and weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (venous thromboembolism, extensive or infected rash, metastases)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anticoagulation review for venous thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting glucagon, zinc and amino acids, skin biopsy and pancreatic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is fasting plasma glucagon raised, with zinc deficiency excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider zinc deficiency, other pancreatic tumours or malabsorption syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of localised tumour, which can be curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Somatostatin analogues such as octreotide or lanreotide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct amino acid, zinc and essential fatty acid deficiencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thromboprophylaxis or anticoagulation for the prothrombotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resection of localised disease can cure; many patients present with metastases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

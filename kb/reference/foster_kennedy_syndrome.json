@@ -146,5 +146,285 @@
       "caption": "Overview comparison matrix for foster kennedy syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "foster_kennedy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain with contrast",
+          "cells": [
+            {
+              "text": "Focused on the anterior cranial fossa and skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal visual field testing of both eyes",
+          "cells": [
+            {
+              "text": "Assesses each eye's visual fields"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Optic nerve heads and retinal nerve fibre layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Olfaction assessment",
+          "cells": [
+            {
+              "text": "Can point to an olfactory groove tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus photography",
+          "cells": [
+            {
+              "text": "Documents disc appearances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical evaluation",
+          "cells": [
+            {
+              "text": "Tumour characterisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "foster_kennedy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurosurgical resection",
+          "cells": [
+            {
+              "text": "Definitive treatment of the causative subfrontal or olfactory-groove meningioma or frontal tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative corticosteroids",
+          "cells": [
+            {
+              "text": "Reduce peritumoural oedema and control raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiosurgery or fractionated radiotherapy",
+          "cells": [
+            {
+              "text": "For unresectable, residual or recurrent tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring of both optic nerves",
+          "cells": [
+            {
+              "text": "Visual fields, acuity and OCT, prioritising vision in the papilloedematous eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "For the permanently atrophic eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval surveillance imaging",
+          "cells": [
+            {
+              "text": "Detects tumour recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurosurgery, neuro-ophthalmology and oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "foster_kennedy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Foster Kennedy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Foster Kennedy syndrome: optic atrophy in one eye, disc swelling in the other",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (large frontal tumour, progressive visual loss, raised ICP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical referral for a large frontal or skull base tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain with contrast, visual fields, OCT and olfaction testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a frontal or skull base tumour causing the findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudo-Foster Kennedy syndrome or other optic neuropathy; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neurosurgical resection of the causative tumour, the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Perioperative corticosteroids for oedema and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiosurgery or fractionated radiotherapy for unresectable or recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial visual fields, acuity and OCT of both optic nerves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Atrophic-eye vision often permanently reduced; resection can preserve or improve vision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

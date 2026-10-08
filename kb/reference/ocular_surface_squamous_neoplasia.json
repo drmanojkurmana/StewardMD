@@ -156,5 +156,342 @@
       "caption": "Overview comparison matrix for ocular surface squamous neoplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / WHO Classification of Eye Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ocular_surface_squamous_neoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Limbal location, feeder vessels and leukoplakia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vital-dye staining (rose bengal or lissamine green)",
+          "cells": [
+            {
+              "text": "Highlights abnormal epithelium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior-segment OCT",
+          "cells": [
+            {
+              "text": "Thickened, hyper-reflective epithelium with an abrupt transition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Impression cytology or biopsy",
+          "cells": [
+            {
+              "text": "Histological confirmation of the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Depth of invasion and margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Immune status in aggressive or young-onset disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_surface_squamous_neoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy before destructive treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Histology first, including for atypical or recurrent pterygium-like lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete excision with cryotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Intraepithelial disease, with curative intent; no-touch technique, wide margins; alcohol epitheliectomy if cornea involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical chemotherapy or immunotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Agent classes include interferon alfa-2b, mitomycin C and 5-fluorouracil; no consensus preference over surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant topical therapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "After surgery when margins are involved or close, or when disease is too diffuse to excise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or refractory disease",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Repeat excision with cryotherapy, or switch or add a different topical agent class"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wider excision for invasive carcinoma",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Mainstay, with extent matched to depth of invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant brachytherapy or radiotherapy",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "When margins cannot be cleared or invasion is deeper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation or exenteration",
+          "cells": [
+            {
+              "text": "8"
+            },
+            {
+              "text": "Last resort for extensive intraocular or orbital invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong follow-up and UV protection",
+          "cells": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "Slit-lamp and vital-dye review, rebiopsy of suspicious regrowth, UV counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ocular_surface_squamous_neoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Ocular surface squamous neoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected limbal ocular surface lesion: gelatinous, papilliform or leukoplakic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (scleral fixation, rapid growth, young or immunosuppressed, nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ophthalmic or medical oncology referral for invasion or spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, vital-dye staining, AS-OCT, then biopsy for histology and invasion depth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm intraepithelial disease without invasion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pterygium, pyogenic granuloma, papilloma or melanoma; rebiopsy if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision with no-touch technique, wide margins and adjunctive cryotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical interferon alfa-2b, mitomycin C or 5-fluorouracil as adjuvant or alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repeat excision or switch topical agent class for recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wider excision for invasive carcinoma; add brachytherapy or radiotherapy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong slit-lamp follow-up with vital dye, AS-OCT and UV protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Intraepithelial disease usually controlled; recurrence follows narrow-margin excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

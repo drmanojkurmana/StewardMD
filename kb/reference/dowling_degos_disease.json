@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for dowling-degos disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dowling_degos_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Filiform elongation of pigmented rete ridges without naevus-cell proliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for KRT5, POFUT1, POGLUT1, PSENEN",
+          "cells": [
+            {
+              "text": "Confirms the variant when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hidradenitis suppurativa in PSENEN cases",
+          "cells": [
+            {
+              "text": "Associated hidradenitis suppurativa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of insulin resistance",
+          "cells": [
+            {
+              "text": "Needed when acanthosis nigricans is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dowling_degos_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acanthosis nigricans",
+          "cells": [
+            {
+              "text": "Flexural pigmentation mislabelled as acanthosis; insulin resistance needs exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galli-Galli disease",
+          "cells": [
+            {
+              "text": "Acantholytic variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dowling_degos_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cosmetic management and counselling",
+          "cells": [
+            {
+              "text": "No curative therapy; benign but progressive, lifelong course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical retinoids and hydroquinone",
+          "cells": [
+            {
+              "text": "For reticulate hyperpigmentation; benefit is modest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigment-selective laser",
+          "cells": [
+            {
+              "text": "Erbium:YAG or Q-switched laser for cosmetically troublesome lesions; response varies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sun exposure accentuates flexural pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overlapping hidradenitis suppurativa",
+          "cells": [
+            {
+              "text": "Managed along its own pathway in PSENEN-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; molecular testing where confirmation is required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dowling_degos_disease-dx-mgmt",
+      "title": "Diagnosis and management of Dowling-Degos disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dowling-Degos disease: reticulate flexural hyperpigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (coexisting hidradenitis suppurativa or disfiguring pigmentation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat coexisting hidradenitis suppurativa along its own pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for filiform rete elongation; family history; genetic testing if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show pigmented rete elongation without naevus-cell proliferation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acanthosis nigricans, Galli-Galli disease or reticulate acropigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cosmetic management and counselling; no curative therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical retinoids or hydroquinone for reticulate pigmentation; modest benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pigment-selective laser for cosmetically troublesome lesions; response varies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Photoprotection, since sun exposure accentuates flexural pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and molecular testing for autosomal dominant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but chronic and slowly progressive; treatments give limited cosmetic gain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

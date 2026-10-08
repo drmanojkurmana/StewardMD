@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for lambert-eaton myasthenic syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lambert_eaton-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum P/Q-type calcium channel antibodies",
+          "cells": [
+            {
+              "text": "Antibodies against presynaptic calcium channels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repetitive nerve stimulation and post-exercise testing",
+          "cells": [
+            {
+              "text": "Decrement at low frequency; marked increment at high frequency or after exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest, then FDG-PET if negative",
+          "cells": [
+            {
+              "text": "Search for small-cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval surveillance imaging",
+          "cells": [
+            {
+              "text": "Occult tumour when initial screen is negative but risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SOX1 antibodies",
+          "cells": [
+            {
+              "text": "Supports an underlying small-cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-fibre electromyography",
+          "cells": [
+            {
+              "text": "Equivocal neuromuscular transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lambert_eaton-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Ocular and bulbar symptoms milder in LEMS; autonomic features favour LEMS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Also a presynaptic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neuron disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lambert_eaton-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amifampridine (3,4-diaminopyridine)",
+          "cells": [
+            {
+              "text": "Symptomatic; enhances presynaptic acetylcholine release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridostigmine",
+          "cells": [
+            {
+              "text": "Added where helpful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying small-cell lung cancer",
+          "cells": [
+            {
+              "text": "Successful tumour treatment often improves the neurological syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, azathioprine, IVIG, plasma exchange or rituximab for disabling or refractory weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval surveillance",
+          "cells": [
+            {
+              "text": "CT and FDG-PET while initial screening is negative but risk remains high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy; symptomatic treatment of dry mouth and constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation monitoring",
+          "cells": [
+            {
+              "text": "Monitor and escalate for severe bulbar or respiratory weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, oncology and respiratory medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lambert_eaton-dx-mgmt",
+      "title": "Diagnosis and management of Lambert-Eaton myasthenic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal leg weakness with dry mouth, constipation or erectile dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, haemoptysis, bulbar or respiratory weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: monitor airway and ventilation for severe bulbar or respiratory weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "P/Q calcium channel antibodies, repetitive nerve stimulation, CT chest, FDG-PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is small-cell lung cancer or another occult tumour found on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue surveillance imaging; consider SOX1 antibodies and single-fibre EMG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Amifampridine to enhance acetylcholine release, with pyridostigmine where helpful",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the underlying small-cell lung cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunotherapy for disabling or refractory weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval CT and FDG-PET surveillance while risk remains",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and symptomatic treatment of dry mouth and constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outlook dominated by the associated malignancy when present; symptoms often improve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

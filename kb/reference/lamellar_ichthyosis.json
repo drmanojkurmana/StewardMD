@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for lamellar ichthyosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lamellar_ichthyosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing (TGM1 and other genes)",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; several causative genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Marked orthohyperkeratosis with normal or thickened granular layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In vitro transglutaminase-1 activity assay",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology assessment",
+          "cells": [
+            {
+              "text": "Ectropion and corneal exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thermoregulation and hydration assessment",
+          "cells": [
+            {
+              "text": "Particularly in neonates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lamellar_ichthyosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital ichthyosiform erythroderma",
+          "cells": [
+            {
+              "text": "Overlapping spectrum; the erythrodermic phenotype differs from plate-like scale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Harlequin ichthyosis",
+          "cells": [
+            {
+              "text": "Severe end of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Netherton syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lamellar_ichthyosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emollients and keratolytics",
+          "cells": [
+            {
+              "text": "Liberal emollients and keratolytics such as urea and alpha-hydroxy acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collodion neonate care",
+          "cells": [
+            {
+              "text": "Humidified incubator, careful fluid and electrolyte balance, monitoring for sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoids",
+          "cells": [
+            {
+              "text": "Acitretin for severe, disabling scaling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology care",
+          "cells": [
+            {
+              "text": "Lubrication for ectropion and corneal exposure; surgical correction where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heat intolerance",
+          "cells": [
+            {
+              "text": "From impaired sweating; vigilance for hyperthermia and skin infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, ophthalmology and ENT with psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier and prenatal testing for autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lamellar_ichthyosis-dx-mgmt",
+      "title": "Diagnosis and management of Lamellar ichthyosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Collodion baby with a taut membrane that sheds, then large plate-like dark scales",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal dehydration, corneal exposure, hyperthermia, skin infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neonatal care for dehydration, temperature instability or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TGM1 and other ichthyosis gene testing, skin biopsy, ophthalmology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing or biopsy confirm a lamellar ichthyosis pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital ichthyosiform erythroderma or another ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liberal emollients and keratolytics such as urea and alpha-hydroxy acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Collodion neonate care in a humidified incubator with fluid balance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acitretin for severe, disabling scaling",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology care for ectropion and corneal exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Heat-intolerance precautions and multidisciplinary care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong; chronic scaling needs continuous care, with eye and heat complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for distal 18q deletion syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "distal_18q_deletion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray as first-line test",
+          "cells": [
+            {
+              "text": "Detects and sizes the terminal deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or MLPA",
+          "cells": [
+            {
+              "text": "Confirms the deletion and assesses parental rearrangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental studies",
+          "cells": [
+            {
+              "text": "Excludes an inherited translocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment and ear imaging",
+          "cells": [
+            {
+              "text": "Hearing loss and external or middle ear anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Myelination and structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring with endocrine and immunoglobulin assessment",
+          "cells": [
+            {
+              "text": "Growth hormone deficiency and IgA deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "distal_18q_deletion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proximal (interstitial) 18q deletion",
+          "cells": [
+            {
+              "text": "Distinct phenotype; confusion with the distal deletion is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated growth hormone deficiency",
+          "cells": [
+            {
+              "text": "Treatable cause of short stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukodystrophies",
+          "cells": [
+            {
+              "text": "Abnormal myelination on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "distal_18q_deletion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational, speech and educational support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing management",
+          "cells": [
+            {
+              "text": "Audiology, hearing aids and ENT input for ear canal atresia or stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Endocrine evaluation; growth hormone where deficiency is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune assessment",
+          "cells": [
+            {
+              "text": "IgA deficiency; prompt treatment of infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot deformity and hypotonia",
+          "cells": [
+            {
+              "text": "Orthopaedic and physiotherapy input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological follow-up",
+          "cells": [
+            {
+              "text": "Brain MRI to characterise dysmyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental studies for recurrence risk and inherited translocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "distal_18q_deletion-dx-mgmt",
+      "title": "Diagnosis and management of Distal 18q deletion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected distal 18q deletion: intellectual disability, hearing loss, short stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (major hearing loss, faltering growth, recurrent infection, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of seizures or neurological decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray; FISH or MLPA; parental studies; audiology; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a terminal 18q deletion found with no inherited translocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider proximal 18q deletion, other subtelomeric deletion or leukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental, speech and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Audiology, hearing aids and ENT input for ear atresia or stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endocrine evaluation and growth hormone where deficiency is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage IgA deficiency with prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Parental studies and genetic counselling for recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mild to moderate intellectual disability; meaningful function with early support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

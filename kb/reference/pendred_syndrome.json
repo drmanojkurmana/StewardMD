@@ -147,5 +147,287 @@
       "caption": "Overview comparison matrix for pendred syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pendred_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Fluctuating or progressive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT or MRI of the temporal bones",
+          "cells": [
+            {
+              "text": "Enlarged vestibular aqueduct and cochlear anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests and thyroid ultrasound",
+          "cells": [
+            {
+              "text": "Goitre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perchlorate discharge test",
+          "cells": [
+            {
+              "text": "Used where genetic testing is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC26A4 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pendred_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hearing aids or cochlear implantation",
+          "cells": [
+            {
+              "text": "For severe-to-profound hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Speech and language therapy and educational support for prelingual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head trauma avoidance",
+          "cells": [
+            {
+              "text": "Avoid head trauma and contact sports that may precipitate stepwise hearing deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid monitoring",
+          "cells": [
+            {
+              "text": "Monitor thyroid function and goitre size; replace thyroid hormone if hypothyroidism develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Track fluctuating or progressive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Co-ordinated otology, audiology and endocrinology care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screen affected siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pendred_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pendred syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with sensorineural hearing loss, enlarged vestibular aqueduct or goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stepwise hearing loss after head trauma, progressive goitre, vertigo)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent otology and endocrine review for stepwise loss or evolving thyroid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial audiometry, temporal bone CT or MRI, and thyroid function with ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC26A4 testing (or perchlorate discharge test) confirm Pendred syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-syndromic enlarged vestibular aqueduct (DFNB4) or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fit hearing aids or cochlear implantation for severe-to-profound hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start early speech, language and educational support for prelingual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise avoidance of head trauma and contact sports",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor thyroid function and goitre; replace thyroid hormone if hypothyroidism develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Offer genetic counselling and screen affected siblings",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Hearing is progressive or fluctuating; the goitre is usually benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

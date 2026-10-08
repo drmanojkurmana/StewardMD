@@ -172,5 +172,531 @@
       "caption": "Overview comparison matrix for nervous system disorders in critical care."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Traumatic Brain Injury (Brain Trauma Foundation 4th ed)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nervous_system_disorders_in_critical-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key thresholds in neurocritical care",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral perfusion pressure",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "CPP = MAP minus ICP; target 60 mmHg or more",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Ischaemia risk when CPP under 50 mmHg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial pressure",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Keep below 20 mmHg (Harrison); under 25, sometimes 20 (Merck)",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "{{hy:Escalate for sustained ICP above 20 to 25}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCS severity",
+          "cells": [
+            {
+              "text": "Severe 3 to 8; moderate 9 to 12; mild 13 to 15",
+              "range": [
+                3,
+                8
+              ]
+            },
+            {
+              "text": "GCS 8 or less in TBI: ICP monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Focal signs",
+          "cells": [
+            {
+              "text": "Pupil asymmetry, hemiparesis, gaze palsy, field cut"
+            },
+            {
+              "text": "Suggest structural lesion: urgent imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory failure risk",
+          "unit": "L",
+          "cells": [
+            {
+              "text": "Vital capacity under 1 L or inspiratory force weaker than -25 cmH2O",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Prepare to intubate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary insults",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "SBP under 90 mmHg or SpO2 under 90%",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "Even brief episodes worsen outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium correction limit",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "About 8 mmol/L per 24 h and 15 per 48 h",
+              "op": "<=",
+              "value": 8
+            },
+            {
+              "text": "Faster risks osmotic demyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-arrest poor prognosis",
+          "cells": [
+            {
+              "text": "Absent pupil reflex or extensor or no motor response at days 5 to 7, absent N20, burst suppression, high NSE"
+            },
+            {
+              "text": "Confounded by sedation, hypothermia, metabolic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Detects nonconvulsive status"
+            },
+            {
+              "text": "Use in unexplained reduced consciousness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "ICP target: Harrison 22e uses below 20 mmHg; Merck citing BTF 4th edition uses below 25 (sometimes 20) mmHg."
+    },
+    {
+      "id": "nervous_system_disorders_in_critical-ddx",
+      "kind": "ddx",
+      "title": "Causes of altered consciousness in the ICU",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Metabolic or septic encephalopathy",
+          "cells": [
+            {
+              "text": "Diffuse, fluctuating, no focal signs"
+            },
+            {
+              "text": "Electrolytes, glucose, liver and renal tests, cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or sedative effect",
+          "cells": [
+            {
+              "text": "Recent sedatives, opioids, polypharmacy"
+            },
+            {
+              "text": "Drug review, toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonconvulsive status epilepticus",
+          "cells": [
+            {
+              "text": "Unexplained low consciousness, subtle twitching"
+            },
+            {
+              "text": "EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke or haemorrhage",
+          "cells": [
+            {
+              "text": "Focal deficits, sudden onset"
+            },
+            {
+              "text": "CT, CTA, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basilar artery thrombosis",
+          "cells": [
+            {
+              "text": "Sudden coma with extensor posturing and cranial nerve signs"
+            },
+            {
+              "text": "CTA; hyperdense basilar sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wernicke encephalopathy",
+          "cells": [
+            {
+              "text": "Malnourished or alcohol use; triad in only a third"
+            },
+            {
+              "text": "Clinical; give thiamine before glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Fever, neck stiffness, immunosuppression"
+            },
+            {
+              "text": "Imaging then LP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcineurin inhibitor neurotoxicity or PRES",
+          "cells": [
+            {
+              "text": "Transplant patient, even with normal drug levels"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nervous_system_disorders_in_critical-treatment",
+      "kind": "treatment",
+      "title": "Management of raised ICP and ICU neurologic complications",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "General measures",
+          "cells": [
+            {
+              "text": "{{hy:All brain-injured patients}}"
+            },
+            {
+              "text": "Head up, avoid hypotension, hypoxia, fever, hyperglycaemia; sedation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mannitol 20%",
+          "cells": [
+            {
+              "text": "Raised ICP"
+            },
+            {
+              "text": "0.5 to 1 g/kg IV over 15 to 30 min, then 0.25 to 0.5 g/kg every 6 to 8 h as needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypertonic saline",
+          "cells": [
+            {
+              "text": "Raised ICP"
+            },
+            {
+              "text": "2 to 3 mL/kg IV bolus or 1 mL/kg/h; keep sodium 155 or less, osmolality 295 to 320"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CSF drainage",
+          "cells": [
+            {
+              "text": "Raised ICP with ventriculostomy"
+            },
+            {
+              "text": "Ventriculostomy preferred monitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brief hyperventilation",
+          "cells": [
+            {
+              "text": "Impending herniation or refractory ICP"
+            },
+            {
+              "text": "PaCO2 30 to 35 mmHg briefly; no prophylactic use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Seizure prophylaxis in TBI",
+          "cells": [
+            {
+              "text": "Structural injury or GCS under 10"
+            },
+            {
+              "text": "Phenytoin 20 mg/kg IV load; stop after 1 week if no seizures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid steroids for ICP",
+          "cells": [
+            {
+              "text": "TBI and stroke"
+            },
+            {
+              "text": "Only for tumour or abscess oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine before glucose",
+          "cells": [
+            {
+              "text": "At-risk malnourished patient"
+            },
+            {
+              "text": "Prevents Wernicke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompressive surgery",
+          "cells": [
+            {
+              "text": "Mass lesion or refractory ICP"
+            },
+            {
+              "text": "Craniectomy or haematoma evacuation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nervous_system_disorders_in_critical-dx-mgmt",
+      "title": "Diagnosis and management of nervous system disorders in critical care",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reduced consciousness in a critically ill patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Secure airway, BP and oxygen; check glucose; thiamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Focal signs or sudden coma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent CT and CT angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mass effect or raised ICP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Head up, osmotherapy, CSF drainage, ICP monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Neurosurgery for mass or refractory ICP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Labs, drug review, toxicology",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Metabolic or drug cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Correct cause; sodium no faster than 8 per 24 h",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "EEG; LP after imaging if infection possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat status epilepticus or CNS infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

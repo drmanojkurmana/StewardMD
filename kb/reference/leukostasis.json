@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for leukostasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Committee for Standards in Haematology acute myeloid leukaemia guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leukostasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with differential and blast percentage",
+          "cells": [
+            {
+              "text": "Very high blast count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Blasts and features of leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen with fibrinogen and D-dimer",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation, which often coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urea, electrolytes, urate, phosphate and calcium",
+          "cells": [
+            {
+              "text": "Tumour lysis syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Interpreted with awareness of leucocyte artefact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT head",
+          "cells": [
+            {
+              "text": "Where neurological signs are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukostasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumonia or neutropenic sepsis",
+          "cells": [
+            {
+              "text": "Respiratory picture and fever can mimic leukostasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Dyspnoea and hypoxia can mimic the pulmonary picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial haemorrhage or ischaemic stroke",
+          "cells": [
+            {
+              "text": "Neurological mimic; CT head where signs are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperviscosity syndrome from a paraprotein",
+          "cells": [
+            {
+              "text": "Another viscosity-driven syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukostasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent cytoreduction",
+          "cells": [
+            {
+              "text": "Hydroxycarbamide and prompt induction chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leucapheresis",
+          "cells": [
+            {
+              "text": "In selected unstable patients, to rapidly lower blast burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour lysis prevention",
+          "cells": [
+            {
+              "text": "Vigorous hydration with rasburicase or allopurinol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Blood-product support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "Avoid or minimise until the white-cell count is controlled; raises viscosity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and neurological care",
+          "cells": [
+            {
+              "text": "Oxygen and ventilatory support; close neurological monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Definitive treatment of underlying AML or blast-phase CML"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leukostasis-dx-mgmt",
+      "title": "Diagnosis and management of leukostasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Very high white count with hypoxaemia, confusion or headache in leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypoxic failure, altered mental status, bleed, priapism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology and intensive care; start cytoreduction at once",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with blast count, blood film, coagulation screen, U&E, urate, ABG, CT head",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a high blast count confirmed on blood film?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pneumonia, pulmonary embolism or paraprotein hyperviscosity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent cytoreduction with hydroxycarbamide and induction chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Leucapheresis for selected unstable patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydration with rasburicase or allopurinol for tumour lysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood-product support for DIC; avoid red-cell transfusion until count controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oxygen, ventilatory support and neurological monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High early mortality; prompt cytoreduction improves survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

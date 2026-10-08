@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for kyphoscoliotic ehlers-danlos syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and connective tissue disorder references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ehlers_danlos_kyphoscoliotic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary pyridinoline cross-link ratio",
+          "cells": [
+            {
+              "text": "PLOD1 form identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PLOD1 and FKBP14 molecular testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine imaging",
+          "cells": [
+            {
+              "text": "Kyphoscoliosis characterisation and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and arterial imaging",
+          "cells": [
+            {
+              "text": "Vascular fragility and aortic dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Globe integrity, cornea and refraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and bone densitometry",
+          "cells": [
+            {
+              "text": "Hearing loss in FKBP14; osteopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_kyphoscoliotic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vascular EDS",
+          "cells": [
+            {
+              "text": "Arterial rupture without kyphoscoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan or Loeys-Dietz syndrome",
+          "cells": [
+            {
+              "text": "Marfanoid habitus with aortic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brittle cornea syndrome",
+          "cells": [
+            {
+              "text": "Corneal fragility from ZNF469 or PRDM5"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myopathy",
+          "cells": [
+            {
+              "text": "Hypotonia in the FKBP14 form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_kyphoscoliotic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and bracing",
+          "cells": [
+            {
+              "text": "Muscle strengthening and protection of hypermobile joints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascorbic acid",
+          "cells": [
+            {
+              "text": "Cofactor for residual collagen cross-linking in the PLOD1 form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surgery",
+          "cells": [
+            {
+              "text": "Orthopaedic and spinal correction of progressive kyphoscoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye protection",
+          "cells": [
+            {
+              "text": "Ophthalmology input and avoidance of ocular trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and blood pressure control for arterial rupture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Restrictive lung disease from kyphoscoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "PLOD1 or FKBP14 carrier testing; autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ehlers_danlos_kyphoscoliotic-dx-mgmt",
+      "title": "Diagnosis and management of Kyphoscoliotic Ehlers-Danlos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected kyphoscoliotic EDS: congenital hypotonia with progressive scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (globe rupture, arterial rupture, restrictive lung compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical and vascular assessment for arterial or globe rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary pyridinoline ratio; PLOD1 and FKBP14 testing; spine imaging; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the PLOD1 or FKBP14 variant found with an abnormal cross-link ratio?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vascular EDS, Marfan syndrome, brittle cornea or congenital myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, bracing and low-impact conditioning for hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ascorbic acid supplementation in the PLOD1 form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spinal surgery for progressive kyphoscoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Eye protection and prompt ophthalmology input for globe fragility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Blood pressure control and arterial surveillance for rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Kyphoscoliosis, lung disease and vascular or ocular rupture drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

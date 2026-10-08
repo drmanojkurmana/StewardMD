@@ -157,5 +157,323 @@
       "caption": "Overview comparison matrix for primary mediastinal large b-cell lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mediastinal_large_b_cell_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Core or surgical biopsy with immunophenotyping",
+          "cells": [
+            {
+              "text": "Adequate tissue, given the fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "CD20, CD23 and variable CD30; weak surface immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT for staging and end-of-treatment response",
+          "cells": [
+            {
+              "text": "Residual masses after treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for SVC obstruction and airway compromise",
+          "cells": [
+            {
+              "text": "SVC obstruction and airway compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood counts, lactate dehydrogenase and organ function",
+          "cells": [
+            {
+              "text": "Baseline status before intensive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular or FISH studies for 9p24",
+          "cells": [
+            {
+              "text": "9p24 abnormalities, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediastinal_large_b_cell_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Grey zone lymphoma",
+          "cells": [
+            {
+              "text": "Intermediate features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell lymphoblastic lymphoma/leukaemia",
+          "cells": [
+            {
+              "text": "Young patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediastinal_large_b_cell_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chemoimmunotherapy backbone",
+          "cells": [
+            {
+              "text": "Curative intent, with chemoimmunotherapy rather than surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthracycline-based chemoimmunotherapy",
+          "cells": [
+            {
+              "text": "First line, combined with an anti-CD20 antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose-adjusted EPOCH with rituximab",
+          "cells": [
+            {
+              "text": "Without radiotherapy; favourable progression-free and overall survival; de facto standard of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHOP-based chemoimmunotherapy plus radiotherapy",
+          "cells": [
+            {
+              "text": "Broadly similar outcomes in retrospective comparisons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-guided omission of radiotherapy",
+          "cells": [
+            {
+              "text": "After dose-adjusted EPOCH-R, when complete metabolic response is shown"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy for salvage",
+          "cells": [
+            {
+              "text": "Incomplete responses or localised relapses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CAR T-cell therapy for relapsed or refractory disease",
+          "cells": [
+            {
+              "text": "Axicabtagene ciloleucel or lisocabtagene maraleucel are approved options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pembrolizumab",
+          "cells": [
+            {
+              "text": "Meaningful response rate in relapsed or refractory disease; complete responses uncommon"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mediastinal_large_b_cell_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary mediastinal large B-cell lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bulky anterior mediastinal mass with fibrosis; suspected primary mediastinal lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "SVC obstruction, airway compromise, effusion or CNS symptoms present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment of SVC obstruction and airway compromise; treat promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Core or surgical biopsy with immunophenotyping; PET-CT; blood counts; LDH; 9p24",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunohistochemistry show the mediastinal B-cell profile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nodular sclerosis Hodgkin, DLBCL, T-lymphoblastic lymphoma or thymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Curative-intent anthracycline-based chemoimmunotherapy with anti-CD20 antibody",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dose-adjusted EPOCH with rituximab, without radiotherapy, as de facto standard",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PET-guided omission of radiotherapy after complete metabolic response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CAR T-cell therapy as an approved option for relapsed or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "PET-CT for end-of-treatment assessment; early referral if relapsed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

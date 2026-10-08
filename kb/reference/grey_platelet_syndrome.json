@@ -153,5 +153,323 @@
       "caption": "Overview comparison matrix for grey platelet syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "grey_platelet_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood film review",
+          "cells": [
+            {
+              "text": "Large agranular grey platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet electron microscopy",
+          "cells": [
+            {
+              "text": "Absent or reduced alpha-granules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregometry and secretion studies",
+          "cells": [
+            {
+              "text": "Platelet secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for P-selectin on activation",
+          "cells": [
+            {
+              "text": "Granule marker expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow with reticulin staining",
+          "cells": [
+            {
+              "text": "Fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NBEAL2, GFI1B and related gene testing",
+          "cells": [
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grey_platelet_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune thrombocytopenia with large platelets",
+          "cells": [
+            {
+              "text": "Immunosuppression is a pitfall if misdiagnosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYH9-related disorders",
+          "cells": [
+            {
+              "text": "May-Hegglin anomaly and related conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quebec platelet disorder",
+          "cells": [
+            {
+              "text": "Secretion defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grey_platelet_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid and platelet transfusion",
+          "cells": [
+            {
+              "text": "Bleeding episodes and cover for surgery and childbirth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytic and hormonal therapy",
+          "cells": [
+            {
+              "text": "Menorrhagia control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aspirin and NSAIDs",
+          "cells": [
+            {
+              "text": "Worsen bleeding tendency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron and hepatitis B immunisation",
+          "cells": [
+            {
+              "text": "Iron for bleeding-related anaemia; immunisation before transfusion exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial blood counts",
+          "cells": [
+            {
+              "text": "Progressive thrombocytopenia, splenomegaly and myelofibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Reserved for severe refractory thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive NBEAL2-related disease; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "grey_platelet_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Grey Platelet Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected grey platelet syndrome: mucosal bleeding with grey agranular platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (major or intracranial bleeding, rapid splenomegaly, marrow failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haemostatic support for major or peripartum bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film, electron microscopy, aggregometry, flow cytometry and gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does electron microscopy show absent alpha-granules, confirming the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider immune thrombocytopenia, MYH9 disorders or Quebec platelet disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tranexamic acid and platelet transfusion for bleeding and surgical cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifibrinolytic and hormonal therapy for menorrhagia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid aspirin, NSAIDs and antiplatelet agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial blood counts; splenectomy only for severe refractory thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate lifelong bleeding with normal lifespan when haemostasis is supported",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

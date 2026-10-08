@@ -152,5 +152,341 @@
       "caption": "Overview comparison matrix for single-organ vasculitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley and Firestein's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "single_organ_vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue biopsy of the affected organ",
+          "cells": [
+            {
+              "text": "Vessel size and pattern of inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA, ANA and complement",
+          "cells": [
+            {
+              "text": "Screens for systemic and autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and systemic review",
+          "cells": [
+            {
+              "text": "Systemic features that would point to wider disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-appropriate imaging",
+          "cells": [
+            {
+              "text": "Vascular involvement of the affected organ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and malignancy screening",
+          "cells": [
+            {
+              "text": "Infective triggers by relevant serology; age-appropriate malignancy screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longitudinal follow-up",
+          "cells": [
+            {
+              "text": "Later conversion to systemic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "single_organ_vasculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA-associated vasculitis",
+          "cells": [
+            {
+              "text": "Positive ANCA on follow-up suggests systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic vasculitis with early organ involvement",
+          "cells": [
+            {
+              "text": "Constitutional symptoms or new organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitis secondary to connective tissue disease",
+          "cells": [
+            {
+              "text": "Screened for by ANA and complement testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced vasculitis",
+          "cells": [
+            {
+              "text": "Drug exposure is a trigger to identify and remove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection-related vasculitis",
+          "cells": [
+            {
+              "text": "Infective triggers identified by serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy-associated vasculitis",
+          "cells": [
+            {
+              "text": "Age-appropriate malignancy screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "single_organ_vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Organ biopsy and exclusion of systemic disease",
+          "cells": [
+            {
+              "text": "Before treating; single-organ vasculitis is a diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated cutaneous disease",
+          "cells": [
+            {
+              "text": "Remove or treat triggers with leg elevation and compression; reserve a short corticosteroid course, colchicine or dapsone for persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-threatening forms",
+          "cells": [
+            {
+              "text": "Corticosteroids with methotrexate or azathioprine, or systemic induction regimens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-directed measures",
+          "cells": [
+            {
+              "text": "Surgical repair and surveillance imaging for aortitis; pain control and rehabilitation for nerve vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Clinical review, serology and inflammatory markers for later systemic progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated specialist input",
+          "cells": [
+            {
+              "text": "Rheumatology with organ specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "single_organ_vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of Single-organ vasculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vasculitis confined to one organ or system: suspected single-organ vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (constitutional symptoms, new organ involvement, aortic dilatation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for systemic vasculitis and treat as organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Organ biopsy; ANCA, ANA and complement; infection and malignancy screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm vasculitis, with no systemic disease on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider systemic vasculitis, ANCA-associated disease or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cutaneous forms: remove triggers, supportive care, and reserve steroids or dapsone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Organ-threatening forms: corticosteroids with methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Organ-directed care: surgical repair for aortitis, pain control for nerve disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance for later systemic conversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many forms are favourable; prognosis depends on the organ and on systemic conversion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

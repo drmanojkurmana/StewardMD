@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for gastroparesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastroparesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Excludes mechanical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scintigraphic solid-meal gastric emptying study",
+          "cells": [
+            {
+              "text": "Measures gastric emptying"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wireless motility capsule or breath test",
+          "cells": [
+            {
+              "text": "Alternatives to scintigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and HbA1c in diabetic patients",
+          "cells": [
+            {
+              "text": "Glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications affecting motility",
+          "cells": [
+            {
+              "text": "Reversible contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and electrolyte assessment",
+          "cells": [
+            {
+              "text": "Severe or chronic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastroparesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical gastric outlet obstruction",
+          "cells": [
+            {
+              "text": "Excluded by upper endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic ulcer disease or malignancy",
+          "cells": [
+            {
+              "text": "Excluded by upper endoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastroparesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary modification",
+          "cells": [
+            {
+              "text": "Small, frequent, low-fat and low-fibre meals; liquid or blended nutrition when solids are poorly tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Hyperglycaemia further slows gastric emptying in diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetic therapy",
+          "cells": [
+            {
+              "text": "Metoclopramide, domperidone or erythromycin, balanced against extrapyramidal effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiemetics and medication review",
+          "cells": [
+            {
+              "text": "Withdraw motility-impairing drugs such as opioids and GLP-1 receptor agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct dehydration and nutrition",
+          "cells": [
+            {
+              "text": "Escalate to enteral jejunal or parenteral feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyloric-directed interventions",
+          "cells": [
+            {
+              "text": "Intrapyloric botulinum toxin, gastric per-oral endoscopic myotomy or gastric electrical stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Gastroenterology and a motility or nutrition service for disabling or resistant symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastroparesis-dx-mgmt",
+      "title": "Diagnosis and management of Gastroparesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastroparesis: vomiting with delayed gastric emptying",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intractable vomiting, weight loss, obstruction or malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent correction of dehydration and electrolytes for intractable vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper endoscopy, solid-meal emptying scan, HbA1c and medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does a solid-meal emptying study confirm delayed gastric emptying?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical obstruction, functional dyspepsia or cyclic vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Small, frequent, low-fat and low-fibre meals; optimise glycaemic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prokinetic therapy such as metoclopramide, domperidone or erythromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw motility-impairing drugs such as opioids and GLP-1 receptor agonists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct dehydration and nutrition; escalate to enteral or parenteral feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often chronic and fluctuating; many control symptoms with diet and medication",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

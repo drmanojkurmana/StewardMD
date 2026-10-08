@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for classic galactosaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "galactosemia_classic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn screening and erythrocyte GALT enzyme assay",
+          "cells": [
+            {
+              "text": "Erythrocyte GALT enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte galactose-1-phosphate",
+          "cells": [
+            {
+              "text": "Erythrocyte galactose-1-phosphate concentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine testing for reducing substances with paired blood glucose",
+          "cells": [
+            {
+              "text": "Non-glucose reducing substances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and coagulation studies",
+          "cells": [
+            {
+              "text": "Hepatic and coagulation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and renal tubular assessment",
+          "cells": [
+            {
+              "text": "Cataract and renal tubular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "galactosemia_classic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong galactose-free diet",
+          "cells": [
+            {
+              "text": "Started as soon as the diagnosis is suspected; eliminates lactose-containing milk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis workup and empirical antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum cover including E. coli in the acutely ill neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive liver and renal care",
+          "cells": [
+            {
+              "text": "Liver failure, coagulopathy and renal tubular dysfunction during the acute presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Oil-droplet cataract, which typically resolves with dietary galactose restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic supervision",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D intake; long-term bone health monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Cognitive, speech and motor difficulties; endocrine surveillance in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade testing of the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "galactosemia_classic-dx-mgmt",
+      "title": "Diagnosis and management of Classic galactosaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected classic galactosaemia: jaundice, hepatomegaly and poor feeding after milk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Gram-negative sepsis, progressive liver failure, encephalopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis workup and empirical broad-spectrum antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GALT enzyme activity, erythrocyte galactose-1-phosphate, urine reducing substances",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is erythrocyte GALT activity deficient, confirming classic galactosaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neonatal sepsis, neonatal hepatitis, tyrosinaemia or fructose intolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong galactose-free diet, started as soon as the diagnosis is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sepsis workup and empirical antibiotics covering E. coli",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care of liver failure, coagulopathy and renal tubular dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietetic supervision for calcium and vitamin D; bone health monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early galactose-free diet prevents neonatal illness and reverses acute manifestations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

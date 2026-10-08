@@ -146,5 +146,276 @@
       "caption": "Overview comparison matrix for perinatal hiv infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perinatal_hiv-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HIV nucleic acid (virological) testing",
+          "cells": [
+            {
+              "text": "Infection status, on the recommended schedule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD4 count and percentage",
+          "cells": [
+            {
+              "text": "Immune status, monitored over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV viral load",
+          "cells": [
+            {
+              "text": "Viral suppression, monitored over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-infection screen",
+          "cells": [
+            {
+              "text": "Tuberculosis, hepatitis B and C, syphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, growth and developmental assessment",
+          "cells": [
+            {
+              "text": "Growth and development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perinatal_hiv-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Suppresses maternal viral load to prevent vertical transmission; appropriate mode of delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal prophylaxis",
+          "cells": [
+            {
+              "text": "Antiretroviral prophylaxis after birth, by assessed transmission risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Start combination therapy promptly in any confirmed infected infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocystis prophylaxis",
+          "cells": [
+            {
+              "text": "Co-trimoxazole in at-risk and infected infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Virological testing",
+          "cells": [
+            {
+              "text": "Nucleic acid testing on the recommended schedule, not antibody tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "CD4 count and percentage, viral load, growth and development; treat co-infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunisation and referral",
+          "cells": [
+            {
+              "text": "Appropriate immunisation; paediatric HIV specialist and maternal support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perinatal_hiv-dx-mgmt",
+      "title": "Diagnosis and management of Perinatal HIV Infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant born to a mother with HIV, or infant with growth faltering and recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (failure to thrive, opportunistic infection, developmental regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric HIV specialist care for opportunistic infection or regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nucleic acid (virological) HIV testing; CD4 count; viral load; co-infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does virological testing confirm HIV infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other congenital infections, primary immunodeficiency or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start combination antiretroviral therapy promptly in any confirmed infected infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give co-trimoxazole prophylaxis against Pneumocystis jirovecii pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor CD4 count, viral load, growth and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for and treat co-infections such as tuberculosis, hepatitis and syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early treatment can give viral suppression and near-normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

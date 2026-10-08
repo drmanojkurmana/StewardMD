@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for gerstmann-straussler-scheinker disease (prnp prion)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gerstmann_straussler_scheinker_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PRNP gene sequencing",
+          "cells": [
+            {
+              "text": "Causative mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy; excludes alternative pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis including RT-QuIC",
+          "cells": [
+            {
+              "text": "Prion-specific assays where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Periodic complexes of classic CJD are often absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Characterises cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree analysis",
+          "cells": [
+            {
+              "text": "Pedigree pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerstmann_straussler_scheinker_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic or familial Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Periodic EEG complexes are often absent in this disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary or sporadic cerebellar ataxias",
+          "cells": [
+            {
+              "text": "Distinguished by PRNP sequencing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gerstmann_straussler_scheinker_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying treatment",
+          "cells": [
+            {
+              "text": "Care directed at symptom control and comfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia management",
+          "cells": [
+            {
+              "text": "Physiotherapy, mobility aids and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow support",
+          "cells": [
+            {
+              "text": "Speech and language therapy for dysarthria and dysphagia, with nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom treatment",
+          "cells": [
+            {
+              "text": "Spasticity, extrapyramidal features and cognitive or neuropsychiatric decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early palliative care",
+          "cells": [
+            {
+              "text": "Advance care planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and predictive testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant PRNP inheritance; at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Prion-specific precautions for instruments and tissue handling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gerstmann_straussler_scheinker_disease-dx-mgmt",
+      "title": "Diagnosis and management of Gerstmann-Straussler-Scheinker disease (PRNP prion)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GSS disease: progressive ataxia with cognitive decline and a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid deterioration, bulbar involvement, at-risk relatives)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for rapid deterioration or bulbar involvement affecting the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PRNP sequencing, MRI, CSF prion assays, EEG and cognitive testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PRNP sequencing confirm a causative mutation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic or familial CJD, cerebellar ataxias or immune cerebellar degeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No disease-modifying treatment; directed at symptom control and comfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, mobility aids and falls prevention for ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Speech and swallow support, with nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early palliative care and advance care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Uniformly progressive and fatal, usually over several years; no treatment alters outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

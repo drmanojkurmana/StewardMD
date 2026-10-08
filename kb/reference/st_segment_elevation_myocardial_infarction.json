@@ -165,5 +165,489 @@
       "caption": "Overview comparison matrix for st-segment elevation myocardial infarction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Myocardial Infarction, 2026",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "st_segment_elevation_myocardial_infarction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing STEMI",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ST elevation, most leads",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "1 mm or more in 2 contiguous leads",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "Reciprocal depression supports"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V2 to V3, men 40 or older",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "2 mm or more",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Sex- and age-specific cut-off"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V2 to V3, men under 40",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "2.5 mm or more",
+              "op": ">=",
+              "value": 2.5
+            },
+            {
+              "text": "Sex- and age-specific cut-off"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V2 to V3, women",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "1.5 mm or more",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "Any age"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Posterior MI",
+          "cells": [
+            {
+              "text": "ST depression V1 to V3 not meeting criteria"
+            },
+            {
+              "text": "Record V7 to V9 for circumflex occlusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LBBB",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Concordant ST elevation, or over 5 mm discordant in 2 precordial leads",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "New LBBB alone is not a STEMI equivalent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-sensitivity troponin",
+          "cells": [
+            {
+              "text": "Above 99th percentile URL; repeat at 1 to 2 h"
+            },
+            {
+              "text": "{{hy:Never delay reperfusion waiting for troponin}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Universal definition",
+          "cells": [
+            {
+              "text": "Rise or fall of troponin with one value above 99th percentile plus ischaemia"
+            },
+            {
+              "text": "Types 1 to 5"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "st_segment_elevation_myocardial_infarction-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic STEMI",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute pericarditis",
+          "cells": [
+            {
+              "text": "Pain radiating to trapezius, positional; diffuse ST elevation"
+            },
+            {
+              "text": "ECG pattern, echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Tearing pain to back, pulse or BP differential"
+            },
+            {
+              "text": "CT angiography before antithrombotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Pleuritic pain, hypoxia, right heart strain"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 2 MI",
+          "cells": [
+            {
+              "text": "Supply-demand imbalance without plaque rupture"
+            },
+            {
+              "text": "Clinical context, angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal or gastric pain, costochondritis",
+          "cells": [
+            {
+              "text": "Epigastric or reproducible chest wall pain"
+            },
+            {
+              "text": "Normal serial ECG and troponin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "st_segment_elevation_myocardial_infarction-treatment",
+      "kind": "treatment",
+      "title": "Treating STEMI",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary PCI",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Preferred reperfusion"
+            },
+            {
+              "text": "Door-to-balloon under 90 min, under 120 min with transfer",
+              "op": "<",
+              "value": 90
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibrinolysis",
+          "cells": [
+            {
+              "text": "PCI not available within 90 to 120 min"
+            },
+            {
+              "text": "Door-to-needle 30 to 60 min; best within 3 h, benefit up to 12 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Angiography after fibrinolysis",
+          "cells": [
+            {
+              "text": "All lysed patients"
+            },
+            {
+              "text": "Within 2 to 24 h, or immediately if lysis fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "All, at once"
+            },
+            {
+              "text": "160 to 325 mg, non-enteric-coated, chewed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "P2Y12 inhibitor load",
+          "cells": [
+            {
+              "text": "With PCI"
+            },
+            {
+              "text": "Prasugrel 60 mg, ticagrelor 180 mg or clopidogrel 300 to 600 mg; DAPT up to 1 year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulant",
+          "cells": [
+            {
+              "text": "During PCI or after lysis"
+            },
+            {
+              "text": "LMWH, UFH or bivalirudin (bivalirudin if HIT)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitrate and morphine",
+          "cells": [
+            {
+              "text": "Ongoing pain"
+            },
+            {
+              "text": "Morphine 2 to 4 mg IV every 15 min as needed; may blunt P2Y12 effect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "Unless bradycardia, block, hypotension, asthma"
+            },
+            {
+              "text": "Most benefit in high-risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-intensity statin",
+          "cells": [
+            {
+              "text": "All, indefinitely"
+            },
+            {
+              "text": "Regardless of lipid levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACE inhibitor or ARB, MRA, SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "HF, LV dysfunction, diabetes, hypertension, CKD"
+            },
+            {
+              "text": "Secondary prevention"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Fibrinolytic contraindications were not listed in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "st_segment_elevation_myocardial_infarction-dx-mgmt",
+      "title": "Diagnosis and management of STEMI",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ischaemic chest pain or equivalent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "12-lead ECG within minutes; aspirin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "ST elevation meeting criteria or STEMI equivalent?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Manage as NSTE-ACS; serial troponin and ECG",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PCI achievable within 90 to 120 min?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Primary PCI with P2Y12 load and anticoagulant",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fibrinolysis, door-to-needle 30 to 60 min",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Reperfusion achieved after lysis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rescue PCI immediately",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Angiography within 2 to 24 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "DAPT, beta-blocker, statin, ACE inhibitor; watch for shock",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

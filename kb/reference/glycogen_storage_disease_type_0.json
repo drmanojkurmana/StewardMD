@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for glycogen storage disease type 0 (glycogen synthase)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glycogen_storage_disease_type_0-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired fasting and postprandial glucose, lactate and ketones",
+          "cells": [
+            {
+              "text": "Fasting ketotic hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of GYS2 or GYS1",
+          "cells": [
+            {
+              "text": "Hepatic or muscle form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound",
+          "cells": [
+            {
+              "text": "Typically a non-enlarged liver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Excludes fatty acid oxidation defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and exercise tolerance",
+          "cells": [
+            {
+              "text": "Muscle form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycogen_storage_disease_type_0-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ketotic hypoglycaemia of childhood",
+          "cells": [
+            {
+              "text": "Overlaps; paired biochemistry separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hepatic glycogen storage diseases (GSD I, III, VI, IX)",
+          "cells": [
+            {
+              "text": "Enlarged liver in most; GSD 0 liver is not enlarged"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycogen_storage_disease_type_0-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevent fasting ketotic hypoglycaemia",
+          "cells": [
+            {
+              "text": "Avoid prolonged fasting; frequent protein-rich meals and overnight feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limit large carbohydrate loads",
+          "cells": [
+            {
+              "text": "Avoids postprandial hyperglycaemia and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood glucose, lactate, ketones and growth, with feed timing adjusted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance in the muscle form",
+          "cells": [
+            {
+              "text": "Echocardiography; advise against strenuous exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist metabolic care",
+          "cells": [
+            {
+              "text": "Coordinated with a dietitian"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive GYS2 or GYS1; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glycogen_storage_disease_type_0-dx-mgmt",
+      "title": "Diagnosis and management of Glycogen storage disease type 0 (glycogen synthase)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GSD type 0: fasting ketotic hypoglycaemia with a non-enlarged liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, developmental delay, exertional syncope, cardiomyopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose treatment for seizures or impaired consciousness from hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired fasting and postprandial biochemistry, GYS1 and GYS2 testing, acylcarnitines",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do paired biochemistry and GYS2 or GYS1 testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ketotic hypoglycaemia, other hepatic GSDs or fatty acid oxidation defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged fasting; frequent protein-rich meals and overnight feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Limit large high-glycaemic carbohydrate loads",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac surveillance and exercise advice in the muscle form",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specialist metabolic care with dietetic input and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hepatic form does well when fasting is avoided, with normal growth and development",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

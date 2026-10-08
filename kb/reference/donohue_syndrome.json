@@ -151,5 +151,307 @@
       "caption": "Overview comparison matrix for donohue syndrome (leprechaunism, insr)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "donohue_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting and postprandial glucose",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia and postprandial hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Extremely elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "INSR gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic INSR mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and gonadal imaging",
+          "cells": [
+            {
+              "text": "Ovarian cysts or genital abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "donohue_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rabson-Mendenhall syndrome",
+          "cells": [
+            {
+              "text": "A less severe INSR defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infections causing dysmorphism",
+          "cells": [
+            {
+              "text": "Elfin dysmorphism is easily confused with infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "donohue_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recombinant IGF-1 (mecasermin)",
+          "cells": [
+            {
+              "text": "Engages the IGF-1 receptor to bypass the defective insulin receptor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent feeding",
+          "cells": [
+            {
+              "text": "Limits fasting hypoglycaemia; postprandial hyperglycaemia managed separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous glucose monitoring",
+          "cells": [
+            {
+              "text": "Tracks alternating hypoglycaemia and hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection treatment",
+          "cells": [
+            {
+              "text": "Aggressive treatment; a major cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, glycaemic profile, ovarian cysts and organ complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Endocrinology and genetics; honest discussion of prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive INSR inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "donohue_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Donohue syndrome (leprechaunism, INSR)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Donohue syndrome: severe growth failure with extreme hyperinsulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent hypoglycaemia, severe wasting, life-threatening infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent infection treatment and feeding support for hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting and postprandial glucose; insulin and C-peptide; INSR sequencing; leptin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic INSR mutations found with extreme hyperinsulinaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rabson-Mendenhall, lipodystrophy, neonatal diabetes or placental causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant IGF-1 (mecasermin) to bypass the defective insulin receptor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Frequent feeding to limit fasting hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continuous glucose monitoring for alternating glycaemic extremes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aggressive treatment of intercurrent infection, a major cause of death",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal recessive INSR",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor prognosis; most affected infants die in the first two years; IGF-1 may help",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

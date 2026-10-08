@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for gjb2-related hearing loss."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otology and audiovestibular references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gjb2_hearing_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn hearing screening with otoacoustic emissions and automated ABR",
+          "cells": [
+            {
+              "text": "Screens for congenital hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and tympanometry",
+          "cells": [
+            {
+              "text": "Threshold and configuration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GJB2 molecular testing with GJB6 deletion analysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broader genetic panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Used when GJB2 testing is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cytomegalovirus testing",
+          "cells": [
+            {
+              "text": "Within the neonatal window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging",
+          "cells": [
+            {
+              "text": "Before cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gjb2_hearing_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital cytomegalovirus infection",
+          "cells": [
+            {
+              "text": "Commonest non-genetic congenital hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic sensorineural hearing loss",
+          "cells": [
+            {
+              "text": "Pendred, Usher, Waardenburg or Jervell-Lange-Nielsen syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enlarged vestibular aqueduct",
+          "cells": [
+            {
+              "text": "Inner-ear malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gjb2_hearing_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early auditory habilitation",
+          "cells": [
+            {
+              "text": "Hearing aids fitted to the loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "For severe-to-profound loss; excellent speech outcomes because the auditory nerve is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Communication support; family choice of listening-and-spoken-language or signing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Detects progression and adjusts amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Audiovestibular, ENT, paediatric and educational input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DFNB1; combined GJB2 and GJB6 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic feature assessment",
+          "cells": [
+            {
+              "text": "In dominant variants; ophthalmology and dermatology review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gjb2_hearing_loss-dx-mgmt",
+      "title": "Diagnosis and management of GJB2-related hearing loss",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GJB2-related hearing loss: congenital sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (failed newborn screen, syndromic features, progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent diagnostic audiology for any failed newborn hearing screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, GJB2 with GJB6 testing, CMV testing and temporal bone imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do GJB2 and GJB6 testing confirm the diagnosis, with CMV excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital CMV, syndromic hearing loss or enlarged vestibular aqueduct",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early auditory habilitation with hearing aids fitted to the loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound loss, with excellent speech outcomes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early speech and language therapy and communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry to detect progression; genetic counselling for DFNB1",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very good with early diagnosis and habilitation; the auditory nerve is preserved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

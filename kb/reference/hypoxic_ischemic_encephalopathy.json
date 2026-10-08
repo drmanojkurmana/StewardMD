@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for neonatal hypoxic-ischaemic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cloherty and Stark Manual of Neonatal Care / Volpe's Neurology of the Newborn",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypoxic_ischemic_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cord and early arterial blood gas with lactate",
+          "cells": [
+            {
+              "text": "Documents metabolic acidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amplitude-integrated and conventional EEG",
+          "cells": [
+            {
+              "text": "Background grading and seizure detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with diffusion-weighted imaging",
+          "cells": [
+            {
+              "text": "Injury pattern and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial ultrasound",
+          "cells": [
+            {
+              "text": "Haemorrhage or major structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-organ monitoring",
+          "cells": [
+            {
+              "text": "Renal function, liver enzymes, coagulation and cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and infective screen",
+          "cells": [
+            {
+              "text": "Used when the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarnat staging",
+          "cells": [
+            {
+              "text": "Mild, moderate or severe, by consciousness, tone, reflexes, autonomic function and seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypoxic_ischemic_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal sepsis or meningitis",
+          "cells": [
+            {
+              "text": "Infective screen when the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism",
+          "cells": [
+            {
+              "text": "Metabolic screen when the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal stroke or intracranial haemorrhage",
+          "cells": [
+            {
+              "text": "Cranial ultrasound, and MRI with diffusion-weighted imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypoxic_ischemic_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic hypothermia",
+          "cells": [
+            {
+              "text": "Cornerstone of neuroprotection for cooling criteria, started in the first hours; controlled rewarming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive intensive care",
+          "cells": [
+            {
+              "text": "Normoxia, normocapnia, normoglycaemia and normal blood pressure; avoid hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication, phenobarbital first-line, guided by EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-organ dysfunction",
+          "cells": [
+            {
+              "text": "Judicious fluids and organ support for kidneys, liver, heart, gut and coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative causes",
+          "cells": [
+            {
+              "text": "Treat sepsis, metabolic disease or perinatal stroke when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injury and prognosis",
+          "cells": [
+            {
+              "text": "MRI with diffusion-weighted imaging and EEG; avoid firm prognosis too early"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypoxic_ischemic_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal hypoxic-ischaemic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Term infant with sentinel event, low Apgar scores and severe metabolic acidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sarnat stage 3, refractory seizures, multi-organ failure or persistent acidaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: severe injury, multi-organ support and prognosis discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood gas, lactate, aEEG and EEG, cranial ultrasound, MRI with DWI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cooling criteria met within the therapeutic window?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for sepsis, metabolic disease or stroke; repeat evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic hypothermia in the first hours, then controlled rewarming",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintain normoxia, normocapnia, normoglycaemia and normal blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phenobarbital first-line for seizures, guided by aEEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Judicious fluids and organ support for multi-organ dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "MRI with diffusion-weighted imaging and EEG for injury and prognosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neuroprotection given; prognosis refined by MRI and EEG findings",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

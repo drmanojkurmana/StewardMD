@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for gaucher disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gaucher_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocerebrosidase activity in leukocytes or fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GBA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and guides counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma biomarkers chitotriosidase or glucosylsphingosine",
+          "cells": [
+            {
+              "text": "Supports diagnosis and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal imaging including MRI",
+          "cells": [
+            {
+              "text": "Marrow infiltration and bone complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gaucher_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myelofibrosis or other splenomegaly with cytopenia",
+          "cells": [
+            {
+              "text": "Can be mistaken for a haematological malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological malignancy such as leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "Splenomegaly with cytopenia can be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gaucher_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy",
+          "cells": [
+            {
+              "text": "Recombinant glucocerebrosidase: imiglucerase, velaglucerase alfa or taliglucerase alfa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral substrate reduction therapy",
+          "cells": [
+            {
+              "text": "Eliglustat or miglustat for suitable non-neuronopathic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bone care",
+          "cells": [
+            {
+              "text": "Analgesia for painful crises, bisphosphonates for osteopenia, transfusion for severe anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuronopathic forms",
+          "cells": [
+            {
+              "text": "Symptomatic and palliative care, since enzyme therapy does not cross the blood-brain barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic monitoring",
+          "cells": [
+            {
+              "text": "Biomarkers, full blood count and imaging of disease activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary splenectomy",
+          "cells": [
+            {
+              "text": "Can worsen bone and hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening within a specialist metabolic service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gaucher_disease-dx-mgmt",
+      "title": "Diagnosis and management of Gaucher disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gaucher disease: hepatosplenomegaly with cytopenia and bone pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological regression, severe thrombocytopenia, bone crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for neurological regression or severe bleeding from thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucocerebrosidase assay, GBA gene testing, FBC, chitotriosidase and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does low glucocerebrosidase activity confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Niemann-Pick, myelofibrosis, haematological malignancy or liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Enzyme replacement therapy with recombinant glucocerebrosidase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral substrate reduction with eliglustat or miglustat if suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bone care: analgesia, bisphosphonates for osteopenia, transfusion as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid unnecessary splenectomy, which can worsen bone and liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 1 generally has a good outlook with enzyme replacement or substrate reduction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

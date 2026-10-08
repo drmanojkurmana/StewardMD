@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for familial iminoglycinuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iminoglycinuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine amino acid chromatography",
+          "cells": [
+            {
+              "text": "Raised glycine, proline and hydroxyproline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Normal circulating levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other tubular function tests",
+          "cells": [
+            {
+              "text": "Generalised Fanconi syndrome excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies",
+          "cells": [
+            {
+              "text": "Trait segregation in relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC36A2 sequencing",
+          "cells": [
+            {
+              "text": "Confirmation where desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat testing beyond infancy",
+          "cells": [
+            {
+              "text": "Needed if the pattern was found in a young neonate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iminoglycinuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological neonatal iminoglycinuria",
+          "cells": [
+            {
+              "text": "Normal until tubular transporters mature; repeat testing beyond infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised aminoaciduria of renal Fanconi syndrome",
+          "cells": [
+            {
+              "text": "Other solutes also lost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-ketotic hyperglycinaemia",
+          "cells": [
+            {
+              "text": "A plasma disorder with raised plasma glycine, not urinary transport"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iminoglycinuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "Harmless inherited trait; reassure patient and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm benign pattern",
+          "cells": [
+            {
+              "text": "Raised urinary glycine, proline and hydroxyproline with normal plasma levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude tubulopathy",
+          "cells": [
+            {
+              "text": "Fanconi syndrome must not be misattributed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal finding",
+          "cells": [
+            {
+              "text": "Repeat testing beyond infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid overinvestigation",
+          "cells": [
+            {
+              "text": "Previously reported associations reflect ascertainment bias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family counselling",
+          "cells": [
+            {
+              "text": "Simple explanation of the inherited, benign nature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iminoglycinuria-dx-mgmt",
+      "title": "Diagnosis and management of Familial iminoglycinuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised urinary glycine, proline and hydroxyproline with normal plasma levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Glycosuria, phosphaturia, proteinuria, acidosis or raised plasma glycine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for generalised tubulopathy or non-ketotic hyperglycinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine amino acid chromatography, plasma amino acids, other tubular function tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated urinary pattern with normal plasma and tubular function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate tubulopathy or plasma disorder; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No treatment; reassure patient and family",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeat testing beyond infancy if found in a neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid unnecessary investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Family explanation and counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign inherited trait; no intervention needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

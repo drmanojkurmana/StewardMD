@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for endocardial fibroelastosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cardiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endocardial_fibroelastosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Endocardial echogenicity, chamber size and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Hypertrophy, strain and repolarisation change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal and infant anti-Ro and anti-La testing",
+          "cells": [
+            {
+              "text": "Autoimmune cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Fibrosis quantification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine, organic acids and gene panel",
+          "cells": [
+            {
+              "text": "Treatable metabolic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary imaging",
+          "cells": [
+            {
+              "text": "Anomalous left coronary artery excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endocardial_fibroelastosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral or autoimmune myocarditis",
+          "cells": [
+            {
+              "text": "Inflammatory cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anomalous left coronary artery from pulmonary artery",
+          "cells": [
+            {
+              "text": "Coronary origin abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pompe disease and other metabolic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Glycogen storage or metabolic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial cardiomyopathy or Barth syndrome",
+          "cells": [
+            {
+              "text": "Metabolic cardiomyopathy with fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive left heart lesion with secondary change",
+          "cells": [
+            {
+              "text": "Congenital obstruction driving fibroelastosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endocardial_fibroelastosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "Diuretics, ACE inhibitors and guideline-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat reversible cause",
+          "cells": [
+            {
+              "text": "Obstructive lesion repair or maternal anti-Ro or anti-La disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic replacement",
+          "cells": [
+            {
+              "text": "Carnitine or cofactor replacement where treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function and mitral regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute support",
+          "cells": [
+            {
+              "text": "Inotropes and intensive care for decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant assessment",
+          "cells": [
+            {
+              "text": "Refractory or contracted-type disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endocardial_fibroelastosis-dx-mgmt",
+      "title": "Diagnosis and management of Endocardial Fibroelastosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected endocardial fibroelastosis: infant heart failure with a thickened endocardium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiogenic shock, embolism, heart block, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent inotropic support and intensive care for cardiogenic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; ECG; maternal anti-Ro and anti-La; carnitine and gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a treatable cause, such as metabolic disease or an obstructive lesion, found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myocarditis, anomalous coronary origin, metabolic or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diuretics, ACE inhibitors and guideline-directed heart-failure therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repair of obstructive lesions and treatment of maternal autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Carnitine or cofactor replacement where a metabolic cause is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography of ventricular function and mitral regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Referral for transplant assessment in refractory or contracted disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Some improve with sustained therapy; contracted and progressive forms do poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

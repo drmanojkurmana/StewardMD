@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for hereditary elliptocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_elliptocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Elliptocytes and poikilocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin, lactate dehydrogenase and haptoglobin",
+          "cells": [
+            {
+              "text": "Markers of haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membrane protein or spectrin studies",
+          "cells": [
+            {
+              "text": "Used where the phenotype is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPTA1, SPTB and EPB41 genetic testing",
+          "cells": [
+            {
+              "text": "Used in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_elliptocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary pyropoikilocytosis",
+          "cells": [
+            {
+              "text": "Infantile features require urgent haematology input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency anaemia",
+          "cells": [
+            {
+              "text": "Can also produce elliptocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplastic syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_elliptocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "For the asymptomatic majority with mild or absent haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Supports erythropoiesis in chronic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "Symptomatic anaemia, particularly in severe hereditary pyropoikilocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy or exchange transfusion",
+          "cells": [
+            {
+              "text": "Neonatal hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Severe transfusion-dependent haemolysis, preceded by appropriate vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count and reticulocytes; screen for pigment gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Inherited membrane defect involving SPTA1, SPTB or EPB41"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_elliptocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary elliptocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Elliptocytes on blood film with anaemia or haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal haemolysis, aplastic crisis, symptomatic anaemia or pyropoikilocytosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: phototherapy or exchange transfusion for neonatal jaundice; urgent haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full blood count, reticulocytes, blood film; bilirubin, LDH, haptoglobin; DAT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is immune haemolysis excluded by a negative DAT, with elliptocytes confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hereditary spherocytosis, iron deficiency or pyropoikilocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No treatment for the asymptomatic majority with mild or absent haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid for chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red-cell transfusion for symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Splenectomy for severe transfusion-dependent haemolysis, after vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild disease needs no treatment; severe cases managed by transfusion or splenectomy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

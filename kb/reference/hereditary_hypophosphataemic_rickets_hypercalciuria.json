@@ -157,5 +157,350 @@
       "caption": "Overview comparison matrix for hereditary hypophosphataemic rickets with hypercalciuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_hypophosphataemic_rickets_hypercalciuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum phosphate with tubular maximum for phosphate corrected for filtration",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "Characteristically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroblast growth factor 23",
+          "cells": [
+            {
+              "text": "Low or normal, which separates this disorder from FGF23-mediated forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone and serum calcium",
+          "cells": [
+            {
+              "text": "PTH typically suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium and renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Hypercalciuria; calculi or nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Characterises the rickets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC34A3 molecular testing",
+          "cells": [
+            {
+              "text": "Biallelic variants; relatives screened for hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hypophosphataemic_rickets_hypercalciuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked hypophosphataemia (PHEX) and other FGF23-mediated forms",
+          "cells": [
+            {
+              "text": "FGF23 is low or normal here, whereas these forms are FGF23-driven"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour-induced osteomalacia",
+          "cells": [
+            {
+              "text": "FGF23-secreting mesenchymal tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi syndrome and Dent disease",
+          "cells": [
+            {
+              "text": "Phosphate wasting as part of a wider proximal tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophosphatasia (ALPL)",
+          "cells": [
+            {
+              "text": "Low alkaline phosphatase with a raised substrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional vitamin D deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hypophosphataemic_rickets_hypercalciuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral phosphate replacement",
+          "cells": [
+            {
+              "text": "Given in divided doses; the sole mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid active vitamin D",
+          "cells": [
+            {
+              "text": "Calcitriol or alfacalcidol aggravate hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration",
+          "cells": [
+            {
+              "text": "Limits hypercalciuria and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound surveillance",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "Phosphate, calcium, PTH and alkaline phosphatase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Metabolic bone and nephrology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Biallelic SLC34A3 variants and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_hypophosphataemic_rickets_hypercalciuria-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary Hypophosphataemic Rickets with Hypercalciuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypophosphataemic rickets with elevated 1,25-dihydroxyvitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive deformity, nephrocalcinosis, or worsening hypercalciuria on active vitamin D?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: stop active vitamin D; treat nephrocalcinosis and stone risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phosphate and TmP/GFR; 1,25-vitamin D; FGF23; PTH; urinary calcium; SLC34A3",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is FGF23 low or normal, with raised calcitriol and hypercalciuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PHEX-related X-linked hypophosphataemia, tumour-induced osteomalacia or Fanconi",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral phosphate replacement in divided doses, the sole mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid active vitamin D such as calcitriol or alfacalcidol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adequate hydration to limit hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal tract ultrasound surveillance for nephrocalcinosis and stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Phosphate replacement controls rickets; calcium and renal status monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

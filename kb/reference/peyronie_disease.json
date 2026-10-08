@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for peyronie disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peyronie_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused history and palpation of the plaque",
+          "cells": [
+            {
+              "text": "Plaque in the flaccid state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Objective curvature measurement during induced or photographed erection",
+          "cells": [
+            {
+              "text": "Curvature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile duplex ultrasound",
+          "cells": [
+            {
+              "text": "Plaque, calcification and vascular status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Validated erectile function questionnaires",
+          "cells": [
+            {
+              "text": "Erectile function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for diabetes and Dupuytren contracture",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peyronie_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital penile curvature",
+          "cells": [
+            {
+              "text": "Present since puberty, with no plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile fracture or acute trauma",
+          "cells": [
+            {
+              "text": "Acute severe pain with deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile cancer or other penile mass",
+          "cells": [
+            {
+              "text": "Rapidly enlarging or atypical mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peyronie_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phase-directed reassurance",
+          "cells": [
+            {
+              "text": "Reassurance and active surveillance during the active phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collagenase injection",
+          "cells": [
+            {
+              "text": "Intralesional Clostridium histolyticum collagenase for stable-phase curvature with a palpable plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile traction and mechanical adjuncts",
+          "cells": [
+            {
+              "text": "Preserve length and reduce curvature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction",
+          "cells": [
+            {
+              "text": "Once stable: tunical plication, or plaque incision or excision with grafting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erectile dysfunction",
+          "cells": [
+            {
+              "text": "Phosphodiesterase-5 inhibitors, as erectile dysfunction affects distress and surgical choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Pain control during the active inflammatory phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosexual support",
+          "cells": [
+            {
+              "text": "Counselling for distress and relationship impact; specialist andrology or urology referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peyronie_disease-dx-mgmt",
+      "title": "Diagnosis and management of Peyronie Disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Penile curvature with a palpable plaque",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (atypical mass, acute pain with deformity, deformity preventing intercourse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected penile fracture or malignant penile mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plaque palpation; curvature measurement; penile duplex; erectile questionnaires",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a stable plaque confirmed, with congenital curvature excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital curvature, penile cancer, vein thrombosis or lymphangiosclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and active surveillance during the active phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intralesional collagenase injection for stable-phase curvature with a palpable plaque",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Penile traction therapy to preserve length and reduce curvature",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical correction once stable, such as tunical plication or plaque incision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat coexisting erectile dysfunction with phosphodiesterase-5 inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable course: some improve, many stabilise with residual deformity, a few progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

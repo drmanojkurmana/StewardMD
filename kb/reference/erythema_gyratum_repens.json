@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for erythema gyratum repens."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_gyratum_repens-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest imaging and urgent search for internal malignancy",
+          "cells": [
+            {
+              "text": "Most often lung carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age- and risk-appropriate cancer screening",
+          "cells": [
+            {
+              "text": "Breast, gastrointestinal and gynaecological"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Excludes specific mimics; non-specific perivascular infiltrate with spongiosis and parakeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Excludes bullous pemphigoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology",
+          "cells": [
+            {
+              "text": "Excludes extensive dermatophytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_gyratum_repens-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema annulare centrifugum",
+          "cells": [
+            {
+              "text": "Slower and less florid than this eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous pemphigoid (figurate or urticarial phase)",
+          "cells": [
+            {
+              "text": "Direct immunofluorescence excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Widespread tinea corporis",
+          "cells": [
+            {
+              "text": "Mycology excludes extensive dermatophytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_gyratum_repens-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent search for and treatment of malignancy",
+          "cells": [
+            {
+              "text": "Most often lung carcinoma; definitive management, and the eruption usually resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology referral and staging",
+          "cells": [
+            {
+              "text": "Age- and risk-appropriate cancer screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroid and oral antihistamine",
+          "cells": [
+            {
+              "text": "Symptomatic relief of the pruritic rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin response as a clinical marker",
+          "cells": [
+            {
+              "text": "Reflects the treatment effect on the underlying cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "Aligned with tumour stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Dermatology and the relevant tumour team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_gyratum_repens-dx-mgmt",
+      "title": "Diagnosis and management of Erythema gyratum repens",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Migrating whorled erythematous bands with fine trailing scale and itching",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (weight loss, cough, haemoptysis, persistent rash after treatment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology referral and staging investigations",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest imaging, age-appropriate cancer screening, skin biopsy and mycology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Internal malignancy identified on staging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat cancer screening; keep searching if the rash persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying malignancy; the eruption usually clears",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Staging and age-appropriate cancer screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroid and oral antihistamine for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Use the skin response as a marker of cancer treatment effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Palliative care aligned with tumour stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Skin course is favourable once the tumour is treated; outcome depends on the cancer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

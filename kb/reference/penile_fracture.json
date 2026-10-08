@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for penile fracture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "penile_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment",
+          "cells": [
+            {
+              "text": "Eggplant deformity and a palpable tunical defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile ultrasound",
+          "cells": [
+            {
+              "text": "Localises the tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the penis",
+          "cells": [
+            {
+              "text": "Used when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retrograde urethrography",
+          "cells": [
+            {
+              "text": "Assesses the urethra for injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible cystoscopy",
+          "cells": [
+            {
+              "text": "Used where urethral injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Haematuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "penile_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Penile haematoma without a tunical tear",
+          "cells": [
+            {
+              "text": "Haematoma without a tunical tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated urethral injury",
+          "cells": [
+            {
+              "text": "Blood at the urethral meatus or gross haematuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "penile_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical exploration and repair",
+          "cells": [
+            {
+              "text": "Prompt repair of the tunica albuginea defect; treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematoma evacuation and tear closure",
+          "cells": [
+            {
+              "text": "Restores anatomy and reduces long-term curvature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral injury repair",
+          "cells": [
+            {
+              "text": "Repair any associated urethral injury found on urethrography or cystoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and abstinence",
+          "cells": [
+            {
+              "text": "Analgesia and no sexual activity during healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative follow-up",
+          "cells": [
+            {
+              "text": "Erectile function; manage curvature or nodules if they develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral",
+          "cells": [
+            {
+              "text": "Urology, given the time-critical nature of repair"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "penile_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Penile fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Penile trauma with eggplant deformity and palpable tunical defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (blood at meatus, urinary retention, expanding haematoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical exploration for suspected complete urethral disruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Penile ultrasound to localise the tear; retrograde urethrography and cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a tunical tear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider superficial vein or artery rupture, dislocation or isolated urethral injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt surgical exploration and repair of the tunica albuginea defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Evacuate the haematoma and close the tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair any associated urethral injury found on urethrography or cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia and abstinence from sexual activity during healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Erectile-function and curvature follow-up after repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early repair generally restores good erectile function with low curvature rates",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

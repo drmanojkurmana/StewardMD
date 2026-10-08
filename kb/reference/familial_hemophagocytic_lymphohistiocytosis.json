@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for familial haemophagocytic lymphohistiocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immune Deficiencies / HLH consensus (Histiocyte Society) guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hemophagocytic_lymphohistiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ferritin, fasting triglycerides and fibrinogen",
+          "cells": [
+            {
+              "text": "Hyperinflammation markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soluble interleukin-2 receptor (soluble CD25)",
+          "cells": [
+            {
+              "text": "Immune activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NK cell function and perforin and CD107a flow cytometry",
+          "cells": [
+            {
+              "text": "Cytotoxic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate",
+          "cells": [
+            {
+              "text": "Haemophagocytosis; supportive but not required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of PRF1, UNC13D, STX11, STXBP2 and related genes",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis and neuroimaging",
+          "cells": [
+            {
+              "text": "Central nervous system involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hemophagocytic_lymphohistiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Triggered by infection, malignancy or rheumatic disease; transplant is not needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrophage activation syndrome in systemic juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Complicates systemic arthritis or Still disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overwhelming sepsis with multi-organ dysfunction",
+          "cells": [
+            {
+              "text": "Mimics the deterioration; infection must be treated and HLH considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hemophagocytic_lymphohistiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HLH-94 or 2004 immunochemotherapy",
+          "cells": [
+            {
+              "text": "Etoposide and dexamethasone, with ciclosporin, to suppress hyperinflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emapalumab",
+          "cells": [
+            {
+              "text": "Interferon-gamma neutralisation for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrathecal therapy",
+          "cells": [
+            {
+              "text": "Intrathecal methotrexate and corticosteroid for neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive curative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of triggers",
+          "cells": [
+            {
+              "text": "Infection such as Epstein-Barr virus; rituximab for EBV-driven disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Antimicrobial prophylaxis and blood-product support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "PRF1, UNC13D, STX11 and STXBP2 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hemophagocytic_lymphohistiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Familial haemophagocytic lymphohistiocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged fever, hepatosplenomegaly and cytopenias in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rising ferritin, neurological change, multi-organ failure, DIC)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology and transplant centre referral; start immunochemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ferritin, triglycerides, fibrinogen, soluble CD25; NK function; PRF1 and UNC13D testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HLH diagnostic criteria met with a primary genetic defect suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary HLH from infection, malignancy or rheumatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Etoposide and dexamethasone immunochemotherapy with ciclosporin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emapalumab for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intrathecal therapy for neurological involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat triggers such as Epstein-Barr virus",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated, it is almost uniformly fatal; immunochemotherapy then transplant changes this",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,276 @@
       "caption": "Overview comparison matrix for mercury poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mercury_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood mercury",
+          "cells": [
+            {
+              "text": "More useful for recent organic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary mercury",
+          "cells": [
+            {
+              "text": "Elemental and inorganic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Tubular injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging in acute vapour inhalation",
+          "cells": [
+            {
+              "text": "Pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history: occupation, dental amalgam handling, dietary fish",
+          "cells": [
+            {
+              "text": "Source of exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mercury_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal from the source of exposure",
+          "cells": [
+            {
+              "text": "The cornerstone of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Succimer, DMPS or dimercaprol for symptomatic elemental or inorganic poisoning; dimercaprol avoided in methylmercury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Oxygen and ventilatory support for vapour pneumonitis; management of corrosive GI injury from salts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal support",
+          "cells": [
+            {
+              "text": "Haemodialysis for acute kidney injury from inorganic mercury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gut decontamination",
+          "cells": [
+            {
+              "text": "After significant ingestion, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological rehabilitation",
+          "cells": [
+            {
+              "text": "Neurological and neuropsychological rehabilitation for persistent deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and public health measures",
+          "cells": [
+            {
+              "text": "Source control, dietary fish advice and pregnancy counselling to protect the foetus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mercury_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Mercury poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mercury exposure with neurological or renal symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory distress, GI haemorrhage with shock, acute kidney injury or pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: remove from source, support breathing; haemodialysis for AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and urinary mercury, renal function, urinalysis, chest imaging, exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised mercury confirmed in blood or urine with a matching exposure history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential tremor, other heavy metal poisoning or primary neurological disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate removal from the source of exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chelation with succimer, DMPS or dimercaprol for symptomatic poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oxygen and ventilatory support for vapour pneumonitis; haemodialysis for AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological and neuropsychological rehabilitation for persistent deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Source control, occupational hygiene and fish and pregnancy advice",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

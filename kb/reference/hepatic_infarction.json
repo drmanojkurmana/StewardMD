@@ -150,5 +150,294 @@
       "caption": "Overview comparison matrix for hepatic infarction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatic_infarction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound of the hepatic artery and portal vein",
+          "cells": [
+            {
+              "text": "Arterial and portal patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiphase contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Wedge-shaped or geographic peripheral hypodense areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or catheter hepatic angiography",
+          "cells": [
+            {
+              "text": "Vascular supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests with serial transaminases",
+          "cells": [
+            {
+              "text": "Brisk rise in transaminases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and thrombophilia screen",
+          "cells": [
+            {
+              "text": "Prothrombotic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Secondary infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Embolic source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_infarction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent revascularisation",
+          "cells": [
+            {
+              "text": "For hepatic artery thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-transplant arterial thrombosis",
+          "cells": [
+            {
+              "text": "Urgent surgical or endovascular management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia, fluid resuscitation and correction of coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and drainage",
+          "cells": [
+            {
+              "text": "Secondary infection or abscess complicating the necrotic segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Transaminases; arterial and portal patency on Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for complications",
+          "cells": [
+            {
+              "text": "Ischaemic cholangiopathy and bile leak, which follow loss of arterial supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Hepatology with transplant or hepatobiliary surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatic_infarction-dx-mgmt",
+      "title": "Diagnosis and management of hepatic infarction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden right upper quadrant pain, fever and a sharp rise in transaminases",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Post-transplant rising transaminases, sepsis, haemorrhage or fulminant failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent revascularisation for hepatic artery thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler of hepatic artery and portal vein; contrast CT; coagulation; cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hepatic artery thrombosis or arterial occlusion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ischaemic hepatitis, pyogenic abscess, Budd-Chiari or cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent revascularisation for hepatic artery thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics and drainage for secondary infection or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care with analgesia, fluids and correction of coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial transaminases and Doppler to track arterial and portal patency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Perfusion restored where possible; monitor for ischaemic cholangiopathy and bile leak",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

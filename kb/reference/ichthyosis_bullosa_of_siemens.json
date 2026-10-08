@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for ichthyosis bullosa of siemens."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ichthyosis_bullosa_of_siemens-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Epidermolytic hyperkeratosis limited to the upper epidermis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KRT2 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Clumped keratin tonofilaments in upper keratinocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swabs of eroded skin",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and examination of relatives",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion distribution",
+          "cells": [
+            {
+              "text": "Palmoplantar sparing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ichthyosis_bullosa_of_siemens-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidermolytic ichthyosis (KRT1 or KRT10)",
+          "cells": [
+            {
+              "text": "More severe; typically with more erythroderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermolysis bullosa simplex",
+          "cells": [
+            {
+              "text": "Blistering can be mistaken for this; palmoplantar sparing is a key discriminator"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Neonatal blistering that can be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ichthyosis_bullosa_of_siemens-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emollients and keratolytics",
+          "cells": [
+            {
+              "text": "Mainstay of supportive care with urea and lactic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce friction",
+          "cells": [
+            {
+              "text": "Limits superficial blistering and erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoids",
+          "cells": [
+            {
+              "text": "Troublesome hyperkeratosis under specialist supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infected erosions",
+          "cells": [
+            {
+              "text": "Swab and treat with appropriate antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Denuded areas and the Mauserung (moulting) phenomenon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "KRT2 testing and examination of relatives for autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ichthyosis_bullosa_of_siemens-dx-mgmt",
+      "title": "Diagnosis and management of Ichthyosis bullosa of Siemens",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Superficial blistering and erosions from birth or with friction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Extensive erosions, spreading infection or rapidly enlarging tender bullae?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat infection and fluid loss; urgent wound and sepsis review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, KRT2 testing, swabs of eroded skin, family examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KRT2 variant confirmed with palmoplantar sparing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epidermolytic ichthyosis or epidermolysis bullosa; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular emollients and keratolytics as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce friction and mechanical trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Swab and treat infected eroded skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care for denuded areas and Mauserung",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and examination of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic supportive care; blistering reduces with friction avoidance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for glucose-galactose malabsorption."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glucose_galactose_malabsorption-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool pH and reducing substances",
+          "cells": [
+            {
+              "text": "Acidic, sugar-containing stool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal osmotic gap and response to glucose and galactose withdrawal",
+          "cells": [
+            {
+              "text": "Diarrhoea resolves on withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose hydrogen breath test",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for SLC5A1 variants",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for glucosuria",
+          "cells": [
+            {
+              "text": "Intermittent glucosuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and electrolyte monitoring",
+          "cells": [
+            {
+              "text": "Hydration and electrolyte status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glucose_galactose_malabsorption-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital sucrase-isomaltase deficiency",
+          "cells": [
+            {
+              "text": "Sucrose malabsorption rather than glucose or galactose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital lactase deficiency",
+          "cells": [
+            {
+              "text": "Lactose malabsorption; glucose and galactose also need exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glucose_galactose_malabsorption-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict glucose- and galactose-free diet",
+          "cells": [
+            {
+              "text": "Replaces lactose- and sucrose-containing feeds with a fructose-based formula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration and electrolyte correction",
+          "cells": [
+            {
+              "text": "During profuse osmotic diarrhoea; oral rehydration or intravenous fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric dietitian",
+          "cells": [
+            {
+              "text": "Nutritional adequacy and cautious carbohydrate tolerance testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and electrolyte monitoring",
+          "cells": [
+            {
+              "text": "Confirms resolution of diarrhoea on withdrawal of glucose and galactose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing for the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hospital escalation",
+          "cells": [
+            {
+              "text": "Breakthrough diarrhoea causing dehydration or faltering growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glucose_galactose_malabsorption-dx-mgmt",
+      "title": "Diagnosis and management of Glucose-galactose malabsorption",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glucose-galactose malabsorption: osmotic diarrhoea in the neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, electrolyte disturbance, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and electrolyte correction for high-volume diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool pH and reducing substances, breath test, SLC5A1 testing and osmotic gap",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does withdrawal of glucose and galactose resolve the diarrhoea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sucrase-isomaltase or lactase deficiency, or secretory diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict glucose- and galactose-free diet with fructose-based formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydrate and correct electrolytes during profuse osmotic diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Paediatric dietitian for nutritional adequacy and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent with a strict fructose-based diet; growth is normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for howel-evans syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "howel_evans_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RHBDF2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Oesophageal surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of palmoplantar lesions",
+          "cells": [
+            {
+              "text": "Used where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the oral mucosa",
+          "cells": [
+            {
+              "text": "Leucokeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed pedigree and family cancer history",
+          "cells": [
+            {
+              "text": "Family oesophageal cancer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "howel_evans_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Keratoderma associated with internal malignancy (paraneoplastic)",
+          "cells": [
+            {
+              "text": "Internal malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pachyonychia congenita",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis of palms and soles",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "howel_evans_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic keratoderma treatment",
+          "cells": [
+            {
+              "text": "Palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong upper GI endoscopic surveillance",
+          "cells": [
+            {
+              "text": "Oesophageal cancer risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt investigation of dysphagia",
+          "cells": [
+            {
+              "text": "New oesophageal symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of oesophageal carcinogens",
+          "cells": [
+            {
+              "text": "Additional carcinogen exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral leucokeratosis and podiatry",
+          "cells": [
+            {
+              "text": "Examined and managed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical genetics",
+          "cells": [
+            {
+              "text": "RHBDF2 testing and cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "howel_evans_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Howel-Evans syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Palmoplantar keratoderma with oral leucokeratosis and family oesophageal cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dysphagia, weight loss, change in leucokeratosis, or iron deficiency with bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endoscopy for dysphagia, weight loss or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RHBDF2 testing; upper GI endoscopy; palmoplantar biopsy if uncertain; oral check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an RHBDF2 variant confirmed, with the keratoderma typical?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pachyonychia congenita, psoriasis or paraneoplastic keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic treatment of the keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong upper GI endoscopic surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoidance of additional oesophageal carcinogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of oral leucokeratosis and podiatry care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oesophageal surveillance; symptomatic skin care; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

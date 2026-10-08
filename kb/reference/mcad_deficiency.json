@@ -151,5 +151,294 @@
       "caption": "Overview comparison matrix for medium-chain acyl-coa dehydrogenase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mcad_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile by tandem mass spectrometry",
+          "cells": [
+            {
+              "text": "Elevated C8 and raised C8:C10"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Medium-chain dicarboxylic aciduria; hexanoylglycine and suberylglycine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, ketones, ammonia and lactate during acute illness",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma free and total carnitine",
+          "cells": [
+            {
+              "text": "Carnitine status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACADM molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assay in fibroblasts or leucocytes",
+          "cells": [
+            {
+              "text": "Where genotype is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mcad_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid prolonged fasting",
+          "cells": [
+            {
+              "text": "Regular carbohydrate-rich feeds and age-appropriate maximum fasting intervals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency regimen",
+          "cells": [
+            {
+              "text": "Oral glucose polymer during intercurrent illness; intravenous glucose if oral intake fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensation",
+          "cells": [
+            {
+              "text": "Intravenous dextrose to reverse hypoketotic hypoglycaemia and suppress lipolysis; correct hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early hospital attendance",
+          "cells": [
+            {
+              "text": "Any febrile or vomiting illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid MCT supplements and fat-loading",
+          "cells": [
+            {
+              "text": "With metabolic dietitian involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine",
+          "cells": [
+            {
+              "text": "Where secondary carnitine depletion is documented"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; sibling testing and newborn-screening cascade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency alert documentation",
+          "cells": [
+            {
+              "text": "Identifies the metabolic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mcad_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Medium-chain acyl-CoA dehydrogenase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with vomiting, refusal to feed or reduced consciousness; suspected MCAD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures or coma with hypoketotic hypoglycaemia, or hyperammonaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency IV dextrose to reverse hypoketotic hypoglycaemia; correct hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile (raised C8), urine organic acids, glucose, ketones, ACADM",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is C8 elevated with raised C8:C10 on the acylcarnitine profile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other FAOD, carnitine cycle disorder or Reye syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged fasting; regular carbohydrate-rich feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emergency regimen with oral glucose polymer; IV glucose if oral intake fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low threshold for hospital attendance during febrile or vomiting illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid MCT supplements and fat-loading; metabolic dietitian involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling, sibling testing and emergency alert documentation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

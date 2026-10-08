@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for jackhammer oesophagus (hypercontractile)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jackhammer_esophagus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution oesophageal manometry",
+          "cells": [
+            {
+              "text": "Contractile vigour and pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Mucosal disease and mechanical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timed barium oesophagram",
+          "cells": [
+            {
+              "text": "Emptying and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Ischaemic chest pain excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional lumen imaging or reflux monitoring",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jackhammer_esophagus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal oesophageal spasm",
+          "cells": [
+            {
+              "text": "Abnormal contraction timing rather than excessive vigour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophagogastric junction outflow obstruction",
+          "cells": [
+            {
+              "text": "Outflow obstruction can drive hypercontractility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jackhammer_esophagus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smooth-muscle relaxants",
+          "cells": [
+            {
+              "text": "Calcium-channel blockers or nitrates to reduce vigour and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromodulators",
+          "cells": [
+            {
+              "text": "Tricyclic antidepressants or visceral analgesics for hypersensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflux",
+          "cells": [
+            {
+              "text": "Proton-pump inhibitors for coexisting reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outflow obstruction",
+          "cells": [
+            {
+              "text": "Exclude and relieve junction obstruction, as hypercontractility may be compensatory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Peroral endoscopic myotomy or botulinum toxin injection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Dietary and lifestyle measures; often benign and fluctuating"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jackhammer_esophagus-dx-mgmt",
+      "title": "Diagnosis and management of Jackhammer oesophagus (hypercontractile)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dysphagia and retrosternal chest pain with a sensation of food sticking",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Chest pain resembling ischaemia, progressive dysphagia, impaction or outflow obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiac assessment; urgent endoscopy for impaction or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "High-resolution manometry, upper endoscopy, timed barium swallow, cardiac assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypercontractile swallows with no outflow obstruction or mucosal cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat outflow obstruction or mucosal disease first; repeat manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Calcium-channel blockers or nitrates to reduce contractile vigour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tricyclic or visceral analgesic for hypersensitivity pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proton-pump inhibitor for coexisting reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Peroral endoscopic myotomy or botulinum toxin in refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassurance with dietary and lifestyle measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often benign and fluctuating; refractory cases considered for myotomy or toxin",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

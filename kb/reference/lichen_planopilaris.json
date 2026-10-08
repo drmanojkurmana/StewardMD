@@ -145,5 +145,334 @@
       "caption": "Overview comparison matrix for lichen planopilaris."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lichen_planopilaris-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Perifollicular erythema, tubular scaling and loss of ostia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy from an active margin",
+          "cells": [
+            {
+              "text": "Lichenoid perifollicular inflammation and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Helps distinguish from discoid lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of skin, nails and mucosae",
+          "cells": [
+            {
+              "text": "Coexisting lichen planus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease-activity assessment",
+          "cells": [
+            {
+              "text": "Guides treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_planopilaris-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Discoid lupus erythematosus",
+          "cells": [
+            {
+              "text": "Scaling, dyspigmentation and follicular plugging; management and immunofluorescence differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frontal fibrosing alopecia",
+          "cells": [
+            {
+              "text": "Clinical variant affecting the hairline and eyebrows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folliculitis decalvans",
+          "cells": [
+            {
+              "text": "Neutrophilic, with pustules and tufting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudopelade of Brocq",
+          "cells": [
+            {
+              "text": "End-stage scarring alopecia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_planopilaris-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potent topical or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Applied to active margins to suppress perifollicular inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Steroid-sparing anti-inflammatory adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "First-line oral therapy for progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Oral retinoids, ciclosporin, methotrexate or mycophenolate; short systemic steroids for rapid scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Itch, burning and trichodynia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial trichoscopy and disease-activity scoring; scarred areas do not regrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Camouflage and support",
+          "cells": [
+            {
+              "text": "Camouflage, wigs and psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lichen_planopilaris-dx-mgmt",
+      "title": "Diagnosis and management of Lichen planopilaris",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vertex or crown patchy scalp scarring alopecia with itch or burning",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly expanding patches, extensive scarring, lupus overlap)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: dermatology review for rapidly advancing scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trichoscopy and scalp biopsy from the active margin, immunofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy from an active margin show lichenoid perifollicular inflammation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider discoid lupus, frontal fibrosing alopecia or folliculitis decalvans",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potent topical or intralesional steroids to active margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical calcineurin inhibitors as steroid-sparing adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydroxychloroquine as first-line oral therapy for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate to retinoids, ciclosporin or methotrexate for rapid scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor with serial trichoscopy; scarred hair does not regrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and unpredictable; treatment slows progression but cannot regrow scarred hair",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

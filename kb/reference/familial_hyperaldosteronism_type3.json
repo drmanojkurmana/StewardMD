@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for familial hyperaldosteronism type 3 (kcnj5)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hyperaldosteronism_type3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma aldosterone-to-renin ratio",
+          "cells": [
+            {
+              "text": "High aldosterone with suppressed renin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmatory aldosterone suppression testing",
+          "cells": [
+            {
+              "text": "Where the diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium and acid-base assessment",
+          "cells": [
+            {
+              "text": "Hypokalaemic metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary or plasma 18-hydroxycortisol and 18-oxocortisol",
+          "cells": [
+            {
+              "text": "Hybrid steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal CT and adrenal venous sampling",
+          "cells": [
+            {
+              "text": "Lateralisation, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNJ5 germline genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant and cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hyperaldosteronism_type3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aldosterone-producing adenoma (Conn syndrome)",
+          "cells": [
+            {
+              "text": "A sporadic cause; adrenal CT and venous sampling assess lateralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liddle syndrome or apparent mineralocorticoid excess",
+          "cells": [
+            {
+              "text": "Listed in the differential; the aldosterone-to-renin ratio screens for aldosterone excess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hyperaldosteronism_type3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mineralocorticoid-receptor antagonists",
+          "cells": [
+            {
+              "text": "Spironolactone or eplerenone as first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hypokalaemia and hypertension",
+          "cells": [
+            {
+              "text": "Additional antihypertensive agents as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Florid, treatment-resistant disease; lifelong replacement afterwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid dexamethasone",
+          "cells": [
+            {
+              "text": "Does not correct aldosterone excess and may worsen it in this type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, potassium and end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "KCNJ5 testing; autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinology and hypertension referral",
+          "cells": [
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hyperaldosteronism_type3-dx-mgmt",
+      "title": "Diagnosis and management of Familial hyperaldosteronism type 3 (KCNJ5)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe childhood-onset hypertension with hypokalaemia, resistant to several drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (profound hypokalaemia with arrhythmia, end-organ damage, massive adrenals)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Correct hypokalaemia; cardiology and renal review for end-organ damage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aldosterone-to-renin ratio; potassium; hybrid steroids; adrenal CT; KCNJ5 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High aldosterone with suppressed renin and KCNJ5 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic adenoma, bilateral hyperplasia or other primary aldosteronism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Spironolactone or eplerenone as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct hypokalaemia and add antihypertensives as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bilateral adrenalectomy for florid, resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid dexamethasone, which does not correct this type",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Milder cases controlled by antagonists; florid bilateral hyperplasia may need surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

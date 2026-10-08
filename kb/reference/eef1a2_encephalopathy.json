@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for eef1a2 developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eef1a2_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "EEF1A2 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Focal and generalised seizure pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, speech and autism assessment",
+          "cells": [
+            {
+              "text": "Functional profile and support needs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor and hypotonia assessment",
+          "cells": [
+            {
+              "text": "Tone and motor delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eef1a2_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "STXBP1 or SYNGAP1 encephalopathy",
+          "cells": [
+            {
+              "text": "Other synaptic gene encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Early seizures with hypotonia in girls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN2A or SCN8A encephalopathy",
+          "cells": [
+            {
+              "text": "Channelopathy-related epileptic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GRIN1 or GRIN2B disorder",
+          "cells": [
+            {
+              "text": "Glutamate receptor encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eef1a2_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure medication",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam or lamotrigine; no channel-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Drug-resistant epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue therapy",
+          "cells": [
+            {
+              "text": "Benzodiazepines and a written plan for status and clusters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapy support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and augmentative communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and educational support",
+          "cells": [
+            {
+              "text": "Autistic features and behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and tone care",
+          "cells": [
+            {
+              "text": "Dietetic, physiotherapy or orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo EEF1A2 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eef1a2_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of EEF1A2 developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected EEF1A2 encephalopathy: drug-resistant epilepsy with developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, regression, severe feeding difficulty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rescue therapy and written seizure escalation plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy gene panel or exome; EEG; brain MRI; developmental and speech assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic EEF1A2 variant identified in a child with epilepsy and delay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider STXBP1, SYNGAP1, CDKL5, SCN2A or GRIN-related encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication; ketogenic diet if drug-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepine rescue and written escalation plan for seizure clusters",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and augmentative communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Behavioural and educational support for autistic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling given usually de novo variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Intellectual disability and severe speech impairment common; cognition guarded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

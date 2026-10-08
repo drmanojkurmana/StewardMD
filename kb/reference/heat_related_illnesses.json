@@ -192,5 +192,493 @@
       "caption": "Overview comparison matrix for heat-related illnesses."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Heatstroke",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/heat-illness/heatstroke"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heat_related_illnesses-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading heat-related illness",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Core temperature or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Heatstroke",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Core temperature above 40.5 C (Harrison) or above 40 C (Merck) with CNS dysfunction",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "{{hy:CNS dysfunction separates heatstroke from heat exhaustion}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heat exhaustion",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Usually below 40.5 C, CNS intact",
+              "op": "<",
+              "value": 40.5
+            },
+            {
+              "text": "Thermoregulation preserved; can progress to heatstroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minor heat syndromes",
+          "cells": [
+            {
+              "text": "Heat oedema, prickly heat, heat syncope, heat cramps, tetany"
+            },
+            {
+              "text": "Self-limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic heatstroke",
+          "cells": [
+            {
+              "text": "Older, chronically ill, sedentary; hot dry skin"
+            },
+            {
+              "text": "Milder coagulopathy and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional heatstroke",
+          "cells": [
+            {
+              "text": "Young, exercising, often sweating"
+            },
+            {
+              "text": "Rhabdomyolysis, marked lactic acidosis, AKI, DIC, hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transaminases",
+          "unit": "x normal",
+          "cells": [
+            {
+              "text": "AST and ALT can exceed 100 times normal",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "AST raised on arrival in heatstroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Humidity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Evaporation fails above 70% relative humidity",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "WBGT better than heat index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temperature measurement",
+          "cells": [
+            {
+              "text": "Continuous core (rectal) monitoring"
+            },
+            {
+              "text": "Peripheral readings unreliable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Heatstroke core threshold is 40.5 C in Harrison 22e and 40 C in Merck; both kept."
+    },
+    {
+      "id": "heat_related_illnesses-ddx",
+      "kind": "ddx",
+      "title": "Other causes of hyperthermia with altered mental state",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis, meningitis, malaria",
+          "cells": [
+            {
+              "text": "Infection with intact thermoregulation (fever)"
+            },
+            {
+              "text": "Cultures, CSF, malaria smear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Antipsychotic exposure, lead-pipe rigidity"
+            },
+            {
+              "text": "Drug history, CK"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serotonin syndrome",
+          "cells": [
+            {
+              "text": "Serotonergic drugs, clonus"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant hyperthermia",
+          "cells": [
+            {
+              "text": "After volatile anaesthetic or suxamethonium"
+            },
+            {
+              "text": "Anaesthetic history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid storm",
+          "cells": [
+            {
+              "text": "Thyrotoxic features"
+            },
+            {
+              "text": "TSH and free T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sympathomimetic or anticholinergic toxicity",
+          "cells": [
+            {
+              "text": "Stimulants, MDMA, cocaine; dry skin with anticholinergics"
+            },
+            {
+              "text": "Urine drug screen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stroke or status epilepticus",
+          "cells": [
+            {
+              "text": "Focal signs or seizures"
+            },
+            {
+              "text": "Cranial CT, EEG"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "heat_related_illnesses-treatment",
+      "kind": "treatment",
+      "title": "Treating heat-related illness",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold or ice water immersion",
+          "cells": [
+            {
+              "text": "Heatstroke"
+            },
+            {
+              "text": "{{hy:Cool first, investigate later}}; lowest morbidity and mortality"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cooling target",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Core below 39 C within 30 min; stop at about 39 C",
+              "op": "<",
+              "value": 39
+            },
+            {
+              "text": "Avoid overcooling"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Evaporative cooling",
+          "cells": [
+            {
+              "text": "Immersion not available"
+            },
+            {
+              "text": "Tepid spray with fan; ice packs only as adjunct"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepine",
+          "cells": [
+            {
+              "text": "Shivering during cooling"
+            },
+            {
+              "text": "Paralysis and intubation if needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isotonic saline boluses",
+          "cells": [
+            {
+              "text": "Volume depletion"
+            },
+            {
+              "text": "Reassess BP, urine output; CVP can mislead"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid antipyretics and dantrolene",
+          "cells": [
+            {
+              "text": "Heatstroke"
+            },
+            {
+              "text": "Not effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICU organ support",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis, AKI, DIC, liver failure, ARDS"
+            },
+            {
+              "text": "Dialysis may be needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Salt and fluid replacement",
+          "cells": [
+            {
+              "text": "Heat cramps, heat exhaustion"
+            },
+            {
+              "text": "Water alone insufficient for cramps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No diuretics",
+          "cells": [
+            {
+              "text": "Heat oedema"
+            },
+            {
+              "text": "Predispose to volume depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Recovery"
+            },
+            {
+              "text": "Acclimatise over 1 to several weeks; review drugs impairing heat loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heat_related_illnesses-dx-mgmt",
+      "title": "Diagnosis and management of heat-related illness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heat exposure with symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Measure core (rectal) temperature; assess mental state",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CNS dysfunction with core temperature above 40 C?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immediate cold water immersion; IV saline",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Core temperature reached 39 C?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop cooling; ICU, labs for CK, LFTs, clotting, glucose",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Mental state improving after cooling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Manage organ complications; review drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Seek other cause: CT, CSF, toxicology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Heat exhaustion or minor syndrome: cool, oral or IV salt and fluid",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n4",
+          "label": "No, continue"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

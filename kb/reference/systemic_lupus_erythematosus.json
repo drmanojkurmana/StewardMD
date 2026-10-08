@@ -187,5 +187,552 @@
       "caption": "Overview comparison matrix for systemic lupus erythematosus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Systemic Lupus Erythematosus",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/systemic-lupus-erythematosus-sle"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_lupus_erythematosus-diagnostic",
+      "kind": "diagnostic",
+      "title": "2019 EULAR/ACR classification of SLE and key tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Weight or meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Entry: ANA titre",
+          "unit": "reciprocal titre",
+          "cells": [
+            {
+              "text": "1:80 or higher",
+              "op": ">=",
+              "value": 80
+            },
+            {
+              "text": "Required before scoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total score",
+          "cells": [
+            {
+              "text": "10 or more with 1 clinical criterion",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Classifies SLE; count highest item per domain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal: biopsy class III or IV",
+          "cells": [
+            {
+              "text": "Proliferative nephritis"
+            },
+            {
+              "text": "10 points",
+              "op": "=",
+              "value": 10
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal: class II or V; proteinuria",
+          "unit": "g/24 h",
+          "cells": [
+            {
+              "text": "Proteinuria over 0.5 g/24 h scores 4",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Class II or V scores 8"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-dsDNA or anti-Smith",
+          "cells": [
+            {
+              "text": "Highly specific"
+            },
+            {
+              "text": "6 points",
+              "op": "=",
+              "value": 6
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute cutaneous lupus, arthritis, pericarditis",
+          "cells": [
+            {
+              "text": "Each scores 6"
+            },
+            {
+              "text": "6 points",
+              "op": "=",
+              "value": 6
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haematologic",
+          "unit": "/mcL",
+          "cells": [
+            {
+              "text": "Leukopenia under 4000/mcL scores 3; platelets under 100,000 scores 4",
+              "op": "<",
+              "value": 4000
+            },
+            {
+              "text": "Autoimmune haemolysis scores 4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low complement",
+          "cells": [
+            {
+              "text": "Low C3 or C4 scores 3; both low scores 4"
+            },
+            {
+              "text": "Lowest in active nephritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other domains",
+          "cells": [
+            {
+              "text": "Fever over 38 C 2; seizure 5; psychosis 3; effusion 5; alopecia or oral ulcers 2; aPL 2"
+            },
+            {
+              "text": "Weighted items"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ANA pattern",
+          "cells": [
+            {
+              "text": "Rim pattern = dsDNA (50% of SLE); speckled = Sm (30% of SLE)"
+            },
+            {
+              "text": "Homogeneous histone pattern in drug-induced lupus"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "ANA sensitivity exceeds 95% but about 30% of healthy people are positive at 1:40; about 5% of SLE is ANA-negative per Harrison."
+    },
+    {
+      "id": "systemic_lupus_erythematosus-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic SLE",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced lupus",
+          "cells": [
+            {
+              "text": "Hydralazine, procainamide, isoniazid, TNF inhibitors; rarely renal or CNS"
+            },
+            {
+              "text": "Antihistone antibodies; resolves off drug"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Erosive arthritis predominates"
+            },
+            {
+              "text": "Anti-CCP, radiographs; dsDNA negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mixed connective tissue disease",
+          "cells": [
+            {
+              "text": "Overlap features"
+            },
+            {
+              "text": "High-titre anti-U1-RNP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection (endocarditis, histoplasmosis, viral)",
+          "cells": [
+            {
+              "text": "Fever, cytopenias, infiltrates"
+            },
+            {
+              "text": "Cultures, echocardiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TTP or atypical HUS",
+          "cells": [
+            {
+              "text": "Microangiopathy with schistocytes"
+            },
+            {
+              "text": "ADAMTS13 activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rosacea",
+          "cells": [
+            {
+              "text": "Malar-like rash with pustules, no systemic disease"
+            },
+            {
+              "text": "Clinical; ANA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Pain and fatigue without inflammation"
+            },
+            {
+              "text": "Normal complement and dsDNA"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "systemic_lupus_erythematosus-treatment",
+      "kind": "treatment",
+      "title": "Treating SLE",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "All patients, including pregnancy"
+            },
+            {
+              "text": "{{hy:5 mg/kg actual weight daily, max 400 mg}}; yearly eye checks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methotrexate, azathioprine or mycophenolate",
+          "cells": [
+            {
+              "text": "Mild to moderate, steroid sparing"
+            },
+            {
+              "text": "Methotrexate 15 to 20 mg weekly; azathioprine 2 mg/kg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "Severe disease"
+            },
+            {
+              "text": "0.5 to 1 mg/kg daily, taper within 6 months; maintenance 7.5 mg or less"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV methylprednisolone pulse",
+          "cells": [
+            {
+              "text": "Severe organ-threatening disease"
+            },
+            {
+              "text": "1 g daily for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mycophenolate induction",
+          "cells": [
+            {
+              "text": "Lupus nephritis"
+            },
+            {
+              "text": "Up to 3 g daily in 2 doses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV cyclophosphamide",
+          "cells": [
+            {
+              "text": "Lupus nephritis"
+            },
+            {
+              "text": "Euro-Lupus 500 mg every 2 weeks x6; NIH 0.75 to 1 g/m2 monthly x6"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Belimumab or voclosporin",
+          "cells": [
+            {
+              "text": "Add-on for nephritis or active disease"
+            },
+            {
+              "text": "Voclosporin 23.7 mg twice daily with mycophenolate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anifrolumab",
+          "cells": [
+            {
+              "text": "Moderate to severe non-renal SLE"
+            },
+            {
+              "text": "300 mg IV every 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab or IVIG",
+          "cells": [
+            {
+              "text": "Refractory cytopenias or neuropsychiatric lupus"
+            },
+            {
+              "text": "IVIG 400 mg/kg daily for 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Warfarin",
+          "cells": [
+            {
+              "text": "Antiphospholipid syndrome with thrombosis"
+            },
+            {
+              "text": "INR 2 to 3, usually lifelong"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_lupus_erythematosus-dx-mgmt",
+      "title": "Diagnosis and management of SLE",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multisystem features: rash, arthritis, cytopenia, serositis, nephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ANA by immunofluorescence",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "ANA 1:80 or higher?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "SLE unlikely; consider anti-Ro if suspicion high",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "dsDNA, Sm, C3, C4, aPL, blood count, urine protein",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "EULAR/ACR score 10 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Undifferentiated disease; review and repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydroxychloroquine for all; photoprotection",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Proteinuria or active urine sediment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Renal biopsy; class III or IV: steroid plus mycophenolate or cyclophosphamide",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Severe non-renal organ disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Pulse steroid, then immunosuppressant or biologic",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Steroid-sparing agent; belimumab or anifrolumab if active",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

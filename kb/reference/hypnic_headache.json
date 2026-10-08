@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for hypnic headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypnic_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Headache diary",
+          "cells": [
+            {
+              "text": "Nocturnal timing and duration of attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Excludes an intracranial cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight or ambulatory blood pressure",
+          "cells": [
+            {
+              "text": "Nocturnal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and caffeine review",
+          "cells": [
+            {
+              "text": "Drug and caffeine intake"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypnic_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cluster headache",
+          "cells": [
+            {
+              "text": "Distinct alarm-clock pattern of nocturnal attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-overuse or rebound headache",
+          "cells": [
+            {
+              "text": "Medication use reviewed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea-related headache",
+          "cells": [
+            {
+              "text": "Loud snoring, witnessed apnoeas or excessive daytime sleepiness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial lesion",
+          "cells": [
+            {
+              "text": "Focal neurological signs or raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypnic_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bedtime caffeine",
+          "cells": [
+            {
+              "text": "First-line prophylaxis given simplicity and frequent efficacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lithium or indometacin",
+          "cells": [
+            {
+              "text": "Alternative preventives when caffeine is insufficient or not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude secondary causes",
+          "cells": [
+            {
+              "text": "Neuroimaging, as the diagnosis is made by exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting causes",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea and nocturnal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Headache diary",
+          "cells": [
+            {
+              "text": "Confirms nocturnal timing and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adverse effect monitoring",
+          "cells": [
+            {
+              "text": "Lithium toxicity and indometacin gastrointestinal and renal effects in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypnic_headache-dx-mgmt",
+      "title": "Diagnosis and management of Hypnic headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache waking the patient from sleep at a consistent time, usually after middle age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Focal neurological signs, raised intracranial pressure or snoring with apnoeas?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neuroimaging and sleep study to exclude sinister or sleep-related cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Headache diary, MRI brain, overnight blood pressure, sleep study if apnoea suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary causes excluded and attacks typical?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat sleep apnoea or nocturnal hypertension, then reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bedtime caffeine as first-line prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lithium or indometacin if caffeine fails or is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat obstructive sleep apnoea and nocturnal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Headache diary to confirm timing and response",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor lithium toxicity and indometacin adverse effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Attacks controlled with prophylaxis; refer to specialist if refractory",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

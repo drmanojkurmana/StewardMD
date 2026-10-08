@@ -153,5 +153,341 @@
       "caption": "Overview comparison matrix for hmg-coa lyase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hmg_coa_lyase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acid analysis",
+          "cells": [
+            {
+              "text": "3-hydroxy-3-methylglutaric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile by tandem mass spectrometry",
+          "cells": [
+            {
+              "text": "Acylcarnitine pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, blood gas and ketones",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ammonia and lactate",
+          "cells": [
+            {
+              "text": "Hyperammonaemia and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HMGCL gene sequencing or enzyme assay",
+          "cells": [
+            {
+              "text": "Genetic or enzyme diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and transaminases",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging if encephalopathic",
+          "cells": [
+            {
+              "text": "White matter change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hmg_coa_lyase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fatty acid oxidation disorders (for example MCAD deficiency)",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia; acylcarnitine profile separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reye syndrome and Reye-like presentations",
+          "cells": [
+            {
+              "text": "Reye-like hepatic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other organic acidaemias",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other types of 3-methylglutaconic aciduria",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hmg_coa_lyase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid fasting",
+          "cells": [
+            {
+              "text": "Frequent carbohydrate feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein and leucine-restricted diet",
+          "cells": [
+            {
+              "text": "Supervised by a metabolic team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous dextrose",
+          "cells": [
+            {
+              "text": "Acute decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crisis hyperammonaemia",
+          "cells": [
+            {
+              "text": "Protein withdrawal and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval surveillance",
+          "cells": [
+            {
+              "text": "Serial urine organic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency alert card",
+          "cells": [
+            {
+              "text": "For the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hmg_coa_lyase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of HMG-CoA lyase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypoketotic hypoglycaemia and acidosis during illness or fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coma, severe hyperammonaemia, high anion gap acidosis, or Reye-like liver failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intravenous dextrose and crisis care for hypoglycaemia and hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids; acylcarnitines; glucose, ketones, ammonia, lactate; HMGCL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 3-hydroxy-3-methylglutaric acid raised, with HMGCL variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MCAD deficiency, Reye syndrome, other organic acidaemias or urea cycle disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid fasting with frequent carbohydrate feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protein and leucine-restricted diet under supervision",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous dextrose for acute decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emergency alert card and interval urine organic acid surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Crises prevented; interval surveillance and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

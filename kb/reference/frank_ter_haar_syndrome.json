@@ -146,5 +146,267 @@
       "caption": "Overview comparison matrix for frank-ter haar syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frank_ter_haar_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SH3PXD2B sequencing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic examination and intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Megalocornea and glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Bowing, flexion deformities and other bone anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial imaging",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frank_ter_haar_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent ophthalmology",
+          "cells": [
+            {
+              "text": "Intraocular-pressure-lowering therapy and glaucoma surgery to preserve vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology",
+          "cells": [
+            {
+              "text": "Assessment and treatment of congenital heart defects, including surgery where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedics and physiotherapy",
+          "cells": [
+            {
+              "text": "Long-bone bowing, flexion deformities and contractures; corrective surgery as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and deformity surveillance",
+          "cells": [
+            {
+              "text": "Growth, development and progression of skeletal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Clinical genetics, ophthalmology, cardiology and orthopaedics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder; carrier testing and recurrence-risk discussion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frank_ter_haar_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Frank-ter Haar syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Frank-ter Haar syndrome: megalocornea with skeletal bowing and deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised intraocular pressure, major heart disease, deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology for congenital glaucoma to prevent irreversible visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SH3PXD2B sequencing, ophthalmic examination, echocardiography and skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SH3PXD2B sequencing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Melnick-Needles, otopalatodigital spectrum or isolated congenital glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent glaucoma management with pressure-lowering therapy and surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cardiology assessment and treatment of congenital heart defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic and physiotherapy care for bowing and flexion deformities",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary care and genetic counselling for the recessive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outlook varies with cardiac and skeletal severity; some infants have early complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

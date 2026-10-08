@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for lichen planus pemphigoides."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lichen_planus_pemphigoides-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of a lichenoid lesion and a blister edge",
+          "cells": [
+            {
+              "text": "Routine histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Linear IgG and C3 at the basement membrane zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salt-split skin immunofluorescence",
+          "cells": [
+            {
+              "text": "Localises antibodies to the blister roof"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum BP180 (NC16A) immunoassay",
+          "cells": [
+            {
+              "text": "Circulating autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history",
+          "cells": [
+            {
+              "text": "Antihypertensives, antibiotics, checkpoint inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_planus_pemphigoides-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bullous lichen planus",
+          "cells": [
+            {
+              "text": "Blisters only within lichenoid lesions, unlike this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Lacks the lichenoid eruption that precedes blistering here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichenoid drug eruption with blistering",
+          "cells": [
+            {
+              "text": "Drug trigger; withdraw the implicated drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Malignancy-associated blistering; screen for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_planus_pemphigoides-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay for both lichenoid and blistering components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Tetracycline with nicotinamide, dapsone, methotrexate, azathioprine or mycophenolate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Potent, for localised lichenoid or bullous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger withdrawal",
+          "cells": [
+            {
+              "text": "Antihypertensives, antibiotics or checkpoint inhibitors; stop phototherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Blister and erosion care to prevent secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Rituximab or omalizumab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical response and BP180/NC16A titres; malignancy screening where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lichen_planus_pemphigoides-dx-mgmt",
+      "title": "Diagnosis and management of Lichen planus pemphigoides",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tense blisters on uninvolved skin, arising alongside lichenoid papules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (widespread denudation, mucosal involvement, checkpoint reaction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent dermatology admission and oncology input if checkpoint-induced",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with histology, direct immunofluorescence, salt-split skin, BP180 assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is linear IgG and C3 at the basement membrane zone confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bullous lichen planus, bullous pemphigoid or drug-induced blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as mainstay for both components",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing agents such as dapsone, methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw any trigger drug and stop phototherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blister and erosion wound care to prevent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Rituximab or omalizumab for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally better prognosis than classic bullous pemphigoid, with sustained remission",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

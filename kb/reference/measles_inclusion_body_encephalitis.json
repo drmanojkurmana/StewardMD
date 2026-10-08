@@ -148,5 +148,285 @@
       "caption": "Overview comparison matrix for measles inclusion body encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "measles_inclusion_body_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Measles virus RNA by PCR or antigen in CSF or brain tissue",
+          "cells": [
+            {
+              "text": "Measles virus in CSF or brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy with immunostaining",
+          "cells": [
+            {
+              "text": "Intranuclear and intracytoplasmic inclusion bodies with measles antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Cortical and subcortical signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Focal epileptiform activity rather than the periodic complexes of SSPE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status: HIV testing, CD4 count, chemotherapy or transplant history",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles exposure and immunisation history",
+          "cells": [
+            {
+              "text": "Exposure and immunisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "measles_inclusion_body_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restore cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Reduce immunosuppression, treat HIV with antiretroviral therapy, or achieve immune reconstitution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribavirin",
+          "cells": [
+            {
+              "text": "Systemic and/or intraventricular, with or without interferon; limited anecdotal evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory seizures",
+          "cells": [
+            {
+              "text": "Combination antiepileptic drugs for refractory focal seizures and epilepsia partialis continua"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocritical support",
+          "cells": [
+            {
+              "text": "Airway protection, nutrition and raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Neurology, infectious diseases and the immunosuppressing service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognosis discussion",
+          "cells": [
+            {
+              "text": "Grave prognosis; palliative and family support where deterioration is relentless"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Measles immunisation of susceptible contacts; immunoglobulin prophylaxis after exposure in immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "measles_inclusion_body_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Measles inclusion body encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunocompromised patient with progressive encephalitis; suspected measles encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory focal seizures, falling consciousness or recent measles exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurocritical care, seizure control and infectious diseases input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF or brain PCR for measles RNA; MRI; EEG; immune status and HIV testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is measles virus RNA or antigen detected in CSF or brain tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PML, HSV encephalitis, toxoplasmosis or SSPE; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reduce immunosuppression, restore cell-mediated immunity and treat HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ribavirin, systemic or intraventricular, with or without interferon",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination antiepileptics for refractory seizures and epilepsia partialis continua",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurocritical support for airway, nutrition and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Grave prognosis; early palliative and family support where deterioration is relentless",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

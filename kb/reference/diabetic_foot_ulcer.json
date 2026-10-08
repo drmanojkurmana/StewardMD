@@ -152,5 +152,325 @@
       "caption": "Overview comparison matrix for diabetic foot ulcer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "IWGDF / NICE diabetic foot guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetic_foot_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Monofilament and palpation of pulses",
+          "cells": [
+            {
+              "text": "Loss of protective sensation and pulse status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial and toe pressures with arterial duplex",
+          "cells": [
+            {
+              "text": "Perfusion; the ankle-brachial index can be falsely elevated in calcified vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiograph and MRI",
+          "cells": [
+            {
+              "text": "Osteomyelitis or Charcot changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep tissue or bone culture",
+          "cells": [
+            {
+              "text": "Guides antibiotics; superficial swabs mislead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose and glycated haemoglobin",
+          "cells": [
+            {
+              "text": "Glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_foot_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial (ischaemic) ulcer",
+          "cells": [
+            {
+              "text": "Rest pain, dependent rubor or gangrene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot neuroarthropathy with ulceration",
+          "cells": [
+            {
+              "text": "Unexplained warm, swollen foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Probe to bone or a chronic non-healing ulcer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_foot_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Offloading",
+          "cells": [
+            {
+              "text": "Total-contact casting, removable devices or therapeutic footwear for high-pressure points"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured wound care",
+          "cells": [
+            {
+              "text": "Regular sharp debridement of callus and non-viable tissue; appropriate dressings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perfusion assessment and revascularisation",
+          "cells": [
+            {
+              "text": "Refer ischaemic or neuroischaemic ulcers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic and cardiovascular control",
+          "cells": [
+            {
+              "text": "Optimise glucose and cardiovascular risk to aid healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection treatment",
+          "cells": [
+            {
+              "text": "Debridement and antibiotics guided by deep tissue culture; imaging if bone is probed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary foot service",
+          "cells": [
+            {
+              "text": "Podiatry, vascular surgery, diabetology and orthotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Structured screening, foot-care education, callus care and protective footwear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetic_foot_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Diabetic foot ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diabetic foot ulcer: non-healing ulcer on a neuropathic foot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spreading cellulitis, sepsis, osteomyelitis, critical ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent debridement and sepsis treatment; refer for revascularisation if ischaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Monofilament and pulses; toe pressures and duplex; radiograph; deep tissue culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is osteomyelitis confirmed by imaging or deep bone culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-diabetic neuropathic ulcer, venous ulcer or Charcot foot",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Offload plantar pressure with total-contact casting or therapeutic footwear",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular sharp debridement and dressings matched to moisture balance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refer ischaemic ulcers for revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optimise glycaemic control and cardiovascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prevent recurrence with screening, foot-care education and protective footwear",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many heal with prompt multidisciplinary care; recurrence is frequent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

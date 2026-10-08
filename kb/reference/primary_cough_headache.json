@@ -141,5 +141,318 @@
       "caption": "Overview comparison matrix for primary cough headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cough_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain including the craniocervical junction",
+          "cells": [
+            {
+              "text": "Chiari type I malformation or posterior fossa lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Posterior fossa or long-tract signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of trigger",
+          "cells": [
+            {
+              "text": "Valsalva versus sustained-exertion trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further vascular imaging",
+          "cells": [
+            {
+              "text": "Secondary vascular cause, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cough_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chiari type I malformation",
+          "cells": [
+            {
+              "text": "Occipital pain with features of tonsillar descent"
+            },
+            {
+              "text": "Craniocervical junction MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior fossa tumour or other mass lesion",
+          "cells": [
+            {
+              "text": "Cerebellar or brainstem signs"
+            },
+            {
+              "text": "MRI of the brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary exercise headache",
+          "cells": [
+            {
+              "text": "Sustained-exertion rather than Valsalva trigger"
+            },
+            {
+              "text": "Trigger history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible cerebral vasoconstriction syndrome",
+          "cells": [
+            {
+              "text": "First or worst headache suggesting a vascular event"
+            },
+            {
+              "text": "Vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cough_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Indometacin (first-line)",
+          "cells": [
+            {
+              "text": "Symptomatic and preventive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude structural cause first",
+          "cells": [
+            {
+              "text": "Craniocervical junction MRI before accepting the primary diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cough or respiratory condition",
+          "cells": [
+            {
+              "text": "Treat to reduce the Valsalva trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative preventives",
+          "cells": [
+            {
+              "text": "Acetazolamide or topiramate if indometacin is not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, often self-limiting course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "If features are atypical or a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cough_headache-dx-mgmt",
+      "title": "Diagnosis and management of Primary cough headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary cough headache: headache triggered by coughing or Valsalva",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cerebellar signs, first or worst headache, progressive headache or tonsillar features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology and urgent imaging for vascular or posterior fossa cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain with craniocervical junction; neurological exam; trigger history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a Chiari malformation or posterior fossa lesion excluded on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the structural lesion as a secondary headache; neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Indometacin as first-line symptomatic and preventive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat any underlying chronic cough or respiratory condition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetazolamide or topiramate if indometacin is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure about a benign, often self-limiting course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to neurology if features are atypical or a secondary cause is suspected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

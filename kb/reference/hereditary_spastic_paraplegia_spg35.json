@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for hsp spg35 (fa2h)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg35-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FA2H sequencing",
+          "cells": [
+            {
+              "text": "Biallelic recessive FA2H variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain with susceptibility-weighted sequences",
+          "cells": [
+            {
+              "text": "Brain iron-related imaging change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizures, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and copper studies",
+          "cells": [
+            {
+              "text": "Excludes treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg35-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilson disease and treatable dystonia-parkinsonism mimics",
+          "cells": [
+            {
+              "text": "Excluded by metabolic and copper studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodegeneration with brain iron accumulation disorders",
+          "cells": [
+            {
+              "text": "Iron-sensitive MRI change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG11 and SPG15",
+          "cells": [
+            {
+              "text": "Complicated recessive HSP with thin corpus callosum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metachromatic leukodystrophy and other leukodystrophies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg35-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral antispasticity agents",
+          "cells": [
+            {
+              "text": "For spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticholinergic agents or botulinum toxin",
+          "cells": [
+            {
+              "text": "For dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, stretching, orthoses and seating",
+          "cells": [
+            {
+              "text": "Rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures, with neuropsychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and low-vision support",
+          "cells": [
+            {
+              "text": "Optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and swallow assessment",
+          "cells": [
+            {
+              "text": "As bulbar function declines, with enteral support where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive FA2H inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg35-dx-mgmt",
+      "title": "Diagnosis and management of HSP SPG35 (FA2H)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spastic paraplegia with dystonia, cognitive decline and optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid dystonia, swallowing failure, new seizures, or loss of independent mobility?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for seizures, swallowing failure or progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FA2H sequencing; brain MRI with susceptibility sequences; ophthalmology; copper studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biallelic FA2H variant found, with Wilson disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider brain iron accumulation disorders, leukodystrophies, SPG11 or Wilson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral antispasticity agents for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticholinergic agents or botulinum toxin for dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication and neuropsychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology and low-vision support for optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; swallow and nutrition monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

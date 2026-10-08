@@ -145,5 +145,285 @@
       "caption": "Overview comparison matrix for gilbert syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gilbert_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fractionated serum bilirubin",
+          "cells": [
+            {
+              "text": "Predominantly unconjugated (indirect) elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver enzymes and synthetic function tests",
+          "cells": [
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Excludes haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat testing",
+          "cells": [
+            {
+              "text": "Fluctuating mild hyperbilirubinaemia, sometimes accentuated by fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UGT1A1 genotyping",
+          "cells": [
+            {
+              "text": "Selected or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gilbert_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Anaemia or a raised reticulocyte count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crigler-Najjar syndrome",
+          "cells": [
+            {
+              "text": "Very high bilirubin, especially from infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dubin-Johnson and Rotor syndromes",
+          "cells": [
+            {
+              "text": "Conjugated hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gilbert_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and lifelong; no treatment required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Prolonged fasting, dehydration and excess alcohol that provoke jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "Isolated unconjugated hyperbilirubinaemia with normal liver tests and no haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug caution",
+          "cells": [
+            {
+              "text": "Reduced UGT1A1 activity; caution with drugs such as irinotecan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient jaundice in illness",
+          "cells": [
+            {
+              "text": "Harmless during intercurrent illness or fasting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gilbert_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Gilbert syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gilbert syndrome: mild unconjugated hyperbilirubinaemia with normal liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (conjugated bilirubin, anaemia, very high bilirubin)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate conjugated or very high bilirubin for an alternative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fractionated bilirubin, liver enzymes, FBC, reticulocytes and blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the bilirubin isolated, unconjugated and fluctuating, with haemolysis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemolysis, Crigler-Najjar, Dubin-Johnson or Rotor syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that Gilbert syndrome is benign, lifelong and needs no treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Advise avoiding prolonged fasting, dehydration and excess alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Caution with irinotecan and other drugs metabolised by UGT1A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Excellent; lifelong but benign, without liver damage or reduced life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for familial hyperkalaemic hypertension (gordon, wnk)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hyperkalemic_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes",
+          "cells": [
+            {
+              "text": "Hyperkalaemia and hyperchloraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous blood gas",
+          "cells": [
+            {
+              "text": "Metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity",
+          "cells": [
+            {
+              "text": "Characteristically suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aldosterone measurement",
+          "cells": [
+            {
+              "text": "Renin-aldosterone axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Estimated glomerular filtration rate",
+          "cells": [
+            {
+              "text": "Excludes renal failure as the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sequencing of WNK1, WNK4, KLHL3 and CUL3",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hyperkalemic_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic kidney disease with hyperkalaemia",
+          "cells": [
+            {
+              "text": "Filtration rate is normal in this condition, unlike CKD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug effects (ACE inhibitors, ARBs, potassium-sparing diuretics)",
+          "cells": [
+            {
+              "text": "Aggravate hyperkalaemia; drug history is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 4 renal tubular acidosis",
+          "cells": [
+            {
+              "text": "Listed in the differential with hyperkalaemic acidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hyperkalemic_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose thiazide diuretic",
+          "cells": [
+            {
+              "text": "Strikingly effective; corrects both hypertension and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sodium restriction",
+          "cells": [
+            {
+              "text": "Complements thiazide therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary potassium restriction",
+          "cells": [
+            {
+              "text": "With monitoring to manage hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, serum potassium and acid-base status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "End-organ surveillance",
+          "cells": [
+            {
+              "text": "Hypertensive complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "WNK1, WNK4, KLHL3 and CUL3 sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Diagnosis and ongoing management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hyperkalemic_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Familial hyperkalaemic hypertension (Gordon, WNK)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young hypertensive patient with unexplained hyperkalaemia and normal kidney function",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe hyperkalaemia with ECG change, accelerated hypertension, ACE inhibitor)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium treatment; stop renin-angiotensin blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes; blood gas; renin and aldosterone; GFR; WNK1, WNK4, KLHL3, CUL3",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hyperkalaemia with low renin and normal GFR; gene variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CKD, drug effect, hypoaldosteronism or type 4 renal tubular acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose thiazide diuretic as disease-specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sodium restriction alongside thiazide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietary potassium restriction with monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitoring of blood pressure, potassium and acid-base status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent when recognised; thiazide normalises blood pressure and electrolytes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

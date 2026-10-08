@@ -155,5 +155,294 @@
       "caption": "Overview comparison matrix for hereditary diffuse gastric cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_diffuse_gastric_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline CDH1 sequencing and deletion or duplication analysis",
+          "cells": [
+            {
+              "text": "Pathogenic CDH1 variants; CTNNA1 and multigene panels may be used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy with multiple systematic biopsies",
+          "cells": [
+            {
+              "text": "Unreliable for detecting early infiltrative cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological search for signet-ring cell foci",
+          "cells": [
+            {
+              "text": "Diffuse-type signet-ring cell cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast MRI and clinical examination in female carriers",
+          "cells": [
+            {
+              "text": "Lobular breast cancer surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history against established criteria",
+          "cells": [
+            {
+              "text": "Testing criteria, such as diffuse gastric cancer in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_diffuse_gastric_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic counselling and CDH1 testing",
+          "cells": [
+            {
+              "text": "When consensus family history criteria are met"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic total gastrectomy",
+          "cells": [
+            {
+              "text": "Confirmed CDH1 carriers without an established cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy with multiple biopsies",
+          "cells": [
+            {
+              "text": "For carriers who decline or defer gastrectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced breast surveillance",
+          "cells": [
+            {
+              "text": "Annual breast MRI for female CDH1 carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional follow-up",
+          "cells": [
+            {
+              "text": "Dietitian support after total gastrectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indefinite surveillance",
+          "cells": [
+            {
+              "text": "Carriers who have not had gastrectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Established localised cancer",
+          "cells": [
+            {
+              "text": "Surgical resection with perioperative or adjuvant therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic cancer",
+          "cells": [
+            {
+              "text": "Platinum-based doublet or comparable systemic regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cascade testing",
+          "cells": [
+            {
+              "text": "Genetic counselling for relatives as they reach testing age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_diffuse_gastric_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary diffuse gastric cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Family history of diffuse gastric cancer, or a CDH1 variant in a carrier",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Persistent dyspepsia, weight loss, anaemia, bleeding or a new breast mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endoscopy with biopsy and gastric cancer pathway referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline CDH1 sequencing with deletion analysis; endoscopy with multiple biopsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic CDH1 variant confirmed, with no established cancer?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue surveillance; consider other familial gastric or polyposis syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic total gastrectomy for confirmed CDH1 carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Upper endoscopy with multiple biopsies for carriers declining surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Enhanced breast surveillance with annual MRI for female carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured nutritional follow-up after total gastrectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Risk reduced by gastrectomy or surveillance; cascade testing for relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

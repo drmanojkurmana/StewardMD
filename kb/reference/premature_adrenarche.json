@@ -147,5 +147,336 @@
       "caption": "Overview comparison matrix for premature adrenarche."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "premature_adrenarche-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "DHEAS and adrenal androgens (androstenedione, testosterone)",
+          "cells": [
+            {
+              "text": "Androgen level appropriate to the degree of virilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "17-hydroxyprogesterone, with ACTH stimulation test",
+          "cells": [
+            {
+              "text": "Non-classic congenital adrenal hyperplasia, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-age radiograph",
+          "cells": [
+            {
+              "text": "Skeletal maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basal LH and FSH",
+          "cells": [
+            {
+              "text": "Whether the gonadal axis is activated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal and pelvic imaging",
+          "cells": [
+            {
+              "text": "Androgen-secreting tumour, if a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose and insulin indices",
+          "cells": [
+            {
+              "text": "Insulin resistance, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premature_adrenarche-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Virilising adrenal tumour",
+          "cells": [
+            {
+              "text": "Rapidly progressive virilisation, clitoromegaly or deepened voice"
+            },
+            {
+              "text": "Adrenal and pelvic imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen-secreting gonadal tumour",
+          "cells": [
+            {
+              "text": "Very high androgen levels out of keeping with benign adrenarche"
+            },
+            {
+              "text": "Pelvic imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central precocious puberty with pubarche",
+          "cells": [
+            {
+              "text": "Substantial bone-age advancement or growth spurt"
+            },
+            {
+              "text": "Basal LH and FSH; bone age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-classic congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "17-hydroxyprogesterone with ACTH stimulation test"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premature_adrenarche-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Isolated premature adrenarche is benign; no specific hormonal treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude CAH and androgen tumours",
+          "cells": [
+            {
+              "text": "When virilisation is marked or rapidly progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Growth velocity, bone age and pubertal staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic risk",
+          "cells": [
+            {
+              "text": "Weight management and healthy-lifestyle advice, given the association with insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longer-term awareness",
+          "cells": [
+            {
+              "text": "Screening for polycystic ovary syndrome in susceptible girls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology if features become progressive, virilising or atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "premature_adrenarche-dx-mgmt",
+      "title": "Diagnosis and management of Premature adrenarche",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected premature adrenarche: early pubic hair in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid virilisation, very high androgens, bone-age advance or adrenal mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: paediatric endocrine work-up for tumour or enzyme defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DHEAS and androgens; 17-OHP with ACTH test; bone age; LH and FSH; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do results indicate a benign variant rather than CAH or an androgen tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue targeted work-up for CAH, tumour or precocious puberty; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation; no specific hormonal treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial growth, bone age and pubertal staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight management and healthy-lifestyle advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for polycystic ovary syndrome in susceptible girls",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, non-progressive course; refer if features become progressive or virilising",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

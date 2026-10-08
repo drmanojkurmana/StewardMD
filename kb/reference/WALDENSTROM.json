@@ -158,5 +158,382 @@
       "caption": "Overview comparison matrix for waldenström macroglobulinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Macroglobulinemia",
+      "url": "https://www.merckmanuals.com/en-ca/professional/hematology-and-oncology/plasma-cell-disorders/macroglobulinemia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "WALDENSTROM-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in Waldenstrom macroglobulinaemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Monoclonal IgM",
+          "cells": [
+            {
+              "text": "{{hy:IgM M-protein on electrophoresis and immunofixation}}"
+            },
+            {
+              "text": "Defining protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bone marrow",
+          "cells": [
+            {
+              "text": "Lymphocytes, plasmacytoid lymphocytes, plasma cells, mast cells; MYD88 and CXCR4 testing"
+            },
+            {
+              "text": "Required for diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma viscosity",
+          "unit": "mPa.s",
+          "cells": [
+            {
+              "text": "Above 4.0 in hyperviscosity (normal 1.4 to 1.8)",
+              "op": ">",
+              "value": 4.0
+            },
+            {
+              "text": "Bleeding, visual change, headache, sausage-link retinal veins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood count and smear",
+          "cells": [
+            {
+              "text": "Normocytic anaemia, marked rouleaux, very high ESR"
+            },
+            {
+              "text": "Cytopenias from marrow infiltration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryoglobulins",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Cold agglutinins give a positive Coombs test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amyloidosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "Look for organ involvement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Patient profile",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Median age 70",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "Men more often; many asymptomatic"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "WALDENSTROM-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Waldenstrom macroglobulinaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IgM myeloma",
+          "cells": [
+            {
+              "text": "{{hy:Rare; lacks the MYD88 mutation}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-Hodgkin lymphoma with IgM",
+          "cells": [
+            {
+              "text": "Small IgM in about 5% of B-cell lymphomas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic lymphocytic leukaemia",
+          "cells": [
+            {
+              "text": "Occasional IgM M-protein; blood lymphocytosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgM MGUS",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "IgM MGUS features were not stated in the source opened."
+    },
+    {
+      "id": "WALDENSTROM-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Waldenstrom macroglobulinaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic disease"
+            },
+            {
+              "text": "Often no treatment for many years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic hyperviscosity}}"
+            },
+            {
+              "text": "Rapidly reverses bleeding and neurological signs; also before rituximab if IgM high"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bendamustine with rituximab",
+          "cells": [
+            {
+              "text": "Symptomatic disease"
+            },
+            {
+              "text": "Highly effective; watch IgM flare after rituximab"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BTK inhibitor (zanubrutinib, acalabrutinib, ibrutinib)",
+          "cells": [
+            {
+              "text": "Symptomatic disease"
+            },
+            {
+              "text": "MYD88 and CXCR4 status may predict response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bortezomib or carfilzomib, venetoclax",
+          "cells": [
+            {
+              "text": "Alternatives or relapse"
+            },
+            {
+              "text": "Also immunomodulators"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fludarabine or cladribine",
+          "cells": [
+            {
+              "text": "Selected cases"
+            },
+            {
+              "text": "Risk of myelodysplasia and AML"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses were not stated in the source opened. Median survival 7 to 10 years."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "WALDENSTROM-dx-mgmt",
+      "title": "Diagnosis and management of Waldenstrom macroglobulinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anaemia, high ESR, hyperviscosity or IgM paraprotein",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Electrophoresis, immunofixation, free light chains, viscosity",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Bone marrow biopsy with MYD88 and CXCR4",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Lymphoplasmacytic infiltrate with IgM?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider myeloma, lymphoma, CLL",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Symptomatic hyperviscosity?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent plasma exchange",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Symptomatic disease or cytopenias?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Observe",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Bendamustine-rituximab or BTK inhibitor",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

@@ -159,5 +159,423 @@
       "caption": "Overview comparison matrix for human papillomavirus infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC STI Treatment Guidelines 2021, Anogenital Warts",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/anogenital-warts.htm"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "human_papillomavirus_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising HPV disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Common wart (verruca vulgaris)",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Dome-shaped, about 1 cm, hyperkeratotic filamentous surface",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "Clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plantar wart",
+          "cells": [
+            {
+              "text": "Endophytic, thick keratin"
+            },
+            {
+              "text": "{{hy:Paring shows punctate bleeding points, unlike a corn}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flat wart",
+          "cells": [
+            {
+              "text": "Slightly raised, velvety; face, arms, legs"
+            },
+            {
+              "text": "Spread by shaving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anogenital warts",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% due to HPV 6 or 11",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Visual diagnosis; HPV testing not recommended for warts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biopsy indications",
+          "cells": [
+            {
+              "text": "Pigmented, indurated, bleeding, ulcerated or fixed lesions; no response; immunocompromised"
+            },
+            {
+              "text": "Exclude intraepidermal or invasive carcinoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oncogenic types",
+          "cells": [
+            {
+              "text": "HPV 16 and 18"
+            },
+            {
+              "text": "Intraepithelial neoplasia and cancer of cervix, anus, vulva, penis, oropharynx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical screening",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "HPV testing with or without cytology from age 30",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Lesions graded CIN I to III"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "human_papillomavirus_infections-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes of warts",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Condyloma lata (secondary syphilis)",
+          "cells": [
+            {
+              "text": "Flat moist anogenital plaques"
+            },
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Umbilicated pearly papules"
+            },
+            {
+              "text": "Clinical, biopsy if unsure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seborrhoeic keratosis",
+          "cells": [
+            {
+              "text": "Stuck-on, waxy, older adults"
+            },
+            {
+              "text": "Clinical or biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma or Bowen disease",
+          "cells": [
+            {
+              "text": "Indurated, bleeding, ulcerated or growing lesion"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corn or callus",
+          "cells": [
+            {
+              "text": "No punctate bleeding on paring"
+            },
+            {
+              "text": "Paring the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin tag (acrochordon)",
+          "cells": [
+            {
+              "text": "Soft pedunculated, smooth surface"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "human_papillomavirus_infections-treatment",
+      "kind": "treatment",
+      "title": "Treating anogenital warts and preventing HPV disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Imiquimod 5% cream",
+          "cells": [
+            {
+              "text": "Patient-applied"
+            },
+            {
+              "text": "At bedtime 3 times a week for up to 16 weeks; wash off after 6 to 10 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Podofilox 0.5%",
+          "cells": [
+            {
+              "text": "Patient-applied; not in pregnancy"
+            },
+            {
+              "text": "Twice daily for 3 days then 4 days off, up to 4 cycles; max 10 cm2 and 0.5 mL/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sinecatechins 15% ointment",
+          "cells": [
+            {
+              "text": "Patient-applied; not in pregnancy"
+            },
+            {
+              "text": "3 times daily up to 16 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryotherapy",
+          "cells": [
+            {
+              "text": "Provider-administered"
+            },
+            {
+              "text": "Liquid nitrogen or cryoprobe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TCA or BCA 80 to 90%",
+          "cells": [
+            {
+              "text": "Provider-administered"
+            },
+            {
+              "text": "Small amount to warts, repeat weekly if needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical removal",
+          "cells": [
+            {
+              "text": "Large or refractory warts"
+            },
+            {
+              "text": "Excision, curettage, laser or electrosurgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Immunocompetent with cutaneous warts"
+            },
+            {
+              "text": "Most resolve in 1 to 2 years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV vaccination",
+          "cells": [
+            {
+              "text": "Prevention before exposure"
+            },
+            {
+              "text": "{{hy:Nonavalent covers 6, 11, 16, 18, 31, 33, 45, 52, 58; does not clear existing infection}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Caesarean delivery is not indicated solely to prevent HPV transmission to the newborn."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "human_papillomavirus_infections-dx-mgmt",
+      "title": "Diagnosis and management of HPV infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Wart-like skin or anogenital lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Atypical: pigmented, indurated, bleeding, ulcerated, fixed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy to exclude carcinoma",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Anogenital location?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Cutaneous wart: observe or salicylic acid, cryotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Screen for other STIs including syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Pregnant?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Cryotherapy, TCA or surgical removal; avoid podofilox",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Imiquimod, podofilox, sinecatechins or provider ablation",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

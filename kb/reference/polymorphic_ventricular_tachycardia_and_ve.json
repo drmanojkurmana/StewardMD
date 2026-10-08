@@ -167,5 +167,496 @@
       "caption": "Overview comparison matrix for polymorphic ventricular tachycardia and ventricular fibrillation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Torsades de Pointes",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/torsades-de-pointes-ventricular-tachycardia"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polymorphic_ventricular_tachycardia_and_ve-diagnostic",
+      "kind": "diagnostic",
+      "title": "ECG thresholds in polymorphic VT and VF",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymorphic VT",
+          "cells": [
+            {
+              "text": "QRS shape changes beat to beat"
+            },
+            {
+              "text": "Often degenerates to VF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsades de pointes",
+          "cells": [
+            {
+              "text": "Polymorphic VT twisting around baseline with long QT"
+            },
+            {
+              "text": "Often pause-dependent onset"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Long QTc, men",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Over 440 ms (Harrison) or over 450 ms (Merck)",
+              "op": ">",
+              "value": 440
+            },
+            {
+              "text": "Congenital or acquired LQTS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long QTc, women",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Over 460 ms (Harrison) or over 470 ms (Merck)",
+              "op": ">",
+              "value": 460
+            },
+            {
+              "text": "Women at higher risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk QTc",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Over 500 ms",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "{{hy:Sharp rise in torsades risk}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short QT syndrome",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "QTc under 360 ms, usually under 300 ms",
+              "op": "<",
+              "value": 360
+            },
+            {
+              "text": "Genetic channelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute MI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10% develop VT degenerating to VF",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Greatest risk in first hour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-MI ICD threshold",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF under 35%",
+              "op": "<",
+              "value": 35
+            },
+            {
+              "text": "Persistent severe LV dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada pattern",
+          "cells": [
+            {
+              "text": "Coved ST elevation in V1 to V2, may need sodium channel blocker challenge"
+            },
+            {
+              "text": "Fever can trigger arrest"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "QTc cutoffs differ between sources: Harrison uses over 440 ms (men) and over 460 ms (women) for congenital LQTS; Merck calls over 450 ms and over 470 ms prolonged."
+    },
+    {
+      "id": "polymorphic_ventricular_tachycardia_and_ve-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of polymorphic VT",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute ischemia or infarction",
+          "cells": [
+            {
+              "text": "First cause to consider; normal QT"
+            },
+            {
+              "text": "ECG, troponin, angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired long QT",
+          "cells": [
+            {
+              "text": "QT-prolonging drugs, low potassium or magnesium, bradycardia"
+            },
+            {
+              "text": "Drug list, electrolytes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital long QT (LQT1 to 3)",
+          "cells": [
+            {
+              "text": "Family history, exercise or auditory triggers"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Coved ST elevation, events in sleep or fever"
+            },
+            {
+              "text": "Sodium channel blocker challenge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholaminergic polymorphic VT",
+          "cells": [
+            {
+              "text": "Bidirectional VT with exercise, normal resting ECG"
+            },
+            {
+              "text": "Exercise test, genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Wall thickness, syncope, family history"
+            },
+            {
+              "text": "Echocardiography or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monomorphic VT",
+          "cells": [
+            {
+              "text": "Uniform QRS from a fixed scar"
+            },
+            {
+              "text": "12-lead ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early repolarization syndrome",
+          "cells": [
+            {
+              "text": "J-point elevation with arrhythmia"
+            },
+            {
+              "text": "Benign J elevation is common; history decides"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polymorphic_ventricular_tachycardia_and_ve-treatment",
+      "kind": "treatment",
+      "title": "Treating polymorphic VT and VF",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Defibrillation and ACLS",
+          "cells": [
+            {
+              "text": "VF or pulseless or unstable polymorphic VT"
+            },
+            {
+              "text": "Unsynchronized shock 120 to 200 J biphasic or 360 J monophasic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Magnesium sulfate",
+          "cells": [
+            {
+              "text": "Torsades de pointes"
+            },
+            {
+              "text": "2 g IV over 1 to 2 min, repeat in 5 to 10 min, then 3 to 20 mg/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop QT-prolonging drugs, correct potassium and magnesium",
+          "cells": [
+            {
+              "text": "Acquired long QT"
+            },
+            {
+              "text": "Avoid all future QT-prolonging drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pacing or isoproterenol",
+          "cells": [
+            {
+              "text": "Pause-dependent torsades"
+            },
+            {
+              "text": "Raises heart rate and shortens QT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent reperfusion and beta blocker",
+          "cells": [
+            {
+              "text": "Polymorphic VT with ischemia"
+            },
+            {
+              "text": "Recurrent VT suggests ongoing ischemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta blocker",
+          "cells": [
+            {
+              "text": "Congenital LQTS, CPVT"
+            },
+            {
+              "text": "Lifelong; avoid QT drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quinidine",
+          "cells": [
+            {
+              "text": "Brugada syndrome with recurrent events"
+            },
+            {
+              "text": "Also treat fever promptly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD",
+          "cells": [
+            {
+              "text": "Survived arrest or high-risk substrate"
+            },
+            {
+              "text": "Post-MI with LVEF under 35%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polymorphic_ventricular_tachycardia_and_ve-dx-mgmt",
+      "title": "Diagnosis and management of polymorphic VT and VF",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Polymorphic VT or VF on monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulseless or unstable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Defibrillate and run ACLS",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG in sinus rhythm; potassium, magnesium; drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Long QT present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "IV magnesium; stop QT drugs; correct electrolytes; pace if pauses",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Signs of acute ischemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Urgent reperfusion and beta blocker",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Evaluate for Brugada, CPVT, HCM; ICD if high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Avoid QT drugs lifelong; test for congenital LQTS if QT stays long",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

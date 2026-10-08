@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for drug induced chorea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_chorea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed medication, over-the-counter and illicit substance history",
+          "cells": [
+            {
+              "text": "Timeline of drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum drug levels (for example phenytoin or lithium)",
+          "cells": [
+            {
+              "text": "Toxic drug levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine toxicology screen",
+          "cells": [
+            {
+              "text": "Stimulants and cocaine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen including glucose and thyroid function",
+          "cells": [
+            {
+              "text": "Metabolic and thyroid causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural or vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_chorea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sydenham chorea and other autoimmune chorea",
+          "cells": [
+            {
+              "text": "Autoimmune cause; not drug-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Huntington disease and phenocopies",
+          "cells": [
+            {
+              "text": "Persistent chorea after drug withdrawal points here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tardive syndromes",
+          "cells": [
+            {
+              "text": "Persistent after withdrawal; tardive dyskinesia is not a primary chorea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_chorea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or dose-reduce the offending agent",
+          "cells": [
+            {
+              "text": "The single most effective step, including levodopa and dopamine agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa-induced peak-dose dyskinesia",
+          "cells": [
+            {
+              "text": "Fractionate and adjust the regimen; add amantadine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tardive dyskinesia",
+          "cells": [
+            {
+              "text": "Withdraw or switch the blocking drug, for example to clozapine; VMAT2 inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing factors",
+          "cells": [
+            {
+              "text": "Correct metabolic or toxic factors such as hyperthyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring after withdrawal",
+          "cells": [
+            {
+              "text": "Watch for resolution over the months after stopping the drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Where severe or not settling; acute chorea resolves, tardive dyskinesia may persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_chorea-dx-mgmt",
+      "title": "Diagnosis and management of drug induced chorea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced chorea: involuntary movements after a dopaminergic or other drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperpyrexia, rigidity, lithium or anticonvulsant toxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drug levels and management of toxicity or neuroleptic malignant syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug history with timeline; drug levels; urine toxicology; glucose; thyroid; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do chorea and drug timing fit, with toxicity and metabolic causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Persistent chorea after withdrawal: consider Huntington disease or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or dose-reduce the offending agent, the most effective step",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fractionate levodopa and add amantadine for peak-dose dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Switch the blocking drug and use a VMAT2 inhibitor for tardive dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct metabolic or toxic factors such as hyperthyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for resolution over months; involve neurology if not settling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute drug chorea usually resolves promptly; tardive dyskinesia may be persistent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

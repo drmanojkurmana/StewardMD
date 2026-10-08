@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for dominant intermediate cmt."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dominant_intermediate_cmt-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Intermediate conduction velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary neuropathy gene panel (DNM2, YARS, INF2)",
+          "cells": [
+            {
+              "text": "Gene-specific variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Neutropenia (DNM2) and cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Glomerulopathy in INF2 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedigree analysis",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dominant_intermediate_cmt-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT X-linked (GJB1)",
+          "cells": [
+            {
+              "text": "Also shows intermediate velocities; not excluded by velocities alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Subacute worsening points to an acquired neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dominant_intermediate_cmt-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Maintains strength and range; prevents contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses, podiatry and orthopaedics",
+          "cells": [
+            {
+              "text": "Foot deformity and drop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and aids",
+          "cells": [
+            {
+              "text": "Hand involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene-specific screening",
+          "cells": [
+            {
+              "text": "Neutropenia and cataract in DNM2; glomerulopathy in INF2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid neurotoxic drugs",
+          "cells": [
+            {
+              "text": "Could aggravate the neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Orthotics, physiotherapy and orthopaedic surgery for correctable deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dominant_intermediate_cmt-dx-mgmt",
+      "title": "Diagnosis and management of Dominant intermediate CMT",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dominant intermediate CMT: slow neuropathy with intermediate velocities",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (proteinuria, neutropenia, or subacute worsening)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Renal review for proteinuria; assess subacute worsening for acquired neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NCS for intermediate velocities; gene panel; FBC; urinalysis and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are intermediate velocities with a DNM2, YARS or INF2 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider X-linked GJB1 CMT, CMT1, CMT2, CIDP or distal motor neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to maintain strength, range and prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "AFOs, podiatry and orthopaedics for foot deformity and drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen gene-specific features: neutropenia, cataract or glomerulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid neurotoxic drugs that could aggravate the neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive, ambulation usually kept; INF2 renal disease can shape outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

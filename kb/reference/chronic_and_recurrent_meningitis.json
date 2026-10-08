@@ -179,5 +179,468 @@
       "caption": "Overview comparison matrix for chronic and recurrent meningitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_and_recurrent_meningitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Definition and CSF clues in chronic meningitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": ">4 with persistent symptoms",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Defines chronic meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF white cells",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": ">5 sustained",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Mononuclear cells usual"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophilic CSF after 3 weeks",
+          "cells": [
+            {
+              "text": "Nocardia, Actinomyces, Brucella, some fungi"
+            },
+            {
+              "text": "Or noninfectious causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic CSF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Coccidioides gives 6 to 20% eosinophils",
+              "range": [
+                6,
+                20
+              ]
+            },
+            {
+              "text": "Also parasites: Angiostrongylus, Gnathostoma, cysticercosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common infective causes",
+          "cells": [
+            {
+              "text": "{{hy:TB first worldwide, then Cryptococcus}}"
+            },
+            {
+              "text": "Signs may be absent in immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large-volume repeated CSF (3 or more)",
+          "cells": [
+            {
+              "text": "Raises fungal and malignant yield"
+            },
+            {
+              "text": "Cryptococcal antigen, cultures, cytology, PCR, mNGS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptomeningeal enhancement",
+          "cells": [
+            {
+              "text": "Follows gyri and basal cisterns"
+            },
+            {
+              "text": "Typical of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pachymeningeal enhancement",
+          "cells": [
+            {
+              "text": "Thick dural enhancement"
+            },
+            {
+              "text": "Lymphoma, IgG4 disease; can be benign after LP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningeal biopsy",
+          "cells": [
+            {
+              "text": "Enhancing region"
+            },
+            {
+              "text": "When CSF is unhelpful and patient deteriorating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Undiagnosed despite work-up",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About one-third"
+            },
+            {
+              "text": "Some need empiric therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_and_recurrent_meningitis-ddx",
+      "kind": "ddx",
+      "title": "Main causes of chronic and recurrent meningitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "Basal meningitis with cranial neuropathies; low glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptococcal meningitis",
+          "cells": [
+            {
+              "text": "Raised pressure; cryptococcal antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosyphilis",
+          "cells": [
+            {
+              "text": "CSF VDRL specific but insensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinomatous or lymphomatous meningitis",
+          "cells": [
+            {
+              "text": "Cytology and flow cytometry on repeated samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosarcoidosis",
+          "cells": [
+            {
+              "text": "Low glucose mimics TB or fungal; FDG-PET for biopsy site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mollaret meningitis (HSV-2)",
+          "cells": [
+            {
+              "text": "{{hy:Recurrent attacks with complete normalisation between}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemical meningitis",
+          "cells": [
+            {
+              "text": "Leaking epidermoid, dermoid or craniopharyngioma; drugs such as NSAIDs, IVIG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune (VKH, Behcet, SLE, IgG4, vasculitis)",
+          "cells": [
+            {
+              "text": "Systemic features and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recent subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Xanthochromia with pleocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_and_recurrent_meningitis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of chronic meningitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antituberculous chemotherapy",
+          "cells": [
+            {
+              "text": "Tuberculous meningitis, or empirical in deteriorating patient"
+            },
+            {
+              "text": "{{hy:Do not wait for slow cultures if deteriorating}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amphotericin then azole",
+          "cells": [
+            {
+              "text": "Cryptococcal and other fungal meningitis"
+            },
+            {
+              "text": "Serial CSF drainage for high pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penicillin",
+          "cells": [
+            {
+              "text": "Neurosyphilis"
+            },
+            {
+              "text": "Consider empirically if serum treponemal positive with unexplained pleocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids or steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Autoimmune and chemical causes"
+            },
+            {
+              "text": "Response does not exclude TB or lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aciclovir-class antiviral",
+          "cells": [
+            {
+              "text": "HSV-2 recurrent meningitis"
+            },
+            {
+              "text": "Treat or suppress attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF diversion or shunting",
+          "cells": [
+            {
+              "text": "Hydrocephalus or raised pressure"
+            },
+            {
+              "text": "Image before LP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause-directed oncology therapy",
+          "cells": [
+            {
+              "text": "Malignant meningitis"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Built from Harrison text only; no doses stated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_and_recurrent_meningitis-dx-mgmt",
+      "title": "Approach to chronic meningitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache, cranial neuropathies or confusion over 4 weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Signs of raised pressure or focal deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Contrast MRI brain and spine before LP",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LP with opening pressure; large-volume CSF studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cause identified (culture, antigen, cytology, PCR)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Cause-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repeat CSF, systemic work-up, PET; consider meningeal biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Deteriorating?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Empirical antituberculous or antifungal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Observe and reassess; steroids only after infection excluded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Safe"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -231,5 +231,510 @@
       "caption": "Diagnostic and clinical overview matrix for irritable bowel syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Irritable Bowel Syndrome",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/irritable-bowel-syndrome-ibs/irritable-bowel-syndrome-ibs",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ibs-diagnostic",
+      "kind": "diagnostic",
+      "title": "Rome criteria, alarm features and limited tests for IBS",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal pain",
+          "unit": "days/week",
+          "cells": [
+            {
+              "text": "At least 1 day/week over 3 months",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "{{hy:Pain is mandatory; painless diarrhoea or constipation does not qualify}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Two or more of",
+          "cells": [
+            {
+              "text": "Related to defecation; change in stool frequency; change in stool form"
+            },
+            {
+              "text": "Rome criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Onset",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "At least 6 months before diagnosis",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Rome timing criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subtype",
+          "cells": [
+            {
+              "text": "IBS-C, IBS-D or IBS-M by stool form"
+            },
+            {
+              "text": "Subtypes often change over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alarm features",
+          "cells": [
+            {
+              "text": "Age >=50, weight loss, rectal bleeding, iron deficiency, nocturnal diarrhoea, family history of colon cancer, IBD or coeliac"
+            },
+            {
+              "text": "Investigate; argue against IBS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Basic tests",
+          "cells": [
+            {
+              "text": "CBC, biochemistry with liver tests, rectal exam with occult blood"
+            },
+            {
+              "text": "All patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diarrhoea-predominant tests",
+          "cells": [
+            {
+              "text": "tTG-IgA with total IgA, faecal calprotectin, CRP or ESR"
+            },
+            {
+              "text": "Exclude coeliac and IBD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Constipation tests",
+          "cells": [
+            {
+              "text": "TSH and calcium"
+            },
+            {
+              "text": "Exclude metabolic causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age over 45 or alarm features"
+            },
+            {
+              "text": "Cancer screening"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ibs-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic IBS",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Bleeding, nocturnal symptoms, weight loss"
+            },
+            {
+              "text": "{{hy:Faecal calprotectin, colonoscopy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Diarrhoea, iron deficiency"
+            },
+            {
+              "text": "tTG-IgA with total IgA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colorectal cancer",
+          "cells": [
+            {
+              "text": "Age, bleeding, change in habit, anaemia"
+            },
+            {
+              "text": "Colonoscopy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microscopic colitis",
+          "cells": [
+            {
+              "text": "Watery diarrhoea, normal-looking mucosa"
+            },
+            {
+              "text": "Colonic biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile acid diarrhoea or bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Chronic diarrhoea, bloating"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactase deficiency",
+          "cells": [
+            {
+              "text": "Symptoms after dairy"
+            },
+            {
+              "text": "Dietary trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid disease or hypercalcaemia",
+          "cells": [
+            {
+              "text": "Constipation or diarrhoea with systemic features"
+            },
+            {
+              "text": "TSH, calcium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug-induced constipation or laxative misuse",
+          "cells": [
+            {
+              "text": "Medication history"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Tests for bile acid diarrhoea and bacterial overgrowth are not stated in the sources opened."
+    },
+    {
+      "id": "ibs-treatment",
+      "kind": "treatment",
+      "title": "Treatment of irritable bowel syndrome",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Explanation, diet and low-FODMAP trial",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "Smaller slower meals, limit caffeine, stepwise reintroduction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Soluble fibre (psyllium)",
+          "cells": [
+            {
+              "text": "Constipation"
+            },
+            {
+              "text": "Titrate; excess causes bloating"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antispasmodic or peppermint oil",
+          "cells": [
+            {
+              "text": "Pain, all subtypes"
+            },
+            {
+              "text": "Dicyclomine or hyoscine; low-quality evidence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loperamide",
+          "cells": [
+            {
+              "text": "IBS-D"
+            },
+            {
+              "text": "Titrate up, avoid constipation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifaximin",
+          "cells": [
+            {
+              "text": "IBS-D with bloating"
+            },
+            {
+              "text": "Improves bloating, pain and loose stools"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eluxadoline or alosetron",
+          "cells": [
+            {
+              "text": "Severe refractory IBS-D"
+            },
+            {
+              "text": "Eluxadoline not after cholecystectomy or with heavy alcohol; alosetron only in selected women"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linaclotide, lubiprostone, plecanatide or PEG",
+          "cells": [
+            {
+              "text": "IBS-C"
+            },
+            {
+              "text": "Secretagogues or osmotic laxative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose tricyclic (nortriptyline, desipramine)",
+          "cells": [
+            {
+              "text": "Persistent pain"
+            },
+            {
+              "text": "Start very low"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CBT or gut-directed hypnotherapy",
+          "cells": [
+            {
+              "text": "Ongoing symptoms"
+            },
+            {
+              "text": "Psychological therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SSRI",
+          "cells": [
+            {
+              "text": "Not as primary therapy"
+            },
+            {
+              "text": "May worsen diarrhoea"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Drug doses are not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ibs-dx-mgmt",
+      "title": "Diagnosis and management of irritable bowel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent abdominal pain with altered bowel habit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Alarm features present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate: colonoscopy and targeted tests",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Rome criteria met?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider other functional or organic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Limited tests: CBC, biochemistry, tests by subtype",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Tests normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Predominant subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "IBS-D: diet, loperamide, rifaximin, TCA",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "IBS-C: fibre, PEG, secretagogue",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Diarrhoea"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Constipation"
+        }
+      ]
+    }
+  ]
 }

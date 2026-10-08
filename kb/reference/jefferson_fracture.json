@@ -145,5 +145,316 @@
       "caption": "Overview comparison matrix for jefferson fracture (c1 burst)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jefferson_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Open-mouth and lateral cervical radiographs",
+          "cells": [
+            {
+              "text": "Ring fracture and lateral mass displacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the cervical spine",
+          "cells": [
+            {
+              "text": "Ring fracture and lateral mass displacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rule of Spence",
+          "cells": [
+            {
+              "text": "Lateral mass overhang threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Transverse atlantal ligament integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Vertebral artery injury when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jefferson_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Odontoid (dens) fracture",
+          "cells": [
+            {
+              "text": "Dens rather than the atlas ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital condyle fracture",
+          "cells": [
+            {
+              "text": "Occipital condyle rather than the atlas ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hangman (C2) fracture",
+          "cells": [
+            {
+              "text": "Pars fracture of the axis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jefferson_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stability",
+          "cells": [
+            {
+              "text": "Transverse atlantal ligament integrity determines treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stable fracture",
+          "cells": [
+            {
+              "text": "Rigid cervical collar or orthosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unstable fracture",
+          "cells": [
+            {
+              "text": "Halo vest, or surgical atlantoaxial fixation and fusion when the ligament is incompetent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral artery injury",
+          "cells": [
+            {
+              "text": "CT or MR angiography and antithrombotic therapy as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early care",
+          "cells": [
+            {
+              "text": "Analgesia and strict spinal precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Spinal surgery referral and imaging to confirm bony union"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jefferson_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Jefferson fracture (C1 burst)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neck pain after axial load, such as a dive or a blow to the vertex",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ligament rupture, lateral mass overhang, vertebral artery injury or neurological deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Spinal precautions; CT angiography for vertebral artery; spinal surgery referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Open-mouth and lateral radiographs, CT, rule of Spence, MRI of transverse ligament",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Transverse atlantal ligament intact with stable fracture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Unstable injury: plan halo or surgical fixation, then reimage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rigid cervical collar or orthosis for stable fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Halo vest or atlantoaxial fusion when ligament incompetent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and strict spinal precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antithrombotic therapy if vertebral artery injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow-up imaging to confirm bony union",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Union confirmed on follow-up; stability guides long-term care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -160,5 +160,343 @@
       "caption": "Overview comparison matrix for doege-potter syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrine oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "doege_potter_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Timed sample during spontaneous hypoglycaemia",
+          "cells": [
+            {
+              "text": "Suppressed insulin and C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGF-2 and IGF-1 with IGF-2 to IGF-1 ratio",
+          "cells": [
+            {
+              "text": "The ratio identifies big IGF-2 secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone and cortisol response during hypoglycaemia",
+          "cells": [
+            {
+              "text": "Counter-regulatory hormone response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of chest and abdomen",
+          "cells": [
+            {
+              "text": "Localises the solitary fibrous tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with nuclear STAT6 immunostaining",
+          "cells": [
+            {
+              "text": "Nuclear STAT6 with NAB2-STAT6 fusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "doege_potter_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulinoma",
+          "cells": [
+            {
+              "text": "Insulin and C-peptide are suppressed, not raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous insulin or sulfonylurea use",
+          "cells": [
+            {
+              "text": "Excluded by sulfonylurea screen and insulin antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other IGF-2 secreting tumours",
+          "cells": [
+            {
+              "text": "Histology and STAT6 staining separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "doege_potter_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour-directed treatment",
+          "cells": [
+            {
+              "text": "Treat the tumour, not the hypoglycaemia itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Primary and usually curative for localised resectable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia after resection",
+          "cells": [
+            {
+              "text": "Evaluate for residual or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Locally advanced or borderline disease",
+          "cells": [
+            {
+              "text": "Assess R0 feasibility with a sarcoma team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unresectable or metastatic disease",
+          "cells": [
+            {
+              "text": "Resistant to anthracyclines; tyrosine kinase inhibitors best evidenced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for recurrence",
+          "cells": [
+            {
+              "text": "Mainstay whenever R0 resection is achievable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Not first-line; individualised by the sarcoma team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interim hypoglycaemia care",
+          "cells": [
+            {
+              "text": "Endocrine management with glucocorticoids while on systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term imaging",
+          "cells": [
+            {
+              "text": "Follow-up intensity guided by tumour size, mitotic rate and retroperitoneal site"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "doege_potter_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Doege-Potter Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Doege-Potter syndrome: recurrent hypoglycaemia with a large thoracic tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe neuroglycopenia, enlarging mass, recurrence after resection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma team review for an enlarging tumour or recurrent hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Timed hypoglycaemia sample; IGF-2 and IGF-1 ratio; chest and abdomen imaging; STAT6",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are insulin and C-peptide suppressed with a raised IGF-2 to IGF-1 ratio?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider insulinoma, exogenous insulin or sulfonylurea use, or adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection, the primary and usually curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "If hypoglycaemia persists after resection, evaluate for residual or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multi-targeted tyrosine kinase inhibitors for unresectable or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery remains the mainstay for resectable recurrence or metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term imaging follow-up, especially for retroperitoneal tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign resection usually cures; malignant or recurrent tumours carry worse prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

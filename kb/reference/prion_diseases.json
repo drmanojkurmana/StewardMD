@@ -162,5 +162,409 @@
       "caption": "Overview comparison matrix for prion diseases (cjd)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, CJD Diagnostic Criteria",
+      "kind": "web",
+      "url": "https://www.cdc.gov/creutzfeldt-jakob/hcp/clinical-overview/diagnosis.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 371-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prion_diseases-diagnostic",
+      "kind": "diagnostic",
+      "title": "CDC diagnostic criteria for sporadic CJD",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Supporting test"
+      ],
+      "rows": [
+        {
+          "parameter": "Definite",
+          "cells": [
+            {
+              "text": "Neuropathology or immunodiagnosis"
+            },
+            {
+              "text": "Protease-resistant PrP on Western blot, immunocytochemistry, or scrapie-associated fibrils"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Probable, route 1",
+          "cells": [
+            {
+              "text": "Neuropsychiatric disorder"
+            },
+            {
+              "text": "{{hy:Positive RT-QuIC in CSF or other tissue}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Probable, route 2",
+          "cells": [
+            {
+              "text": "Rapidly progressive dementia plus 2 of 4: myoclonus, visual or cerebellar signs, pyramidal or extrapyramidal signs, akinetic mutism"
+            },
+            {
+              "text": "At least 1 of EEG periodic sharp waves, 14-3-3, or typical MRI; no alternative diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "14-3-3 protein",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Counts only if illness under 2 years",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Supports probable CJD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI DWI or FLAIR",
+          "cells": [
+            {
+              "text": "High signal in caudate or putamen, or in 2 or more cortical regions"
+            },
+            {
+              "text": "Cortical ribboning"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Possible",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Progressive dementia plus 2 of 4 features, negative tests, duration under 2 years",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "No alternative diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Course",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Death usually within 1 year of first symptoms",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Uniformly fatal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prion_diseases-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic CJD",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune or paraneoplastic encephalitis",
+          "cells": [
+            {
+              "text": "Treatable; seizures, psychiatric onset"
+            },
+            {
+              "text": "Neural antibodies in serum and CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hashimoto encephalopathy",
+          "cells": [
+            {
+              "text": "Raised antithyroid antibodies; steroid responsive"
+            },
+            {
+              "text": "Anti-TPO antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS vasculitis",
+          "cells": [
+            {
+              "text": "Strokes, headache, CSF inflammation"
+            },
+            {
+              "text": "Angiography, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS lymphoma",
+          "cells": [
+            {
+              "text": "Enhancing mass lesions"
+            },
+            {
+              "text": "MRI, CSF cytology, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral or bacterial encephalitis",
+          "cells": [
+            {
+              "text": "Fever, CSF pleocytosis"
+            },
+            {
+              "text": "CSF PCR and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alzheimer disease, DLB or CBD",
+          "cells": [
+            {
+              "text": "Slower course; DLB and CBD with movement signs can mimic"
+            },
+            {
+              "text": "Clinical course, RT-QuIC negative"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prolonged seizures",
+          "cells": [
+            {
+              "text": "Can mimic CJD on MRI"
+            },
+            {
+              "text": "EEG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prion_diseases-treatment",
+      "kind": "treatment",
+      "title": "Managing prion disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude treatable mimics first",
+          "cells": [
+            {
+              "text": "Every rapidly progressive dementia"
+            },
+            {
+              "text": "Autoimmune, infectious, vascular, neoplastic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonazepam, levetiracetam or valproate",
+          "cells": [
+            {
+              "text": "Myoclonus"
+            },
+            {
+              "text": "Symptomatic only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive nursing care",
+          "cells": [
+            {
+              "text": "Immobility, dysphagia"
+            },
+            {
+              "text": "Aspiration, skin and nutrition care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early palliative care and advance planning",
+          "cells": [
+            {
+              "text": "After diagnosis"
+            },
+            {
+              "text": "No disease-modifying therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control and notification",
+          "cells": [
+            {
+              "text": "All suspected cases"
+            },
+            {
+              "text": "Special instrument decontamination; notify public health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Familial prion disease"
+            },
+            {
+              "text": "PRNP testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prion_diseases-dx-mgmt",
+      "title": "Diagnosis and management of suspected CJD",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly progressive dementia, often with myoclonus or ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "MRI with DWI, EEG, CSF studies, autoimmune and infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Treatable mimic found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the alternative cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "RT-QuIC positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Probable CJD: supportive and palliative care, notify",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "2 of 4 features plus typical EEG, MRI or 14-3-3?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Possible CJD if under 2 years; reassess",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

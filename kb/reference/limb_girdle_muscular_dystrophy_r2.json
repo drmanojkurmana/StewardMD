@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r2 (dysferlin-related)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Characteristically very high, especially early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI of thighs and calves",
+          "cells": [
+            {
+              "text": "Posterior-compartment predominant pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with dysferlin immunoblot",
+          "cells": [
+            {
+              "text": "Dysferlin reduced or absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monocyte dysferlin assay by flow cytometry",
+          "cells": [
+            {
+              "text": "Accessible screening test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DYSF sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Confirms a myopathic pattern; excludes neurogenic mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic inflammatory myopathy (polymyositis)",
+          "cells": [
+            {
+              "text": "Inflammatory biopsy and very high CK; genetic confirmation prevents wrong steroid use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Miyoshi distal myopathy",
+          "cells": [
+            {
+              "text": "Allelic DYSF phenotype with distal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anoctaminopathy (LGMD R12)",
+          "cells": [
+            {
+              "text": "Calf-predominant weakness with high CK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoglycanopathies (LGMD R3 to R6)",
+          "cells": [
+            {
+              "text": "More prominent cardiac and childhood involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve range of movement; orthoses and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid strenuous eccentric exercise",
+          "cells": [
+            {
+              "text": "Provokes sarcolemmal microtears; low-impact activity and weight management encouraged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unneeded immunosuppression",
+          "cells": [
+            {
+              "text": "Corticosteroids are often given for raised CK without genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Erect and supine spirometry; non-invasive ventilation if respiratory muscle weakness emerges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "ECG and echocardiography; cardiac involvement uncommon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist neuromuscular care",
+          "cells": [
+            {
+              "text": "Orthopaedic and spinal input for contractures and posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing for relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r2-dx-mgmt",
+      "title": "Diagnosis and management of Limb-girdle muscular dystrophy R2 (dysferlin-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Calf-predominant or pelvic weakness after athletic youth, with very high CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive loss of tiptoe walking, respiratory symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory assessment and genetic confirmation before any immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, muscle MRI of thighs and calves, biopsy with dysferlin, DYSF sequencing, EMG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is reduced or absent dysferlin with biallelic DYSF variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polymyositis, Miyoshi myopathy or LGMD R12 (ANO5)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to preserve movement; orthoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid strenuous eccentric exercise; low-impact activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory surveillance with non-invasive ventilation if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Baseline ECG and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing for relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable and generally slow; many remain ambulant for long periods after onset",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

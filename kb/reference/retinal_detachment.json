@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for retinal detachment."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinal_detachment-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated indirect ophthalmoscopy with scleral indentation",
+          "cells": [
+            {
+              "text": "Locates retinal breaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Pigment cells in the anterior vitreous (tobacco dust)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Detachment when the view is obscured by haemorrhage or cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular status, which sets the visual prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinal_detachment-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Posterior vitreous detachment without tear",
+          "cells": [
+            {
+              "text": "Floaters and flashes without a break; excluded by dilated peripheral examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreous haemorrhage",
+          "cells": [
+            {
+              "text": "Obscures the view, so B-scan ultrasonography is used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine with visual aura",
+          "cells": [
+            {
+              "text": "Pitfall: symptoms attributed to migraine without excluding a tear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinal_detachment-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Pneumatic retinopexy, scleral buckling or pars plana vitrectomy, with laser or cryotherapy sealing breaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing",
+          "cells": [
+            {
+              "text": "Urgent surgery while the macula is still attached, as macular status determines visual prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tractional detachment",
+          "cells": [
+            {
+              "text": "Vitrectomy with treatment of the underlying retinopathy, such as proliferative diabetic retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exudative detachment",
+          "cells": [
+            {
+              "text": "Treat the underlying inflammatory, vascular or neoplastic cause rather than primary surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Laser or cryotherapy to retinal tears and high-risk lesions such as lattice degeneration, including the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative care",
+          "cells": [
+            {
+              "text": "Posturing with intraocular gas tamponade; avoid air travel while gas remains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fellow-eye monitoring",
+          "cells": [
+            {
+              "text": "Monitor the fellow eye and educate on warning symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinal_detachment-dx-mgmt",
+      "title": "Diagnosis and management of Retinal detachment",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden floaters, flashes and a curtain or shadow spreading across vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (visual field defect, shadow nearing macula, fellow-eye symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical referral; a macula-on detachment is a surgical emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated indirect ophthalmoscopy with scleral indentation; OCT for macular status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a retinal break or detachment found on dilated examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vitreous haemorrhage, posterior vitreous detachment or migraine; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical repair: pneumatic retinopexy, scleral buckling or vitrectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat tractional and exudative types by their specific causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser or cryotherapy to retinal tears and high-risk lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Post-operative gas posturing; monitor the fellow eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reattachment achieved in most cases; visual outcome depends on macular status and timing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

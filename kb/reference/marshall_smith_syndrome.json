@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for marshall-smith syndrome (nfix)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marshall_smith_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bone-age radiograph and skeletal survey",
+          "cells": [
+            {
+              "text": "Advanced maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway evaluation including endoscopy",
+          "cells": [
+            {
+              "text": "Laryngomalacia and choanal patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep and respiratory assessment",
+          "cells": [
+            {
+              "text": "Sleep-disordered breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and developmental evaluation",
+          "cells": [
+            {
+              "text": "Developmental impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted NFIX sequencing, gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "NFIX variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marshall_smith_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malan (NFIX-related overgrowth) syndrome",
+          "cells": [
+            {
+              "text": "Also NFIX-related, with an overgrowth phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marshall syndrome (COL11A1-related)",
+          "cells": [
+            {
+              "text": "A distinct syndrome, COL11A1-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other syndromes with advanced bone age",
+          "cells": [
+            {
+              "text": "Advanced bone age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marshall_smith_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care centred on the airway",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper-airway management",
+          "cells": [
+            {
+              "text": "Choanal atresia, laryngomalacia and glossoptosis: choanal surgery, CPAP or tracheostomy where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Treatment of recurrent respiratory infections; surveillance for sleep-disordered breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Failure to thrive; gastrostomy feeding where oral intake is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early therapies for severe developmental impairment and hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic monitoring",
+          "cells": [
+            {
+              "text": "Kyphoscoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo; parental testing; recurrence risk generally low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "ENT, respiratory, genetics and developmental paediatrics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marshall_smith_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Marshall-Smith syndrome (NFIX)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with advanced bone age, developmental impairment and hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Upper airway obstruction, respiratory failure, apnoea or recurrent aspiration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure the airway: choanal surgery, CPAP or tracheostomy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bone-age radiograph, airway endoscopy, sleep assessment, brain MRI, NFIX testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an NFIX variant confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Malan, Marshall or Sotos syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Proactive upper-airway management for choanal atresia, laryngomalacia and glossoptosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Respiratory support and treatment of recurrent respiratory infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gastrostomy feeding where oral intake is inadequate for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early developmental therapies; orthopaedic monitoring of kyphoscoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-specific therapy; genetic counselling with parental testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

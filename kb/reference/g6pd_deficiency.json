@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for glucose-6-phosphate dehydrogenase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "g6pd_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative G6PD enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity; repeat after recovery if measured in crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocyte response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Bite cells, blister cells and Heinz body preparation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "Bilirubin, lactate dehydrogenase and haptoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Haemoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin (Coombs) test",
+          "cells": [
+            {
+              "text": "Helps exclude immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "g6pd_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Excluded by direct antiglobulin (Coombs) test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal jaundice of other cause",
+          "cells": [
+            {
+              "text": "ABO or Rh incompatibility, or sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "g6pd_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict avoidance of oxidant triggers",
+          "cells": [
+            {
+              "text": "Fava (broad) beans and oxidant drugs such as primaquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt treatment of intercurrent infections",
+          "cells": [
+            {
+              "text": "Common precipitants of acute haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care in crisis",
+          "cells": [
+            {
+              "text": "Hydration; red-cell transfusion for severe anaemia; most episodes are self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal jaundice management",
+          "cells": [
+            {
+              "text": "Phototherapy and exchange transfusion where needed, to prevent kernicterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen before oxidant drugs",
+          "cells": [
+            {
+              "text": "Check enzyme activity before prescribing; repeat after recovery if measured in a crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; testing of at-risk female carriers and relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "g6pd_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Glucose-6-Phosphate Dehydrogenase Deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected G6PD deficiency: haemolysis after an oxidant trigger or neonatal jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling haemoglobin, haemoglobinuria with AKI, severe jaundice)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent phototherapy and exchange transfusion for risk of kernicterus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "G6PD enzyme assay, blood film, haemolysis markers and direct antiglobulin test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does G6PD activity confirm deficiency, with immune haemolysis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autoimmune haemolysis, spherocytosis or other red cell enzyme defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance of oxidant triggers such as fava beans and oxidant drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt treatment of intercurrent infections, a common precipitant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care in crisis: hydration and transfusion for severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for this X-linked disorder, including carrier testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most lead normal lives with trigger avoidance; haemolysis is usually self-limiting",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

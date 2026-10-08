@@ -146,5 +146,276 @@
       "caption": "Overview comparison matrix for gestational diabetes mellitus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gestational_diabetes_mellitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral glucose tolerance test with fasting and post-load values",
+          "cells": [
+            {
+              "text": "Fasting and post-load glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home capillary glucose monitoring",
+          "cells": [
+            {
+              "text": "Fasting and postprandial glucose to guide therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HbA1c when measured early",
+          "cells": [
+            {
+              "text": "Helps distinguish pre-existing diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fetal growth ultrasound and amniotic fluid assessment",
+          "cells": [
+            {
+              "text": "Macrosomia and polyhydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum oral glucose tolerance test",
+          "cells": [
+            {
+              "text": "Reclassifies glucose status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gestational_diabetes_mellitus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Medical nutrition therapy",
+          "cells": [
+            {
+              "text": "First-line, with capillary glucose self-monitoring and physical activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin",
+          "cells": [
+            {
+              "text": "Preferred pharmacotherapy when glycaemic targets are unmet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "Alternative pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal surveillance",
+          "cells": [
+            {
+              "text": "Serial growth ultrasound and amniotic fluid assessment for macrosomia and polyhydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery planning",
+          "cells": [
+            {
+              "text": "Timing and mode, with macrosomia and shoulder dystocia risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal care",
+          "cells": [
+            {
+              "text": "Early feeding and glucose monitoring to anticipate hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum testing",
+          "cells": [
+            {
+              "text": "Oral glucose tolerance test to reclassify glucose status and counsel on type 2 risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gestational_diabetes_mellitus-dx-mgmt",
+      "title": "Diagnosis and management of Gestational diabetes mellitus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gestational diabetes: glucose intolerance first detected in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (macrosomia or polyhydramnios, very poor control, pre-eclampsia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review for macrosomia or non-reassuring fetal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oral glucose tolerance test, home glucose monitoring and HbA1c if measured early",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are glucose values above threshold on the oral glucose tolerance test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pre-existing diabetes, MODY or stress-induced hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Medical nutrition therapy, capillary glucose self-monitoring and physical activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin as the preferred drug if targets are unmet; metformin as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial growth ultrasound and amniotic fluid assessment in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postpartum oral glucose tolerance test to reclassify glucose status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Well controlled, it has an excellent outcome, approaching the non-diabetic population",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -155,5 +155,352 @@
       "caption": "Overview comparison matrix for familial chylomicronaemia syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and lipidology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_chylomicronaemia_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid profile and refrigerator test",
+          "cells": [
+            {
+              "text": "Grossly raised triglycerides; creamy chylomicron layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic panel (LPL, APOC2, APOA5, GPIHBP1, LMF1)",
+          "cells": [
+            {
+              "text": "Biallelic pathogenic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-heparin lipoprotein lipase activity and mass",
+          "cells": [
+            {
+              "text": "Absent or markedly reduced function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In vitro apoC-II activation study",
+          "cells": [
+            {
+              "text": "Where APOC2 deficiency is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum lipase and amylase with pancreatic imaging",
+          "cells": [
+            {
+              "text": "Suspected pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, HbA1c, thyroid function, renal profile and urinalysis",
+          "cells": [
+            {
+              "text": "Secondary contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GPIHBP1 autoantibodies",
+          "cells": [
+            {
+              "text": "Where an acquired phenotype is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_chylomicronaemia_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multifactorial (polygenic) chylomicronaemia",
+          "cells": [
+            {
+              "text": "Milder; secondary aggravation by alcohol, uncontrolled diabetes or oestrogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced hypertriglyceridaemia",
+          "cells": [
+            {
+              "text": "Retinoids, corticosteroids, protease inhibitors and second-generation antipsychotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen storage disease type I",
+          "cells": [
+            {
+              "text": "Presents with hypertriglyceridaemia in childhood"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_chylomicronaemia_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong severe dietary fat restriction",
+          "cells": [
+            {
+              "text": "Cornerstone; medium-chain triglycerides bypass chylomicron formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin and essential fatty acid supplementation",
+          "cells": [
+            {
+              "text": "Offsets the restricted diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid alcohol and oestrogen-containing agents",
+          "cells": [
+            {
+              "text": "Optimise any coexisting diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apolipoprotein C-III-directed therapy",
+          "cells": [
+            {
+              "text": "Fibrates, statins and omega-3 are largely ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis management",
+          "cells": [
+            {
+              "text": "Fasting, fluid resuscitation and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular fasting triglyceride monitoring",
+          "cells": [
+            {
+              "text": "Reinforces dietary adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist lipid clinic with dietitian",
+          "cells": [
+            {
+              "text": "Dedicated metabolic care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_chylomicronaemia_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Familial chylomicronaemia syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Milky serum with very high fasting triglycerides, often with pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe or recurrent pancreatitis, infant failure to thrive, inflammation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Inpatient acute pancreatitis care: fasting, fluids and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting lipids and refrigerator test; LPL pathway gene panel; post-heparin LPL",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic LPL-pathway variant with lipoprotein lipase defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider multifactorial chylomicronaemia or drug-induced hypertriglyceridaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong severe dietary fat restriction with medium-chain triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fat-soluble vitamin and essential fatty acid supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid alcohol and oestrogen; optimise diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Apolipoprotein C-III-directed therapy; conventional drugs largely ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With strict fat restriction, many avoid recurrent pancreatitis and live normal lives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

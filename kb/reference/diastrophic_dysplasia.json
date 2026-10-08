@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for diastrophic dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diastrophic_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Short tubular bones, epiphyseal change and spinal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC26A2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic SLC26A2 loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging",
+          "cells": [
+            {
+              "text": "Kyphosis and instability, particularly before anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial spinal imaging",
+          "cells": [
+            {
+              "text": "Progressive scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip imaging",
+          "cells": [
+            {
+              "text": "Dysplasia and dislocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diastrophic_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy, orthotics and orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Joint contractures and hip and knee deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scoliosis management",
+          "cells": [
+            {
+              "text": "Serial imaging, bracing and corrective spinal surgery where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine management",
+          "cells": [
+            {
+              "text": "Kyphosis and instability, especially before any anaesthetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and anaesthesia planning",
+          "cells": [
+            {
+              "text": "Small airway and spinal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cleft palate and external ear",
+          "cells": [
+            {
+              "text": "Repair cleft palate; monitor ear swelling that later calcifies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and joint preservation",
+          "cells": [
+            {
+              "text": "Premature osteoarthritis; joint replacement in later life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SLC26A2 variant; skeletal dysplasia team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diastrophic_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Diastrophic dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diastrophic dysplasia: short limbs, joint contractures, hitch-hiker thumb",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cervical kyphosis or instability, rapid scoliosis, airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal and airway assessment before anaesthesia to protect the cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; SLC26A2 testing; cervical spine imaging; serial spinal and hip imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an SLC26A2 variant found with the typical skeletal survey?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider arthrogryposis, Larsen syndrome or spondyloepiphyseal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, orthotics and orthopaedic correction of hip and knee deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial spinal imaging, bracing and corrective surgery for scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess cervical kyphosis and instability before any anaesthetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Plan anaesthesia for a small airway and spinal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive SLC26A2 and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Intelligence and lifespan usually normal; disability often severe",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

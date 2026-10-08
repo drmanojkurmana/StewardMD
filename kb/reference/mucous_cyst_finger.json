@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for mucous cyst of the finger."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mucous_cyst_finger-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from site, translucency and nail groove",
+          "cells": [
+            {
+              "text": "Dome-shaped translucent swelling on the dorsum of the finger; groove or ridge in the nail plate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs of the digit",
+          "cells": [
+            {
+              "text": "Distal interphalangeal osteoarthritis and osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a cystic lesion and its joint connection when uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Reserved for atypical or recurrent lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside transillumination",
+          "cells": [
+            {
+              "text": "Translucency of the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overlying skin assessment",
+          "cells": [
+            {
+              "text": "Thin or ulcerated skin that needs flap cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological sampling",
+          "cells": [
+            {
+              "text": "Discharge or suspected secondary infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucous_cyst_finger-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heberden node of distal interphalangeal osteoarthritis",
+          "cells": [
+            {
+              "text": "Mucous cyst is translucent, tracks dorsally toward the nail fold and arises from the DIP joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dorsal wrist or digital ganglion arising elsewhere",
+          "cells": [
+            {
+              "text": "Mucous cyst arises from the distal interphalangeal joint, with associated osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual or periungual tumour",
+          "cells": [
+            {
+              "text": "Marked nail plate destruction raises concern for a subungual tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucous_cyst_finger-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic cysts with intact overlying skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with osteophyte debridement",
+          "cells": [
+            {
+              "text": "Excision with ligation of the joint pedicle gives the most durable result"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local rotation or advancement flap",
+          "cells": [
+            {
+              "text": "Where the overlying skin is attenuated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid repeated needle aspiration or sclerotherapy",
+          "cells": [
+            {
+              "text": "Frequently recurs and risks seeding septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care of DIP osteoarthritis",
+          "cells": [
+            {
+              "text": "Analgesia and splinting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin monitoring",
+          "cells": [
+            {
+              "text": "Prompt review if the cyst ruptures, given risk of septic arthritis or osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery referral",
+          "cells": [
+            {
+              "text": "Nail deformity, persistent pain or threatened skin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mucous_cyst_finger-dx-mgmt",
+      "title": "Diagnosis and management of Mucous cyst of the finger",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dome-shaped translucent swelling on finger dorsum near the DIP joint, older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (skin breakdown, discharge, cellulitis or rapidly enlarging solid mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for septic arthritis or osteomyelitis of the DIP joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; radiographs for DIP osteoarthritis; ultrasound if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical mucous cyst confirmed, with ultrasound joint connection if uncertain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "MRI for atypical or recurrent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation for small, asymptomatic cysts with intact skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision with osteophyte debridement and joint pedicle ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local rotation or advancement flap if skin is attenuated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid repeated needle aspiration or sclerotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to hand surgery for nail deformity, pain or threatened skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excision gives the most durable result; aspiration often recurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

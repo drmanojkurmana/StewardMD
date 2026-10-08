@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for difficult airway."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "difficult_airway-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bedside airway assessment scores and examination",
+          "cells": [
+            {
+              "text": "Anatomical factors that predict difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasendoscopy or flexible airway endoscopy",
+          "cells": [
+            {
+              "text": "Obstructing lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of airway anatomy and masses",
+          "cells": [
+            {
+              "text": "Airway anatomy and masses, when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capnography",
+          "cells": [
+            {
+              "text": "Confirms tracheal placement and ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Previous anaesthetic records and airway alerts",
+          "cells": [
+            {
+              "text": "Difficulty known from past anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "difficult_airway-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oesophageal intubation",
+          "cells": [
+            {
+              "text": "Mistaken for a difficult airway; capnography confirms tracheal placement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway oedema from angioedema or infection",
+          "cells": [
+            {
+              "text": "Rapidly worsening obstruction from oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway foreign body or obstructing tumour",
+          "cells": [
+            {
+              "text": "Obstructing lesion seen on endoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "difficult_airway-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygenation",
+          "cells": [
+            {
+              "text": "Preoxygenation and apnoeic oxygenation to extend safe apnoea time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured, time-limited plan",
+          "cells": [
+            {
+              "text": "Pre-defined backup steps and failure criteria before induction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Awake tracheal intubation",
+          "cells": [
+            {
+              "text": "For anticipated difficulty, with flexible endoscopy while ventilating spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Failed intubation",
+          "cells": [
+            {
+              "text": "Face mask or supraglottic device to oxygenate; avoid repeated laryngoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Can't intubate, can't oxygenate",
+          "cells": [
+            {
+              "text": "Immediate front-of-neck access by cricothyroidotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm placement",
+          "cells": [
+            {
+              "text": "Continuous capnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation and alert",
+          "cells": [
+            {
+              "text": "Airway alert; early involvement of senior anaesthetic and surgical support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "difficult_airway-dx-mgmt",
+      "title": "Diagnosis and management of Difficult airway",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected difficult airway: anticipated or unexpected difficulty with intubation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (can't intubate can't oxygenate, desaturation, rapid obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Declare CICO and perform immediate front-of-neck access by cricothyroidotomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Airway assessment scores; nasendoscopy; imaging; past anaesthetic records",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the difficulty anticipated from assessment or prior records?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Unanticipated: prioritise oxygenation with a mask or supraglottic device",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Preoxygenate and use apnoeic oxygenation to extend safe apnoea time",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured, time-limited airway plan with backup steps before induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Awake tracheal intubation with flexible endoscopy for anticipated difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prioritise oxygenation with mask or supraglottic device over repeated laryngoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Confirm placement with continuous capnography; document and alert",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most are managed safely; delayed rescue oxygenation can cause brain injury or death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

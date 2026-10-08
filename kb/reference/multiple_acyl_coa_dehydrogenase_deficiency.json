@@ -155,5 +155,341 @@
       "caption": "Overview comparison matrix for multiple acyl-coa dehydrogenase deficiency (glutaric aciduria type ii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multiple_acyl_coa_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Elevation of multiple chain-length species together"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Glutaric and dicarboxylic aciduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas, glucose, ketones and ammonia during crises",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia, acidosis and hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Suspected lipid-storage myopathy or rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ETFA, ETFB and ETFDH gene sequencing",
+          "cells": [
+            {
+              "text": "Identifies the genetic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound in neonates",
+          "cells": [
+            {
+              "text": "Cystic dysplastic kidneys in the severe form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of riboflavin",
+          "cells": [
+            {
+              "text": "Clinical and biochemical response; many late-onset patients respond markedly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_acyl_coa_dehydrogenase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated fatty acid oxidation disorders (MCAD, VLCAD, LCHAD)",
+          "cells": [
+            {
+              "text": "Acylcarnitine elevations span short, medium and long chains in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated glutaric aciduria type I",
+          "cells": [
+            {
+              "text": "Glutaric acid is raised in both, but this disorder also shows a broad range of dicarboxylic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory or metabolic myopathies (late-onset disease)",
+          "cells": [
+            {
+              "text": "Late-onset form often presents as a lipid-storage myopathy with exercise intolerance and rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multiple_acyl_coa_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trial of riboflavin",
+          "cells": [
+            {
+              "text": "Many late-onset patients respond markedly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coenzyme Q10 and L-carnitine",
+          "cells": [
+            {
+              "text": "Supplementation alongside the riboflavin trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary management",
+          "cells": [
+            {
+              "text": "Avoid fasting; low-fat, low-protein, high-carbohydrate diet with frequent feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency regimen",
+          "cells": [
+            {
+              "text": "Intravenous glucose during intercurrent illness or catabolic stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute crisis management",
+          "cells": [
+            {
+              "text": "Correct hypoketotic hypoglycaemia, acidosis and hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Acylcarnitine and organic acid profiles, growth; creatine kinase where myopathy or rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary metabolic care",
+          "cells": [
+            {
+              "text": "With a specialist dietitian"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening and antenatal or newborn testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multiple_acyl_coa_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypoketotic hypoglycaemia, acidosis or exercise myopathy with raised glutaric acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperammonaemia, cardiomyopathy, rhabdomyolysis, fasting crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Acute crisis care: intravenous glucose, correct acidosis and hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile, urine organic acids, gas, glucose, ketones, ammonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multiple chain-length acylcarnitine elevations with glutaric aciduria confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated fatty acid oxidation disorders or glutaric aciduria type I",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial of riboflavin with coenzyme Q10 and L-carnitine supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid fasting; low-fat, low-protein, high-carbohydrate diet with frequent feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency intravenous glucose regimen during illness or catabolic stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor acylcarnitine and organic acid profiles, growth and creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Riboflavin responders often improve markedly; severe neonatal form has poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

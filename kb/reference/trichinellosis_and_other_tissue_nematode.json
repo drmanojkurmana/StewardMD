@@ -175,5 +175,436 @@
       "caption": "Overview comparison matrix for trichinellosis and other tissue nematode infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Trichinellosis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/trichinellosis/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichinellosis_and_other_tissue_nematode-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing trichinellosis and tissue nematode infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Eosinophilia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "In over 90% of symptomatic trichinellosis; may exceed 50% at 2 to 4 weeks",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Fever, periorbital oedema, myalgia, eosinophilia after a suspect meal}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Raised in most symptomatic cases"
+            },
+            {
+              "text": "Myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichinella serology",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Usually positive only after week 3",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Early diagnosis is clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "unit": "g",
+          "cells": [
+            {
+              "text": "1 g or more near tendon insertion, compressed fresh tissue",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "Routine histology may miss larvae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Larval burden",
+          "unit": "larvae/g",
+          "cells": [
+            {
+              "text": "Under 10 larvae/g light; over 50 larvae/g heavy",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Heavy burden can be fatal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxocara ELISA",
+          "cells": [
+            {
+              "text": "Positive in visceral larva migrans"
+            },
+            {
+              "text": "May be negative in ocular disease; stool useless"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF eosinophils",
+          "cells": [
+            {
+              "text": "Eosinophilic meningitis"
+            },
+            {
+              "text": "Angiostrongylus or Gnathostoma in endemic areas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichinellosis_and_other_tissue_nematode-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tissue nematode infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis or dermatomyositis",
+          "cells": [
+            {
+              "text": "No dietary exposure; chronic"
+            },
+            {
+              "text": "Trichinella serology, muscle biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other periorbital oedema",
+          "cells": [
+            {
+              "text": "Allergy, nephrotic syndrome, angioedema"
+            },
+            {
+              "text": "Urine protein, eosinophil count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral or bacterial myositis, pleurodynia",
+          "cells": [
+            {
+              "text": "No eosinophilia"
+            },
+            {
+              "text": "Eosinophil count, serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoblastoma (vs ocular toxocariasis)",
+          "cells": [
+            {
+              "text": "Child with retinal mass"
+            },
+            {
+              "text": "{{hy:Toxocara serology and specialist imaging before enucleation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other eosinophilic meningitis",
+          "cells": [
+            {
+              "text": "Paragonimus, schistosomiasis, cysticercosis, coccidioidomycosis"
+            },
+            {
+              "text": "Exposure history, serology, imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strongyloidiasis or filariasis",
+          "cells": [
+            {
+              "text": "Eosinophilia with other features"
+            },
+            {
+              "text": "Stool larvae, blood microfilariae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichinellosis_and_other_tissue_nematode-treatment",
+      "kind": "treatment",
+      "title": "Treating trichinellosis and tissue nematodes",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Albendazole",
+          "cells": [
+            {
+              "text": "Trichinellosis"
+            },
+            {
+              "text": "400 mg twice daily orally for 8 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mebendazole",
+          "cells": [
+            {
+              "text": "Trichinellosis alternative"
+            },
+            {
+              "text": "200 to 400 mg three times daily for 3 days, then 400 to 500 mg three times daily for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Start early",
+          "cells": [
+            {
+              "text": "Before larvae encyst in muscle"
+            },
+            {
+              "text": "Less effective after 3 to 4 weeks; longer courses may be needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Severe trichinellosis (myocarditis, encephalitis), ocular or severe visceral larva migrans"
+            },
+            {
+              "text": "Dampen hypersensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albendazole",
+          "cells": [
+            {
+              "text": "Symptomatic visceral or ocular Toxocara"
+            },
+            {
+              "text": "With steroid for ocular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care, analgesia, steroids, repeat LP",
+          "cells": [
+            {
+              "text": "Angiostrongylus eosinophilic meningitis"
+            },
+            {
+              "text": "Lumbar puncture relieves headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count monitoring",
+          "cells": [
+            {
+              "text": "Long benzimidazole courses"
+            },
+            {
+              "text": "Marrow suppression"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Neither albendazole nor mebendazole is approved for pregnancy or children under 2 (CDC)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichinellosis_and_other_tissue_nematode-dx-mgmt",
+      "title": "Diagnosis and management of trichinellosis and tissue nematodes",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, myalgia, periorbital oedema or eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Diet and travel history; eosinophils, CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Undercooked pork or game with myositis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Presumptive trichinellosis; serology after week 3",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Albendazole 8 to 14 days early",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Myocarditis, encephalitis or severe disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Add corticosteroids; cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Complete course; CBC if prolonged",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Eosinophilic meningitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Angiostrongylus or Gnathostoma: supportive care, steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Toxocara serology; albendazole if symptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

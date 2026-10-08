@@ -145,5 +145,315 @@
       "caption": "Overview comparison matrix for presbycusis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "presbycusis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Symmetrical high-frequency sensorineural pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech audiometry",
+          "cells": [
+            {
+              "text": "Discrimination; predicts hearing aid benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Conductive component from the middle ear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Wax impaction and external or middle ear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus",
+          "cells": [
+            {
+              "text": "Retrocochlear lesion, if loss is markedly asymmetrical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "presbycusis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acoustic neuroma or retrocochlear lesion",
+          "cells": [
+            {
+              "text": "Marked asymmetry; unilateral tinnitus, vertigo or facial numbness"
+            },
+            {
+              "text": "MRI of the internal auditory meatus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerumen impaction or middle ear disease",
+          "cells": [
+            {
+              "text": "Conductive loss"
+            },
+            {
+              "text": "Otoscopy and tympanometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ototoxic drug-induced hearing loss",
+          "cells": [
+            {
+              "text": "Ototoxic drug exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "presbycusis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "Mainstay; amplifies the high frequencies where loss is greatest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Severe loss with poor aided speech discrimination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aural rehabilitation",
+          "cells": [
+            {
+              "text": "Assistive listening devices and communication strategies, especially in noise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinnitus management",
+          "cells": [
+            {
+              "text": "Education and sound therapy where troublesome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modifiable contributors",
+          "cells": [
+            {
+              "text": "Noise protection, avoiding ototoxins, control of vascular and metabolic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic audiological review",
+          "cells": [
+            {
+              "text": "Monitor progression and optimise amplification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "presbycusis-dx-mgmt",
+      "title": "Diagnosis and management of Presbycusis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected presbycusis: gradual high-frequency hearing loss in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Marked asymmetry, sudden loss, unilateral tinnitus, vertigo or neurological signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent evaluation for retrocochlear lesion or sudden hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure tone and speech audiometry, tympanometry, otoscopy; MRI if asymmetrical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do tests show a symmetrical high-frequency sensorineural pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider noise, ototoxic, conductive or Meniere causes; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hearing aids as the mainstay, amplifying high frequencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe loss with poor aided discrimination",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aural rehabilitation and tinnitus management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address noise, ototoxin and vascular or metabolic contributors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Periodic audiological review to monitor progression and optimise amplification",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -189,5 +189,510 @@
       "caption": "Overview comparison matrix for heart failure: pathophysiology and diagnosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Heart Failure",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/heart-failure-hf"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, NYHA classification (p111) and Table 234-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heart_failure_pathophysiology_and_diagnosi-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing heart failure",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "BNP",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Commonly used threshold 100 pg/mL",
+              "op": "=",
+              "value": 100
+            },
+            {
+              "text": "Up to 30% of acute HFpEF fall below it; normal BNP does not exclude HF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Natriuretic peptide confounders",
+          "cells": [
+            {
+              "text": "Falsely low in obesity; raised by age, female sex, CKD, AF, PE, PAH"
+            },
+            {
+              "text": "Interpret in context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HFrEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF 40% or less",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "Echo with Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HFmrEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF 41 to 49%",
+              "range": [
+                41,
+                49
+              ]
+            },
+            {
+              "text": "Echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HFpEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF 50% or more",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Exclude noncardiac causes of dyspnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "Cardiothoracic ratio over 0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Upper-lobe diversion, Kerley B lines, effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S3 gallop",
+          "cells": [
+            {
+              "text": "Volume overload"
+            },
+            {
+              "text": "{{hy:Severe haemodynamic compromise, poor prognosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear lung bases",
+          "cells": [
+            {
+              "text": "Rales absent in chronic HF"
+            },
+            {
+              "text": "Does not exclude congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG pseudo-infarct with low voltage",
+          "cells": [
+            {
+              "text": "Q waves with small QRS"
+            },
+            {
+              "text": "Suggests amyloid or infiltrative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-output HF clue",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Haemoglobin often 8 g/dL or less",
+              "op": "<=",
+              "value": 8
+            },
+            {
+              "text": "Also AV fistula, thyrotoxicosis, beriberi, cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NYHA class I to IV",
+          "cells": [
+            {
+              "text": "No limitation to symptoms at rest"
+            },
+            {
+              "text": "Correlates poorly with EF and peak VO2"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "heart_failure_pathophysiology_and_diagnosi-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic heart failure",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "COPD or asthma",
+          "cells": [
+            {
+              "text": "Wheeze; cardiac asthma mimics it"
+            },
+            {
+              "text": "Natriuretic peptide, echo, spirometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia or lung cancer",
+          "cells": [
+            {
+              "text": "Fever, focal signs, mass"
+            },
+            {
+              "text": "Chest x-ray"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Kussmaul's sign, massive ascites, normal EF"
+            },
+            {
+              "text": "Right and left heart catheterisation, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Sudden dyspnoea; raises BNP"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cirrhosis",
+          "cells": [
+            {
+              "text": "Ascites with liver disease"
+            },
+            {
+              "text": "Liver tests, JVP normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoedema or DVT",
+          "cells": [
+            {
+              "text": "Nonpitting or unilateral oedema"
+            },
+            {
+              "text": "Duplex ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary disease",
+          "cells": [
+            {
+              "text": "RUQ pain with abnormal LFTs from hepatic congestion"
+            },
+            {
+              "text": "Echo and JVP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noncardiogenic pulmonary oedema",
+          "cells": [
+            {
+              "text": "ARDS picture"
+            },
+            {
+              "text": "Invasive haemodynamics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heart_failure_pathophysiology_and_diagnosi-treatment",
+      "kind": "treatment",
+      "title": "Initial management after diagnosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Find precipitant",
+          "cells": [
+            {
+              "text": "Every admission"
+            },
+            {
+              "text": "Identifiable in 50 to 90%: nonadherence, salt, NSAIDs, ischaemia, arrhythmia, infection, anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop drugs that worsen HF",
+          "cells": [
+            {
+              "text": "Verapamil, diltiazem, NSAIDs, class I antiarrhythmics, sotalol, anti-TNF"
+            },
+            {
+              "text": "Per Table 234-4"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Loop diuretic",
+          "cells": [
+            {
+              "text": "Congestion"
+            },
+            {
+              "text": "Relieving venous congestion can improve renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GDMT for HFrEF",
+          "cells": [
+            {
+              "text": "LVEF 40% or less"
+            },
+            {
+              "text": "{{hy:ARNI or ACE inhibitor, beta-blocker, MRA, SGLT2 inhibitor}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV iron",
+          "cells": [
+            {
+              "text": "Iron deficiency with or without anaemia"
+            },
+            {
+              "text": "Oral iron ineffective; improves symptoms and admissions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Etiological work-up",
+          "cells": [
+            {
+              "text": "New HF"
+            },
+            {
+              "text": "Coronary imaging, MRI, light chains, ferritin, HIV, genetics as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD or CRT",
+          "cells": [
+            {
+              "text": "Criteria met"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced therapies or palliation",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            },
+            {
+              "text": "Specialist HF service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heart_failure_pathophysiology_and_diagnosi-dx-mgmt",
+      "title": "Diagnosis and management of heart failure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspnoea, orthopnoea, oedema or fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "History, exam for JVP and S3, ECG, chest x-ray, bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "BNP or NT-proBNP",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Natriuretic peptide raised or high clinical suspicion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Look for lung, liver, renal or venous cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Echocardiogram with Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "LVEF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "HFrEF: find cause, start GDMT",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "HFmrEF or HFpEF: confirm high filling pressure, treat comorbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "40% or less"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Above 40%"
+        }
+      ]
+    }
+  ]
 }

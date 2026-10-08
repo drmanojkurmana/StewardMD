@@ -146,5 +146,267 @@
       "caption": "Overview comparison matrix for meniere's disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "menieres_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Fluctuating low-frequency sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caloric testing and video head impulse testing",
+          "cells": [
+            {
+              "text": "Vestibular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus",
+          "cells": [
+            {
+              "text": "Vestibular schwannoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests, when clinically indicated",
+          "cells": [
+            {
+              "text": "Alternative causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menieres_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Salt restriction",
+          "cells": [
+            {
+              "text": "With reduced caffeine and alcohol, as first-line lifestyle measures to limit endolymphatic hydrops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and betahistine",
+          "cells": [
+            {
+              "text": "Maintenance therapy to reduce attack frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular sedatives and antiemetics",
+          "cells": [
+            {
+              "text": "Prochlorperazine or antihistamines for acute vertiginous attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intratympanic therapy",
+          "cells": [
+            {
+              "text": "Corticosteroid, or ablative gentamicin for disabling refractory unilateral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular rehabilitation and hearing aids",
+          "cells": [
+            {
+              "text": "Residual vestibular hypofunction and progressive sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Endolymphatic sac decompression, vestibular neurectomy or labyrinthectomy for intractable vertigo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and safety counselling",
+          "cells": [
+            {
+              "text": "Sudden attacks; ENT specialist follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "menieres_disease-dx-mgmt",
+      "title": "Diagnosis and management of Meniere's disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Episodic vertigo with fluctuating low-frequency hearing loss and tinnitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive unilateral hearing loss, sudden deafness, drop attacks or central signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for sudden deafness or a central cause; MRI for schwannoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry; vestibular testing (calorics, vHIT); MRI of internal auditory meatus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is vestibular schwannoma excluded on MRI of the internal auditory meatus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acoustic neuroma or other vestibular disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Salt restriction, with reduced caffeine and alcohol, as first-line measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintenance diuretic and betahistine to reduce attack frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prochlorperazine or antihistamines for acute vertiginous attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intratympanic corticosteroid, or ablative gentamicin for disabling refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vestibular rehabilitation and hearing aids; surgery reserved for intractable vertigo",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

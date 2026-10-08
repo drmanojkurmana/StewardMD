@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for functional (dissociative) seizures."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_seizures-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-EEG telemetry",
+          "cells": [
+            {
+              "text": "Captures a typical event without an epileptiform correlate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyewitness or home-video account",
+          "cells": [
+            {
+              "text": "Detailed account of the episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG, ambulatory monitoring and tilt testing",
+          "cells": [
+            {
+              "text": "Assesses cardiac and syncopal causes of collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard EEG and MRI",
+          "cells": [
+            {
+              "text": "Coexisting epilepsy or structural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin",
+          "cells": [
+            {
+              "text": "Interpreted with caution in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological and psychiatric assessment",
+          "cells": [
+            {
+              "text": "Comorbidity and precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_seizures-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epileptic seizures",
+          "cells": [
+            {
+              "text": "Lateral tongue biting, stereotyped events, post-ictal confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Convulsive syncope",
+          "cells": [
+            {
+              "text": "Assessed by tilt testing where syncope is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia causing collapse",
+          "cells": [
+            {
+              "text": "Cardiac symptoms suggesting an arrhythmic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_seizures-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clear supportive explanation",
+          "cells": [
+            {
+              "text": "Alone can reduce or stop events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw unnecessary antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Avoid emergency anticonvulsant treatment for events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient and family education",
+          "cells": [
+            {
+              "text": "Recognise and safely manage episodes without inappropriate escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG confirmation",
+          "cells": [
+            {
+              "text": "Typical event captured without an epileptiform correlate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid psychiatric illness",
+          "cells": [
+            {
+              "text": "Trauma and precipitating stressors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage coexisting epilepsy",
+          "cells": [
+            {
+              "text": "Where both conditions are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_seizures-dx-mgmt",
+      "title": "Diagnosis and management of Functional (dissociative) seizures",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional seizures: stereotyped episodes, pending video-EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features of epilepsy, cardiac symptoms, injury, sleep events)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac assessment for symptoms suggesting arrhythmic collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-EEG telemetry, eyewitness account, ECG and standard EEG or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does video-EEG capture a typical event without an epileptiform correlate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epilepsy, convulsive syncope, panic attacks or parasomnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clear, supportive explanation of the diagnosis, which alone can reduce events",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cognitive behavioural therapy as the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw unnecessary antiepileptic drugs and avoid emergency anticonvulsants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Educate patient and family to manage episodes safely without escalation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies; explanation alone stops events in some, and psychological therapy helps many",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

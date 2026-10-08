@@ -172,5 +172,502 @@
       "caption": "Overview comparison matrix for pheochromocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pheochromocytoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/pheochromocytoma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pheochromocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing pheochromocytoma and paraganglioma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic triad",
+          "cells": [
+            {
+              "text": "Episodic headache, sweating, palpitations"
+            },
+            {
+              "text": "Present in about one-third; with hypertension makes PPGL likely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma free metanephrines",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity up to 99%",
+              "op": "<=",
+              "value": 99
+            },
+            {
+              "text": "{{hy:Best first test; metanephrines leak continuously}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "24 h urine fractionated metanephrines",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 95%",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Two or three normal results during high BP make PPGL very unlikely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal 24 h urine total metanephrine",
+          "unit": "mg/24 h",
+          "cells": [
+            {
+              "text": "Under 1.3 mg",
+              "op": "<",
+              "value": 1.3
+            },
+            {
+              "text": "Free epinephrine plus norepinephrine under 100 mcg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Borderline elevations",
+          "cells": [
+            {
+              "text": "Often false positive"
+            },
+            {
+              "text": "Exclude drugs and diet, then repeat; clonidine suppression rarely needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of chest and abdomen",
+          "cells": [
+            {
+              "text": "After positive biochemistry"
+            },
+            {
+              "text": "MRI slightly better for extra-adrenal tumors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ga-68 dotatate or F-18 DOPA PET",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity over 95%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Replacing MIBG; best for metastatic or hereditary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline genetic panel",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "SDHx, VHL, RET, NF1 and others"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic risk markers",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Tumor over 5 cm, SDHB mutation, PASS or GAPP score",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "About 5 to 10% are metastatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pheochromocytoma-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pheochromocytoma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Panic disorder or anxiety",
+          "cells": [
+            {
+              "text": "Episodes with fear, usually without severe hypertension"
+            },
+            {
+              "text": "Normal plasma metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Essential hypertension with adrenergic features",
+          "cells": [
+            {
+              "text": "Sustained BP without paroxysms"
+            },
+            {
+              "text": "Normal metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cocaine or amphetamine use",
+          "cells": [
+            {
+              "text": "Sympathomimetic crisis"
+            },
+            {
+              "text": "Urine drug screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonidine withdrawal",
+          "cells": [
+            {
+              "text": "Rebound hypertension after stopping clonidine"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid syndrome or mastocytosis",
+          "cells": [
+            {
+              "text": "Flushing usually without hypertension"
+            },
+            {
+              "text": "Urine 5-HIAA, serum tryptase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonfunctioning or cortisol or aldosterone adrenal adenoma",
+          "cells": [
+            {
+              "text": "Incidental adrenal mass"
+            },
+            {
+              "text": "Metanephrines plus cortisol and aldosterone testing; low-density lipid-rich adenoma on CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious crises",
+          "cells": [
+            {
+              "text": "Sympathomimetic amine use"
+            },
+            {
+              "text": "Drug screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pheochromocytoma-treatment",
+      "kind": "treatment",
+      "title": "Treating pheochromocytoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpha blockade first",
+          "cells": [
+            {
+              "text": "All before surgery, for about 10 to 14 days"
+            },
+            {
+              "text": "Phenoxybenzamine 20 to 40 mg orally three times daily or doxazosin 1 to 32 mg once daily; target BP under 130/80"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta blocker after alpha blockade",
+          "cells": [
+            {
+              "text": "Tachycardia once alpha blockade is adequate"
+            },
+            {
+              "text": "{{hy:Never start beta blocker first}}; propranolol 20 to 40 mg three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Volume repletion and high-salt diet",
+          "cells": [
+            {
+              "text": "Preoperatively"
+            },
+            {
+              "text": "Prevents hypotension after tumor removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic or cortical-sparing adrenalectomy",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            },
+            {
+              "text": "Cortical-sparing for bilateral or hereditary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phentolamine",
+          "cells": [
+            {
+              "text": "Paroxysm during surgery"
+            },
+            {
+              "text": "1 to 5 mg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitroprusside infusion",
+          "cells": [
+            {
+              "text": "Hypertensive crisis"
+            },
+            {
+              "text": "2 to 4 mcg/kg/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Genetic counselling and surveillance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Lifelong biochemical follow-up; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid FNA of adrenal mass",
+          "cells": [
+            {
+              "text": "Until PPGL excluded biochemically"
+            },
+            {
+              "text": "Biopsy can trigger a crisis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pheochromocytoma-dx-mgmt",
+      "title": "Diagnosis and management of pheochromocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal hypertension, triad, adrenal incidentaloma or hereditary syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Plasma free or 24 h urine fractionated metanephrines",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Clearly elevated?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Borderline elevation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "PPGL very unlikely",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop interfering drugs and repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CT or MRI chest and abdomen; functional PET if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Germline genetic panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha blockade 10 to 14 days, then beta blocker; fluids and salt",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Metastatic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adrenalectomy; confirm biochemical cure; lifelong follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Specialist systemic therapy with continued alpha blockade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

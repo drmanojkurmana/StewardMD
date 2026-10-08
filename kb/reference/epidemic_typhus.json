@@ -151,5 +151,296 @@
       "caption": "Overview comparison matrix for epidemic (louse-borne) typhus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epidemic_typhus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Indirect immunofluorescence antibody serology on paired sera",
+          "cells": [
+            {
+              "text": "Serological evidence on paired samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of blood or tissue",
+          "cells": [
+            {
+              "text": "Organism detection, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium",
+          "cells": [
+            {
+              "text": "Hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and liver enzymes",
+          "cells": [
+            {
+              "text": "Organ involvement, including acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of clothing and body for lice",
+          "cells": [
+            {
+              "text": "Supports the epidemiological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidemic_typhus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spotted fever group rickettsioses",
+          "cells": [
+            {
+              "text": "Centrifugal rash that spares the palms and soles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcaemia",
+          "cells": [
+            {
+              "text": "Petechial or purpuric rash with hypotension and shock"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidemic_typhus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical doxycycline",
+          "cells": [
+            {
+              "text": "Given on clinical and epidemiological suspicion, without waiting for serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chloramphenicol",
+          "cells": [
+            {
+              "text": "Alternative where doxycycline is contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Rehydration, correction of hyponatraemia, antipyretics and nursing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delousing",
+          "cells": [
+            {
+              "text": "Patient, clothing and close contacts, with topical insecticides and hygiene measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Encephalopathy, myocarditis, renal impairment and hypovolaemia; organ support and critical care in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public-health notification",
+          "cells": [
+            {
+              "text": "Outbreak control, with vigilance for later Brill-Zinsser recrudescence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epidemic_typhus-dx-mgmt",
+      "title": "Diagnosis and management of Epidemic (louse-borne) typhus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abrupt high fever, severe headache and prostration after louse exposure or crowding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (encephalopathy, shock, digital gangrene, acute kidney injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Critical care with organ support for encephalopathy, shock or renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired-sera serology, PCR where available, serum sodium and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clinical and epidemiological suspicion present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider murine typhus, spotted fever or meningococcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical doxycycline without waiting for serology; chloramphenicol if contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydration and correction of hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Delouse the patient, clothing and close contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Notify public health; watch for Brill-Zinsser recrudescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mortality rises with age if untreated; prompt doxycycline is dramatically effective",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

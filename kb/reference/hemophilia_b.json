@@ -149,5 +149,341 @@
       "caption": "Overview comparison matrix for haemophilia b (factor ix, christmas disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemophilia_b-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Activated partial thromboplastin time, prothrombin time and platelet count",
+          "cells": [
+            {
+              "text": "Prolonged aPTT with normal prothrombin time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Separates factor deficiency from an inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor IX activity assay",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and grades severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII assay",
+          "cells": [
+            {
+              "text": "Differentiates from haemophilia A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor IX inhibitor assay",
+          "cells": [
+            {
+              "text": "Used when the replacement response is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F9 genetic testing",
+          "cells": [
+            {
+              "text": "Diagnosis and carrier detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_b-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemophilia A",
+          "cells": [
+            {
+              "text": "Factor VIII assay separates it; clinically indistinguishable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired factor IX deficiency",
+          "cells": [
+            {
+              "text": "Caused by rare autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K-dependent factor deficiency or warfarin effect",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_b-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic factor IX replacement",
+          "cells": [
+            {
+              "text": "Prevents bleeds; acute bleeds treated with factor IX"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newer non-factor prophylaxis",
+          "cells": [
+            {
+              "text": "Rebalances haemostasis, as an alternative to factor replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene therapy",
+          "cells": [
+            {
+              "text": "Adeno-associated-virus gene therapy in eligible adults, for sustained endogenous factor IX"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Mucosal and dental bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibitor management",
+          "cells": [
+            {
+              "text": "Immune tolerance induction and bypassing agents; alertness to allergic reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint health",
+          "cells": [
+            {
+              "text": "Physiotherapy; avoid intramuscular injections and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Factor levels, inhibitor screening and joint assessment through a haemophilia centre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier testing for female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemophilia_b-dx-mgmt",
+      "title": "Diagnosis and management of Haemophilia B (factor IX, Christmas disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged aPTT with normal prothrombin time, with bleeding in a male",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intracranial, airway or compartment bleeding, or an allergic reaction to replacement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent factor IX replacement for intracranial or airway bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "aPTT, PT, mixing study; factor IX activity; factor VIII assay; inhibitor assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is factor IX activity low, with factor VIII normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemophilia A, von Willebrand disease or acquired factor IX deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic factor IX replacement; acute bleeds treated with factor IX",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tranexamic acid for mucosal and dental bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immune tolerance induction and bypassing agents for inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy; avoid intramuscular injections and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeds prevented and joints protected through specialist care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

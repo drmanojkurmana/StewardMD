@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for mannose-binding lectin deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mbl_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum mannose-binding lectin level and functional lectin pathway assay",
+          "cells": [
+            {
+              "text": "MBL level and functional lectin pathway activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MBL2 genotyping, where clinically indicated",
+          "cells": [
+            {
+              "text": "MBL2 genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broader immune workup (immunoglobulins, antibody responses, complement)",
+          "cells": [
+            {
+              "text": "Coexisting defect excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of infection frequency and severity",
+          "cells": [
+            {
+              "text": "Infection frequency and severity in clinical context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of concurrent immunosuppressive factors",
+          "cells": [
+            {
+              "text": "Concurrent immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mbl_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Antibody deficiencies (IgA deficiency or common variable immunodeficiency)",
+          "cells": [
+            {
+              "text": "Recurrent or severe infection beyond isolated MBL deficiency; immunoglobulins checked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement component deficiencies",
+          "cells": [
+            {
+              "text": "Complement pathways assessed in the broader workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary immunodeficiency from immunosuppression or malignancy",
+          "cells": [
+            {
+              "text": "Chemotherapy or immunosuppression compounds the risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal variation with incidental low MBL",
+          "cells": [
+            {
+              "text": "Incidental low MBL in a healthy individual; generally benign course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mbl_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt recognition and treatment of infection",
+          "cells": [
+            {
+              "text": "No specific replacement therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early empirical antibacterial therapy",
+          "cells": [
+            {
+              "text": "Targets pyogenic bacteria during intercurrent infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full routine immunisation",
+          "cells": [
+            {
+              "text": "Including pneumococcal and other encapsulated-organism vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitigate coexisting immunosuppression",
+          "cells": [
+            {
+              "text": "Identify and address factors that unmask susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heightened surveillance",
+          "cells": [
+            {
+              "text": "Infancy and periods of chemotherapy or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate for a coexisting immunodeficiency",
+          "cells": [
+            {
+              "text": "Where infections are recurrent or severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education and reassurance",
+          "cells": [
+            {
+              "text": "Generally benign course of isolated deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mbl_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Mannose-binding lectin deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent or severe infections with suspected mannose-binding lectin deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Infection out of proportion to isolated MBL deficiency, or invasive pyogenic infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt treatment of invasive pyogenic infection; search for another immune defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MBL level, functional lectin pathway assay, MBL2 genotype, immunoglobulins, complement",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is MBL deficiency confirmed with no coexisting immune defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate coexisting antibody or complement deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No specific replacement therapy; prompt recognition and treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early empirical antibacterial therapy against pyogenic bacteria in intercurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Full routine immunisation, including pneumococcal and encapsulated-organism vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Heightened surveillance during infancy and periods of chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally benign course of isolated deficiency; patient education and reassurance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

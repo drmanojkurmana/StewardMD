@@ -171,5 +171,551 @@
       "caption": "Overview comparison matrix for cirrhosis and its complications."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ascites",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/ascites",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cirrhosis_and_its_complications-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key thresholds in cirrhosis and its complications",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Portal hypertension (HVPG)",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": ">5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Clinically significant at >=10"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAAG",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": ">=1.1",
+              "op": ">=",
+              "value": 1.1
+            },
+            {
+              "text": "{{hy:Portal hypertensive ascites}}; <1.1 suggests infection or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascitic protein with SAAG >=1.1",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": ">2.5",
+              "op": ">",
+              "value": 2.5
+            },
+            {
+              "text": "Suggests cardiac ascites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascitic neutrophils",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": ">250",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "Spontaneous bacterial peritonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascitic protein, SBP risk",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<1.5",
+              "op": "<",
+              "value": 1.5
+            },
+            {
+              "text": "Higher SBP risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "More than two organisms on ascitic culture",
+          "cells": [
+            {
+              "text": "Polymicrobial"
+            },
+            {
+              "text": "Suspect secondary peritonitis from perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AST to ALT ratio",
+          "cells": [
+            {
+              "text": "About 2:1, AST usually <400"
+            },
+            {
+              "text": "Alcohol-related liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelets for thrombin generation",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Adequate above about 50,000 to 60,000",
+              "range": [
+                50000,
+                60000
+              ]
+            },
+            {
+              "text": "PT and INR unreliable for bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ammonia",
+          "cells": [
+            {
+              "text": "Usually raised in encephalopathy"
+            },
+            {
+              "text": "Poor correlation with severity; asterixis is key"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACLF 28-day mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20 to 70%",
+              "range": [
+                20,
+                70
+              ]
+            },
+            {
+              "text": "Rises with organ failures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Child-Pugh class and MELD",
+          "cells": [
+            {
+              "text": "Severity grading"
+            },
+            {
+              "text": "Guide bleeding risk and transplant priority"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cirrhosis_and_its_complications-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of cirrhosis and ascites",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-cirrhotic portal hypertension",
+          "cells": [
+            {
+              "text": "Portal or splenic vein thrombosis, schistosomiasis, congenital hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Hepatic venous outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac hepatopathy",
+          "cells": [
+            {
+              "text": "{{hy:SAAG >=1.1 with ascitic protein >2.5}}; right heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinusoidal obstruction syndrome",
+          "cells": [
+            {
+              "text": "After stem cell conditioning or pyrrolizidine alkaloids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritoneal carcinomatosis or infection",
+          "cells": [
+            {
+              "text": "SAAG <1.1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary bacterial peritonitis",
+          "cells": [
+            {
+              "text": "Polymicrobial ascitic culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cirrhosis_and_its_complications-treatment",
+      "kind": "treatment",
+      "title": "Management of cirrhosis and complications",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "{{hy:All}}"
+            },
+            {
+              "text": "Abstinence, HBV or HCV antivirals, weight loss, AIH immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium restriction",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "Ascites"
+            },
+            {
+              "text": "2000"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spironolactone plus furosemide",
+          "cells": [
+            {
+              "text": "Ascites"
+            },
+            {
+              "text": "Maximum spironolactone 400 mg daily, furosemide 160 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Albumin with large-volume paracentesis",
+          "unit": "g/L removed",
+          "cells": [
+            {
+              "text": "More than 5 L removed"
+            },
+            {
+              "text": "6 to 8 of 25% albumin",
+              "range": [
+                6,
+                8
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TIPS",
+          "cells": [
+            {
+              "text": "Refractory or recurrent ascites"
+            },
+            {
+              "text": "Also for selected variceal bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Terlipressin, antibiotics, endoscopic therapy",
+          "cells": [
+            {
+              "text": "Acute variceal bleeding"
+            },
+            {
+              "text": "20 to 30% mortality per bleed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-selective beta-blocker or band ligation",
+          "cells": [
+            {
+              "text": "Variceal bleeding prophylaxis"
+            },
+            {
+              "text": "Doses not stated in sources opened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactulose and rifaximin",
+          "cells": [
+            {
+              "text": "Hepatic encephalopathy"
+            },
+            {
+              "text": "Correct precipitants; do not restrict protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotics then secondary prophylaxis",
+          "cells": [
+            {
+              "text": "SBP"
+            },
+            {
+              "text": "Agent not stated in sources opened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HCC ultrasound surveillance and transplant referral",
+          "cells": [
+            {
+              "text": "All with cirrhosis; decompensated"
+            },
+            {
+              "text": "Guided by Child-Pugh and MELD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Avoid NSAIDs and aminoglycosides in ascites."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cirrhosis_and_its_complications-dx-mgmt",
+      "title": "Management of cirrhosis and its complications",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cirrhosis suspected or confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Cause work-up; imaging; Child-Pugh and MELD; endoscopy for varices",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Ascites present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diagnostic paracentesis: SAAG, protein, neutrophils, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neutrophils >250/uL?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat SBP with antibiotics; then prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium 2 g/day, spironolactone plus furosemide",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Refractory ascites?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Large-volume paracentesis with albumin; consider TIPS",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Varices or bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Beta-blocker or band ligation; terlipressin and antibiotics if bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "HCC surveillance; transplant referral when decompensated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Then"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

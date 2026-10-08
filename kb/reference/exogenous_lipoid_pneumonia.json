@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for exogenous lipoid pneumonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "exogenous_lipoid_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT of the thorax",
+          "cells": [
+            {
+              "text": "Low-attenuation (fat-density) consolidation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy with bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Lipid-laden macrophages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat stains on lavage fluid or tissue",
+          "cells": [
+            {
+              "text": "Oil red O or Sudan stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transbronchial or surgical lung biopsy",
+          "cells": [
+            {
+              "text": "Where malignancy cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed exposure history",
+          "cells": [
+            {
+              "text": "Medicines, nasal drops, cosmetics, vaping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing assessment and reflux evaluation",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological studies",
+          "cells": [
+            {
+              "text": "Concurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exogenous_lipoid_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchogenic carcinoma",
+          "cells": [
+            {
+              "text": "Fat-density consolidation or mass that can mimic carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary alveolar proteinosis",
+          "cells": [
+            {
+              "text": "Crazy-paving pattern on high-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Community-acquired or aspiration pneumonia",
+          "cells": [
+            {
+              "text": "Chronic consolidation is often wrongly attributed to infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "exogenous_lipoid_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Identify and stop the oily exposure",
+          "cells": [
+            {
+              "text": "Mineral oil, oil-based nasal drops, laxatives, lip preparations or vaping oils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing assessment and reflux treatment",
+          "cells": [
+            {
+              "text": "Reduces aspiration; avoid oily preparations at bedtime"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and chest physiotherapy",
+          "cells": [
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and lavage",
+          "cells": [
+            {
+              "text": "Severe or progressive disease; whole-lung or segmental lavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics only for superimposed infection",
+          "cells": [
+            {
+              "text": "Not for the lipoid process itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial CT and lung function",
+          "cells": [
+            {
+              "text": "Monitoring; biopsy or resection if malignancy is not excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory medicine referral",
+          "cells": [
+            {
+              "text": "Ongoing management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "exogenous_lipoid_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Exogenous Lipoid Pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough, dyspnoea or consolidation after oily medicine, drops or vaping",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (mass not separable from carcinoma, massive aspiration, sepsis, hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Oxygen and respiratory review; treat superimposed sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT for fat-density lesions; bronchoscopy with lavage; fat stains; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lipid-laden macrophages or fat-density lesion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy to exclude malignancy; consider other interstitial or infective causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop the causative oily exposure immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Swallowing assessment and reflux treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids and lavage for severe or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics only for superimposed bacterial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial CT and lung function monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good when the exposure is stopped early; gradual improvement in many cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

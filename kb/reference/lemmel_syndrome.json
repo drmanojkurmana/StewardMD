@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for lemmel syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lemmel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver biochemistry",
+          "cells": [
+            {
+              "text": "Cholestatic pattern: raised alkaline phosphatase and bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Biliary dilatation; excludes gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Characterises the diverticulum; excludes a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Biliary tree, diverticulum and level of obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Side-viewing duodenoscopy",
+          "cells": [
+            {
+              "text": "Diverticulum and papilla seen directly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Excludes a small periampullary or pancreatic tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lemmel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choledocholithiasis with distal duct stone",
+          "cells": [
+            {
+              "text": "Stone must be excluded before attributing obstruction to the diverticulum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periampullary or pancreatic head carcinoma",
+          "cells": [
+            {
+              "text": "Progressive painless jaundice or weight loss raises concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ampullary adenoma or carcinoma",
+          "cells": [
+            {
+              "text": "Ampullary lesion; excluded by endoscopy and endoscopic ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mirizzi syndrome",
+          "cells": [
+            {
+              "text": "Impacted cystic duct stone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lemmel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic biliary relief",
+          "cells": [
+            {
+              "text": "ERCP with sphincterotomy, biliary drainage or stenting as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholangitis",
+          "cells": [
+            {
+              "text": "Appropriate antibiotics and urgent biliary decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milder or intermittent obstruction",
+          "cells": [
+            {
+              "text": "Conservative management with analgesia and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Diverticulectomy or biliary diversion for refractory obstruction or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver biochemistry; watch for recurrent cholangitis or pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Hepatobiliary and endoscopy specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lemmel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lemmel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Obstructive jaundice or RUQ pain with biliary dilatation in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cholangitis, painless jaundice, pancreatitis, perforation, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biliary decompression for acute cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver tests, ultrasound, CT, MRCP, duodenoscopy, endoscopic ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a periampullary diverticulum shown with no stone or neoplasm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider choledocholithiasis, ampullary tumour or pancreatic head carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relieve obstruction endoscopically: ERCP with sphincterotomy or stent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics and urgent decompression for cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative care with analgesia for milder obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reserve diverticulectomy or biliary bypass for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for recurrent cholangitis or pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with accurate diagnosis; complications worsen the prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

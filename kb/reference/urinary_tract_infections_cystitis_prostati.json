@@ -175,5 +175,531 @@
       "caption": "Overview comparison matrix for urinary tract infections: cystitis, prostatitis, and pyelonephritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Bacterial Urinary Tract Infections",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urinary_tract_infections_cystitis_prostati-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing urinary tract infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic, voided culture",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": "Over 10^4 CFU/mL (10^3 raises sensitivity)",
+              "op": ">",
+              "value": 10000
+            },
+            {
+              "text": "Significant bacteriuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Suprapubic or cystoscopic sample",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": "Over 10^3 CFU/mL",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Any growth on suprapubic tap counts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Asymptomatic bacteriuria, women",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": "Over 10^5 CFU/mL same strain on 2 specimens",
+              "op": ">",
+              "value": 100000
+            },
+            {
+              "text": "One specimen in men"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter specimen",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": "Single species over 10^2 CFU/mL",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Bacteriuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyuria",
+          "unit": "WBC/mcL",
+          "cells": [
+            {
+              "text": "8 WBC/mcL or more uncentrifuged (2 to 5/hpf spun)",
+              "op": ">=",
+              "value": 8
+            },
+            {
+              "text": "Most infected over 10 WBC/mcL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitrite and leukocyte esterase",
+          "cells": [
+            {
+              "text": "Help rule out UTI"
+            },
+            {
+              "text": "Nitrite false negative with non-Enterobacterales or dilute urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptoms required",
+          "cells": [
+            {
+              "text": "Dysuria, frequency, urgency, flank pain, fever"
+            },
+            {
+              "text": "{{hy:Bacteriuria or pyuria without symptoms is not UTI}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Recurrent, complicated, stones, no response"
+            },
+            {
+              "text": "Ultrasound or CT"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "urinary_tract_infections_cystitis_prostati-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic UTI",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Asymptomatic bacteriuria",
+          "cells": [
+            {
+              "text": "Positive culture without symptoms"
+            },
+            {
+              "text": "Clinical; treat only in pregnancy or before urological procedure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chlamydia, gonorrhoea or M. genitalium urethritis",
+          "cells": [
+            {
+              "text": "Sexual exposure, discharge, sterile pyuria"
+            },
+            {
+              "text": "NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaginitis (Candida, Trichomonas)",
+          "cells": [
+            {
+              "text": "Vaginal discharge, external dysuria"
+            },
+            {
+              "text": "Vaginal microscopy, NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic urethritis",
+          "cells": [
+            {
+              "text": "Genital vesicles or ulcers"
+            },
+            {
+              "text": "HSV PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interstitial cystitis",
+          "cells": [
+            {
+              "text": "Chronic bladder pain, sterile cultures"
+            },
+            {
+              "text": "Repeat negative cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pelvic pain syndrome (men)",
+          "cells": [
+            {
+              "text": "Prostatic pain without bacteriuria"
+            },
+            {
+              "text": "Negative cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delirium from another cause",
+          "cells": [
+            {
+              "text": "Older adult with incidental bacteriuria"
+            },
+            {
+              "text": "Search for sepsis and other causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urinary_tract_infections_cystitis_prostati-treatment",
+      "kind": "treatment",
+      "title": "Treating UTI",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitrofurantoin",
+          "cells": [
+            {
+              "text": "Uncomplicated cystitis, women"
+            },
+            {
+              "text": "100 mg twice daily for 5 days; not in men or pyelonephritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP-SMX",
+          "cells": [
+            {
+              "text": "Uncomplicated cystitis"
+            },
+            {
+              "text": "160/800 mg twice daily for 3 days (7 days in men)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fosfomycin",
+          "cells": [
+            {
+              "text": "Uncomplicated cystitis"
+            },
+            {
+              "text": "3 g orally once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "cells": [
+            {
+              "text": "Outpatient pyelonephritis"
+            },
+            {
+              "text": "500 mg twice daily for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Levofloxacin",
+          "cells": [
+            {
+              "text": "Outpatient pyelonephritis, resistance under 10%"
+            },
+            {
+              "text": "750 mg daily for 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV ceftriaxone or broad agent, then oral",
+          "cells": [
+            {
+              "text": "Inpatient pyelonephritis"
+            },
+            {
+              "text": "{{hy:Total 7 to 14 days}}; step down after defervescence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolonged fluoroquinolone or trimethoprim",
+          "cells": [
+            {
+              "text": "Bacterial prostatitis"
+            },
+            {
+              "text": "Prostate-penetrating agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage or relief of obstruction",
+          "cells": [
+            {
+              "text": "Abscess, emphysematous pyelonephritis, obstruction"
+            },
+            {
+              "text": "Persistent fever despite antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antibiotic",
+          "cells": [
+            {
+              "text": "Asymptomatic bacteriuria (not pregnant, no procedure)"
+            },
+            {
+              "text": "Includes catheters, diabetes, older adults"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck lists nitrofurantoin as contraindicated with CrCl under 60 mL/min. Prostatitis durations were not in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urinary_tract_infections_cystitis_prostati-dx-mgmt",
+      "title": "Diagnosis and management of urinary tract infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urinary symptoms or positive urine test",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Symptoms of UTI present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Pregnant or before mucosal urological procedure?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Asymptomatic bacteriuria: treat by culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Do not treat; look for other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Fever, flank pain or systemic signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Woman with uncomplicated cystitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Nitrofurantoin 5 days, TMP-SMX 3 days or fosfomycin once",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Male or complicated: culture; TMP-SMX 7 days or longer; think prostatitis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Able to take oral and not septic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oral fluoroquinolone 5 to 7 days; culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Admit; blood and urine cultures; IV antibiotic",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "Fever persists at 72 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Image for obstruction, abscess or gas; drain",
+          "cite": "c1"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Oral step-down to complete 7 to 14 days",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

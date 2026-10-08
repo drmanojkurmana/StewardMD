@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for mycobacterium gordonae infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_gordonae_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated cultures from a normally sterile or compatible site",
+          "cells": [
+            {
+              "text": "Needed to establish genuine infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Species identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation of water supplies, reagents and laboratory processes",
+          "cells": [
+            {
+              "text": "When a pseudo-outbreak is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "When true disease is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or device sampling",
+          "cells": [
+            {
+              "text": "Suspected prosthesis-related infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation in tissue",
+          "cells": [
+            {
+              "text": "Organisms in tissue support true infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_gordonae_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Specimen or laboratory contamination",
+          "cells": [
+            {
+              "text": "By far the most common explanation for an isolate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-outbreak from a contaminated water source",
+          "cells": [
+            {
+              "text": "Recovered readily from tap water, laboratory water and reagents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_gordonae_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise contamination",
+          "cells": [
+            {
+              "text": "Most isolates represent contamination or colonisation and need no antimicrobial treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Establish genuine infection",
+          "cells": [
+            {
+              "text": "Repeated isolation from a normally sterile or compatible site, with histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidrug therapy for true disease",
+          "cells": [
+            {
+              "text": "Susceptibility-guided, such as rifampicin, ethambutol and a macrolide, sometimes with a fluoroquinolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Remove infected prosthetic material or indwelling devices where biofilm sustains infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-outbreak investigation",
+          "cells": [
+            {
+              "text": "Water supply, reagents and laboratory processes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status",
+          "cells": [
+            {
+              "text": "Assess and optimise; real disease occurs almost only in the severely immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_gordonae_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium gordonae infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Positive M. gordonae culture from a clinical specimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (repeated isolation from a sterile site, device infection, cluster)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Remove infected prosthetic material if confirmed; investigate the water source",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat cultures, species identification, tissue histology, immune status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Repeated isolation from a sterile or compatible site with tissue confirmation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as contamination or colonisation; no antimicrobial treatment needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise most isolates as contamination or colonisation; no treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirmed disease: susceptibility-guided rifampicin, ethambutol and a macrolide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove infected prosthetic material or indwelling devices",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate water supply and laboratory processes in pseudo-outbreaks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Negligible significance for most isolates; true infection is rare",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

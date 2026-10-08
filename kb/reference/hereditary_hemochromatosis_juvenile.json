@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for juvenile hereditary haemochromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_hemochromatosis_juvenile-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting transferrin saturation and serum ferritin",
+          "cells": [
+            {
+              "text": "Markedly raised; biochemical hallmarks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HJV and HAMP molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic MRI (R2/T2*)",
+          "cells": [
+            {
+              "text": "Quantifies liver iron non-invasively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI T2* and echocardiography",
+          "cells": [
+            {
+              "text": "Myocardial iron and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screen (gonadotrophins, sex steroids, glucose tolerance)",
+          "cells": [
+            {
+              "text": "Hypogonadotrophic hypogonadism and diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and fibrosis assessment",
+          "cells": [
+            {
+              "text": "Biopsy reserved for uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hemochromatosis_juvenile-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfusional (secondary) iron overload",
+          "cells": [
+            {
+              "text": "Arises from chronic anaemia or transfusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic HFE-related haemochromatosis (type 1)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transferrin receptor 2 haemochromatosis (type 3)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hemochromatosis_juvenile-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic phlebotomy",
+          "cells": [
+            {
+              "text": "Mainstay, to deplete iron stores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferoxamine, deferasirox or deferiprone where phlebotomy is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent cardiac assessment",
+          "cells": [
+            {
+              "text": "Iron cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and diabetes care",
+          "cells": [
+            {
+              "text": "Hypogonadotrophic hypogonadism; diabetes management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle advice",
+          "cells": [
+            {
+              "text": "Avoid iron and vitamin C supplements and excess alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Transferrin saturation and ferritin to guide venesection; hepatic and cardiac review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "HJV and HAMP variants and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_hemochromatosis_juvenile-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile hereditary haemochromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early hypogonadism, diabetes or heart failure with very high ferritin and iron saturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia, decompensated liver disease or rapidly rising ferritin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac assessment for iron cardiomyopathy and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin saturation and ferritin; HJV and HAMP testing; cardiac and liver MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are HJV or HAMP variants confirmed, with secondary iron overload excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HFE, TFR2, ferroportin disease or transfusional iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic phlebotomy to deplete iron stores, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron chelation where phlebotomy is not feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hormone replacement for hypogonadism and management of diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid iron and vitamin C supplements and excess alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Iron stores reduced; cardiac and endocrine complications managed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

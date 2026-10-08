@@ -154,5 +154,305 @@
       "caption": "Overview comparison matrix for dicer1 syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dicer1_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline DICER1 sequencing and deletion or duplication analysis",
+          "cells": [
+            {
+              "text": "Pathogenic germline DICER1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging in early childhood",
+          "cells": [
+            {
+              "text": "Lung cysts and pleuropulmonary blastoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal and pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Renal and ovarian tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound and clinical examination",
+          "cells": [
+            {
+              "text": "Multinodular goitre and differentiated thyroid cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour testing for the RNase IIIb hotspot mutation",
+          "cells": [
+            {
+              "text": "Characteristic hotspot supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Pineoblastoma or intracranial disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dicer1_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong multidisciplinary surveillance",
+          "cells": [
+            {
+              "text": "Syndrome itself is not treated; component tumours are treated when found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging in early childhood",
+          "cells": [
+            {
+              "text": "Detects lung cysts and blastoma before progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal and pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Cystic nephroma and ovarian Sertoli-Leydig cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid surveillance",
+          "cells": [
+            {
+              "text": "Goitre and differentiated thyroid cancer; intensified after chemotherapy or radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleuropulmonary blastoma treatment",
+          "cells": [
+            {
+              "text": "Resection; chemotherapy for higher-risk solid or mixed subtypes; radiotherapy used selectively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian and renal tumours",
+          "cells": [
+            {
+              "text": "Organ- or fertility-sparing surgery; systemic therapy for higher-grade disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid cancer",
+          "cells": [
+            {
+              "text": "Lobectomy or thyroidectomy when malignancy is confirmed or strongly suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiation minimisation",
+          "cells": [
+            {
+              "text": "Reduce exposure given the susceptibility to second malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dicer1_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of DICER1 syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DICER1 syndrome: lung cysts, renal or ovarian tumour, or thyroid nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory distress, lung lesion, suspicious thyroid nodule)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and tumour-specific treatment for suspected pleuropulmonary blastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline DICER1 sequencing; chest imaging; abdominal ultrasound; thyroid ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic germline DICER1 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital airway malformation, Li-Fraumeni or other tumour syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong multidisciplinary surveillance for component tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chest imaging in early childhood to detect lung cysts and blastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Abdominal and pelvic ultrasound for cystic nephroma and ovarian tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thyroid ultrasound surveillance; lobectomy if malignancy is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Penetrance is variable; pleuropulmonary blastoma is aggressive, so surveillance helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

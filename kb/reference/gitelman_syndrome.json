@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for gitelman syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gitelman_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium, magnesium and bicarbonate",
+          "cells": [
+            {
+              "text": "Hypokalaemic, hypomagnesaemic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypocalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Usually elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine electrolytes and covert diuretic screen",
+          "cells": [
+            {
+              "text": "Covert diuretic use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and supports counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "When significant hypokalaemia or hypomagnesaemia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gitelman_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bartter syndrome",
+          "cells": [
+            {
+              "text": "Separated by urinary calcium and serum magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surreptitious thiazide diuretic use",
+          "cells": [
+            {
+              "text": "Excluded by urine diuretic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperaldosteronism",
+          "cells": [
+            {
+              "text": "Distinguished by hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gitelman_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong oral magnesium replacement",
+          "cells": [
+            {
+              "text": "The priority; correcting magnesium stabilises potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral potassium with liberal salt and fluid",
+          "cells": [
+            {
+              "text": "Offsets renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing agents",
+          "cells": [
+            {
+              "text": "Spironolactone, eplerenone or amiloride to reduce potassium and magnesium loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous replacement",
+          "cells": [
+            {
+              "text": "Severe symptomatic depletion, tetany or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum potassium and magnesium; ECG surveillance during marked disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid QT-prolonging drugs",
+          "cells": [
+            {
+              "text": "Maintain salt and fluid intake during vomiting, diarrhoea or heat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; assessment of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gitelman_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Gitelman syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gitelman syndrome: hypokalaemia with hypomagnesaemia and alkalosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tetany, seizures, arrhythmia, prolonged QT)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV magnesium and potassium replacement with ECG monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, urinary calcium ratio, renin and aldosterone, and urine diuretic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does hypocalciuria with low magnesium confirm the diagnosis, with diuretics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bartter syndrome, surreptitious diuretic use or primary hyperaldosteronism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral magnesium replacement, the priority for stabilising potassium",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral potassium with liberal salt and fluid intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium-sparing agents such as spironolactone, eplerenone or amiloride",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous magnesium and potassium for severe symptomatic depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good long-term outlook with preserved renal function; lifelong supplementation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

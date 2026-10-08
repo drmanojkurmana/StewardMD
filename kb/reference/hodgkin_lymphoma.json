@@ -162,5 +162,463 @@
       "caption": "Overview comparison matrix for hodgkin's lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hodgkin Lymphoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/lymphomas/hodgkin-lymphoma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hodgkin_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging Hodgkin lymphoma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Criterion",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Reed-Sternberg cells",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 1% of tumour cells in inflammatory background",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Diagnostic of classical HL; needs expert haematopathologist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunophenotype",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "CD30 in 100%, CD15 in 85%, PAX-5 often positive",
+              "op": "=",
+              "value": 100
+            },
+            {
+              "text": "{{hy:CD20 low or absent in classical HL; NLPHL cells are CD30 and CD15 negative}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B symptoms",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Weight loss over 10% in 6 months, fever above 38 C, drenching sweats",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "About one-third at presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ann Arbor stage I to II",
+          "cells": [
+            {
+              "text": "One region, or two or more on one side of diaphragm"
+            },
+            {
+              "text": "Early stage, favourable or unfavourable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ann Arbor stage III to IV",
+          "cells": [
+            {
+              "text": "Both sides of diaphragm, or liver, marrow or diffuse extranodal disease"
+            },
+            {
+              "text": "Advanced stage, scored by IPS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unfavourable early-stage factors",
+          "unit": "sites",
+          "cells": [
+            {
+              "text": "Bulky disease, 4 or more nodal sites, age over 50, raised ESR",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "ESR above 30 with B symptoms or above 50 without"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "International Prognostic Score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1 point each: male, age over 45, stage IV, albumin below 4 g/dL, Hb below 10.5 g/dL, WBC 15,000/uL or more, lymphocytes below 600/uL",
+              "op": ">=",
+              "value": 0
+            },
+            {
+              "text": "5-year PFS 88% with no factors to 62% with 4 or more"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET/CT",
+          "cells": [
+            {
+              "text": "Staging and response"
+            },
+            {
+              "text": "Better than marrow biopsy for patchy marrow disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hodgkin_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes of Hodgkin lymphoma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Young patient, pharyngitis, atypical lymphocytes"
+            },
+            {
+              "text": "EBV serology; biopsy if nodes persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive lymphadenopathy",
+          "cells": [
+            {
+              "text": "Inflammatory or infectious cause, regresses"
+            },
+            {
+              "text": "Excision biopsy if persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-Hodgkin lymphoma",
+          "cells": [
+            {
+              "text": "Non-contiguous spread, CD20-positive sheets"
+            },
+            {
+              "text": "Biopsy with immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaplastic large-cell lymphoma",
+          "cells": [
+            {
+              "text": "CD30 positive, mimics HL in older patients"
+            },
+            {
+              "text": "T-cell markers, ALK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell/histiocyte-rich B-cell lymphoma",
+          "cells": [
+            {
+              "text": "Few large B cells in reactive background"
+            },
+            {
+              "text": "Expert immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenytoin-induced adenopathy",
+          "cells": [
+            {
+              "text": "Drug history"
+            },
+            {
+              "text": "Resolves after stopping drug"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hodgkin_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Treating Hodgkin lymphoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Abbreviated ABVD with or without radiotherapy",
+          "cells": [
+            {
+              "text": "Early stage I to II"
+            },
+            {
+              "text": "Cures about 85 to 90%; avoid bleomycin over age 60"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nivolumab-AVD or BV-AVD",
+          "cells": [
+            {
+              "text": "Advanced stage III to IV"
+            },
+            {
+              "text": "{{hy:Nivolumab-AVD poised to become standard}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PET-adapted ABVD (RATHL)",
+          "cells": [
+            {
+              "text": "Advanced stage"
+            },
+            {
+              "text": "2 ABVD cycles; PET negative: 4 more AVD; PET positive: escalate to BEACOPP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Escalated BEACOPP",
+          "cells": [
+            {
+              "text": "Advanced or PET-positive disease"
+            },
+            {
+              "text": "More toxicity; no survival gain over standard in some studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salvage chemotherapy then autologous transplant",
+          "cells": [
+            {
+              "text": "Relapsed or refractory, chemosensitive"
+            },
+            {
+              "text": "Allogeneic transplant for non-responders"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brentuximab vedotin or PD-1 inhibitor",
+          "cells": [
+            {
+              "text": "After at least 2 prior therapies"
+            },
+            {
+              "text": "Neuropathy with BV; immune toxicities with checkpoint inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Definitive radiotherapy",
+          "cells": [
+            {
+              "text": "Early-stage NLPHL"
+            },
+            {
+              "text": "15-year nonrelapse survival 82%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Survivorship",
+          "cells": [
+            {
+              "text": "All cured patients"
+            },
+            {
+              "text": "TSH every 6 months after neck radiation; breast screening from 8 to 10 years or age 40 after chest radiation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Cure rates differ by source: Harrison gives over 85% overall; Merck gives 85 to 90% for limited stage and 75 to 80% for advanced stage. Both kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hodgkin_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Hodgkin lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless cervical or mediastinal nodes, B symptoms or pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Excision biopsy with immunohistochemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Classical HL (CD30, CD15 positive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "NLPHL or other lymphoma: manage separately",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "PET/CT, CBC, ESR, albumin, HIV and hepatitis tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Ann Arbor stage I to II?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Abbreviated ABVD with or without radiotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Advanced: score IPS, start nivolumab-AVD, BV-AVD or ABVD",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "PET negative at end of therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Survivorship surveillance for late effects",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biopsy residual; salvage then autologous transplant",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

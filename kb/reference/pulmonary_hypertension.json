@@ -178,5 +178,514 @@
       "caption": "Overview comparison matrix for pulmonary hypertension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Rev Esp Cardiol 2023, 2022 ESC/ERS hemodynamic definitions",
+      "kind": "web",
+      "url": "https://www.revespcardiol.org/en-impact-of-the-revised-hemodynamic-defini-articulo-S1885585723000142"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 234-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Hemodynamic definitions of pulmonary hypertension (right heart catheter)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "mPAP",
+        "PAWP and PVR"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypertension",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 20 mmHg",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Older cutoff was 25 mmHg or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Precapillary PH (PAH, groups 1, 3, 4)",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 20 mmHg",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "PAWP 15 mmHg or less, PVR over 2 Wood units"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isolated postcapillary PH (group 2)",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 20 mmHg",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "PAWP over 15 mmHg, PVR 2 Wood units or less"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combined pre- and postcapillary PH",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 20 mmHg",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "PAWP over 15 mmHg, PVR over 2 Wood units"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echocardiography with bubble study",
+          "cells": [
+            {
+              "text": "Best initial screen"
+            },
+            {
+              "text": "{{hy:Right heart catheter confirms; echo cannot exclude}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "V/Q scan",
+          "cells": [
+            {
+              "text": "Mismatched perfusion defects"
+            },
+            {
+              "text": "Screen for CTEPH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFTs with DLCO",
+          "cells": [
+            {
+              "text": "Isolated low DLCO"
+            },
+            {
+              "text": "Classic for PAH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasoreactivity testing",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Responders under 5%",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Only responders get calcium channel blockers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "PVR threshold was lowered from 3 to 2 Wood units in 2022."
+    },
+    {
+      "id": "pulmonary_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Causes and look-alikes to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Left heart disease (HFpEF, valve disease)",
+          "cells": [
+            {
+              "text": "Commonest cause; PAWP over 15 mmHg"
+            },
+            {
+              "text": "Echo, right heart catheter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COPD, ILD or hypoventilation",
+          "cells": [
+            {
+              "text": "Hypoxic vasoconstriction and parenchymal loss"
+            },
+            {
+              "text": "PFTs, HRCT, sleep study"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CTEPH",
+          "cells": [
+            {
+              "text": "Prior VTE, mismatched perfusion defects"
+            },
+            {
+              "text": "V/Q scan then pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease PAH",
+          "cells": [
+            {
+              "text": "Systemic sclerosis features"
+            },
+            {
+              "text": "Autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portopulmonary hypertension",
+          "cells": [
+            {
+              "text": "Cirrhosis with portal hypertension"
+            },
+            {
+              "text": "Liver assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV or schistosomiasis PAH",
+          "cells": [
+            {
+              "text": "Risk exposure"
+            },
+            {
+              "text": "HIV test, schistosome serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital shunt or Eisenmenger",
+          "cells": [
+            {
+              "text": "Murmur, cyanosis"
+            },
+            {
+              "text": "Bubble echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deconditioning or asthma",
+          "cells": [
+            {
+              "text": "Nonspecific dyspnea, normal hemodynamics"
+            },
+            {
+              "text": "CPET, spirometry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Treating pulmonary hypertension by group",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Specialist centre classification",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "PAH drugs can harm groups 2 and 3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERA, PDE-5 inhibitor or riociguat, prostacyclin pathway drugs",
+          "cells": [
+            {
+              "text": "Group 1 PAH"
+            },
+            {
+              "text": "Combination therapy by risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium channel blocker",
+          "cells": [
+            {
+              "text": "Vasoreactive PAH only"
+            },
+            {
+              "text": "Fewer than 5% respond"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat left heart disease",
+          "cells": [
+            {
+              "text": "Group 2"
+            },
+            {
+              "text": "Not PAH-specific drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and treat lung disease",
+          "cells": [
+            {
+              "text": "Group 3"
+            },
+            {
+              "text": "Treat sleep-disordered breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong anticoagulation plus endarterectomy, balloon angioplasty or riociguat",
+          "cells": [
+            {
+              "text": "Group 4 CTEPH"
+            },
+            {
+              "text": "Endarterectomy can cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and oxygen",
+          "cells": [
+            {
+              "text": "Right heart failure, hypoxemia"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplant",
+          "cells": [
+            {
+              "text": "Refractory PAH"
+            },
+            {
+              "text": "Refer early"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained dyspnea, syncope or right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Echocardiography with bubble study, ECG, chest x-ray",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Echo suggests PH?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for other causes of dyspnea",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Left heart or lung disease explains it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat underlying disease (group 2 or 3)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "V/Q scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Mismatched perfusion defects?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "CTEPH: anticoagulate, refer for endarterectomy or BPA",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Right heart catheter at expert centre",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "mPAP over 20, PAWP 15 or less, PVR over 2 WU?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "PAH: vasoreactivity test, targeted therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Postcapillary: manage left heart disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

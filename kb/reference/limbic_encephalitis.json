@@ -150,5 +150,352 @@
       "caption": "Overview comparison matrix for limbic encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limbic_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF neuronal antibody panels",
+          "cells": [
+            {
+              "text": "Surface and intracellular antigens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI focused on the medial temporal lobes",
+          "cells": [
+            {
+              "text": "Increased T2 or FLAIR signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Cell count, protein, oligoclonal bands; excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures and encephalopathic patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body CT and FDG-PET",
+          "cells": [
+            {
+              "text": "Underlying malignancy; repeated if initially negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibody-directed tumour screening",
+          "cells": [
+            {
+              "text": "For example pelvic imaging for ovarian teratoma in NMDA-receptor disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limbic_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex and other viral encephalitis",
+          "cells": [
+            {
+              "text": "Empirical aciclovir while herpes simplex remains possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS lymphoma",
+          "cells": [
+            {
+              "text": "Neoplastic infiltration of the central nervous system"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wernicke encephalopathy and metabolic encephalopathies",
+          "cells": [
+            {
+              "text": "Metabolic causes to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapidly progressive dementia including prion disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limbic_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids, IVIG and/or plasma exchange; most effective when given early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunotherapy",
+          "cells": [
+            {
+              "text": "Rituximab or cyclophosphamide for refractory, severe or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour treatment",
+          "cells": [
+            {
+              "text": "Including resection of ovarian teratoma in NMDA-receptor disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Antiseizure medication, including for faciobrachial dystonic seizures in LGI1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Psychiatric, movement and autonomic management; intensive care and airway support when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyponatraemia",
+          "cells": [
+            {
+              "text": "Corrected; characteristic of LGI1 antibody disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Repeated when the initial screen is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Neurorehabilitation and neuropsychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limbic_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Limbic encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute short-term memory loss, confusion, psychiatric change and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory seizures, reduced consciousness, autonomic instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive monitoring; empirical aciclovir while HSV is possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antibody panels in serum and CSF, MRI medial temporal, LP, EEG, CT or PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a neuronal antibody identified with a compatible picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpes simplex encephalitis, prion disease or metabolic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line corticosteroids with IVIG and/or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab or cyclophosphamide for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Search for and treat underlying malignancy, such as ovarian teratoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication and correction of hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance tumour imaging and neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Surface-antigen disease often recovers; intracellular-antigen disease fares worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

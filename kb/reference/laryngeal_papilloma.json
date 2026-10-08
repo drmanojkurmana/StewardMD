@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for laryngeal papilloma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngeal_papilloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Identifies and maps papillomatous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rigid endoscopy under anaesthesia with biopsy",
+          "cells": [
+            {
+              "text": "Assessment, mapping and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Confirms papilloma; excludes dysplasia or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV typing of tissue",
+          "cells": [
+            {
+              "text": "Type 11 carries higher prognostic concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheobronchoscopy or imaging",
+          "cells": [
+            {
+              "text": "Distal airway or pulmonary spread, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_papilloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vocal fold leukoplakia or dysplasia",
+          "cells": [
+            {
+              "text": "Excluded by histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verrucous or invasive squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Malignant transformation is more likely with type 11 or prior irradiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal fold polyp",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngeal_papilloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated conservative debulking",
+          "cells": [
+            {
+              "text": "Microdebrider or CO2 laser; preserves airway and voice while sparing normal mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant therapy",
+          "cells": [
+            {
+              "text": "Intralesional cidofovir or systemic bevacizumab for aggressive or frequently recurring disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute airway obstruction",
+          "cells": [
+            {
+              "text": "Prompt management; avoid tracheostomy where possible, as it risks distal seeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice therapy",
+          "cells": [
+            {
+              "text": "Supports voice after cumulative scarring from repeated procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Endoscopy for recurrence, distal spread and malignant transformation, especially HPV type 11"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV typing and histology",
+          "cells": [
+            {
+              "text": "Prognostic stratification; exclude dysplasia on excised tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated review",
+          "cells": [
+            {
+              "text": "ENT and respiratory specialist care with structured review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngeal_papilloma-dx-mgmt",
+      "title": "Diagnosis and management of Laryngeal papilloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent exophytic laryngeal papillomas with hoarseness, cry change or stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, distal spread, ulceration, frequent recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway management for bulky disease with stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy, biopsy with histology, HPV typing, distal airway imaging if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm papilloma without dysplasia or malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dysplasia, carcinoma or other benign lesions; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repeated conservative debulking with microdebrider or CO2 laser",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant cidofovir or bevacizumab for aggressive or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid tracheostomy where possible, to limit distal seeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Voice therapy after cumulative scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance endoscopy for recurrence and malignant change",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Unpredictable, often chronic recurrence; aggressive or distal disease carries risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

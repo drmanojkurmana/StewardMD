@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for erythema toxicum neonatorum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatal and Infant Dermatology (Eichenfield, Frieden)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythema_toxicum_neonatorum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wright or Giemsa stain of pustule contents",
+          "cells": [
+            {
+              "text": "Predominant eosinophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and bacterial culture",
+          "cells": [
+            {
+              "text": "Staphylococcal infection when the neonate is unwell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral swabs and PCR for herpes simplex",
+          "cells": [
+            {
+              "text": "Vesicular lesions with clinical suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium hydroxide preparation",
+          "cells": [
+            {
+              "text": "Excludes candidal pustulosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, where assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic screen including blood culture",
+          "cells": [
+            {
+              "text": "Systemically unwell neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical or diagnostically uncertain presentations only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_toxicum_neonatorum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transient neonatal pustular melanosis",
+          "cells": [
+            {
+              "text": "Present at birth and leaves pigmented macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal herpes simplex infection",
+          "cells": [
+            {
+              "text": "Grouped vesicles, especially on the scalp or presenting part"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous impetigo or staphylococcal pustulosis",
+          "cells": [
+            {
+              "text": "A positive Gram stain or culture indicates bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_toxicum_neonatorum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No specific treatment",
+          "cells": [
+            {
+              "text": "The eruption is benign and self-limiting; parental reassurance is the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigation or antibiotics",
+          "cells": [
+            {
+              "text": "Once the clinical diagnosis is secure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wright or Giemsa stain",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain; shows eosinophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infective mimics",
+          "cells": [
+            {
+              "text": "Staphylococcal, herpes simplex or candidal infection if the neonate is unwell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine gentle skin care",
+          "cells": [
+            {
+              "text": "Observation for spontaneous resolution over days to a couple of weeks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythema_toxicum_neonatorum-dx-mgmt",
+      "title": "Diagnosis and management of erythema toxicum neonatorum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well term neonate with flea-bitten erythematous papules or pustules in the first days",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (unwell or febrile neonate, grouped vesicles, palm or sole involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Septic screen and blood culture for an unwell neonate; viral testing if vesicles",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wright or Giemsa stain of pustule contents; FBC for eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Eosinophil-rich pustules in a well infant with classic morphology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Culture, herpes simplex PCR or KOH to exclude infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parental reassurance; no specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid unnecessary investigation or antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gentle routine skin care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observe spontaneous resolution over days to a couple of weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; resolves within days to a couple of weeks without scarring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

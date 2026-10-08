@@ -175,5 +175,453 @@
       "caption": "Overview comparison matrix for adrenal cortical disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Addison Disease",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/addison-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Primary Aldosteronism",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/primary-aldosteronism",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key tests in adrenal cortical disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Cushing screening",
+          "cells": [
+            {
+              "text": "1 mg overnight dexamethasone test, late-night salivary cortisol, 24-h urinary free cortisol"
+            },
+            {
+              "text": "{{hy:Exclude exogenous steroids; confirm before any imaging}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cushing: plasma ACTH",
+          "cells": [
+            {
+              "text": "Suppressed vs normal or high"
+            },
+            {
+              "text": "Suppressed: adrenal CT; normal or high: pituitary MRI and dynamic tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior petrosal sinus sampling",
+          "cells": [
+            {
+              "text": "Central to peripheral ACTH above 2 at baseline, above 3 after CRH",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Pituitary source; MRI normal in up to 40%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal insufficiency: morning cortisol",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Below 5 is low",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "With ACTH 50 pg/mL or more: primary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cosyntropin 250 mcg test",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Peak below 18 at 30 or 60 min",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "Adrenal insufficiency likely; assay dependent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary adrenal insufficiency labs",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Na below 135, K above 5, Na:K below 30:1"
+            },
+            {
+              "text": "Hyperpigmentation; secondary disease has low ACTH and near-normal electrolytes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aldosterone to renin ratio",
+          "cells": [
+            {
+              "text": "Aldosterone above 15 ng/dL with ratio above 20",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Screen for primary aldosteronism; confirm with salt loading"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adrenal incidentaloma",
+          "cells": [
+            {
+              "text": "1 mg dexamethasone test in all; metanephrines if HU above 10; renin and aldosterone if hypertensive"
+            },
+            {
+              "text": "Unenhanced CT attenuation guides"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_disorders-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis in adrenal cortical disorders",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudo-Cushing states",
+          "cells": [
+            {
+              "text": "{{hy:Alcohol, depression, morbid obesity raise cortisol without true Cushing}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cushing disease vs ectopic ACTH",
+          "cells": [
+            {
+              "text": "Pituitary adenoma vs carcinoid, small-cell lung cancer; IPSS separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal Cushing",
+          "cells": [
+            {
+              "text": "Adenoma, carcinoma, macronodular or pigmented nodular disease; ACTH suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liddle syndrome, apparent mineralocorticoid excess, liquorice",
+          "cells": [
+            {
+              "text": "Low renin and low aldosterone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Low ACTH, no hyperpigmentation, electrolytes often normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyponatraemia from SIAD, heart or liver failure",
+          "cells": [
+            {
+              "text": "No hyperpigmentation, hyperkalaemia or raised BUN"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other hyperpigmentation",
+          "cells": [
+            {
+              "text": "Haemochromatosis, heavy metals, Peutz-Jeghers, lung cancer"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment of adrenal cortical disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone 100 mg IV",
+          "cells": [
+            {
+              "text": "{{hy:Adrenal crisis, give before test results}}"
+            },
+            {
+              "text": "Repeat every 6 to 8 h for 24 h; 1 L D5 in 0.9% saline over 1 to 2 h, then saline"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrocortisone maintenance",
+          "cells": [
+            {
+              "text": "Chronic adrenal insufficiency"
+            },
+            {
+              "text": "15 to 25 mg/day in 2 or 3 doses, e.g. 10, 5, 5 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fludrocortisone",
+          "cells": [
+            {
+              "text": "Primary adrenal insufficiency"
+            },
+            {
+              "text": "0.1 to 0.2 mg daily, titrate to BP and potassium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Intercurrent illness"
+            },
+            {
+              "text": "Double hydrocortisone; carry 100 mg injectable hydrocortisone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transsphenoidal surgery or adrenalectomy",
+          "cells": [
+            {
+              "text": "Endogenous Cushing syndrome"
+            },
+            {
+              "text": "Remove the source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metyrapone or ketoconazole",
+          "cells": [
+            {
+              "text": "Cushing when surgery delayed or incomplete"
+            },
+            {
+              "text": "Steroidogenesis inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenalectomy or spironolactone",
+          "cells": [
+            {
+              "text": "Primary aldosteronism, unilateral vs bilateral"
+            },
+            {
+              "text": "Spironolactone 50 mg rising to 50 to 100 mg daily"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_disorders-dx-mgmt",
+      "title": "Diagnosis and management of adrenal cortical disorders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected adrenal cortical disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shock, hypotension, hyponatraemia, hyperkalaemia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Draw cortisol and ACTH; hydrocortisone 100 mg IV and fluids",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Confirm with cosyntropin test; start maintenance replacement",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cushingoid features (striae, bruising, proximal myopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude exogenous steroids; 2 screening tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "ACTH suppressed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Adrenal CT; adrenalectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Pituitary MRI, dynamic tests, IPSS; pituitary surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Hypertension with hypokalaemia or resistance?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aldosterone-renin ratio and confirmatory testing",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Evaluate incidentaloma or other cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Confirmed"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

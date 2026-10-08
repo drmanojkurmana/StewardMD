@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for hypermanganesaemia with dystonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypermanganesemia_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-blood manganese concentration",
+          "cells": [
+            {
+              "text": "Markedly elevated manganese"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Symmetrical T1 hyperintensity in basal ganglia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Polycythaemia; low ferritin with high total iron-binding capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging or elastography",
+          "cells": [
+            {
+              "text": "Hepatic involvement; fibrosis or cirrhosis in SLC30A10 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC30A10 and SLC39A14 genetic testing",
+          "cells": [
+            {
+              "text": "Type 1 (SLC30A10) or type 2 (SLC39A14) disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary manganese excretion",
+          "cells": [
+            {
+              "text": "Guides and monitors chelation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermanganesemia_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired manganese toxicity",
+          "cells": [
+            {
+              "text": "Parenteral nutrition, environmental or occupational exposure, or chronic liver failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary polycythaemia (JAK2-related)",
+          "cells": [
+            {
+              "text": "Polycythaemia here is driven by manganese-stimulated erythropoietin, with dystonia present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermanganesemia_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Intravenous disodium calcium edetate; urinary manganese monitored to guide courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral iron",
+          "cells": [
+            {
+              "text": "Competes with manganese uptake, particularly in SLC30A10 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and environmental restriction",
+          "cells": [
+            {
+              "text": "Restrict manganese exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic dystonia treatment",
+          "cells": [
+            {
+              "text": "Anticholinergics, baclofen or botulinum toxin injections, with physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Whole-blood manganese, full blood count, iron studies, liver function and hepatic imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Considered for end-stage hepatic disease in SLC30A10 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; coordinate metabolic, neurology and hepatology care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypermanganesemia_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Hypermanganesaemia with dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dystonia with parkinsonian gait; polycythaemia or liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly progressive dystonia, gait failure or decompensated liver disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of liver status and adequacy of chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood manganese, T1 basal-ganglia MRI, iron studies, SLC30A10 or SLC39A14 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised manganese with characteristic MRI confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired manganese toxicity or other genetic dystonias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Chelation with intravenous disodium calcium edetate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral iron to compete with manganese uptake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict dietary and environmental manganese",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic dystonia treatment with physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider liver transplantation for end-stage SLC30A10 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early treatment can stabilise or improve neurological and hepatic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

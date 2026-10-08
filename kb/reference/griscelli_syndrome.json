@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for griscelli syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical immunology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "griscelli_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of the hair shaft",
+          "cells": [
+            {
+              "text": "Large pigment clumps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYO5A, RAB27A and MLPH genetic testing",
+          "cells": [
+            {
+              "text": "Molecular subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NK cell and cytotoxic lymphocyte degranulation assays",
+          "cells": [
+            {
+              "text": "Cytotoxic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, ferritin, triglycerides and fibrinogen",
+          "cells": [
+            {
+              "text": "Haemophagocytosis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging in suspected type 1",
+          "cells": [
+            {
+              "text": "Neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Where HLH is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "griscelli_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chediak-Higashi syndrome",
+          "cells": [
+            {
+              "text": "Giant granules are absent in Griscelli syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hermansky-Pudlak syndrome",
+          "cells": [
+            {
+              "text": "Oculocutaneous albinism with bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Immune activation without pigmentary change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "griscelli_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HLH accelerated phase in type 2",
+          "cells": [
+            {
+              "text": "Immunochemotherapy under an HLH protocol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Only curative treatment for the immunodeficiency of type 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Infection prophylaxis, transfusion and prompt treatment of intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 neurodisability care",
+          "cells": [
+            {
+              "text": "Physiotherapy, antiseizure medication, feeding and developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 3 management",
+          "cells": [
+            {
+              "text": "Pigmentary change only; reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Type 2 reactivation of HLH and neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing of MYO5A, RAB27A or MLPH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "griscelli_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Griscelli syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Griscelli syndrome: silvery hair with pigment clumps and immune features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever with cytopenias, neurological decline, overwhelming infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent HLH protocol treatment for fever with cytopenias and hyperferritinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair microscopy, gene panel, degranulation assays, ferritin and marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do gene testing and degranulation assays confirm the subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Chediak-Higashi, Hermansky-Pudlak or familial HLH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "HLH protocol immunochemotherapy for the accelerated phase in type 2",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation for type 2 immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Infection prophylaxis, transfusion and prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurodisability care for type 1 with physiotherapy and antiseizure medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 2 is fatal untreated; transplantation can cure the immunodeficiency",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

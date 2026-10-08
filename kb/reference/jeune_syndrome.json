@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for jeune syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jeune_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Narrow thorax, short ribs and acetabular spurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung function and thoracic imaging",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliopathy skeletal gene panel",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and imaging",
+          "cells": [
+            {
+              "text": "Progressive nephronopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and hepatic imaging",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jeune_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ellis-van Creveld syndrome",
+          "cells": [
+            {
+              "text": "Distinguished by cardiac and ectodermal assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-rib polydactyly syndromes",
+          "cells": [
+            {
+              "text": "Polydactyly present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jeune_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Oxygen and non-invasive ventilation, to mechanical ventilation in severe infantile disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic expansion",
+          "cells": [
+            {
+              "text": "Vertical expandable prosthetic titanium rib or lateral thoracoplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Prompt chest infection treatment, airway clearance and immunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Surveillance and treatment as it evolves, including dialysis or transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term review",
+          "cells": [
+            {
+              "text": "Hepatic and ophthalmological review in survivors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; multidisciplinary skeletal dysplasia team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jeune_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Jeune syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Narrow bell-shaped thorax with short ribs and respiratory distress from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory failure, recurrent chest infection, renal impairment or liver fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate respiratory support; urgent renal review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, lung function, thoracic imaging, ciliopathy panel, renal and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thoracic insufficiency with ciliopathy variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ellis-van Creveld or another short-rib dysplasia; repeat genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory support proportionate to need, up to ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thoracic expansion surgery such as VEPTR or lateral thoracoplasty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt treatment of infection; airway clearance and immunisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and hepatic surveillance with treatment as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thoracic insufficiency can be fatal in infancy; long-term multisystem surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

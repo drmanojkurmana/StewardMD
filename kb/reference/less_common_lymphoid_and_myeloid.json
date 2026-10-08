@@ -176,5 +176,547 @@
       "caption": "Overview comparison matrix for less common lymphoid and myeloid malignancies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "NCI PDQ, Hairy Cell Leukemia Treatment (Health Professional)",
+      "kind": "web",
+      "url": "https://www.cancer.gov/types/leukemia/hp/hairy-cell-treatment-pdq"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e21-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "less_common_lymphoid_and_myeloid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining features of the less common lymphoid and myeloid neoplasms",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Defining finding",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hairy cell leukaemia",
+          "cells": [
+            {
+              "text": "CD11c, CD25, CD103 and very high CD20 on flow; BRAF V600E"
+            },
+            {
+              "text": "{{hy:Monocytopenia and dry tap}}; HCL variant lacks CD25 and BRAF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Splenic marginal zone lymphoma",
+          "cells": [
+            {
+              "text": "CD20 positive; CD5, CD10, CD43, CD103 negative; villous lymphocytes"
+            },
+            {
+              "text": "CD5 negative separates it from CLL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell prolymphocytic leukaemia",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "WBC often over 100,000/uL; inv(14)(q11q32) in about 80%",
+              "op": ">",
+              "value": 100000
+            },
+            {
+              "text": "Aggressive; hepatosplenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell large granular lymphocytic leukaemia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Severe neutropenia; pure red cell aplasia in 15 to 20%",
+              "range": [
+                15,
+                20
+              ]
+            },
+            {
+              "text": "Linked to rheumatoid arthritis; indolent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extranodal NK/T-cell lymphoma, nasal type",
+          "cells": [
+            {
+              "text": "EBV-related, CD56 positive, angiodestructive midline lesion"
+            },
+            {
+              "text": "Common in Asia and Latin America"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary effusion lymphoma",
+          "cells": [
+            {
+              "text": "HHV-8 driven effusions without a mass"
+            },
+            {
+              "text": "Mostly in AIDS; rapidly fatal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMML-1 versus CMML-2",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "CMML-1: under 10% marrow and under 5% blood blasts",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "CMML-2: 10 to 19% marrow or 5 to 19% blood blasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mast cell leukaemia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Mast cells 20% or more of marrow aspirate",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "Oncologic emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypereosinophilia",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Absolute eosinophils 1500/uL or more",
+              "op": ">=",
+              "value": 1500
+            },
+            {
+              "text": "HES needs eosinophil-mediated organ damage; screen for PDGFRA or PDGFRB rearrangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dry tap causes",
+          "cells": [
+            {
+              "text": "Metastatic carcinoma 17%, CML 15%, myelofibrosis 14%, hairy cell 10%, acute leukaemia 10%, lymphoma or Hodgkin 9%, normal marrow rare"
+            },
+            {
+              "text": "Dry taps occur in about 4% of aspirates"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison 22e prints the hypereosinophilia threshold as 1500 x10^9/L; the usual unit is 1500/uL (1.5 x10^9/L)."
+    },
+    {
+      "id": "less_common_lymphoid_and_myeloid-ddx",
+      "kind": "ddx",
+      "title": "Rare neoplasms and the common conditions they resemble",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Splenic marginal zone lymphoma vs CLL",
+          "cells": [
+            {
+              "text": "CLL is CD5 positive"
+            },
+            {
+              "text": "Flow cytometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hairy cell leukaemia vs splenic marginal zone lymphoma",
+          "cells": [
+            {
+              "text": "HCL is CD103 and CD25 positive with BRAF V600E"
+            },
+            {
+              "text": "Flow cytometry and BRAF testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-prolymphocytic leukaemia vs leukaemic mantle cell lymphoma",
+          "cells": [
+            {
+              "text": "Both may be CD5 positive with t(11;14)"
+            },
+            {
+              "text": "No reliable separating test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal large B-cell lymphoma vs nodular sclerosing Hodgkin",
+          "cells": [
+            {
+              "text": "MLBCL is CD45 and CD20 positive, no lacunar cells"
+            },
+            {
+              "text": "Biopsy immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic neutrophilic leukaemia vs reactive neutrophilia",
+          "cells": [
+            {
+              "text": "Infection, inflammation, myeloma or cancer cause reactive neutrophilia"
+            },
+            {
+              "text": "CSF3R mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMML vs reactive monocytosis",
+          "cells": [
+            {
+              "text": "TB, endocarditis, fungal infection, sarcoid, postsplenectomy"
+            },
+            {
+              "text": "Marrow morphology and molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hypereosinophilia vs reactive",
+          "cells": [
+            {
+              "text": "Helminths, allergy, drugs, vasculitis"
+            },
+            {
+              "text": "Stool and serology for parasites; PDGFRA FISH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic mastocytosis vs hereditary alpha-tryptasaemia",
+          "cells": [
+            {
+              "text": "Both raise serum tryptase"
+            },
+            {
+              "text": "KIT D816V and marrow biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "less_common_lymphoid_and_myeloid-treatment",
+      "kind": "treatment",
+      "title": "Entity-specific treatment",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic HCL with acceptable counts"
+            },
+            {
+              "text": "Treat for symptomatic cytopenias, growing spleen or infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cladribine with or without rituximab",
+          "cells": [
+            {
+              "text": "{{hy:First-line hairy cell leukaemia}}"
+            },
+            {
+              "text": "Cladribine 0.15 mg/kg IV days 1 to 5; complete response 50 to 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BRAF inhibitor with or without anti-CD20",
+          "cells": [
+            {
+              "text": "HCL in frail or infected patients, or relapse"
+            },
+            {
+              "text": "Vemurafenib or dabrafenib with trametinib"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab-based therapy",
+          "cells": [
+            {
+              "text": "CD20-positive B-cell entities such as splenic marginal zone or mediastinal large B-cell lymphoma"
+            },
+            {
+              "text": "Splenectomy for symptomatic splenic marginal zone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imatinib",
+          "cells": [
+            {
+              "text": "Eosinophilic neoplasm with PDGFRA or PDGFRB rearrangement"
+            },
+            {
+              "text": "Highly responsive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT-directed therapy",
+          "cells": [
+            {
+              "text": "Advanced systemic mastocytosis"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alemtuzumab then allogeneic transplant",
+          "cells": [
+            {
+              "text": "T-cell prolymphocytic leukaemia"
+            },
+            {
+              "text": "Consolidate if fit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "HIV-associated primary effusion lymphoma"
+            },
+            {
+              "text": "Plus chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Cytopenias and infection risk"
+            },
+            {
+              "text": "Prophylaxis, transfusion; cardiac screen in HES"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Doses are given only where NCI PDQ states them."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "less_common_lymphoid_and_myeloid-dx-mgmt",
+      "title": "Diagnosis and management of less common lymphoid and myeloid malignancies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained cytopenia, lymphocytosis, splenomegaly or eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood film, flow cytometry, marrow with cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Reactive cause excluded (infection, parasites, drugs, inflammation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the reactive cause and repeat counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mature B, T or NK lymphoid clone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Classify by markers: CD5, CD25, CD103, CD56, EBV, BRAF",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Hairy cell leukaemia needing treatment?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Cladribine with or without rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Entity-specific therapy in a haemato-oncology unit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Myeloid work-up: CSF3R, KIT D816V, PDGFRA or B, tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "PDGFRA or PDGFRB rearranged?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Imatinib",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

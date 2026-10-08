@@ -156,5 +156,471 @@
       "caption": "Overview comparison matrix for polycystic kidney disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, ADPKD",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/cystic-kidney-disease/autosomal-dominant-polycystic-kidney-disease-adpkd"
+    },
+    {
+      "id": "c3",
+      "label": "AuntMinnie report of Pei unified ultrasound criteria (JASN)",
+      "kind": "web",
+      "url": "https://www.auntminnie.com/clinical-news/ultrasound/article/15588532/researchers-propose-new-ultrasound-screening-criteria-for-adpkd"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polycystic_kidney_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing ADPKD in at-risk family members",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Ultrasound criterion",
+        "Comment"
+      ],
+      "rows": [
+        {
+          "parameter": "Age 15 to 39 years",
+          "unit": "cysts",
+          "cells": [
+            {
+              "text": "3 or more renal cysts, one or both kidneys",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Positive predictive value 100%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Age 40 to 59 years",
+          "unit": "cysts per kidney",
+          "cells": [
+            {
+              "text": "2 or more cysts in each kidney",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Diagnostic"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Age 60 years or more",
+          "unit": "cysts per kidney",
+          "cells": [
+            {
+              "text": "4 or more cysts in each kidney",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Simple cysts rise with age"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Exclusion at age 40 or more",
+          "unit": "cysts",
+          "cells": [
+            {
+              "text": "Fewer than 2 renal cysts",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Excludes ADPKD"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Under 30 with negative scan",
+          "cells": [
+            {
+              "text": "Cannot reliably exclude"
+            },
+            {
+              "text": "Repeat scan or MRI or genetic testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Detects cysts of 2 to 3 mm"
+            },
+            {
+              "text": "Equivocal cases and kidney volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total kidney volume",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "Over 1500 mL",
+              "op": ">",
+              "value": 1500
+            },
+            {
+              "text": "{{hy:Strongest predictor of progression}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Genetics",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "PKD1 about 85%, PKD2 about 15%",
+              "op": "=",
+              "value": 85
+            },
+            {
+              "text": "PKD2 milder and later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common findings",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Hematuria and hypertension each about 40 to 50%",
+              "range": [
+                40,
+                50
+              ]
+            },
+            {
+              "text": "Proteinuria minor, under 3.5 g/day in about 20%"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Criteria apply to people with a family history; no imaging criteria are set without one."
+    },
+    {
+      "id": "polycystic_kidney_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic ADPKD",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple renal cysts",
+          "cells": [
+            {
+              "text": "Few cysts, increase with age, normal kidney size"
+            },
+            {
+              "text": "Age-based cyst count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal recessive PKD",
+          "cells": [
+            {
+              "text": "Childhood onset, hepatic fibrosis, parents without cysts after 40"
+            },
+            {
+              "text": "Parental ultrasound, PKHD1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADPKD-like disease (GANAB, DNAJB11)",
+          "cells": [
+            {
+              "text": "Normal or small kidneys, fewer cysts"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADTKD (UMOD, MUC1, others)",
+          "cells": [
+            {
+              "text": "Small fibrotic kidneys, gout"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberous sclerosis",
+          "cells": [
+            {
+              "text": "Angiomyolipomas, skin and CNS lesions"
+            },
+            {
+              "text": "MRI, TSC genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal cell carcinoma in a complex cyst",
+          "cells": [
+            {
+              "text": "Solid enhancing component"
+            },
+            {
+              "text": "Contrast CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polycystic_kidney_disease-treatment",
+      "kind": "treatment",
+      "title": "Managing ADPKD",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Hypertension"
+            },
+            {
+              "text": "Strict BP control is essential"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High water intake, sodium restriction",
+          "cells": [
+            {
+              "text": "All who can excrete the load"
+            },
+            {
+              "text": "Suppresses vasopressin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tolvaptan",
+          "cells": [
+            {
+              "text": "Adults at risk of rapid progression"
+            },
+            {
+              "text": "Polyuria; contraindicated with liver injury; specialist start"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Cyst infection or pyelonephritis"
+            },
+            {
+              "text": "Infection is the second commonest cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst aspiration or nephrectomy",
+          "cells": [
+            {
+              "text": "Severe pain, bleeding or recurrent infection"
+            },
+            {
+              "text": "No long-term benefit from aspiration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MR angiography screening",
+          "cells": [
+            {
+              "text": "Family history of aneurysm or hemorrhagic stroke"
+            },
+            {
+              "text": "Aneurysms in about 4% of young and up to 10% of older adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dialysis or transplant",
+          "cells": [
+            {
+              "text": "Kidney failure"
+            },
+            {
+              "text": "Kidney failure in 35 to 45% by age 60; disease does not recur in graft"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polycystic_kidney_disease-dx-mgmt",
+      "title": "Diagnosis and management of ADPKD",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Family history, hypertension, hematuria, flank pain or incidental cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Renal ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Meets age-based cyst criteria?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Under 30 or equivocal scan?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "ADPKD unlikely",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "MRI or genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Measure kidney volume; check BP and eGFR",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "High risk of rapid progression?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Tolvaptan plus BP control and fluids",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "ACE inhibitor or ARB, water intake, monitor",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

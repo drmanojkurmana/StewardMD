@@ -153,5 +153,323 @@
       "caption": "Overview comparison matrix for eosinophilic proctocolitis of infancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_proctocolitis_infant-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trial of dietary protein elimination",
+          "cells": [
+            {
+              "text": "Both diagnostic and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and culture",
+          "cells": [
+            {
+              "text": "Excludes infective colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia and anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apt-Downey test",
+          "cells": [
+            {
+              "text": "Distinguishes swallowed maternal blood in the neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal calprotectin",
+          "cells": [
+            {
+              "text": "Raised but non-specific in early infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible sigmoidoscopy or colonoscopy with mucosal biopsy",
+          "cells": [
+            {
+              "text": "Eosinophilic mucosal infiltrate; reserved for atypical or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_proctocolitis_infant-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anal fissure",
+          "cells": [
+            {
+              "text": "Attributing all infant rectal bleeding to allergy misses this"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Food protein-induced enterocolitis syndrome (FPIES)",
+          "cells": [
+            {
+              "text": "The infant stays systemically well, without prominent vomiting, dehydration or shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective colitis (Salmonella, Shigella, Campylobacter, shiga-toxin E. coli)",
+          "cells": [
+            {
+              "text": "Excluded by stool microscopy and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_proctocolitis_infant-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal elimination diet",
+          "cells": [
+            {
+              "text": "Exclusion of cow's milk, and often soy, while breastfeeding continues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensively hydrolysed or amino-acid formula",
+          "cells": [
+            {
+              "text": "For formula-fed infants; amino-acid formula where hydrolysed formula fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting course in a well, thriving infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical confirmation",
+          "cells": [
+            {
+              "text": "Rectal bleeding settles within days to a couple of weeks after the trigger protein is removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and anaemia monitoring",
+          "cells": [
+            {
+              "text": "Growth, resolution of bleeding, and correction of iron-deficiency anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned reintroduction",
+          "cells": [
+            {
+              "text": "Supervised reintroduction of the protein after a period, to confirm acquired tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric and dietitian support",
+          "cells": [
+            {
+              "text": "Maternal nutrition on the elimination diet; escalate if FPIES or another diagnosis is suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_proctocolitis_infant-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic proctocolitis of infancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well, thriving infant with mucousy, blood-streaked stools in the first months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (faltering growth, vomiting or dehydration, brisk bleeding, obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude FPIES, necrotising enterocolitis, or surgical and obstructive causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy and culture, FBC, Apt-Downey test, and a protein elimination trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rectal bleeding settles after the trigger protein is removed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anal fissure or infective colitis; sigmoidoscopy with biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maternal exclusion of cow's milk and often soy, continuing breastfeeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Extensively hydrolysed or amino-acid formula for formula-fed infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor growth and bleeding; correct iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supervised reintroduction after a period to confirm tolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; most infants develop tolerance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

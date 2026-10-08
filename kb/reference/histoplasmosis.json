@@ -165,5 +165,465 @@
       "caption": "Overview comparison matrix for histoplasmosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Histoplasmosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/histoplasmosis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "histoplasmosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing histoplasmosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or test",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Ohio and Mississippi valleys; caves, bird or bat droppings, demolition"
+            },
+            {
+              "text": "Acute illness 1 to 4 weeks after exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine plus serum antigen",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:Above 95% sensitive in disseminated disease}}",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Above 80% in severe acute pulmonary disease; levels track response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine antigen alone (disseminated)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 90% positive",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Serum antigen about 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antigen cross-reactivity",
+          "cells": [
+            {
+              "text": "Blastomyces, Coccidioides, Paracoccidioides, Talaromyces"
+            },
+            {
+              "text": "Interpret with clinical picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 75% of disseminated and chronic pulmonary disease",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Gold standard but up to 1 month; BAL, marrow, blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology (ID, CF, EIA)",
+          "cells": [
+            {
+              "text": "Best in immunocompetent and chronic pulmonary disease"
+            },
+            {
+              "text": "Insensitive early and in transplant recipients; can persist for years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Small narrow-budding intracellular yeasts"
+            },
+            {
+              "text": "Blood smear yeasts in advanced HIV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-risk host",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "AIDS with CD4 below 200/uL, anti-TNF, transplant",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "About 70% of disseminated cases are immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthritis with erythema nodosum",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 10% of acute cases",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Inflammatory, not dissemination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "histoplasmosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic histoplasmosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cavitary tuberculosis",
+          "cells": [
+            {
+              "text": "Upper-lobe cavities like chronic histoplasmosis"
+            },
+            {
+              "text": "Sputum AFB smear, culture and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Hilar adenopathy, erythema nodosum"
+            },
+            {
+              "text": "Negative antigen, non-caseating granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Mediastinal mass, fever, cytopenias"
+            },
+            {
+              "text": "Node biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodule in a smoker"
+            },
+            {
+              "text": "Calcified nodule favours old granuloma; biopsy if uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blastomycosis or coccidioidomycosis",
+          "cells": [
+            {
+              "text": "Other endemic mycoses, antigen cross-reacts"
+            },
+            {
+              "text": "Culture and species-specific serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "histoplasmosis-treatment",
+      "kind": "treatment",
+      "title": "Treating histoplasmosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild acute pulmonary disease, immunocompetent"
+            },
+            {
+              "text": "Treat only if symptoms last beyond about 1 month"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "Mild-moderate acute disease not improving, or immunocompromised"
+            },
+            {
+              "text": "Three times daily for 3 days, then twice daily for 6 to 12 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole, long course",
+          "cells": [
+            {
+              "text": "Chronic cavitary pulmonary disease"
+            },
+            {
+              "text": "12 to 24 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liposomal amphotericin B",
+          "cells": [
+            {
+              "text": "Severe or disseminated disease"
+            },
+            {
+              "text": "{{hy:IV daily for 2 weeks or until stable, then itraconazole for 12 months}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole suppression in HIV",
+          "cells": [
+            {
+              "text": "Advanced HIV"
+            },
+            {
+              "text": "Continue until CD4 above 150/uL on ART"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Severe respiratory compromise or inflammatory complications"
+            },
+            {
+              "text": "Adjunct only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antifungal",
+          "cells": [
+            {
+              "text": "Fibrosing mediastinitis"
+            },
+            {
+              "text": "Fibrotic reaction to past infection; does not respond"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "First trimester"
+            },
+            {
+              "text": "Avoid azoles"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Antigen sensitivity differs: Harrison gives above 95% for urine plus serum in disseminated disease; Merck gives over 90% urine and about 80% serum. Both kept. Azole and amphotericin doses are not given in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "histoplasmosis-dx-mgmt",
+      "title": "Diagnosis and management of histoplasmosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flu-like or cavitary lung illness after endemic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest imaging, urine and serum antigen, serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Disseminated or severe disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cultures of BAL, marrow, blood; check HIV and immune status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Liposomal amphotericin B until stable",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Step down to itraconazole for 12 months; monitor antigen",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Chronic cavitary disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Itraconazole 12 to 24 months; exclude tuberculosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptoms beyond 1 month or immunocompromised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Itraconazole 6 to 12 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Observe; self-limited",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

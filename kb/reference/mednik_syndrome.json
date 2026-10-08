@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for mednik syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mednik_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Typically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic copper quantification and liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic copper and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AP1S1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "AP1S1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and biopsy, where needed",
+          "cells": [
+            {
+              "text": "Ichthyosis and keratoderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mednik_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Hepatic copper accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menkes disease and occipital horn syndrome",
+          "cells": [
+            {
+              "text": "ATP7A defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital ichthyosis syndromes (e.g. Netherton syndrome)",
+          "cells": [
+            {
+              "text": "Congenital ichthyosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mednik_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Zinc acetate",
+          "cells": [
+            {
+              "text": "With copper-modulating therapy as in Wilson disease, to correct copper handling and limit hepatic copper accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "For the enteropathy, including parenteral nutrition in severe infantile diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Emollients, keratolytics and topical or systemic retinoids for ichthyosis and keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and neuropathy",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation; physiotherapy and supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Developmental, educational and communication support for cognitive impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver function, hepatic copper, audiometry and nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; test at-risk family members"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Metabolic, dermatology, neurology and audiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mednik_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of MEDNIK syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with severe enteropathy, diarrhoea and failure to thrive; suspected MEDNIK",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cholestatic liver disease, rapidly progressive hearing loss or sepsis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutritional support for severe diarrhoea; treat sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum copper and caeruloplasmin, hepatic copper, AP1S1 testing, audiometry, NCS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an AP1S1 variant confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wilson disease, Menkes disease or Netherton syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Zinc acetate to correct copper handling and limit hepatic copper accumulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional support for the enteropathy, including parenteral nutrition if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emollients, keratolytics and retinoids for ichthyosis and keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for progressive sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver, copper, hearing and nerve monitoring; genetic counselling for family members",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

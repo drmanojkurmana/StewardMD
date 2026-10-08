@@ -153,5 +153,323 @@
       "caption": "Overview comparison matrix for multidrug-resistant tuberculosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mdr_tuberculosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Rapid molecular testing for rifampicin resistance",
+          "cells": [
+            {
+              "text": "Rifampicin resistance at diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Line-probe assays and phenotypic drug-susceptibility testing",
+          "cells": [
+            {
+              "text": "Resistance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-based monitoring of treatment response",
+          "cells": [
+            {
+              "text": "Treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline toxicity tests: audiometry, ECG for QT, liver and renal function",
+          "cells": [
+            {
+              "text": "Baseline drug toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and screening of close contacts",
+          "cells": [
+            {
+              "text": "HIV status and contacts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mdr_tuberculosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-susceptible TB with treatment failure from non-adherence",
+          "cells": [
+            {
+              "text": "Failure attributable to non-adherence, not true resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption of anti-tuberculosis drugs",
+          "cells": [
+            {
+              "text": "Mimics resistance through reduced drug levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paradoxical reaction or immune reconstitution",
+          "cells": [
+            {
+              "text": "Reaction rather than true treatment failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mdr_tuberculosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "All-oral BPaLM regimen",
+          "cells": [
+            {
+              "text": "Shorter, susceptibility-guided: bedaquiline with pretomanid, linezolid and a later-generation fluoroquinolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tailor to susceptibility",
+          "cells": [
+            {
+              "text": "Substitute agents as resistance broadens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Directly observed support",
+          "cells": [
+            {
+              "text": "Programmatic or directly observed treatment to prevent amplification of resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicity monitoring",
+          "cells": [
+            {
+              "text": "ECG for QT prolongation, full blood count for linezolid myelosuppression, visual acuity, liver and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-conversion monitoring",
+          "cells": [
+            {
+              "text": "Confirms treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Airborne isolation and screening of close contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV co-management",
+          "cells": [
+            {
+              "text": "Antiretroviral co-management and nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist service",
+          "cells": [
+            {
+              "text": "Specialist drug-resistant TB service, multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mdr_tuberculosis-dx-mgmt",
+      "title": "Diagnosis and management of Multidrug-resistant tuberculosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pulmonary TB with rifampicin resistance on rapid molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pre-XDR or XDR resistance, or extensive disease with respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Switch to drug-resistant pathway; refer to specialist DR-TB service",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Line-probe assay, phenotypic testing, HIV test, baseline ECG, audiometry, LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the resistance pattern confirmed on line-probe or phenotypic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider drug-susceptible TB with non-adherence, malabsorption or NTM; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "All-oral BPaLM: bedaquiline, pretomanid, linezolid and a later-generation fluoroquinolone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tailor the regimen to line-probe and susceptibility results",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Directly observed treatment and adherence support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Toxicity monitoring: ECG, full blood count, visual acuity, liver and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Culture conversion confirms response; multidisciplinary specialist management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for follicular bronchiolitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "follicular_bronchiolitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Centrilobular and peribronchial nodules with ground-glass and mosaic attenuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease serology",
+          "cells": [
+            {
+              "text": "Rheumatoid arthritis, Sjogren or other association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and lymphocyte subsets, with HIV test",
+          "cells": [
+            {
+              "text": "Common variable immunodeficiency or HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung function with gas transfer",
+          "cells": [
+            {
+              "text": "Obstructive, restrictive or mixed pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy with immunohistochemistry and clonality",
+          "cells": [
+            {
+              "text": "Reactive follicles; lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Lymphocytosis; infection excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "follicular_bronchiolitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocytic interstitial pneumonia",
+          "cells": [
+            {
+              "text": "Overlapping lymphoid lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade marginal-zone (MALT) lymphoma",
+          "cells": [
+            {
+              "text": "Monoclonal B-cell population on clonality studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Centrilobular nodules from an inhaled antigen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "follicular_bronchiolitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the associated disorder",
+          "cells": [
+            {
+              "text": "Immunoglobulin replacement for common variable immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids for lymphoid proliferation",
+          "cells": [
+            {
+              "text": "Steroid-sparing immunosuppressant or immunomodulator as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilators and pulmonary rehabilitation",
+          "cells": [
+            {
+              "text": "Airflow obstruction and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis and prompt antimicrobials",
+          "cells": [
+            {
+              "text": "Immunodeficiency predisposing to infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial lung function and high-resolution CT",
+          "cells": [
+            {
+              "text": "Progression to interstitial fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-cell clonality surveillance",
+          "cells": [
+            {
+              "text": "Transformation to lymphoma such as MALT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated respiratory, rheumatology and immunology care",
+          "cells": [
+            {
+              "text": "Multidisciplinary review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "follicular_bronchiolitis-dx-mgmt",
+      "title": "Diagnosis and management of Follicular bronchiolitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive breathlessness and cough with nodules on high-resolution CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dominant mass, B symptoms, hypoxaemic failure, monoclonal B cells)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for dominant mass, B symptoms or hypoxaemic respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT; connective tissue and immunoglobulin screen; HIV test; biopsy with clonality",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reactive follicles on biopsy without monoclonal B-cell population?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MALT lymphoma, LIP or hypersensitivity pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying immunodeficiency or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for lymphoid proliferation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bronchodilators and pulmonary rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Clonality surveillance for lymphoma transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often stable or slowly progressive when treated; worse with interstitial fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for intraductal papilloma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and benign breast disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intraductal_papilloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Characterises the discharge and any trigger point or lump"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing of the discharge for blood",
+          "cells": [
+            {
+              "text": "Bloodstained discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the subareolar ducts",
+          "cells": [
+            {
+              "text": "Triple assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography",
+          "cells": [
+            {
+              "text": "Women of appropriate age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ductography or ductoscopy",
+          "cells": [
+            {
+              "text": "Localises the lesion in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microdochectomy with histology",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraductal_papilloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ductal carcinoma in situ or invasive carcinoma",
+          "cells": [
+            {
+              "text": "Bloodstained single-duct discharge mandates exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiological nipple discharge",
+          "cells": [
+            {
+              "text": "Not from a single duct; confused with pathological discharge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraductal_papilloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Microdochectomy",
+          "cells": [
+            {
+              "text": "Single-duct excision as definitive treatment with histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triple assessment",
+          "cells": [
+            {
+              "text": "Clinical examination, imaging and pathology to exclude carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total duct excision",
+          "cells": [
+            {
+              "text": "Several ducts involved or discharge cannot be localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closer surveillance",
+          "cells": [
+            {
+              "text": "Multiple peripheral papillomas or atypia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Incidental benign solitary papilloma without troublesome discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Breast surgical team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intraductal_papilloma-dx-mgmt",
+      "title": "Diagnosis and management of Intraductal papilloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Single-duct nipple discharge, bloodstained or serous, from a subareolar duct",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bloodstained discharge, palpable or irregular mass, or atypia on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent triple assessment and breast surgical review for carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination, discharge testing, ultrasound of subareolar ducts, mammography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Single duct identified and carcinoma excluded on triple assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Further imaging or duct biopsy; surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Microdochectomy for single-duct disease with histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Total duct excision if several ducts are involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Closer surveillance for multiple peripheral papillomas or atypia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Conservative follow-up for incidental solitary papilloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Breast multidisciplinary follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign on histology; surveillance matched to risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -154,5 +154,325 @@
       "caption": "Overview comparison matrix for disseminated bcg infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Infectious diseases references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disseminated_bcg_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterial blood, urine, marrow and tissue cultures",
+          "cells": [
+            {
+              "text": "Mycobacteria in blood or affected tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid-fast staining and culture of biopsy material",
+          "cells": [
+            {
+              "text": "Organisms in liver, marrow, bladder or prostate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification",
+          "cells": [
+            {
+              "text": "Distinguishes M. bovis BCG from the M. tuberculosis complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination",
+          "cells": [
+            {
+              "text": "Granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunological work-up in infants",
+          "cells": [
+            {
+              "text": "Lymphocyte subsets, oxidative burst and IFN-gamma/IL-12 pathway genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_bcg_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated Mycobacterium tuberculosis",
+          "cells": [
+            {
+              "text": "Separated by molecular identification of the organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Fever, hepatosplenomegaly and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_bcg_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged multidrug antimycobacterial therapy",
+          "cells": [
+            {
+              "text": "Isoniazid, rifampicin and ethambutol; BCG is intrinsically pyrazinamide-resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop intravesical BCG",
+          "cells": [
+            {
+              "text": "No further doses after a systemic reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "For severe or hypersensitivity-type reactions to intravesical BCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunodeficiency work-up in infants",
+          "cells": [
+            {
+              "text": "Severe combined immunodeficiency, CGD or IL-12/IFN-gamma defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IFN-gamma therapy and transplant",
+          "cells": [
+            {
+              "text": "Where a correctable immune defect is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Hepatitis, pneumonitis and sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent systemic absorption",
+          "cells": [
+            {
+              "text": "Avoid traumatic catheterisation; delay instillation after resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input and genetics",
+          "cells": [
+            {
+              "text": "Infectious diseases and immunology; genetic counselling if heritable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disseminated_bcg_infection-dx-mgmt",
+      "title": "Diagnosis and management of Disseminated BCG infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected disseminated BCG infection: fever and organ involvement after BCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (miliary spread, cytopenias, mycotic aneurysm, infant immune defect)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antimycobacterial therapy and sepsis care; stop intravesical BCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mycobacterial blood and tissue cultures; acid-fast stain; BCG molecular identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is M. bovis BCG identified by molecular testing of cultured material?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculosis, non-tuberculous mycobacteria, lymphoma or other sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged isoniazid, rifampicin and ethambutol; avoid pyrazinamide (intrinsic resistance)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop intravesical BCG; corticosteroids for severe hypersensitivity reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Investigate and correct immunodeficiency in infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider IFN-gamma and transplant where a correctable defect is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid traumatic catheterisation and delay instillation after resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised disease does well; disseminated infection carries substantial mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

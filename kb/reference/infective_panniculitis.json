@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for infective panniculitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Weedon's Skin Pathology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infective_panniculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional biopsy with special stains",
+          "cells": [
+            {
+              "text": "Gram, Ziehl-Neelsen, PAS and Grocott stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep tissue culture",
+          "cells": [
+            {
+              "text": "Bacteria, mycobacteria and fungi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and immune status including HIV",
+          "cells": [
+            {
+              "text": "Host immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Extent of deep infection or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR or molecular assays",
+          "cells": [
+            {
+              "text": "Fastidious organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Injections, travel, animal exposure and immunosuppressive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infective_panniculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema nodosum",
+          "cells": [
+            {
+              "text": "Sterile; no fever, ulceration, abscess or suppuration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus panniculitis",
+          "cells": [
+            {
+              "text": "Sterile; no fever, ulceration, abscess or suppuration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infective_panniculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical then targeted antibacterials",
+          "cells": [
+            {
+              "text": "Broad-spectrum cover pending deep culture, then narrowed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial disease",
+          "cells": [
+            {
+              "text": "Prolonged multidrug antimycobacterial regimens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal panniculitis",
+          "cells": [
+            {
+              "text": "Systemic azole or amphotericin-based agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Drain and debride abscesses and necrotic subcutaneous fat, repeating exploration if suppuration persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Wound care, analgesia and management of systemic sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Host immunity",
+          "cells": [
+            {
+              "text": "Reduce corticosteroids, biologics or chemotherapy where feasible; control glycaemia; treat HIV"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infective_panniculitis-dx-mgmt",
+      "title": "Diagnosis and management of infective panniculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender subcutaneous nodules or plaques with fever, ulceration or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sepsis, necrotising infection, rapid spread or failure to improve on antibiotics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical debridement with broad empirical antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep incisional biopsy with special stains, deep culture, blood cultures, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organism identified on deep culture or PCR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mycobacterial or fungal infection; repeat deep sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Narrow antibacterial therapy to the cultured organism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged multidrug antimycobacterial therapy for mycobacteria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic azole or amphotericin for fungal panniculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain and debride abscesses and necrotic fat",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reduce immunosuppression and treat underlying HIV or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Organism-directed treatment with surgical source control; relapse monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

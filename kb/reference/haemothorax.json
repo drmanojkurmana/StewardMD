@@ -153,5 +153,312 @@
       "caption": "Overview comparison matrix for haemothorax."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haemothorax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pleural fluid haematocrit",
+          "cells": [
+            {
+              "text": "Greater than half the peripheral blood haematocrit confirms haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest drain output",
+          "cells": [
+            {
+              "text": "Classically more than 1.5 litres drained immediately indicates massive haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Point-of-care ultrasound (eFAST)",
+          "cells": [
+            {
+              "text": "Helps establish the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest radiograph",
+          "cells": [
+            {
+              "text": "Helps establish the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT thorax",
+          "cells": [
+            {
+              "text": "Best for quantifying retained clot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemothorax-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemorrhagic effusion not meeting haematocrit criteria",
+          "cells": [
+            {
+              "text": "Pleural fluid haematocrit not above half of peripheral value; malignancy or pulmonary embolism as causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diaphragmatic rupture",
+          "cells": [
+            {
+              "text": "Herniated abdominal contents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empyema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or haemopneumothorax",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemothorax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Large-bore intercostal chest drain",
+          "cells": [
+            {
+              "text": "Evacuates blood, re-expands the lung and quantifies ongoing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids and blood transfusion; reverse anticoagulation or coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent VATS or thoracotomy",
+          "cells": [
+            {
+              "text": "Massive haemothorax, persistently high drain output or haemodynamic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early VATS evacuation",
+          "cells": [
+            {
+              "text": "Retained, incompletely drained haemothorax, to prevent empyema and fibrothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Continuous chest drain output and haemodynamic status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Traumatic vascular injury, malignancy, thoracic aortic pathology or catamenial haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Aid lung re-expansion; treat any secondary empyema promptly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haemothorax-dx-mgmt",
+      "title": "Diagnosis and management of haemothorax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected haemothorax: blood in the pleural space after trauma or procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (shock, tension physiology, massive or high drain output)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: resuscitate and urgent VATS or thoracotomy for massive bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Erect chest radiograph, eFAST and CT thorax; compare pleural and blood haematocrit",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pleural fluid haematocrit exceed half of the peripheral blood value?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider effusion, empyema, pneumothorax or diaphragmatic rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Large-bore intercostal chest drain; resuscitate and reverse coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor drain output and haemodynamic status",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early VATS evacuation if clot is retained, to prevent empyema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lung re-expansion with controlled loss, or surgery if bleeding persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

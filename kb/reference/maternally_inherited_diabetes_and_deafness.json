@@ -153,5 +153,332 @@
       "caption": "Overview comparison matrix for maternally inherited diabetes and deafness."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "maternally_inherited_diabetes_and_deafness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted molecular testing for m.3243A>G, on urinary epithelial cells or buccal mucosa",
+          "cells": [
+            {
+              "text": "m.3243A>G variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundoscopy with optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular pattern dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Islet autoantibodies",
+          "cells": [
+            {
+              "text": "Expected to be negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resting and post-exertional lactate",
+          "cells": [
+            {
+              "text": "Lactate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maternally_inherited_diabetes_and_deafness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Islet autoantibodies, expected to be negative in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS and other mitochondrial cytopathies",
+          "cells": [
+            {
+              "text": "Stroke-like episodes suggesting MELAS overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maternally_inherited_diabetes_and_deafness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early insulin",
+          "cells": [
+            {
+              "text": "Diabetes treated as progressive beta-cell failure, favouring early insulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid metformin",
+          "cells": [
+            {
+              "text": "Lactic-acidosis risk in mitochondrial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids; cochlear implantation for advanced sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coenzyme Q10 and drug avoidance",
+          "cells": [
+            {
+              "text": "Consider coenzyme Q10; avoid mitochondrial-toxic drugs such as aminoglycosides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal review",
+          "cells": [
+            {
+              "text": "Regular review for the macular pattern dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and renal surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and renal monitoring for proteinuria and nephropathy, the main determinants of prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS-overlap vigilance",
+          "cells": [
+            {
+              "text": "Stroke-like episodes, myopathy and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Strictly maternal inheritance with variable heteroplasmy; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "maternally_inherited_diabetes_and_deafness-dx-mgmt",
+      "title": "Diagnosis and management of Maternally Inherited Diabetes and Deafness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diabetes with sensorineural hearing loss; suspected maternal mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lactic acidosis, cardiomyopathy, declining renal function or stroke-like episodes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and renal review; treat lactic acidosis; assess MELAS overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "m.3243A>G testing on urinary epithelial cells; audiometry; echo; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the m.3243A>G variant confirmed with islet autoantibodies negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 diabetes, MODY or Wolfram syndrome; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Favour early insulin for progressive beta-cell failure; avoid metformin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids, and cochlear implantation for advanced sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider coenzyme Q10; avoid mitochondrial-toxic drugs such as aminoglycosides",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography and renal monitoring as the main determinants of prognosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for strictly maternal inheritance; family screening offered",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

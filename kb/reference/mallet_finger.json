@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for mallet finger."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mallet_finger-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of extension lag",
+          "cells": [
+            {
+              "text": "Loss of active extension at the distal interphalangeal joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral plain radiograph",
+          "cells": [
+            {
+              "text": "Bony mallet, fragment size and volar subluxation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of joint congruity and stability",
+          "cells": [
+            {
+              "text": "Overall joint congruity and stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the overlying skin",
+          "cells": [
+            {
+              "text": "Open injury or skin loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound, occasionally",
+          "cells": [
+            {
+              "text": "Terminal tendon when imaging is equivocal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallet_finger-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexor digitorum profundus avulsion (jersey finger)",
+          "cells": [
+            {
+              "text": "Causes the opposite deficit to mallet finger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or osteomyelitis of the DIP joint",
+          "cells": [
+            {
+              "text": "Signs of joint infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open laceration of the terminal tendon",
+          "cells": [
+            {
+              "text": "Open injury, managed with wound care and soft-tissue cover"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallet_finger-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous DIP splinting in extension",
+          "cells": [
+            {
+              "text": "Uninterrupted, leaving the PIP joint free; for closed tendinous and most bony injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uninterrupted splint wear",
+          "cells": [
+            {
+              "text": "Any flexion during healing restarts the process; hand therapy education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fixation",
+          "cells": [
+            {
+              "text": "Large avulsion fragment with volar subluxation, unstable joint or open injury; Kirschner wire"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and soft-tissue cover",
+          "cells": [
+            {
+              "text": "Open injuries with skin loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graduated mobilisation and splint weaning",
+          "cells": [
+            {
+              "text": "Under hand therapy guidance after the immobilisation period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstruction or arthrodesis",
+          "cells": [
+            {
+              "text": "Chronic deformity or secondary swan-neck"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery referral",
+          "cells": [
+            {
+              "text": "Unstable joint, large fragment or delayed presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mallet_finger-dx-mgmt",
+      "title": "Diagnosis and management of Mallet finger",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Loss of active DIP extension with a dropped, flexed fingertip",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Volar subluxation, open injury, fixed deformity or joint infection present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to hand surgery: unstable joint, large fragment or open injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lateral radiograph for bony mallet, fragment size and volar subluxation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the DIP extension lag confirmed as a mallet injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider jersey finger, DIP fracture-dislocation or infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Continuous DIP splinting in extension, leaving the PIP joint free",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Uninterrupted splint wear; any flexion restarts healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical fixation for large fragment, volar subluxation or open injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graduated mobilisation and splint weaning with hand therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good with early continuous splinting; delay or interrupted splinting leaves a small lag",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

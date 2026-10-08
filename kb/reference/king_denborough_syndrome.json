@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for king-denborough syndrome (ryr1, malignant hyperthermia-associated)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "king_denborough_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and electromyography",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with histochemistry",
+          "cells": [
+            {
+              "text": "Cores or fibre-type disproportion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RYR1 genetic testing and congenital myopathy panel",
+          "cells": [
+            {
+              "text": "Confirms an RYR1-related myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hyperthermia evaluation",
+          "cells": [
+            {
+              "text": "In-vitro or caffeine-halothane contracture testing where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and respiratory assessment",
+          "cells": [
+            {
+              "text": "Monitoring for cardiac, respiratory and scoliosis complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "king_denborough_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other RYR1-related congenital myopathies",
+          "cells": [
+            {
+              "text": "Also RYR1-related; biopsy and genetic testing needed to separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noonan syndrome and similar dysmorphic syndromes",
+          "cells": [
+            {
+              "text": "Shares short stature and webbed neck; RYR1 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated malignant hyperthermia susceptibility",
+          "cells": [
+            {
+              "text": "Without overt myopathy; contracture testing where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "king_denborough_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Avoid volatile inhalational anaesthetics and suxamethonium; trigger-free technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dantrolene availability",
+          "cells": [
+            {
+              "text": "Ensure dantrolene is immediately available wherever anaesthesia is given"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hyperthermia crisis protocol",
+          "cells": [
+            {
+              "text": "Intravenous dantrolene, active cooling, correction of hyperkalaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy to maintain strength and ambulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ surveillance",
+          "cells": [
+            {
+              "text": "Respiratory monitoring, cardiac assessment and orthopaedic care for scoliosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "king_denborough_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of King-Denborough syndrome (RYR1, malignant hyperthermia-associated)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected King-Denborough: childhood hypotonia, proximal weakness, dysmorphic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (planned anaesthesia, MH history, respiratory weakness, rhabdomyolysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: malignant hyperthermia precautions and dantrolene before any anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Creatine kinase, nerve studies, muscle biopsy, RYR1 testing, MH contracture testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RYR1 testing or the congenital myopathy panel confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other congenital myopathies and dysmorphic syndromes such as Noonan",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance of volatile anaesthetics and suxamethonium",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dantrolene immediately available wherever anaesthesia is given",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and rehabilitation to maintain strength",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory, cardiac and orthopaedic monitoring, including scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Myopathy often slowly progressive; malignant hyperthermia risk persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

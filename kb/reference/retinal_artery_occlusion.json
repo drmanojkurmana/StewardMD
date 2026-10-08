@@ -154,5 +154,285 @@
       "caption": "Overview comparison matrix for retinal artery occlusion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinal_artery_occlusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundoscopy and fundus photography",
+          "cells": [
+            {
+              "text": "Pale, oedematous inner retina with a cherry-red spot at the fovea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Early inner retinal oedema; later inner retinal thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Delayed or absent retinal arterial filling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and temporal artery biopsy",
+          "cells": [
+            {
+              "text": "Giant cell arteritis as an arteritic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid Doppler and CT or MR angiography",
+          "cells": [
+            {
+              "text": "Carotid stenosis or other embolic source in the neck vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiac embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusion-weighted brain MRI",
+          "cells": [
+            {
+              "text": "Clinically silent cerebral infarction, which is common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinal_artery_occlusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke pathway",
+          "cells": [
+            {
+              "text": "Treat as an ocular stroke emergency; consider thrombolysis in hyperacute presentations at specialist centres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early measures to dislodge embolus",
+          "cells": [
+            {
+              "text": "Ocular massage, anterior chamber paracentesis and pressure-lowering agents; limited evidence of benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude giant cell arteritis",
+          "cells": [
+            {
+              "text": "In older patients; if suspected, start high-dose corticosteroids immediately to protect the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary stroke prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet or anticoagulant therapy, a statin, and control of blood pressure, diabetes and smoking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embolic source",
+          "cells": [
+            {
+              "text": "Carotid endarterectomy for significant stenosis; management of any cardiac source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Watch for ocular neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinal_artery_occlusion-dx-mgmt",
+      "title": "Diagnosis and management of Retinal Artery Occlusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden painless monocular visual loss with pale retina and cherry-red spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deficit, jaw claudication, amaurosis fugax, bilateral)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency stroke pathway; consider thrombolysis at specialist centres",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundoscopy, OCT, fluorescein angiography, inflammatory markers, carotid and heart imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an embolic or arteritic cause identified on imaging or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for other causes of sudden visual loss; repeat the workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent stroke pathway; consider thrombolysis at specialist centres",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude giant cell arteritis; start high-dose corticosteroids if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secondary stroke prevention: antiplatelet or anticoagulant, statin, BP control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the embolic source: carotid endarterectomy or cardiac management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Visual recovery generally poor; marks systemic vascular disease with raised stroke risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

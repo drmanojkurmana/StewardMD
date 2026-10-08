@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for dystonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural lesion, particularly in hemidystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial in young-onset generalised dystonia",
+          "cells": [
+            {
+              "text": "Dopa-responsive dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum copper, ceruloplasmin and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Wilson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for hereditary dystonias",
+          "cells": [
+            {
+              "text": "Hereditary dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Dopamine-blocking and other offending drugs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tardive and acute drug-induced dystonia",
+          "cells": [
+            {
+              "text": "Dopamine-blocking drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young onset with hepatic or psychiatric features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinson disease with dystonic features",
+          "cells": [
+            {
+              "text": "Parkinsonian signs with dystonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Mainstay for focal and segmental dystonia such as cervical dystonia and blepharospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "Young-onset generalised dystonia, to identify dopa-responsive dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral centrally acting agents",
+          "cells": [
+            {
+              "text": "Anticholinergics, baclofen and benzodiazepines for widespread disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Globus pallidus for refractory, disabling generalised or segmental dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw offending drugs",
+          "cells": [
+            {
+              "text": "Dopamine-blocking drugs; treat secondary causes such as Wilson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and sensory tricks",
+          "cells": [
+            {
+              "text": "Occupational therapy and sensory trick teaching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Status dystonicus",
+          "cells": [
+            {
+              "text": "Supportive care, sedation and intensive care escalation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dystonia: sustained involuntary muscle contractions with abnormal posture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (laryngeal dystonia, status dystonicus, young onset with liver signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway protection for laryngeal dystonia or intensive care for status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain; levodopa trial; copper and ceruloplasmin; genetics; medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a secondary cause such as drug exposure or Wilson disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider functional dystonia, Parkinson disease or hereditary dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Botulinum toxin for focal and segmental dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa trial in young-onset generalised dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticholinergics, baclofen or benzodiazepines for widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pallidal deep brain stimulation for refractory disabling dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Withdraw dopamine-blocking drugs and treat Wilson disease if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Varies by cause; focal dystonias respond well to botulinum toxin",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

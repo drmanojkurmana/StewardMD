@@ -145,5 +145,323 @@
       "caption": "Overview comparison matrix for heparin-induced thrombocytopenia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heparin_induced_thrombocytopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial platelet counts with 4Ts score",
+          "cells": [
+            {
+              "text": "Degree and timing of the fall, thrombosis, and absence of other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-platelet factor 4/heparin immunoassay",
+          "cells": [
+            {
+              "text": "High sensitivity, limited specificity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional confirmatory assay (serotonin release or platelet activation)",
+          "cells": [
+            {
+              "text": "Confirms the antibody's activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound and imaging",
+          "cells": [
+            {
+              "text": "Venous or arterial thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of other causes",
+          "cells": [
+            {
+              "text": "Other causes of thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heparin_induced_thrombocytopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombotic microangiopathy (TTP or HUS)",
+          "cells": [
+            {
+              "text": "Unlike HIT, most causes are not prothrombotic; HIT is thrombosis rather than bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis or drug-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "HIT typically shows a fall of more than half, five to ten days after heparin starts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heparin_induced_thrombocytopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop all heparin",
+          "cells": [
+            {
+              "text": "Including flushes and heparin-bonded catheters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-heparin anticoagulant",
+          "cells": [
+            {
+              "text": "Argatroban, danaparoid or fondaparinux, even with low platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prophylactic platelet transfusion",
+          "cells": [
+            {
+              "text": "Unless significant bleeding, as it may aggravate thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delay vitamin K antagonists",
+          "cells": [
+            {
+              "text": "Until the platelet count has substantially recovered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombosis screening",
+          "cells": [
+            {
+              "text": "Duplex ultrasound for venous and arterial thrombosis; treat confirmed thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and alert",
+          "cells": [
+            {
+              "text": "Platelet recovery; document a heparin allergy alert"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology input",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; guides anticoagulant choice and duration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heparin_induced_thrombocytopenia-dx-mgmt",
+      "title": "Diagnosis and management of Heparin-induced thrombocytopenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Platelet fall five to ten days after starting heparin, with or without thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New thrombosis, limb ischaemia, skin necrosis, or heparin still being given?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: stop heparin, anticoagulate with a non-heparin agent, image for thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "4Ts score; anti-PF4/heparin immunoassay; functional assay; duplex ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the 4Ts score high, with a positive functional assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sepsis, DIC, immune thrombocytopenia, or TTP and HUS; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop all heparin, including flushes and heparin-bonded catheters",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulate with argatroban, danaparoid or fondaparinux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid prophylactic platelet transfusion unless significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delay vitamin K antagonists until platelets have substantially recovered",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Platelets recover; thrombosis treated and heparin allergy alert documented",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

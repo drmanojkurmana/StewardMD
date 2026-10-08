@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for heavy chain disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / WHO classification of haematolymphoid tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heavy_chain_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and urine immunofixation",
+          "cells": [
+            {
+              "text": "A heavy chain without a light chain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoselection or specialised immunochemistry",
+          "cells": [
+            {
+              "text": "Confirms the isolated heavy chain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small bowel biopsy and imaging",
+          "cells": [
+            {
+              "text": "Suspected alpha heavy chain disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine with immunophenotyping",
+          "cells": [
+            {
+              "text": "Marrow involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node biopsy",
+          "cells": [
+            {
+              "text": "Used where lymphadenopathy is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for infection or autoimmune disease",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heavy_chain_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic lymphocytic leukaemia",
+          "cells": [
+            {
+              "text": "Mu heavy chain disease usually arises in the setting of CLL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease and malabsorption",
+          "cells": [
+            {
+              "text": "Alpha type presents as small intestinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple myeloma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marginal zone lymphoma (including MALT lymphoma)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heavy_chain_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpha heavy chain disease, early",
+          "cells": [
+            {
+              "text": "Eradicate Campylobacter jejuni and treat the marginal-zone lymphoproliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced, bulky or lymphomatous disease",
+          "cells": [
+            {
+              "text": "Lymphoma-directed chemoimmunotherapy, anthracycline-based"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gamma and mu variants",
+          "cells": [
+            {
+              "text": "Treat the underlying lymphoplasmacytic clone and any coexisting chronic lymphocytic leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption support",
+          "cells": [
+            {
+              "text": "Nutritional repletion and replacement of fat-soluble vitamins, iron and other deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial immunofixation, cross-sectional imaging and repeat biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway vigilance in gamma disease",
+          "cells": [
+            {
+              "text": "Characteristic palatal and uvular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Haematology-oncology with gastroenterology; aggressive lymphoma protocols if transformed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heavy_chain_disease-dx-mgmt",
+      "title": "Diagnosis and management of Heavy chain disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunofixation shows a heavy chain without a light chain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Malabsorption, airway oedema, transformation or marrow failure present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: protect the airway; aggressive lymphoma protocols if transformed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immunoselection, small bowel and marrow biopsy, lymph node biopsy if enlarged",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated heavy chain confirmed, with isotype identified (alpha, gamma or mu)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myeloma, marginal zone lymphoma, Waldenstrom or CLL; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alpha type: eradicate Campylobacter jejuni and treat the lymphoproliferation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bulky disease: anthracycline-based lymphoma chemoimmunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gamma and mu types: treat the underlying clone and coexisting CLL",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutritional repletion and replacement of fat-soluble vitamins and iron",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Response monitored with serial immunofixation and imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

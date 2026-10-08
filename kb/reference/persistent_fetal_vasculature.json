@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for persistent fetal vasculature (phpv)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "persistent_fetal_vasculature-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "B-scan ocular ultrasound",
+          "cells": [
+            {
+              "text": "Fibrovascular stalk and calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the orbits and brain",
+          "cells": [
+            {
+              "text": "Used when retinoblastoma cannot be excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia with fundus assessment of both eyes",
+          "cells": [
+            {
+              "text": "Fundus of both eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement and biometry",
+          "cells": [
+            {
+              "text": "Microphthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide-field retinal imaging",
+          "cells": [
+            {
+              "text": "Retina, where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Bilateral or syndromic presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "persistent_fetal_vasculature-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinoblastoma",
+          "cells": [
+            {
+              "text": "Leukocoria, which needs urgent exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Norrie disease",
+          "cells": [
+            {
+              "text": "Bilateral cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "persistent_fetal_vasculature-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude retinoblastoma first",
+          "cells": [
+            {
+              "text": "Urgent, before any intervention in a child with leukocoria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lensectomy and vitrectomy",
+          "cells": [
+            {
+              "text": "Early, for selected predominantly anterior disease; excision of retrolental membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia therapy",
+          "cells": [
+            {
+              "text": "Optical correction and occlusion of the fellow eye; central to any visual gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary glaucoma",
+          "cells": [
+            {
+              "text": "Detect and control medically or surgically with intraocular pressure monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Globe preservation",
+          "cells": [
+            {
+              "text": "A comfortable, cosmetically acceptable globe where useful vision is not achievable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and systemic evaluation",
+          "cells": [
+            {
+              "text": "Bilateral or syndromic presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Paediatric ophthalmology specialist team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "persistent_fetal_vasculature-dx-mgmt",
+      "title": "Diagnosis and management of Persistent fetal vasculature (PHPV)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with leukocoria, with persistent fetal vasculature suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (leukocoria needing exclusion, bilateral disease, secondary glaucoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinoblastoma exclusion before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "B-scan ultrasound for fibrovascular stalk; MRI if retinoblastoma not excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a fibrovascular stalk without tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinoblastoma, congenital cataract, Coats disease or Norrie disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude retinoblastoma urgently before any intervention in leukocoria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early lensectomy and vitrectomy for selected, predominantly anterior disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optical correction and occlusion of the fellow eye for amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Detect and control secondary glaucoma with intraocular pressure monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Preserve a comfortable, cosmetically acceptable globe where vision is not achievable",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual outcome usually poor, especially in posterior disease; early surgery can help",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

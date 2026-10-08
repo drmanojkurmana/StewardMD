@@ -157,5 +157,452 @@
       "caption": "Overview comparison matrix for plague."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Plague Clinical Care, 2024",
+      "kind": "web",
+      "url": "https://www.cdc.gov/plague/hcp/clinical-care/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 159-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 159-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plague-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing plague",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Bubonic plague",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Incubation 2 to 6 days; fever over 38 C with painful bubo",
+              "range": [
+                2,
+                6
+              ]
+            },
+            {
+              "text": "Predominant form worldwide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septicemic or pneumonic at presentation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20% of cases",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Pneumonic spreads person to person"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specimens",
+          "cells": [
+            {
+              "text": "Bubo aspirate, sputum or BAL, blood"
+            },
+            {
+              "text": "Cary-Blair transport medium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram or Wayson stain",
+          "cells": [
+            {
+              "text": "Bipolar gram-negative coccobacilli (safety pin)"
+            },
+            {
+              "text": "On blood smear means heavy bacteremia and poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "cells": [
+            {
+              "text": "Blood agar, MacConkey"
+            },
+            {
+              "text": "Automated systems may misidentify as Y. pseudotuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F1 antigen rapid test",
+          "cells": [
+            {
+              "text": "Probable case if positive"
+            },
+            {
+              "text": "Two negatives 24 h apart needed to exclude when no confirmatory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmed case (WHO)",
+          "cells": [
+            {
+              "text": "Isolation, fourfold anti-F1 change, or specific PCR"
+            },
+            {
+              "text": "Suspected case needs exposure within 10 days"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Do not delay treatment for laboratory results."
+    },
+    {
+      "id": "plague-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic plague",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Streptococcal or staphylococcal lymphadenitis",
+          "cells": [
+            {
+              "text": "Local skin portal, less toxic"
+            },
+            {
+              "text": "Aspirate Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tularemia",
+          "cells": [
+            {
+              "text": "Ulceroglandular lesion, rabbit or tick exposure"
+            },
+            {
+              "text": "Francisella serology or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cat-scratch disease",
+          "cells": [
+            {
+              "text": "Cat contact, subacute node"
+            },
+            {
+              "text": "Bartonella serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick typhus",
+          "cells": [
+            {
+              "text": "Eschar and rash"
+            },
+            {
+              "text": "Rickettsial serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Generalized nodes, pharyngitis"
+            },
+            {
+              "text": "Heterophile or EBV serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Subacute fever and hemoptysis"
+            },
+            {
+              "text": "Sputum AFB and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritonsillar abscess",
+          "cells": [
+            {
+              "text": "Resembles plague pharyngitis"
+            },
+            {
+              "text": "Aspirate culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plague-treatment",
+      "kind": "treatment",
+      "title": "Treating and preventing plague",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gentamicin",
+          "cells": [
+            {
+              "text": "All forms, first line"
+            },
+            {
+              "text": "5 mg/kg IV or IM every 24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Streptomycin",
+          "cells": [
+            {
+              "text": "All forms, first line"
+            },
+            {
+              "text": "1 g IV or IM every 12 h (2 g/day)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin, levofloxacin or moxifloxacin",
+          "cells": [
+            {
+              "text": "All forms, first line"
+            },
+            {
+              "text": "Cipro 400 mg IV every 8 h or 750 mg PO every 12 h; levofloxacin 750 mg daily; moxifloxacin 400 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Bubonic or pharyngeal only"
+            },
+            {
+              "text": "200 mg load then 100 mg every 12 h; not for pneumonic or septicemic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chloramphenicol",
+          "cells": [
+            {
+              "text": "Plague meningitis"
+            },
+            {
+              "text": "50 mg/kg/day divided every 6 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treatment duration",
+          "cells": [
+            {
+              "text": "All forms"
+            },
+            {
+              "text": "10 to 14 days; longer if fever persists"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Droplet isolation and notification",
+          "cells": [
+            {
+              "text": "Pneumonic plague"
+            },
+            {
+              "text": "{{hy:Public health emergency; consider bioterrorism}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postexposure prophylaxis, 7 days",
+          "cells": [
+            {
+              "text": "Close contact under 6 ft with pneumonic case or infected fluids"
+            },
+            {
+              "text": "Cipro 500 to 750 mg every 12 h, levofloxacin 500 to 750 mg daily, moxifloxacin 400 mg daily or doxycycline 100 mg every 12 h"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Older Table 159-2 lists tetracycline 2 g/day and gentamicin 3 to 5 mg/kg/day every 8 h as options and Table 159-3 lists TMP-SMX for prophylaxis; CDC 2024 favors aminoglycosides, fluoroquinolones and doxycycline. Both give gentamicin 5 mg/kg once daily and streptomycin 2 g/day."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plague-dx-mgmt",
+      "title": "Diagnosis and management of plague",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with bubo, sepsis or pneumonia after rodent or flea exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Collect bubo aspirate, sputum and blood; start antibiotics now",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Cough or pneumonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Droplet isolation, notify; contacts get 7 days of prophylaxis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Meningitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Chloramphenicol-based regimen",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Pneumonic or septicemic form?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Gentamicin, streptomycin or fluoroquinolone for 10 to 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Bubonic: any first-line agent or doxycycline for 10 to 14 days",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

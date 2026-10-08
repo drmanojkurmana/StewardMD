@@ -154,5 +154,350 @@
       "caption": "Overview comparison matrix for hereditary angioedema type 3 (normal c1 inhibitor)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_angioedema_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "C4 level",
+          "cells": [
+            {
+              "text": "Characteristically normal between and often during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1-inhibitor antigen and functional activity",
+          "cells": [
+            {
+              "text": "Both normal in this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1q level",
+          "cells": [
+            {
+              "text": "Helps exclude acquired C1-inhibitor deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted or panel genetic testing (F12, PLG, ANGPT1, KNG1)",
+          "cells": [
+            {
+              "text": "Genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed family pedigree",
+          "cells": [
+            {
+              "text": "Affected female relatives and hormonal triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of oestrogen exposure",
+          "cells": [
+            {
+              "text": "Contraception, pregnancy and hormone replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of ACE-inhibitor use",
+          "cells": [
+            {
+              "text": "Excludes drug-induced angioedema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_angioedema_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary angioedema type I",
+          "cells": [
+            {
+              "text": "Quantitative C1-inhibitor deficiency; C1-inhibitor level is normal in this type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary angioedema type II",
+          "cells": [
+            {
+              "text": "Dysfunctional C1-inhibitor with normal or raised level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE-inhibitor-induced angioedema",
+          "cells": [
+            {
+              "text": "Excluded by reviewing ACE-inhibitor use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histaminergic or idiopathic angioedema",
+          "cells": [
+            {
+              "text": "Urticaria may accompany it; hereditary angioedema is non-urticarial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mast-cell activation and allergic anaphylaxis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_angioedema_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute attacks",
+          "cells": [
+            {
+              "text": "Bradykinin-pathway agents, as in C1-inhibitor-deficient hereditary angioedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term prophylaxis",
+          "cells": [
+            {
+              "text": "Anti-kallikrein therapy with lanadelumab or berotralstat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen elimination",
+          "cells": [
+            {
+              "text": "Stop combined oral contraceptives and oestrogen hormone therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-term prophylaxis",
+          "cells": [
+            {
+              "text": "Before procedures and anticipated trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency action plan",
+          "cells": [
+            {
+              "text": "Airway-focused plan and self-injectable rescue therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ineffective drugs",
+          "cells": [
+            {
+              "text": "Antihistamines, corticosteroids and adrenaline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology and genetics",
+          "cells": [
+            {
+              "text": "Targeted genetic testing (F12, PLG, ANGPT1, KNG1) and family review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_angioedema_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary Angioedema Type 3 (Normal C1 Inhibitor)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent non-urticarial angioedema with normal C1-inhibitor level and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Laryngeal swelling, stridor, rapid facial swelling, or attacks worse on oestrogen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway emergency plan and rescue bradykinin-pathway therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "C4; C1-inhibitor antigen and function; C1q; genetic testing (F12, PLG, ANGPT1, KNG1)",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are C1-inhibitor level and function normal, with ACE-inhibitor use excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HAE type I or II, acquired deficiency or histaminergic angioedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute attacks treated with bradykinin-pathway agents, as in C1-inhibitor HAE",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term prophylaxis with lanadelumab or berotralstat",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop oestrogen-containing contraceptives and hormone therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Short-term prophylaxis before procedures; airway-focused rescue plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks controlled with bradykinin-pathway therapy and oestrogen withdrawal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

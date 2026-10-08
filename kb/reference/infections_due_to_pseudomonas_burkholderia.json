@@ -173,5 +173,443 @@
       "caption": "Overview comparison matrix for infections due to pseudomonas, burkholderia, and stenotrophomonas species."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Melioidosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/melioidosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 257-8 and community-acquired pneumonia table (p90 to 91)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infections_due_to_pseudomonas_burkholderia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising Pseudomonas, Burkholderia and Stenotrophomonas infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "P. aeruginosa on culture",
+          "cells": [
+            {
+              "text": "Green-blue pigment, metallic sheen, fruity odour, lactose non-fermenter, oxidase positive"
+            },
+            {
+              "text": "Mucoid colonies in cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ecthyma gangrenosum",
+          "cells": [
+            {
+              "text": "Pink to purple to black necrotic skin lesion"
+            },
+            {
+              "text": "{{hy:Signals bacteraemia in neutropenia or AIDS}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudomonas keratitis",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Can involve the whole cornea within about 48 h",
+              "op": "=",
+              "value": 48
+            },
+            {
+              "text": "Contact lens wearers; emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant otitis externa",
+          "unit": "mm/h",
+          "cells": [
+            {
+              "text": "ESR often 100 mm/h or more",
+              "op": ">=",
+              "value": 100
+            },
+            {
+              "text": "Elderly diabetic, granulation tissue, cranial nerve VII palsy; technetium bone scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia versus colonisation",
+          "cells": [
+            {
+              "text": "Neutrophils on Gram stain with P. aeruginosa growth"
+            },
+            {
+              "text": "Positive aspirate or PCR alone may be colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melioidosis",
+          "cells": [
+            {
+              "text": "Endemic exposure (Southeast Asia, northern Australia, India); TB-like cavitation, abscesses, sepsis"
+            },
+            {
+              "text": "Culture of pus, sputum or blood; serology unreliable in endemic areas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stenotrophomonas maltophilia",
+          "cells": [
+            {
+              "text": "After broad-spectrum cephalosporin or carbapenem"
+            },
+            {
+              "text": "Often colonisation in ventilated non-neutropenic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local susceptibility",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "First-line antipseudomonal agents unreliable when susceptibility below 80%",
+              "op": "<",
+              "value": 80
+            },
+            {
+              "text": "Test before newer agents or cefiderocol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_pseudomonas_burkholderia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic these infections",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other gram-negative pneumonia or sepsis",
+          "cells": [
+            {
+              "text": "Clinically indistinguishable"
+            },
+            {
+              "text": "Culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis (versus melioidosis)",
+          "cells": [
+            {
+              "text": "Chronic cavitary upper-lobe disease"
+            },
+            {
+              "text": "Mycobacterial and B. pseudomallei culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S. aureus, Aspergillus or Mucor skin lesions",
+          "cells": [
+            {
+              "text": "Can mimic ecthyma gangrenosum"
+            },
+            {
+              "text": "Skin biopsy and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid overload in ventilated patients",
+          "cells": [
+            {
+              "text": "CT change without infection"
+            },
+            {
+              "text": "Clinical course, diuresis response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymicrobial osteomyelitis",
+          "cells": [
+            {
+              "text": "Trauma or pressure ulcer"
+            },
+            {
+              "text": "Deep bone biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_pseudomonas_burkholderia-treatment",
+      "kind": "treatment",
+      "title": "Treating Pseudomonas, Burkholderia and Stenotrophomonas infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen or notes as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Antipseudomonal beta-lactam",
+          "cells": [
+            {
+              "text": "Serious P. aeruginosa infection"
+            },
+            {
+              "text": "Piperacillin-tazobactam 4.5 g IV q6h, cefepime, imipenem 500 mg IV q6h or meropenem 1 g IV q8h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Add second agent",
+          "cells": [
+            {
+              "text": "Severe sepsis, neutropenia, high local resistance"
+            },
+            {
+              "text": "Ciprofloxacin 400 mg IV, levofloxacin 750 mg IV, or an aminoglycoside"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Devices, stones, abscesses, ecthyma, osteomyelitis"
+            },
+            {
+              "text": "Remove retained catheters or stents; relapse often from retained device"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratitis",
+          "cells": [
+            {
+              "text": "Contact lens corneal ulcer"
+            },
+            {
+              "text": "Intensive topical antipseudomonal drops, remove lens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-trimoxazole",
+          "cells": [
+            {
+              "text": "Stenotrophomonas maltophilia"
+            },
+            {
+              "text": "{{hy:Intrinsically carbapenem resistant}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melioidosis, IV phase",
+          "cells": [
+            {
+              "text": "Confirmed or suspected"
+            },
+            {
+              "text": "Ceftazidime at least 10 to 14 days, longer for severe disease or deep abscess; carbapenem alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Melioidosis, oral phase",
+          "cells": [
+            {
+              "text": "After IV phase"
+            },
+            {
+              "text": "Co-trimoxazole or doxycycline for 3 to 6 months; amoxicillin-clavulanate in children under 8 and pregnancy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Melioidosis mortality: Harrison 22e cites septicaemia mortality up to 44% in Thailand; Merck gives overall mortality under 10% with septicaemic disease often fatal. Both kept. Beta-lactam and fluoroquinolone doses are from the Tables PDF pneumonia regimens."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infections_due_to_pseudomonas_burkholderia-dx-mgmt",
+      "title": "Diagnosis and management of Pseudomonas and related infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sepsis or focal infection in an ICU, neutropenic or device patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Cultures from blood and site before antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Endemic melioidosis exposure?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "IV ceftazidime 10 to 14 days, then oral co-trimoxazole 3 to 6 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neutropenia, shock or high local resistance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antipseudomonal beta-lactam plus second agent",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single antipseudomonal beta-lactam",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove devices, drain collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "S. maltophilia isolated as true infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Switch to co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Narrow to single active agent by susceptibility",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

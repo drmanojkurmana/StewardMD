@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for left ventricular non-compaction cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/AHA cardiomyopathy guidelines; Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "left_ventricular_noncompaction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with non-compacted to compacted ratio",
+          "cells": [
+            {
+              "text": "Trabeculation ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Trabecular quantification and fibrosis on late gadolinium enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG and ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Conduction abnormality and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left ventricular systolic function and volumes",
+          "cells": [
+            {
+              "text": "Systolic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and cascade screening",
+          "cells": [
+            {
+              "text": "Frequently familial, sarcomeric basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular assessment",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "left_ventricular_noncompaction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated cardiomyopathy",
+          "cells": [
+            {
+              "text": "Separated by the non-compacted to compacted ratio on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Overlapping sarcomeric genetics; trabeculation assessment distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiological hypertrabeculation (athletes, pregnancy)",
+          "cells": [
+            {
+              "text": "Prominent trabeculation without disease; avoid overdiagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endomyocardial fibrosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "left_ventricular_noncompaction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Guideline-directed, including beta-blockers and ACE inhibitors or ARBs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "When systolic function is impaired, atrial fibrillation is present, or thrombus is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia and defibrillator",
+          "cells": [
+            {
+              "text": "Manage ventricular arrhythmia; assess for an ICD in high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Echo or cardiac MRI and ambulatory ECG for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Cascade screening of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular evaluation",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced therapy referral",
+          "cells": [
+            {
+              "text": "Transplantation or mechanical circulatory support for refractory heart failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "left_ventricular_noncompaction-dx-mgmt",
+      "title": "Diagnosis and management of Left ventricular non-compaction cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prominent LV trabeculation with heart failure, arrhythmia or embolic event",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new heart failure, syncope or VT, embolism, family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for arrhythmia or embolic event",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo non-compaction ratio, cardiac MRI, ECG and Holter, genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is non-compaction confirmed on cardiac MRI, rather than physiological trabeculation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider athlete or pregnancy trabeculation, dilated or hypertrophic cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heart failure therapy with beta-blockers and an ACE inhibitor or ARB",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulation for impaired function, AF or thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Arrhythmia management and ICD assessment for high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echo or CMR and ambulatory ECG surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing and cascade screening of first-degree relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on ventricular function and arrhythmic burden; preserved function may stay stable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

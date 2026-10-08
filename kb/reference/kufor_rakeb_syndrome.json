@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for kufor-rakeb syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kufor_rakeb_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with iron-sensitive sequences",
+          "cells": [
+            {
+              "text": "Atrophy and basal ganglia iron accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP13A2 testing within a parkinsonism or NBIA panel",
+          "cells": [
+            {
+              "text": "ATP13A2 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caeruloplasmin, copper studies and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Excludes Wilson disease; Kayser-Fleischer rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine transporter (DAT) imaging",
+          "cells": [
+            {
+              "text": "Presynaptic dopaminergic deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculomotor assessment",
+          "cells": [
+            {
+              "text": "Supranuclear gaze palsy and saccadic slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist metabolic testing",
+          "cells": [
+            {
+              "text": "Excludes Niemann-Pick disease type C"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kufor_rakeb_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Young-onset Parkinson disease (PRKN, PINK1, DJ-1)",
+          "cells": [
+            {
+              "text": "Missed if the pyramidal signs and gaze palsy are overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Caeruloplasmin, copper studies and Kayser-Fleischer rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niemann-Pick disease type C",
+          "cells": [
+            {
+              "text": "Young-onset extrapyramidal features with vertical gaze palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive supranuclear palsy",
+          "cells": [
+            {
+              "text": "Shares the vertical gaze palsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kufor_rakeb_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levodopa with a dopa-decarboxylase inhibitor",
+          "cells": [
+            {
+              "text": "First-line for the levodopa-responsive parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyskinesia and fluctuation management",
+          "cells": [
+            {
+              "text": "Adjust the regimen; amantadine or adjunctive dopaminergic agents considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity and myoclonus",
+          "cells": [
+            {
+              "text": "Baclofen for spasticity; symptomatic treatment of myoclonus and dystonic or oculogyric spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychiatric and cognitive care",
+          "cells": [
+            {
+              "text": "Cognitive support; cautious pharmacotherapy for hallucinations and dementia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy, falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; consider testing at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Swallowing, mobility and safety; escalate supportive care as disability advances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kufor_rakeb_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kufor-Rakeb syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Kufor-Rakeb: young-onset parkinsonism with pyramidal signs and gaze palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline, disabling dyskinesia, falls, psychosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for rapid decline or emergent psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Iron-sensitive MRI, ATP13A2 panel, copper studies, DAT imaging, oculomotor review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ATP13A2 testing identify a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wilson disease, Niemann-Pick type C or young-onset Parkinson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levodopa with a dopa-decarboxylase inhibitor as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage early dyskinesias and motor fluctuations by adjusting the regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baclofen for spasticity; symptomatic treatment of myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation and falls prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and monitoring of swallowing, mobility and safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive; severe combined disability often develops within about a decade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

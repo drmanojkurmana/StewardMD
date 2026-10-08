@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for knobloch syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "knobloch_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination and wide-field imaging",
+          "cells": [
+            {
+              "text": "Vitreoretinal degeneration and detachment risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the head",
+          "cells": [
+            {
+              "text": "Occipital encephalocele or skull defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular atrophy and vitreoretinal interface changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axial length and refraction",
+          "cells": [
+            {
+              "text": "Quantifies high myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Retinal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL18A1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Identifies COL18A1 mutations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "knobloch_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Walker-Warburg syndrome",
+          "cells": [
+            {
+              "text": "Syndromic high myopia with brain malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated pathological (degenerative) myopia",
+          "cells": [
+            {
+              "text": "Occipital defect and vitreoretinal degeneration distinguish Knobloch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stickler syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "knobloch_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Dilated and wide-field examination for degeneration and detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinopexy or surgical repair",
+          "cells": [
+            {
+              "text": "Prophylactic retinopexy or laser; vitrectomy or scleral buckling for detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myopia correction",
+          "cells": [
+            {
+              "text": "Refraction and low-vision aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical assessment",
+          "cells": [
+            {
+              "text": "Neuroimaging and repair of the occipital encephalocele or skull defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated eye conditions",
+          "cells": [
+            {
+              "text": "Monitoring and management of cataract, lens subluxation and glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive COL18A1 inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "knobloch_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Knobloch syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Knobloch syndrome: high myopia, vitreoretinal degeneration, occipital defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (retinal symptoms, occipital lesion, rapid myopia progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal care for retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus exam, MRI for occipital defect, OCT, COL18A1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does COL18A1 testing show biallelic mutations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Stickler, Walker-Warburg and isolated degenerative myopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong ophthalmological surveillance for degeneration and detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic retinopexy and surgical repair of detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correction of high myopia and low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuroimaging and neurosurgical assessment of the occipital defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor cataract, lens subluxation and glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual prognosis guarded given myopia, macular change and recurrent detachment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

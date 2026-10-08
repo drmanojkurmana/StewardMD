@@ -144,5 +144,267 @@
       "caption": "Overview comparison matrix for retinopathy of prematurity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinopathy_of_prematurity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured screening dilated indirect ophthalmoscopy",
+          "cells": [
+            {
+              "text": "Retinopathy in at-risk preterm infants, at defined intervals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of zone, stage and plus disease",
+          "cells": [
+            {
+              "text": "Zone I or plus disease indicates treatment-requiring retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide-field retinal imaging",
+          "cells": [
+            {
+              "text": "Documentation and telemedicine review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longer-term refraction, alignment and amblyopia assessment",
+          "cells": [
+            {
+              "text": "Refractive error, strabismus and amblyopia in survivors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinopathy_of_prematurity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laser for type 1 (threshold) disease",
+          "cells": [
+            {
+              "text": "Ablate the avascular peripheral retina to halt the neovascular drive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF",
+          "cells": [
+            {
+              "text": "Reserved for aggressive posterior or zone I disease, with vigilant follow-up for reactivation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen regulation",
+          "cells": [
+            {
+              "text": "Regulate supplemental oxygen to targeted saturation ranges; avoid unnecessary hyperoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured screening",
+          "cells": [
+            {
+              "text": "Examinations at intervals set by gestational age and birthweight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreoretinal surgery",
+          "cells": [
+            {
+              "text": "Scleral buckling or vitrectomy when tractional retinal detachment develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Refractive error, strabismus and amblyopia in treated eyes and preterm survivors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Neonatology and ophthalmology together; counsel parents on the visual prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinopathy_of_prematurity-dx-mgmt",
+      "title": "Diagnosis and management of Retinopathy of prematurity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Preterm, low-birthweight infant within the ROP screening window",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (zone I or plus disease, aggressive posterior ROP, traction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment: laser or anti-VEGF; vitrectomy if traction detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Screening dilated ophthalmoscopy; record zone, stage and plus disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is treatment-requiring disease present (type 1, threshold)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue structured screening at intervals set by gestational age",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Laser photocoagulation of avascular retina for type 1 (threshold) disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-VEGF for aggressive posterior or zone I disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regulate supplemental oxygen to targeted saturation ranges",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term follow-up for refraction, strabismus and amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild disease often regresses; untreated severe disease can lead to blindness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

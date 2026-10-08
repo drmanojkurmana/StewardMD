@@ -151,5 +151,332 @@
       "caption": "Overview comparison matrix for mef2c haploinsufficiency syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mef2c_haploinsufficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "5q14.3 deletions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEF2C sequencing",
+          "cells": [
+            {
+              "text": "MEF2C variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizure characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, feeding and swallowing assessment",
+          "cells": [
+            {
+              "text": "Development, feeding and swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MECP2, CDKL5 and FOXG1 testing, if the Rett spectrum is considered",
+          "cells": [
+            {
+              "text": "Rett spectrum, if considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mef2c_haploinsufficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rett syndrome (MECP2)",
+          "cells": [
+            {
+              "text": "Rett spectrum; MECP2 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Rett spectrum; CDKL5 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FOXG1 syndrome (congenital Rett variant)",
+          "cells": [
+            {
+              "text": "Rett spectrum; FOXG1 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mef2c_haploinsufficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to seizure type for the frequently associated epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy for hypotonia and motor delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Augmentative and alternative communication for absent or minimal speech"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing support",
+          "cells": [
+            {
+              "text": "Nutritional support; gastrostomy where feeding difficulty is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constipation and behaviour",
+          "cells": [
+            {
+              "text": "Laxatives; behavioural support for autistic features and stereotypies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and brain MRI",
+          "cells": [
+            {
+              "text": "Characterise seizures and structural change; ongoing developmental monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Most cases are de novo; confirmatory testing and recurrence-risk assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric neurology, developmental and therapy support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mef2c_haploinsufficiency-dx-mgmt",
+      "title": "Diagnosis and management of MEF2C Haploinsufficiency Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with developmental delay, hypotonia and epilepsy; suspected MEF2C disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Regression of acquired skills, evolving epilepsy or aspiration with faltering growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of evolving epilepsy; assess aspiration and feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray for 5q14.3; MEF2C sequencing; MRI; EEG; swallowing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a 5q14.3 deletion or MEF2C variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rett, CDKL5 deficiency or FOXG1 syndrome; test MECP2, CDKL5, FOXG1",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication tailored to seizure type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for hypotonia and motor delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Augmentative communication with speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Feeding and swallowing support; gastrostomy where feeding is severely impaired",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cases are de novo; lifelong multidisciplinary care and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

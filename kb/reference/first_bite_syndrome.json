@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for first bite syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "first_bite_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History of first-bite, sour-food-provoked pain",
+          "cells": [
+            {
+              "text": "Classic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of parapharyngeal space and deep parotid",
+          "cells": [
+            {
+              "text": "Tumour excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salivary gland ultrasound",
+          "cells": [
+            {
+              "text": "Obstruction or sialadenitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior parapharyngeal or sympathetic chain surgery",
+          "cells": [
+            {
+              "text": "Surgical precursor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialography if obstruction suspected",
+          "cells": [
+            {
+              "text": "Duct assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "first_bite_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Frey syndrome",
+          "cells": [
+            {
+              "text": "Sweating rather than pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or obstructive sialadenitis",
+          "cells": [
+            {
+              "text": "Salivary inflammation or calculus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parapharyngeal space tumour",
+          "cells": [
+            {
+              "text": "New spontaneous first bite pain without prior surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "first_bite_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin into the parotid gland",
+          "cells": [
+            {
+              "text": "Most effective for refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbamazepine, gabapentin or amitriptyline",
+          "cells": [
+            {
+              "text": "First-line neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sour or tart trigger foods",
+          "cells": [
+            {
+              "text": "Reassurance that pain tends to lessen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of parapharyngeal space",
+          "cells": [
+            {
+              "text": "Exclude an underlying tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any parapharyngeal tumour",
+          "cells": [
+            {
+              "text": "Resolves the associated pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otolaryngology referral",
+          "cells": [
+            {
+              "text": "Consideration of botulinum toxin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "first_bite_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of First bite syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Parotid pain at the first bite of each meal, provoked by sour food",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (spontaneous pain without surgery, Horner syndrome, neck mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging for suspected parapharyngeal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of first-bite pattern; CT or MRI of parapharyngeal space; salivary ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "First-bite pain after parapharyngeal or sympathetic surgery with no tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider parapharyngeal tumour, sialadenitis or Frey syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid sour or tart trigger foods and reassure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbamazepine, gabapentin or amitriptyline for neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Botulinum toxin into the parotid for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat any identified parapharyngeal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; pain tends to lessen over months to two years, though it may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

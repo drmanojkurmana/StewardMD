@@ -166,5 +166,458 @@
       "caption": "Overview comparison matrix for intestinal nematode (roundworm) infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC Clinical Care of Soil-transmitted Helminths",
+      "kind": "web",
+      "url": "https://www.cdc.gov/sth/hcp/clinical-care/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "CDC Clinical Care of Strongyloides",
+      "kind": "web",
+      "url": "https://www.cdc.gov/strongyloides/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intestinal_nematode_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing intestinal nematode infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascaris eggs in stool",
+          "unit": "um",
+          "cells": [
+            {
+              "text": "About 65 x 45 um",
+              "op": "=",
+              "value": 65
+            },
+            {
+              "text": "Lung phase 9 to 12 days after ingestion causes Loffler syndrome before eggs appear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hookworm eggs in stool",
+          "unit": "um",
+          "cells": [
+            {
+              "text": "About 40 x 60 um",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Species indistinguishable; check for microcytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichuris eggs",
+          "unit": "um",
+          "cells": [
+            {
+              "text": "Lemon-shaped, about 50 x 20 um",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Heavy burden: dysentery and rectal prolapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Enterobius}}",
+          "cells": [
+            {
+              "text": "Eggs not in stool"
+            },
+            {
+              "text": "Morning perianal cellulose tape test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strongyloides rhabditiform larvae",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Single stool detects about one-third",
+              "op": "=",
+              "value": 33
+            },
+            {
+              "text": "Serial stools, agar plate culture, serology (ELISA)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Larva currens",
+          "unit": "cm/h",
+          "cells": [
+            {
+              "text": "Serpiginous rash advancing up to about 10 cm/h",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Pathognomonic for strongyloidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilia and high IgE",
+          "cells": [
+            {
+              "text": "Common with tissue-migrating worms"
+            },
+            {
+              "text": "Often absent in disseminated strongyloidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated strongyloidiasis",
+          "cells": [
+            {
+              "text": "Filariform larvae in stool, sputum, lavage or drain fluid"
+            },
+            {
+              "text": "Often with gram-negative sepsis or meningitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intestinal_nematode_infections-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic intestinal nematode infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer disease",
+          "cells": [
+            {
+              "text": "Strongyloides pain worsens with food"
+            },
+            {
+              "text": "Stool larvae or Strongyloides serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Heavy trichuriasis with bloody mucoid diarrhoea"
+            },
+            {
+              "text": "Stool ova and parasites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute appendicitis or surgical abdomen",
+          "cells": [
+            {
+              "text": "Intestinal or biliary ascariasis in endemic areas"
+            },
+            {
+              "text": "Ultrasound, plain film for worm mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary bacterial sepsis or meningitis",
+          "cells": [
+            {
+              "text": "May reflect Strongyloides hyperinfection in immunosuppressed"
+            },
+            {
+              "text": "Sputum and stool for larvae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hookworm versus Strongyloides larvae",
+          "cells": [
+            {
+              "text": "Hookworm larvae hatch in non-fresh stool"
+            },
+            {
+              "text": "Examine fresh stool"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intestinal_nematode_infections-treatment",
+      "kind": "treatment",
+      "title": "Treating intestinal nematode infections (CDC)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascariasis",
+          "cells": [
+            {
+              "text": "Ascaris"
+            },
+            {
+              "text": "Albendazole 400 mg once; or mebendazole 100 mg twice daily for 3 days or 500 mg once; or ivermectin 150 to 200 mcg/kg once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hookworm",
+          "cells": [
+            {
+              "text": "Hookworm"
+            },
+            {
+              "text": "Albendazole 400 mg once; or mebendazole 100 mg twice daily for 3 days or 500 mg once; or pyrantel pamoate 11 mg/kg for 3 days (max 1 g)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trichuriasis",
+          "cells": [
+            {
+              "text": "Whipworm"
+            },
+            {
+              "text": "Albendazole 400 mg daily for 3 days; or mebendazole 100 mg twice daily for 3 days; or ivermectin 200 mcg/kg/day for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "{{hy:Ivermectin for strongyloidiasis}}",
+          "cells": [
+            {
+              "text": "Chronic infection, even if asymptomatic"
+            },
+            {
+              "text": "200 mcg/kg once daily for 1 to 2 days; repeat stool at 2 to 4 weeks"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperinfection or dissemination",
+          "cells": [
+            {
+              "text": "Strongyloides in immunosuppressed"
+            },
+            {
+              "text": "Reduce immunosuppression; ivermectin 200 mcg/kg daily until stool or sputum negative for 2 weeks"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Albendazole for strongyloidiasis",
+          "cells": [
+            {
+              "text": "Alternative"
+            },
+            {
+              "text": "400 mg twice daily for 7 days; avoid in first trimester"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pinworm",
+          "cells": [
+            {
+              "text": "Enterobius"
+            },
+            {
+              "text": "Benzimidazole; treat household contacts, hygiene and laundering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement",
+          "cells": [
+            {
+              "text": "Hookworm anaemia"
+            },
+            {
+              "text": "With deworming and nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen before immunosuppression",
+          "cells": [
+            {
+              "text": "Steroids, transplant, HTLV-1, haematologic cancer, unexplained eosinophilia with exposure"
+            },
+            {
+              "text": "Serology and treat if positive"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Ivermectin is relatively contraindicated with Loa loa co-infection, weight under 15 kg, pregnancy and lactation. All agents are pregnancy category C; WHO allows benzimidazoles in the 2nd and 3rd trimesters in mass campaigns."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intestinal_nematode_infections-dx-mgmt",
+      "title": "Diagnosis and management of intestinal nematode infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "GI symptoms, anaemia, eosinophilia or exposure in endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunosuppressed with sepsis or pulmonary infiltrates?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Stool, sputum and lavage for larvae; blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Daily ivermectin until negative 2 weeks; cut immunosuppression",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Perianal itch at night?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Tape test; treat patient and household",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Serial stool microscopy and Strongyloides serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Strongyloides found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Ivermectin 200 mcg/kg for 1 to 2 days",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Species-specific benzimidazole; iron if anaemic",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

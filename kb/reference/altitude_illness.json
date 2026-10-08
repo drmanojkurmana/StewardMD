@@ -186,5 +186,427 @@
       "caption": "Overview comparison matrix for altitude illness."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Altitude Illness",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/altitude-illness/acute-altitude-illness",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "altitude_illness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising acute altitude illness",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Altitude for AMS",
+          "unit": "m",
+          "cells": [
+            {
+              "text": "Unlikely below 2400",
+              "op": "<",
+              "value": 2400
+            },
+            {
+              "text": "About 25% at 2000 to 3000 m; 50% to 70% at 4340 m"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute mountain sickness",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Onset 6 to 10 after ascent; headache plus fatigue, GI upset or dizziness",
+              "range": [
+                6,
+                10
+              ]
+            },
+            {
+              "text": "Usually settles in 24 to 48 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-altitude cerebral oedema",
+          "unit": "m",
+          "cells": [
+            {
+              "text": "Usually 4000 or more; 1 to 5 days after ascent",
+              "op": ">=",
+              "value": 4000
+            },
+            {
+              "text": "{{hy:Gait ataxia is a reliable early warning; then confusion to coma}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-altitude pulmonary oedema",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "24 to 96 after rapid ascent above 2400 m",
+              "range": [
+                24,
+                96
+              ]
+            },
+            {
+              "text": "Exertional dyspnoea, dry cough, then pink sputum; most deaths"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HAPE oxygen saturation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Often 40 to 70",
+              "range": [
+                40,
+                70
+              ]
+            },
+            {
+              "text": "Patchy oedema with normal heart size on X-ray"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HAPE fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Low grade, below 38.5",
+              "op": "<",
+              "value": 38.5
+            },
+            {
+              "text": "Low-grade fever is part of HAPE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severity grading",
+          "cells": [
+            {
+              "text": "AMS mild vs moderate by headache, nausea, fatigue, dizziness"
+            },
+            {
+              "text": "AMS and HACE form a continuum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "altitude_illness-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of altitude illness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Applies to"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol hangover, viral illness, caffeine withdrawal, dehydration, exhaustion",
+          "cells": [
+            {
+              "text": "AMS mimics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypothermia, hyponatraemia, migraine",
+          "cells": [
+            {
+              "text": "AMS mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS infection, brain haemorrhage, uncontrolled diabetes",
+          "cells": [
+            {
+              "text": "{{hy:HACE mimics; seizures, focal signs or meningism suggest these}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia, pneumothorax, pulmonary embolism, anxiety attack",
+          "cells": [
+            {
+              "text": "HAPE mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "altitude_illness-treatment",
+      "kind": "treatment",
+      "title": "Prevention and treatment of altitude illness",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Graded ascent",
+          "unit": "m/day",
+          "cells": [
+            {
+              "text": "Above 3000 m",
+              "op": ">",
+              "value": 3000
+            },
+            {
+              "text": "Sleeping altitude up no more than about 500 m per day; rest day every 3 to 4 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acetazolamide prophylaxis",
+          "cells": [
+            {
+              "text": "Higher-risk ascent"
+            },
+            {
+              "text": "125 mg every 12 hours from the night before until 2 days at top altitude"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop ascent, rest, analgesia",
+          "cells": [
+            {
+              "text": "Mild to moderate AMS"
+            },
+            {
+              "text": "Acetazolamide 250 mg twice daily or dexamethasone 2 to 4 mg every 6 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Descent",
+          "unit": "m",
+          "cells": [
+            {
+              "text": "{{hy:Severe AMS, HACE, HAPE}}"
+            },
+            {
+              "text": "500 to 1000 m often rapidly effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone for HACE",
+          "cells": [
+            {
+              "text": "HACE"
+            },
+            {
+              "text": "8 mg, then 4 mg every 6 hours; IM or IV if needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen and nifedipine",
+          "cells": [
+            {
+              "text": "HAPE"
+            },
+            {
+              "text": "Oxygen to saturation above 90%; nifedipine SR 30 mg every 12 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sildenafil or tadalafil",
+          "cells": [
+            {
+              "text": "HAPE alternative or prevention after prior HAPE"
+            },
+            {
+              "text": "Sildenafil 50 mg every 8 hours; tadalafil 10 mg every 12 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Portable hyperbaric bag",
+          "cells": [
+            {
+              "text": "Descent delayed or impossible"
+            },
+            {
+              "text": "Buys time; does not replace descent"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Diuretics are contraindicated in HAPE."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "altitude_illness-dx-mgmt",
+      "title": "Diagnosis and management of altitude illness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symptoms after recent ascent above about 2400 m",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ataxia or altered consciousness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "HACE: descend, oxygen, dexamethasone 8 mg then 4 mg every 6 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Breathless at rest, cough, low saturation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "HAPE: descend, oxygen above 90%, nifedipine SR",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Headache with fatigue, nausea or dizziness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Consider hangover, viral illness, dehydration, other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "AMS: halt ascent, rest, analgesia; acetazolamide or dexamethasone",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Worsening or severe?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Descend 500 to 1000 m",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resume gradual ascent once symptoms resolve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

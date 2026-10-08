@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for persistent depressive disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "persistent_depressive_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured suicide risk assessment",
+          "cells": [
+            {
+              "text": "Current suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised depression rating scales",
+          "cells": [
+            {
+              "text": "Chronic severity over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Medical contributors such as hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and metabolic panel",
+          "cells": [
+            {
+              "text": "Medical contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for hypomanic or manic episodes",
+          "cells": [
+            {
+              "text": "Bipolarity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance use screening",
+          "cells": [
+            {
+              "text": "Comorbid substance misuse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "persistent_depressive_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Major depressive disorder, episodic type",
+          "cells": [
+            {
+              "text": "Episodic course, whereas this disorder is chronic by definition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar II disorder in a depressive phase",
+          "cells": [
+            {
+              "text": "Hypomanic or manic episodes on screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "persistent_depressive_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antidepressant",
+          "cells": [
+            {
+              "text": "SSRI or SNRI, continued for an adequate trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychotherapy",
+          "cells": [
+            {
+              "text": "Evidence-based therapy, including cognitive behavioural therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined treatment",
+          "cells": [
+            {
+              "text": "Pharmacotherapy and psychotherapy preferred; augmentation for partial response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicide risk",
+          "cells": [
+            {
+              "text": "Repeated risk assessment with safety planning, despite a seemingly milder daily picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolarity and substance screen",
+          "cells": [
+            {
+              "text": "Screen for bipolarity before and during antidepressant treatment; treat substance misuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Prolonged treatment to prevent relapse, tracked with rating scales"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical and psychosocial",
+          "cells": [
+            {
+              "text": "Exclude thyroid dysfunction; address ongoing psychosocial stressors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist escalation",
+          "cells": [
+            {
+              "text": "Specialist psychiatry for treatment-resistant disease, with augmentation or ECT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "persistent_depressive_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Persistent depressive disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic depressed mood suspected to be persistent depressive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (suicidal ideation with plan or intent, superimposed episode, emerging mania)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychiatric assessment and safety planning for suicidal ideation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Suicide risk assessment; rating scales; thyroid and metabolic screen; substance screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the chronic course fit persistent depressive disorder without bipolar features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider major depression, bipolar II, cyclothymia, or a medical or drug cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antidepressant pharmacotherapy, typically an SSRI or SNRI, for an adequate trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Psychotherapy, including cognitive behavioural therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combine pharmacotherapy and psychotherapy; augment for partial response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat suicide risk assessment with safety planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Maintain treatment long term to prevent relapse, tracked with rating scales",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, often treatment-resistant; improves with sustained combined treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

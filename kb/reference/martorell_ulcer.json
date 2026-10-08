@@ -152,5 +152,332 @@
       "caption": "Overview comparison matrix for martorell ulcer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Dermatology / EWMA wound guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "martorell_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional or wedge biopsy from the ulcer edge",
+          "cells": [
+            {
+              "text": "Subcutaneous arteriolosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial index and arterial duplex ultrasound",
+          "cells": [
+            {
+              "text": "Significant large-vessel disease, to be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure assessment, including ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose and glycated haemoglobin",
+          "cells": [
+            {
+              "text": "Glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, phosphate, parathyroid hormone and renal function",
+          "cells": [
+            {
+              "text": "Calciphylaxis screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and vasculitis screen",
+          "cells": [
+            {
+              "text": "Mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound tissue culture",
+          "cells": [
+            {
+              "text": "Secondary infection, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "martorell_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atherosclerotic (large-vessel) arterial ulcer",
+          "cells": [
+            {
+              "text": "Large-vessel disease, excluded by ankle-brachial index and arterial duplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calciphylaxis",
+          "cells": [
+            {
+              "text": "Renal failure or dialysis dependence with painful skin necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitic ulcer",
+          "cells": [
+            {
+              "text": "Systemic vasculitis, screened for in the workup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "martorell_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Antihypertensive therapy as the key disease-modifying step, targeting arteriolosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "In coexisting diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Often including opioids, for severe and disproportionate pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moist wound care with debridement",
+          "cells": [
+            {
+              "text": "Meticulous care; debridement of necrotic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early split-skin grafting",
+          "cells": [
+            {
+              "text": "Accelerates healing and provides pain relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid inappropriate immunosuppression",
+          "cells": [
+            {
+              "text": "Immunosuppression intended for pyoderma gangrenosum worsens the ischaemic wound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and risk factor control",
+          "cells": [
+            {
+              "text": "Contralateral leg for recurrence; combined dermatology and vascular surgery input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "martorell_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Martorell ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful necrotic leg ulcer in a patient with hypertension or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pain out of proportion, secondary infection, sepsis or features of calciphylaxis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: treat infection and assess for calciphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ulcer-edge biopsy, ankle-brachial index, arterial duplex, calcium, PTH and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is subcutaneous arteriolosclerosis confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyoderma gangrenosum, vasculitic or atherosclerotic ulcer; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise blood pressure control to target the underlying arteriolosclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Effective analgesia, often including opioids, for disproportionate pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Moist wound care with debridement, then early split-skin grafting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid immunosuppression intended for pyoderma gangrenosum; it worsens the wound",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor the contralateral leg; combined dermatology and vascular surgery input",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for klinefelter syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "klinefelter_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; defines mosaicism or higher-grade aneuploidy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone with LH and FSH",
+          "cells": [
+            {
+              "text": "Low testosterone with elevated gonadotrophins in testicular failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis",
+          "cells": [
+            {
+              "text": "Usually azoospermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density assessment",
+          "cells": [
+            {
+              "text": "Osteoporosis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "Glucose intolerance and dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "klinefelter_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kallmann syndrome and hypogonadotropic hypogonadism",
+          "cells": [
+            {
+              "text": "Hypogonadotropic; Klinefelter has raised gonadotrophins and 47,XXY karyotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional tall stature",
+          "cells": [
+            {
+              "text": "Tall stature alone; Klinefelter adds hypogonadism with small firm testes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragile X syndrome",
+          "cells": [
+            {
+              "text": "Learning difficulties also occur; Klinefelter intelligence is usually normal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "klinefelter_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Supports virilisation, bone health, muscle mass, mood and wellbeing; does not restore fertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Testicular sperm extraction and assisted reproduction where paternity is desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density monitoring",
+          "cells": [
+            {
+              "text": "Management of osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic surveillance",
+          "cells": [
+            {
+              "text": "Glucose intolerance, dyslipidaemia and cardiovascular risk; treat troublesome gynaecomastia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and psychological support",
+          "cells": [
+            {
+              "text": "Speech, language and executive function difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated condition surveillance",
+          "cells": [
+            {
+              "text": "Breast malignancy, venous thromboembolism and autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Karyotype confirmation; endocrine, andrology and fertility input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "klinefelter_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Klinefelter syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Klinefelter syndrome: hypogonadism, infertility or tall stature in a male",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fracture risk, thromboembolism, mediastinal tumour, psychosocial need)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for thromboembolism or mediastinal germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, testosterone with LH and FSH, semen analysis, bone density, metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does karyotype show 47,XXY or another supernumerary X?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other primary hypogonadism, Kallmann syndrome or tall stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testosterone replacement, which does not restore fertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fertility counselling with sperm extraction and assisted reproduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bone density monitoring and management of osteoporosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Metabolic and cardiovascular surveillance; treat gynaecomastia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Educational, speech and psychological support; surveillance for associated conditions",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy near normal; infertility usual and comorbidity risk raised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

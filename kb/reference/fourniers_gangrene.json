@@ -153,5 +153,276 @@
       "caption": "Overview comparison matrix for fournier's gangrene."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fourniers_gangrene-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood cultures and operative tissue cultures",
+          "cells": [
+            {
+              "text": "Organisms from blood, operative tissue and any discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal and liver function, glucose, lactate, coagulation",
+          "cells": [
+            {
+              "text": "Gauges sepsis severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or plain imaging",
+          "cells": [
+            {
+              "text": "Defines extent of gas and tissue involvement, when it will not delay surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Definitive diagnosis and debridement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic assessment and immunosuppression screen",
+          "cells": [
+            {
+              "text": "Underlying immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fourniers_gangrene-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency wide surgical debridement",
+          "cells": [
+            {
+              "text": "All necrotic fascia and tissue, with planned repeat exploration and source control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad-spectrum empirical antibiotics",
+          "cells": [
+            {
+              "text": "Gram-positive, Gram-negative and anaerobic cover; clindamycin for toxin suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic resuscitation",
+          "cells": [
+            {
+              "text": "IV fluids, vasopressors and multi-organ support in critical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control predisposing conditions",
+          "cells": [
+            {
+              "text": "Tighten glycaemic control; address obesity, alcohol excess or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal or urinary diversion",
+          "cells": [
+            {
+              "text": "Colostomy or suprapubic catheter to protect the healing perineum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Nutritional optimisation; adjunctive hyperbaric oxygen where accessible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged reconstruction",
+          "cells": [
+            {
+              "text": "Reconstructive and plastic surgery after sepsis resolves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fourniers_gangrene-dx-mgmt",
+      "title": "Diagnosis and management of Fournier's gangrene",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fournier gangrene: rapidly spreading perineal swelling with pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (crepitus, skin necrosis, septic shock, subcutaneous gas)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical debridement and critical care resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and operative cultures, lactate, coagulation, CT or plain imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does surgical exploration confirm necrotising infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider abscess, simple cellulitis, strangulated hernia or scrotal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency wide debridement of all necrotic tissue with planned re-exploration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum antibiotics with clindamycin for toxin suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Haemodynamic resuscitation and multi-organ support in critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control predisposing conditions such as diabetes, obesity or immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mortality rises steeply with delayed surgery; early aggressive debridement is key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for gnao1 encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gnao1_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or whole-exome sequencing",
+          "cells": [
+            {
+              "text": "Confirms the GNAO1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video EEG",
+          "cells": [
+            {
+              "text": "Where seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural and metabolic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder characterisation with video",
+          "cells": [
+            {
+              "text": "Chorea and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation candidacy assessment",
+          "cells": [
+            {
+              "text": "Refractory movement disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gnao1_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dyskinetic cerebral palsy",
+          "cells": [
+            {
+              "text": "Dyskinetic phenotype mistaken for it; genetic diagnosis is missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADCY5-related dyskinesia",
+          "cells": [
+            {
+              "text": "Chorea syndrome; separated by genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gnao1_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Broad-spectrum agents titrated to seizure type and EEG pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chorea and dystonia",
+          "cells": [
+            {
+              "text": "Dopamine-depleting or blocking agents such as tetrabenazine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonic or choreic storm",
+          "cells": [
+            {
+              "text": "Emergency treatment with benzodiazepines, sedation and intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Globus pallidus internus for refractory, disabling movement disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and feeding support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy; feeding support or gastrostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Intercurrent illness, stress and abrupt medication change; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gnao1_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of GNAO1 encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GNAO1 encephalopathy: dyskinetic movement disorder with seizures in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dystonic or choreic storm, status, rapid feeding deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency treatment of dystonic or choreic storm with sedation and intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GNAO1 sequencing, video EEG, brain MRI and metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing confirm a GNAO1 variant, with treatable mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ADCY5 dyskinesia, FOXG1, GNB1, STXBP1 or dyskinetic cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication titrated to seizure type and EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tetrabenazine or other movement-disorder agents for chorea and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency management of dystonic or choreic storms with intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider deep brain stimulation for refractory, disabling movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most have significant intellectual disability and persistent movement disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for familial partial lipodystrophy (dunnigan, lmna/pparg)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_partial_lipodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Regional fat quantification by DEXA or MRI",
+          "cells": [
+            {
+              "text": "Limb fat loss with truncal sparing or accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting triglycerides, glucose or HbA1c, insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Metabolic profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum leptin",
+          "cells": [
+            {
+              "text": "Suitability for metreleptin replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging",
+          "cells": [
+            {
+              "text": "Steatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LMNA and PPARG genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography in LMNA disease",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_partial_lipodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cushing syndrome",
+          "cells": [
+            {
+              "text": "Truncal fat and facial fullness mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital generalised lipodystrophy",
+          "cells": [
+            {
+              "text": "Generalised rather than partial fat loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired partial lipodystrophy (Barraquer-Simons)",
+          "cells": [
+            {
+              "text": "Acquired form distinguished by genetics and history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_partial_lipodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Metformin and insulin-sensitising therapy",
+          "cells": [
+            {
+              "text": "Insulin-resistant diabetes, escalating to high-dose insulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrates and omega-3 fatty acids",
+          "cells": [
+            {
+              "text": "Hypertriglyceridaemia, with dietary fat restriction to prevent pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metreleptin",
+          "cells": [
+            {
+              "text": "Leptin deficiency with severe metabolic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-controlled diet and exercise",
+          "cells": [
+            {
+              "text": "Limits ectopic lipid and hepatic steatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance in LMNA disease",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and conduction disease; device therapy when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and family screening",
+          "cells": [
+            {
+              "text": "LMNA and PPARG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_partial_lipodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Familial partial lipodystrophy (Dunnigan, LMNA/PPARG)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Limb fat loss with truncal fat, insulin resistance and hypertriglyceridaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pancreatitis, arrhythmia or cardiomyopathy, progressive liver fibrosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pancreatitis care if triglycerides are very high; cardiac review in LMNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DEXA or MRI fat distribution; lipids; leptin; liver tests; LMNA and PPARG testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Partial fat loss with metabolic features and LMNA or PPARG variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Cushing syndrome, metabolic syndrome or acquired lipodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Metformin and insulin-sensitising therapy, escalating insulin as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fibrates and omega-3 with dietary fat restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metreleptin for leptin deficiency with severe metabolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver monitoring and cardiac surveillance in LMNA disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Governed by metabolic and cardiovascular complications; proactive control improves it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for gabra1-related developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Epilepsy genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gabra1_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or trio exome or genome sequencing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised spike-wave, hypsarrhythmia, burst-suppression or multifocal discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually normal or nonspecific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Developmental status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes treatable mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental testing",
+          "cells": [
+            {
+              "text": "Establishes de novo status or inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gabra1_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other GABA-A subunit encephalopathies (GABRB3, GABRB2, GABRG2)",
+          "cells": [
+            {
+              "text": "Clinical overlap; requires gene-specific testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural or metabolic causes of infantile epileptic encephalopathy",
+          "cells": [
+            {
+              "text": "Excluded by MRI and metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gabra1_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Antiseizure medications tailored to the phenotype, such as valproate or levetiracetam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal therapy",
+          "cells": [
+            {
+              "text": "Corticotrophin or corticosteroids for encephalopathic and infantile-spasm phenotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial EEG and developmental surveillance",
+          "cells": [
+            {
+              "text": "Guides treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; parental testing and recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology and epileptology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gabra1_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of GABRA1-related developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GABRA1 encephalopathy: infantile epilepsy with developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intractable seizures, spasms with hypsarrhythmia, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for epileptic spasms with hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy gene panel or exome sequencing, EEG, MRI and metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene sequencing confirm a GABRA1 variant, with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other GABA-A subunit, Dravet, STXBP1 or KCNQ2 disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medications tailored to the phenotype, such as valproate or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hormonal therapy for encephalopathic or infantile-spasm phenotypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early developmental intervention with physiotherapy and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with parental testing for this autosomal dominant disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Wide-ranging: inherited phenotypes may be well controlled, with preserved cognition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

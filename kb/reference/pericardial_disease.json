@@ -170,5 +170,523 @@
       "caption": "Overview comparison matrix for pericardial disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pericarditis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/pericarditis/pericarditis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 239-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pericardial_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute pericarditis and its complications",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic criteria",
+          "cells": [
+            {
+              "text": "2 or more of 4: typical chest pain, friction rub, ECG changes, effusion"
+            },
+            {
+              "text": "Classic definition of acute pericarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive findings",
+          "cells": [
+            {
+              "text": "Raised CRP or ESR; edema or late enhancement on cardiac MRI"
+            },
+            {
+              "text": "Newer approach: typical pain plus 2 or more findings is definite"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest pain",
+          "cells": [
+            {
+              "text": "Pleuritic, worse supine, eased sitting forward"
+            },
+            {
+              "text": "Radiates to trapezius ridge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Friction rub",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Heard at some time in about 85%",
+              "op": "=",
+              "value": 85
+            },
+            {
+              "text": "Best at end expiration leaning forward"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG stage 1",
+          "cells": [
+            {
+              "text": "Diffuse concave ST elevation with PR depression"
+            },
+            {
+              "text": "{{hy:Reciprocal depression only in aVR and V1}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Over 38 C",
+              "op": ">",
+              "value": 38
+            },
+            {
+              "text": "High-risk feature needing admission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other high-risk features",
+          "cells": [
+            {
+              "text": "Subacute onset, large effusion, immunosuppression, anticoagulation, trauma, NSAID failure, myopericarditis"
+            },
+            {
+              "text": "Admit and investigate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tamponade signs",
+          "cells": [
+            {
+              "text": "Hypotension, raised JVP, pulsus paradoxus, low voltage, electrical alternans"
+            },
+            {
+              "text": "RA and RV diastolic collapse on echo"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Constriction signs",
+          "cells": [
+            {
+              "text": "Kussmaul sign, prominent y descent, pericardial knock"
+            },
+            {
+              "text": "Thickened or calcified pericardium on CT or MRI"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Timing classification",
+          "cells": [
+            {
+              "text": "Acute under 6 weeks, subacute 6 weeks to 6 months, chronic over 6 months"
+            },
+            {
+              "text": "Guides etiologic search"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pericardial_disease-ddx",
+      "kind": "ddx",
+      "title": "Separating pericardial syndromes and mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "Convex ST elevation with reciprocal change; large troponin rise"
+            },
+            {
+              "text": "ECG evolution, troponin, angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "Pulsus paradoxus common; no Kussmaul sign; electrical alternans"
+            },
+            {
+              "text": "Echo: effusion with RA collapse and RV diastolic collapse"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Kussmaul sign, y descent, pericardial knock; pulsus paradoxus usually absent"
+            },
+            {
+              "text": "CT or MRI thickened or calcified pericardium"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Restrictive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Kussmaul sign present, no pericardial thickening, thick myocardium"
+            },
+            {
+              "text": "MRI; endomyocardial biopsy sometimes helpful"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Right ventricular infarction",
+          "cells": [
+            {
+              "text": "Kussmaul sign, enlarged RV, may have S3"
+            },
+            {
+              "text": "ECG right-sided leads, echo"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tuberculous pericarditis",
+          "cells": [
+            {
+              "text": "Subacute effusion, risk of constriction"
+            },
+            {
+              "text": "Pericardial fluid ADA, TB PCR, tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Purulent pericarditis",
+          "cells": [
+            {
+              "text": "Fever, sepsis, poor prognosis"
+            },
+            {
+              "text": "Pericardiocentesis with Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cor pulmonale",
+          "cells": [
+            {
+              "text": "Advanced lung disease; Kussmaul sign negative"
+            },
+            {
+              "text": "Chest imaging, echo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pericardial_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating pericardial disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspirin or ibuprofen plus colchicine",
+          "cells": [
+            {
+              "text": "First line for idiopathic or viral pericarditis"
+            },
+            {
+              "text": "Aspirin 325 to 650 mg every 4 to 6 h or ibuprofen 600 to 800 mg every 6 to 8 h; colchicine 0.5 or 0.6 mg once or twice daily for 3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exercise restriction",
+          "cells": [
+            {
+              "text": "All acute pericarditis"
+            },
+            {
+              "text": "Heart rate under 100/min for at least 1 month, until symptoms, markers and ECG settle"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IL-1 inhibitor (anakinra, rilonacept)",
+          "cells": [
+            {
+              "text": "Recurrent pericarditis with inflammatory phenotype"
+            },
+            {
+              "text": "Preferred over steroids in that phenotype"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose prednisone",
+          "cells": [
+            {
+              "text": "Non-inflammatory phenotype or NSAID contraindicated"
+            },
+            {
+              "text": "0.2 to 0.5 mg/kg/day; exclude TB and pyogenic infection first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrence regimen",
+          "cells": [
+            {
+              "text": "15 to 30% recur"
+            },
+            {
+              "text": "NSAID and colchicine for 6 to 12 months with slow taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pericardiocentesis",
+          "cells": [
+            {
+              "text": "Tamponade"
+            },
+            {
+              "text": "{{hy:Urgent drainage can be lifesaving}}; echo-guided; remove drain when under 25 to 50 mL/24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cause-directed therapy",
+          "cells": [
+            {
+              "text": "TB, uremic, malignant, purulent pericarditis"
+            },
+            {
+              "text": "Antituberculous drugs, dialysis, drainage, antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardiectomy",
+          "cells": [
+            {
+              "text": "Symptomatic chronic constriction"
+            },
+            {
+              "text": "Operative mortality about 5% (5 to 10% in Harrison)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Constriction surgical mortality: Merck gives about 5%; Harrison gives 5 to 10%, highest after radiation."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pericardial_disease-dx-mgmt",
+      "title": "Diagnosis and management of pericardial disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pleuritic chest pain, rub, or unexplained effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG, troponin, CRP, chest x-ray, echocardiogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Tamponade: hypotension, raised JVP, RA or RV collapse?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Urgent pericardiocentesis; send fluid",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Two or more diagnostic criteria for pericarditis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Seek other causes of pain or effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "High-risk features or specific cause suspected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Admit; investigate TB, purulent, malignant, autoimmune, uremic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAID or aspirin plus colchicine; restrict exercise",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Recurrent or refractory?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "IL-1 inhibitor or low-dose steroid; watch for constriction",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outpatient follow-up until markers normal",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

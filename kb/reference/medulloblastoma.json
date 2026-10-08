@@ -157,5 +157,294 @@
       "caption": "Overview comparison matrix for medulloblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medulloblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI of the brain",
+          "cells": [
+            {
+              "text": "Posterior fossa mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal MRI before surgery, where feasible",
+          "cells": [
+            {
+              "text": "Leptomeningeal spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar CSF cytology, timed after surgery",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with molecular subgrouping",
+          "cells": [
+            {
+              "text": "WNT, SHH, group 3 or group 4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for MYC or MYCN amplification and TP53 status",
+          "cells": [
+            {
+              "text": "High-risk markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline testing when clinically suggested",
+          "cells": [
+            {
+              "text": "Predisposition syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medulloblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staging",
+          "cells": [
+            {
+              "text": "Whole-neuraxis MRI timed around surgery, plus CSF cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe resection",
+          "cells": [
+            {
+              "text": "Near-total resection favoured over risking the fourth ventricle floor, cranial nerves or PICA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive hydrocephalus",
+          "cells": [
+            {
+              "text": "Ventriculostomy or resection; a meaningful minority need a permanent shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Average versus high risk by age, M stage, residual disease and pathology; anaplastic histology is always high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Average-risk craniospinal irradiation",
+          "cells": [
+            {
+              "text": "With posterior fossa boost plus concurrent and adjuvant chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Younger children under about 3 years",
+          "cells": [
+            {
+              "text": "Delay or omit radiotherapy; chemotherapy-only or limited-field strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk disease",
+          "cells": [
+            {
+              "text": "More dose-intensified chemotherapy; high-dose chemotherapy with stem cell rescue in some protocols"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Survivorship surveillance",
+          "cells": [
+            {
+              "text": "Neurocognitive decline, neuroendocrine dysfunction, growth, hearing loss and second malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medulloblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Medulloblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with posterior fossa mass and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Herniation signs, obstructive hydrocephalus or leptomeningeal spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent decompression: ventriculostomy or resection for hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of the brain; craniospinal MRI; CSF cytology; molecular subgrouping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is medulloblastoma confirmed on histopathology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pilocytic astrocytoma, ependymoma or atypical teratoid/rhabdoid tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stage with whole-neuraxis MRI and CSF cytology, timed around surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maximal safe resection, favouring near-total resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Craniospinal radiotherapy with boost plus chemotherapy in average-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "More dose-intensified chemotherapy for high-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong survivorship surveillance for neurocognitive, endocrine and hearing effects",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

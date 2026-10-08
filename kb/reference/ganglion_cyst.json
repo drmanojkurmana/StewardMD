@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for ganglion cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganglion_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical features with transillumination",
+          "cells": [
+            {
+              "text": "Usually diagnosed clinically, aided by transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a cystic lesion, finds occult ganglia, assesses relation to vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Occult, deep or atypical swellings; excludes other soft-tissue lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Pulsatile volar wrist mass before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology after excision",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aneurysm at the volar wrist",
+          "cells": [
+            {
+              "text": "Pulsatile volar wrist swelling near the radial artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soft-tissue sarcoma",
+          "cells": [
+            {
+              "text": "Rapidly enlarging, hard, fixed or irregular mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Asymptomatic cysts; a large proportion resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aspiration",
+          "cells": [
+            {
+              "text": "For symptomatic lesions; recurrence is frequent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, activity modification and splinting",
+          "cells": [
+            {
+              "text": "Relief of discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with capsular stalk",
+          "cells": [
+            {
+              "text": "For painful, recurrent or functionally limiting lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allen test and radial artery imaging",
+          "cells": [
+            {
+              "text": "Before any volar wrist intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on recurrence",
+          "cells": [
+            {
+              "text": "Recurrence remains possible after meticulous excision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganglion_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Ganglion cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ganglion cyst: cystic wrist swelling, usually clinically diagnosed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard fixed mass, pulsatile volar swelling, nerve compression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vascular imaging for pulsatile volar swelling before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination, ultrasound, and MRI for occult or atypical swellings",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound confirm a cystic lesion, with vascular and solid tumours excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider giant cell tumour, lipoma, carpal boss or soft-tissue sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe asymptomatic cysts, many of which resolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle aspiration for symptomatic lesions, with warning of frequent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision with capsular stalk for painful, recurrent or limiting lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm arterial patency with an Allen test before volar wrist intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; many resolve, aspiration often recurs, and excision reduces recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

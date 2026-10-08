@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for emery-dreifuss muscular dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "emery_dreifuss_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EMD and LMNA molecular testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and prolonged rhythm monitoring",
+          "cells": [
+            {
+              "text": "Conduction disease and atrial arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography or cardiac MRI",
+          "cells": [
+            {
+              "text": "Cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Normal or mildly to moderately raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with emerin or lamin A/C staining",
+          "cells": [
+            {
+              "text": "Protein loss in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac screening of relatives and carriers",
+          "cells": [
+            {
+              "text": "Carriers at risk of conduction disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "emery_dreifuss_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Becker muscular dystrophy",
+          "cells": [
+            {
+              "text": "Dystrophin deficiency with later onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb-girdle muscular dystrophy (LMNA form)",
+          "cells": [
+            {
+              "text": "Proximal weakness without early contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bethlem myopathy",
+          "cells": [
+            {
+              "text": "Collagen VI contractures with distal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facioscapulohumeral dystrophy",
+          "cells": [
+            {
+              "text": "Facial and scapular weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "emery_dreifuss_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pacemaker and defibrillator",
+          "cells": [
+            {
+              "text": "Early pacing for conduction block; ICD for sudden-death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Atrial arrhythmia or atrial standstill"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "Associated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthoses",
+          "cells": [
+            {
+              "text": "Early elbow, Achilles and neck contractures; surgical release if disabling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility and respiratory care",
+          "cells": [
+            {
+              "text": "Humeroperoneal weakness; respiratory monitoring in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac screening",
+          "cells": [
+            {
+              "text": "Relatives and X-linked carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "EMD and LMNA testing with family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "emery_dreifuss_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Emery-Dreifuss muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Emery-Dreifuss dystrophy: contractures with weakness and cardiac symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope, high-grade block, atrial standstill, heart failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for syncope or high-grade conduction block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMD and LMNA testing; ECG and rhythm monitoring; echocardiography or cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an EMD or LMNA variant found with conduction or cardiac disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Becker, limb-girdle, Bethlem myopathy or FSHD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early pacemaker for conduction block and an ICD for sudden-death risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulation for atrial arrhythmia or atrial standstill",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Heart-failure therapy for the cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and orthoses for early contractures; surgical release if disabling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiac screening of relatives and X-linked carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow weakness; sudden cardiac death can occur even with mild weakness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

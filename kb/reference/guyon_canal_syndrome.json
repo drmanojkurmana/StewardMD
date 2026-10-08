@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for guyon canal syndrome (ulnar nerve at wrist)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "guyon_canal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Localises the lesion to the wrist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Ganglion or other soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs with carpal tunnel view, and CT",
+          "cells": [
+            {
+              "text": "Hook of hamate fracture when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allen test and vascular imaging",
+          "cells": [
+            {
+              "text": "Hypothenar hammer syndrome or ulnar artery pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinel percussion over the canal",
+          "cells": [
+            {
+              "text": "Wrist-level compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dorsal ulnar sensation assessment",
+          "cells": [
+            {
+              "text": "Level of the lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "guyon_canal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cubital tunnel syndrome",
+          "cells": [
+            {
+              "text": "Ulnar nerve at the elbow; separated by dorsal ulnar sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothenar hammer syndrome",
+          "cells": [
+            {
+              "text": "Ulnar artery injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C8 or T1 radiculopathy",
+          "cells": [
+            {
+              "text": "Cervical root cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "guyon_canal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the compressive cause",
+          "cells": [
+            {
+              "text": "Excision of ganglion, fixation or excision of hook of hamate fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification for handlebar palsy",
+          "cells": [
+            {
+              "text": "Padded gloves, handlebars and ergonomic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative measures for mild idiopathic cases",
+          "cells": [
+            {
+              "text": "Avoid repetitive gripping; non-steroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Confirmed compressive lesion or failed conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Restores intrinsic muscle function after decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical review and nerve conduction; early intervention before fixed wasting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "guyon_canal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Guyon canal syndrome (ulnar nerve at wrist)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Guyon canal syndrome: ulnar nerve compression at the wrist with hand weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ulnar artery thrombosis, mass lesion, rapid intrinsic wasting)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular assessment for ulnar artery thrombosis or aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, MRI or ultrasound, radiographs with carpal tunnel view",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do nerve studies localise the lesion to the wrist with a compressive cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cubital tunnel syndrome, C8 radiculopathy or hypothenar hammer syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the compressive cause, such as a ganglion or hook of hamate fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activity modification and padded handlebars for external pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical decompression of Guyon canal for confirmed compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy to restore intrinsic muscle function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good when a compressive cause is treated; long-standing wasting recovers less well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

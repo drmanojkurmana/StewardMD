@@ -160,5 +160,429 @@
       "caption": "Overview comparison matrix for zollinger-ellison syndrome (gastrinoma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Gastrinoma",
+      "url": "https://www.merckmanuals.com/professional/oncology/gastrointestinal-and-pancreatic-neuroendocrine-tumors-nets/gastrinoma",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ZOLLINGER_ELLISON-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of Zollinger-Ellison syndrome (gastrinoma)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical clues",
+          "cells": [
+            {
+              "text": "Refractory or multiple ulcers, ulcers beyond the duodenal bulb, diarrhoea"
+            },
+            {
+              "text": "Up to 25% have no ulcer at diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum gastrin",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Above 150 in all patients",
+              "op": ">",
+              "value": 150
+            },
+            {
+              "text": "Most reliable screening test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diagnostic gastrin level",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Above 1000 with acid output above 15 mEq/hour",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "{{hy:Establishes the diagnosis with compatible features}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secretin stimulation test",
+          "unit": "mcg/kg",
+          "cells": [
+            {
+              "text": "Secretin 2 IV when gastrin under 1000",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Paradoxical gastrin rise confirms gastrinoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tumour site",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "80 in pancreas or duodenal wall",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Duodenum commonest; usually under 1 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignancy and multiplicity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50 malignant, about 50 multiple",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Slow-growing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MEN1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "40 to 60 of gastrinoma patients",
+              "range": [
+                40,
+                60
+              ]
+            },
+            {
+              "text": "Check calcium and family history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localisation",
+          "cells": [
+            {
+              "text": "CT or somatostatin receptor imaging, then endoscopic ultrasound"
+            },
+            {
+              "text": "Selective arterial secretin injection as an alternative"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ZOLLINGER_ELLISON-ddx",
+      "kind": "ddx",
+      "title": "Other causes of hypergastrinaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proton pump inhibitor use",
+          "cells": [
+            {
+              "text": "{{hy:Hypochlorhydria raises gastrin; commonest confounder}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pernicious anaemia and chronic atrophic gastritis",
+          "cells": [
+            {
+              "text": "Low acid output with high gastrin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal insufficiency",
+          "cells": [
+            {
+              "text": "Reduced gastrin clearance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Massive small bowel resection",
+          "cells": [
+            {
+              "text": "Surgical history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antral G-cell hyperplasia",
+          "cells": [
+            {
+              "text": "Opposite response to secretin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pheochromocytoma",
+          "cells": [
+            {
+              "text": "Listed cause of moderate hypergastrinaemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ZOLLINGER_ELLISON-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Zollinger-Ellison syndrome",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Omeprazole or esomeprazole",
+          "cells": [
+            {
+              "text": "{{hy:All patients, to control acid}}"
+            },
+            {
+              "text": "40 mg orally twice daily, usually indefinitely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "No apparent metastases"
+            },
+            {
+              "text": "Cure in 20% to 25% of localised non-MEN cases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Octreotide",
+          "cells": [
+            {
+              "text": "Symptom control, metastatic disease"
+            },
+            {
+              "text": "100 to 500 mcg SC 2 to 3 times daily, or LAR 20 to 30 mg IM monthly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peptide receptor radionuclide therapy",
+          "cells": [
+            {
+              "text": "SSTR-positive disease progressing on somatostatin analogue"
+            },
+            {
+              "text": "Preferred next step"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Everolimus or sunitinib",
+          "cells": [
+            {
+              "text": "Progressive metastatic pancreatic NET"
+            },
+            {
+              "text": "Sunitinib especially if SSTR-negative"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Survival above 90% at 5 and 10 years after complete removal of an isolated tumour; 43% and 25% when removal is incomplete."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ZOLLINGER_ELLISON-dx-mgmt",
+      "title": "Diagnosis and management of Zollinger-Ellison syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Refractory, multiple or distal ulcers, or ulcers with diarrhoea",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fasting serum gastrin; note PPI use and kidney function",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Gastrin above 150 pg/mL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Gastrinoma excluded",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gastrin above 1000 with high acid output?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Secretin stimulation test",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Paradoxical gastrin rise?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Consider PPI effect, atrophic gastritis, renal failure",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose PPI; screen for MEN1; localise tumour",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Metastases present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgical resection",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Somatostatin analogue, then PRRT, everolimus or sunitinib",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

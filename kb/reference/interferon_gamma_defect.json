@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for interferon-gamma pathway defect."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interferon_gamma_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing of IFNGR1, IFNGR2, IL12B, IL12RB1 and STAT1",
+          "cells": [
+            {
+              "text": "Causal variant in the IL-12 and interferon-gamma axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional assays of interferon-gamma production and signalling",
+          "cells": [
+            {
+              "text": "Functional defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for interferon-gamma receptor",
+          "cells": [
+            {
+              "text": "Receptor expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures and molecular identification",
+          "cells": [
+            {
+              "text": "Mycobacterial and Salmonella species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-gamma autoantibody testing",
+          "cells": [
+            {
+              "text": "Acquired phenocopy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Extent of disseminated infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interferon_gamma_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HIV and other acquired T-cell deficiency",
+          "cells": [
+            {
+              "text": "Acquired rather than selective defect; HIV testing needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe combined immunodeficiency",
+          "cells": [
+            {
+              "text": "Broad immunodeficiency rather than selective mycobacterial susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-gamma autoantibody syndrome",
+          "cells": [
+            {
+              "text": "Acquired phenocopy, mainly in adults"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interferon_gamma_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted antimicrobials",
+          "cells": [
+            {
+              "text": "Prolonged combination therapy, often long term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant interferon-gamma",
+          "cells": [
+            {
+              "text": "Partial receptor and IL-12-axis defects with residual responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Considered for complete receptor deficiency, which responds poorly to cytokine therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccine and exposure advice",
+          "cells": [
+            {
+              "text": "Avoid live BCG and other live vaccines; avoid environmental mycobacteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Long-term antimycobacterial prophylaxis against recurrent disseminated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Genetic counselling and family screening; distinguish from autoantibody phenocopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interferon_gamma_defect-dx-mgmt",
+      "title": "Diagnosis and management of Interferon-gamma pathway defect",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Disseminated mycobacterial or Salmonella infection, or BCG disease after vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe early infection in complete receptor deficiency or disseminated BCG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent culture-directed therapy; stop live vaccines; transplant discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IFN-gamma axis genetics, functional assays, receptor flow, cultures, antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Defect confirmed by genetics or function, with autoantibodies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired autoantibody or HIV; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged targeted combination antimicrobial therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant interferon-gamma for partial defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transplant considered for complete receptor deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid live BCG and live vaccines; long-term prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong infection risk; prolonged therapy and immunology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

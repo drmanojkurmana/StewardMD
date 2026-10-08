@@ -177,5 +177,461 @@
       "caption": "Overview comparison matrix for cocaine, other psychostimulants, and hallucinogens."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Drug-induced hyperthermia",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cocaine_other_psychostimulants_and_halluci-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognition of stimulant and hallucinogen toxicity",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Sympathomimetic syndrome",
+          "cells": [
+            {
+              "text": "Euphoria, agitation, tachycardia, hypertension, hyperthermia, mydriasis, tremor, hyperreflexia"
+            },
+            {
+              "text": "Same picture with any stimulant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DSM-5 stimulant use disorder",
+          "unit": "criteria in 12 months",
+          "cells": [
+            {
+              "text": "At least 2 of 11",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Mild 2 to 3, moderate 4 to 5, severe 6 or more"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hallucinogen use disorder",
+          "cells": [
+            {
+              "text": "First 10 criteria only"
+            },
+            {
+              "text": "No withdrawal criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hallucinogen onset and duration",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Onset 20 to 90 min; lasts up to 6 to 12",
+              "range": [
+                6,
+                12
+              ]
+            },
+            {
+              "text": "Salvia about 30 min"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant withdrawal",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Acute phase 7 to 10",
+              "range": [
+                7,
+                10
+              ]
+            },
+            {
+              "text": "Hypersomnia, hunger, low mood; cue-driven craving persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG, troponin, chest x-ray",
+          "cells": [
+            {
+              "text": "Cocaine chest pain"
+            },
+            {
+              "text": "Exclude infarction and dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature, CK, renal function",
+          "cells": [
+            {
+              "text": "Hyperthermia and rhabdomyolysis"
+            },
+            {
+              "text": "{{hy:Exclude hypoglycaemia and hypoxaemia before sedating}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard drug screen",
+          "cells": [
+            {
+              "text": "Often misses new psychoactive substances"
+            },
+            {
+              "text": "Negative screen does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adulterant clues",
+          "cells": [
+            {
+              "text": "Opioid toxidrome (fentanyl), agranulocytosis or skin necrosis (levamisole)"
+            },
+            {
+              "text": "Fatal co-ingestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cocaine_other_psychostimulants_and_halluci-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of the agitated, hyperthermic patient",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticholinergic toxidrome",
+          "cells": [
+            {
+              "text": "Dry skin, urinary retention, no sweating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serotonin syndrome",
+          "cells": [
+            {
+              "text": "Clonus, hyperreflexia with serotonergic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Rigidity after antipsychotic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid storm",
+          "cells": [
+            {
+              "text": "Thyroid history, goitre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pheochromocytoma",
+          "cells": [
+            {
+              "text": "Paroxysmal catecholamine excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis or CNS infection",
+          "cells": [
+            {
+              "text": "{{hy:Fever with confusion needs infection work-up}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol or sedative withdrawal",
+          "cells": [
+            {
+              "text": "History of dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other drugs causing hyperthermia",
+          "cells": [
+            {
+              "text": "Amphetamines, cocaine, PCP, MDMA, LSD, salicylates, lithium, anticholinergics, sympathomimetics"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "cocaine_other_psychostimulants_and_halluci-treatment",
+      "kind": "treatment",
+      "title": "Management of stimulant and hallucinogen toxicity",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV benzodiazepines",
+          "cells": [
+            {
+              "text": "{{hy:First line for agitation, hypertension, tachycardia, seizures}}"
+            },
+            {
+              "text": "Dampens central sympathetic drive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive cooling",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            },
+            {
+              "text": "Core <39 within 30 min",
+              "op": "<",
+              "value": 39
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            },
+            {
+              "text": "Prevent kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepine, nitrate, aspirin",
+          "cells": [
+            {
+              "text": "Cocaine chest pain"
+            },
+            {
+              "text": "Avoid non-selective beta blockers; labetalol or carvedilol if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Wide-complex arrhythmia from sodium-channel block"
+            },
+            {
+              "text": "Telemetry or ICU"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rocuronium for intubation",
+          "cells": [
+            {
+              "text": "Rapid-sequence intubation"
+            },
+            {
+              "text": "Avoid succinylcholine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contingency management and CBT",
+          "cells": [
+            {
+              "text": "Stimulant use disorder"
+            },
+            {
+              "text": "No licensed drug; benefit up to 2 years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Built from Harrison text and Tables PDF only; no drug doses stated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cocaine_other_psychostimulants_and_halluci-dx-mgmt",
+      "title": "Management of acute stimulant toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Agitated patient with sympathomimetic signs after drug use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check glucose and oxygen; ECG, temperature, CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "IV benzodiazepines for agitation and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Core temperature high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Cool to below 39 C within 30 min; IV fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Chest pain or ECG changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzodiazepine, nitrate, aspirin; no non-selective beta blocker",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Focal signs or coma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Brain imaging for haemorrhage or infarct; ICU",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor; screen co-ingestants; refer for contingency management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

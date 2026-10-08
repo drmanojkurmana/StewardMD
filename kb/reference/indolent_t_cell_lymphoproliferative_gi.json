@@ -156,5 +156,305 @@
       "caption": "Overview comparison matrix for indolent t-cell lymphoproliferative disorder of the gi tract."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "indolent_t_cell_lymphoproliferative_gi-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopy with multiple mucosal biopsies",
+          "cells": [
+            {
+              "text": "Mucosal changes in affected segments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for CD4 versus CD8 and proliferation index",
+          "cells": [
+            {
+              "text": "Low proliferation index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor clonality analysis",
+          "cells": [
+            {
+              "text": "Clonal T-cell proliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and gluten-free diet response",
+          "cells": [
+            {
+              "text": "Coeliac disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAT3-JAK2 or related fusion testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Disease extent; aggressive lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "indolent_t_cell_lymphoproliferative_gi-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease and refractory coeliac disease",
+          "cells": [
+            {
+              "text": "Poor response to a gluten-free diet should prompt reconsideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Chronic relapsing diarrhoea, pain and weight loss mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteropathy-associated T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Aggressive intestinal T-cell lymphoma needing intensive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "indolent_t_cell_lymphoproliferative_gi-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No anatomic staging",
+          "cells": [
+            {
+              "text": "Diffuse mucosal process; management guided by symptoms and behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watch and wait",
+          "cells": [
+            {
+              "text": "Incidental, minimally symptomatic disease with surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom and nutritional care",
+          "cells": [
+            {
+              "text": "Antidiarrhoeal agents, nutritional supplements and correction of deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Reserved for significant or progressive symptoms; low-intensity approaches favoured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for transformation",
+          "cells": [
+            {
+              "text": "Endoscopic and clinical surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "indolent_t_cell_lymphoproliferative_gi-dx-mgmt",
+      "title": "Diagnosis and management of Indolent T-cell lymphoproliferative disorder of the GI tract",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic relapsing diarrhoea, pain or weight loss with mucosal lymphocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid progression, mass, obstruction, perforation or raised LDH with B symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and biopsy for transformation to aggressive lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with multiple biopsies, T-cell phenotype, clonality, coeliac serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clonal indolent infiltrate with coeliac and IBD excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider coeliac, IBD or aggressive lymphoma; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Watch and wait for incidental, asymptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antidiarrhoeal agents, nutritional support and correction of deficiencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-intensity systemic therapy only for significant or progressive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic and clinical surveillance for transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Indolent course; transformation to aggressive lymphoma must be watched for",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for gorlin syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gorlin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PTCH1 and SUFU germline testing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Germline variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopantomogram or jaw imaging",
+          "cells": [
+            {
+              "text": "Odontogenic keratocysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Falx calcification and rib or vertebral anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological mapping and biopsy",
+          "cells": [
+            {
+              "text": "Suspicious skin lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI in young children",
+          "cells": [
+            {
+              "text": "Medulloblastoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and ovarian ultrasound",
+          "cells": [
+            {
+              "text": "Where fibromas are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gorlin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic multiple basal cell carcinomas",
+          "cells": [
+            {
+              "text": "Chronic sun exposure rather than early-onset germline disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bazex-Dupre-Christol syndrome",
+          "cells": [
+            {
+              "text": "Basal cell carcinoma with other skin features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xeroderma pigmentosum",
+          "cells": [
+            {
+              "text": "Early skin cancers with sun sensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gorlin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision of basal cell carcinomas",
+          "cells": [
+            {
+              "text": "Mohs micrographic surgery where tissue-sparing precision is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hedgehog pathway inhibitors",
+          "cells": [
+            {
+              "text": "Vismodegib or sonidegib for extensive, multiple or inoperable basal cell carcinomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance and broad-spectrum sunscreen to limit new tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise ionising radiation",
+          "cells": [
+            {
+              "text": "Radiotherapy avoided because of marked radiosensitivity; MRI and ultrasound preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jaw cyst management",
+          "cells": [
+            {
+              "text": "Enucleation or marsupialisation with orthopantomogram surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Dermatological skin mapping and paediatric brain MRI for medulloblastoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predictive PTCH1 or SUFU testing for at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gorlin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Gorlin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gorlin syndrome: multiple basal cell carcinomas with jaw cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new neurological signs in a child, aggressive carcinoma, jaw swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for new neurological signs suggesting medulloblastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PTCH1 and SUFU testing, jaw imaging, skeletal radiographs and skin mapping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PTCH1 or SUFU germline testing confirm the syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic basal cell carcinomas, Bazex-Dupre-Christol or xeroderma pigmentosum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical excision of basal cell carcinomas, with Mohs surgery where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hedgehog pathway inhibitors for extensive or inoperable carcinomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid radiotherapy, since it induces new tumours in the field",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong skin mapping and paediatric brain MRI surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life expectancy usually near normal; lifelong burden from skin cancers and jaw cysts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

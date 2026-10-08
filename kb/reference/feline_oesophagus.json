@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for feline oesophagus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "feline_oesophagus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with attention to ring persistence",
+          "cells": [
+            {
+              "text": "Transient or fixed rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal and proximal oesophageal biopsies",
+          "cells": [
+            {
+              "text": "Eosinophilic infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium swallow",
+          "cells": [
+            {
+              "text": "Transient ring pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory pH or impedance monitoring",
+          "cells": [
+            {
+              "text": "Gastro-oesophageal reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution manometry",
+          "cells": [
+            {
+              "text": "Suspected motility disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atopic history and peripheral eosinophilia",
+          "cells": [
+            {
+              "text": "Where eosinophilic oesophagitis is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "feline_oesophagus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Eosinophilic oesophagitis with fixed rings",
+          "cells": [
+            {
+              "text": "Fixed, persistent rings rather than transient ones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Associated with the transient pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schatzki ring or diffuse oesophageal spasm",
+          "cells": [
+            {
+              "text": "Other ring and motility appearances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "feline_oesophagus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the finding as benign and transient",
+          "cells": [
+            {
+              "text": "Direct management at the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitor and lifestyle measures",
+          "cells": [
+            {
+              "text": "For associated reflux; weight reduction and avoiding late meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal and proximal biopsies",
+          "cells": [
+            {
+              "text": "When the clinical context suggests eosinophilic oesophagitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PPI, swallowed topical corticosteroids and dietary elimination",
+          "cells": [
+            {
+              "text": "Confirmed eosinophilic oesophagitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring and endoscopic reassessment",
+          "cells": [
+            {
+              "text": "Refractory reflux or uncertain diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroenterology referral",
+          "cells": [
+            {
+              "text": "Persistent dysphagia, refractory symptoms or fixed rings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "feline_oesophagus-dx-mgmt",
+      "title": "Diagnosis and management of feline oesophagus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Transient concentric rings seen at endoscopy or barium study, often with reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (food impaction, progressive dysphagia, weight loss, haematemesis, fixed rings)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Gastroenterology referral for impaction, stricture or fixed rings",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with ring assessment; oesophageal biopsies; pH or impedance; manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Transient rings with no eosinophilic infiltration on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat eosinophilic oesophagitis with PPI, topical steroid and diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise the finding as benign and direct care at the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Proton pump inhibitor and reflux lifestyle measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oesophageal biopsies to exclude eosinophilic oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ambulatory monitoring where reflux is refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "The pattern itself is benign; outcome depends on the underlying condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

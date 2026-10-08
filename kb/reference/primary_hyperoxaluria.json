@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for primary hyperoxaluria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_hyperoxaluria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "24-hour urinary oxalate measurement",
+          "cells": [
+            {
+              "text": "Urinary oxalate excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma oxalate",
+          "cells": [
+            {
+              "text": "Rise as renal function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone analysis",
+          "cells": [
+            {
+              "text": "Calcium oxalate composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "Stones and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Causative enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic oxalosis when renal failure is present",
+          "cells": [
+            {
+              "text": "Systemic oxalosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enteric (secondary) hyperoxaluria",
+          "cells": [
+            {
+              "text": "Fat malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary oxalate overload",
+          "cells": [
+            {
+              "text": "Excess dietary oxalate intake"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maintenance hyperhydration",
+          "cells": [
+            {
+              "text": "Vigorous, to lower urinary calcium oxalate supersaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystallisation inhibitors",
+          "cells": [
+            {
+              "text": "Potassium citrate, orthophosphate and magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine trial",
+          "cells": [
+            {
+              "text": "Supervised; effective in a subset of type 1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RNA-interference therapy",
+          "cells": [
+            {
+              "text": "Lumasiran, targeting hepatic oxalate production, in type 1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone clearance",
+          "cells": [
+            {
+              "text": "Lithotripsy or endourological removal, minimising nephron-damaging interventions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinary and plasma oxalate; surveillance for systemic oxalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant for end-stage disease",
+          "cells": [
+            {
+              "text": "Intensive dialysis and combined or sequential liver-kidney transplantation in type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_hyperoxaluria-dx-mgmt",
+      "title": "Diagnosis and management of Primary hyperoxaluria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary hyperoxaluria: recurrent calcium oxalate stones or nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Declining renal function, systemic oxalosis or early-onset severe stone disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent nephrology review for systemic oxalosis or renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "24-hour urinary oxalate; plasma oxalate; renal imaging; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do oxalate levels and genetic testing confirm primary hyperoxaluria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enteric or dietary hyperoxaluria or idiopathic stone disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vigorous maintenance hyperhydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Crystallisation inhibitors such as potassium citrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supervised pyridoxine trial in a subset of type 1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stone clearance with minimal nephron-damaging intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal and systemic oxalosis surveillance; transplant considered for end-stage type 1",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

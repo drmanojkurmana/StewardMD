@@ -213,5 +213,476 @@
       "caption": "Diagnostic and clinical overview matrix for deep vein thrombosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Deep Venous Thrombosis",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/deep-venous-thrombosis-dvt",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dvt-diagnostic",
+      "kind": "diagnostic",
+      "title": "Wells score and tests for suspected DVT",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Points or threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Wells items",
+          "cells": [
+            {
+              "text": "1 each: vein tenderness, whole-leg swelling, calf >3 cm larger, pitting oedema, collateral veins, active cancer, immobilisation, surgery in 4 weeks, prior DVT"
+            },
+            {
+              "text": "Minus 2 if another diagnosis is as likely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wells high",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=3",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "High probability; ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wells moderate",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1 to 2",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "D-dimer or ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wells low",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "<=0",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "text": "{{hy:Negative D-dimer excludes DVT}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D-dimer accuracy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 96%, specificity about 37%"
+            },
+            {
+              "text": "Positive result needs imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Compression ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 90%, specificity about 98%"
+            },
+            {
+              "text": "Non-compressible vein is diagnostic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Ultrasound negative or indeterminate with high suspicion"
+            },
+            {
+              "text": "Pelvic veins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D-dimer in inpatients",
+          "cells": [
+            {
+              "text": "Often raised by illness, surgery, pregnancy, cancer"
+            },
+            {
+              "text": "Rarely helpful"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source conflict: Merck allows an age-adjusted D-dimer (age x 10 ng/mL over 50 years); Harrison says this cut-off is endorsed for PE but not for suspected DVT."
+    },
+    {
+      "id": "dvt-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic DVT",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "{{hy:Fever and chills favour cellulitis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured Baker cyst",
+          "cells": [
+            {
+              "text": "Sudden severe calf pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle strain or injury",
+          "cells": [
+            {
+              "text": "Clear trauma or exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous insufficiency or post-thrombotic syndrome",
+          "cells": [
+            {
+              "text": "Long-standing swelling, skin change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superficial thrombophlebitis",
+          "cells": [
+            {
+              "text": "Tender palpable cord; can extend to deep veins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "May-Thurner syndrome",
+          "cells": [
+            {
+              "text": "Recurrent left leg swelling in a young woman"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dvt-treatment",
+      "kind": "treatment",
+      "title": "Treatment of DVT",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Apixaban or rivaroxaban",
+          "cells": [
+            {
+              "text": "{{hy:Most patients; start without heparin lead-in}}"
+            },
+            {
+              "text": "Doses not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Edoxaban or dabigatran",
+          "cells": [
+            {
+              "text": "After 5 days of parenteral heparin"
+            },
+            {
+              "text": "Parenteral lead-in required"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH or UFH then warfarin",
+          "cells": [
+            {
+              "text": "Antiphospholipid syndrome; other selected cases"
+            },
+            {
+              "text": "Warfarin within 24 h; overlap heparin 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH alone",
+          "cells": [
+            {
+              "text": "Extensive iliofemoral DVT or cancer"
+            },
+            {
+              "text": "Fondaparinux an alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration 3 to 6 months",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Provoked by a transient factor",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "Then stop"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extended anticoagulation",
+          "cells": [
+            {
+              "text": "Unprovoked, recurrent, cancer or thrombophilia"
+            },
+            {
+              "text": "Reassess periodically; reduced-dose DOAC possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serial ultrasound",
+          "cells": [
+            {
+              "text": "Isolated distal DVT without severe symptoms"
+            },
+            {
+              "text": "Anticoagulate if it extends"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVC filter",
+          "cells": [
+            {
+              "text": "Anticoagulation contraindicated"
+            },
+            {
+              "text": "Cuts acute PE, not mortality"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter-directed thrombolysis",
+          "cells": [
+            {
+              "text": "Under 60, extensive iliofemoral DVT with limb threat (phlegmasia), low bleeding risk"
+            },
+            {
+              "text": "Higher bleeding risk"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "DOAC and LMWH doses are not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dvt-dx-mgmt",
+      "title": "Diagnosis and management of suspected DVT",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful swollen leg",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Wells score",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Wells <=0 (low)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "D-dimer",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "D-dimer negative?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "DVT excluded; look for cellulitis, Baker cyst",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Compression ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Proximal DVT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Anticoagulate 3 to 6 months or longer if unprovoked",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Isolated distal DVT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial ultrasound; treat if it extends",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Repeat imaging or venography if suspicion high",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

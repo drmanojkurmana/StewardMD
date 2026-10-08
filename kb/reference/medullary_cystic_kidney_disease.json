@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for medullary cystic kidney disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medullary_cystic_kidney_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed family pedigree",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate",
+          "cells": [
+            {
+              "text": "Hyperuricaemia in UMOD disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Characteristically bland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Normal or small kidneys; cysts inconstant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial renal function and eGFR trajectory",
+          "cells": [
+            {
+              "text": "Rate of decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (UMOD, MUC1, HNF1B, REN)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy where genetics are unavailable",
+          "cells": [
+            {
+              "text": "Tubulointerstitial fibrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medullary_cystic_kidney_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nephronophthisis",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance, unlike the dominant pattern in MCKD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Cysts are inconstant in MCKD; renal ultrasound shows normal or small kidneys"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medullary_cystic_kidney_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive CKD care",
+          "cells": [
+            {
+              "text": "Blood pressure optimisation and avoidance of nephrotoxic drugs; no targeted therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urate lowering",
+          "cells": [
+            {
+              "text": "Xanthine oxidase inhibitor such as allopurinol for early gout in UMOD-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "REN-related precautions",
+          "cells": [
+            {
+              "text": "Avoid renin-angiotensin inhibitors, NSAIDs and dehydration; fludrocortisone for hypotension and hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Track progression",
+          "cells": [
+            {
+              "text": "eGFR decline and serum urate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning",
+          "cells": [
+            {
+              "text": "Dialysis and kidney transplantation; the condition does not recur in the allograft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation and counselling",
+          "cells": [
+            {
+              "text": "Confirm the causative gene; autosomal dominant counselling with family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medullary_cystic_kidney_disease-dx-mgmt",
+      "title": "Diagnosis and management of Medullary cystic kidney disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive CKD with bland urine and a dominant family pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly declining renal function, uraemia or refractory tophaceous gout?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology review: plan for dialysis or transplant and urate control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pedigree, serum urate, renal ultrasound, serial eGFR, genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a causative gene confirmed on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Renal biopsy for tubulointerstitial fibrosis if genetics unavailable; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive CKD care with blood pressure control and avoidance of nephrotoxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allopurinol to lower urate for early gout in UMOD-related disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid RAS inhibitors, NSAIDs and dehydration where REN is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Track eGFR decline and serum urate; prepare for dialysis or transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transplantation succeeds because the condition does not recur in the allograft",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

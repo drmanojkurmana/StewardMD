@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for labyrinthine concussion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "labyrinthine_concussion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Pattern and degree of hearing loss, often higher frequencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Excludes temporal-bone fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Middle-ear and ossicular status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videonystagmography with positional testing",
+          "cells": [
+            {
+              "text": "Vestibular and positional function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular-evoked myogenic potentials",
+          "cells": [
+            {
+              "text": "Vestibular end-organ function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Central injury, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "labyrinthine_concussion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Temporal bone fracture",
+          "cells": [
+            {
+              "text": "Excluded by high-resolution temporal bone CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perilymph fistula",
+          "cells": [
+            {
+              "text": "Progressive or fluctuating hearing loss suggests it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic benign paroxysmal positional vertigo",
+          "cells": [
+            {
+              "text": "Positional vertigo from dislodged otoconia; repositioning treats it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ossicular chain disruption",
+          "cells": [
+            {
+              "text": "Conductive loss; assessed by tympanometry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "labyrinthine_concussion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No specific pharmacological cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular suppressants",
+          "cells": [
+            {
+              "text": "Prochlorperazine or an antihistamine, only briefly for severe symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular rehabilitation",
+          "cells": [
+            {
+              "text": "Promotes central compensation for persistent imbalance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repositioning manoeuvres",
+          "cells": [
+            {
+              "text": "Epley for traumatic BPPV from dislodged otoconia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids for persistent sensorineural loss; tinnitus management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude associated injury",
+          "cells": [
+            {
+              "text": "Temporal-bone fracture, perilymph fistula, ossicular disruption, central injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls-prevention and safety advice",
+          "cells": [
+            {
+              "text": "During the recovery period"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "labyrinthine_concussion-dx-mgmt",
+      "title": "Diagnosis and management of Labyrinthine concussion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Head trauma with sensorineural hearing loss, tinnitus and vertigo; no fracture seen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fluctuating hearing, CSF leak, facial weakness, focal deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for perilymph or CSF fistula and central injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, high-resolution temporal bone CT, tympanometry, VNG, MRI if central",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are temporal-bone fracture and fistula excluded on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the associated injury: fracture, fistula or ossicular disruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; brief vestibular suppressants only for severe symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vestibular rehabilitation for persistent imbalance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Epley repositioning for traumatic BPPV",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids and tinnitus management for sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Falls-prevention and safety advice during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vertigo often improves over weeks to months; hearing loss and tinnitus often permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for heterophyiasis (intestinal fluke)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heterophyiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration",
+          "cells": [
+            {
+              "text": "Ova"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool sampling",
+          "cells": [
+            {
+              "text": "Low and intermittent egg output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Egg morphometry",
+          "cells": [
+            {
+              "text": "Separates it from other small trematodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac or neurological imaging",
+          "cells": [
+            {
+              "text": "Ectopic disease, only when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology, where available",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heterophyiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metagonimiasis and other heterophyid flukes",
+          "cells": [
+            {
+              "text": "Egg morphometry separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opisthorchiasis or clonorchiasis",
+          "cells": [
+            {
+              "text": "Overlapping egg morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis and other protozoal enteritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heterophyiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "Anthelmintic of choice, with high cure rates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral rehydration and symptomatic care",
+          "cells": [
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid raw, salted or inadequately cooked food",
+          "cells": [
+            {
+              "text": "Prevents infection and reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool examination",
+          "cells": [
+            {
+              "text": "Repeated sampling to confirm cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic disease management",
+          "cells": [
+            {
+              "text": "Cardiac or neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Cardiac or central nervous system involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heterophyiasis-dx-mgmt",
+      "title": "Diagnosis and management of Heterophyiasis (intestinal fluke)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic diarrhoea and eosinophilia with fluke eggs in stool",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiac symptoms, neurological deficit, weight loss, or no response to therapy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate urgently for cardiac or central nervous system involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration; repeated sampling; FBC; egg morphometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are heterophyid eggs identified on repeated stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other intestinal trematodes, giardiasis or chronic bacterial enteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel, the anthelmintic of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral rehydration and symptomatic treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid raw, salted or inadequately cooked food",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool examination to confirm cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cure confirmed by follow-up stool examination; reinfection prevented",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

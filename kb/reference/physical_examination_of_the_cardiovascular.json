@@ -173,5 +173,513 @@
       "caption": "Overview comparison matrix for physical examination of the cardiovascular system."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cardiovascular Examination",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/approach-to-the-cardiac-patient/cardiovascular-examination"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 247-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "physical_examination_of_the_cardiovascular-diagnostic",
+      "kind": "diagnostic",
+      "title": "Bedside cardiovascular thresholds",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Abnormal value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "JVP at 30 degrees",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Over 4.5 cm above sternal angle",
+              "op": ">",
+              "value": 4.5
+            },
+            {
+              "text": "{{hy:Raised CVP; any pulsation above clavicle when sitting is abnormal}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominojugular reflux",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "JVP stays over 3 cm higher during abdominal pressure",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Poorly compliant RV or RV filling obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulsus paradoxus",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Inspiratory systolic fall over 10 mmHg",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Tamponade, severe asthma or COPD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Orthostatic hypotension",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Systolic fall over 20 or diastolic over 10 mmHg within 3 min",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Without heart rate rise suggests autonomic failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Orthostatic heart rate rise",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "30/min or more (40 in adolescents)",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Hypovolemia or POTS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "0.90 or less",
+              "op": "<=",
+              "value": 0.9
+            },
+            {
+              "text": "PAD: mild 0.71 to 0.90, moderate 0.41 to 0.70, severe 0.40 or less; over 1.30 noncompressible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Interarm systolic difference",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 10 mmHg (entry); over 15 mmHg (Merck)",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Dissection, coarctation, subclavian disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide pulse pressure",
+          "cells": [
+            {
+              "text": "Systolic hypertension with low diastolic"
+            },
+            {
+              "text": "Arteriosclerosis, aortic regurgitation, thyrotoxicosis, fever, AV fistula, PDA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "BP cuff size",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Bladder about 80% of arm length, 40% of circumference",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Small cuff overestimates BP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources differ: the entry gives an abnormal interarm difference over 10 mmHg and JVP over 4.5 cm above the sternal angle; Merck calls up to 15 mmHg interarm difference normal and gives 4 cm as the upper limit of JVP."
+    },
+    {
+      "id": "physical_examination_of_the_cardiovascular-ddx",
+      "kind": "ddx",
+      "title": "Bedside signs that separate cardiac conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing sign",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic stenosis",
+          "cells": [
+            {
+              "text": "Pulsus parvus et tardus, sustained apex, soft A2"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic regurgitation",
+          "cells": [
+            {
+              "text": "Water-hammer pulse, wide pulse pressure"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypertrophic obstructive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Bifid pulse with rapid rise, triple apical impulse"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mitral stenosis",
+          "cells": [
+            {
+              "text": "Loud S1 and opening snap; shorter A2-OS interval means higher gradient"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid regurgitation",
+          "cells": [
+            {
+              "text": "Large v wave, systolic hepatic pulsation"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "Pulsus paradoxus, raised JVP, blunted y descent"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Kussmaul sign, rapid y descent, pericardial knock"
+            },
+            {
+              "text": "CT or MRI of pericardium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial septal defect",
+          "cells": [
+            {
+              "text": "Fixed split S2"
+            },
+            {
+              "text": "Echocardiography with bubble study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coarctation or dissection",
+          "cells": [
+            {
+              "text": "Arm-leg or interarm BP difference, femoral delay"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "physical_examination_of_the_cardiovascular-treatment",
+      "kind": "treatment",
+      "title": "Acting on cardiovascular examination findings",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Murmur, abnormal pulse or heart sounds"
+            },
+            {
+              "text": "Hand-held ultrasound can extend the exam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JVP-guided diuresis",
+          "cells": [
+            {
+              "text": "Heart failure with raised JVP"
+            },
+            {
+              "text": "Raised JVP and S3 predict hospitalization and death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent echocardiography and pericardiocentesis pathway",
+          "cells": [
+            {
+              "text": "Pulsus paradoxus with raised JVP"
+            },
+            {
+              "text": "Suspected tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography",
+          "cells": [
+            {
+              "text": "Interarm difference or pulse deficit with chest pain"
+            },
+            {
+              "text": "Suspected dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial index and vascular review",
+          "cells": [
+            {
+              "text": "Claudication or absent pedal pulses"
+            },
+            {
+              "text": "Strong predictor of cardiovascular death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory BP monitoring",
+          "cells": [
+            {
+              "text": "Suspected white coat or masked hypertension"
+            },
+            {
+              "text": "24 h recording"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Pulsatile abdominal mass"
+            },
+            {
+              "text": "Palpation alone is unreliable for AAA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Murmur with fever or embolic stigmata"
+            },
+            {
+              "text": "Suspected endocarditis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "physical_examination_of_the_cardiovascular-dx-mgmt",
+      "title": "Diagnosis and management of abnormal cardiovascular examination",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Structured exam: BP both arms, pulses, JVP, precordium, auscultation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulsus paradoxus over 10 mmHg with raised JVP?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent echo for tamponade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Interarm difference or pulse deficit with pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "CT angiography for dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Raised JVP, S3 or edema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Assess heart failure; JVP-guided diuretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "New murmur or abnormal pulse character?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Echocardiography; blood cultures if febrile",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "ABI, ambulatory BP or orthostatic testing as indicated",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for fructose-1,6-bisphosphatase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fructose_1_6_bisphosphatase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose, blood gas and lactate during episodes",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and lactic acidosis during symptomatic episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and urine ketones",
+          "cells": [
+            {
+              "text": "Documents accompanying ketosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "May show elevated lactate and glycerol-3-phosphate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and ammonia",
+          "cells": [
+            {
+              "text": "Distinguishes other causes of metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBP1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme activity assay in liver or leucocytes",
+          "cells": [
+            {
+              "text": "Where genetics are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fructose_1_6_bisphosphatase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycogen storage disease type I",
+          "cells": [
+            {
+              "text": "Glucose-6-phosphatase deficiency rather than fructose-1,6-bisphosphatase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary fructose intolerance",
+          "cells": [
+            {
+              "text": "Aldolase B deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fructose_1_6_bisphosphatase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous glucose",
+          "cells": [
+            {
+              "text": "Corrects hypoglycaemia and reverses lactic acidosis in acute crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous bicarbonate",
+          "cells": [
+            {
+              "text": "Corrects severe metabolic acidosis during decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crisis prevention",
+          "cells": [
+            {
+              "text": "Avoid prolonged fasting; frequent carbohydrate-rich feeds and slow-release uncooked cornstarch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary restriction",
+          "cells": [
+            {
+              "text": "Restrict fructose, sucrose and sorbitol, which aggravate the metabolic block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day regimen",
+          "cells": [
+            {
+              "text": "Increased glucose intake and early hospital review during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, blood glucose and acid-base status with dietitian-led review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder; carrier testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fructose_1_6_bisphosphatase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Fructose-1,6-bisphosphatase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected FBPase deficiency: hypoglycaemia with lactic acidosis during fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (profound hypoglycaemia, lactic acidosis, hepatomegaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency IV glucose and bicarbonate for a metabolic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood glucose, gas, lactate, ketones, urine organic acids and FBP1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does FBP1 genetic testing or enzyme assay confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glycogen storage disease type I, fructose intolerance or PC deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous glucose to correct hypoglycaemia and lactic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid prolonged fasting; frequent carbohydrate-rich feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict fructose, sucrose and sorbitol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day regimen with early hospital review during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term prognosis generally good with avoidance of fasting and dietary control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

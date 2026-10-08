@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for sinding-larsen-johansson syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sinding_larsen_johansson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Tenderness localised to the inferior patellar pole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral knee radiographs",
+          "cells": [
+            {
+              "text": "Fragmentation or calcification at the lower patellar pole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Proximal patellar tendon and inferior pole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Reserved for atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexibility and alignment assessment",
+          "cells": [
+            {
+              "text": "Quadriceps and hamstring tightness, and lower limb alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral knee comparison",
+          "cells": [
+            {
+              "text": "Distinguishes from a bipartite patella"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinding_larsen_johansson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osgood-Schlatter disease",
+          "cells": [
+            {
+              "text": "Occurs at the tibial tubercle, the opposite (distal) patellar tendon attachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipartite patella",
+          "cells": [
+            {
+              "text": "Separated by comparison with the contralateral knee"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patellar sleeve or inferior pole avulsion fracture",
+          "cells": [
+            {
+              "text": "Acute severe pain with an extensor lag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinding_larsen_johansson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Relative rest from jumping and running; the mainstay given the self-limiting course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "Simple analgesia or non-steroidal anti-inflammatory drugs, with local ice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Quadriceps and hamstring stretching and progressive strengthening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patellar tendon strap or taping",
+          "cells": [
+            {
+              "text": "Graded return-to-sport programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Symptoms resolve as the patella matures and traction loads decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging reassessment",
+          "cells": [
+            {
+              "text": "Atypical or persistent cases, to exclude other anterior knee pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sinding_larsen_johansson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sinding-Larsen-Johansson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anterior knee pain with a tender inferior patellar pole in an active child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute pain with extensor lag, rest or night pain, effusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for patellar sleeve or avulsion fracture, infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine for inferior pole tenderness; lateral knee radiographs for fragmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do radiographs show inferior pole fragmentation or calcification?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bipartite patella or avulsion fracture; reassess with MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification: relative rest from jumping and running",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, NSAIDs and local ice for pain control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Quadriceps and hamstring stretching and progressive strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Taping or a strap, then a graded return-to-sport programme",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting; resolves as the patella matures, with no significant long-term sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

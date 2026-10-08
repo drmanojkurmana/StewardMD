@@ -146,5 +146,287 @@
       "caption": "Overview comparison matrix for ethylene glycol poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ethylene_glycol_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ethylene glycol level",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas with calculated anion gap",
+          "cells": [
+            {
+              "text": "High anion-gap metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum osmolality with osmolal gap",
+          "cells": [
+            {
+              "text": "Raised osmolal gap in toxic alcohol ingestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, electrolytes, urea and creatinine",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine microscopy and ECG",
+          "cells": [
+            {
+              "text": "Calcium oxalate crystals; QT interval"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ethylene_glycol_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fomepizole",
+          "cells": [
+            {
+              "text": "Antidote of choice; blocks alcohol dehydrogenase to prevent formation of toxic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ethanol",
+          "cells": [
+            {
+              "text": "Alternative where fomepizole is not available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Severe poisoning or established renal failure; removes ethylene glycol and metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Correction of high anion-gap metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine and pyridoxine",
+          "cells": [
+            {
+              "text": "Cofactor therapy to divert metabolism to non-toxic products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious calcium replacement",
+          "cells": [
+            {
+              "text": "Symptomatic hypocalcaemia, with ECG monitoring of the QT interval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology service and monitoring",
+          "cells": [
+            {
+              "text": "Blood gases, anion and osmolal gaps, renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ethylene_glycol_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Ethylene glycol poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained high anion-gap acidosis with raised osmolal gap after antifreeze exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe acidosis, oliguric kidney injury, hypocalcaemia with QT change, coma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Contact the poisons service; start fomepizole without waiting for levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ethylene glycol level if available; blood gas, anion and osmolal gaps, calcium, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Toxic alcohol poisoning supported by the gaps or an ethylene glycol level?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider methanol poisoning, ketoacidosis, lactic acidosis or uraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fomepizole as antidote of choice; ethanol if unavailable",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thiamine and pyridoxine cofactor therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium bicarbonate for high anion-gap acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haemodialysis for severe acidosis or renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cautious calcium for symptomatic hypocalcaemia, with QT monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prompt antidote and dialysis usually allow full recovery; delay risks lasting harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

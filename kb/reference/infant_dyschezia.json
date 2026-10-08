@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for infant dyschezia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infant_dyschezia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Perineal and anal inspection",
+          "cells": [
+            {
+              "text": "Anal position and patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool consistency documentation",
+          "cells": [
+            {
+              "text": "Soft stool supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Normal growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "When a structural anomaly or Hirschsprung disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast study or rectal suction biopsy",
+          "cells": [
+            {
+              "text": "Reserved for suspected Hirschsprung disease or anatomical anomaly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infant_dyschezia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional constipation",
+          "cells": [
+            {
+              "text": "Stools are hard rather than soft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal malformation or anal stenosis",
+          "cells": [
+            {
+              "text": "Abnormal anal position or stenotic anus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal fissure",
+          "cells": [
+            {
+              "text": "Painful defecation; straining can be confused with pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Delayed passage of meconium or passage of hard stools"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infant_dyschezia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; resolves as the infant learns to coordinate defecation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid rectal stimulation",
+          "cells": [
+            {
+              "text": "Suppositories and digital manoeuvres can interfere with learning the reflex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No medication or diet change",
+          "cells": [
+            {
+              "text": "Neither laxatives nor formula changes are required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm diagnosis",
+          "cells": [
+            {
+              "text": "Normal growth and soft stool consistency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-netting",
+          "cells": [
+            {
+              "text": "Review if stool becomes hard, growth falters or other features develop"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infant_dyschezia-dx-mgmt",
+      "title": "Diagnosis and management of Infant dyschezia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant under nine months with straining, crying and reddening before a soft stool",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hard stool, delayed meconium, abnormal anal position or poor growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Examine the anus; assess for Hirschsprung disease or anorectal anomaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perineal and anal inspection, stool consistency, growth charts, digital examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Soft stool passed with normal growth and anal anatomy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Contrast study or rectal suction biopsy for suspected Hirschsprung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure parents: benign, resolves as coordination matures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid suppositories and digital rectal stimulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No laxatives or formula change needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Safety-net if stools become hard or growth falters",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolves as the infant learns to coordinate defecation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

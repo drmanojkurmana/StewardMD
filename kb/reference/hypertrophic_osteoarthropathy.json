@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for hypertrophic osteoarthropathy (incl. pachydermoperiostosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypertrophic_osteoarthropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph and CT thorax",
+          "cells": [
+            {
+              "text": "Underlying lung malignancy or suppurative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-bone radiographs",
+          "cells": [
+            {
+              "text": "Symmetrical periosteal new bone along the diaphyses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Tramline or double-stripe cortical uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cyanotic congenital heart disease or endocarditis when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and imaging",
+          "cells": [
+            {
+              "text": "Hepatic causes when considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic_osteoarthropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated digital clubbing",
+          "cells": [
+            {
+              "text": "Clubbing without periostitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary pachydermoperiostosis",
+          "cells": [
+            {
+              "text": "Hereditary form driven by impaired prostaglandin E2 degradation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic_osteoarthropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat underlying cause",
+          "cells": [
+            {
+              "text": "Resect intrathoracic tumour or eradicate suppurative lung disease; regression often follows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "For periostitic bone pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates or COX-2 inhibitors",
+          "cells": [
+            {
+              "text": "For refractory bone pain, particularly in primary hereditary form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult malignancy",
+          "cells": [
+            {
+              "text": "Prompt investigation for intrathoracic malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin management",
+          "cells": [
+            {
+              "text": "Symptomatic and dermatological care of skin thickening in pachydermoperiostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Respiratory medicine or oncology according to the underlying disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypertrophic_osteoarthropathy-dx-mgmt",
+      "title": "Diagnosis and management of Hypertrophic osteoarthropathy (incl. pachydermoperiostosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Digital clubbing with periostitis and painful joint or limb swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid progression, weight loss, haemoptysis or signs of endocarditis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent chest imaging for lung malignancy or lung abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph or CT thorax, long-bone radiographs, bone scintigraphy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause such as intrathoracic malignancy identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary pachydermoperiostosis or other cause; repeat work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat underlying cause, such as resecting tumour or eradicating suppurative lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs for periostitic bone pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bisphosphonates or COX-2 inhibitors for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skin management in pachydermoperiostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Referral to respiratory medicine or oncology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Secondary form often regresses once the underlying disease is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

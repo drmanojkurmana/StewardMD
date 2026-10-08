@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for dysgerminoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysgerminoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum LDH, beta-hCG and AFP",
+          "cells": [
+            {
+              "text": "Germ-cell tumour markers; AFP characteristically normal in pure dysgerminoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of a solid ovarian mass",
+          "cells": [
+            {
+              "text": "Solid ovarian mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI for staging",
+          "cells": [
+            {
+              "text": "Nodal and extent assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype or genetic testing",
+          "cells": [
+            {
+              "text": "Gonadal dysgenesis, especially in young patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with OCT4, SALL4 and c-KIT immunohistochemistry",
+          "cells": [
+            {
+              "text": "Germ-cell lineage markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the contralateral ovary",
+          "cells": [
+            {
+              "text": "Bilateral disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysgerminoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Yolk sac tumour, immature teratoma or embryonal carcinoma",
+          "cells": [
+            {
+              "text": "Other malignant germ-cell tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadoblastoma in a dysgenetic gonad",
+          "cells": [
+            {
+              "text": "Dysgenetic gonad with Y-chromosome material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian lymphoma",
+          "cells": [
+            {
+              "text": "Solid ovarian mass without germ-cell markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysgerminoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stage IA fertility-sparing surgery",
+          "cells": [
+            {
+              "text": "Unilateral salpingo-oophorectomy with staging; observation afterwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Higher stage disease",
+          "cells": [
+            {
+              "text": "Fertility-preserving surgery remains an option even with metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "Platinum-based combination after surgery beyond stage IA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse",
+          "cells": [
+            {
+              "text": "Referral to a specialist germ-cell tumour board"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Not first-line when fertility is wished; selected chemoresistant cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysgenetic gonad",
+          "cells": [
+            {
+              "text": "Karyotype and gonadectomy versus fertility discussion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marker monitoring",
+          "cells": [
+            {
+              "text": "LDH and alkaline phosphatase; rising AFP suggests mixed germ-cell tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysgerminoma-dx-mgmt",
+      "title": "Diagnosis and management of Dysgerminoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysgerminoma: solid ovarian mass in an adolescent or young woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly enlarging solid mass, torsion or rupture, rising markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gynaecological oncology review for torsion, rupture or rising markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LDH, beta-hCG and AFP; ultrasound; CT or MRI staging; karyotype; histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm dysgerminoma with normal AFP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider yolk sac tumour, immature teratoma, lymphoma or metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stage IA: fertility-sparing unilateral salpingo-oophorectomy with staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Higher stage: platinum-based combination chemotherapy after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fertility-preserving surgery for metastatic or recurrent disease where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer relapse or rising AFP to a specialist germ-cell tumour board",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial LDH and alkaline phosphatase monitoring with imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent, especially early; advanced disease often cured and fertility often preserved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

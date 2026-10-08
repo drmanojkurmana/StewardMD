@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for functional dyspepsia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_dyspepsia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Helicobacter pylori testing",
+          "cells": [
+            {
+              "text": "Breath, stool antigen or biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "When alarm features are present or symptoms are refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Screens for anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric emptying study",
+          "cells": [
+            {
+              "text": "When gastroparesis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary or pancreatic imaging",
+          "cells": [
+            {
+              "text": "When the history suggests these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_dyspepsia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer disease",
+          "cells": [
+            {
+              "text": "Excluded by upper endoscopy when alarm features are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroparesis",
+          "cells": [
+            {
+              "text": "Confirmed or excluded by gastric emptying study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-induced dyspepsia",
+          "cells": [
+            {
+              "text": "For example from NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_dyspepsia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Helicobacter pylori eradication",
+          "cells": [
+            {
+              "text": "Tested for and eradicated with antibiotic-based combination therapy as an early step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "First-line acid suppression, particularly for epigastric pain syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetics",
+          "cells": [
+            {
+              "text": "For postprandial distress syndrome, with fullness and early satiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricyclic antidepressants",
+          "cells": [
+            {
+              "text": "For persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and lifestyle advice",
+          "cells": [
+            {
+              "text": "Smaller, low-fat meals; psychological therapies for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "To exclude ulcer and malignancy when alarm features or refractory symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_dyspepsia-dx-mgmt",
+      "title": "Diagnosis and management of Functional dyspepsia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional dyspepsia: persistent upper abdominal symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, bleeding, anaemia, dysphagia, vomiting, mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent upper endoscopy for alarm features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "H pylori testing and full blood count; endoscopy if alarm features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are H pylori infection and organic disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GORD, gastroparesis, biliary disease or NSAID-induced dyspepsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Test for and eradicate Helicobacter pylori with combination therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Proton pump inhibitor first line, especially for epigastric pain syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prokinetics for postprandial distress with fullness and early satiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tricyclic antidepressants for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but often chronic and relapsing; can substantially impair quality of life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

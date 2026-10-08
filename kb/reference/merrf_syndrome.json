@@ -148,5 +148,211 @@
       "caption": "Overview comparison matrix for merrf syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "merrf_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Resting and post-exercise blood lactate and pyruvate",
+          "cells": [
+            {
+              "text": "Lactate and pyruvate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Generalised epileptiform and photosensitive discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and brainstem atrophy; basal ganglia calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted molecular testing for m.8344A>G",
+          "cells": [
+            {
+              "text": "m.8344A>G variant and heteroplasmy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal muscle biopsy",
+          "cells": [
+            {
+              "text": "Ragged-red fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Deafness and neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "merrf_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of MERRF syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Myoclonic epilepsy with ataxia and sensorineural deafness; suspected MERRF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Poorly controlled myoclonus, rapid decline, conduction disease or lactic decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for status epilepticus; cardiac review for conduction disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate, EEG, brain MRI, m.8344A>G testing, muscle biopsy, audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the m.8344A>G variant confirmed with heteroplasmy quantification?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MELAS, Unverricht-Lundborg, Lafora disease or other myoclonic epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levetiracetam or clonazepam for myoclonus; avoid sodium valproate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Coenzyme Q10, riboflavin and L-carnitine, recognising the limited evidence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for deafness; rehabilitation for ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid mitochondrial toxins including aminoglycosides and valproate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cardiac, endocrine and neurological surveillance; maternal-line genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

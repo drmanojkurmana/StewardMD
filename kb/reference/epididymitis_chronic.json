@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for chronic epididymitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epididymitis_chronic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Localises tenderness and excludes a testicular mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Epididymis and testis; cysts, varicocele or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine analysis and culture",
+          "cells": [
+            {
+              "text": "Identifies or excludes urinary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted infection screening",
+          "cells": [
+            {
+              "text": "Where risk factors or urethral symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for referred causes",
+          "cells": [
+            {
+              "text": "Abdominal, inguinal and musculoskeletal sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of previous scrotal surgery or vasectomy",
+          "cells": [
+            {
+              "text": "Contribution to symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymitis_chronic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent acute infective epididymitis",
+          "cells": [
+            {
+              "text": "Acute episodes are usually infective; chronic disease is frequently non-infective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular tumour",
+          "cells": [
+            {
+              "text": "A discrete or hard testicular mass requires exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-vasectomy pain syndrome",
+          "cells": [
+            {
+              "text": "Previous vasectomy contributes to symptoms through congestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epididymitis_chronic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop repeated antibiotic courses",
+          "cells": [
+            {
+              "text": "Antimicrobials reserved for microbiologically proven infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Reassurance, scrotal support, local heat and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory analgesia",
+          "cells": [
+            {
+              "text": "Amitriptyline or a gabapentinoid where a neuropathic component is evident"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address contributing factors",
+          "cells": [
+            {
+              "text": "Post-vasectomy congestion, referred abdominal or musculoskeletal pain, and overlapping chronic pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spermatic cord nerve block",
+          "cells": [
+            {
+              "text": "For refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymectomy",
+          "cells": [
+            {
+              "text": "Last resort, after careful counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pain pathway and psychological support",
+          "cells": [
+            {
+              "text": "Specialist andrology or chronic pain referral for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epididymitis_chronic-dx-mgmt",
+      "title": "Diagnosis and management of Chronic epididymitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent localised epididymal pain lasting three months or more",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hard testicular mass, acute severe pain, fever, progressive swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude testicular tumour, torsion or superimposed acute infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination, scrotal ultrasound, urine culture and STI screening where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Referred pain or a contributing cause (vasectomy, scrotal surgery) identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess: consider chronic orchialgia or referred ureteric, hernia or nerve pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop repeated antibiotics unless infection is proven",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Scrotal support, local heat and activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-inflammatory analgesia; amitriptyline or gabapentinoid if neuropathic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spermatic cord nerve block for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Epididymectomy only as a last resort after counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but persistent; many men improve with conservative measures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

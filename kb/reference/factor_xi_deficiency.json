@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for factor xi deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "factor_xi_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Activated partial thromboplastin time with normal PT",
+          "cells": [
+            {
+              "text": "Prolonged APTT only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific factor XI coagulant assay",
+          "cells": [
+            {
+              "text": "Confirms the deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Distinguishes deficiency from an inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assays of factors VIII, IX and XII",
+          "cells": [
+            {
+              "text": "Combined or alternative deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "von Willebrand factor and platelet function testing",
+          "cells": [
+            {
+              "text": "Where mucosal bleeding is prominent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F11 gene analysis and family screening",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibitor (Bethesda-type) assay",
+          "cells": [
+            {
+              "text": "Previously exposed or refractory patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_xi_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemophilia A or B",
+          "cells": [
+            {
+              "text": "Spontaneous haemarthroses and deep muscle bleeds are typical there and uncommon here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Mucosal bleeding; von Willebrand factor and platelet testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact factor deficiencies (factor XII, prekallikrein)",
+          "cells": [
+            {
+              "text": "Prolong the APTT but never cause bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_xi_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Mainstay for mucosal bleeding and minor procedures, especially at fibrinolytic-rich sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XI concentrate or fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Major surgery or significant bleeding; thrombotic risk noted with concentrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant activated factor VII",
+          "cells": [
+            {
+              "text": "Patients with inhibitors or refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid and hormonal measures",
+          "cells": [
+            {
+              "text": "Menorrhagia and prevention of postpartum haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative and peripartum haemostatic planning",
+          "cells": [
+            {
+              "text": "Bleeding is poorly predicted by the factor level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet agents and NSAIDs",
+          "cells": [
+            {
+              "text": "With patient education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Including Ashkenazi Jewish kindreds"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "factor_xi_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Factor XI Deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Excess bleeding after tonsillectomy, dental or urological surgery; prolonged APTT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (postpartum or heavy menstrual bleed, bleed failing replacement, CNS bleed)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology review; antifibrinolytic; factor XI or FFP for major bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Specific factor XI assay; mixing study; factors VIII, IX and XII; VWF and platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low factor XI with no inhibitor and no other factor cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test for an inhibitor, haemophilia, von Willebrand disease or lupus anticoagulant",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tranexamic acid as mainstay for mucosal bleeding and minor procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Factor XI concentrate or FFP for major surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Recombinant activated factor VII for inhibitors or refractory bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Perioperative and peripartum planning; avoid antiplatelet agents and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most have an excellent outlook and a normal lifespan with haemostatic planning",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for epidermodysplasia verruciformis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epidermodysplasia_verruciformis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Enlarged keratinocytes with blue-grey cytoplasm (EV cells)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV typing by PCR from lesional skin",
+          "cells": [
+            {
+              "text": "Beta-HPV types, especially HPV5 and HPV8"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "TMC6 and TMC8 and related genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunodeficiency assessment, including HIV testing and lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Distinguishes acquired EV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy and total-body skin surveillance",
+          "cells": [
+            {
+              "text": "Changing lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of changing, indurated or ulcerated lesions",
+          "cells": [
+            {
+              "text": "Squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermodysplasia_verruciformis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired epidermodysplasia verruciformis (HIV, iatrogenic immunosuppression, GATA2)",
+          "cells": [
+            {
+              "text": "Occurs with T-cell immunodeficiency such as HIV, transplant immunosuppression or GATA2 defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis versicolor",
+          "cells": [
+            {
+              "text": "Macular lesions mimic it closely; dismissing them as this is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermodysplasia_verruciformis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, broad-spectrum sunscreen and protective clothing; the central measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or ablative treatment of wart-like lesions",
+          "cells": [
+            {
+              "text": "Topical retinoids, imiquimod, 5-fluorouracil or cryotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoid",
+          "cells": [
+            {
+              "text": "Acitretin for widespread or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total-body skin surveillance",
+          "cells": [
+            {
+              "text": "Dermoscopy, with biopsy of any changing, indurated or ulcerated lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early excision of squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Margin-controlled (Mohs) or wide excision for aggressive tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying immunodeficiency",
+          "cells": [
+            {
+              "text": "In acquired disease, including HIV and GATA2 defects; minimise iatrogenic immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TMC6/TMC8 inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and clinical genetics",
+          "cells": [
+            {
+              "text": "Long-term coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epidermodysplasia_verruciformis-dx-mgmt",
+      "title": "Diagnosis and management of Epidermodysplasia verruciformis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Widespread flat wart-like papules and pityriasis versicolor-like lesions from childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (indurated, ulcerated or enlarging lesion, or regional lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Early biopsy and excision of suspected squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for EV cells; HPV PCR typing; immunodeficiency screen including HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "EV cells on biopsy with beta-HPV types (HPV5 or HPV8) detected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for acquired EV-like phenotype and underlying immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict lifelong photoprotection, the central measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical retinoids, imiquimod, 5-fluorouracil or cryotherapy for warts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acitretin for widespread or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Total-body skin surveillance with dermoscopy and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive TMC6/TMC8",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lesions persist lifelong; squamous cell carcinoma is the main determinant of outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

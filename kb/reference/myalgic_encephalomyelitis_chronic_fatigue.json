@@ -174,5 +174,446 @@
       "caption": "Overview comparison matrix for myalgic encephalomyelitis/ chronic fatigue syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Diagnosing ME/CFS (for clinicians)",
+      "kind": "web",
+      "url": "https://www.cdc.gov/me-cfs/hcp/diagnosis/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 389-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for ME/CFS",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IOM 2015: core",
+          "cells": [
+            {
+              "text": "Substantial activity reduction with profound new fatigue not relieved by rest"
+            },
+            {
+              "text": "{{hy:Plus post-exertional malaise and unrefreshing sleep}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IOM 2015: one more",
+          "cells": [
+            {
+              "text": "Cognitive impairment or orthostatic intolerance"
+            },
+            {
+              "text": "Symptoms at least half the time, at least moderate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "6 months or more",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Manage as ME/CFS while monitoring if criteria not yet met"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Older criteria: fatigue",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "At least 6 months, new onset, not from exertion or disease, not relieved by rest",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Substantial reduction in prior activities"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Older criteria: symptoms",
+          "unit": "symptoms",
+          "cells": [
+            {
+              "text": "4 or more concurrent for 6 months",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Memory or concentration, sore throat, tender nodes, myalgia, arthralgia, new headache, unrefreshing sleep, post-exertional malaise"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Older criteria: exclusions",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "Medical cause, psychotic depression, bipolar, schizophrenia, dementia, eating disorder, substance misuse, BMI over 40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Exclude before diagnosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Laboratory tests",
+          "cells": [
+            {
+              "text": "CBC, ESR, CRP, electrolytes, glucose, calcium, renal, liver, TSH, iron studies, coeliac screen, urinalysis"
+            },
+            {
+              "text": "Usually normal; used to find other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthostatic stand test",
+          "cells": [
+            {
+              "text": "Lean or standing test"
+            },
+            {
+              "text": "Detects POTS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-infection fatigue",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10% stay ill 6 months after EBV, Q fever, Ross River and others",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Long COVID can meet criteria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 389-1 lists the older (1994 CDC) criteria; Harrison 22e and CDC use the 2015 IOM criteria, which make post-exertional malaise mandatory. Both are shown."
+    },
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-ddx",
+      "kind": "ddx",
+      "title": "Causes of chronic fatigue to exclude",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Weight gain, cold intolerance"
+            },
+            {
+              "text": "TSH, free T4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia or iron disorders",
+          "cells": [
+            {
+              "text": "Pallor, low Hb"
+            },
+            {
+              "text": "CBC and iron studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "GI symptoms, iron deficiency"
+            },
+            {
+              "text": "Coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression or anxiety",
+          "cells": [
+            {
+              "text": "Low mood and anhedonia; fatigue improves with activity"
+            },
+            {
+              "text": "Mental health assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POTS or dysautonomia",
+          "cells": [
+            {
+              "text": "Symptoms on standing with tachycardia"
+            },
+            {
+              "text": "Stand test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Widespread pain dominates"
+            },
+            {
+              "text": "Clinical criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Dry eyes and mouth"
+            },
+            {
+              "text": "Anti-Ro and anti-La"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-treatment",
+      "kind": "treatment",
+      "title": "Management of ME/CFS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pacing and energy management",
+          "cells": [
+            {
+              "text": "{{hy:All patients; avoid push and crash}}"
+            },
+            {
+              "text": "Graded exercise therapy no longer recommended"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom-directed treatment",
+          "cells": [
+            {
+              "text": "Pain, sleep, orthostatic intolerance"
+            },
+            {
+              "text": "Start drugs at low dose and increase slowly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthostatic intolerance",
+          "cells": [
+            {
+              "text": "POTS features"
+            },
+            {
+              "text": "Fluids, salt, compression garments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Coping, mood, isolation"
+            },
+            {
+              "text": "Screen for depression and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbidities",
+          "cells": [
+            {
+              "text": "Any identified illness"
+            },
+            {
+              "text": "Re-evaluate periodically"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Re-investigate",
+          "cells": [
+            {
+              "text": "Continued decline or new symptoms"
+            },
+            {
+              "text": "Look for another illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-dx-mgmt",
+      "title": "Diagnosis and management of ME/CFS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue with reduced function for months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "History, exam, baseline labs, stand test, mental health screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Another cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat that cause; reassess fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PEM, unrefreshing sleep, plus cognitive or orthostatic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Idiopathic chronic fatigue; monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Present 6 months or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Manage as probable ME/CFS; monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "ME/CFS: pacing, symptom care, support, periodic review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for phacolytic glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phacolytic_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Hypermature cataract, pseudohypopyon and iridescent particles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Confirms an open angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Pressure rise (glaucoma)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Posterior segment when the fundus is obscured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aqueous aspirate cytology",
+          "cells": [
+            {
+              "text": "Protein-laden macrophages, when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal assessment",
+          "cells": [
+            {
+              "text": "Oedema and endothelial status before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biometry of the fellow eye",
+          "cells": [
+            {
+              "text": "Surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phacolytic_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute primary angle-closure glaucoma",
+          "cells": [
+            {
+              "text": "Open angle on gonioscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endophthalmitis",
+          "cells": [
+            {
+              "text": "Signs suggesting it, rather than sterile lens-induced inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phacolytic_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt cataract extraction",
+          "cells": [
+            {
+              "text": "Removes the leaking hypermature lens and liberated protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical pressure reduction",
+          "cells": [
+            {
+              "text": "Topical aqueous suppressants such as beta-blockers and alpha-agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Control of macrophage-driven inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal and endothelial assessment",
+          "cells": [
+            {
+              "text": "Timing and safety of surgery when corneal oedema is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular lens implantation",
+          "cells": [
+            {
+              "text": "At cataract surgery, once inflammation and pressure are controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative monitoring",
+          "cells": [
+            {
+              "text": "Pressure and optic nerve; glaucoma usually resolves without long-term medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Ophthalmic surgeon, with planned management of the fellow eye cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phacolytic_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of phacolytic glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful eye with hypermature cataract, pseudohypopyon and raised intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (very high pressure with oedema, optic nerve compromise, endophthalmitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for endophthalmitis, or for an only or bilateral hypermature eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp exam; gonioscopy for open angle; pressure; B-scan if fundus obscured",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gonioscopy confirm an open angle with hypermature lens changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute angle closure, neovascular glaucoma or endophthalmitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt cataract extraction to remove the leaking hypermature lens",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lower intraocular pressure with topical aqueous suppressants such as beta-blockers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids for macrophage-driven inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess cornea and endothelium to time surgery safely when oedema is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Implant an intraocular lens once inflammation and pressure are controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Extraction usually normalises pressure; final vision depends on optic nerve and macula",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

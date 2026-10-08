@@ -147,5 +147,276 @@
       "caption": "Overview comparison matrix for subungual glomus tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glomus_tumor_nail-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Love's pin test, Hildreth's ischaemia test and cold sensitivity",
+          "cells": [
+            {
+              "text": "Focused clinical tests that localise the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Localises a small subungual lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound",
+          "cells": [
+            {
+              "text": "Alternative imaging for localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Bluish or reddish subungual spot and nail groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiograph",
+          "cells": [
+            {
+              "text": "Secondary erosion of the underlying phalanx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised specimen",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomus_tumor_nail-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Curative; typically brings rapid relief of pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound localisation",
+          "cells": [
+            {
+              "text": "Precise, tissue-sparing approach to a small lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete removal with nail bed repair",
+          "cells": [
+            {
+              "text": "Minimises recurrence and deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interim analgesia and cold avoidance",
+          "cells": [
+            {
+              "text": "Symptom control before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Of the excised specimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up for recurrent pain",
+          "cells": [
+            {
+              "text": "Usually indicates incomplete excision or a further lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glomus_tumor_nail-dx-mgmt",
+      "title": "Diagnosis and management of Subungual glomus tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected subungual glomus tumour: long-standing localised pain under the nail",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multiple lesions, rapid or infiltrative growth, bony erosion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for expert review of multiple, rapidly growing or infiltrative lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Focused clinical tests, MRI or ultrasound localisation and radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do focused examination and imaging localise the lesion before surgery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subungual melanoma, exostosis, haematoma or neuroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, typically curative with rapid relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preoperative MRI or ultrasound to localise the tiny lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful nail bed repair to limit deformity and recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histological confirmation of the excised specimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; excision is curative, though incomplete removal or multiple lesions can recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

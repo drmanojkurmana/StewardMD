@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for fumarase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fumarase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Marked fumarate elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Polymicrogyria, open operculum and other malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fumarate hydratase enzyme activity",
+          "cells": [
+            {
+              "text": "In leucocytes or fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular analysis of the FH gene",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and carrier assessment",
+          "cells": [
+            {
+              "text": "HLRCC-related tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging surveillance",
+          "cells": [
+            {
+              "text": "For carrier relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fumarase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-specific therapy exists for the biallelic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "For seizures and severe encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrostomy feeding",
+          "cells": [
+            {
+              "text": "For failure to thrive and feeding difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodisability and palliative care",
+          "cells": [
+            {
+              "text": "Multidisciplinary, given the poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Dominant HLRCC cancer risk in heterozygous carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carrier surveillance",
+          "cells": [
+            {
+              "text": "Regular renal MRI for renal cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological and gynaecological review",
+          "cells": [
+            {
+              "text": "Cutaneous and uterine leiomyomas in carriers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fumarase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Fumarase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fumarase deficiency: neonatal encephalopathy with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe encephalopathy, HLRCC family history, carrier renal mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of a new renal mass in a carrier relative",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids for fumarate, brain MRI and FH gene analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does marked fumarate on urine organic acids with FH testing confirm the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other TCA-cycle or mitochondrial encephalopathies or cortical malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care and antiepileptic drugs for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy feeding for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counsel the family on the dominant HLRCC cancer risk in carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular renal MRI surveillance of carrier relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biallelic infantile form: poor prognosis, severe impairment, frequent early death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

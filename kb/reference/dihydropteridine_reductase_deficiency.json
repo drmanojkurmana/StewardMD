@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for dihydropteridine reductase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dihydropteridine_reductase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dihydropteridine reductase activity in blood spots",
+          "cells": [
+            {
+              "text": "Deficient DHPR activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and urine pterin profile with phenylalanine",
+          "cells": [
+            {
+              "text": "Biopterin normal or raised with raised phenylalanine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QDPR gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the QDPR variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF neurotransmitter metabolites and 5-methyltetrahydrofolate",
+          "cells": [
+            {
+              "text": "Neurotransmitter deficit and cerebral folate deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI or CT",
+          "cells": [
+            {
+              "text": "Demyelination and basal ganglia calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydropteridine_reductase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic phenylketonuria",
+          "cells": [
+            {
+              "text": "Biopterin profile separates it; diet alone is insufficient here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "6-pyruvoyl-tetrahydropterin synthase deficiency",
+          "cells": [
+            {
+              "text": "A BH4 synthesis defect, not a recycling defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydropteridine_reductase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenylalanine restriction",
+          "cells": [
+            {
+              "text": "Controls blood phenylalanine; diet alone is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurotransmitter precursors",
+          "cells": [
+            {
+              "text": "Levodopa with a decarboxylase inhibitor, and 5-hydroxytryptophan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folinic acid",
+          "cells": [
+            {
+              "text": "Treats secondary cerebral folate deficiency; prevents demyelination and calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BH4 supplementation",
+          "cells": [
+            {
+              "text": "Often inadequate alone because the defect lies in recycling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Physiotherapy and developmental support for seizures and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "CSF neurotransmitter metabolites, blood phenylalanine and developmental assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and follow-up",
+          "cells": [
+            {
+              "text": "Autosomal recessive; lifelong metabolic follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dihydropteridine_reductase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Dihydropteridine reductase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DHPR deficiency: infant with hyperphenylalaninaemia, dystonia and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (regression, dystonia, intracranial calcification)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent start of neurotransmitter precursors and folinic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DHPR activity in blood spots; pterin profile; QDPR sequencing; CSF neurotransmitters",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is DHPR activity deficient with QDPR variants on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider classic PKU, 6-PTPS or GTP cyclohydrolase I deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrict dietary phenylalanine to control blood levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa with decarboxylase inhibitor and 5-hydroxytryptophan replace neurotransmitters",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add folinic acid for cerebral folate deficiency and prevent demyelination",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Do not rely on BH4 alone; the defect is in recycling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong metabolic follow-up and genetic counselling for the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early combined treatment can substantially improve outcome; delay leaves lasting damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

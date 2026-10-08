@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for perthes' disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perthes_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP and frog-lateral radiographs of both hips",
+          "cells": [
+            {
+              "text": "Staging of the changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Early change before radiographic change; extent of necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical hip range of movement",
+          "cells": [
+            {
+              "text": "Abduction and internal rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations to exclude infection or inflammatory arthritis",
+          "cells": [
+            {
+              "text": "Acute presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and skeletal survey",
+          "cells": [
+            {
+              "text": "Atypical or bilateral presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perthes_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis or osteomyelitis of the hip",
+          "cells": [
+            {
+              "text": "Fever, systemic upset and an acutely irritable hip"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slipped capital femoral epiphysis",
+          "cells": [
+            {
+              "text": "Occurs in older children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal or epiphyseal dysplasia",
+          "cells": [
+            {
+              "text": "Bilateral or atypical disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perthes_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Simple analgesia, activity modification and physiotherapy to preserve hip range of movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head containment",
+          "cells": [
+            {
+              "text": "Physiotherapy to preserve abduction and internal rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protected weight-bearing",
+          "cells": [
+            {
+              "text": "Weight-bearing protection and traction during painful active phases, to reduce load on the softened epiphysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical containment",
+          "cells": [
+            {
+              "text": "Femoral varus or pelvic acetabular osteotomy for older children or extensive involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "Monitor the fragmentation and reossification phases for sphericity and containment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Orthopaedic and physiotherapy care, tailored to age and extent of head involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Residual deformity and premature hip osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perthes_disease-dx-mgmt",
+      "title": "Diagnosis and management of Perthes' disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with limp or hip or knee pain; hip range of movement assessed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fever with irritable hip, bilateral disease, marked loss of hip movement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of septic arthritis in a febrile, irritable hip",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP and frog-lateral radiographs of both hips; MRI for early change",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do radiographs or MRI show femoral head changes consistent with Perthes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transient synovitis, SCFE, developmental dysplasia or juvenile arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relieve symptoms with analgesia, activity modification and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preserve abduction and internal rotation to keep the femoral head contained",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protected weight-bearing and traction during painful active phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Femoral varus or pelvic osteotomy for older children or extensive involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial radiographs through fragmentation and reossification to track containment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting; many younger children remodel to a near-normal hip, older children less so",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

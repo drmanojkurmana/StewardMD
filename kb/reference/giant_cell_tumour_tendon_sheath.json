@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for giant cell tumour of tendon sheath."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "giant_cell_tumour_tendon_sheath-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with gradient-echo imaging",
+          "cells": [
+            {
+              "text": "Low-signal mass; blooming from haemosiderin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Solid hypoechoic mass adjacent to the tendon sheath"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Pressure erosion of adjacent bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology after excision",
+          "cells": [
+            {
+              "text": "Diagnostic standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transillumination",
+          "cells": [
+            {
+              "text": "Distinguishes it from a ganglion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_cell_tumour_tendon_sheath-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ganglion cyst of the digit or tendon sheath",
+          "cells": [
+            {
+              "text": "Distinguished by transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomus tumour",
+          "cells": [
+            {
+              "text": "Subungual and painful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial sarcoma or other soft-tissue sarcoma",
+          "cells": [
+            {
+              "text": "Rapid enlargement, pain or ill-defined infiltrative margins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giant_cell_tumour_tendon_sheath-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete marginal excision",
+          "cells": [
+            {
+              "text": "The mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meticulous removal of satellites",
+          "cells": [
+            {
+              "text": "Multilobulated tumour and satellite nodules; clearing sheath and joint lowers recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic CSF1-receptor therapy",
+          "cells": [
+            {
+              "text": "Pexidartinib for diffuse or unresectable tenosynovial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI planning",
+          "cells": [
+            {
+              "text": "Defines extent and tendon or joint involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative hand therapy",
+          "cells": [
+            {
+              "text": "Restores digital movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence surveillance",
+          "cells": [
+            {
+              "text": "Commoner after incomplete excision or distal interphalangeal lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "giant_cell_tumour_tendon_sheath-dx-mgmt",
+      "title": "Diagnosis and management of Giant cell tumour of tendon sheath",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected giant cell tumour of tendon sheath: firm nodule on a digit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid enlargement, infiltrative margins, bone destruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for sarcoma assessment if rapid growth, pain or infiltrative margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with gradient-echo imaging, ultrasound and radiographs for bone erosion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology after excision confirm a giant cell tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ganglion, glomus tumour, fibroma or synovial sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete marginal excision as the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Meticulous removal of multilobulated tumour and satellite nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pexidartinib for diffuse or unresectable tenosynovial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postoperative hand therapy and recurrence surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, excellent prognosis after complete excision; recurrence is well recognised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

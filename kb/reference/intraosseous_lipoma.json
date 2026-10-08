@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for intraosseous lipoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick, Diagnosis of Bone and Joint Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intraosseous_lipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Lucent lesion with sclerotic rim and possible central calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Fat signal on all sequences"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Fat attenuation with negative Hounsfield values"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-suppressed MRI sequences",
+          "cells": [
+            {
+              "text": "Suppression of the fatty component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with prior imaging",
+          "cells": [
+            {
+              "text": "Stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Only for atypical or aggressive features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraosseous_lipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple (unicameral) bone cyst",
+          "cells": [
+            {
+              "text": "No fat signal on fat-suppressed imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcaneal pseudocyst",
+          "cells": [
+            {
+              "text": "Normal trabecular lucency in the neutral triangle; no sclerotic rim"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aneurysmal bone cyst",
+          "cells": [
+            {
+              "text": "Aggressive features such as cortical destruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraosseous_lipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic incidental lesions; often self-involuting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive confirmation",
+          "cells": [
+            {
+              "text": "CT fat attenuation and fat-suppressed MRI to avoid unnecessary intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Documents stability where the diagnosis is confident"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curettage and bone grafting",
+          "cells": [
+            {
+              "text": "Symptomatic, enlarging or structurally weakened lesions at fracture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Only atypical or aggressive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Orthopaedic and musculoskeletal radiology review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intraosseous_lipoma-dx-mgmt",
+      "title": "Diagnosis and management of Intraosseous lipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental lucent bone lesion, often in the calcaneus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cortical destruction, soft-tissue extension, rapid growth or new localised pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy and bone tumour or sarcoma review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, CT fat attenuation, fat-suppressed MRI, comparison with old imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fat attenuation or fat signal confirmed and stable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cyst or another lesion; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic incidental lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial imaging to document stability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Curettage and bone grafting for symptomatic or weakened lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy only if atypical or aggressive features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthopaedic and musculoskeletal radiology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign, often self-involuting; intervention reserved for symptomatic or weakened bone",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

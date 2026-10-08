@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for mediterranean macrothrombocytopenia (gp1ba)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mediterranean_macrothrombocytopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with manual film review",
+          "cells": [
+            {
+              "text": "Large platelets; clumping excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for the GPIb-IX-V complex",
+          "cells": [
+            {
+              "text": "GPIb-IX-V complex expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ristocetin-induced platelet agglutination studies",
+          "cells": [
+            {
+              "text": "Platelet agglutination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GP1BA sequencing",
+          "cells": [
+            {
+              "text": "GP1BA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of secondary and immune causes",
+          "cells": [
+            {
+              "text": "Secondary and immune causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediterranean_macrothrombocytopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biallelic Bernard-Soulier syndrome",
+          "cells": [
+            {
+              "text": "Bleeding more severe than expected prompts reassessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia (acquired)",
+          "cells": [
+            {
+              "text": "Progressive fall in platelet count suggests a superimposed acquired process"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediterranean_macrothrombocytopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the condition",
+          "cells": [
+            {
+              "text": "Avoid inappropriate ITP treatment such as corticosteroids, immunoglobulin or splenectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No specific therapy",
+          "cells": [
+            {
+              "text": "Benign disorder with preserved haemostasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemostatic challenges",
+          "cells": [
+            {
+              "text": "Surgery, dental extraction and childbirth: tranexamic acid; platelet transfusion for significant bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caution with antiplatelet and anticoagulant drugs",
+          "cells": [
+            {
+              "text": "Counsel on bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; offer family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic documentation",
+          "cells": [
+            {
+              "text": "Prevents repeated investigation and misdiagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mediterranean_macrothrombocytopenia-dx-mgmt",
+      "title": "Diagnosis and management of Mediterranean macrothrombocytopenia (GP1BA)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Macrothrombocytopenia with large platelets on film; suspected GP1BA disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding more severe than expected, progressive platelet fall or other cytopenias?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reassess for biallelic Bernard-Soulier or an acquired process; haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with film review; flow cytometry for GPIb-IX-V; ristocetin agglutination; GP1BA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GPIb-IX-V defect confirmed with a GP1BA variant on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MYH9 disorder, grey platelet syndrome or pseudothrombocytopenia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise the disorder to avoid corticosteroids, immunoglobulin or splenectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "No specific therapy; the disorder is benign with preserved haemostasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tranexamic acid for surgery or childbirth; platelets for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on bleeding risk with antiplatelet and anticoagulant drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family testing; documentation to prevent misdiagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

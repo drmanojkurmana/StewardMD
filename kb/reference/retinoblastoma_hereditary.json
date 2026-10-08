@@ -149,5 +149,267 @@
       "caption": "Overview comparison matrix for hereditary retinoblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinoblastoma_hereditary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia with wide-field fundus imaging",
+          "cells": [
+            {
+              "text": "Tumour map and stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular ultrasound",
+          "cells": [
+            {
+              "text": "Intraocular mass with characteristic calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of orbits and brain",
+          "cells": [
+            {
+              "text": "Optic nerve and extraocular spread; pineal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline RB1 testing with counselling",
+          "cells": [
+            {
+              "text": "Germline RB1 mutation; cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinoblastoma_hereditary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eye-conserving therapy",
+          "cells": [
+            {
+              "text": "Focal laser or thermotherapy, cryotherapy, plaque brachytherapy and chemoreduction for typically bilateral, multifocal tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "For eyes with advanced disease; avoid diagnostic biopsy because of tumour seeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "External beam radiotherapy",
+          "cells": [
+            {
+              "text": "Avoid where feasible; markedly increases radiation-induced second malignancy risk in germline carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation",
+          "cells": [
+            {
+              "text": "Confirm germline RB1 mutation; counselling and cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening of siblings and offspring",
+          "cells": [
+            {
+              "text": "Serial examinations under anaesthesia from infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Second non-ocular malignancies such as osteosarcoma, soft-tissue sarcoma and melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordination",
+          "cells": [
+            {
+              "text": "Care coordinated through an ocular oncology team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinoblastoma_hereditary-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary retinoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with leukocoria or strabismus; possible germline RB1 mutation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (buphthalmos, painful red eye, optic or pineal involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: advanced disease with optic nerve, extraocular or pineal spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia, ocular ultrasound, orbit and brain MRI, RB1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a germline RB1 mutation confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Keep under review; consider other causes of leukocoria and repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eye-conserving therapy: laser, cryotherapy, brachytherapy or chemoreduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enucleation for advanced disease; avoid diagnostic biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid external beam radiotherapy where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cascade RB1 screening of relatives; serial examinations from infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Eye-preserving therapy often possible; lifelong second-malignancy risk in carriers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

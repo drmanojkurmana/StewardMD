@@ -164,5 +164,400 @@
       "caption": "Overview comparison matrix for tularemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Tularemia",
+      "kind": "web",
+      "url": "https://www.cdc.gov/tularemia/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tularemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing tularaemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Ticks, deer flies, hunting or skinning rabbits, contaminated water, aerosols"
+            },
+            {
+              "text": "Suspect when fever follows exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical form",
+          "cells": [
+            {
+              "text": "Ulceroglandular, glandular, oropharyngeal, oculoglandular, pneumonic, typhoidal"
+            },
+            {
+              "text": "Set by route of entry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of ulcer or tissue",
+          "cells": [
+            {
+              "text": "Rapid and reliable"
+            },
+            {
+              "text": "Comparable to culture for ulcer swabs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "cells": [
+            {
+              "text": "Isolate from ulcer edge, node, respiratory sample, blood"
+            },
+            {
+              "text": "{{hy:Warn the laboratory: aerosol infection risk}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Specific antibodies"
+            },
+            {
+              "text": "Confirms when culture and PCR negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node abscess",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "In about one third of patients",
+              "op": "=",
+              "value": 33
+            },
+            {
+              "text": "May need drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonic form",
+          "cells": [
+            {
+              "text": "Often bacteraemic"
+            },
+            {
+              "text": "Severe, especially at age 65 or older"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Serology titre thresholds were not stated in the sources opened."
+    },
+    {
+      "id": "tularemia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tularaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodules or dense consolidation; often biopsied first"
+            },
+            {
+              "text": "Exposure history, F. tularensis PCR on tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or head and neck cancer",
+          "cells": [
+            {
+              "text": "Persistent lymphadenopathy"
+            },
+            {
+              "text": "Node PCR or culture, histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Chronic nodes or lung lesions"
+            },
+            {
+              "text": "Mycobacterial culture, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Community-acquired pneumonia",
+          "cells": [
+            {
+              "text": "No zoonotic exposure; responds to beta-lactam"
+            },
+            {
+              "text": "Failure of beta-lactam, exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common skin and soft tissue infection",
+          "cells": [
+            {
+              "text": "Small primary ulcer easily missed"
+            },
+            {
+              "text": "Ulcer edge PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral illness or undifferentiated sepsis",
+          "cells": [
+            {
+              "text": "Fever without localising signs (typhoidal)"
+            },
+            {
+              "text": "Blood culture, PCR, serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tularemia-treatment",
+      "kind": "treatment",
+      "title": "Treating tularaemia (adult doses, CDC)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gentamicin",
+          "cells": [
+            {
+              "text": "Severe disease, first choice"
+            },
+            {
+              "text": "6 mg/kg IV or IM every 24 h for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Streptomycin",
+          "cells": [
+            {
+              "text": "Severe or pneumonic disease"
+            },
+            {
+              "text": "First-line aminoglycoside per Harrison"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "cells": [
+            {
+              "text": "Mild to moderate disease"
+            },
+            {
+              "text": "400 mg IV every 8 h or 750 mg PO every 12 h for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Levofloxacin",
+          "cells": [
+            {
+              "text": "Mild to moderate disease"
+            },
+            {
+              "text": "750 mg IV or PO every 24 h for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Mild disease alternative"
+            },
+            {
+              "text": "200 mg load then 100 mg every 12 h for 14 to 21 days; higher relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Two-class combination",
+          "cells": [
+            {
+              "text": "Severe infection"
+            },
+            {
+              "text": "{{hy:Gentamicin plus ciprofloxacin or doxycycline}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Node drainage",
+          "cells": [
+            {
+              "text": "Fluctuant node not resolving on antibiotics"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Do not use doxycycline alone for severe infection or when treatment is delayed over 2 weeks (CDC)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tularemia-dx-mgmt",
+      "title": "Diagnosis and management of tularaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with ulcer, node, pneumonia after animal or tick exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Alert laboratory; PCR and culture of ulcer, node or sputum; serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe, pneumonic, typhoidal or unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Admit; gentamicin, consider adding ciprofloxacin",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Oral ciprofloxacin or levofloxacin 10 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Fluctuant lymph node persisting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Drain the node; complete antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Complete course; watch for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

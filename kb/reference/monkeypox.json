@@ -167,5 +167,446 @@
       "caption": "Overview comparison matrix for mpox (monkeypox) & poxvirus infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO Fact sheet, Mpox",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/mpox"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monkeypox-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of mpox",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually within a week; range 1 to 21 days",
+              "range": [
+                1,
+                21
+              ]
+            },
+            {
+              "text": "Contacts monitor for 21 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic course",
+          "cells": [
+            {
+              "text": "Fever and nodes, then rash: macule, papule, vesicle, umbilicated pustule, crust"
+            },
+            {
+              "text": "Each stage 2 to 3 days; face and palms and soles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clade IIb pattern",
+          "unit": "lesions",
+          "cells": [
+            {
+              "text": "Often fewer than 10 anogenital lesions, rash first",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Lesions at different stages at one site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphadenopathy",
+          "cells": [
+            {
+              "text": "Present in mpox, absent in smallpox"
+            },
+            {
+              "text": "{{hy:Key bedside separator}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion swab PCR",
+          "cells": [
+            {
+              "text": "Swab of skin, fluid or crust is the preferred test"
+            },
+            {
+              "text": "Throat or anal swab if no skin lesion; blood not recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "STI coinfection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10% have another STI",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "A positive STI test does not exclude mpox"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe-risk host",
+          "unit": "cells/mm3",
+          "cells": [
+            {
+              "text": "HIV with CD4 under 200, especially under 50",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Disseminated necrotic disease and most deaths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "2 to 4 weeks",
+              "range": [
+                2,
+                4
+              ]
+            },
+            {
+              "text": "Longer if immunocompromised"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Pearly painless umbilicated papules for months"
+            },
+            {
+              "text": "Biopsy shows Henderson-Patterson bodies; cannot be cultured"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monkeypox-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mpox",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Varicella",
+          "cells": [
+            {
+              "text": "Lesions at different stages, truncal, no prominent nodes"
+            },
+            {
+              "text": "VZV PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex",
+          "cells": [
+            {
+              "text": "Grouped painful vesicles, recurrent"
+            },
+            {
+              "text": "HSV PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis",
+          "cells": [
+            {
+              "text": "Painless chancre or secondary rash on palms and soles"
+            },
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonorrhoea or chlamydia proctitis",
+          "cells": [
+            {
+              "text": "Discharge without umbilicated lesions"
+            },
+            {
+              "text": "NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smallpox",
+          "cells": [
+            {
+              "text": "No lymphadenopathy; synchronous centrifugal rash"
+            },
+            {
+              "text": "Orthopoxvirus PCR via public health lab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous anthrax",
+          "cells": [
+            {
+              "text": "Painless black eschar with oedema"
+            },
+            {
+              "text": "Gram stain, culture, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Painless, no fever, lasts months"
+            },
+            {
+              "text": "Clinical or biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monkeypox-treatment",
+      "kind": "treatment",
+      "title": "Management of mpox",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "{{hy:Most immunocompetent patients}}"
+            },
+            {
+              "text": "Analgesia, skin and wound care, fluids, treat proctitis pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antivirals",
+          "cells": [
+            {
+              "text": "Severe disease or high-risk host"
+            },
+            {
+              "text": "Tecovirimat first choice per entry; cidofovir, brincidofovir or vaccinia immune globulin as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "From symptom onset until scabs fall off and skin heals"
+            },
+            {
+              "text": "Condoms for 12 weeks after recovery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-exposure vaccination",
+          "cells": [
+            {
+              "text": "Contacts"
+            },
+            {
+              "text": "Within 4 days; up to 14 days if no symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pre-exposure vaccination",
+          "cells": [
+            {
+              "text": "High-risk groups"
+            },
+            {
+              "text": "MVA vaccine per national programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and STI testing",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Optimise ART in advanced HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Admission",
+          "cells": [
+            {
+              "text": "Ocular, neurologic, cardiac or obstructive mucosal disease"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Antiviral efficacy conflict: WHO states there is no proven effective antiviral for mpox; the entry (Harrison 22e) lists tecovirimat as usual first choice for severe disease. Use within trials or national protocols."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monkeypox-dx-mgmt",
+      "title": "Diagnosis and management of mpox",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vesiculopustular or anogenital rash with exposure risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Isolate; swab lesion for mpox PCR; HIV and STI tests",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Mpox PCR positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat alternative: VZV, HSV, syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Notify public health; trace contacts and vaccinate within 4 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe disease or CD4 under 200?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Admit; antiviral per protocol; manage complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Home isolation and supportive care until skin heals",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for pubertal gynaecomastia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gynecomastia_pubertal-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast, testicular and pubertal staging examination",
+          "cells": [
+            {
+              "text": "Glandular tissue versus fat; pubertal stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-examination over several months",
+          "cells": [
+            {
+              "text": "Typical cases regress spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone, LH and FSH",
+          "cells": [
+            {
+              "text": "Hypogonadism if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestradiol, beta-hCG and DHEA sulphate",
+          "cells": [
+            {
+              "text": "Hormone-secreting tumour if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid, liver and renal function tests",
+          "cells": [
+            {
+              "text": "Systemic contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast and testicular ultrasound",
+          "cells": [
+            {
+              "text": "Discrete mass or testicular abnormality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynecomastia_pubertal-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fatty pseudogynaecomastia with obesity",
+          "cells": [
+            {
+              "text": "Adipose enlargement without glandular tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced gynaecomastia",
+          "cells": [
+            {
+              "text": "Anabolic steroids and cannabis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klinefelter syndrome",
+          "cells": [
+            {
+              "text": "Pathological hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynecomastia_pubertal-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Most cases regress as the hypothalamic-pituitary-gonadal axis matures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and substance history",
+          "cells": [
+            {
+              "text": "Stop contributory agents such as anabolic steroids and cannabis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish glandular from fatty tissue",
+          "cells": [
+            {
+              "text": "Weight reduction where obesity contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tamoxifen",
+          "cells": [
+            {
+              "text": "Reserved for persistent, large or distressing cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Subcutaneous mastectomy or liposuction for glandular tissue persisting beyond puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate pathological cause",
+          "cells": [
+            {
+              "text": "Hypogonadism, hormone-secreting tumour or systemic disease if features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "For the adolescent and family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gynecomastia_pubertal-dx-mgmt",
+      "title": "Diagnosis and management of Pubertal gynaecomastia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pubertal gynaecomastia: breast enlargement in an adolescent boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard eccentric mass, nipple discharge, testicular mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for hard eccentric mass or testicular mass suggesting malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pubertal staging, hormone profile, thyroid and liver tests, and ultrasound if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the enlargement glandular, pubertal and without a pathological hormone cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fatty pseudogynaecomastia, drug-induced change or hypogonadism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation, as most cases regress with puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop contributory drugs such as anabolic steroids and cannabis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tamoxifen for persistent, large or distressing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for glandular tissue persisting beyond puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; most cases resolve as puberty progresses, a minority persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

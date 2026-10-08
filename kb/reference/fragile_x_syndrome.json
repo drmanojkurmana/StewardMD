@@ -146,5 +146,276 @@
       "caption": "Overview comparison matrix for fragile x syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fragile_x_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted FMR1 molecular testing",
+          "cells": [
+            {
+              "text": "CGG repeat sizing and methylation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Used if the molecular test is negative and the cause is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, cognitive and autism assessments",
+          "cells": [
+            {
+              "text": "Formal assessment across domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac evaluation",
+          "cells": [
+            {
+              "text": "Mitral valve prolapse, when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cascade testing of at-risk relatives",
+          "cells": [
+            {
+              "text": "Identifies at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fragile_x_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early intensive therapy",
+          "cells": [
+            {
+              "text": "Behavioural, educational, speech-language and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication for comorbid symptoms",
+          "cells": [
+            {
+              "text": "Stimulants or alpha-2 agonists for hyperactivity and inattention; selective serotonin reuptake inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural interventions",
+          "cells": [
+            {
+              "text": "For autism-spectrum features, hand-flapping and tactile defensiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For the epilepsy affecting a proportion of patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and orthopaedic follow-up",
+          "cells": [
+            {
+              "text": "Mitral valve prolapse; joint hypermobility and pes planus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatrics, developmental specialists and psychology; planned transition to adult services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade testing, premutation-associated disorders and reproductive options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fragile_x_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fragile X syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fragile X syndrome: intellectual disability with autism-spectrum features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (premutation carrier risks, seizures, marked behavioural decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurological review for emerging seizures or marked behavioural deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted FMR1 testing with CGG repeat sizing and methylation status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do FMR1 repeat sizing and methylation confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chromosomal microarray; consider other X-linked or developmental causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early intensive behavioural, educational, speech and occupational therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stimulants or alpha-2 agonists for hyperactivity and inattention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for the epilepsy in a proportion of patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac follow-up; genetic counselling and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life expectancy generally normal; intellectual disability persists lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

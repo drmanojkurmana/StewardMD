@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for ligamentum flavum hypertrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "The Adult and Pediatric Spine (Rothman-Simeone) / Apley and Solomon's System of Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ligamentum_flavum_hypertrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the affected spinal region",
+          "cells": [
+            {
+              "text": "Ligamentum flavum thickness and canal and recess stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification or ossification; bony anatomy for surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing and flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Dynamic instability and spondylolisthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upright or axially loaded MRI",
+          "cells": [
+            {
+              "text": "Dynamic stenosis where supine imaging is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial pressure index or vascular studies",
+          "cells": [
+            {
+              "text": "Excludes peripheral arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiological studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy or radiculopathy, where needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ligamentum_flavum_hypertrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ossification of the ligamentum flavum",
+          "cells": [
+            {
+              "text": "Predominantly thoracic; can cause myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial cyst or facet joint hypertrophy",
+          "cells": [
+            {
+              "text": "Compresses the lateral recess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular claudication",
+          "cells": [
+            {
+              "text": "Exertional leg symptoms without a spinal cause; ABPI separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural lipomatosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ligamentum_flavum_hypertrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Flexion-biased physiotherapy, activity modification and postural advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "NSAIDs and neuropathic agents such as gabapentinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injections",
+          "cells": [
+            {
+              "text": "Epidural or transforaminal corticosteroids for persistent radicular or claudicant symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and conditioning",
+          "cells": [
+            {
+              "text": "Optimised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Laminectomy or laminotomy for refractory or progressive neurogenic claudication, and for thoracic ligamentum ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Progressive neurological deficit; urgent escalation for cauda equina or evolving myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surgery",
+          "cells": [
+            {
+              "text": "Operative selection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ligamentum_flavum_hypertrophy-dx-mgmt",
+      "title": "Diagnosis and management of Ligamentum flavum hypertrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neurogenic claudication, with symptoms relieved by sitting or leaning forward",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (myelopathy, cauda equina, progressive weakness, systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal surgical review for cauda equina or myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI spine, CT if ossification, standing and flexion-extension films, ABPI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is canal stenosis from thickened ligamentum flavum confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vascular claudication, disc herniation or synovial cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Flexion-biased physiotherapy and activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and gabapentinoids for symptom control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Epidural or transforaminal steroids for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical decompression for refractory or progressive neurogenic claudication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for progressive deficit; urgent escalation if evolving",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progresses slowly; decompression reliably relieves claudication in selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

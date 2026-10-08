@@ -173,5 +173,471 @@
       "caption": "Overview comparison matrix for infections due to mixed anaerobic organisms."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 164-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Mixed Anaerobic Infections",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/anaerobic-bacteria/mixed-anaerobic-infections"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infections_due_to_mixed_anaerobic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising mixed anaerobic infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Gingival crevice flora",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "10^11 to 10^12 bacteria, anaerobe to aerobe ratio 10^3:1",
+              "op": "=",
+              "value": 1000
+            },
+            {
+              "text": "Fusobacterium, Prevotella, Peptostreptococcus drive oral and lung infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Terminal ileum and colon flora",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "10^11 to 10^12 bacteria, ratio 10^3:1",
+              "op": "=",
+              "value": 1000
+            },
+            {
+              "text": "B. fragilis group dominates abdominal infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Female genital tract flora",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "10^7 to 10^9 bacteria, ratio 10:1",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Peptostreptococcus, Bacteroides, Prevotella bivia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sterile pus on Gram stain",
+          "cells": [
+            {
+              "text": "Many mixed organisms with no aerobic growth"
+            },
+            {
+              "text": "{{hy:Strongly suggests anaerobes}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Putrid odour",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in only 30 to 50%",
+              "range": [
+                30,
+                50
+              ]
+            },
+            {
+              "text": "Absence does not exclude anaerobes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other clues",
+          "cells": [
+            {
+              "text": "Gas in tissue, necrosis, abscess near mucosa, septic thrombophlebitis, failure of non-anaerobic antibiotics"
+            },
+            {
+              "text": "Gas also comes from aerobes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Specimen",
+          "cells": [
+            {
+              "text": "Aspirate or biopsy from a sterile site, anaerobic transport"
+            },
+            {
+              "text": "Never swabs of mouth, vagina, faeces or sputum"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Empyema fluid",
+          "unit": "pH",
+          "cells": [
+            {
+              "text": "pH below 7.2, LDH above 1000 IU/L, mean WBC about 55,000",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Simple parapneumonic effusion pH about 7.4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B. fragilis-group bacteraemia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Untreated mortality about 60%",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Look for colonic cancer or diverticulitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_mixed_anaerobic-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic anaerobic infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chemical (Mendelson) pneumonitis",
+          "cells": [
+            {
+              "text": "Onset within 4 to 6 h of acid aspiration; whiteout in 8 to 24 h"
+            },
+            {
+              "text": "Time course after aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcus aureus abscess or lung abscess",
+          "cells": [
+            {
+              "text": "Single aerobic organism"
+            },
+            {
+              "text": "Culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Group A streptococcal necrotising fasciitis",
+          "cells": [
+            {
+              "text": "Faster spread over 1 to 3 days, monomicrobial"
+            },
+            {
+              "text": "Tissue culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple parapneumonic effusion",
+          "cells": [
+            {
+              "text": "pH about 7.4, mean WBC about 5000"
+            },
+            {
+              "text": "Pleural fluid analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign-body aspiration",
+          "cells": [
+            {
+              "text": "Obstruction and atelectasis"
+            },
+            {
+              "text": "Bronchoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy or granuloma (versus actinomycosis)",
+          "cells": [
+            {
+              "text": "Chronic woody jaw mass"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_mixed_anaerobic-treatment",
+      "kind": "treatment",
+      "title": "Treating mixed anaerobic infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical drainage and debridement",
+          "cells": [
+            {
+              "text": "{{hy:All abscesses and necrotic tissue}}"
+            },
+            {
+              "text": "Close perforations; vein ligation may be needed for septic thrombophlebitis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Clindamycin or amoxicillin-clavulanate",
+          "cells": [
+            {
+              "text": "Above the diaphragm: oral, neck, lung abscess"
+            },
+            {
+              "text": "Penicillin alone may fail"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "Below diaphragm, with a gram-negative agent"
+            },
+            {
+              "text": "Active against clindamycin-resistant B. fragilis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Carbapenem or beta-lactam/beta-lactamase inhibitor",
+          "cells": [
+            {
+              "text": "Intra-abdominal or pelvic infection"
+            },
+            {
+              "text": "Single agent covers anaerobes and Enterobacterales; no aminoglycoside needed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Agents to avoid alone",
+          "cells": [
+            {
+              "text": "Any anaerobic infection"
+            },
+            {
+              "text": "Aminoglycosides, monobactams and co-trimoxazole lack anaerobic activity; clindamycin, cefoxitin unreliable for B. fragilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reference-lab susceptibility",
+          "cells": [
+            {
+              "text": "Brain abscess, endocarditis, bone, joint or prosthetic infection"
+            },
+            {
+              "text": "Guides prolonged therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No antibiotic doses were stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infections_due_to_mixed_anaerobic-dx-mgmt",
+      "title": "Diagnosis and management of mixed anaerobic infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abscess, necrotising or foul infection near a mucosal surface",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Aspirate or biopsy sterile site; anaerobic transport and Gram stain",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Airway threat, necrotising fasciitis or Lemierre features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Emergency surgery or airway control",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Drain pus and debride dead tissue",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Source above the diaphragm?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clindamycin or amoxicillin-clavulanate",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metronidazole plus gram-negative agent, or carbapenem",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improving within expected time?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Complete course; treat underlying cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Re-image for undrained pus; send isolates for susceptibility",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

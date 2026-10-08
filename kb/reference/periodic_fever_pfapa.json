@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for pfapa syndrome (periodic fever, aphthous stomatitis, pharyngitis, adenitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "periodic_fever_pfapa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom and temperature diary",
+          "cells": [
+            {
+              "text": "Fever pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count during and between episodes",
+          "cells": [
+            {
+              "text": "Excludes cyclic neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers during an attack",
+          "cells": [
+            {
+              "text": "Inflammation during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat swab or streptococcal testing",
+          "cells": [
+            {
+              "text": "Excludes recurrent bacterial pharyngitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for monogenic periodic fever syndromes",
+          "cells": [
+            {
+              "text": "Used when features are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Used where an alternative autoinflammatory diagnosis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periodic_fever_pfapa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cyclic neutropenia",
+          "cells": [
+            {
+              "text": "Neutropenia coinciding with fevers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic autoinflammatory syndromes",
+          "cells": [
+            {
+              "text": "Serositis, rash or a strong family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periodic_fever_pfapa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroid at onset of attack",
+          "cells": [
+            {
+              "text": "Aborts individual febrile attacks; dramatically effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics or analgesia, hydration and reassurance during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine prophylaxis",
+          "cells": [
+            {
+              "text": "Children with frequent attacks or shortened intervals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tonsillectomy",
+          "cells": [
+            {
+              "text": "Potentially curative in selected children with frequent or troublesome episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm diagnosis",
+          "cells": [
+            {
+              "text": "Exclude cyclic neutropenia, recurrent streptococcal infection and monogenic syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family counselling",
+          "cells": [
+            {
+              "text": "Child thrives between episodes; benign and self-limiting, typically resolving over several years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "periodic_fever_pfapa-dx-mgmt",
+      "title": "Diagnosis and management of PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent fever episodes with aphthous stomatitis, pharyngitis or adenitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (poor growth, persistent inflammation, evolving fever, neutropenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review for suspected monogenic autoinflammatory disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fever diary; full blood count between episodes; inflammatory markers during an attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are cyclic neutropenia and recurrent streptococcal infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider monogenic autoinflammatory syndromes or recurrent streptococcal pharyngitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Abort individual attacks with a corticosteroid given at the onset of an episode",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Provide antipyretics or analgesia, hydration and reassurance during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider colchicine prophylaxis for frequent attacks or short intervals",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Discuss tonsillectomy in selected children with frequent or troublesome episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; no lasting effect on growth or development",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

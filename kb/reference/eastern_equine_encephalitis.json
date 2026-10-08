@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for eastern equine encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eastern_equine_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF IgM serology for eastern equine encephalitis virus",
+          "cells": [
+            {
+              "text": "Viral antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Pleocytosis and raised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Basal ganglia and thalamic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF RT-PCR",
+          "cells": [
+            {
+              "text": "Limited sensitivity late in disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizure activity and encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eastern_equine_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex virus encephalitis",
+          "cells": [
+            {
+              "text": "Treatable cause that must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "West Nile virus neuroinvasive disease",
+          "cells": [
+            {
+              "text": "Other arboviral encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningoencephalitis",
+          "cells": [
+            {
+              "text": "Bacterial infection in CSF"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eastern_equine_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive neurocritical care",
+          "cells": [
+            {
+              "text": "Airway protection and mechanical ventilation; no specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Benzodiazepines, then loading with an antiseizure agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Head elevation and osmotic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical aciclovir",
+          "cells": [
+            {
+              "text": "Until herpes simplex encephalitis is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluids and infection care",
+          "cells": [
+            {
+              "text": "Electrolytes, aspiration prevention and secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "For survivors with disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Mosquito-bite avoidance; vector control; public health notification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eastern_equine_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Eastern equine encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected eastern equine encephalitis: fever with rapidly declining consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (coma, status epilepticus, raised pressure, basal ganglia lesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intensive care with airway protection and empirical aciclovir",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgM serology in serum and CSF; CSF analysis; MRI for basal ganglia; EEG; PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is arboviral IgM positive with deep grey-matter involvement on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpes simplex encephalitis, West Nile virus or bacterial meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care with airway protection and ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepines then antiseizure loading for status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Head elevation and osmotic therapy for raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Empirical aciclovir until herpes simplex encephalitis is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurorehabilitation for survivors and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Very high case-fatality among arboviral encephalitides; survivors often disabled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

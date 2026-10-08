@@ -193,5 +193,519 @@
       "caption": "Overview comparison matrix for muscular dystrophies and other muscle diseases."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Duchenne and Becker Muscular Dystrophy",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/inherited-muscular-disorders/duchenne-muscular-dystrophy-and-becker-muscular-dystrophy"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 387-11",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 61-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "muscular_dystrophies_and_other_muscle-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic clues in muscle disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Myopathic pattern",
+          "cells": [
+            {
+              "text": "Symmetric proximal weakness, normal reflexes and sensation"
+            },
+            {
+              "text": "Sensory loss points to nerve or cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Up to 100 times normal in Duchenne",
+              "op": "<=",
+              "value": 100
+            },
+            {
+              "text": "Over 100 times normal with myoglobinuria = rhabdomyolysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Raised AST, ALT, LDH, aldolase",
+          "cells": [
+            {
+              "text": "May come from muscle"
+            },
+            {
+              "text": "{{hy:Normal GGT confirms a muscle source}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duchenne vs Becker",
+          "cells": [
+            {
+              "text": "Duchenne onset 2 to 3 years, wheelchair by 12; Becker walks past 15"
+            },
+            {
+              "text": "Dystrophin absent (DMD) or low (BMD)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystrophin testing",
+          "cells": [
+            {
+              "text": "MLPA first, then full gene sequencing"
+            },
+            {
+              "text": "Biopsy only if genetics unconfirmed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myotonic dystrophy type 1",
+          "unit": "repeats",
+          "cells": [
+            {
+              "text": "CTG repeat 200 to 1000 (normal 5 to 30)",
+              "range": [
+                200,
+                1000
+              ]
+            },
+            {
+              "text": "Grip myotonia, cataract, conduction block; autosomal dominant"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Ptosis or ophthalmoplegia",
+          "cells": [
+            {
+              "text": "Mitochondrial (KSS, PEO), oculopharyngeal, myotonic (ptosis only), congenital myopathy"
+            },
+            {
+              "text": "Also myasthenia, LEMS, botulism, GBS or Miller Fisher, Graves"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pattern clues",
+          "cells": [
+            {
+              "text": "Facial weakness with scapular winging = FSHD; forearm flexor and quadriceps = inclusion body myositis"
+            },
+            {
+              "text": "Muscle MRI shows pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac baseline in DMD",
+          "cells": [
+            {
+              "text": "ECG and echo at diagnosis or by age 6"
+            },
+            {
+              "text": "Cardiac involvement in about a third by 14 and all over 18"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "muscular_dystrophies_and_other_muscle-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic hereditary myopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Statin, fibrate or niacin myopathy",
+          "cells": [
+            {
+              "text": "CK rise, myalgia to rhabdomyolysis on lipid drugs"
+            },
+            {
+              "text": "Drug history; stop drug"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Steroid or critical illness myopathy",
+          "cells": [
+            {
+              "text": "High-dose steroids or nondepolarising blockers: acute quadriplegic myopathy"
+            },
+            {
+              "text": "Drug history, EMG"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other toxic myopathy",
+          "cells": [
+            {
+              "text": "Zidovudine, drugs of abuse, penicillamine, amiodarone, chloroquine, colchicine"
+            },
+            {
+              "text": "Biopsy: ragged red fibres or autophagic vacuoles"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Immune-mediated necrotising myopathy",
+          "cells": [
+            {
+              "text": "Looks like LGMD without a mutation"
+            },
+            {
+              "text": "Anti-HMGCR and anti-SRP antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis or LEMS",
+          "cells": [
+            {
+              "text": "Fatigable weakness, ptosis"
+            },
+            {
+              "text": "Antibodies and repetitive stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neuron disease or SMA",
+          "cells": [
+            {
+              "text": "Fasciculations, upper motor neuron signs"
+            },
+            {
+              "text": "EMG and nerve studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia or polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Pain without true weakness; normal CK and EMG"
+            },
+            {
+              "text": "ESR for PMR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism or hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Endocrine myopathy"
+            },
+            {
+              "text": "TFTs, PTH, calcium, vitamin D"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muscular_dystrophies_and_other_muscle-treatment",
+      "kind": "treatment",
+      "title": "Management of muscular dystrophies",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Daily prednisone or deflazacort",
+          "cells": [
+            {
+              "text": "{{hy:Duchenne over age 4 with plateau or decline}}"
+            },
+            {
+              "text": "Delays wheelchair 1.4 to 2.5 years; alternate-day dosing not effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exon-skipping drugs",
+          "cells": [
+            {
+              "text": "Eligible DMD genotypes (exon 51, 53, 45)"
+            },
+            {
+              "text": "Clinical benefit unproven"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gene transfer",
+          "cells": [
+            {
+              "text": "Selected young DMD patients"
+            },
+            {
+              "text": "No overall functional gain; liver and immune toxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACE inhibitor or beta-blocker",
+          "cells": [
+            {
+              "text": "DMD or BMD cardiomyopathy"
+            },
+            {
+              "text": "Start before symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pacemaker or ICD",
+          "cells": [
+            {
+              "text": "Conduction disease in Emery-Dreifuss or myotonic dystrophy"
+            },
+            {
+              "text": "Sudden death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noninvasive ventilation",
+          "cells": [
+            {
+              "text": "Nocturnal hypoventilation"
+            },
+            {
+              "text": "Tracheostomy extends survival into 30s"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enzyme replacement",
+          "cells": [
+            {
+              "text": "Pompe disease"
+            },
+            {
+              "text": "Alglucosidase alfa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and genetic counselling",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Stretching, orthoses, scoliosis care; cardiac check of female carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic precautions",
+          "cells": [
+            {
+              "text": "All dystrophies"
+            },
+            {
+              "text": "Risk of malignant hyperthermia-type reactions and rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no steroid doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "muscular_dystrophies_and_other_muscle-dx-mgmt",
+      "title": "Diagnosis and management of muscular dystrophies and other muscle diseases",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal weakness or raised CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sensory loss or abnormal reflexes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for neuropathy, cord or motor neuron disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Drug or toxin exposure?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Stop drug; recheck CK and strength",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "CK, GGT, TFTs, EMG, muscle MRI, myositis antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Inflammatory or necrotising antibodies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Treat as immune myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic testing by pattern; biopsy if unconfirmed",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "ECG, echo, spirometry at diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Disease-specific therapy, cardiac and respiratory care, rehab",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

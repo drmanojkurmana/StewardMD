@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for mycoplasma genitalium infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycoplasma_genitalium_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nucleic acid amplification testing of first-void urine or genital swabs",
+          "cells": [
+            {
+              "text": "Culture is very difficult; NAAT is the diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflex testing for 23S rRNA macrolide-resistance mutations",
+          "cells": [
+            {
+              "text": "Guides choice of antibiotic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concurrent NAAT for chlamydia and gonorrhoea",
+          "cells": [
+            {
+              "text": "Co-infection screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy of urethral or genital smears",
+          "cells": [
+            {
+              "text": "Documents urethritis or cervicitis, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test of cure by NAAT several weeks after treatment",
+          "cells": [
+            {
+              "text": "Confirms cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for HIV and syphilis",
+          "cells": [
+            {
+              "text": "Coexisting sexually transmitted infections"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycoplasma_genitalium_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chlamydia trachomatis urethritis or cervicitis",
+          "cells": [
+            {
+              "text": "Persistent urethritis after chlamydia treatment points toward M. genitalium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neisseria gonorrhoeae infection",
+          "cells": [
+            {
+              "text": "Excluded by concurrent NAAT for gonorrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycoplasma_genitalium_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resistance-guided therapy",
+          "cells": [
+            {
+              "text": "Test positive specimens for 23S rRNA macrolide-resistance mutations before choosing treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide-susceptible infection",
+          "cells": [
+            {
+              "text": "Doxycycline to lower organism load, then an extended azithromycin regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide-resistant infection",
+          "cells": [
+            {
+              "text": "Doxycycline, then moxifloxacin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid beta-lactams",
+          "cells": [
+            {
+              "text": "The cell-wall-deficient organism is intrinsically resistant to them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner notification",
+          "cells": [
+            {
+              "text": "Partners treated; abstain from sex until treatment is completed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test of cure and screening",
+          "cells": [
+            {
+              "text": "NAAT several weeks after treatment; screen for HIV and syphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications and referral",
+          "cells": [
+            {
+              "text": "Manage pelvic inflammatory disease; refer to genitourinary medicine for persistent or recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycoplasma_genitalium_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycoplasma genitalium infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-gonococcal urethritis or cervicitis, possibly persisting after chlamydia treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pelvic pain, adnexal tenderness, fever, epididymo-orchitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for pelvic inflammatory disease or epididymo-orchitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NAAT, reflex macrolide-resistance testing, chlamydia and gonorrhoea NAAT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "M. genitalium detected on NAAT, with macrolide-resistance status known?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test for other causes: chlamydia, gonorrhoea, trichomonas, herpes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Test positives for 23S rRNA macrolide-resistance mutations before choosing therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Macrolide-susceptible: doxycycline, then extended azithromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Macrolide-resistant: doxycycline, then moxifloxacin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid beta-lactams; partner notification and treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Test of cure by NAAT several weeks after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Susceptible infection responds; macrolide and quinolone resistance makes cure harder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

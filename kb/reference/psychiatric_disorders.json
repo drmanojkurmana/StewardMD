@@ -183,5 +183,534 @@
       "caption": "Overview comparison matrix for psychiatric disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Depressive Disorders",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/psychiatric-disorders/mood-disorders/depressive-disorders"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Bulimia Nervosa",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/psychiatric-disorders/eating-disorders/bulimia-nervosa"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 79-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 79-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "psychiatric_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key diagnostic thresholds in common psychiatric disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Criterion",
+        "Comment"
+      ],
+      "rows": [
+        {
+          "parameter": "Major depressive disorder",
+          "unit": "symptoms",
+          "cells": [
+            {
+              "text": "5 or more symptoms nearly every day for 2 weeks, including low mood or anhedonia",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Past mania or hypomania excludes it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Persistent depressive disorder",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Chronic symptoms for 2 years or more",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Dysthymia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar I versus II",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Mania 1 week or more; hypomania 4 days or more with depression",
+              "op": ">=",
+              "value": 7
+            },
+            {
+              "text": "Cyclothymia: 2 years of subthreshold swings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid cycling",
+          "unit": "episodes/year",
+          "cells": [
+            {
+              "text": "4 or more mood episodes per year",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Check thyroid function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panic attack",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Peaks within about 10 minutes",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Up to about 75% later develop major depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorexia nervosa",
+          "cells": [
+            {
+              "text": "Low body weight, intense fear of weight gain, body image distortion"
+            },
+            {
+              "text": "Older Table 79-2 also lists amenorrhea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bulimia nervosa",
+          "unit": "per week",
+          "cells": [
+            {
+              "text": "Binges and compensatory behavior at least once a week for 3 months",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "Older Table 79-3 required twice weekly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lithium level",
+          "unit": "meq/L",
+          "cells": [
+            {
+              "text": "0.8 to 1.2 meq/L in acute treatment",
+              "range": [
+                0.8,
+                1.2
+              ]
+            },
+            {
+              "text": "Narrow therapeutic window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicidal ideation or plan",
+          "cells": [
+            {
+              "text": "Ask directly at every visit"
+            },
+            {
+              "text": "{{hy:Immediate specialist referral}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Tables PDF eating-disorder criteria (79-2, 79-3) are pre-DSM-5. DSM-5-TR drops amenorrhea from anorexia and lowers bulimia frequency from twice weekly to once weekly over 3 months; the current criteria are given first."
+    },
+    {
+      "id": "psychiatric_disorders-ddx",
+      "kind": "ddx",
+      "title": "Medical and psychiatric mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothyroidism or hyperthyroidism",
+          "cells": [
+            {
+              "text": "Mood change with somatic features"
+            },
+            {
+              "text": "TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pheochromocytoma, hypoglycemia",
+          "cells": [
+            {
+              "text": "Paroxysmal anxiety with physical signs"
+            },
+            {
+              "text": "Glucose, metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia",
+          "cells": [
+            {
+              "text": "Palpitations labelled panic"
+            },
+            {
+              "text": "ECG, ambulatory monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frontal lobe tumor or dementia",
+          "cells": [
+            {
+              "text": "Personality change, cognitive decline"
+            },
+            {
+              "text": "Neuroimaging, cognitive testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance or drug-induced disorder",
+          "cells": [
+            {
+              "text": "Onset with drug use or withdrawal"
+            },
+            {
+              "text": "Drug history, toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar depression",
+          "cells": [
+            {
+              "text": "Past hypomania or mania"
+            },
+            {
+              "text": "Careful history before antidepressant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal grief",
+          "cells": [
+            {
+              "text": "Waves of sadness with preserved self-esteem"
+            },
+            {
+              "text": "Clinical assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of weight loss in the young",
+          "cells": [
+            {
+              "text": "IBD, malignancy, endocrine disease without body image distortion"
+            },
+            {
+              "text": "Blood tests, endoscopy as indicated"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "psychiatric_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treating common psychiatric disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "SSRI or SNRI",
+          "cells": [
+            {
+              "text": "Depression and anxiety disorders"
+            },
+            {
+              "text": "Improvement may take 1 to 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cognitive behavioral or other psychotherapy",
+          "cells": [
+            {
+              "text": "Depression, anxiety, eating disorders"
+            },
+            {
+              "text": "CBT is first choice for bulimia: 16 to 20 sessions"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lithium or anticonvulsant mood stabilizer",
+          "cells": [
+            {
+              "text": "Bipolar disorder"
+            },
+            {
+              "text": "Monitor levels, thyroid and kidney"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipsychotic",
+          "cells": [
+            {
+              "text": "Schizophrenia, mania, psychotic depression"
+            },
+            {
+              "text": "Monitor metabolic effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECT",
+          "cells": [
+            {
+              "text": "Severe suicidal, psychotic or catatonic depression; pregnancy; not eating"
+            },
+            {
+              "text": "When drugs fail or urgency is high"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short-term benzodiazepine",
+          "cells": [
+            {
+              "text": "Acute anxiety"
+            },
+            {
+              "text": "Limit to 4 to 6 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Anorexia nervosa"
+            },
+            {
+              "text": "Gain about 0.5 to 1 lb per week to avoid refeeding syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hospitalization",
+          "cells": [
+            {
+              "text": "Significant suicidal ideation, especially without support"
+            },
+            {
+              "text": "Crisis care"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "psychiatric_disorders-dx-mgmt",
+      "title": "Diagnosis and management of psychiatric presentation in primary care",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mood, anxiety, psychotic or eating symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Suicidal or homicidal ideation with plan?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychiatric referral or admission",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Screen with PHQ or PC-PTSD; history, exam, TSH, drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Medical or substance cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat the medical cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Psychosis or past mania?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Antipsychotic or mood stabilizer; specialist care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "SSRI or SNRI plus psychotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Response after adequate trial?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue; maintenance if recurrent",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Switch or augment; refer; consider ECT if severe",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

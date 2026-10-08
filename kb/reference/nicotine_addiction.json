@@ -157,5 +157,465 @@
       "caption": "Overview comparison matrix for nicotine addiction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Smoking Cessation",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/special-subjects/tobacco-use/smoking-cessation"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nicotine_addiction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing nicotine addiction",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Loss of control",
+          "cells": [
+            {
+              "text": "Daily use, many episodes, craving, failed quit attempts"
+            },
+            {
+              "text": "{{hy:Clinical diagnosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Use within 30 minutes of waking",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "First use within 30 min",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "Marker of heavy dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total daily dosing",
+          "cells": [
+            {
+              "text": "Count all products: cigarettes, vapes, pouches, cigars"
+            },
+            {
+              "text": "Dosing frequency sustains addiction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Readiness",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Willing to quit within the next 30 days",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "Set quit date within 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Withdrawal course",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Worst in first 3 days; most settle in 2 to 4 weeks",
+              "range": [
+                2,
+                4
+              ]
+            },
+            {
+              "text": "Harrison gives 4 to 6 weeks; craving can last months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Weight gain after quitting",
+          "unit": "kg",
+          "cells": [
+            {
+              "text": "Average 4 to 5 kg",
+              "range": [
+                4,
+                5
+              ]
+            },
+            {
+              "text": "Counsel in advance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Unassisted success",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5% long term",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "Medication and counselling raise this"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lung cancer relative risk",
+          "cells": [
+            {
+              "text": "About 13 to 28 in current smokers",
+              "range": [
+                13,
+                28
+              ]
+            },
+            {
+              "text": "Rises with cigarettes per day and duration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Withdrawal duration: Merck says most symptoms settle in 2 to 4 weeks; Harrison 22e says symptoms can persist 4 to 6 weeks."
+    },
+    {
+      "id": "nicotine_addiction-ddx",
+      "kind": "ddx",
+      "title": "Conditions that overlap with nicotine withdrawal or dependence",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary anxiety disorder",
+          "cells": [
+            {
+              "text": "Symptoms independent of smoking pattern"
+            },
+            {
+              "text": "History over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression",
+          "cells": [
+            {
+              "text": "Persistent low mood beyond withdrawal period"
+            },
+            {
+              "text": "PHQ-9 or clinical assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other substance use disorder",
+          "cells": [
+            {
+              "text": "Alcohol or stimulant use"
+            },
+            {
+              "text": "Substance history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caffeine dependence",
+          "cells": [
+            {
+              "text": "Headache and irritability on stopping caffeine"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cannabis vaping",
+          "cells": [
+            {
+              "text": "Refillable pods with cannabis oils"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nicotine_addiction-treatment",
+      "kind": "treatment",
+      "title": "Treatment of nicotine addiction",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "5 As brief intervention",
+          "cells": [
+            {
+              "text": "{{hy:Every tobacco user at every visit}}"
+            },
+            {
+              "text": "Ask, Advise, Assess, Assist, Arrange follow-up within the first week"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Varenicline",
+          "cells": [
+            {
+              "text": "First-line medication"
+            },
+            {
+              "text": "12 to 24 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combination NRT",
+          "cells": [
+            {
+              "text": "Heavier dependence"
+            },
+            {
+              "text": "Patch plus gum, lozenge or spray; about 1 mg nicotine per cigarette per day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nicotine patch alone",
+          "cells": [
+            {
+              "text": "Lighter dependence"
+            },
+            {
+              "text": "10 weeks; keep wearing after a lapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bupropion SR",
+          "cells": [
+            {
+              "text": "Alternative or add-on"
+            },
+            {
+              "text": "7 to 12 weeks, up to 6 months; avoid with seizures, eating disorder, recent MAOI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Quitline and counselling",
+          "cells": [
+            {
+              "text": "All quitters"
+            },
+            {
+              "text": "Quitlines as effective as in-person counselling"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "E-cigarettes",
+          "cells": [
+            {
+              "text": "Not a recommended cessation aid"
+            },
+            {
+              "text": "If used, switch completely; dual use negates benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Pregnant smokers"
+            },
+            {
+              "text": "Behavioural support first; NRT if needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives durations but refers to drug references for doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nicotine_addiction-dx-mgmt",
+      "title": "Diagnosis and management of nicotine addiction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient uses tobacco or nicotine products",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Ask and advise; record all products and frequency",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Willing to quit within 30 days?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Personalised benefit message; revisit at each visit",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Set quit date within 2 weeks; quitline referral",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "First use within 30 min of waking or heavy use?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Varenicline or combination NRT",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NRT patch or bupropion",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Abstinent at follow-up?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Continue medication full course; relapse plan",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Combine agents and intensify counselling; retry",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

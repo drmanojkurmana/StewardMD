@@ -145,5 +145,314 @@
       "caption": "Overview comparison matrix for mycobacterium malmoense infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_malmoense_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterial culture with prolonged incubation",
+          "cells": [
+            {
+              "text": "Slow growth; can take several weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification to species level",
+          "cells": [
+            {
+              "text": "Species identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Cavitary or fibronodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated respiratory cultures",
+          "cells": [
+            {
+              "text": "To satisfy diagnostic criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy and culture",
+          "cells": [
+            {
+              "text": "Suspected childhood lymphadenitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of underlying lung disease and immune status",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_malmoense_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mycobacterium avium complex or M. kansasii lung disease",
+          "cells": [
+            {
+              "text": "Pulmonary disease resembles these; striking clustering in northern Europe favours this organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nontuberculous or tuberculous lymphadenitis in children",
+          "cells": [
+            {
+              "text": "Excision and culture settle the diagnosis in childhood cervical disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_malmoense_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rifampicin and ethambutol combination",
+          "cells": [
+            {
+              "text": "Prolonged; commonly with a macrolide such as clarithromycin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged culture incubation",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; the slow grower may otherwise be reported as negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying lung disease and smoking",
+          "cells": [
+            {
+              "text": "Manage conditions such as COPD; support smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response and toxicity monitoring",
+          "cells": [
+            {
+              "text": "Repeated respiratory cultures and ethambutol-related visual changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Childhood cervical lymphadenitis",
+          "cells": [
+            {
+              "text": "Complete surgical excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases or respiratory medicine; relapse can occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_malmoense_infection-dx-mgmt",
+      "title": "Diagnosis and management of Mycobacterium malmoense infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cavitary or fibronodular lung disease in an adult with COPD or smoking history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive cavitation, constitutional symptoms, haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review; ensure cultures are held long enough",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Culture with prolonged incubation, molecular speciation, chest CT, repeated cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Species confirmed by molecular identification on repeated cultures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Culture longer and repeat sampling; consider other NTM or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged rifampicin and ethambutol combination, often with clarithromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage underlying lung disease and support smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repeated respiratory cultures and ethambutol visual monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Complete surgical excision for childhood cervical lymphadenitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reasonable response in lung disease; relapse can occur; childhood nodes cured by excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

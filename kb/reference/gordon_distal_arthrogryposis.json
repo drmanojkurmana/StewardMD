@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for gordon syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gordon_distal_arthrogryposis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysmorphology and palatal examination",
+          "cells": [
+            {
+              "text": "Overt or submucous cleft palate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIEZO2 and distal arthrogryposis panel testing",
+          "cells": [
+            {
+              "text": "Molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding evaluation and cleft-team referral",
+          "cells": [
+            {
+              "text": "Feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand, foot and spine radiographs and growth assessment",
+          "cells": [
+            {
+              "text": "Skeletal and stature assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal ultrasound in at-risk pregnancies",
+          "cells": [
+            {
+              "text": "Foetal akinesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Ptosis and eye movement abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gordon_distal_arthrogryposis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal arthrogryposis type 5",
+          "cells": [
+            {
+              "text": "Also PIEZO2-related, with ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Van der Woude syndrome",
+          "cells": [
+            {
+              "text": "Cleft palate predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sheldon-Hall syndrome",
+          "cells": [
+            {
+              "text": "Distal arthrogryposis overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gordon_distal_arthrogryposis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cleft palate repair",
+          "cells": [
+            {
+              "text": "Coordinated cleft team with early specialised feeding support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Camptodactyly and talipes",
+          "cells": [
+            {
+              "text": "Serial casting, splinting, physiotherapy and corrective orthopaedic surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Joint mobility and hand function for congenital contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "After palatal repair; monitor velopharyngeal insufficiency and hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and growth",
+          "cells": [
+            {
+              "text": "Ptosis review and growth monitoring for frequent short stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Genetics, orthopaedics and cleft team; genetic counselling for autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gordon_distal_arthrogryposis-dx-mgmt",
+      "title": "Diagnosis and management of Gordon syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gordon syndrome: cleft palate with distal limb contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal feeding failure, airway concern, progressive scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and airway review for neonatal aspiration or airway compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Palatal examination, PIEZO2 testing, skeletal radiographs and ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PIEZO2 testing confirm the diagnosis, with other arthrogryposis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider distal arthrogryposis type 5, Van der Woude or popliteal pterygium syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cleft palate repair through a coordinated cleft team",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial casting, splinting and orthopaedic surgery for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for joint mobility and hand function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech therapy after palatal repair with hearing surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good with cleft repair and orthopaedic care; intellect and lifespan usually normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

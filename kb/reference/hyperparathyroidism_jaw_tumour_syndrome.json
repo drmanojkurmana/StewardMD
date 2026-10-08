@@ -158,5 +158,334 @@
       "caption": "Overview comparison matrix for hyperparathyroidism-jaw tumour syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperparathyroidism_jaw_tumour_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corrected calcium, parathyroid hormone and phosphate",
+          "cells": [
+            {
+              "text": "Markedly elevated calcium and PTH suggests carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound with sestamibi or four-dimensional CT",
+          "cells": [
+            {
+              "text": "Localises the parathyroid tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panoramic jaw radiograph or maxillofacial CT",
+          "cells": [
+            {
+              "text": "Ossifying fibromas of mandible and maxilla"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound or CT",
+          "cells": [
+            {
+              "text": "Cysts, hamartoma or Wilms tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound in women",
+          "cells": [
+            {
+              "text": "Uterine tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline CDC73 mutation analysis",
+          "cells": [
+            {
+              "text": "Confirms the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parafibromin immunohistochemistry on resected tissue",
+          "cells": [
+            {
+              "text": "Parafibromin status of resected tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperparathyroidism_jaw_tumour_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brown tumours of hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Jaw lesion is an ossifying fibroma, which persists after cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apparently sporadic parathyroid carcinoma",
+          "cells": [
+            {
+              "text": "CDC73 germline testing is still indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperparathyroidism_jaw_tumour_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parathyroidectomy",
+          "cells": [
+            {
+              "text": "En bloc resection of suspicious glands given high carcinoma risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative calcium control",
+          "cells": [
+            {
+              "text": "Hydration, bisphosphonates and cinacalcet, particularly in unresectable or metastatic carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jaw surgery",
+          "cells": [
+            {
+              "text": "Maxillofacial excision of symptomatic ossifying fibromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical surveillance",
+          "cells": [
+            {
+              "text": "Lifelong corrected calcium and PTH for recurrent or metastatic carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "Renal lesions and pelvic assessment in women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "CDC73 testing and cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Endocrine surgery, endocrinology and oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperparathyroidism_jaw_tumour_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyperparathyroidism-jaw tumour syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Primary hyperparathyroidism, possibly with ossifying jaw fibromas",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Markedly raised calcium and PTH with neck mass, or rapidly enlarging jaw lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Suspect parathyroid carcinoma; urgent en bloc surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, PTH, neck and jaw imaging, renal and pelvic screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Germline CDC73 variant or parafibromin loss confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic adenoma or other hereditary hyperparathyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parathyroidectomy with en bloc resection of suspicious glands",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preoperative calcium control with hydration, bisphosphonates, cinacalcet",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excise symptomatic ossifying fibromas of the jaw",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and pelvic imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong surveillance needed; cure of hyperparathyroidism alone is not enough",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

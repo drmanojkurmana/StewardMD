@@ -148,5 +148,285 @@
       "caption": "Overview comparison matrix for hepatic porphyria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatic_porphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spot urine porphobilinogen and delta-aminolaevulinic acid in an acute episode",
+          "cells": [
+            {
+              "text": "Excess porphobilinogen and ALA during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma, urine and faecal porphyrin profiling",
+          "cells": [
+            {
+              "text": "Classifies the porphyria type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme activity assays and genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the specific defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis C, iron studies and HFE genotyping (porphyria cutanea tarda)",
+          "cells": [
+            {
+              "text": "Associated causes of porphyria cutanea tarda"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Hyponatraemia during acute attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic imaging and alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Hepatocellular carcinoma surveillance in acute porphyria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_porphyria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw precipitating drugs",
+          "cells": [
+            {
+              "text": "And treat intercurrent infection during an acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous haem arginate",
+          "cells": [
+            {
+              "text": "Given early in a significant attack, to suppress ALA synthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria-safe analgesics and antiemetics",
+          "cells": [
+            {
+              "text": "Opioids and safe antiemetics for attack symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid triggers",
+          "cells": [
+            {
+              "text": "Porphyrinogenic drugs, fasting or crash dieting, and alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda treatment",
+          "cells": [
+            {
+              "text": "Regular venesection, or low-dose hydroxychloroquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular carcinoma surveillance",
+          "cells": [
+            {
+              "text": "Periodic imaging in older patients with acute porphyria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Screen at-risk relatives, with personalised drug-safety advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatic_porphyria-dx-mgmt",
+      "title": "Diagnosis and management of Hepatic porphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute attack: severe abdominal pain, neuropathy or hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive weakness, bulbar or breathing involvement, seizures or autonomic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent intravenous haem arginate and intensive care for a severe attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine porphobilinogen and ALA during the attack; porphyrin profiling; electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is porphobilinogen raised during the attack, confirming an acute porphyria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lead poisoning, neuropathy, a surgical abdomen or another porphyria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw precipitating drugs and treat intercurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early intravenous haem arginate in a significant attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Porphyria-safe analgesics and antiemetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid triggers: porphyrinogenic drugs, fasting and alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks controlled; long-term trigger avoidance and carcinoma surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

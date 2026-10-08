@@ -157,5 +157,460 @@
       "caption": "Overview comparison matrix for primary biliary cholangitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Primary Biliary Cholangitis",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/fibrosis-and-cirrhosis/primary-biliary-cholangitis-pbc",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PRIMARY_BILIARY_CHOLANGITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of primary biliary cholangitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rule",
+          "cells": [
+            {
+              "text": "{{hy:Any 2 of: cholestatic ALP, AMA or PBC-specific ANA, typical biopsy}}"
+            },
+            {
+              "text": "Biopsy only needed if antibodies negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Usually above 1.5",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "GGT raised; transaminases usually under 5 x ULN"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antimitochondrial antibody",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 90 to 95",
+              "range": [
+                90,
+                95
+              ]
+            },
+            {
+              "text": "AMA-M2 ELISA 90% sensitive, 96% specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PBC-specific ANA",
+          "cells": [
+            {
+              "text": "Anti-sp100, anti-gp210"
+            },
+            {
+              "text": "Diagnose AMA-negative PBC"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgM",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Non-suppurative destructive cholangitis of interlobular ducts"
+            },
+            {
+              "text": "Also stages fibrosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Patient profile",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "95 are women aged 40 to 70",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Half asymptomatic; pruritus and fatigue in up to 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "AIH overlap features",
+          "cells": [
+            {
+              "text": "ALT above 5 x ULN, IgG above 2 x ULN, SMA positive, interface hepatitis"
+            },
+            {
+              "text": "Consider overlap syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PRIMARY_BILIARY_CHOLANGITIS-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of primary biliary cholangitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Extrahepatic biliary obstruction",
+          "cells": [
+            {
+              "text": "{{hy:Must be excluded first}}"
+            },
+            {
+              "text": "Ultrasound, then MRCP or ERCP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Bile duct strictures, often with IBD"
+            },
+            {
+              "text": "MRCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced cholestasis",
+          "cells": [
+            {
+              "text": "Drug history"
+            },
+            {
+              "text": "Biopsy if unclear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Granulomas"
+            },
+            {
+              "text": "Liver biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "Hepatitic pattern; AMA false positives possible"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PRIMARY_BILIARY_CHOLANGITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of primary biliary cholangitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "{{hy:All patients, first line}}"
+            },
+            {
+              "text": "13 to 15 mg/kg/day orally"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Assess UDCA response",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "At 12 or more",
+              "op": ">=",
+              "value": 12
+            },
+            {
+              "text": "Response: ALP under 1.5 to 2 x ULN and normal bilirubin; about 40% respond poorly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Seladelpar or elafibranor",
+          "cells": [
+            {
+              "text": "Second line, with UDCA or alone if intolerant"
+            },
+            {
+              "text": "Avoid in decompensated cirrhosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bezafibrate or fenofibrate",
+          "cells": [
+            {
+              "text": "If newer agents unavailable"
+            },
+            {
+              "text": "Monitor transaminases and kidney function"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholestyramine",
+          "cells": [
+            {
+              "text": "Pruritus"
+            },
+            {
+              "text": "4 to 16 g/day, separated from UDCA by 1 hour"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifampicin, naltrexone or sertraline",
+          "cells": [
+            {
+              "text": "Refractory pruritus"
+            },
+            {
+              "text": "Trial basis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vitamins A, D, E, K and bone protection",
+          "cells": [
+            {
+              "text": "Malabsorption, osteoporosis"
+            },
+            {
+              "text": "Bisphosphonate, calcium and vitamin D"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "MELD 15 or more, refractory ascites, variceal bleed, intractable itch"
+            },
+            {
+              "text": "Recurrence over 30% by 10 years, usually benign"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Obeticholic acid was withdrawn from the US market. Ten-year transplant-free survival about 80% treated vs 60% untreated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PRIMARY_BILIARY_CHOLANGITIS-dx-mgmt",
+      "title": "Diagnosis and management of primary biliary cholangitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised ALP and GGT, often a middle-aged woman with itch or fatigue",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Ultrasound of liver and bile ducts",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Duct dilatation or obstruction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "MRCP or ERCP for obstruction or PSC",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "AMA, anti-sp100, anti-gp210, IgM",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Antibody positive with ALP above 1.5 x ULN?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liver biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "UDCA 13 to 15 mg/kg/day",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Adequate response at 12 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Add seladelpar, elafibranor or a fibrate",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue UDCA; treat itch, bones, vitamins; transplant if decompensated",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "PBC confirmed"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

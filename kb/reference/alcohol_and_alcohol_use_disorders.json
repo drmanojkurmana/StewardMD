@@ -162,5 +162,467 @@
       "caption": "Overview comparison matrix for alcohol and alcohol use disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Alcohol Use Disorder and Rehabilitation",
+      "url": "https://www.merckmanuals.com/professional/special-subjects/recreational-drugs-and-intoxicants/alcohol-use-disorder-and-rehabilitation",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Alcohol Toxicity and Withdrawal",
+      "url": "https://www.merckmanuals.com/professional/special-subjects/recreational-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alcohol_and_alcohol_use_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis, screening and withdrawal timing in alcohol use disorder",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "DSM-5 alcohol use disorder",
+          "cells": [
+            {
+              "text": "2 or more of 11 criteria in 12 months",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Mild 2 to 3, moderate 4 to 5, severe 6 or more"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "At-risk drinking",
+          "unit": "drinks/week",
+          "cells": [
+            {
+              "text": "Men above 14 (or 4 per occasion); women above 7 (or 3 per occasion)",
+              "op": ">",
+              "value": 14
+            },
+            {
+              "text": "Prompts brief intervention"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "AUDIT",
+          "cells": [
+            {
+              "text": "Score 8 or more",
+              "op": ">=",
+              "value": 8
+            },
+            {
+              "text": "May indicate harmful use; screening only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GGT and CDT",
+          "cells": [
+            {
+              "text": "GGT above 35 U; CDT above 20 U/L or above 2.6%"
+            },
+            {
+              "text": "Combined markers of heavy drinking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MCV and uric acid",
+          "cells": [
+            {
+              "text": "MCV 91 or more; urate above 7 mg/dL"
+            },
+            {
+              "text": "Supportive markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal onset",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Within about 6 of last drink",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Tremor, sweating, anxiety"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Withdrawal seizures",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "6 to 48",
+              "range": [
+                6,
+                48
+              ]
+            },
+            {
+              "text": "Hallucinosis at 12 to 24 hours"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Delirium tremens",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Begins 48 to 72",
+              "range": [
+                48,
+                72
+              ]
+            },
+            {
+              "text": "{{hy:Delirium with autonomic instability; high risk of death}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Blood alcohol",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "300 to 400 unconsciousness; 400 or more may be fatal"
+            },
+            {
+              "text": "Low level with coma: look for another cause"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "alcohol_and_alcohol_use_disorders-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis in alcohol-related presentations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic ketoacidosis vs alcoholic ketoacidosis",
+          "cells": [
+            {
+              "text": "AKA: only mild hyperglycaemia; BHB to lactate ratio 2:1 to 9:1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head injury, CNS infection or other drugs",
+          "cells": [
+            {
+              "text": "{{hy:Altered mentation with low blood alcohol; CT and LP may be needed}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Schizophrenia vs alcoholic hallucinosis",
+          "cells": [
+            {
+              "text": "Hallucinosis has clear consciousness and ordered thought"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Primary depression vs alcohol-induced mood disorder",
+          "cells": [
+            {
+              "text": "About half of depressive episodes resolve within a month of abstinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wernicke-Korsakoff vs other dementias",
+          "cells": [
+            {
+              "text": "No single alcoholic dementia entity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic vs alcoholic neuropathy",
+          "cells": [
+            {
+              "text": "Both distal, symmetric, sensory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alcohol_and_alcohol_use_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment of alcohol withdrawal and alcohol use disorder",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Thiamine",
+          "cells": [
+            {
+              "text": "{{hy:All, before glucose, to prevent or treat Wernicke}}"
+            },
+            {
+              "text": "100 mg IV"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diazepam",
+          "cells": [
+            {
+              "text": "Withdrawal"
+            },
+            {
+              "text": "5 to 10 mg IV or orally hourly until sedated; DT 5 to 10 mg IV every 10 minutes as needed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lorazepam",
+          "cells": [
+            {
+              "text": "Withdrawal with significant liver disease; withdrawal seizures"
+            },
+            {
+              "text": "1 to 2 mg IV or orally; 1 to 3 mg IV for seizures over 2 to 3 minutes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chlordiazepoxide",
+          "cells": [
+            {
+              "text": "Less severe withdrawal"
+            },
+            {
+              "text": "50 to 100 mg orally every 4 to 6 hours, then taper"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Phenobarbital",
+          "cells": [
+            {
+              "text": "Benzodiazepine-refractory withdrawal or DT"
+            },
+            {
+              "text": "10 mg/kg IV, or 120 to 240 mg IV every 20 minutes as needed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Naltrexone",
+          "cells": [
+            {
+              "text": "Relapse prevention; not with opioid use or liver failure"
+            },
+            {
+              "text": "50 mg daily orally, or 380 mg IM monthly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acamprosate",
+          "cells": [
+            {
+              "text": "Relapse prevention"
+            },
+            {
+              "text": "2 g orally daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disulfiram",
+          "cells": [
+            {
+              "text": "Motivated, supervised patients; not in pregnancy or heart failure"
+            },
+            {
+              "text": "0.5 g daily for 1 to 3 weeks, then 0.25 g daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psychosocial treatment",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Brief intervention, motivational therapy, CBT, Alcoholics Anonymous"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alcohol_and_alcohol_use_disorders-dx-mgmt",
+      "title": "Diagnosis and management of alcohol use disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heavy drinking suspected or alcohol-related harm",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Screen: single question, then AUDIT; DSM-5 criteria",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Withdrawal symptoms or recent stop after dependence?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thiamine 100 mg IV; benzodiazepine titrated to symptoms",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Delirium tremens or refractory seizures?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ICU; frequent IV benzodiazepine, phenobarbital if refractory",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "AUD present (2 or more criteria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Brief intervention for at-risk drinking",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Naltrexone, acamprosate or disulfiram plus psychosocial care",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "After recovery"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

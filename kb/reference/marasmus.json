@@ -145,5 +145,276 @@
       "caption": "Overview comparison matrix for marasmus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marasmus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anthropometry: weight-for-height and mid-upper-arm circumference",
+          "cells": [
+            {
+              "text": "Degree of wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and body temperature",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes including potassium, magnesium and phosphate",
+          "cells": [
+            {
+              "text": "Deficits; falling phosphate during refeeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for underlying and intercurrent infection",
+          "cells": [
+            {
+              "text": "Intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for micronutrient deficiencies and anaemia",
+          "cells": [
+            {
+              "text": "Micronutrient deficiency and anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marasmus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phased nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Low-energy stabilisation feeds, then catch-up feeding with ready-to-use therapeutic food"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent feeds and active warming",
+          "cells": [
+            {
+              "text": "Prevent and treat hypoglycaemia and hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious rehydration",
+          "cells": [
+            {
+              "text": "Oral rehydration solution for malnutrition; avoid fluid overload and cardiac failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and micronutrient correction",
+          "cells": [
+            {
+              "text": "Potassium and magnesium deficits; micronutrients, vitamins and anaemia treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gradual feed escalation",
+          "cells": [
+            {
+              "text": "Monitor for refeeding syndrome, with attention to falling phosphate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Screen for and treat intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Underlying cause, feeding practices and family food security"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marasmus-dx-mgmt",
+      "title": "Diagnosis and management of Marasmus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severely wasted child with low weight-for-height and mid-upper-arm circumference",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoglycaemia, hypothermia, sepsis signs or circulatory compromise present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stabilisation: treat hypoglycaemia, hypothermia and sepsis; check circulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anthropometry, blood glucose, temperature, electrolytes and infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is severe wasting confirmed on anthropometry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider kwashiorkor, malabsorption, chronic infection or metabolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phased rehabilitation: low-energy stabilisation feeds, then ready-to-use therapeutic food",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Frequent feeds and active warming for hypoglycaemia and hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious oral rehydration, avoiding fluid overload and cardiac failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gradual feed escalation with refeeding monitoring of phosphate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary follow-up addressing cause, feeding practices and food security",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

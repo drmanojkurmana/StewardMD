@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for mevalonate kinase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and autoinflammatory disease consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mevalonate_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary organic acids for mevalonic acid, ideally during an attack",
+          "cells": [
+            {
+              "text": "Mevalonic acid during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate kinase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of MVK",
+          "cells": [
+            {
+              "text": "MVK variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins including IgD and IgA",
+          "cells": [
+            {
+              "text": "IgD and IgA levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants and full blood count during and between flares",
+          "cells": [
+            {
+              "text": "Inflammation during and between flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and developmental assessment",
+          "cells": [
+            {
+              "text": "Severe disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mevalonate_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab as the mainstay of disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF inhibition or interleukin-6 blockade",
+          "cells": [
+            {
+              "text": "Tocilizumab in selected cases refractory to interleukin-1 blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flare symptom control",
+          "cells": [
+            {
+              "text": "NSAIDs or short corticosteroid courses for acute flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis surveillance",
+          "cells": [
+            {
+              "text": "Proteinuria monitoring; tight control of inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe mevalonic aciduria",
+          "cells": [
+            {
+              "text": "Neurodevelopmental, ophthalmological and physiotherapy care; transplant considered in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger management",
+          "cells": [
+            {
+              "text": "Treat intercurrent infection; anticipate vaccination-related flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive MVK variants; rheumatology and immunology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mevalonate_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Mevalonate kinase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent febrile attacks from infancy with raised acute-phase reactants",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Proteinuria, severe neurological impairment, ataxia, or macrophage activation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for macrophage activation syndrome or amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary mevalonic acid during an attack; MVK enzyme and genetic testing; IgD and IgA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an MVK variant confirmed on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FMF, TRAPS, PFAPA or cryopyrin-associated syndromes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra or canakinumab as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tocilizumab or TNF inhibition for cases refractory to interleukin-1 blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAIDs or short corticosteroid courses for acute flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Proteinuria monitoring for secondary AA amyloidosis; manage triggers and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rheumatology and immunology follow-up; genetic counselling for autosomal recessive MVK",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for phace syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phace_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI and MRA of brain, head and neck",
+          "cells": [
+            {
+              "text": "Posterior fossa and cerebrovascular anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography with aortic arch imaging",
+          "cells": [
+            {
+              "text": "Coarctation and arch anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed ophthalmological examination",
+          "cells": [
+            {
+              "text": "Posterior segment and optic anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination of sternum and abdomen",
+          "cells": [
+            {
+              "text": "Ventral midline defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy or airway assessment",
+          "cells": [
+            {
+              "text": "Beard-distribution lesion or stridor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, neurological and hearing follow-up",
+          "cells": [
+            {
+              "text": "Development and hearing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phace_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sturge-Weber syndrome",
+          "cells": [
+            {
+              "text": "Capillary malformation in a trigeminal distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital haemangioma",
+          "cells": [
+            {
+              "text": "Rapidly involuting or non-involuting, GLUT1-negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated segmental infantile haemangioma",
+          "cells": [
+            {
+              "text": "No extracutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phace_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Propranolol",
+          "cells": [
+            {
+              "text": "Oral first-line therapy for segmental infantile haemangioma, started cautiously after cardiac and cerebrovascular assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline imaging",
+          "cells": [
+            {
+              "text": "MRI and MRA of brain, head and neck, with echocardiography and aortic arch imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke-risk mitigation",
+          "cells": [
+            {
+              "text": "Careful blood-pressure and perfusion management; avoid abrupt haemodynamic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway management",
+          "cells": [
+            {
+              "text": "Subglottic beard-distribution haemangioma causing stridor; systemic therapy and airway intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular protection",
+          "cells": [
+            {
+              "text": "Corneal and visual protection for ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology",
+          "cells": [
+            {
+              "text": "Coarctation and arch anomalies, including surgical repair where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Neurodevelopmental and hearing follow-up across dermatology, neurology, cardiology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phace_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of PHACE syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large segmental facial haemangioma with possible extracutaneous anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (focal deficit, coarctation or heart failure, stridor, visual compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology or stroke assessment for a focal deficit or coarctation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI and MRA of brain, head and neck; echocardiography with arch imaging; eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and eye findings show posterior fossa, arch or ocular anomalies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated segmental haemangioma, Sturge-Weber syndrome or congenital haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral propranolol as first-line therapy for segmental infantile haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baseline MRI and MRA with echocardiography and aortic arch imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mitigate stroke risk with careful blood-pressure and perfusion management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage subglottic haemangioma causing stridor with systemic therapy and airway care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiology care for coarctation, with surgical repair where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Skin lesion involutes; long-term outcome depends on brain, heart and eye anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for leriche syndrome (aortoiliac occlusive disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard vascular surgery reference texts and peripheral arterial disease consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leriche_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial pressure index and segmental limb pressures",
+          "cells": [
+            {
+              "text": "Reduced index; quantifies inflow disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound of aortoiliac and femoral segments",
+          "cells": [
+            {
+              "text": "Aortoiliac and femoral flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Extent of aortoiliac occlusion; plans intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "Where endovascular treatment is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise testing",
+          "cells": [
+            {
+              "text": "Where the diagnosis of claudication is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leriche_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinal (neurogenic) claudication",
+          "cells": [
+            {
+              "text": "Buttock and thigh symptoms can wrongly point to spine or hip disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Femoropopliteal or infrainguinal peripheral arterial disease",
+          "cells": [
+            {
+              "text": "Calf-predominant claudication; Leriche claudication is proximal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous disease with venous claudication",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leriche_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Aortobifemoral bypass or endovascular aortoiliac angioplasty and stenting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk reduction",
+          "cells": [
+            {
+              "text": "Smoking cessation, statin, blood pressure and glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Consider a low-dose anticoagulant and antiplatelet combination for peripheral arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised exercise",
+          "cells": [
+            {
+              "text": "Exercise programme for claudication; cilostazol as symptomatic adjunct where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erectile dysfunction",
+          "cells": [
+            {
+              "text": "Phosphodiesterase-5 inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Graft patency; screening for coronary and carotid atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot care",
+          "cells": [
+            {
+              "text": "Monitoring for critical limb ischaemia and tissue loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leriche_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Leriche syndrome (aortoiliac occlusive disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral buttock, hip or thigh claudication with erectile dysfunction, often a smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rest pain, ulcer or gangrene, acute limb ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vascular surgery for critical or acute limb ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABPI and segmental pressures, duplex, CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is aortoiliac occlusion confirmed on angiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider femoropopliteal disease, spinal claudication or venous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Revascularisation by aortobifemoral bypass or endovascular stenting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation, statin, and blood pressure and glucose control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiplatelet therapy for peripheral arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supervised exercise programme; cilostazol as adjunct where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "PDE-5 inhibitors for erectile dysfunction; graft surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Bypass is durable and relieves claudication; underlying atherosclerosis risk persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

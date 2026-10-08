@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for gonadoblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gonadoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype and molecular testing for Y-chromosome material",
+          "cells": [
+            {
+              "text": "Y-chromosome material in gonadal dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum LH and FSH with sex-steroid levels",
+          "cells": [
+            {
+              "text": "Typically elevated gonadotropins, low sex steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germ cell tumour markers: LDH, alpha-fetoprotein, beta-hCG",
+          "cells": [
+            {
+              "text": "Malignant germ cell features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and abdominal imaging",
+          "cells": [
+            {
+              "text": "Localises gonads and detects a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of removed gonadal tissue",
+          "cells": [
+            {
+              "text": "Confirms gonadoblastoma and excludes invasive tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for wider disorder of sex development features",
+          "cells": [
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gonadoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysgerminoma or other malignant germ cell tumour",
+          "cells": [
+            {
+              "text": "Invasive tumour that histology must exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streak gonad without tumour",
+          "cells": [
+            {
+              "text": "Gonadal dysgenesis without neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Teratoma or mixed germ cell tumour",
+          "cells": [
+            {
+              "text": "Mixed germ cell elements on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gonadoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic bilateral gonadectomy",
+          "cells": [
+            {
+              "text": "Dysgenetic Y-bearing gonads, to prevent malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncological treatment if invasive tumour is found",
+          "cells": [
+            {
+              "text": "Surgery and platinum-based chemotherapy for dysgerminoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Oestrogen and progestogen to induce and maintain puberty and protect bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotyping",
+          "cells": [
+            {
+              "text": "Molecular testing for Y-chromosome material in gonadal dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Germ cell tumour markers and imaging where gonads remain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Disorder of sex development, endocrine, gynaecology and oncology teams with psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gonadoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Gonadoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gonadoblastoma: gonadal dysgenesis with Y-chromosome material",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Y material, rapidly enlarging mass, rising markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncological review for a rapidly enlarging pelvic mass or rising markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype with Y-chromosome testing, gonadotropins, germ cell markers and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology of removed gonadal tissue confirm gonadoblastoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider streak gonad, dysgerminoma or other germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic bilateral gonadectomy of Y-bearing dysgenetic gonads",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oncological surgery and chemotherapy if an invasive tumour is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oestrogen and progestogen replacement to induce puberty and protect bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Germ cell tumour marker and imaging surveillance where gonads remain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "When Y-bearing gonads are removed before malignant change, the outlook is excellent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

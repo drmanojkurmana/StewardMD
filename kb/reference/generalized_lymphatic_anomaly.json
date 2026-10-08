@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for generalised lymphatic anomaly."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalized_lymphatic_anomaly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-body or targeted MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue, splenic and thoracic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs and CT",
+          "cells": [
+            {
+              "text": "Characterises lytic bone lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and pleural or pericardial fluid analysis",
+          "cells": [
+            {
+              "text": "Chyle in pleural or pericardial fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with lymphatic markers (D2-40 or podoplanin)",
+          "cells": [
+            {
+              "text": "Histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile",
+          "cells": [
+            {
+              "text": "Distinguishes from kaposiform lymphangiomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA-pathway genetic analysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_lymphatic_anomaly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gorham-Stout disease",
+          "cells": [
+            {
+              "text": "Progressive osteolysis, or vanishing bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaposiform lymphangiomatosis",
+          "cells": [
+            {
+              "text": "Coagulopathy and haemorrhagic effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic malignancy or histiocytosis",
+          "cells": [
+            {
+              "text": "Multifocal lytic bone lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_lymphatic_anomaly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sirolimus",
+          "cells": [
+            {
+              "text": "mTOR inhibitor targeting the PIK3CA-AKT-mTOR pathway to reduce lesion burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chylous effusion management",
+          "cells": [
+            {
+              "text": "Low-fat, medium-chain-triglyceride diet, drainage, pleurodesis or thoracic duct intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerotherapy or surgical debulking",
+          "cells": [
+            {
+              "text": "Symptomatic or compressive focal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Painful or structurally significant lytic bone lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Pericardial or pleural disease causing cardiorespiratory compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Visceral, splenic and thoracic involvement over the chronic course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist vascular anomalies service",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalized_lymphatic_anomaly-dx-mgmt",
+      "title": "Diagnosis and management of Generalised lymphatic anomaly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected generalised lymphatic anomaly: multifocal lytic bone and lymphatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (chylothorax, large pericardial effusion, pathological fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and respiratory support for chylous or pericardial compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-body MRI, bone CT, chest imaging, lymphatic-marker biopsy and coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does lymphatic-marker biopsy with normal coagulation confirm this anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gorham-Stout disease, kaposiform lymphangiomatosis or metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sirolimus, an mTOR inhibitor, to reduce lesion burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-fat, MCT diet, drainage and pleurodesis or duct intervention for chylous effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sclerotherapy or surgical debulking for symptomatic focal lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bisphosphonates for painful or structurally significant lytic bone lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies with extent and site; limited disease may remain stable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

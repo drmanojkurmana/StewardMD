@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for dermatomyositis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatomyositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase and myositis antibody panel",
+          "cells": [
+            {
+              "text": "Anti-Mi-2, anti-TIF1-gamma, anti-MDA5 and antisynthetase antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EMG and muscle MRI",
+          "cells": [
+            {
+              "text": "Localises and characterises inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle or skin biopsy",
+          "cells": [
+            {
+              "text": "Characteristic histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT chest and pulmonary function tests",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Weight loss, new mass or cytopenias raise concern for an underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatomyositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psoriasis or contact dermatitis",
+          "cells": [
+            {
+              "text": "Gottron or knuckle lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyopathic dermatomyositis",
+          "cells": [
+            {
+              "text": "Classic skin findings without weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatomyositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for muscle and skin inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, azathioprine, mycophenolate or IVIG; rituximab in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin disease",
+          "cells": [
+            {
+              "text": "Strict photoprotection, topical corticosteroids or calcineurin inhibitors, and hydroxychloroquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapidly progressive lung disease",
+          "cells": [
+            {
+              "text": "Calcineurin inhibitors and cyclophosphamide, especially with anti-MDA5 antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Age- and risk-appropriate, at diagnosis and during follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and monitoring",
+          "cells": [
+            {
+              "text": "Physiotherapy; creatine kinase, strength, swallowing and cardiac status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Rheumatology, dermatology, respiratory and oncology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatomyositis-dx-mgmt",
+      "title": "Diagnosis and management of Dermatomyositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatomyositis: proximal myopathy with characteristic skin changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly progressive lung disease, malignancy signs, dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment; aggressive treatment for rapidly progressive ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, myositis antibodies, EMG and MRI; HRCT and PFTs; muscle or skin biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do antibodies or biopsy show characteristic dermatomyositis changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polymyositis, inclusion body myositis, lupus or psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as first-line for muscle and skin inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate, azathioprine, mycophenolate or IVIG; rituximab if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strict photoprotection, topical therapy and hydroxychloroquine for skin disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Malignancy screening at diagnosis and during follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Calcineurin inhibitors and cyclophosphamide for rapidly progressive lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis depends on lung disease, malignancy and cardiac involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

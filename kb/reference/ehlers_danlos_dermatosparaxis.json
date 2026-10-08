@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for dermatosparaxis ehlers-danlos syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and connective tissue disorder references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ehlers_danlos_dermatosparaxis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ADAMTS2 molecular testing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy electron microscopy",
+          "cells": [
+            {
+              "text": "Ribbon-like collagen fibrils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collagen biochemistry",
+          "cells": [
+            {
+              "text": "Unprocessed pN-collagen accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Bleeding diathesis excluded; characteristically normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Osteopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hernia and prolapse assessment",
+          "cells": [
+            {
+              "text": "Herniae and pelvic-floor or rectal prolapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_dermatosparaxis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classical EDS (COL5A1 or COL5A2)",
+          "cells": [
+            {
+              "text": "Hyperextensible skin with COL5 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutis laxa syndromes",
+          "cells": [
+            {
+              "text": "Redundant skin from elastic fibre defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kyphoscoliotic EDS",
+          "cells": [
+            {
+              "text": "Scoliosis with urinary cross-link abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury",
+          "cells": [
+            {
+              "text": "Bruising pattern without a genetic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_dermatosparaxis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin protection",
+          "cells": [
+            {
+              "text": "Gentle handling, padding and avoidance of trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound management",
+          "cells": [
+            {
+              "text": "Careful closure, skin support and infection prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hernia and prolapse repair",
+          "cells": [
+            {
+              "text": "Tissue-sparing surgical technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bruising care",
+          "cells": [
+            {
+              "text": "Supportive care after confirming a normal coagulation screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Osteopenia and short stature reviewed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ADAMTS2; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ehlers_danlos_dermatosparaxis-dx-mgmt",
+      "title": "Diagnosis and management of Dermatosparaxis Ehlers-Danlos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatosparaxis EDS: fragile skin with extensive bruising and herniae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (wound dehiscence, hernia strangulation, bladder rupture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for hernia strangulation or visceral rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ADAMTS2 testing; skin electron microscopy; coagulation screen; hernia assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic ADAMTS2 variants found with a normal coagulation screen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider classical EDS, cutis laxa, kyphoscoliotic EDS or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protect fragile skin with gentle handling, padding and trauma avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Careful wound closure and infection prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tissue-sparing repair of umbilical, inguinal and prolapse problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Normal coagulation screen to exclude a true bleeding diathesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong fragility; with conservative care life expectancy is often near normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

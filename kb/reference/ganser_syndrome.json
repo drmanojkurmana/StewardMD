@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for ganser syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan and Sadock's Comprehensive Textbook of Psychiatry / Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganser_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mental state examination",
+          "cells": [
+            {
+              "text": "Approximate answers and clouding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive testing",
+          "cells": [
+            {
+              "text": "Compared with the pattern expected in genuine impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes organic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of the brain",
+          "cells": [
+            {
+              "text": "Where an organic process is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Excludes post-ictal or encephalopathic states"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history and psychosocial stressors",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganser_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Delirium or organic confusional state",
+          "cells": [
+            {
+              "text": "Fluctuating consciousness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia or genuine cognitive impairment",
+          "cells": [
+            {
+              "text": "Cognitive testing pattern differs from genuine impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malingering or factitious disorder",
+          "cells": [
+            {
+              "text": "Concern for secondary gain, requiring careful handling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganser_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Safe supportive environment",
+          "cells": [
+            {
+              "text": "Low stimulation while the typically self-limiting episode resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude organic disease",
+          "cells": [
+            {
+              "text": "Treat any organic brain or metabolic disturbance before settling on the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial stressor support",
+          "cells": [
+            {
+              "text": "Supportive psychotherapy and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid psychiatric illness",
+          "cells": [
+            {
+              "text": "Depression or psychosis, with pharmacotherapy where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid confronting the patient",
+          "cells": [
+            {
+              "text": "About approximate answers, which can entrench the presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatry referral",
+          "cells": [
+            {
+              "text": "Assessment, follow-up and monitoring for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganser_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ganser syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ganser syndrome: approximate answers and clouding of consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (organic cause, self-harm risk, fluctuating consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for self-harm or delirium with fluctuating consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mental state examination, cognitive testing, bloods, imaging and EEG as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are organic causes and delirium excluded on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malingering, factitious disorder, dementia or post-ictal state",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Safe, low-stimulation, supportive environment while the episode resolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude and treat any organic brain or metabolic disturbance first",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive psychotherapy and reassurance for the psychosocial stressor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid confronting the patient about approximate answers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually self-limiting; resolves over days to weeks once the stressor is addressed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

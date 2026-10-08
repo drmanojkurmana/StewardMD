@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for hereditary fructose intolerance."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_fructose_intolerance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ALDOB molecular genetic testing",
+          "cells": [
+            {
+              "text": "Preferred confirmatory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, liver function and coagulation during exposure",
+          "cells": [
+            {
+              "text": "Hypoglycaemia, hepatic and coagulation effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular function assessment",
+          "cells": [
+            {
+              "text": "Fanconi-like picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for reducing substances",
+          "cells": [
+            {
+              "text": "Fructosuria after fructose ingestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver imaging or biopsy",
+          "cells": [
+            {
+              "text": "Used where hepatic disease is unexplained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary history",
+          "cells": [
+            {
+              "text": "Correlates symptoms with fructose-containing foods"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_fructose_intolerance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict lifelong dietary exclusion",
+          "cells": [
+            {
+              "text": "Fructose, sucrose and sorbitol; the definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous glucose",
+          "cells": [
+            {
+              "text": "Acute ingestion with hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin C and micronutrients",
+          "cells": [
+            {
+              "text": "Supplement deficiencies on a fructose-restricted diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medicine screening",
+          "cells": [
+            {
+              "text": "Hidden fructose or sorbitol in medicines and excipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver function, coagulation, growth and renal proximal tubular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "ALDOB variants and family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alert documentation",
+          "cells": [
+            {
+              "text": "Warns against intravenous fructose- or sorbitol-containing products"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_fructose_intolerance-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary fructose intolerance",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vomiting, hypoglycaemia or poor growth after fruit, sucrose or sorbitol",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute hypoglycaemia, liver dysfunction with coagulopathy, or renal tubular dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intravenous glucose for hypoglycaemia; stop fructose exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ALDOB genetic testing; glucose, liver tests and coagulation; urine reducing substances",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ALDOB variant confirmed, with other causes of hypoglycaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider galactosaemia, fructose-1,6-bisphosphatase deficiency or glycogen storage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict lifelong exclusion of fructose, sucrose and sorbitol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen medicines and excipients for hidden fructose or sorbitol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin C and micronutrient supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor liver function, coagulation, growth and renal tubular function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms prevented by strict diet; alert documentation for emergencies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

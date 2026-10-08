@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for grover disease (transient acantholytic dermatosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "grover_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Focal acantholysis and dyskeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Negative; excludes autoimmune pemphigus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of triggers",
+          "cells": [
+            {
+              "text": "Heat, sweating and immobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of xerosis and coexisting dermatoses",
+          "cells": [
+            {
+              "text": "Coexisting skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drug-related triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grover_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Darier disease",
+          "cells": [
+            {
+              "text": "Acantholytic disorder with a genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hailey-Hailey disease",
+          "cells": [
+            {
+              "text": "Familial benign pemphigus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pemphigus foliaceus or vulgaris",
+          "cells": [
+            {
+              "text": "Autoimmune blistering disease; excluded by immunofluorescence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grover_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Heat, sweating, sun exposure, occlusion and prolonged bed rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids with emollients",
+          "cells": [
+            {
+              "text": "First-line for eruption and pruritus; topical calcineurin inhibitors added"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "For itch and correction of coexisting xerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory disease",
+          "cells": [
+            {
+              "text": "Phototherapy, a systemic retinoid such as acitretin, or short systemic steroid course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drug-related triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic work-up",
+          "cells": [
+            {
+              "text": "Atypical or persistently refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "grover_disease-dx-mgmt",
+      "title": "Diagnosis and management of Grover disease (transient acantholytic dermatosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Grover disease: pruritic papules on the trunk in a sweating or hot patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atypical or refractory disease, secondary infection, intractable itch)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Systemic review for atypical, widespread or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with focal acantholysis, negative immunofluorescence and trigger review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show focal acantholysis with negative immunofluorescence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Darier disease, Hailey-Hailey disease or pemphigus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid heat, sweating, occlusion and prolonged bed rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids with emollients for eruption and itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral antihistamines and correction of xerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phototherapy or systemic retinoid for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, often self-limiting over weeks to months; a subset runs a relapsing course",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

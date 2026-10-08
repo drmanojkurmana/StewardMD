@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for fistula-in-ano."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fistula_in_ano-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Internal and external openings and track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI pelvis",
+          "cells": [
+            {
+              "text": "Complex, recurrent or Crohn's-related fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Track mapping relative to the sphincter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease or malignancy suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fistula_in_ano-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent anorectal abscess",
+          "cells": [
+            {
+              "text": "Recurrent perianal collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal Crohn's disease",
+          "cells": [
+            {
+              "text": "Complex, branching or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pilonidal sinus or hidradenitis suppurativa",
+          "cells": [
+            {
+              "text": "Other perianal sinus tracts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fistula_in_ano-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fistulotomy for low, simple fistulae",
+          "cells": [
+            {
+              "text": "Laying open the track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter-sparing techniques",
+          "cells": [
+            {
+              "text": "Seton drainage or ligation of intersphincteric fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of abscess and control of sepsis",
+          "cells": [
+            {
+              "text": "Often with a loose seton before definitive repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-TNF agents with seton drainage",
+          "cells": [
+            {
+              "text": "Crohn's-related fistulae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mapping by examination and MRI or endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Relation to sphincter complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colorectal surgical referral",
+          "cells": [
+            {
+              "text": "Biopsy where inflammatory bowel disease or malignancy suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fistula_in_ano-dx-mgmt",
+      "title": "Diagnosis and management of Fistula-in-ano",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent or recurrent perianal discharge, with swelling or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (complex or recurrent tracks, undrained sepsis, necrotising infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of undrained sepsis; assess for necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia; MRI for complex disease; endoanal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Simple track with no Crohn's disease or malignancy on imaging and biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Crohn's disease, tuberculosis or malignancy; biopsy the track",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fistulotomy for low, simple fistulae",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Seton drainage and sphincter-sparing options for high tracks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain abscess and control sepsis before definitive repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-TNF therapy with seton for Crohn's-related disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High cure rates for simple low fistulae; complex or Crohn's tracks often recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

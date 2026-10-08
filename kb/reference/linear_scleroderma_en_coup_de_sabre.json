@@ -153,5 +153,361 @@
       "caption": "Overview comparison matrix for linear scleroderma en coup de sabre."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibodies and autoantibody profile",
+          "cells": [
+            {
+              "text": "Characterises autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Intracranial involvement when neurological symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the face and soft tissue",
+          "cells": [
+            {
+              "text": "Depth of involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Disease activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and dental or maxillofacial assessment",
+          "cells": [
+            {
+              "text": "Ocular and orofacial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography with skin activity score",
+          "cells": [
+            {
+              "text": "Activity over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parry-Romberg syndrome",
+          "cells": [
+            {
+              "text": "Progressive hemifacial atrophy; possibly the severe end of the same spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Localised, not systemic; no Raynaud phenomenon or internal organ sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other morphoea subtypes (plaque, generalised)",
+          "cells": [
+            {
+              "text": "Different pattern; the linear sabre-stroke band defines this subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal facial lipodystrophy or atrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, often with systemic corticosteroids, during active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Mycophenolate mofetil or other immunosuppressants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and topical measures",
+          "cells": [
+            {
+              "text": "Soft-tissue mobility and skin condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical assessment, inflammatory markers and imaging to guide duration of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological surveillance",
+          "cells": [
+            {
+              "text": "Brain MRI where seizures or headache occur; antiseizure medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular and orofacial care",
+          "cells": [
+            {
+              "text": "Ophthalmology and dental or maxillofacial assessment on the affected side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstruction",
+          "cells": [
+            {
+              "text": "Autologous fat grafting or corrective surgery once disease is inactive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Dermatology, rheumatology and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-dx-mgmt",
+      "title": "Diagnosis and management of Linear scleroderma en coup de sabre",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Linear sclerotic, atrophic band on the frontoparietal scalp and forehead in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, midline extension, eye inflammation, facial growth threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and ophthalmology review; MRI brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, ANA, MRI brain and face, inflammatory markers, eye and dental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a linear sclerotic band confirmed with dermal sclerosis on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Parry-Romberg syndrome, systemic sclerosis or other morphoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Methotrexate with or without systemic corticosteroids during active disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mycophenolate or other immunosuppressants for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and topical measures for soft-tissue mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological and ocular surveillance; antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reconstructive fat grafting once disease is inactive",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Activity settles over years, leaving atrophy; early treatment limits progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

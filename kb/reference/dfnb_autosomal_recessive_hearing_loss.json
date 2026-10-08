@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for autosomal recessive non-syndromic hearing loss (dfnb)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dfnb_autosomal_recessive_hearing_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn screening followed by diagnostic audiometry",
+          "cells": [
+            {
+              "text": "Early identification and confirmed loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and auditory brainstem response",
+          "cells": [
+            {
+              "text": "Defines the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging",
+          "cells": [
+            {
+              "text": "Malformations; planning for implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cytomegalovirus testing",
+          "cells": [
+            {
+              "text": "Acquired cause excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deafness gene panel beginning with DFNB1",
+          "cells": [
+            {
+              "text": "GJB2 and GJB6 testing first"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dfnb_autosomal_recessive_hearing_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Syndromic recessive hearing loss (Usher, Pendred, Jervell and Lange-Nielsen)",
+          "cells": [
+            {
+              "text": "Extra-auditory visual, thyroid, renal or cardiac features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cytomegalovirus hearing loss",
+          "cells": [
+            {
+              "text": "Acquired cause, tested for before attributing to genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inner-ear malformation such as incomplete partition",
+          "cells": [
+            {
+              "text": "Malformation on temporal bone imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dfnb_autosomal_recessive_hearing_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early hearing aids",
+          "cells": [
+            {
+              "text": "Fitted after newborn screening and diagnostic audiometry to support language"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "For severe-to-profound loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aural habilitation",
+          "cells": [
+            {
+              "text": "Speech-and-language therapy and family communication support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "DFNB1 (GJB2 and GJB6) first; recessive inheritance; carrier and family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC26A4 monitoring",
+          "cells": [
+            {
+              "text": "Fluctuation in enlarged vestibular aqueduct; head-trauma avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude syndromic and acquired causes",
+          "cells": [
+            {
+              "text": "CMV testing and ophthalmology, thyroid, renal and cardiac review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Paediatric audiology and otology team, for implant candidacy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dfnb_autosomal_recessive_hearing_loss-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal recessive non-syndromic hearing loss (DFNB)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DFNB hearing loss: congenital or early childhood sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fluctuating loss, syndromic features, syncope with long QT)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac review for syncope or prolonged QT (Jervell and Lange-Nielsen)",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Newborn screen and audiometry; OAE and ABR; GJB2 and GJB6 testing; CMV test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic GJB2 or GJB6 variants found on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider syndromic hearing loss, congenital CMV, OTOF or inner-ear malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early hearing aids after newborn screening to support language",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Structured aural habilitation with speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor SLC26A4 disease for progression; counsel on head-trauma avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to a paediatric audiology and otology team",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most stable; early amplification or implants usually give good spoken language",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

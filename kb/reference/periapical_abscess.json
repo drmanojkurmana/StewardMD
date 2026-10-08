@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for periapical abscess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "periapical_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulp sensibility testing",
+          "cells": [
+            {
+              "text": "Expected non-vital response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percussion, palpation and mobility assessment",
+          "cells": [
+            {
+              "text": "Tooth tenderness, palpation and mobility findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periapical radiography; cone-beam CT when needed",
+          "cells": [
+            {
+              "text": "Extent of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for fascial-space spread and airway compromise",
+          "cells": [
+            {
+              "text": "Spread of infection in swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture and systemic markers",
+          "cells": [
+            {
+              "text": "Severe or spreading infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periapical_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Periodontal abscess",
+          "cells": [
+            {
+              "text": "Arises from the gingival sulcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irreversible pulpitis",
+          "cells": [
+            {
+              "text": "Occurs without abscess formation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periapical_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Root canal treatment or extraction of the necrotic, infected tooth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Drain pus through the tooth or incise a fluctuant swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Adjunct only for spreading infection, systemic involvement or immunocompromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Pain control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fascial-space and airway check",
+          "cells": [
+            {
+              "text": "Assess for spread and airway compromise; escalate urgently if present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dentistry or oral and maxillofacial surgery for definitive management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restorative follow-up",
+          "cells": [
+            {
+              "text": "Caries prevention and restorative care to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "periapical_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Periapical abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tooth pain with swelling from a necrotic, infected tooth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid floor-of-mouth swelling, trismus, dysphagia, systemic sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and surgical escalation for Ludwig angina or deep-space infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pulp sensibility testing, percussion and periapical radiography; cone-beam CT if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does testing show a non-vital tooth with periapical infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider periodontal abscess, irreversible pulpitis or periapical granuloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Source control by root canal treatment or extraction of the infected tooth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drain pus through the tooth or incise a fluctuant swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reserve antibiotics for spreading infection, systemic involvement or immunocompromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Provide analgesia and assess for fascial-space spread and airway compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to dentistry or oral and maxillofacial surgery for definitive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis with timely drainage and source control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

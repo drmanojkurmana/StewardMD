@@ -145,5 +145,487 @@
       "caption": "Overview comparison matrix for acute rheumatic fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Rheumatic Fever",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/rheumatic-fever",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 322-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_rheumatic_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Jones criteria for acute rheumatic fever (first episode)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rule",
+          "cells": [
+            {
+              "text": "{{hy:2 major, or 1 major plus 2 minor, plus evidence of recent GAS infection}}"
+            },
+            {
+              "text": "Chorea alone suffices once other causes excluded"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major criteria",
+          "cells": [
+            {
+              "text": "Carditis, polyarthritis, chorea, erythema marginatum, subcutaneous nodules"
+            },
+            {
+              "text": "Echo all possible cases for subclinical carditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "38.5 or higher",
+              "op": ">=",
+              "value": 38.5
+            },
+            {
+              "text": "Moderate to high risk thresholds not given in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: inflammatory markers",
+          "unit": "mm/h",
+          "cells": [
+            {
+              "text": "ESR above 60 or CRP above 30 mg/L",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Monitor every 1 to 2 weeks until normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: other",
+          "cells": [
+            {
+              "text": "Polyarthralgia; prolonged PR interval for age"
+            },
+            {
+              "text": "Minor criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Evidence of GAS",
+          "cells": [
+            {
+              "text": "Raised or rising ASO or anti-DNase B, positive throat culture or rapid antigen"
+            },
+            {
+              "text": "Most cases have negative throat culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "ECG, echocardiogram, blood count, CRP, ASO, anti-DNase B"
+            },
+            {
+              "text": "Always request"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence",
+          "cells": [
+            {
+              "text": "Prior ARF or RHD with documented GAS infection"
+            },
+            {
+              "text": "Criteria can be applied"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "acute_rheumatic_fever-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of acute rheumatic fever",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic or gonococcal arthritis",
+          "cells": [
+            {
+              "text": "{{hy:Infection; aspirate the joint}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Rheumatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Rheumatic; check dsDNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive arthritis or viral arthritis",
+          "cells": [
+            {
+              "text": "Post-infective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lyme disease",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infective endocarditis",
+          "cells": [
+            {
+              "text": "Embolic phenomena; blood cultures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leukaemia or sickle cell arthropathy",
+          "cells": [
+            {
+              "text": "Haematological"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kawasaki disease, serum sickness, drug reaction",
+          "cells": [
+            {
+              "text": "Inflammatory or drug-related"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "acute_rheumatic_fever-treatment",
+      "kind": "treatment",
+      "title": "Treatment and secondary prophylaxis of acute rheumatic fever",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Eradicate GAS",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Oral penicillin or amoxicillin for 10 days, or single IM benzathine penicillin G"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "Arthritis and mild carditis"
+            },
+            {
+              "text": "15 to 25 mg/kg four times daily (max 4 to 6 g/day) for 2 to 4 weeks, then taper over 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Naproxen",
+          "cells": [
+            {
+              "text": "Alternative anti-inflammatory"
+            },
+            {
+              "text": "7.5 to 10 mg/kg twice daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "Moderate to severe carditis"
+            },
+            {
+              "text": "2 to 4 weeks then taper over 2 to 3 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Uncontrolled inflammation after 2 days or severe heart failure"
+            },
+            {
+              "text": "30 mg/kg daily (max 1 g) for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzathine penicillin prophylaxis",
+          "cells": [
+            {
+              "text": "{{hy:Secondary prophylaxis for all}}"
+            },
+            {
+              "text": "IM every 3 to 4 weeks; every 3 weeks better in high-endemic areas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prophylaxis duration: no carditis",
+          "cells": [
+            {
+              "text": "5 years after last attack or to age 21"
+            },
+            {
+              "text": "Whichever is longer"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prophylaxis duration: carditis, no residual valve disease",
+          "cells": [
+            {
+              "text": "10 years after last attack or to age 21"
+            },
+            {
+              "text": "Whichever is longer"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prophylaxis duration: persistent valve disease",
+          "cells": [
+            {
+              "text": "10 years after last attack or to age 40"
+            },
+            {
+              "text": "Whichever is longer; sometimes lifelong"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral alternatives",
+          "cells": [
+            {
+              "text": "Injection not possible"
+            },
+            {
+              "text": "Daily penicillin V or sulfadiazine; erythromycin or azithromycin if allergic"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Durations follow the AHA table in the Tables PDF; Merck phrases persistent valve disease as more than 10 years, often indefinite or to age 40, and lifelong with severe valve disease and close contact with young children. Other organisations differ slightly."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_rheumatic_fever-dx-mgmt",
+      "title": "Diagnosis and management of acute rheumatic fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with arthritis, carditis or chorea after sore throat",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG, echocardiogram, CRP, ESR, ASO and anti-DNase B, throat swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Evidence of recent GAS infection?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for septic, reactive or other arthritis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Jones criteria met?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Possible ARF: review and repeat echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Penicillin to eradicate GAS",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Moderate to severe carditis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prednisone; heart failure therapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aspirin or naproxen for arthritis",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benzathine penicillin every 3 to 4 weeks for set duration",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -143,5 +143,334 @@
       "caption": "Overview comparison matrix for little league elbow."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "little_league_elbow-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of medial elbow tenderness and throwing history",
+          "cells": [
+            {
+              "text": "Medial epicondyle tenderness and workload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs with comparison views",
+          "cells": [
+            {
+              "text": "Apophyseal widening or avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue or osteochondral injury, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throwing mechanics and workload assessment",
+          "cells": [
+            {
+              "text": "Technique and load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar nerve function",
+          "cells": [
+            {
+              "text": "Nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "little_league_elbow-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteochondritis dissecans of the capitellum",
+          "cells": [
+            {
+              "text": "Coexisting lateral injury that is missed when only the medial side is examined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar neuritis",
+          "cells": [
+            {
+              "text": "Ulnar nerve symptoms; nerve function is assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medial epicondylitis in adults",
+          "cells": [
+            {
+              "text": "Adult counterpart; the apophysis is involved in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar collateral ligament injury",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "little_league_elbow-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative rest",
+          "cells": [
+            {
+              "text": "Stop throwing until symptom-free; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and ice",
+          "cells": [
+            {
+              "text": "For medial epicondyle apophysitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanics and workload",
+          "cells": [
+            {
+              "text": "Correct throwing mechanics; enforce pitch-count and rest guidelines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Flexor-pronator and shoulder-girdle strengthening before a staged return to throwing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fixation",
+          "cells": [
+            {
+              "text": "For significantly displaced medial epicondyle avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Radiographic follow-up of the apophysis; ulnar nerve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education",
+          "cells": [
+            {
+              "text": "Athlete, family and coaches on workload limits and early reporting of pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "little_league_elbow-dx-mgmt",
+      "title": "Diagnosis and management of Little League elbow",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Medial elbow pain in a skeletally immature thrower, worse during throwing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (displaced avulsion, locking, ulnar nerve symptoms, rest pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: orthopaedic review for displaced avulsion or loose bodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs with comparison, MRI if soft-tissue or osteochondral injury suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is medial epicondyle apophysitis confirmed with the throwing history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider capitellar osteochondritis dissecans, UCL injury or ulnar neuritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relative rest from throwing until symptom-free",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia and ice for apophysitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct throwing mechanics; enforce pitch-count and rest guidelines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy before a graded return to throwing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical fixation for significantly displaced avulsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most young throwers recover fully with early rest; continued overload risks avulsion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

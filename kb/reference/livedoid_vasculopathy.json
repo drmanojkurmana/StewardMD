@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for livedoid vasculopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "livedoid_vasculopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyaline fibrin thrombi with minimal vessel-wall inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen including antiphospholipid antibodies",
+          "cells": [
+            {
+              "text": "Prothrombotic states"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and connective-tissue serology",
+          "cells": [
+            {
+              "text": "Associated systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulins and hepatitis serology",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex studies",
+          "cells": [
+            {
+              "text": "Venous insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound swab",
+          "cells": [
+            {
+              "text": "Where secondary infection of ulcers is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "livedoid_vasculopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous small-vessel (leukocytoclastic) vasculitis",
+          "cells": [
+            {
+              "text": "Inflammatory vasculitis; this condition is thrombo-occlusive, and biopsy separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous stasis ulceration and lipodermatosclerosis",
+          "cells": [
+            {
+              "text": "Venous ulceration; atrophie blanche scarring is distinct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Associated thrombophilic state; screened for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulinaemia",
+          "cells": [
+            {
+              "text": "Cryoglobulins; screened for"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "livedoid_vasculopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiplatelet and anticoagulant therapy",
+          "cells": [
+            {
+              "text": "Aspirin, dipyridamole, pentoxifylline or anticoagulation to counter fibrin-thrombus occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia",
+          "cells": [
+            {
+              "text": "Screen for and treat any prothrombotic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Disproportionate, disabling pain; neuropathic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and compression",
+          "cells": [
+            {
+              "text": "Lower-leg ulcers; treat secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Refractory or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle",
+          "cells": [
+            {
+              "text": "Smoking cessation; reduce thrombotic risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Dermatology and haematology for the chronic, relapsing course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "livedoid_vasculopathy-dx-mgmt",
+      "title": "Diagnosis and management of Livedoid vasculopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful purpuric macules and recurrent ulcers on the ankles, with atrophie blanche",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (thrombophilia or APS, extensive ulceration, infection, vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology review for thrombophilia and APS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy (hyaline fibrin thrombi), thrombophilia and APS screen, autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are hyaline fibrin thrombi seen with minimal vessel-wall inflammation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider small-vessel vasculitis, venous ulceration or cryoglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy against fibrin-thrombus occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for and treat any thrombophilic or prothrombotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Effective analgesia for disabling pain, including neuropathic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care and compression for lower-leg ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Smoking cessation and reduction of thrombotic risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, relapsing; ulceration and scarring progress; thrombophilia treatment helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

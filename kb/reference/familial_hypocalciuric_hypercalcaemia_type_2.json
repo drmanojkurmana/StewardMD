@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for familial hypocalciuric hypercalcaemia type 2."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hypocalciuric_hypercalcaemia_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Simultaneous serum calcium, ionised calcium and PTH",
+          "cells": [
+            {
+              "text": "Hypercalcaemia with PTH typically normal or mildly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium-to-creatinine clearance ratio from paired samples",
+          "cells": [
+            {
+              "text": "Low ratio distinguishes it from primary hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum magnesium and phosphate",
+          "cells": [
+            {
+              "text": "Biochemical profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNA11 sequencing, with CASR and AP2S1 analysis",
+          "cells": [
+            {
+              "text": "Causative variant and other FHH subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family biochemical screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review for lithium and thiazides",
+          "cells": [
+            {
+              "text": "Drug-induced hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypocalciuric_hypercalcaemia_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "FHH type 1 (CASR loss-of-function)",
+          "cells": [
+            {
+              "text": "Commonest FHH subtype; sequencing separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Low calcium-to-creatinine clearance ratio separates it before any surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lithium-associated hypercalcaemia",
+          "cells": [
+            {
+              "text": "Reproduces the hypocalciuric hypercalcaemic pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypocalciuric_hypercalcaemia_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Asymptomatic hypercalcaemia needs no routine drug treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary parathyroidectomy",
+          "cells": [
+            {
+              "text": "The subtype is benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and avoidance of aggravating factors",
+          "cells": [
+            {
+              "text": "Thiazide diuretics and vitamin D excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cinacalcet for the uncommon symptomatic patient",
+          "cells": [
+            {
+              "text": "Targets the calcium-sensing pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNA11 confirmation and family screening",
+          "cells": [
+            {
+              "text": "With genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic calcium and PTH monitoring",
+          "cells": [
+            {
+              "text": "Expected lifelong stability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hypocalciuric_hypercalcaemia_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Familial Hypocalciuric Hypercalcaemia Type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asymptomatic hypercalcaemia with low urinary calcium in a relative with the same pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (malignancy-like symptoms, stones or bone disease, severe neonatal calcium)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for malignancy or hypercalcaemic crisis; avoid surgery until confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium and PTH; calcium-to-creatinine clearance ratio; GNA11, CASR and AP2S1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low calcium-to-creatinine ratio with GNA11 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FHH1, primary hyperparathyroidism or lithium-associated hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation; no routine drug treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid unnecessary parathyroidectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydration and avoidance of thiazides and vitamin D excess",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cinacalcet only for the rare symptomatic patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family biochemical screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; hypercalcaemia is mild, stable and typically asymptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

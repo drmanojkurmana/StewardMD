@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for dysmenorrhoea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysmenorrhea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused history and pelvic examination",
+          "cells": [
+            {
+              "text": "Primary versus secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Fibroids, adenomyosis and adnexal pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for sexually transmitted infection",
+          "cells": [
+            {
+              "text": "Pelvic inflammatory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy when endometriosis is suspected",
+          "cells": [
+            {
+              "text": "Endometriosis that persists despite symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test",
+          "cells": [
+            {
+              "text": "Pregnancy-related pain excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysmenorrhea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Endometriosis",
+          "cells": [
+            {
+              "text": "Deep dyspareunia, dyschezia or cyclical bowel or bladder symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenomyosis",
+          "cells": [
+            {
+              "text": "Heavy bleeding and a bulky uterus on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic inflammatory disease",
+          "cells": [
+            {
+              "text": "Fever, abnormal discharge or pelvic tenderness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysmenorrhea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Prostaglandin synthesis inhibitors started with the onset of menses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovulation suppression",
+          "cells": [
+            {
+              "text": "Combined hormonal contraception, progestogen or levonorgestrel intrauterine system"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-drug measures",
+          "cells": [
+            {
+              "text": "Local heat and exercise; reassurance in primary dysmenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Treat endometriosis, adenomyosis, fibroids and pelvic inflammatory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic inflammatory disease",
+          "cells": [
+            {
+              "text": "Appropriate antibiotics; laparoscopy where endometriosis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude pregnancy",
+          "cells": [
+            {
+              "text": "Before attributing pain to dysmenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecology referral",
+          "cells": [
+            {
+              "text": "Refractory, atypical or secondary-type pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysmenorrhea-dx-mgmt",
+      "title": "Diagnosis and management of Dysmenorrhoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysmenorrhoea: painful menstruation with cramping pelvic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pain after menarche, heavy bleeding, dyspareunia, fever)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for pelvic infection or suspected torsion; exclude pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Focused history and pelvic exam; transvaginal ultrasound; STI screen; pregnancy test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a secondary cause such as endometriosis or fibroids found on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Primary dysmenorrhoea: NSAIDs and hormonal suppression; reassure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs started at the onset of menses for prostaglandin-driven pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combined contraception, progestogen or levonorgestrel IUS to suppress ovulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying cause in secondary dysmenorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics for pelvic inflammatory disease; laparoscopy if endometriosis suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Gynaecology referral for refractory or atypical pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Primary dysmenorrhoea is benign and often improves; secondary depends on the cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

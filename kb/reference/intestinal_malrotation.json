@@ -145,5 +145,278 @@
       "caption": "Overview comparison matrix for intestinal malrotation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intestinal_malrotation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper gastrointestinal contrast series",
+          "cells": [
+            {
+              "text": "Location of the duodenojejunal junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Superior mesenteric vessel orientation; whirlpool sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain abdominal radiograph",
+          "cells": [
+            {
+              "text": "Paucity of distal gas or double-bubble pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis from bowel ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline bloods and cross-match",
+          "cells": [
+            {
+              "text": "Preparation for emergency laparotomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intestinal_malrotation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency laparotomy",
+          "cells": [
+            {
+              "text": "Ladd procedure for confirmed or suspected midgut volvulus: derotation, division of Ladd bands, appendicectomy, bowel repositioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids, nasogastric decompression and correction of metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilious vomiting",
+          "cells": [
+            {
+              "text": "Treated as a surgical emergency with urgent upper gastrointestinal contrast imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel viability",
+          "cells": [
+            {
+              "text": "Assessed at operation; infarcted segments resected; second-look laparotomy where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Long-term support and short-bowel management after extensive resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Paediatric surgical review; low recurrence risk after Ladd procedure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intestinal_malrotation-dx-mgmt",
+      "title": "Diagnosis and management of Intestinal malrotation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Previously well neonate or infant with sudden bilious vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abdominal distension, tenderness, rectal bleeding, acidosis or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency resuscitation and immediate laparotomy for suspected volvulus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent upper GI contrast, ultrasound for whirlpool sign, radiograph, blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Malrotation with volvulus confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other obstruction; re-image urgently if vomiting persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency Ladd procedure: derotation, division of bands, appendicectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resuscitation, fluids, nasogastric decompression and acidosis correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess bowel viability; plan second-look laparotomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutritional support and short-bowel management after resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Paediatric surgical follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Low recurrence risk after Ladd procedure; short-bowel risk after extensive resection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for peripartum cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC guidance on cardiovascular disease in pregnancy / Williams Obstetrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peripartum_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Left ventricular function; excludes other pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods including full blood count, renal, liver and thyroid function",
+          "cells": [
+            {
+              "text": "Systemic and thyroid screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI in selected cases",
+          "cells": [
+            {
+              "text": "Characterises the myocardium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peripartum_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pre-existing cardiomyopathy unmasked by pregnancy",
+          "cells": [
+            {
+              "text": "Pre-existing disease, unmasked by pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism or amniotic fluid embolism",
+          "cells": [
+            {
+              "text": "Features of systemic or pulmonary thromboembolism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peripartum_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure therapy adapted for pregnancy",
+          "cells": [
+            {
+              "text": "Adapted for pregnancy and lactation; avoid foetotoxic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guideline-directed heart failure therapy",
+          "cells": [
+            {
+              "text": "ACE inhibitor or ARB, beta-blocker and mineralocorticoid antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decongestion",
+          "cells": [
+            {
+              "text": "Diuretics with sodium and fluid restriction for pulmonary congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Heightened risk of mural thrombus and thromboembolism, especially with severely reduced ejection fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bromocriptine",
+          "cells": [
+            {
+              "text": "Disease-specific adjunct to suppress prolactin, given with anticoagulant cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced support",
+          "cells": [
+            {
+              "text": "Inotropes and mechanical circulatory support for decompensation or cardiogenic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and counselling",
+          "cells": [
+            {
+              "text": "Serial echocardiography; counsel on the risk of future pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Cardiology, obstetrics, anaesthesia and neonatology; consider advanced therapies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peripartum_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of Peripartum cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness and oedema in late pregnancy or the months after delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute pulmonary oedema, cardiogenic shock, arrhythmia, thromboembolism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: inotropes and mechanical circulatory support for cardiogenic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transthoracic echocardiography; ECG; natriuretic peptide; chest imaging; bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography show reduced left ventricular function with no other cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pre-eclampsia, pre-existing cardiomyopathy, embolism or ischaemic heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat as heart failure with therapy adapted for pregnancy and lactation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Relieve congestion with diuretics, sodium and fluid restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulate given the risk of mural thrombus and thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider bromocriptine to suppress prolactin, with anticoagulant cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor recovery of left ventricular function with serial echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many recover within months; some develop persistent heart failure or die",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

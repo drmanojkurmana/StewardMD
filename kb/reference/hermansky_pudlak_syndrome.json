@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for hermansky-pudlak syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hermansky_pudlak_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-mount electron microscopy of platelets",
+          "cells": [
+            {
+              "text": "Platelet dense-granule ultrastructure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of HPS genes",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation and function studies",
+          "cells": [
+            {
+              "text": "Storage-pool defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT and pulmonary function tests",
+          "cells": [
+            {
+              "text": "Pulmonary fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Visual acuity and iris changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Granulomatous colitis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hermansky_pudlak_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Platelet storage-pool bleeding",
+          "cells": [
+            {
+              "text": "Management of the bleeding tendency, with pre-procedure haematology planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Strict protection for oculocutaneous albinism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary fibrosis surveillance",
+          "cells": [
+            {
+              "text": "Serial high-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatous colitis",
+          "cells": [
+            {
+              "text": "Treated along inflammatory bowel disease lines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic alert",
+          "cells": [
+            {
+              "text": "Pre-procedure planning for bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Haematology, respiratory, dermatology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hermansky_pudlak_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hermansky-Pudlak syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Albinism with bleeding tendency and possible lung or bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Breathlessness, significant bleeding, severe infection, or refractory colitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology and respiratory review for bleeding or fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Platelet electron microscopy; HPS gene testing; aggregation; HRCT and PFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a platelet storage-pool defect with an HPS gene variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Chediak-Higashi, Griscelli, isolated albinism or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Manage the platelet storage-pool bleeding tendency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict photoprotection for oculocutaneous albinism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-resolution CT surveillance for pulmonary fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat granulomatous colitis as inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeding planned for; fibrosis and colitis surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

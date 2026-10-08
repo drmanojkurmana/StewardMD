@@ -152,5 +152,316 @@
       "caption": "Overview comparison matrix for elastofibroma dorsi."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "elastofibroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Lens-shaped mass with fibrous and fatty signal, periscapular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Location and internal fat streaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Deep subscapular position and layered appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elastic-fibre stain on biopsy",
+          "cells": [
+            {
+              "text": "Fragmented beaded elastic fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral imaging",
+          "cells": [
+            {
+              "text": "Frequent contralateral lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "elastofibroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Soft-tissue sarcoma of the chest wall or back",
+          "cells": [
+            {
+              "text": "Atypical or invasive features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoid-type fibromatosis",
+          "cells": [
+            {
+              "text": "Infiltrative fibrous lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoma or fibrolipoma",
+          "cells": [
+            {
+              "text": "Fat-predominant mass without fibrous signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic soft-tissue deposit",
+          "cells": [
+            {
+              "text": "Known malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "elastofibroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic, radiologically typical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marginal excision",
+          "cells": [
+            {
+              "text": "Symptomatic pain or snapping once diagnosis is definitive; low recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Unilateral sporadic lesions or diagnostic uncertainty before excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavity drainage",
+          "cells": [
+            {
+              "text": "Seroma or haematoma prevention after excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Soft tissue or orthopaedic oncology for atypical or excision-bound lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "elastofibroma-dx-mgmt",
+      "title": "Diagnosis and management of Elastofibroma dorsi",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected elastofibroma dorsi: deep periscapular mass, often bilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atypical site, rapid growth, neurological or vascular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma assessment for rapid growth or invasive features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI and CT; ultrasound; biopsy with elastic stain if uncertain; bilateral imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a typical periscapular lesion found on MRI or CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sarcoma, desmoid fibromatosis, lipoma or metastatic deposit",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation for asymptomatic lesions with a typical appearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Marginal excision for symptomatic lesions once diagnosis is secure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy with elastic stain for unilateral or uncertain lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain or compress the cavity to limit seroma after excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oncology referral for atypical lesions where sarcoma is not excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign; marginal excision is curative for symptomatic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }
