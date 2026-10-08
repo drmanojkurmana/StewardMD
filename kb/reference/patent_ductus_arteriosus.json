@@ -148,5 +148,270 @@
       "caption": "Overview comparison matrix for patent ductus arteriosus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "patent_ductus_arteriosus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ductus, shunt magnitude and left heart size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiomegaly and increased pulmonary vascular markings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Left ventricular volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse character and pulse pressure",
+          "cells": [
+            {
+              "text": "Bounding pulses from diastolic runoff"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patent_ductus_arteriosus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventricular septal defect",
+          "cells": [
+            {
+              "text": "Another left-to-right shunt; echocardiography locates the defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous hum",
+          "cells": [
+            {
+              "text": "Innocent continuous murmur with no shunt on echo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patent_ductus_arteriosus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cyclo-oxygenase inhibitor closure",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Ibuprofen or indometacin in preterm infants; paracetamol if contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostaglandin to maintain patency",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "In duct-dependent congenital lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perfusion monitoring",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Pulse character, feeding, respiratory status and perfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "patent_ductus_arteriosus-dx-mgmt",
+      "title": "Diagnosis and management of Patent Ductus Arteriosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Continuous murmur and bounding pulses in a preterm infant with a left-to-right shunt",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (heart failure, collapse as the duct closes or poor perfusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal cardiology for collapse or duct-dependent lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo for ductus and shunt, chest radiograph, ECG, pulse and pressure assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo confirm a patent ductus with a significant left-to-right shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider VSD, aortopulmonary window, venous hum or coronary fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ibuprofen or indometacin to close a significant duct in preterm infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Paracetamol where cyclo-oxygenase inhibitors are contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prostaglandin to keep the ductus open in duct-dependent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor perfusion, feeding, respiratory status and pulse character",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated timely-closed duct excellent; untreated large duct risks lung vascular disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

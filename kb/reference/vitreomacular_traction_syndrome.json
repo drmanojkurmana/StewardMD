@@ -151,5 +151,258 @@
       "caption": "Overview comparison matrix for vitreomacular traction syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitreomacular_traction_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Vitreomacular adhesion and traction, graded for extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amsler grid testing",
+          "cells": [
+            {
+              "text": "Metamorphopsia, detected and monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Best-corrected visual acuity",
+          "cells": [
+            {
+              "text": "Functional impact"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitreomacular_traction_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-thickness or lamellar macular hole",
+          "cells": [
+            {
+              "text": "Traction can progress to a full-thickness hole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epiretinal membrane (macular pucker)",
+          "cells": [
+            {
+              "text": "Distortion from a surface membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoid macular oedema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitreomacular_traction_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild or minimally symptomatic traction; spontaneous release can resolve it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal ocriplasmin",
+          "cells": [
+            {
+              "text": "Pharmacological vitreolysis for focal adhesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitrectomy",
+          "cells": [
+            {
+              "text": "Progressive symptoms or macular hole"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitreomacular_traction_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Vitreomacular traction syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitreomacular traction: distortion of central vision from an adherent vitreous",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive distortion, macular hole or retinal tear)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitreoretinal review for macular hole or retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT for adhesion and traction, Amsler grid, best-corrected visual acuity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT confirm vitreomacular adhesion with traction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epiretinal membrane, macular hole or macular oedema; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation for mild or minimally symptomatic traction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravitreal ocriplasmin for focal adhesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitrectomy for progressive symptoms or a macular hole",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Spontaneous release can resolve the syndrome; progression threatens the macula",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for posterior vitreous detachment."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Royal College of Ophthalmologists guidance / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_vitreous_detachment-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated slit-lamp with peripheral retinal examination and scleral indentation",
+          "cells": [
+            {
+              "text": "Retinal breaks excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shafer's sign check",
+          "cells": [
+            {
+              "text": "Pigment in the anterior vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Fundus obscured, for example by haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Weiss ring, vitreomacular traction or macular pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and field assessment",
+          "cells": [
+            {
+              "text": "Baseline function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat examination after an interval",
+          "cells": [
+            {
+              "text": "Delayed retinal tear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_vitreous_detachment-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinal tear or retinal detachment",
+          "cells": [
+            {
+              "text": "Curtain or shadow in the field"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreous haemorrhage from other causes",
+          "cells": [
+            {
+              "text": "Proliferative retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal migraine or occipital photopsia",
+          "cells": [
+            {
+              "text": "Transient, without floaters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior uveitis or vitritis",
+          "cells": [
+            {
+              "text": "Inflammatory cells in the vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreomacular traction syndrome",
+          "cells": [
+            {
+              "text": "Traction on OCT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_vitreous_detachment-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Uncomplicated cases without a retinal break"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral retinal examination",
+          "cells": [
+            {
+              "text": "Dilated examination with scleral indentation at presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal break treatment",
+          "cells": [
+            {
+              "text": "Laser retinopexy or cryotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage work-up",
+          "cells": [
+            {
+              "text": "B-scan ultrasonography and urgent review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net advice",
+          "cells": [
+            {
+              "text": "Urgent return for new shower of floaters or field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Repeat examination after an interval"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_vitreous_detachment-dx-mgmt",
+      "title": "Diagnosis and management of Posterior vitreous detachment",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New floaters or flashes in a patient with a posterior vitreous detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (curtain or shadow, shower of floaters, Shafer's sign, central loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal specialist review for suspected retinal break or detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated peripheral examination with indentation; OCT; B-scan if view obscured",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does peripheral examination exclude a retinal break or tear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinal tear, vitreous haemorrhage, uveitis or retinal migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe uncomplicated cases without a retinal break",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dilated peripheral examination with scleral indentation at presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat a retinal break promptly with laser retinopexy or cryotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "B-scan to investigate obscuring vitreous haemorrhage urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Safety-net advice to return urgently for new symptoms or field loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Uncomplicated detachment is benign; symptoms usually settle over weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,261 @@
       "caption": "Overview comparison matrix for pellucid marginal degeneration."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pellucid_marginal_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal topography and tomography",
+          "cells": [
+            {
+              "text": "Crab-claw pattern and inferior thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pachymetry mapping",
+          "cells": [
+            {
+              "text": "Band of thinning localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Intact epithelium, no inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pellucid_marginal_degeneration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Keratoconus",
+          "cells": [
+            {
+              "text": "Central cone rather than an inferior peripheral band of thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoglobus",
+          "cells": [
+            {
+              "text": "Global thinning rather than a band"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pellucid_marginal_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Spectacles, then rigid gas-permeable or scleral lenses for irregular astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-linking",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Corneal collagen cross-linking in documented progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for advanced disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Grafting is technically challenging because the peripheral cornea is thin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pellucid_marginal_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Pellucid marginal degeneration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral painless blur from irregular astigmatism with inferior peripheral thinning",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sudden pain, redness or visual loss suggesting hydrops)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for acute hydrops or perforation risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal topography and tomography, pachymetry mapping, slit-lamp examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a crab-claw pattern with inferior thinning confirmed, epithelium intact?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider keratoconus, keratoglobus, Terrien degeneration or post-surgical ectasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optical correction with spectacles, then rigid gas-permeable or scleral lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corneal collagen cross-linking in documented progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for advanced disease, recognising that grafting is technically challenging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for progression of astigmatism and thinning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow progression; vision often managed optically for years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for treacher collins syndrome (tcof1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "treacher_collins_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Treacher Collins syndrome (TCOF1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Treacher Collins syndrome: down-slanting eyes, microtia and malar hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: neonatal airway obstruction, feeding failure, or corneal exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway management and feeding support in the neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TCOF1 testing; audiology; craniofacial CT; sleep study if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TCOF1 testing show a pathogenic variant with the typical facial pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Nager or Miller syndrome, Goldenhar spectrum or isolated Pierre Robin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure the neonatal airway, from positioning to distraction or tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding aids and speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early bone-conduction hearing aids for language development",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged craniofacial and eyelid reconstruction through childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With multidisciplinary care most achieve good function and normal cognition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "treacher_collins_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TCOF1 molecular testing with POLR1C and POLR1D if negative",
+          "cells": [
+            {
+              "text": "Pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Conductive hearing loss from microtia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial CT",
+          "cells": [
+            {
+              "text": "Zygomatic, orbital and middle-ear anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea from airway hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Lower eyelid coloboma and ocular surface"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "treacher_collins_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nager acrofacial dysostosis",
+          "cells": [
+            {
+              "text": "Preaxial limb defects alongside mandibulofacial dysostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goldenhar spectrum",
+          "cells": [
+            {
+              "text": "Asymmetric involvement rather than symmetrical mandibulofacial dysostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated Pierre Robin sequence",
+          "cells": [
+            {
+              "text": "Micrognathia and cleft palate without the zygomatic and eyelid features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "treacher_collins_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal airway management",
+          "cells": [
+            {
+              "text": "Positioning, nasopharyngeal airway, distraction osteogenesis or tracheostomy in severe obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support and speech therapy",
+          "cells": [
+            {
+              "text": "Cleft palate and feeding aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Bone-conduction hearing aids to protect language"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged craniofacial reconstruction",
+          "cells": [
+            {
+              "text": "Zygoma, mandible, eyelids and external ear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyelid and ocular surface care",
+          "cells": [
+            {
+              "text": "Coloboma repair under ophthalmology guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep apnoea treatment",
+          "cells": [
+            {
+              "text": "Continuous positive airway pressure where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant TCOF1-related disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

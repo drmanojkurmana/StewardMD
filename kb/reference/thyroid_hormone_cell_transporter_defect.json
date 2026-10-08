@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for thyroid hormone cell-membrane transporter defect."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology texts and thyroid transporter disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_hormone_cell_transporter_defect-dx-mgmt",
+      "title": "Diagnosis and management of Thyroid hormone cell-membrane transporter defect",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected MCT8 defect: hypotonia, developmental delay and raised free T3 in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: poor weight gain with tachycardia, or misdiagnosis with high-dose thyroxine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic review for hypermetabolic state; stop inappropriate thyroxine",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Free T3, free T4 and TSH profile; SLC16A2 testing; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC16A2 testing show a pathogenic variant with raised free T3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider THRB resistance, cerebral palsy or another neurometabolic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider tiratricol to lower the peripheral thyrotoxic burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blockade for tachycardia and nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, feeding assessment and seizure management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor thyroid function, weight and cardiac status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing of female relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neurodevelopmental impairment is severe and largely irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_hormone_cell_transporter_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Free T3, free T4 and TSH",
+          "cells": [
+            {
+              "text": "Raised free T3, low or low-normal free T4, normal or slightly raised TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reverse T3 measurement",
+          "cells": [
+            {
+              "text": "Peripheral thyroid hormone metabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC16A2 genetic testing",
+          "cells": [
+            {
+              "text": "Pathogenic variant confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Myelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment",
+          "cells": [
+            {
+              "text": "Severity of neurodevelopmental impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight, growth and heart rate assessment",
+          "cells": [
+            {
+              "text": "Peripheral hypermetabolism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_hormone_cell_transporter_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Resistance to thyroid hormone (THRB)",
+          "cells": [
+            {
+              "text": "Thyroid hormone resistance; SLC16A2 testing separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy of other aetiology",
+          "cells": [
+            {
+              "text": "Distinct thyroid function profile with raised free T3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid hormone metabolism defects (SBP2 or SECISBP2)",
+          "cells": [
+            {
+              "text": "Other thyroid hormone metabolism disorders; genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_hormone_cell_transporter_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tiratricol (TRIAC)",
+          "cells": [
+            {
+              "text": "Thyroid hormone analogue to lower the peripheral thyrotoxic burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Peripheral hypermetabolism and tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Poor weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy for hypotonia and spasticity; feeding assessment; seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring on analogue therapy",
+          "cells": [
+            {
+              "text": "Thyroid function, weight, growth and cardiac status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; carrier testing of female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

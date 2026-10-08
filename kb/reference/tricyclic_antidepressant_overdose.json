@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for tricyclic antidepressant overdose."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tricyclic_antidepressant_overdose-dx-mgmt",
+      "title": "Diagnosis and management of Tricyclic antidepressant overdose",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tricyclic overdose: anticholinergic features with reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: QRS widening, ventricular arrhythmia, hypotension or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate bicarbonate, airway protection and continuous cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for QRS and aVR; blood gas; electrolytes; co-ingestant screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ECG show QRS widening or a prominent terminal R wave in aVR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other sodium-channel blockers, hyperkalaemia or anticholinergic poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early intubation for depressed consciousness or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous sodium bicarbonate for QRS widening or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Benzodiazepines for seizures; avoid class Ia, Ic and III drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Crystalloid then noradrenaline for hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lipid emulsion or extracorporeal support if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Psychiatric assessment once the ECG and mental state normalise",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Most deaths early from arrhythmia or hypotension; survivors of day one usually recover",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tricyclic_antidepressant_overdose-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial 12-lead ECG",
+          "cells": [
+            {
+              "text": "QRS width and terminal R wave in aVR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Abrupt deterioration is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and electrolytes",
+          "cells": [
+            {
+              "text": "Acidosis and potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capillary glucose and co-ingestant screen",
+          "cells": [
+            {
+              "text": "Paracetamol and salicylate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Prolonged seizures or immobility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricyclic_antidepressant_overdose-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Similar QRS widening; drug history identifies the agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Causes QRS widening; serum potassium distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other anticholinergic poisoning",
+          "cells": [
+            {
+              "text": "Broad QRS points to sodium-channel blockade"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricyclic_antidepressant_overdose-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early intubation",
+          "cells": [
+            {
+              "text": "Depressed consciousness or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Widening QRS, ventricular arrhythmia or hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Early presentations once airway protected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines for seizures",
+          "cells": [
+            {
+              "text": "Avoid class Ia, Ic and III antiarrhythmics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystalloid then noradrenaline",
+          "cells": [
+            {
+              "text": "Hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid emulsion or extracorporeal support",
+          "cells": [
+            {
+              "text": "Refractory cardiotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid physostigmine",
+          "cells": [
+            {
+              "text": "Do not give"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

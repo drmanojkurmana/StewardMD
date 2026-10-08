@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for portal cavernoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portal_cavernoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound of the portal system",
+          "cells": [
+            {
+              "text": "Portal vein patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR portography",
+          "cells": [
+            {
+              "text": "Cavernous transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Varices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia and MPN screen with JAK2",
+          "cells": [
+            {
+              "text": "Prothrombotic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Hypersplenism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and synthetic tests",
+          "cells": [
+            {
+              "text": "Preserved function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Biliopathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_cavernoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Portal vein tumour thrombus",
+          "cells": [
+            {
+              "text": "Tumour within the thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Hepatic venous outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_cavernoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Directed by the prothrombotic state, balanced against variceal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Variceal bleeding",
+          "cells": [
+            {
+              "text": "Endoscopic band ligation for prevention and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical shunt",
+          "cells": [
+            {
+              "text": "Meso-Rex bypass or portosystemic shunt for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypersplenism",
+          "cells": [
+            {
+              "text": "Management of cytopenias with attention to bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliopathy",
+          "cells": [
+            {
+              "text": "Treatment when biliary obstruction develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology",
+          "cells": [
+            {
+              "text": "Identify and treat an underlying myeloproliferative neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portal_cavernoma-dx-mgmt",
+      "title": "Diagnosis and management of portal cavernoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Portal vein thrombosis with collaterals, varices or hypersplenism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (variceal haemorrhage, cholangitis, mesenteric extension, rapid cytopenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endoscopic band ligation for variceal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler; CT or MR portography; endoscopy; thrombophilia and JAK2; blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does portography show cavernous transformation of a thrombosed portal vein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cirrhotic portal hypertension, Budd-Chiari, tumour thrombus or portal fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticoagulation directed by the prothrombotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prevention and treatment of variceal bleeding with band ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Meso-Rex bypass or portosystemic shunt for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of hypersplenism and cytopenias with bleeding risk in mind",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Haematology referral to identify and treat an underlying MPN",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With preserved liver function and controlled varices, outlook is generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

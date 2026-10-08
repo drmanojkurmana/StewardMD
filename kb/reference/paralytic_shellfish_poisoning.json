@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for paralytic shellfish poisoning (saxitoxin)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paralytic_shellfish_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from shellfish history and neurology",
+          "cells": [
+            {
+              "text": "Characteristic paralytic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial forced vital capacity",
+          "cells": [
+            {
+              "text": "Ventilatory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry and arterial blood gases",
+          "cells": [
+            {
+              "text": "Respiratory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and baseline bloods",
+          "cells": [
+            {
+              "text": "Alternative causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxin assay of shellfish samples",
+          "cells": [
+            {
+              "text": "Where available; public health notification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paralytic_shellfish_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetrodotoxin (pufferfish) poisoning",
+          "cells": [
+            {
+              "text": "Another sodium-channel toxin with a similar syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome or botulism",
+          "cells": [
+            {
+              "text": "Ascending weakness; the shellfish history separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paralytic_shellfish_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Airway protection and mechanical ventilation through paralysis; no antidote"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal decontamination",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Activated charcoal and gastric lavage soon after ingestion, once the airway is protected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Continuous monitoring with serial forced vital capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Intravenous fluids and supportive care until toxin clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and public health actions",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Neurological monitoring; notify public health authorities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paralytic_shellfish_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Paralytic shellfish poisoning (saxitoxin)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Perioral tingling and limb weakness within an hour of eating shellfish",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive weakness, falling oxygen saturation or airway at risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway protection and mechanical ventilation for respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial forced vital capacity, oximetry, arterial gases, ECG, electrolytes, toxin assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is shellfish ingestion confirmed, with other causes of paralysis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetrodotoxin, Guillain-Barre syndrome, botulism or ciguatera",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with airway protection and mechanical ventilation; no antidote",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activated charcoal and gastric lavage soon after ingestion once the airway is protected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continuous respiratory monitoring with serial forced vital capacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous fluids and intensive supportive care until toxin clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurological monitoring during paralysis; notify public health authorities",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With ventilatory support recovery is usually complete in days; severe cases can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,315 @@
       "caption": "Overview comparison matrix for paraquat poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraquat_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or urine paraquat level and urine dithionite test",
+          "cells": [
+            {
+              "text": "Confirms the agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial renal and liver function tests",
+          "cells": [
+            {
+              "text": "Early kidney and liver injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and serial chest imaging",
+          "cells": [
+            {
+              "text": "Evolving lung injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and electrolytes",
+          "cells": [
+            {
+              "text": "Baseline and supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma level plotted against time since ingestion",
+          "cells": [
+            {
+              "text": "Prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraquat_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other lethal pesticide ingestion",
+          "cells": [
+            {
+              "text": "Organophosphate or aluminium phosphide; the paraquat level separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute interstitial pneumonitis or other ARDS",
+          "cells": [
+            {
+              "text": "Ingestion history and plasma level distinguish paraquat injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraquat_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early decontamination",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Activated charcoal or Fuller's earth if presenting very early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen restriction",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Withhold or minimise oxygen; reserve for severe refractory hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "IV fluids, analgesia for corrosive burns and antiemetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced elimination",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Haemoperfusion or haemodialysis; survival benefit is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Corticosteroids and cyclophosphamide in severe cases; outcome still poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology input",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Early poisons centre review and honest palliative planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraquat_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Paraquat poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paraquat ingestion with painful oropharyngeal burns, vomiting and abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (concentrated ingestion, early kidney injury or progressive hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent toxicology and ICU review; decontaminate if very early",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paraquat level, dithionite test, renal and liver tests, ABG, serial chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is paraquat confirmed, with the plasma level plotted against time since ingestion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other pesticide ingestion, corrosive injury, ARDS or pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activated charcoal or Fuller's earth if presenting very early after ingestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withhold or minimise oxygen, which accelerates free-radical lung injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV fluids, analgesia for burns, and haemoperfusion or haemodialysis if available",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids and cyclophosphamide in severe poisoning, with limited benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally poor and dose-dependent; death from organ failure or pulmonary fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

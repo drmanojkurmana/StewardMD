@@ -146,5 +146,352 @@
       "caption": "Overview comparison matrix for postprandial hypotension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postprandial_hypotension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure before and after a standard meal",
+          "cells": [
+            {
+              "text": "Postprandial fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lying-to-standing blood pressure",
+          "cells": [
+            {
+              "text": "Coexisting orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Antihypertensives and diuretics taken with meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing",
+          "cells": [
+            {
+              "text": "Autonomic failure suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose around episodes",
+          "cells": [
+            {
+              "text": "Hypoglycaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postprandial_hypotension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Postural rather than meal-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflex (vasovagal) syncope",
+          "cells": [
+            {
+              "text": "Triggered by standing or emotion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia or structural heart disease",
+          "cells": [
+            {
+              "text": "Syncope without meal trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-induced hypotension",
+          "cells": [
+            {
+              "text": "Drug timing with meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive hypoglycaemia",
+          "cells": [
+            {
+              "text": "Low glucose after eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dumping syndrome",
+          "cells": [
+            {
+              "text": "Gastric surgery history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postprandial_hypotension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diet change",
+          "cells": [
+            {
+              "text": "Smaller, frequent meals low in rapidly absorbed carbohydrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural measures",
+          "cells": [
+            {
+              "text": "Water before meals, remaining seated after eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication timing",
+          "cells": [
+            {
+              "text": "Reschedule antihypertensives and diuretics away from meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological adjuncts",
+          "cells": [
+            {
+              "text": "Acarbose, caffeine or octreotide where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Identify and manage, as it compounds the risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying condition",
+          "cells": [
+            {
+              "text": "Treat autonomic failure or Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postprandial_hypotension-dx-mgmt",
+      "title": "Diagnosis and management of Postprandial hypotension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dizziness or syncope within an hour of eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (recurrent syncope with injury, postprandial angina, synucleinopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac review for postprandial angina or syncope with injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Postprandial blood pressure; lying-to-standing BP; medication review; ECG; glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does a standard meal reproduce a significant fall in blood pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orthostatic hypotension, reflex syncope, arrhythmia or dumping",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Smaller, more frequent meals low in rapidly absorbed carbohydrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drink water before meals and remain seated after eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reschedule antihypertensives and diuretics away from mealtimes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider acarbose, caffeine or octreotide as adjuncts where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Identify and manage coexisting orthostatic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually manageable with diet and behaviour; higher risk in frailty or autonomic failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,287 @@
       "caption": "Overview comparison matrix for nutcracker syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nutcracker_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound of the left renal vein",
+          "cells": [
+            {
+              "text": "Flow velocity and compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Compressed segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Haematuria and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of glomerular or stone disease",
+          "cells": [
+            {
+              "text": "Other causes of haematuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nutcracker_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IgA nephropathy",
+          "cells": [
+            {
+              "text": "Glomerular haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thin basement membrane disease",
+          "cells": [
+            {
+              "text": "Benign haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urolithiasis",
+          "cells": [
+            {
+              "text": "Loin pain and haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial malignancy",
+          "cells": [
+            {
+              "text": "Haematuria requiring cystoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nutcracker_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "For younger, mildly symptomatic patients; many improve with growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight gain",
+          "cells": [
+            {
+              "text": "Increases retroperitoneal fat and eases compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical or endovascular treatment",
+          "cells": [
+            {
+              "text": "For severe, persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor renal function and haematuria",
+          "cells": [
+            {
+              "text": "Tracks progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nutcracker_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Nutcracker syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Left flank pain and haematuria from left renal vein compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe macroscopic haematuria, impaired renal function)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of clot retention or anaemia from haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal vein Doppler, CT or MR venography, urinalysis, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Left renal vein compression with symptoms matching it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glomerular disease or urolithiasis; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative observation for younger, mildly symptomatic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Encourage weight gain to increase retroperitoneal fat",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical or endovascular treatment for severe symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor renal function and haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many younger patients improve spontaneously as retroperitoneal fat increases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

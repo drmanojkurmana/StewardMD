@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for mononeuritis multiplex."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mononeuritis_multiplex-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Multifocal, asymmetric pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR, CRP, ANCA, ANA, complement, cryoglobulins",
+          "cells": [
+            {
+              "text": "Inflammatory and autoimmune screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes, HIV, hepatitis B and C testing",
+          "cells": [
+            {
+              "text": "Metabolic and infective causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve and muscle biopsy",
+          "cells": [
+            {
+              "text": "Confirms vasculitis when systemic markers are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Systemic organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mononeuritis_multiplex-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic vasculitides (PAN, GPA)",
+          "cells": [
+            {
+              "text": "Treatable cause to exclude early; confirmed by biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic neuropathy and amyotrophy",
+          "cells": [
+            {
+              "text": "Should not be assumed without excluding vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple compressive mononeuropathies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective causes (leprosy, HIV, Lyme)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mononeuritis_multiplex-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Corticosteroids plus cyclophosphamide or rituximab for vasculitis; tight glycaemic control in diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tailored immunomodulation",
+          "cells": [
+            {
+              "text": "IV immunoglobulin for immune-mediated disease; treat cryoglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain control",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic antidepressants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, foot-drop splint, falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Disease activity, treatment toxicity, end-organ involvement, relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt escalation of immunosuppression",
+          "cells": [
+            {
+              "text": "For progressive deficit, to prevent irreversible axonal infarction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mononeuritis_multiplex-dx-mgmt",
+      "title": "Diagnosis and management of Mononeuritis multiplex",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful, asymmetric multifocal nerve deficits over days to weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid progression with systemic features, renal, lung or gut involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy and immunosuppression for suspected active vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NCS/EMG, ESR, CRP, ANCA, cryoglobulins, HIV and hepatitis serology, nerve biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vasculitis or other treatable cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for diabetes, compressive neuropathies, sarcoid, infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Steroids plus cyclophosphamide or rituximab for vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tailor therapy: IVIG, cryoglobulinaemia treatment, glycaemic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathic pain agents; foot-drop splint and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for relapse and drug toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vasculitic cases recover substantially if treated before axonal loss is established",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

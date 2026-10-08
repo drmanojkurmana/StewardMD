@@ -158,5 +158,238 @@
       "caption": "Overview comparison matrix for familial renal glucosuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_glucosuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine glucose with simultaneous plasma glucose",
+          "cells": [
+            {
+              "text": "Glucosuria relative to plasma glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting plasma glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_glucosuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetes mellitus",
+          "cells": [
+            {
+              "text": "Raised glycated haemoglobin"
+            },
+            {
+              "text": "HbA1c"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi syndrome",
+          "cells": [
+            {
+              "text": "Aminoaciduria or phosphaturia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_glucosuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Isolated SGLT2-related glucosuria is benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnosis",
+          "cells": [
+            {
+              "text": "Confirm and actively exclude Fanconi syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes",
+          "cells": [
+            {
+              "text": "Exclude diabetes with glycaemic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_glucosuria-dx-mgmt",
+      "title": "Diagnosis and management of Familial Renal Glucosuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal glucosuria: glycosuria with normal plasma glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised HbA1c or hyperglycaemia, aminoaciduria, phosphaturia, or acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for diabetes or Fanconi syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine glucose with plasma glucose; fasting glucose; HbA1c; urine chemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is glucosuria with normal glucose and no other tubular defect confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider diabetes or Fanconi syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that isolated SGLT2-related glucosuria is benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm the diagnosis and actively exclude Fanconi syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Exclude diabetes with glycaemic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Periodic review of urine chemistry",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,231 @@
       "caption": "Overview comparison matrix for yellow nail syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory Medicine and Dermatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "yellow_nail_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of nail changes, lymphoedema and effusions",
+          "cells": [
+            {
+              "text": "Triad of yellow dystrophic nails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid analysis",
+          "cells": [
+            {
+              "text": "Exudative or lymphatic effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yellow_nail_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Onychomycosis and other nail dystrophies",
+          "cells": [
+            {
+              "text": "Dismissed as fungal infection, which misses the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital or acquired lymphoedema of other cause",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Effusions with proteinuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yellow_nail_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic drainage of effusions",
+          "cells": [
+            {
+              "text": "Recurrent pleural effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of refractory or chylous effusions",
+          "cells": [
+            {
+              "text": "Specialist treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "yellow_nail_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Yellow nail syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected yellow nail syndrome: yellow thickened nails with lymphoedema and effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features of malignancy or large rapidly reaccumulating effusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation for malignancy or drainage of large effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Assessment of nails and lymphoedema, pleural fluid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the nail, lymphoedema and effusion features present together?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider onychomycosis, other lymphoedema or nephrotic effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic drainage of recurrent pleural effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specialist treatment for refractory or chylous effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not dismiss the nail changes as simple fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Chronic; effusions are the main respiratory complication",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

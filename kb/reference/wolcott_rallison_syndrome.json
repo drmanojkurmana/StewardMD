@@ -149,5 +149,240 @@
       "caption": "Overview comparison matrix for wolcott-rallison syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Monogenic diabetes references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wolcott_rallison_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EIF2AK3 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose with C-peptide and islet autoantibodies",
+          "cells": [
+            {
+              "text": "Insulin deficiency with negative autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolcott_rallison_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other causes of permanent neonatal diabetes",
+          "cells": [
+            {
+              "text": "KCNJ11, ABCC8 or INS variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IPEX syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune enteropathy and early diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 diabetes",
+          "cells": [
+            {
+              "text": "Negative islet autoantibodies separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolcott_rallison_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong insulin replacement",
+          "cells": [
+            {
+              "text": "Permanent, non-autoimmune insulin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for liver and infection",
+          "cells": [
+            {
+              "text": "Recurrence during infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wolcott_rallison_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Wolcott-Rallison syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Wolcott-Rallison: neonatal insulin-deficient diabetes with liver crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute liver failure, coagulopathy or hypoglycaemia during infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of liver failure, hypoglycaemia or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EIF2AK3 testing, glucose with C-peptide, islet autoantibodies, liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EIF2AK3 testing confirm biallelic variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other causes of permanent neonatal diabetes or IPEX",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong insulin replacement for insulin deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor liver function and manage decompensation during infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid attributing diabetes to type 1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lifelong insulin need; recurrent decompensation with infection is a risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

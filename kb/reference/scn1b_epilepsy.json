@@ -149,5 +149,267 @@
       "caption": "Overview comparison matrix for scn1b-related epilepsy (gefs+/dravet-like)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scn1b_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "SCN1B variant; zygosity separates dominant GEFS+ from biallelic Dravet-like disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised and focal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural causes in severe presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and segregation analysis",
+          "cells": [
+            {
+              "text": "Dominant GEFS+ spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Severe phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scn1b_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure medication",
+          "cells": [
+            {
+              "text": "Sodium valproate, levetiracetam or clobazam in the severe phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caution with sodium-channel blockers",
+          "cells": [
+            {
+              "text": "May be poorly tolerated in the biallelic Dravet-like phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt fever control",
+          "cells": [
+            {
+              "text": "Antipyretics, since fever lowers the seizure threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue benzodiazepine protocol",
+          "cells": [
+            {
+              "text": "For prolonged seizures; counsel on status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental surveillance",
+          "cells": [
+            {
+              "text": "Early intervention in the severe encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Segregation analysis separating dominant GEFS+ from biallelic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scn1b_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of SCN1B-related epilepsy (GEFS+/Dravet-like)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Febrile-triggered seizures with family history: suspected SCN1B epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Febrile status, regression, drug-resistant seizures or SUDEP risk features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rescue benzodiazepine, seizure admission and paediatric epileptology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome with zygosity, EEG, MRI in severe cases, family segregation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SCN1B variant found, and is it heterozygous or biallelic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test SCN1A, GABRG2 and PCDH19; reconsider genetic generalised epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Valproate, levetiracetam or clobazam for severe phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Use sodium-channel blockers cautiously if biallelic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antipyretics and a rescue benzodiazepine protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental surveillance and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Heterozygous GEFS+ often favourable; biallelic Dravet-like disease is severe",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

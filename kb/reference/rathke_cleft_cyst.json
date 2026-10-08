@@ -150,5 +150,238 @@
       "caption": "Overview comparison matrix for rathke cleft cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rathke_cleft_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary MRI with contrast",
+          "cells": [
+            {
+              "text": "Non-enhancing cyst and any intracystic nodule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Hypopituitarism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rathke_cleft_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniopharyngioma",
+          "cells": [
+            {
+              "text": "Cystic adamantinomatous component"
+            },
+            {
+              "text": "Pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic pituitary adenoma",
+          "cells": [
+            {
+              "text": "Solid enhancing component"
+            },
+            {
+              "text": "Pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rathke_cleft_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Conservative observation with surveillance MRI for asymptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transsphenoidal drainage",
+          "cells": [
+            {
+              "text": "Drainage and fenestration rather than aggressive resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone assessment",
+          "cells": [
+            {
+              "text": "Assess and replace pituitary deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rathke_cleft_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Rathke cleft cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Rathke cleft cyst: non-enhancing pituitary cyst on MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Visual field loss, new hypopituitarism or diabetes insipidus, or apoplexy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for visual loss or apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast pituitary MRI; anterior pituitary hormone profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a non-enhancing cyst confirmed with other lesions excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider craniopharyngioma or cystic adenoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative observation with surveillance MRI for asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transsphenoidal drainage and fenestration if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hormone assessment for hypopituitarism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Endocrine and visual surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

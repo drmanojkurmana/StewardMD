@@ -145,5 +145,316 @@
       "caption": "Overview comparison matrix for thyroglossal cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroglossal_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Thyroglossal cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroglossal cyst: painless midline swelling that moves on swallowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: acute abscess, solid component, or airway compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics and drainage of an abscess; airway assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neck ultrasound confirming a normal orthotopic thyroid gland",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a normally sited, functioning thyroid gland confirmed on ultrasound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ectopic thyroid: check thyroid function and consider thyroxine before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sistrunk procedure: cyst, tract and central hyoid removed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm a normal orthotopic thyroid before excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics and drainage for infection, then definitive excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thyroxine if the orthotopic thyroid is ectopic or absent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Histology of the specimen to exclude rare carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Low recurrence after Sistrunk; simple excision leaving the tract recurs more often",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroglossal_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Cyst characterisation and normally sited thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Ectopic thyroid concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Atypical, recurrent or deep lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration",
+          "cells": [
+            {
+              "text": "Suspicious or atypical masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radionuclide thyroid scan",
+          "cells": [
+            {
+              "text": "Ectopic functioning tissue, when it must be confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroglossal_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopic or lingual thyroid",
+          "cells": [
+            {
+              "text": "Thyroid tissue at an ectopic site; a normal orthotopic gland must be confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoid cyst of the midline neck",
+          "cells": [
+            {
+              "text": "Midline lesion that the Sistrunk operation does not treat as a tract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Branchial or lateral neck cyst",
+          "cells": [
+            {
+              "text": "Lies off the midline; not an embryological tract cyst"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroglossal_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sistrunk procedure",
+          "cells": [
+            {
+              "text": "Excision of cyst, tract and central hyoid; minimises recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm orthotopic thyroid",
+          "cells": [
+            {
+              "text": "Before excision, as the cyst rarely holds the only functioning thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management",
+          "cells": [
+            {
+              "text": "Antibiotics and drainage; definitive surgery after inflammation settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroxine replacement",
+          "cells": [
+            {
+              "text": "If the orthotopic thyroid is ectopic or absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the specimen",
+          "cells": [
+            {
+              "text": "Rare malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Paediatric surgery or otolaryngology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

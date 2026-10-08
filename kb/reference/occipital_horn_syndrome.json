@@ -150,5 +150,278 @@
       "caption": "Overview comparison matrix for occipital horn syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "occipital_horn_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Characteristically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Occipital horns and dysplastic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP7A genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the copper-transport defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and urinary tract imaging",
+          "cells": [
+            {
+              "text": "Aneurysm, dissection or bladder diverticulum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occipital_horn_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic Menkes disease",
+          "cells": [
+            {
+              "text": "More severe ATP7A phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutis laxa syndromes",
+          "cells": [
+            {
+              "text": "Loose skin with connective tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ehlers-Danlos syndrome",
+          "cells": [
+            {
+              "text": "Connective tissue phenotype; copper testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occipital_horn_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No proven disease-modifying therapy",
+          "cells": [
+            {
+              "text": "Parenteral copper-histidine has limited value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for vascular complications",
+          "cells": [
+            {
+              "text": "Aneurysm or dissection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urological review",
+          "cells": [
+            {
+              "text": "Bladder diverticulum and infection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "occipital_horn_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Occipital horn syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Occipital horns and connective tissue features in a male with low copper",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bladder rupture, acute aneurysm or dissection, urosepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for bladder rupture or vascular emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum copper and caeruloplasmin, skeletal films, ATP7A testing, vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ATP7A variant with low copper and occipital horns?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Menkes disease or Ehlers-Danlos; retest copper and genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No proven disease-modifying therapy; copper-histidine has limited value",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surveillance for aneurysm and dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urological review for diverticulum and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for X-linked inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Much better than classic Menkes; survival into adulthood with connective tissue morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

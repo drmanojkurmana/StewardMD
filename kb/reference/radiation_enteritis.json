@@ -149,5 +149,267 @@
       "caption": "Overview comparison matrix for radiation enteritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology and oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "radiation_enteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History of abdominal or pelvic radiotherapy",
+          "cells": [
+            {
+              "text": "Prior radiation exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging or small-bowel contrast studies",
+          "cells": [
+            {
+              "text": "Small-bowel changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional status and malabsorption assessment",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy as indicated",
+          "cells": [
+            {
+              "text": "Mucosal assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radiation_enteritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent malignancy causing obstruction",
+          "cells": [
+            {
+              "text": "Obstruction"
+            },
+            {
+              "text": "Cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adhesional small-bowel obstruction",
+          "cells": [
+            {
+              "text": "Obstruction"
+            },
+            {
+              "text": "Contrast studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radiation_enteritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute enteritis",
+          "cells": [
+            {
+              "text": "Usually self-limited, resolving within two to six months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Antidiarrhoeal agents, antispasmodics and low-residue low-fat diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption",
+          "cells": [
+            {
+              "text": "Nutritional support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "radiation_enteritis-dx-mgmt",
+      "title": "Diagnosis and management of Radiation enteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected radiation enteritis: bowel symptoms after abdominal or pelvic radiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Small-bowel obstruction, fistula, significant bleeding, or severe malnutrition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for obstruction or fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiotherapy history; small-bowel imaging or contrast; nutrition; endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is radiation injury confirmed with recurrent malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider recurrent malignancy, IBD or SIBO; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute enteritis: conservative care, usually self-limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antidiarrhoeal agents and antispasmodics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-residue, low-fat diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutritional support for malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Gastroenterology review for chronic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

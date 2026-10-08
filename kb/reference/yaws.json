@@ -151,5 +151,240 @@
       "caption": "Overview comparison matrix for yaws."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "yaws-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dark-field microscopy of lesion exudate",
+          "cells": [
+            {
+              "text": "Spirochaetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-treponemal serology (RPR or VDRL)",
+          "cells": [
+            {
+              "text": "Activity of infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yaws-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Venereal syphilis",
+          "cells": [
+            {
+              "text": "Serologically identical; distinguished by history and setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bejel or pinta",
+          "cells": [
+            {
+              "text": "Other endemic treponematoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous infection or other skin disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yaws-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Single oral azithromycin dose",
+          "cells": [
+            {
+              "text": "Cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intramuscular benzathine benzylpenicillin",
+          "cells": [
+            {
+              "text": "Alternative cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact treatment",
+          "cells": [
+            {
+              "text": "Community treatment for infection control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "yaws-dx-mgmt",
+      "title": "Diagnosis and management of Yaws",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected yaws: skin lesions with bone involvement in a child from an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (destructive facial lesions or extensive bone deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment and review for destructive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dark-field microscopy of exudate, non-treponemal serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microscopy or serology confirm treponemal infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venereal syphilis or other skin disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single oral azithromycin dose or intramuscular benzathine penicillin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not mislabel children as venereal syphilis from positive serology alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Contact treatment in affected communities",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Curable with antibiotics; facial and bone destruction is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

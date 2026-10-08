@@ -155,5 +155,238 @@
       "caption": "Overview comparison matrix for remitting seronegative symmetrical synovitis with pitting oedema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rheumatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "remitting_seronegative_symmetrical_synovitis_with_pitting_oedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RF and anti-CCP antibodies",
+          "cells": [
+            {
+              "text": "Expected to be negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "remitting_seronegative_symmetrical_synovitis_with_pitting_oedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Elderly-onset seronegative rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Seronegative symmetrical arthritis"
+            },
+            {
+              "text": "RF and anti-CCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "remitting_seronegative_symmetrical_synovitis_with_pitting_oedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Low-dose oral corticosteroids as the mainstay, with rapid response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tapering",
+          "cells": [
+            {
+              "text": "Taper gradually once in remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screen",
+          "cells": [
+            {
+              "text": "Assess for constitutional features or malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "remitting_seronegative_symmetrical_synovitis_with_pitting_oedema-dx-mgmt",
+      "title": "Diagnosis and management of Remitting Seronegative Symmetrical Synovitis with Pitting Oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected RS3PE: abrupt symmetrical synovitis with pitting oedema in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Weight loss, night sweats, lymphadenopathy, or poor steroid response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for malignancy or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RF and anti-CCP; ESR and CRP; joint imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are RF and anti-CCP negative with corticosteroid response confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider elderly-onset RA, PMR or spondyloarthritis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose oral corticosteroids as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Taper corticosteroids gradually once in remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess for constitutional features or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Rheumatology follow-up for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

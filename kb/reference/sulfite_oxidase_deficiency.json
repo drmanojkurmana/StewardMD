@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for isolated sulfite oxidase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sulfite_oxidase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fresh urine sulphite testing and urinary S-sulphocysteine",
+          "cells": [
+            {
+              "text": "Biochemical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma uric acid",
+          "cells": [
+            {
+              "text": "Normal; separates it from molybdenum cofactor deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma total homocysteine and cystine",
+          "cells": [
+            {
+              "text": "Tend to be low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Early oedema, then cystic change and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SUOX molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sulfite_oxidase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Molybdenum cofactor deficiency",
+          "cells": [
+            {
+              "text": "Biochemically similar but with low uric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoxic-ischaemic encephalopathy",
+          "cells": [
+            {
+              "text": "Perinatal history and imaging distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-ketotic hyperglycinaemia",
+          "cells": [
+            {
+              "text": "Neonatal encephalopathy with a different metabolic profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sulfite_oxidase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary restriction of methionine and cysteine",
+          "cells": [
+            {
+              "text": "Substrate reduction; limited efficacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Intractable seizures, avoiding agents that worsen the state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive nutrition",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agents and physiotherapy",
+          "cells": [
+            {
+              "text": "Evolving spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological management",
+          "cells": [
+            {
+              "text": "Ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of catabolic stress",
+          "cells": [
+            {
+              "text": "Intercurrent illness and fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sulfite_oxidase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Isolated sulfite oxidase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intractable neonatal seizures and encephalopathy: suspected sulphite oxidase deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intractable seizures, ectopia lentis, rapid neurological decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anticonvulsant control of intractable neonatal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fresh urine sulphite; urinary S-sulphocysteine; plasma uric acid; MRI; SUOX",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is urinary sulphite or S-sulphocysteine raised with normal uric acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider molybdenum cofactor deficiency or hypoxic-ischaemic injury; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary restriction of sulphur amino acids, recognising limited efficacy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsant therapy for intractable seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding for nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antispasticity agents and physiotherapy for evolving spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe neonatal form has a poor prognosis; milder late-onset forms exist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

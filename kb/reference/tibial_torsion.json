@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for tibial torsion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tibial_torsion-dx-mgmt",
+      "title": "Diagnosis and management of Tibial torsion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tibial torsion: in-toeing gait in a toddler or child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive worsening, marked asymmetry, pain, or short stature?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric orthopaedic review for suspected pathological deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rotational profile: thigh-foot angle and transmalleolar axis; hip rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the profile show internal tibial torsion with a normal femur?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider femoral anteversion, metatarsus adductus or Blount disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; physiological torsion resolves with growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid braces, night splints and special shoes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial rotational profile to confirm derotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor external torsion, which can worsen with growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Derotational osteotomy only for rare severe persistent deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; internal tibial torsion resolves spontaneously in almost all children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tibial_torsion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thigh-foot angle and transmalleolar axis",
+          "cells": [
+            {
+              "text": "Rotational profile with the child prone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot progression angle during gait",
+          "cells": [
+            {
+              "text": "In-toeing or out-toeing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip rotation assessment",
+          "cells": [
+            {
+              "text": "Coexisting femoral cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot examination",
+          "cells": [
+            {
+              "text": "Metatarsus adductus or other deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing lower-limb radiographs",
+          "cells": [
+            {
+              "text": "Only when angular deformity or pathological cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tibial_torsion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Increased femoral anteversion",
+          "cells": [
+            {
+              "text": "Femoral rather than tibial rotation; full rotational profile separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metatarsus adductus",
+          "cells": [
+            {
+              "text": "In-toeing at the level of the foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blount disease",
+          "cells": [
+            {
+              "text": "Pathological angular tibial deformity that is not simple torsion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tibial_torsion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Internal tibial torsion is physiological and resolves with growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid braces and splints",
+          "cells": [
+            {
+              "text": "Night splints, special shoes and stretching do not alter the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial rotational profile",
+          "cells": [
+            {
+              "text": "Confirms expected external derotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Derotational osteotomy",
+          "cells": [
+            {
+              "text": "Rare severe, persistent deformity in an older child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closer follow-up of external torsion",
+          "cells": [
+            {
+              "text": "Tends to worsen with growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric orthopaedic referral",
+          "cells": [
+            {
+              "text": "Atypical, asymmetrical, worsening or pathological cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

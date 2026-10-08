@@ -148,5 +148,332 @@
       "caption": "Overview comparison matrix for shone complex."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "shone_complex-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic components",
+          "cells": [
+            {
+              "text": "Supravalvar mitral ring, parachute mitral valve, subaortic stenosis, coarctation; incomplete forms common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Maps every level of left-heart obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler gradients",
+          "cells": [
+            {
+              "text": "Mitral apparatus, subaortic region, aortic valve and arch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MR or CT angiography",
+          "cells": [
+            {
+              "text": "Arch anatomy and coarctation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary vascular resistance and residual gradients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and ECG",
+          "cells": [
+            {
+              "text": "Chamber enlargement and pulmonary congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Progression of individual lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shone_complex-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated coarctation of the aorta",
+          "cells": [
+            {
+              "text": "Assuming it is isolated misses the wider complex; full echo survey"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated congenital mitral stenosis",
+          "cells": [
+            {
+              "text": "Supravalvar ring and parachute valve mimic mitral stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated subaortic or valvar aortic stenosis",
+          "cells": [
+            {
+              "text": "One obvious lesion can distract from additional serial obstructions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shone_complex-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged relief of each obstruction",
+          "cells": [
+            {
+              "text": "Coarctation repair, subaortic and supravalvar mitral ring resection, mitral or aortic valve repair or replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostaglandin infusion",
+          "cells": [
+            {
+              "text": "Maintains ductal patency in the duct-dependent critically ill neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical heart failure support",
+          "cells": [
+            {
+              "text": "Diuretics and afterload reduction for pulmonary venous congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic mapping",
+          "cells": [
+            {
+              "text": "Serial imaging to find every level and track progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Residual obstruction, mitral dysfunction, pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prophylaxis and reintervention",
+          "cells": [
+            {
+              "text": "Staged as lesions recur or the child grows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cardiac team",
+          "cells": [
+            {
+              "text": "Surgical and cardiology multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "shone_complex-dx-mgmt",
+      "title": "Diagnosis and management of Shone complex",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with serial left-heart obstructions: mitral, subaortic and coarctation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neonatal collapse, pulmonary oedema or rising left atrial pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Start prostaglandin infusion; urgent cardiac surgical and catheter relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography of every level; Doppler gradients; cardiac MR or CT; catheterisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Two or more serial obstructions identified, including the mitral apparatus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for isolated coarctation, isolated mitral or aortic stenosis, cor triatriatum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diuretics and afterload reduction for pulmonary venous congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repair coarctation; resect subaortic stenosis and supravalvar mitral ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair or replace mitral or aortic valve; endocarditis prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong surveillance and staged reintervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded; mitral-dominant and multilevel disease often needs repeat intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

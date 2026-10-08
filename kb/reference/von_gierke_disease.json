@@ -152,5 +152,260 @@
       "caption": "Overview comparison matrix for von gierke disease (glycogen storage disease type i)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "von_gierke_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose, lactate, uric acid and lipids during controlled fasting",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia, lactic acidosis, hyperuricaemia and hyperlipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound and surveillance imaging",
+          "cells": [
+            {
+              "text": "Hepatic adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "von_gierke_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other hepatic glycogen storage diseases (types III, VI, IX)",
+          "cells": [
+            {
+              "text": "Hepatomegaly with different enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fructose-1,6-bisphosphatase deficiency",
+          "cells": [
+            {
+              "text": "Gluconeogenesis defect with hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary fructose intolerance",
+          "cells": [
+            {
+              "text": "Hypoglycaemia after fructose; galactose and fructose restriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "von_gierke_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Frequent daytime carbohydrate feeds",
+          "cells": [
+            {
+              "text": "Uncooked cornstarch with overnight continuous nasogastric feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restrict galactose and fructose",
+          "cells": [
+            {
+              "text": "Dietary restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for adenomas",
+          "cells": [
+            {
+              "text": "Liver imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "von_gierke_disease-dx-mgmt",
+      "title": "Diagnosis and management of Von Gierke disease (glycogen storage disease type I)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected von Gierke disease: fasting hypoglycaemia with hepatomegaly in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoglycaemia with seizures, lactic acidosis or liver mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose correction for hypoglycaemia with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting glucose, lactate, uric acid, lipids, liver ultrasound, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does controlled fasting show hypoglycaemia with lactic acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other glycogen storage or gluconeogenesis defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Frequent daytime carbohydrate feeds with uncooked cornstarch",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Overnight continuous feeding to prevent nocturnal hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict galactose and fructose in the diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver surveillance for hepatic adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Euglycaemia controls most features; adenomas and neutropenia need surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

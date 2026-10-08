@@ -149,5 +149,249 @@
       "caption": "Overview comparison matrix for combined vitamin k-dependent clotting factor deficiency (ggcx/vkorc1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_k_dependent_coagulation_factor_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Both prolonged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individual assays of factors II, VII, IX and X",
+          "cells": [
+            {
+              "text": "Concurrent deficiency of vitamin K-dependent factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assays of proteins C and S",
+          "cells": [
+            {
+              "text": "Concurrent deficiency of the anticoagulant proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response of clotting times to vitamin K",
+          "cells": [
+            {
+              "text": "Distinguishes the genetic defect from acquired deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_k_dependent_coagulation_factor_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired vitamin K deficiency",
+          "cells": [
+            {
+              "text": "Malabsorption, poor intake or biliary obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warfarin or vitamin K antagonist effect",
+          "cells": [
+            {
+              "text": "Inadvertent exposure; warfarin hypersensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic disease of the newborn",
+          "cells": [
+            {
+              "text": "Vitamin K deficiency in the neonate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_k_dependent_coagulation_factor_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose phytomenadione",
+          "cells": [
+            {
+              "text": "Often lifelong, to drive residual carboxylase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin complex concentrate or factor replacement",
+          "cells": [
+            {
+              "text": "Active or severe bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_k_dependent_coagulation_factor_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Combined vitamin K-dependent clotting factor deficiency (GGCX/VKORC1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected combined vitamin K-dependent factor deficiency: bleeding, prolonged clotting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal intracranial or severe mucosal or GI bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent factor replacement for severe or intracranial bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PT and APTT, individual factor II, VII, IX and X assays, protein C and S assays",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do assays show combined deficiency of factors II, VII, IX, X and proteins C and S?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired vitamin K deficiency or warfarin effect; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose phytomenadione, often lifelong",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prothrombin complex concentrate or factor replacement for active bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid over-anticoagulation and monitor response to vitamin K",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Bleeding ranges from mild to severe; treatment is effective but may be lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

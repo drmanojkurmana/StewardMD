@@ -152,5 +152,240 @@
       "caption": "Overview comparison matrix for zika virus infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zika_virus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR of serum and urine in the viraemic phase",
+          "cells": [
+            {
+              "text": "Acute Zika virus RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zika IgM serology with confirmatory neutralisation",
+          "cells": [
+            {
+              "text": "Recent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zika_virus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue fever",
+          "cells": [
+            {
+              "text": "Co-endemic; Zika rash and arthralgia can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chikungunya",
+          "cells": [
+            {
+              "text": "Arthralgia with rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles and rubella",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19 infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zika_virus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Rest, fluids and paracetamol; no specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy counselling and fetal surveillance",
+          "cells": [
+            {
+              "text": "Exposure in pregnancy carries malformation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zika_virus-dx-mgmt",
+      "title": "Diagnosis and management of Zika virus infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zika virus infection: febrile rash illness with arthralgia or conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infection or exposure in pregnancy, or progressive ascending weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review for pregnancy exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR of serum and urine, Zika IgM with neutralisation confirmation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RT-PCR or confirmatory serology show Zika virus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dengue, chikungunya or other febrile rash illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with rest, fluids and paracetamol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fetal surveillance for pregnancy exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counselling on pregnancy and mosquito avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Usually mild; pregnancy exposure carries serious congenital risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

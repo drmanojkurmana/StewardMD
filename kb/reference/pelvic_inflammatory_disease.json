@@ -151,5 +151,270 @@
       "caption": "Overview comparison matrix for pelvic inflammatory disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pelvic_inflammatory_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pregnancy test",
+          "cells": [
+            {
+              "text": "Ectopic pregnancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nucleic acid amplification testing for chlamydia and gonorrhoea",
+          "cells": [
+            {
+              "text": "Causative organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy and culture of genital tract samples",
+          "cells": [
+            {
+              "text": "Genital tract organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and full blood count",
+          "cells": [
+            {
+              "text": "Systemic response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelvic_inflammatory_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopic pregnancy",
+          "cells": [
+            {
+              "text": "Pregnancy test is the first step to exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian cyst accident or endometriosis",
+          "cells": [
+            {
+              "text": "Adnexal pathology; imaging and tests separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelvic_inflammatory_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Ceftriaxone with doxycycline and metronidazole, with a low treatment threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner management",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Test and treat sexual partners to prevent reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inpatient treatment",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For tubo-ovarian abscess or sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pelvic_inflammatory_disease-dx-mgmt",
+      "title": "Diagnosis and management of Pelvic inflammatory disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower abdominal pain with tender adnexal mass or fever in a sexually active woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (tubo-ovarian abscess, peritonitis, sepsis or intolerance of oral therapy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent gynaecology review for abscess, peritonitis or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pregnancy test, NAAT for chlamydia and gonorrhoea, microscopy and culture, markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are genital infection and tubal inflammation found, with ectopic pregnancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ectopic pregnancy, appendicitis, ovarian cyst accident or endometriosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical ceftriaxone, doxycycline and metronidazole with a low treatment threshold",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Test and treat sexual partners to prevent reinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inpatient treatment for tubo-ovarian abscess or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on tubal damage, infertility and ectopic risk after each episode",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute infection usually resolves; recurrence raises infertility and ectopic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

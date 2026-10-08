@@ -157,5 +157,314 @@
       "caption": "Overview comparison matrix for papillary craniopharyngioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_craniopharyngioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast MRI of sella and suprasellar region",
+          "cells": [
+            {
+              "text": "Solid or cystic mass and its relation to chiasm and third ventricle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification, usually sparse in the papillary type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary profile and water balance testing",
+          "cells": [
+            {
+              "text": "Endocrine deficits and diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity, colour vision and perimetry",
+          "cells": [
+            {
+              "text": "Visual field defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E immunohistochemistry or molecular assay",
+          "cells": [
+            {
+              "text": "Near-universal in this tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_craniopharyngioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adamantinomatous craniopharyngioma",
+          "cells": [
+            {
+              "text": "Bimodal age; CTNNB1 rather than BRAF, with more calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary adenoma, including cystic macroadenoma",
+          "cells": [
+            {
+              "text": "A solid enhancing papillary mass can mimic it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_craniopharyngioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maximal safe resection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Microsurgical or endoscopic endonasal skull-base approach, tailored to size and location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid complete resection without a plane",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Prevents hypothalamic injury, stalk damage and permanent diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative surgery and radiotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Biopsy or cyst drainage with adjuvant radiotherapy where this preserves function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ommaya reservoir",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Intracystic instillation in selected cystic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF-targeted therapy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For progressive or unresectable disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_craniopharyngioma-dx-mgmt",
+      "title": "Diagnosis and management of Papillary craniopharyngioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Solid or mixed suprasellar mass in an adult with visual or endocrine symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid visual loss, adrenal insufficiency, diabetes insipidus or hydrocephalus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for visual loss or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of sella, CT, hormone profile, water test, visual fields, BRAF V600E",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show papillary epithelium with BRAF V600E?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adamantinomatous craniopharyngioma, Rathke cleft cyst or pituitary adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe resection by microsurgical or endoscopic endonasal approach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid complete resection when there is no clear plane from the hypothalamus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative surgery and adjuvant radiotherapy where that preserves function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ommaya reservoir for intracystic instillation in selected cystic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "BRAF-targeted therapy for progressive or unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable for grade 1; parasellar site can leave visual or endocrine morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

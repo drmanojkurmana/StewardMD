@@ -149,5 +149,260 @@
       "caption": "Overview comparison matrix for transfusion-related immunomodulation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusion_related_immunomodulation-dx-mgmt",
+      "title": "Diagnosis and management of Transfusion-related immunomodulation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transfusion immunomodulation: rising infection after repeated transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rising postoperative infection with liberal transfusion practice?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review transfusion practice and infection control in the affected unit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transfusion exposure review; leucoreduction status; infection audit",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does audit show infection rising with transfusion exposure after adjustment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider confounding by indication or hospital-acquired infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrictive transfusion thresholds and single-unit transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Universal leucoreduction of cellular components",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Patient blood management to reduce allogeneic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prefer fresher components in high-exposure settings",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Audit outcomes against transfusion exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Contested chronic effect; the practical response is minimising unnecessary transfusion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusion_related_immunomodulation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Review of transfusion exposure",
+          "cells": [
+            {
+              "text": "Number of units and leucoreduction status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audit of postoperative infection rates",
+          "cells": [
+            {
+              "text": "Infection against transfusion exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Storage age correlation",
+          "cells": [
+            {
+              "text": "Where data are available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multivariable analysis",
+          "cells": [
+            {
+              "text": "Adjusts for confounding by indication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_related_immunomodulation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restrictive transfusion thresholds",
+          "cells": [
+            {
+              "text": "Single-unit transfusion; the principal pragmatic response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Universal leucoreduction",
+          "cells": [
+            {
+              "text": "Donor leucocytes considered central mediators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient blood management",
+          "cells": [
+            {
+              "text": "Iron and erythropoiesis-stimulating agents, cell salvage, and tranexamic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fresher or washed components",
+          "cells": [
+            {
+              "text": "Selected high-exposure settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local audit",
+          "cells": [
+            {
+              "text": "Postoperative infection and outcome against transfusion exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for thyroid dyshormonogenesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology texts and congenital hypothyroidism guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_dyshormonogenesis-dx-mgmt",
+      "title": "Diagnosis and management of Thyroid dyshormonogenesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroid dyshormonogenesis: congenital hypothyroidism with a present goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: delayed treatment, compressive goitre, or sensorineural deafness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent start of levothyroxine and paediatric endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TSH and free thyroxine; thyroid ultrasound; uptake scan; perchlorate test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a present gland with trapping or organification defect confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thyroid dysgenesis, central hypothyroidism or transient neonatal hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt lifelong levothyroxine once confirmed on newborn screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Titrate the dose against thyroid function and growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor development and goitre regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Audiology and aural rehabilitation for suspected Pendred syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prompt treatment gives normal growth and development; delay risks permanent impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_dyshormonogenesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum TSH and free thyroxine",
+          "cells": [
+            {
+              "text": "Raised TSH with low free thyroxine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound",
+          "cells": [
+            {
+              "text": "Present or enlarged gland, distinguishing it from dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radionuclide uptake scan",
+          "cells": [
+            {
+              "text": "Trapping and gland location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perchlorate discharge test",
+          "cells": [
+            {
+              "text": "Organification defect, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroglobulin and iodine studies",
+          "cells": [
+            {
+              "text": "Synthesis defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and audiology",
+          "cells": [
+            {
+              "text": "Synthesis genes; sensorineural hearing loss in Pendred syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_dyshormonogenesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid dysgenesis (aplasia, hypoplasia or ectopia)",
+          "cells": [
+            {
+              "text": "Gland absent or misplaced on imaging, whereas dyshormonogenesis has a present gland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central (secondary) hypothyroidism",
+          "cells": [
+            {
+              "text": "Low TSH with low thyroxine, unlike the raised TSH of dyshormonogenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient neonatal hypothyroidism",
+          "cells": [
+            {
+              "text": "Maternal or iodine factors; resolves, unlike the inherited defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_dyshormonogenesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levothyroxine replacement",
+          "cells": [
+            {
+              "text": "Started promptly and lifelong once confirmed on newborn screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose titration",
+          "cells": [
+            {
+              "text": "Against thyroid function and clinical response, through infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and development monitoring",
+          "cells": [
+            {
+              "text": "Goitre expected to regress as levels normalise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and aural rehabilitation",
+          "cells": [
+            {
+              "text": "Pendred syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose adjustment",
+          "cells": [
+            {
+              "text": "Intercurrent illness, growth and puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrinology and genetics",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

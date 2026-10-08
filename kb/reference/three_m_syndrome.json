@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for 3m syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "three_m_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of 3M syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected 3M syndrome: proportionate short stature with a large-appearing head",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: infant feeding failure, or misdiagnosed growth-hormone deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutritional support and airway planning before procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Molecular testing of CUL7, OBSL1 and CCDC8; skeletal radiographs; IGF-1 axis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does molecular testing identify biallelic CUL7, OBSL1 or CCDC8 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Silver-Russell syndrome, growth-hormone deficiency or Mulibrey nanism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Realistic counselling; growth-hormone therapy is generally ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial growth monitoring and skeletal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess and manage hypogonadism in affected males",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anaesthetic caution given the facial and skeletal features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and testing of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cognition and life expectancy are normal; short stature is the main issue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "three_m_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing of CUL7, OBSL1 and CCDC8",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial growth measurements",
+          "cells": [
+            {
+              "text": "Proportionate short stature with relatively preserved head circumference"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Slender long bones with thin cortices, tall vertebral bodies and slender ribs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth-hormone and IGF-1 assessment",
+          "cells": [
+            {
+              "text": "Classic growth-hormone deficiency excluded; usually normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hypogonadism",
+          "cells": [
+            {
+              "text": "Affected males, where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "three_m_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Silver-Russell syndrome",
+          "cells": [
+            {
+              "text": "Body asymmetry and feeding difficulty; 3M lacks marked asymmetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth-hormone deficiency or insensitivity (Laron syndrome)",
+          "cells": [
+            {
+              "text": "Poor growth-hormone response is characteristic of 3M, and IGF-1 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mulibrey nanism",
+          "cells": [
+            {
+              "text": "Primordial short stature; TRIM37 testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "three_m_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Realistic counselling",
+          "cells": [
+            {
+              "text": "No effective disease-specific drug; growth-hormone therapy is generally ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial growth monitoring",
+          "cells": [
+            {
+              "text": "Proportionate short stature with preserved head circumference"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypogonadism management",
+          "cells": [
+            {
+              "text": "Affected males"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal surveillance",
+          "cells": [
+            {
+              "text": "Slender long bones and vertebral changes, with orthopaedic input as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic caution",
+          "cells": [
+            {
+              "text": "Facial and skeletal features may complicate the airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

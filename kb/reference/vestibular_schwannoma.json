@@ -148,5 +148,249 @@
       "caption": "Overview comparison matrix for vestibular schwannoma (acoustic neuroma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vestibular_schwannoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gadolinium-enhanced MRI of the internal auditory meatus",
+          "cells": [
+            {
+              "text": "Tumour in the internal auditory meatus and cerebellopontine angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone and speech audiometry",
+          "cells": [
+            {
+              "text": "Asymmetric sensorineural loss and speech discrimination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Auditory brainstem response",
+          "cells": [
+            {
+              "text": "Used where MRI is contraindicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vestibular_schwannoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningioma of the cerebellopontine angle",
+          "cells": [
+            {
+              "text": "Imaging distinguishes the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial nerve schwannoma",
+          "cells": [
+            {
+              "text": "Facial nerve involvement without vestibular origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermoid or arachnoid cyst",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meniere disease",
+          "cells": [
+            {
+              "text": "Fluctuating loss rather than progressive asymmetric loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vestibular_schwannoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "Serial gadolinium MRI for small or asymptomatic tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "Small-to-moderate or growing tumours, to arrest growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vestibular_schwannoma-dx-mgmt",
+      "title": "Diagnosis and management of Vestibular schwannoma (acoustic neuroma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vestibular schwannoma: asymmetric hearing loss with tinnitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (brainstem compression, cerebellar signs or facial numbness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for brainstem compression or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gadolinium MRI of the internal auditory meatus, audiometry, ABR if MRI contraindicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI confirm a cerebellopontine angle schwannoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meningioma, cyst or Meniere disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Serial gadolinium MRI surveillance for small or asymptomatic tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stereotactic radiosurgery for small-to-moderate or growing tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor hearing and facial nerve function during surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Many small tumours remain stable; growth threatens hearing and facial nerve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

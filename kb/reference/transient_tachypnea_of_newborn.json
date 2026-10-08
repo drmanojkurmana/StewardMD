@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for transient tachypnea of the newborn."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transient_tachypnea_of_newborn-dx-mgmt",
+      "title": "Diagnosis and management of Transient Tachypnea of the Newborn",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transient tachypnoea of the newborn: tachypnoea after caesarean delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rising oxygen need, distress beyond two or three days, or sepsis signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis screen, antibiotics and reconsideration of pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; pulse oximetry; blood gas if distress; sepsis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the radiograph show wet-lung features with a modest oxygen need?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider RDS, pneumonia, meconium aspiration or congenital heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supplemental oxygen and CPAP if distress is marked",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withhold oral feeds and use nasogastric or intravenous fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sepsis screen and empirical antibiotics until excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor glucose in infants of diabetic mothers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reconsider diagnosis if oxygen need rises or distress persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and self-limited, usually resolving within a day or two",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transient_tachypnea_of_newborn-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Wet-lung features: perihilar markings, fluid in fissures, hyperinflation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry and oxygen requirement",
+          "cells": [
+            {
+              "text": "Modest oxygen need"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Significant distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis screen",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Infant of a diabetic mother"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transient_tachypnea_of_newborn-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Distress from surfactant deficiency; prematurity and ground-glass pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early-onset neonatal pneumonia or sepsis",
+          "cells": [
+            {
+              "text": "Marked or prolonged distress; sepsis screen needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "Rising oxygen need or pre- and post-ductal saturation difference"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transient_tachypnea_of_newborn-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygen and CPAP",
+          "cells": [
+            {
+              "text": "Titrated to saturations; CPAP if distress is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withhold oral feeds",
+          "cells": [
+            {
+              "text": "Nasogastric feeds or intravenous fluids to avoid aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous monitoring",
+          "cells": [
+            {
+              "text": "Pulse oximetry and serial respiratory assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis screen and antibiotics",
+          "cells": [
+            {
+              "text": "Until pneumonia or sepsis is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose monitoring",
+          "cells": [
+            {
+              "text": "Infant of a diabetic mother"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "If oxygen need rises or distress persists beyond two or three days"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

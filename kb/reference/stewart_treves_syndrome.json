@@ -158,5 +158,323 @@
       "caption": "Overview comparison matrix for stewart treves syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stewart_treves_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Incisional skin biopsy with CD31, CD34 and ERG",
+          "cells": [
+            {
+              "text": "Endothelial malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the affected limb",
+          "cells": [
+            {
+              "text": "Extent of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET",
+          "cells": [
+            {
+              "text": "Occult multifocal or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodal assessment",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prior oncological and radiotherapy history",
+          "cells": [
+            {
+              "text": "Radiation field"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stewart_treves_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kaposi sarcoma",
+          "cells": [
+            {
+              "text": "A vascular skin tumour that histology and endothelial markers separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or erysipelas",
+          "cells": [
+            {
+              "text": "Inflammatory complication of lymphoedema; biopsy separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stewart_treves_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Imaging workup for regional and distant disease",
+          "cells": [
+            {
+              "text": "At presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide surgical excision",
+          "cells": [
+            {
+              "text": "The treatment of choice when resectable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amputation",
+          "cells": [
+            {
+              "text": "Considered for anatomically extensive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative radiotherapy",
+          "cells": [
+            {
+              "text": "In essentially all resected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic anthracycline or taxane regimens",
+          "cells": [
+            {
+              "text": "Advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative chemotherapy and radiotherapy",
+          "cells": [
+            {
+              "text": "Metastatic setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Chest imaging and clinical review of the limb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early specialist referral",
+          "cells": [
+            {
+              "text": "Sarcoma and radiation oncology centre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stewart_treves_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of stewart treves syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Violaceous lesions on a chronically swollen limb: suspected Stewart-Treves",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, ulceration, bleeding, multifocal nodules)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma centre referral for suspected angiosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-thickness incisional biopsy with CD31, CD34, ERG; MRI; CT chest, abdomen, pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show angiosarcoma with endothelial markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kaposi sarcoma, cellulitis or a benign vascular lesion; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide surgical excision where resectable, with amputation considered",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Postoperative radiotherapy in most resected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic anthracycline or taxane-based therapy for advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance chest imaging and re-biopsy of any new lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aggressive, with early haematogenous spread; prognosis is poor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

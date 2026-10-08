@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for schaaf-yang syndrome (magel2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schaaf_yang_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MAGEL2 sequencing with parental origin",
+          "cells": [
+            {
+              "text": "Pathogenic variant; only paternal-allele variants cause disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "15q11.2 methylation analysis",
+          "cells": [
+            {
+              "text": "Distinguishes from classical Prader-Willi; normal result does not exclude SYS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Excludes contiguous deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study",
+          "cells": [
+            {
+              "text": "Central or obstructive apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism assessment",
+          "cells": [
+            {
+              "text": "Neurodevelopmental profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation",
+          "cells": [
+            {
+              "text": "Hypothalamic-pituitary dysfunction where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schaaf_yang_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classical Prader-Willi syndrome",
+          "cells": [
+            {
+              "text": "Contractures point to MAGEL2; methylation can be normal in Schaaf-Yang"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myotonic dystrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schaaf_yang_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Infant feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding for hypotonia-related difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep-disordered breathing",
+          "cells": [
+            {
+              "text": "Treat central and obstructive apnoea, such as with positive airway pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contractures",
+          "cells": [
+            {
+              "text": "Physiotherapy, splinting and orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism support",
+          "cells": [
+            {
+              "text": "Speech, occupational and behavioural therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine care",
+          "cells": [
+            {
+              "text": "Treat hypothalamic-pituitary dysfunction where found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Coordinated multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schaaf_yang_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Schaaf-Yang syndrome (MAGEL2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with hypotonia, feeding failure and joint contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Feeding failure needing tube, apnoea with hypoxaemia, airway-threatening contractures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assisted feeding and sleep study with airway support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MAGEL2 sequencing with parental origin, methylation test, microarray, sleep study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a paternal-allele MAGEL2 truncating variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider Prader-Willi, arthrogryposis syndromes, myotonic dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Feeding support including gastrostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat sleep apnoea, e.g. positive airway pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and splinting for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and autism therapy; endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong intellectual disability and autism needs; early mortality in severe cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

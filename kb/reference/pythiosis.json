@@ -147,5 +147,240 @@
       "caption": "Overview comparison matrix for pythiosis (pythium insidiosum)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pythiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Histopathology with special stains",
+          "cells": [
+            {
+              "text": "Broad, sparsely septate hyphae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue culture",
+          "cells": [
+            {
+              "text": "Organism growth and zoospore formation in water"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for anti-Pythium antibodies",
+          "cells": [
+            {
+              "text": "Anti-Pythium antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pythiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucormycosis and other angioinvasive moulds",
+          "cells": [
+            {
+              "text": "Angioinvasive mould infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal keratitis from Fusarium or Aspergillus",
+          "cells": [
+            {
+              "text": "Corneal ulcer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pythiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical surgery",
+          "cells": [
+            {
+              "text": "Early wide excision or amputation as mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotherapy",
+          "cells": [
+            {
+              "text": "Pythium insidiosum antigen to modulate host response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobials",
+          "cells": [
+            {
+              "text": "Combination agents acting independently of ergosterol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pythiosis-dx-mgmt",
+      "title": "Diagnosis and management of Pythiosis (Pythium insidiosum)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pythiosis: angioinvasive infection with limb ischaemia or corneal ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid limb ischaemia, corneal ulcer failing therapy, or freshwater exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for limb ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Histopathology with stains; culture; serology; molecular identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Pythium confirmed on histology or culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mucormycosis or Fusarium infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early radical surgery, wide excision or amputation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunotherapy with Pythium antigen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination antimicrobials acting independently of ergosterol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Surgical follow-up; monitor for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

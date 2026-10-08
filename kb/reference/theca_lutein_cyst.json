@@ -144,5 +144,316 @@
       "caption": "Overview comparison matrix for theca lutein cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "theca_lutein_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Theca lutein cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected theca lutein cysts: bilateral multicystic ovaries with high hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: acute pelvic pain, haemorrhage, or hCG plateau after molar evacuation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for torsion or haemorrhage, conserving ovarian tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum beta-hCG; pelvic ultrasound with uterine evaluation; thyroid function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hCG high with bilateral multilocular cysts and no solid component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider OHSS, bilateral cystadenoma or ovarian malignancy; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management, as cysts involute when hCG falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Evacuate a mole or treat trophoblastic disease at source",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for ovarian hyperstimulation syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial hCG and ultrasound to confirm regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgery only for torsion, rupture or haemorrhage, conserving the ovary",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent outlook; cysts almost always resolve without surgery once hCG falls",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "theca_lutein_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum beta-hCG",
+          "cells": [
+            {
+              "text": "Quantifies the hormonal driver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal or transabdominal ultrasound",
+          "cells": [
+            {
+              "text": "Bilateral multilocular cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound of the uterus",
+          "cells": [
+            {
+              "text": "Molar pregnancy or multiple pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyrotropic effect of very high hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and observation",
+          "cells": [
+            {
+              "text": "Features of ovarian hyperstimulation syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "theca_lutein_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovarian hyperstimulation syndrome",
+          "cells": [
+            {
+              "text": "Follows ovulation induction; check for tense ascites and breathlessness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral cystadenomas",
+          "cells": [
+            {
+              "text": "Theca-lutein cysts regress as hCG falls; cystadenomas do not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian malignancy with bilateral cystic involvement",
+          "cells": [
+            {
+              "text": "Solid or papillary components, or failure to regress, raise suspicion of neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "theca_lutein_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Cysts involute once beta-hCG falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the driver",
+          "cells": [
+            {
+              "text": "Evacuation of a mole, delivery, or chemotherapy for gestational trophoblastic neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Ovarian hyperstimulation syndrome, where that is the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial hCG and ultrasound",
+          "cells": [
+            {
+              "text": "Confirms regression and excludes trophoblastic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid check",
+          "cells": [
+            {
+              "text": "Weak thyrotropic effect of very high hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Acute complications such as torsion, rupture or haemorrhage, conserving ovarian tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

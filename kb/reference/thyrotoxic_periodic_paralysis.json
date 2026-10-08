@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for thyrotoxic periodic paralysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / endocrine and neuromuscular reference literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyrotoxic_periodic_paralysis-dx-mgmt",
+      "title": "Diagnosis and management of Thyrotoxic periodic paralysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyrotoxic periodic paralysis: acute weakness in young man with thyrotoxicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: respiratory or bulbar weakness, arrhythmia, or rebound hyperkalaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac monitoring with cautious potassium and beta-blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum potassium; thyroid function tests; ECG; TSH-receptor antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is thyrotoxicosis present alongside hypokalaemic paralysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial periodic paralysis, renal potassium loss or Guillain-Barre",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cautious potassium replacement with monitoring for rebound hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Propranolol to blunt the adrenergic potassium shift",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Carbimazole to render the patient euthyroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radioiodine or thyroidectomy to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid high-carbohydrate meals and exercise followed by rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent once euthyroid; attacks recur while thyrotoxicosis persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyrotoxic_periodic_paralysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium and full electrolyte panel during attack",
+          "cells": [
+            {
+              "text": "Hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Hypokalaemic changes and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary potassium and acid-base status",
+          "cells": [
+            {
+              "text": "Intracellular shift rather than loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH-receptor antibodies and thyroid imaging",
+          "cells": [
+            {
+              "text": "Cause of thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium and phosphate",
+          "cells": [
+            {
+              "text": "Associated electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyrotoxic_periodic_paralysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial (hypokalaemic) periodic paralysis",
+          "cells": [
+            {
+              "text": "Thyroid function is normal in familial disease; checking thyroid status separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gitelman or Bartter syndrome",
+          "cells": [
+            {
+              "text": "Renal potassium loss rather than a shift; urinary potassium distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Ascending paralysis without hypokalaemia or thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyrotoxic_periodic_paralysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cautious potassium replacement",
+          "cells": [
+            {
+              "text": "Hypokalaemia reflects a shift; risks rebound hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-selective beta-blockade",
+          "cells": [
+            {
+              "text": "Such as propranolol, to blunt the adrenergic potassium shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thionamide antithyroid drug",
+          "cells": [
+            {
+              "text": "Carbimazole to render the patient euthyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive thyrotoxicosis treatment",
+          "cells": [
+            {
+              "text": "Radioiodine or thyroidectomy to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "High-carbohydrate meals and strenuous exercise followed by rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and ECG monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinology referral",
+          "cells": [
+            {
+              "text": "Underlying thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

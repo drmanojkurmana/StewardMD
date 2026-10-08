@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for trichothiodystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichothiodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Trichothiodystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichothiodystrophy: brittle sulphur-deficient hair with developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: serious recurrent infection, failure to thrive, or neurological decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent infection management and immunology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polarised hair microscopy; hair cysteine analysis; ERCC2, ERCC3 and GTF2H5 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does polarised microscopy show tiger-tail banding with DNA-repair gene variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider xeroderma pigmentosum, Cockayne syndrome or Netherton syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict photoprotection in photosensitive patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics for ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt treatment of infection and immunisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, speech and occupational therapy, and education",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with family and prenatal testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Varies with severity; recurrent infection is a major cause of morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichothiodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Polarised light microscopy of hair",
+          "cells": [
+            {
+              "text": "Tiger-tail alternating banding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair amino acid analysis",
+          "cells": [
+            {
+              "text": "Low cysteine and sulphur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCC2, ERCC3 and GTF2H5 testing",
+          "cells": [
+            {
+              "text": "Pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional DNA-repair assay",
+          "cells": [
+            {
+              "text": "Photosensitive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Dysmyelination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichothiodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Xeroderma pigmentosum",
+          "cells": [
+            {
+              "text": "Photosensitivity with raised skin cancer risk, unlike trichothiodystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cockayne syndrome",
+          "cells": [
+            {
+              "text": "Photosensitivity with progressive neurological decline and no tiger-tail hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Netherton syndrome",
+          "cells": [
+            {
+              "text": "Ichthyosis with hair-shaft defects but no tiger-tail banding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichothiodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multisystem care",
+          "cells": [
+            {
+              "text": "No curative or disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sunscreen and protective clothing in photosensitive patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ichthyosis care",
+          "cells": [
+            {
+              "text": "Emollients and keratolytics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt infection treatment",
+          "cells": [
+            {
+              "text": "Immunisation and monitoring for immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy, and education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

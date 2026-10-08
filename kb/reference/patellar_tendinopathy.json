@@ -147,5 +147,328 @@
       "caption": "Overview comparison matrix for patellar tendinopathy (jumper knee)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "patellar_tendinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Single-leg decline squat load test",
+          "cells": [
+            {
+              "text": "Reproduces and grades pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Tendon structure and neovascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Partial tear or other pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with the asymptomatic side",
+          "cells": [
+            {
+              "text": "Incidental imaging change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patellar_tendinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Patellofemoral pain syndrome",
+          "cells": [
+            {
+              "text": "Peri-patellar pain rather than inferior pole localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osgood-Schlatter or Sinding-Larsen-Johansson disease",
+          "cells": [
+            {
+              "text": "Adolescent apophyseal pain at a growth-plate site"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patellar_tendinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Isometric quadriceps holds",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Initial pain relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive tendon loading",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Heavy slow-resistance or eccentric decline squats"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relative rest",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Reduce jumping and deceleration rather than complete inactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kinetic chain and load correction",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Address contributing factors and training-load errors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid steroid injection",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Intratendinous corticosteroid carries rupture risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patellar_tendinopathy-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to tendon injury and myopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Tendon rupture or tendinitis",
+          "cells": [
+            {
+              "text": "quinolones, glucocorticoids, isotretinoin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myalgias or myopathy",
+          "cells": [
+            {
+              "text": "glucocorticoids, penicillamine, hydroxychloroquine, AZT, lovastatin, simvastatin, pravastatin, clofibrate, interferon, IL-2, alcohol, cocaine, taxol, docetaxel, colchicine, quinolones, cyclosporine, protease inhibitors"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "patellar_tendinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Patellar tendinopathy (jumper knee)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pain at the inferior pole of the patella in jumping or change-of-direction athletes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sudden loss of extension, night pain or locking)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for suspected tendon rupture or a mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Single-leg decline squat load test, ultrasound, MRI if partial tear suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does load testing reproduce inferior pole pain, with rupture excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider patellofemoral pain, Osgood-Schlatter, fat pad impingement or partial tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Progressive tendon loading from isometric holds to heavy eccentric decline squats",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Relative rest from jumping and deceleration rather than total inactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct kinetic-chain factors and training-load errors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid intratendinous corticosteroid injection because of rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Responds to structured loading, but rehabilitation may take months and can recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

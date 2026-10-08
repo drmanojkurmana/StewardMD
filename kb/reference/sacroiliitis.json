@@ -143,5 +143,296 @@
       "caption": "Overview comparison matrix for sacroiliitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rheumatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sacroiliitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the sacroiliac joints",
+          "cells": [
+            {
+              "text": "Active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Structural change; may miss early inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B27 and inflammatory markers",
+          "cells": [
+            {
+              "text": "Support spondyloarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spondyloarthritis feature review",
+          "cells": [
+            {
+              "text": "Extra-articular manifestations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and joint sampling",
+          "cells": [
+            {
+              "text": "Where infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sacroiliitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Axial spondyloarthritis or ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "Inflammatory cause; HLA-B27 and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic sacroiliitis",
+          "cells": [
+            {
+              "text": "Acute severe unilateral pain with fever; needs urgent antimicrobials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical low back pain",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sacroiliitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for inflammatory sacroiliitis, with exercise and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF or IL-17 inhibitors",
+          "cells": [
+            {
+              "text": "Inflammatory disease refractory to NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-directed antimicrobials",
+          "cells": [
+            {
+              "text": "Septic sacroiliitis; drain any abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extra-articular screening",
+          "cells": [
+            {
+              "text": "Uveitis, psoriasis and inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial MRI and inflammatory markers",
+          "cells": [
+            {
+              "text": "Monitor activity and response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sacroiliitis-dx-mgmt",
+      "title": "Diagnosis and management of Sacroiliitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Buttock or low back pain with suspected sacroiliac inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever with severe unilateral pain, immunosuppression or injecting drug use?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Blood cultures, joint sampling and urgent antimicrobials for septic sacroiliitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of sacroiliac joints, radiographs, HLA-B27, inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active inflammation on MRI with a spondyloarthritis picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider infection, mechanical pain, fracture and referred hip or spine pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs with exercise and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "TNF or IL-17 inhibitor if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for uveitis, psoriasis and inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MRI and markers; rheumatology-led care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Inflammatory form is controllable but may progress to ankylosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

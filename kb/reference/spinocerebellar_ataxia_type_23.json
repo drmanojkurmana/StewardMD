@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for spinocerebellar ataxia type 23 (pdyn)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_23-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PDYN sequencing",
+          "cells": [
+            {
+              "text": "Missense variant in an ataxia panel or exome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy, sometimes with brainstem involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat-expansion SCA testing",
+          "cells": [
+            {
+              "text": "Excludes the commoner repeat ataxias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and B12 and vitamin E levels",
+          "cells": [
+            {
+              "text": "Posterior-column signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxia screen",
+          "cells": [
+            {
+              "text": "Thyroid function, coeliac serology and alcohol history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_23-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin E deficiency ataxia",
+          "cells": [
+            {
+              "text": "Treatable mimic with posterior-column signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Treatable mimic with posterior-column signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_23-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Gait and pyramidal spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agent",
+          "cells": [
+            {
+              "text": "Such as baclofen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proprioceptive rehabilitation and walking aids",
+          "cells": [
+            {
+              "text": "Posterior-column sensory ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct B12 or vitamin E deficiency",
+          "cells": [
+            {
+              "text": "If present; excludes a modifiable cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow assessment",
+          "cells": [
+            {
+              "text": "Periodic review, as bulbar involvement influences prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_23-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 23 (PDYN)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult-onset ataxia with posterior-column sensory loss: suspected SCA23",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, autonomic failure, aspiration risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for MSA or acquired cause; swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PDYN sequencing; brain MRI; repeat-expansion exclusion; B12 and vitamin E levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PDYN missense variant found with posterior-column signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Friedreich ataxia, vitamin E or B12 deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy for gait and pyramidal spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Proprioceptive rehabilitation and walking aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct vitamin B12 or vitamin E deficiency if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Swallow assessment and multidisciplinary follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No specific therapy; care is supportive and multidisciplinary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

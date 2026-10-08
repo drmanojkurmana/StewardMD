@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for tolosa-hunt syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tolosa_hunt_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Tolosa-Hunt syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tolosa-Hunt syndrome: painful ophthalmoplegia with retro-orbital pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: no steroid response, orbital apex signs with visual loss, or systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of tumour, aneurysm or invasive fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of cavernous sinus; MR or CT angiography; ESR; sarcoid and vasculitis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does contrast MRI show cavernous sinus inflammation with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tumour, aneurysm, cavernous sinus thrombosis or fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude tumour, aneurysm, infection and granulomatous disease first",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Slow corticosteroid taper to limit relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Azathioprine or methotrexate for recurrent or steroid-dependent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Contrast MRI surveillance for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually responds well to steroids; recurrences are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tolosa_hunt_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of brain and orbits with contrast",
+          "cells": [
+            {
+              "text": "Cavernous sinus soft tissue that enhances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography",
+          "cells": [
+            {
+              "text": "Aneurysm excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for sarcoidosis and vasculitis",
+          "cells": [
+            {
+              "text": "Systemic granulomatous disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Diabetic nerve palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Atypical or steroid-unresponsive cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tolosa_hunt_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cavernous sinus tumour or metastasis",
+          "cells": [
+            {
+              "text": "Failure to respond to corticosteroids prompts re-evaluation for tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracavernous carotid aneurysm",
+          "cells": [
+            {
+              "text": "Excluded by MR or CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital apex fungal infection such as mucormycosis",
+          "cells": [
+            {
+              "text": "Immunocompromised or diabetic patients; fungal infection must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tolosa_hunt_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay; rapid pain relief with gradual recovery of ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of mimics",
+          "cells": [
+            {
+              "text": "Tumour, aneurysm, infection and systemic granulomatous disease before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Acute retro-orbital pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slow corticosteroid taper",
+          "cells": [
+            {
+              "text": "Reduces relapse risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine or methotrexate for recurrent or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast MRI surveillance",
+          "cells": [
+            {
+              "text": "Resolution of cavernous sinus inflammation and relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

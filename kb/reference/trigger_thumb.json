@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for trigger thumb."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigger_thumb-dx-mgmt",
+      "title": "Diagnosis and management of Trigger thumb",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trigger thumb: catching or locking of the thumb IP joint on flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: fixed flexion contracture or loss of active IP flexion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hand surgery review for infective flexor tenosynovitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis with Notta node; ultrasound if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a tender Notta node present with triggering at the A1 pulley?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider joint arthritis, flexor pollicis longus rupture or De Quervain tenosynovitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification, splint and sheath steroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "A1 pulley release for refractory triggering or fixed contracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and optimise diabetes, hypothyroidism and rheumatoid arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy with stretching and tendon gliding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor recurrence, which is higher in diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally excellent; most respond to injection or release; diabetics recur more",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigger_thumb-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Triggering and Notta node"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Pulley thickening or nodule in equivocal cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes screen",
+          "cells": [
+            {
+              "text": "Recurrent or multi-digit disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Concomitant joint arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and rheumatoid screen",
+          "cells": [
+            {
+              "text": "Inflammatory arthropathy considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of triggering grade and IP range",
+          "cells": [
+            {
+              "text": "Baseline for review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigger_thumb-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thumb joint osteoarthritis",
+          "cells": [
+            {
+              "text": "Joint pain and bony change on radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor pollicis longus rupture",
+          "cells": [
+            {
+              "text": "Loss of active interphalangeal flexion rather than triggering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De Quervain tenosynovitis",
+          "cells": [
+            {
+              "text": "Radial wrist pain over the first compartment without A1 triggering"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigger_thumb-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification, splint and sheath steroid injection",
+          "cells": [
+            {
+              "text": "Highly effective in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "A1 pulley release",
+          "cells": [
+            {
+              "text": "Triggering refractory to injection or fixed IP flexion contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation in paediatric congenital cases",
+          "cells": [
+            {
+              "text": "Many resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise diabetes, hypothyroidism and rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy with stretching and gliding",
+          "cells": [
+            {
+              "text": "After injection or release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "Higher in diabetes; escalate when injection fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

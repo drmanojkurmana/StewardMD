@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for schatzki ring."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schatzki_ring-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium swallow",
+          "cells": [
+            {
+              "text": "Full oesophageal distension with solid bolus challenge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Confirmation, biopsy and dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal biopsies",
+          "cells": [
+            {
+              "text": "Exclude eosinophilic oesophagitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory reflux monitoring",
+          "cells": [
+            {
+              "text": "When reflux contribution is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hiatus hernia assessment",
+          "cells": [
+            {
+              "text": "Associated finding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schatzki_ring-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Eosinophilic oesophagitis",
+          "cells": [
+            {
+              "text": "Fixed rings and recurrent dysphagia; biopsies separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic stricture",
+          "cells": [
+            {
+              "text": "Reflux-related narrowing; ring recurrence may indicate untreated reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal adenocarcinoma at the junction",
+          "cells": [
+            {
+              "text": "Progressive dysphagia or weight loss suggests malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schatzki_ring-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic dilatation",
+          "cells": [
+            {
+              "text": "Widens the lumen and relieves dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic disimpaction",
+          "cells": [
+            {
+              "text": "Acute food bolus impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Controls coexisting reflux and reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy for eosinophilic oesophagitis",
+          "cells": [
+            {
+              "text": "Before attributing dysphagia to the ring alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eating advice",
+          "cells": [
+            {
+              "text": "Chew thoroughly, avoid large boluses and alcohol-associated bolting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat dilatation",
+          "cells": [
+            {
+              "text": "For symptomatic recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schatzki_ring-dx-mgmt",
+      "title": "Diagnosis and management of Schatzki ring",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intermittent solid-food dysphagia, often with meat or bread",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Food impaction, progressive dysphagia, weight loss, odynophagia or bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endoscopy for disimpaction; biopsy any stricture to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Barium swallow with solid bolus; endoscopy with biopsies for eosinophilic oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a lower oesophageal ring seen on distension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider web, peptic stricture, eosinophilic oesophagitis, achalasia, carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic dilatation of the symptomatic ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Proton pump inhibitor for coexisting reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise careful chewing and avoiding large boluses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat dilatation if symptoms recur",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Dilatation usually effective and safe; rings can recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

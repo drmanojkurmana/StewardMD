@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for serous cystadenoma of the pancreas."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serous_cystadenoma_pancreas-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Microcystic honeycomb pattern with central scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Characterises cysts and septa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration, cyst fluid CEA",
+          "cells": [
+            {
+              "text": "Characteristically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid glucose",
+          "cells": [
+            {
+              "text": "Tends to be high in serous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Confirms absence of main duct communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation for von Hippel-Lindau",
+          "cells": [
+            {
+              "text": "When clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serous_cystadenoma_pancreas-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucinous cystic neoplasm",
+          "cells": [
+            {
+              "text": "Fluid CEA is low in serous lesions; macrocystic serous variants can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Branch-duct IPMN",
+          "cells": [
+            {
+              "text": "MRCP confirms serous cystadenoma lacks main duct communication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serous_cystadenoma_pancreas-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Confidently diagnosed asymptomatic lesion, with periodic surveillance imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Distal pancreatectomy, enucleation or pancreatoduodenectomy for symptomatic, large, enlarging or uncertain lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS and aspiration",
+          "cells": [
+            {
+              "text": "Low fluid CEA and high fluid glucose separate it from mucinous neoplasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mass-effect complications",
+          "cells": [
+            {
+              "text": "Biliary or gastric outlet obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Hippel-Lindau evaluation",
+          "cells": [
+            {
+              "text": "Genetic counselling and surveillance if confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary review",
+          "cells": [
+            {
+              "text": "Hepatobiliary and pancreatology team decides resection versus observation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serous_cystadenoma_pancreas-dx-mgmt",
+      "title": "Diagnosis and management of Serous cystadenoma of the pancreas",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental pancreatic cystic lesion, often in an older woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Macrocystic look-alike of mucinous neoplasm, solid component, rapid growth or jaundice?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Multidisciplinary review and consider resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI; MRCP; EUS with fluid CEA, glucose and cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Microcystic honeycomb with central scar and low fluid CEA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate as mucinous cystic neoplasm, IPMN or solid pseudopapillary neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic lesions with periodic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect symptomatic, large, enlarging or uncertain lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat biliary or gastric outlet obstruction from mass effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Check for von Hippel-Lindau disease when suggested",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent: malignant change very rare; resection is curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

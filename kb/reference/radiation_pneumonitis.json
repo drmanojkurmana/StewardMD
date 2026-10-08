@@ -154,5 +154,238 @@
       "caption": "Overview comparison matrix for radiation pneumonitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "radiation_pneumonitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph and high-resolution CT",
+          "cells": [
+            {
+              "text": "Changes correlated with the radiation field"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen saturation, arterial blood gas and lung function",
+          "cells": [
+            {
+              "text": "Hypoxaemia and lung function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radiation_pneumonitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective pneumonia, including opportunistic infection",
+          "cells": [
+            {
+              "text": "Fever or purulent sputum"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphangitic carcinomatosis or tumour progression",
+          "cells": [
+            {
+              "text": "Tumour progression in the treated field"
+            },
+            {
+              "text": "High-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radiation_pneumonitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild or asymptomatic change",
+          "cells": [
+            {
+              "text": "Observation only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate to severe symptomatic disease",
+          "cells": [
+            {
+              "text": "Treatment according to severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superimposed infection",
+          "cells": [
+            {
+              "text": "Treat promptly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "radiation_pneumonitis-dx-mgmt",
+      "title": "Diagnosis and management of Radiation pneumonitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected radiation pneumonitis: breathlessness within the radiation field",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid breathlessness with hypoxaemia, fever or purulent sputum, or extensive changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent respiratory review for hypoxaemia or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CXR and HRCT correlated with field; oximetry; ABG; lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do changes match the radiation field with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infection, lymphangitic spread or PE; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mild or asymptomatic change: observation only",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Moderate to severe symptomatic disease: treat per severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat superimposed infection promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Serial imaging and lung function follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

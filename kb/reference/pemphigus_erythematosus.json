@@ -151,5 +151,264 @@
       "caption": "Overview comparison matrix for pemphigus erythematosus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pemphigus_erythematosus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lesional skin biopsy",
+          "cells": [
+            {
+              "text": "Superficial acantholysis in the granular layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence of perilesional skin",
+          "cells": [
+            {
+              "text": "Combined intercellular and basement membrane pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_erythematosus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Generalised superficial form; this is the localised variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Discoid or systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Overlapping features; immunofluorescence pattern distinguishes them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pemphigus_erythematosus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Mainstay for active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Azathioprine or mycophenolate mofetil to limit corticosteroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Considered for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Relapses are common; a minority progress to generalised disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pemphigus_erythematosus-dx-mgmt",
+      "title": "Diagnosis and management of Pemphigus erythematosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Scaly crusted plaques and flaccid superficial blisters with lupus-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid widespread erosions, secondary sepsis or emerging lupus features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for widespread erosions, sepsis or systemic lupus features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lesional biopsy, perilesional DIF, indirect immunofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunofluorescence show the combined intercellular and basement membrane pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pemphigus foliaceus, lupus, seborrhoeic dermatitis or impetigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as the mainstay for active disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azathioprine or mycophenolate mofetil to limit corticosteroid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab considered for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for relapse, which is common, and progression to generalised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but comparatively benign and localised; relapses common, minority generalise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,307 @@
       "caption": "Overview comparison matrix for trehalase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trehalase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Trehalase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trehalase deficiency: post-meal diarrhoea and bloating after mushrooms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: dehydration, weight loss, or symptoms persisting despite avoidance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rehydration and evaluation for another malabsorptive or mucosal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dietary history; trehalose breath test; duodenal disaccharidase assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are symptoms reproduced by trehalose and does the assay show low trehalase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sucrase-isomaltase or lactase deficiency or a functional disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid trehalose-rich foods, chiefly mushrooms and some processed foods",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietitian input to identify hidden sources",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Educate that symptoms are dose-dependent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm with duodenal assay or breath test before a functional label",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure that the condition is benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; symptoms are controlled by avoiding trehalose-rich foods",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trehalase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary history of mushroom or trehalose-containing food",
+          "cells": [
+            {
+              "text": "Symptom correlation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trehalose hydrogen breath test",
+          "cells": [
+            {
+              "text": "Malabsorption of trehalose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal biopsy with disaccharidase assay",
+          "cells": [
+            {
+              "text": "Low trehalase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool pH and reducing substances after trehalose challenge",
+          "cells": [
+            {
+              "text": "Osmotic malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TREH molecular testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trehalase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital sucrase-isomaltase deficiency",
+          "cells": [
+            {
+              "text": "Sucrose-containing foods; disaccharidase panel separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactase deficiency",
+          "cells": [
+            {
+              "text": "Dairy-linked symptoms; trehalose testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional bowel disorder",
+          "cells": [
+            {
+              "text": "Symptoms reproduced by trehalose-rich meals; assay confirms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trehalase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary elimination of trehalose-rich foods",
+          "cells": [
+            {
+              "text": "Mushrooms and certain processed foods; the definitive measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian support",
+          "cells": [
+            {
+              "text": "Hidden trehalose sources and nutritional adequacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose-dependent symptom education",
+          "cells": [
+            {
+              "text": "Blanket restriction is not always required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmatory assay",
+          "cells": [
+            {
+              "text": "Duodenal disaccharidase assay or breath test before a functional label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign with no systemic consequences"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,249 @@
       "caption": "Overview comparison matrix for vulvar intraepithelial neoplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology textbook and colposcopy guidance on vulval premalignant disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vulvar_intraepithelial_neoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Vulval biopsy",
+          "cells": [
+            {
+              "text": "Histological confirmation and grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulvoscopy with acetic acid",
+          "cells": [
+            {
+              "text": "Extent of the lesion; guides directed biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "p16 and HPV testing",
+          "cells": [
+            {
+              "text": "High-risk HPV driven, p16-positive usual-type VIN"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvar_intraepithelial_neoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lichen sclerosus",
+          "cells": [
+            {
+              "text": "Differentiated VIN can mimic it histologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive vulval squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Ulceration, induration or a nodular lesion suggests occult invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulval Paget disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Condylomata acuminata",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvar_intraepithelial_neoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Differentiated VIN or any lesion with suspected occult invasion, with margin assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative treatment",
+          "cells": [
+            {
+              "text": "Usual-type VIN where invasion is excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vulvar_intraepithelial_neoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Vulvar intraepithelial neoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected VIN: vulval lesion with high-risk HPV or p16 positivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ulceration, induration, bleeding or nodular lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude occult invasive carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vulval biopsy, vulvoscopy with acetic acid, p16 and HPV testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm high-grade VIN without invasion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichen sclerosus, Paget disease or invasive carcinoma; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide local excision with margin assessment for differentiated VIN",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ablative treatment for usual-type VIN where invasion is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy any suspicious lesion rather than treating it empirically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Excision can uncover invasive disease; biopsy first guides treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

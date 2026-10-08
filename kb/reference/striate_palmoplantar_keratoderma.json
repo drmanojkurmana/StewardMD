@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for striate palmoplantar keratoderma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "striate_palmoplantar_keratoderma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "DSG1 and DSP sequencing",
+          "cells": [
+            {
+              "text": "Desmosomal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis with acantholytic-like widening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Autosomal dominant pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac involvement where a DSP variant is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail and hair examination",
+          "cells": [
+            {
+              "text": "Syndromic keratoderma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography",
+          "cells": [
+            {
+              "text": "Striate pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "striate_palmoplantar_keratoderma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pachyonychia congenita",
+          "cells": [
+            {
+              "text": "Focal keratoderma with nail and oral features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naxos disease and Carvajal syndrome",
+          "cells": [
+            {
+              "text": "Cardiocutaneous keratoderma; woolly hair suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "striate_palmoplantar_keratoderma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical keratolytics",
+          "cells": [
+            {
+              "text": "Urea, salicylic acid or lactic acid preparations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical measures",
+          "cells": [
+            {
+              "text": "Regular paring, debridement and cushioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral acitretin",
+          "cells": [
+            {
+              "text": "Severe, disabling keratoderma, after topical and mechanical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of fissuring and infection",
+          "cells": [
+            {
+              "text": "Painful fissures and secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "ECG and echocardiography for DSP variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation and counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "striate_palmoplantar_keratoderma-dx-mgmt",
+      "title": "Diagnosis and management of Striate palmoplantar keratoderma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Linear palmoplantar thickening along stress lines: suspected striate keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (arrhythmia, syncope, cardiomyopathy, woolly hair, painful fissuring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for family history of arrhythmia or cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DSG1 and DSP sequencing; skin biopsy; ECG and echo; nail and hair examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a desmosomal variant found with a striate pattern and normal nails?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pachyonychia congenita or a cardiocutaneous syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical keratolytics such as urea and salicylic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular paring and cushioning for thickened skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac assessment with ECG and echo for DSP variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral acitretin for severe disabling disease after topical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and autosomal dominant; cardiac risk depends on the gene",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

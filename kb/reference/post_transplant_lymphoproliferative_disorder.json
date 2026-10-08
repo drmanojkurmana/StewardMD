@@ -151,5 +151,361 @@
       "caption": "Overview comparison matrix for post-transplant lymphoproliferative disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard transplantation and haematopathology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "post_transplant_lymphoproliferative_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue biopsy with histopathology, immunophenotyping and clonality",
+          "cells": [
+            {
+              "text": "Diagnosis and lineage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBER staining with blood viral load",
+          "cells": [
+            {
+              "text": "Epstein-Barr virus involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional and functional imaging",
+          "cells": [
+            {
+              "text": "Staging and disease extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Systemic disease suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allograft function assessment",
+          "cells": [
+            {
+              "text": "Graft dysfunction from tumour infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH and general tumour markers",
+          "cells": [
+            {
+              "text": "Tumour burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS evaluation",
+          "cells": [
+            {
+              "text": "Neurological involvement suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "post_transplant_lymphoproliferative_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary or reactivated viral infection",
+          "cells": [
+            {
+              "text": "Epstein-Barr virus or cytomegalovirus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allograft rejection",
+          "cells": [
+            {
+              "text": "Graft dysfunction without mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De novo or recurrent lymphoma",
+          "cells": [
+            {
+              "text": "Not related to transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive lymphadenopathy",
+          "cells": [
+            {
+              "text": "Benign histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other opportunistic infection",
+          "cells": [
+            {
+              "text": "Lymphadenopathy with an infective cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic solid-organ malignancy",
+          "cells": [
+            {
+              "text": "Solid-organ primary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "post_transplant_lymphoproliferative_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reduce immunosuppression",
+          "cells": [
+            {
+              "text": "First-line, to restore T-cell surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "For CD20-positive B-cell disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery or radiotherapy",
+          "cells": [
+            {
+              "text": "Localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral load monitoring",
+          "cells": [
+            {
+              "text": "Surveillance in high-risk recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allograft function monitoring",
+          "cells": [
+            {
+              "text": "Balancing tumour control against rejection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Transplantation and haemato-oncology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "post_transplant_lymphoproliferative_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Post-transplant lymphoproliferative disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lymphadenopathy or mass in a transplant recipient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (B symptoms, rapid growth, CNS disease, high or rising EBV load)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haemato-oncology review for aggressive or CNS disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with histology and clonality; EBER; viral load; imaging; marrow if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a lymphoproliferative lesion with EBV-encoded RNA positivity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reactive lymphadenopathy, rejection, other infection or metastatic cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reduce immunosuppression as the first-line intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab for CD20-positive B-cell disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery or radiotherapy for localised disease where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial EBV load monitoring in high-risk recipients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Joint transplant and haemato-oncology multidisciplinary management",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early lesions may regress; monomorphic and aggressive disease has a worse outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

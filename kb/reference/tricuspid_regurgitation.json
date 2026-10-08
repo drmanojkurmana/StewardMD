@@ -142,5 +142,327 @@
       "caption": "Overview comparison matrix for tricuspid regurgitation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Valvular heart disease guidelines / cardiology references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tricuspid_regurgitation-dx-mgmt",
+      "title": "Diagnosis and management of Tricuspid regurgitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tricuspid regurgitation: raised JVP, v waves and pansystolic murmur",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive right heart failure, endocarditis or severe pulmonary hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent valve team review for endocarditis or decompensated right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography grading severity and right ventricle; pulmonary pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo grade regurgitation as significant, and is it primary or secondary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constrictive pericarditis, pulmonary hypertension or hepatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat left-sided heart disease and pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Loop diuretics with aldosterone antagonist for congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rate or rhythm control and anticoagulation for atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antimicrobials for endocarditis; manage carcinoid or lead causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical or transcatheter repair in selected severe cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Serial echocardiographic surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Depends on cause and right ventricular function; secondary disease worsens outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tricuspid_regurgitation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Grades severity; assesses right ventricle and annulus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary artery pressure assessment",
+          "cells": [
+            {
+              "text": "Drives treatment of pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left-sided valve or myocardial evaluation",
+          "cells": [
+            {
+              "text": "Common driver of functional regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for primary causes",
+          "cells": [
+            {
+              "text": "Endocarditis, carcinoid, device leads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart and hepatic assessment",
+          "cells": [
+            {
+              "text": "Chronic congestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricuspid_regurgitation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Raised venous pressure with limited ventricular filling on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Raised pulmonary pressure as cause or consequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic disease",
+          "cells": [
+            {
+              "text": "Liver disease alone does not explain congestion when valve disease is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricuspid_regurgitation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat left-sided disease and pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Reduces functional regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loop diuretics with aldosterone antagonist",
+          "cells": [
+            {
+              "text": "Systemic venous and hepatic congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rate or rhythm control and anticoagulation",
+          "cells": [
+            {
+              "text": "Atrial fibrillation with annular remodelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobials, carcinoid or lead management",
+          "cells": [
+            {
+              "text": "Primary valve causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid annuloplasty, replacement or transcatheter repair",
+          "cells": [
+            {
+              "text": "Selected severe cases, often with left valve surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Watch for right heart failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for spinocerebellar ataxia type 40."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_40-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CCDC88C sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy, sometimes with pontine involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat-expansion SCA panel",
+          "cells": [
+            {
+              "text": "Excludes the common repeat subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral component, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxia screen",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Dominant transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_40-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxia type 1",
+          "cells": [
+            {
+              "text": "Pyramidal signs and spasticity are prominent; repeat testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charlevoix-Saguenay spastic ataxia (SACS)",
+          "cells": [
+            {
+              "text": "Recessive spastic ataxia with cerebellar features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_40-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Pyramidal spasticity; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agent",
+          "cells": [
+            {
+              "text": "Pyramidal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of intention tremor",
+          "cells": [
+            {
+              "text": "Where it impairs function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and mobility aids",
+          "cells": [
+            {
+              "text": "Spasticity compounds the ataxic gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow surveillance",
+          "cells": [
+            {
+              "text": "Periodic assessment for bulbar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission; segregation analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_40-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 40",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult ataxia with prominent spasticity and extensor plantar signs: suspected SCA40",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid spasticity, bulbar failure, hydrocephalus, sensory level)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical or spinal review for hydrocephalus or cord lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CCDC88C sequencing; brain MRI; repeat-expansion exclusion; family segregation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a heterozygous CCDC88C variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCA1, SCA3, SPG7 disease or SACS; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and stretching for pyramidal spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antispasticity agent for pyramidal features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of intention tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Falls prevention and swallow surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; spasticity and falls compound the ataxia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

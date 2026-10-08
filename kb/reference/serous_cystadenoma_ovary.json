@@ -153,5 +153,317 @@
       "caption": "Overview comparison matrix for ovarian serous cystadenoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serous_cystadenoma_ovary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Thin-walled unilocular cyst, clear fluid, few or no septations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "When the lesion is large or indeterminate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CA125",
+          "cells": [
+            {
+              "text": "Not diagnostic alone; elevated in only about 75 percent of epithelial ovarian cancers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CA125, premenopausal referral threshold",
+          "cells": [
+            {
+              "text": "Above 200 U/mL triggers gynaecologic oncology referral",
+              "op": ">",
+              "value": 200
+            }
+          ],
+          "cite": "c1",
+          "unit": "U/mL"
+        },
+        {
+          "parameter": "CA125, postmenopausal referral threshold",
+          "cells": [
+            {
+              "text": "Any elevation triggers gynaecologic oncology referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Benign lining without atypia or invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler assessment",
+          "cells": [
+            {
+              "text": "If torsion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serous_cystadenoma_ovary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Serous borderline tumour or low-grade serous carcinoma",
+          "cells": [
+            {
+              "text": "Cystadenoma lacks epithelial proliferation, atypia and stromal invasion; solid or papillary parts and ascites raise concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucinous cystadenoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serous_cystadenoma_ovary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interval ultrasound surveillance",
+          "cells": [
+            {
+              "text": "Asymptomatic simple unilocular thin-walled cyst with normal markers and no referral criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecologic oncology referral",
+          "cells": [
+            {
+              "text": "Any ACOG or SGO referral criterion or complex imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystectomy or oophorectomy",
+          "cells": [
+            {
+              "text": "Large, symptomatic or indeterminate cyst without high-risk features; minimally invasive where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgical evaluation",
+          "cells": [
+            {
+              "text": "Acute severe pain suggesting torsion or rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy and cytotoxic therapy",
+          "cells": [
+            {
+              "text": "No role in benign serous cystadenoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics and gynaecologic oncology",
+          "cells": [
+            {
+              "text": "Strong family history or known BRCA1, BRCA2 or Lynch mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serous_cystadenoma_ovary-dx-mgmt",
+      "title": "Diagnosis and management of Ovarian serous cystadenoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thin-walled unilocular ovarian cyst on ultrasound, asymptomatic or with pelvic pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Solid or papillary parts, thick septa, ascites or raised CA125 (>200 U/mL premenopausal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to gynaecologic oncology before any surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound; CA125 with risk assessment; MRI if indeterminate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Simple cyst, normal markers and no referral criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as possible borderline or malignant tumour per oncology pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interval ultrasound for small simple cysts, watching for new complex features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cystectomy or oophorectomy if large, symptomatic or indeterminate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent evaluation of acute pain for torsion or rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm benign histology; no cancer surveillance after removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent: benign and cured by complete excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

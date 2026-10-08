@@ -152,5 +152,278 @@
       "caption": "Overview comparison matrix for notalgia paraesthetica."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "notalgia_paraesthetica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical mapping of the itch to a thoracic dermatome",
+          "cells": [
+            {
+              "text": "Localises the nerve involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic spine imaging",
+          "cells": [
+            {
+              "text": "Degenerative or structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination",
+          "cells": [
+            {
+              "text": "Excludes an evolving plaque or malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "notalgia_paraesthetica-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brachioradial pruritus",
+          "cells": [
+            {
+              "text": "Itch of a different distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular or lichen amyloidosis",
+          "cells": [
+            {
+              "text": "Hyperpigmented itchy patch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postinflammatory hyperpigmentation",
+          "cells": [
+            {
+              "text": "Pigmentation from another skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised tinea",
+          "cells": [
+            {
+              "text": "Infective itchy patch"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "notalgia_paraesthetica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical capsaicin",
+          "cells": [
+            {
+              "text": "Depletes substance P to relieve neuropathic itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gabapentinoids or tricyclic antidepressants",
+          "cells": [
+            {
+              "text": "When topical therapy is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sedating antihistamines",
+          "cells": [
+            {
+              "text": "Ineffective for neuropathic itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging when neurological signs",
+          "cells": [
+            {
+              "text": "Directs treatment of the cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "notalgia_paraesthetica-dx-mgmt",
+      "title": "Diagnosis and management of notalgia paraesthetica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronically itchy hyperpigmented patch on the upper or mid back",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (evolving or ulcerated plaque, radicular pain, deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy an evolving plaque; investigate neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermatomal mapping, thoracic spine imaging if indicated, skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Itch confined to a thoracic dermatome with no skin disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider brachioradial pruritus or amyloidosis; reassess the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical capsaicin to relieve neuropathic itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentinoid or tricyclic antidepressant if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid sedating antihistamines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Image the spine when neurological signs are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but chronic and relapsing; symptoms can be controlled over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

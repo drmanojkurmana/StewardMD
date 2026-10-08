@@ -153,6 +153,11 @@
       "id": "c1",
       "label": "Braunwald's Heart Disease / infiltrative cardiomyopathy consensus documents",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -161,14 +166,64 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in cardiac amyloidosis",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Echocardiography", "cells": [{"text": "Wall thickening, granular sparkling texture, impaired longitudinal strain with apical sparing"}], "cite": "c1"},
-        {"parameter": "ECG", "cells": [{"text": "Paradoxically low voltages, pseudo-infarct pattern, conduction disease"}], "cite": "c1"},
-        {"parameter": "Serum free light chains and immunofixation", "cells": [{"text": "Monoclonal protein excluded or identified"}], "cite": "c1"},
-        {"parameter": "Bone-avid scintigraphy (pyrophosphate imaging)", "cells": [{"text": "ATTR uptake once a monoclonal protein is excluded"}], "cite": "c1"},
-        {"parameter": "Cardiac MRI", "cells": [{"text": "Diffuse late enhancement and abnormal T1 mapping"}], "cite": "c1"},
-        {"parameter": "Tissue biopsy and typing", "cells": [{"text": "When needed"}], "cite": "c1"}
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Wall thickening, granular sparkling texture, impaired longitudinal strain with apical sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Paradoxically low voltages, pseudo-infarct pattern, conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal protein excluded or identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-avid scintigraphy (pyrophosphate imaging)",
+          "cells": [
+            {
+              "text": "ATTR uptake once a monoclonal protein is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Diffuse late enhancement and abnormal T1 mapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy and typing",
+          "cells": [
+            {
+              "text": "When needed"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -176,16 +231,380 @@
       "kind": "treatment",
       "title": "Management options in cardiac amyloidosis",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Typing first", "cells": [{"text": "Confirm and type the amyloid; therapy is subtype-specific"}, {"text": "Essential"}], "cite": "c1"},
-        {"parameter": "AL disease", "cells": [{"text": "Plasma-cell-directed therapy such as bortezomib-based regimens with daratumumab, alongside haematology"}, {"text": "Urgent"}], "cite": "c1"},
-        {"parameter": "ATTR disease", "cells": [{"text": "Transthyretin stabiliser such as tafamidis, or gene silencing with patisiran or inotersen"}, {"text": "Slows progression"}], "cite": "c1"},
-        {"parameter": "Heart failure", "cells": [{"text": "Cautious diuresis; avoid beta-blockers, calcium-channel blockers and digoxin"}, {"text": "Restrictive physiology"}], "cite": "c1"},
-        {"parameter": "Conduction disease and arrhythmia", "cells": [{"text": "Pacing where indicated; anticoagulation for atrial arrhythmias"}, {"text": "As indicated"}], "cite": "c1"},
-        {"parameter": "Surveillance", "cells": [{"text": "Echocardiography, cardiac biomarkers and staging; awareness of carpal tunnel and other red flags"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Genetic and transplant considerations", "cells": [{"text": "Family screening in hereditary ATTR; cardiac or combined transplantation in selected patients"}, {"text": "Selected"}], "cite": "c1"}
+        {
+          "parameter": "Typing first",
+          "cells": [
+            {
+              "text": "Confirm and type the amyloid; therapy is subtype-specific"
+            },
+            {
+              "text": "Essential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AL disease",
+          "cells": [
+            {
+              "text": "Plasma-cell-directed therapy such as bortezomib-based regimens with daratumumab, alongside haematology"
+            },
+            {
+              "text": "Urgent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATTR disease",
+          "cells": [
+            {
+              "text": "Transthyretin stabiliser such as tafamidis, or gene silencing with patisiran or inotersen"
+            },
+            {
+              "text": "Slows progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Cautious diuresis; avoid beta-blockers, calcium-channel blockers and digoxin"
+            },
+            {
+              "text": "Restrictive physiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conduction disease and arrhythmia",
+          "cells": [
+            {
+              "text": "Pacing where indicated; anticoagulation for atrial arrhythmias"
+            },
+            {
+              "text": "As indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, cardiac biomarkers and staging; awareness of carpal tunnel and other red flags"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and transplant considerations",
+          "cells": [
+            {
+              "text": "Family screening in hereditary ATTR; cardiac or combined transplantation in selected patients"
+            },
+            {
+              "text": "Selected"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
+    },
+    {
+      "id": "cardiac_amyloidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
     }
   ],
   "flowcharts": [
@@ -194,25 +613,101 @@
       "title": "Diagnosis and management of cardiac amyloidosis",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Heart failure with wall thickening, low ECG voltages, or unexplained restrictive physiology", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: rapidly progressive heart failure, high-grade block, or newly found monoclonal protein?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: urgent haematology and cardiology review", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Echocardiography with strain; ECG; serum free light chains and immunofixation", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Monoclonal protein present?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Tissue typing; AL-directed plasma-cell therapy with haematology", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Bone-avid scintigraphy for ATTR; transthyretin stabiliser or gene silencing", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "AL needs urgent treatment; ATTR managed to slow progression", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure with wall thickening, low ECG voltages, or unexplained restrictive physiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapidly progressive heart failure, high-grade block, or newly found monoclonal protein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent haematology and cardiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography with strain; ECG; serum free light chains and immunofixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Monoclonal protein present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Tissue typing; AL-directed plasma-cell therapy with haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bone-avid scintigraphy for ATTR; transthyretin stabiliser or gene silencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "AL needs urgent treatment; ATTR managed to slow progression",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Next"},
-        {"from": "n7", "to": "n8", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
       ]
     }
   ]

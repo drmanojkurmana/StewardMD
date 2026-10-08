@@ -154,5 +154,231 @@
       "caption": "Overview comparison matrix for x-linked reticulate pigmentary disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_reticulate_pigmentary_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted molecular testing for the recurrent intronic POLA1 variant",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis when exome sequencing misses it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Keratitis and corneal scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_reticulate_pigmentary_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Incontinentia pigmenti (IKBKG)",
+          "cells": [
+            {
+              "text": "Blaschko-linear pigmentation; different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulate acropigmentation of Kitamura",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_reticulate_pigmentary_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt antimicrobial treatment",
+          "cells": [
+            {
+              "text": "Recurrent respiratory, urinary and gastrointestinal infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance",
+          "cells": [
+            {
+              "text": "Recurrent pneumonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ophthalmology input",
+          "cells": [
+            {
+              "text": "Sight-threatening keratitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_reticulate_pigmentary_disorder-dx-mgmt",
+      "title": "Diagnosis and management of X-linked Reticulate Pigmentary Disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked reticulate pigmentary disorder: pigmentation with recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sight-threatening keratitis or recurrent pneumonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology input for keratitis with corneal scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted POLA1 testing for the intronic variant, ophthalmic examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does targeted testing confirm the recurrent POLA1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider incontinentia pigmenti or reticulate acropigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt antimicrobial treatment of recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway clearance for recurrent pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology follow-up for keratitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Multisystem disease; infections and eye involvement drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

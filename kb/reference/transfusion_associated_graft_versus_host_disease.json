@@ -152,5 +152,316 @@
       "caption": "Overview comparison matrix for transfusion-associated graft-versus-host disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusion_associated_graft_versus_host_disease-dx-mgmt",
+      "title": "Diagnosis and management of Transfusion-associated graft-versus-host disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transfusion GVHD: fever, rash and pancytopenia weeks after transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive pancytopenia, or a directed donation from a relative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology and transfusion review; infection prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; marrow examination; HLA and chimerism; FBC trend",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do chimerism studies show donor lymphocytes with marrow aplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider drug reaction, CMV infection or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent with gamma or X-ray irradiation of cellular components",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Flag at-risk recipients who always need irradiated products",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for established disease, with poor expected response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care for marrow aplasia with aggressive infection prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Stem cell transplantation in rare selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Almost always fatal within weeks; prevention by irradiation is essential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusion_associated_graft_versus_host_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Basal vacuolar change, dyskeratosis and lymphocytic infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Hypoplasia or aplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing and chimerism studies",
+          "cells": [
+            {
+              "text": "Donor lymphocytes in recipient blood or tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC",
+          "cells": [
+            {
+              "text": "Progressive pancytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Cholestatic derangement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_associated_graft_versus_host_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug reaction with eosinophilia and systemic symptoms",
+          "cells": [
+            {
+              "text": "Drug history and eosinophilia; chimerism testing separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytomegalovirus marrow suppression",
+          "cells": [
+            {
+              "text": "Viral marrow suppression without donor lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graft-versus-host disease after stem cell transplantation",
+          "cells": [
+            {
+              "text": "Graft marrow is spared in transplant GVHD; marrow aplasia is the defining feature here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_associated_graft_versus_host_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Irradiation of cellular components",
+          "cells": [
+            {
+              "text": "Gamma or X-ray; the essential prevention, as leucoreduction alone is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flagging at-risk recipients",
+          "cells": [
+            {
+              "text": "Immunocompromised, directed donations from relatives, HLA-matched platelets, intrauterine or neonatal exchange"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Corticosteroids, ciclosporin and antithymocyte globulin; response generally poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Transfusion, growth factors, and skin, gut and hepatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis and treatment",
+          "cells": [
+            {
+              "text": "Overwhelming infection with bleeding drives mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stem cell transplantation",
+          "cells": [
+            {
+              "text": "Rare, appropriately selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for subclavian steal syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard vascular surgery and neurology reference texts and cerebrovascular consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subclavian_steal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral arm blood pressure",
+          "cells": [
+            {
+              "text": "Inter-arm gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound of vertebral and subclavian arteries",
+          "cells": [
+            {
+              "text": "Reversed vertebral flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography of the aortic arch",
+          "cells": [
+            {
+              "text": "Localises the proximal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "When intervention is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provocative arm-exercise testing",
+          "cells": [
+            {
+              "text": "Reproduces symptoms and flow reversal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for large-vessel arteritis",
+          "cells": [
+            {
+              "text": "When atherosclerosis is not the cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subclavian_steal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thoracic outlet syndrome",
+          "cells": [
+            {
+              "text": "Arm symptoms without flow reversal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu arteritis",
+          "cells": [
+            {
+              "text": "Large-vessel vasculitis with systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subclavian_steal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Asymptomatic reversed vertebral flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy and risk-factor modification",
+          "cells": [
+            {
+              "text": "Antiplatelet therapy and vascular risk control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular angioplasty and stenting",
+          "cells": [
+            {
+              "text": "Symptomatic disease with suitable anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid-subclavian bypass",
+          "cells": [
+            {
+              "text": "Where endovascular treatment is unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of arteritis",
+          "cells": [
+            {
+              "text": "Immunosuppression where large-vessel vasculitis is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Inter-arm gradient and symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subclavian_steal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Subclavian steal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arm claudication with posterior symptoms and BP gradient: suspected subclavian steal",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope or focal deficit, prior bypass, systemic vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular review for arm ischaemia or posterior circulation events",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bilateral arm pressures; duplex of vertebral and subclavian; CTA or MRA of arch",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an inter-arm systolic gradient with reversed vertebral flow confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thoracic outlet syndrome or vertebrobasilar disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management of asymptomatic reversed flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet therapy and risk-factor modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovascular angioplasty and stenting for symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carotid-subclavian bypass where endovascular treatment is unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Asymptomatic reversed flow is often benign; symptomatic lesions need revascularisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

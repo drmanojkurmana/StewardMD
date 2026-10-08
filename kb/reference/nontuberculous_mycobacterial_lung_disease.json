@@ -154,5 +154,287 @@
       "caption": "Overview comparison matrix for non-tuberculous mycobacterial lung disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated sputum mycobacterial cultures",
+          "cells": [
+            {
+              "text": "At least two separate positive samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage culture",
+          "cells": [
+            {
+              "text": "When sputum is not obtainable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species identification",
+          "cells": [
+            {
+              "text": "Guides drug choice and resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Cavitation and nodular bronchiectatic pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Must be excluded before treating NTM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis exacerbation from conventional pathogens",
+          "cells": [
+            {
+              "text": "Treated differently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Fungal cavitary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung malignancy",
+          "cells": [
+            {
+              "text": "Mass or cavitary lesion on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide, rifampicin and ethambutol for MAC",
+          "cells": [
+            {
+              "text": "Continued well beyond sputum culture conversion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin-based therapy for M. kansasii",
+          "cells": [
+            {
+              "text": "Responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous agents for extensive disease",
+          "cells": [
+            {
+              "text": "Added in severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid macrolide monotherapy",
+          "cells": [
+            {
+              "text": "Resistance develops without a full regimen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Non-tuberculous mycobacterial lung disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough and sputum with nodular bronchiectasis or cavitary lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoptysis, weight loss, rapid progression, resistant species)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for haemoptysis; exclude tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated sputum cultures, bronchoscopic lavage if needed, species identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Two or more positive cultures with compatible imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider colonisation, tuberculosis or aspergillosis; re-culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Macrolide, rifampicin and ethambutol for MAC disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continue beyond sputum culture conversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rifampicin-based therapy for M. kansasii",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous agents for extensive or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies by species; kansasii responds well, MAC is often controllable but relapses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

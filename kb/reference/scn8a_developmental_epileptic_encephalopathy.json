@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for scn8a developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scn8a_developmental_epileptic_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy panel or trio exome",
+          "cells": [
+            {
+              "text": "SCN8A variant and likely functional effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged or video EEG",
+          "cells": [
+            {
+              "text": "Seizure types and interictal abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Often normal early; excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional or in silico variant assessment",
+          "cells": [
+            {
+              "text": "Gain versus loss of function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac review",
+          "cells": [
+            {
+              "text": "Sodium-channel expression and SUDEP considerations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Documents trajectory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scn8a_developmental_epileptic_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Phenytoin, carbamazepine, oxcarbazepine or lacosamide for gain-of-function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconsider or avoid blockers",
+          "cells": [
+            {
+              "text": "Loss-of-function variants, where they may be unhelpful or aggravating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-resistant mixed seizures",
+          "cells": [
+            {
+              "text": "Combination therapy and consideration of the ketogenic diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Movement disorder, hypotonia, spasticity and cortical visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment and SUDEP counselling",
+          "cells": [
+            {
+              "text": "Raised risk of sudden unexpected death in epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental surveillance",
+          "cells": [
+            {
+              "text": "Neuropsychological monitoring with early intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and referral",
+          "cells": [
+            {
+              "text": "Paediatric neurology and epileptology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scn8a_developmental_epileptic_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of SCN8A developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with intractable seizures and delay: suspected SCN8A encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizure clusters, status, regression, movement disorder or SUDEP risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat status; cardiac review; urgent epileptology and SUDEP counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy panel or trio exome, video EEG, MRI, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SCN8A variant with gain-of-function effect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Loss-of-function: avoid sodium-channel blockers; milder familial phenotype possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phenytoin, carbamazepine, oxcarbazepine or lacosamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combination therapy and ketogenic diet if resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rehabilitation for movement disorder, hypotonia and visual impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac assessment, SUDEP counselling and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; gain-of-function disease is often drug-resistant with disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

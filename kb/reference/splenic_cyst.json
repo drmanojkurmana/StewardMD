@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for splenic cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Grainger & Allison's Diagnostic Radiology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "splenic_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Anechoic, well-defined lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Wall, septa and any enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA 19-9 and CEA",
+          "cells": [
+            {
+              "text": "May be raised in epithelial cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydatid serology",
+          "cells": [
+            {
+              "text": "Where parasitic disease is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Secondary infection or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised specimen",
+          "cells": [
+            {
+              "text": "Lining type"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parasitic (hydatid) cyst",
+          "cells": [
+            {
+              "text": "Must be excluded before intervention to avoid spillage and anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic abscess",
+          "cells": [
+            {
+              "text": "Infected collection with fever and sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic true cysts, with interval imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of hydatid cyst",
+          "cells": [
+            {
+              "text": "Exposure history and serology before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spleen-preserving surgery",
+          "cells": [
+            {
+              "text": "Partial splenectomy, deroofing or fenestration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid simple aspiration alone",
+          "cells": [
+            {
+              "text": "Recurrence is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Only where spleen-preserving techniques are not possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour marker follow-up",
+          "cells": [
+            {
+              "text": "CA 19-9 and CEA with imaging after excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Defines the lining and excludes rare neoplasms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "splenic_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Splenic cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well-defined splenic fluid lesion, often incidental: suspected splenic cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rupture or haemorrhage, sepsis, solid or septated component)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency care for rupture or haemorrhage; urgent review if solid",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound with Doppler; contrast CT or MRI; hydatid serology; CA 19-9 and CEA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a true cyst confirmed, with a parasitic cyst excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hydatid cyst, abscess or neoplasm; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation with interval imaging for small asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spleen-preserving surgery such as deroofing or partial splenectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid simple aspiration alone, because recurrence is common",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histology of the excised specimen to define the lining",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign; aspiration alone recurs and splenectomy should be avoided",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

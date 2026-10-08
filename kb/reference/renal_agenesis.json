@@ -148,5 +148,238 @@
       "caption": "Overview comparison matrix for renal agenesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_agenesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal and postnatal renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Empty renal fossa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DMSA scintigraphy",
+          "cells": [
+            {
+              "text": "Absent renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_agenesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Involuted multicystic dysplastic kidney",
+          "cells": [
+            {
+              "text": "Small involuted kidney"
+            },
+            {
+              "text": "Renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe renal hypoplasia or dysplasia",
+          "cells": [
+            {
+              "text": "Small dysplastic kidney"
+            },
+            {
+              "text": "DMSA scintigraphy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_agenesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral agenesis",
+          "cells": [
+            {
+              "text": "Neonatal palliative care for bilateral agenesis with Potter sequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary kidney",
+          "cells": [
+            {
+              "text": "Surveillance for hypertension and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Proteinuria and renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_agenesis-dx-mgmt",
+      "title": "Diagnosis and management of Renal agenesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal agenesis: empty renal fossa on antenatal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilateral agenesis with oligohydramnios, hypertension, proteinuria, or falling function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal review for bilateral agenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal and postnatal renal ultrasound; DMSA scintigraphy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is absent renal function confirmed on DMSA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider involuted multicystic dysplastic kidney or hypoplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bilateral agenesis with Potter sequence: neonatal palliative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Unilateral solitary kidney: surveillance for hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor proteinuria and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Long-term nephrology follow-up for unilateral agenesis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

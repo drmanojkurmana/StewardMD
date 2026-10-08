@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for pancreatic panniculitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pancreatic_panniculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional biopsy including subcutaneous fat",
+          "cells": [
+            {
+              "text": "Saponified ghost adipocytes in deep fat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum lipase and amylase",
+          "cells": [
+            {
+              "text": "Pancreatic enzyme release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the pancreas",
+          "cells": [
+            {
+              "text": "Pancreatitis or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Where pancreatic carcinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_panniculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema nodosum",
+          "cells": [
+            {
+              "text": "Ordinary nodules; the pancreatic cause must be sought here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panniculitis, polyarthritis and eosinophilia (PPP syndrome)",
+          "cells": [
+            {
+              "text": "Adds polyarthritis and eosinophilia; carries high mortality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_panniculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the pancreatic disorder",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Pancreatitis or enzyme-secreting tumour; the definitive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resect carcinoma",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Especially the acinar cell type, where identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Fluids and nutrition to reduce the circulating enzyme load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Rest, elevation, analgesia and wound care for ulcerating nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate PPP syndrome",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Polyarthritis and eosinophilia worsen prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pancreatic_panniculitis-dx-mgmt",
+      "title": "Diagnosis and management of Pancreatic panniculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender leg nodules that may ulcerate and discharge oily material",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (polyarthritis with eosinophilia, unexplained nodules or severe pancreatitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pancreatic work-up for suspected carcinoma or PPP syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep biopsy with fat, lipase and amylase, CT or MRI of pancreas, FBC, calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does deep biopsy show ghost adipocytes with a pancreatic cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider erythema nodosum, alpha-1-antitrypsin panniculitis or infective panniculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying pancreatitis or enzyme-secreting tumour as definitive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect or treat pancreatic carcinoma, especially acinar cell type, where found",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fluids and nutrition for acute pancreatitis to reduce circulating enzyme load",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rest, elevation, analgesia and wound care for ulcerating nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Investigate for polyarthritis and eosinophilia (PPP syndrome), which worsens prognosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on the pancreatic disease; PPP syndrome and carcinoma carry poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

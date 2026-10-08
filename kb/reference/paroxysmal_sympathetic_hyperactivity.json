@@ -149,5 +149,291 @@
       "caption": "Overview comparison matrix for paroxysmal sympathetic hyperactivity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_sympathetic_hyperactivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous heart rate, blood pressure, temperature and respiratory rate",
+          "cells": [
+            {
+              "text": "Documents paroxysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic screen with cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures and non-convulsive status excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure, hydrocephalus or rebleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSH-Assessment Measure",
+          "cells": [
+            {
+              "text": "Diagnostic likelihood tool"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_sympathetic_hyperactivity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis or systemic infection",
+          "cells": [
+            {
+              "text": "Cultures and inflammatory markers are required before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroleptic malignant or serotonin syndrome",
+          "cells": [
+            {
+              "text": "Drug exposure history separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_sympathetic_hyperactivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reduce noxious stimulation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Cluster suctioning, turning and pain care; treat any precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute surges",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Morphine and short-acting benzodiazepines to abort paroxysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive therapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Propranolol, clonidine or dexmedetomidine, and gabapentin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid abrupt withdrawal",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Stopping controlling drugs can precipitate rebound storms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_sympathetic_hyperactivity-dx-mgmt",
+      "title": "Diagnosis and management of Paroxysmal sympathetic hyperactivity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Episodic tachycardia, hypertension, hyperthermia and sweating after severe brain injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sustained extreme hyperthermia, untreated sepsis or raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ICU review for sustained hyperthermia or hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous vital signs, septic screen, EEG, neuroimaging, PSH-AM score",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are paroxysms documented with sepsis, seizures and raised pressure excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sepsis, non-convulsive status, raised ICP or neuroleptic malignant syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cluster noxious care such as suctioning and turning; treat any precipitant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Opioids and short-acting benzodiazepines to abort acute surges",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Propranolol, clonidine or dexmedetomidine and gabapentin as preventive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Do not stop controlling drugs abruptly, which can trigger rebound storms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Linked to more severe injury; paroxysms usually diminish over weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

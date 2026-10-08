@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for scarlet fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scarlet_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Throat swab",
+          "cells": [
+            {
+              "text": "Group A streptococcus by culture or rapid antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-streptolysin O and antibody titres",
+          "cells": [
+            {
+              "text": "Confirm recent infection when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Screens for post-streptococcal glomerulonephritis in convalescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and bloods",
+          "cells": [
+            {
+              "text": "If complicated or invasive infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scarlet_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Measles",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kawasaki disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic shock syndrome",
+          "cells": [
+            {
+              "text": "Hypotension and multi-organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scarlet_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Penicillin",
+          "cells": [
+            {
+              "text": "Phenoxymethylpenicillin first-line; macrolide for penicillin allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete the full course",
+          "cells": [
+            {
+              "text": "Eradicates group A streptococcus and prevents rheumatic fever and suppurative complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics, analgesia, fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion from school or nursery",
+          "cells": [
+            {
+              "text": "Until an appropriate interval after antibiotics start"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Convalescent monitoring",
+          "cells": [
+            {
+              "text": "Post-streptococcal glomerulonephritis and acute rheumatic fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notify; consider treating symptomatic close contacts in outbreaks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scarlet_fever-dx-mgmt",
+      "title": "Diagnosis and management of Scarlet fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with sore throat, fever and sandpaper rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension and multi-organ involvement, abscess, carditis or nephritic signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit for streptococcal toxic shock or invasive infection; drain abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Throat swab culture or rapid antigen test; ASO titre if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is group A streptococcus detected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider measles, rubella, Kawasaki disease, drug rash, viral exanthem",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phenoxymethylpenicillin; macrolide if penicillin allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete the full antibiotic course",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care; exclude from school until treated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for glomerulonephritis and rheumatic fever; notify public health",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent with prompt antibiotics; main risk is rheumatic and renal sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

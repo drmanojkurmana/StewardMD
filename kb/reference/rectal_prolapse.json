@@ -147,5 +147,238 @@
       "caption": "Overview comparison matrix for rectal prolapse."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rectal_prolapse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination with straining",
+          "cells": [
+            {
+              "text": "Prolapse reproduced on straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy or sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Lead-point lesion or synchronous colonic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectal_prolapse-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolapsing third- or fourth-degree haemorrhoids",
+          "cells": [
+            {
+              "text": "Third- or fourth-degree haemorrhoids"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal-only rectal prolapse",
+          "cells": [
+            {
+              "text": "Mucosal prolapse only"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectal_prolapse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Abdominal rectopexy or perineal repair as definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel habit",
+          "cells": [
+            {
+              "text": "Fibre, fluids and laxatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "For irreducible or ischaemic prolapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rectal_prolapse-dx-mgmt",
+      "title": "Diagnosis and management of Rectal prolapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rectal prolapse: protrusion of rectal wall on straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Irreducible prolapse with congestion, ulceration, ischaemia, or gangrene?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for strangulated or gangrenous prolapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination while straining; colonoscopy or sigmoidoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is full-thickness rectal prolapse confirmed on straining examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemorrhoids or mucosal prolapse; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Abdominal rectopexy or perineal repair as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise bowel habit with fibre, fluids and laxatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent surgery for irreducible or ischaemic prolapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Colorectal follow-up for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,352 @@
       "caption": "Overview comparison matrix for posterior urethral polyp."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / EAU Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_urethral_polyp-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystourethroscopy",
+          "cells": [
+            {
+              "text": "Polyp visualised and localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voiding or retrograde urethrography",
+          "cells": [
+            {
+              "text": "Mobile filling defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and urine cytology",
+          "cells": [
+            {
+              "text": "Haematuria and atypical cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Mass or malignancy suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of resected specimen",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSA, interpreted cautiously",
+          "cells": [
+            {
+              "text": "Benign elevation possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_urethral_polyp-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostatic-type urethral polyp",
+          "cells": [
+            {
+              "text": "Prostatic epithelium within the polyp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral or bladder neck papilloma",
+          "cells": [
+            {
+              "text": "Papillary lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial carcinoma of the urethra",
+          "cells": [
+            {
+              "text": "Malignant urothelial histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior urethral valves",
+          "cells": [
+            {
+              "text": "Children, with obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verumontanum mucosal gland hyperplasia",
+          "cells": [
+            {
+              "text": "Benign prostatic mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "PSA-raising mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_urethral_polyp-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic resection",
+          "cells": [
+            {
+              "text": "Transurethral resection or excision, generally curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression",
+          "cells": [
+            {
+              "text": "Catheter for acute obstruction from a prolapsing polyp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Confirms benign fibroepithelial polyp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Cystourethroscopy for low risk of recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSA interpretation",
+          "cells": [
+            {
+              "text": "Benign elevation mimics prostate malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Urology, or paediatric urology in boys"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_urethral_polyp-dx-mgmt",
+      "title": "Diagnosis and management of Posterior urethral polyp",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria or voiding symptoms with a mobile urethral filling defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (persistent haematuria, atypical cytology, retention, rising PSA)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent catheter decompression for retention from a prolapsing polyp",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cystourethroscopy; urethrography; urinalysis and cytology; histopathology; PSA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histopathology confirm a benign fibroepithelial polyp?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider urothelial carcinoma, papilloma, posterior urethral valves or prostate cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic transurethral resection or excision of the polyp",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Catheter decompression for acute obstruction from a prolapsing polyp",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histopathology of the resected specimen to confirm a benign polyp",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance cystourethroscopy for the low risk of recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Interpret PSA cautiously, recognising benign elevation as a mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; endoscopic resection is generally curative with low recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for strabismus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "strabismus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cover-uncover and alternate cover tests",
+          "cells": [
+            {
+              "text": "Deviation detected and measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity in each eye",
+          "cells": [
+            {
+              "text": "Amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Correctable refractive cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility and stereopsis",
+          "cells": [
+            {
+              "text": "Binocular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Incomitant or paralytic squint"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "strabismus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cranial nerve palsy (third, fourth or sixth nerve)",
+          "cells": [
+            {
+              "text": "An incomitant squint needing neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoblastoma",
+          "cells": [
+            {
+              "text": "Leukocoria with squint in a child"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "strabismus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Spectacles",
+          "cells": [
+            {
+              "text": "Refractive error, particularly hypermetropia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusion or atropine",
+          "cells": [
+            {
+              "text": "Amblyopia in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms in spectacles",
+          "cells": [
+            {
+              "text": "Diplopia in acquired adult strabismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extraocular muscle surgery",
+          "cells": [
+            {
+              "text": "Where non-surgical measures fail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological investigation",
+          "cells": [
+            {
+              "text": "Incomitant or paralytic squint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Alignment and binocular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "strabismus-dx-mgmt",
+      "title": "Diagnosis and management of Strabismus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Misaligned eyes: suspected strabismus needing cover tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new incomitant squint, leukocoria, sudden diplopia with headache)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent examination for a neurological cause or retinoblastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cover-uncover and alternate cover tests; acuity; cycloplegic refraction; motility",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a concomitant deviation found with a correctable refractive cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider an incomitant palsy or retinoblastoma; neuroimaging and urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Spectacles to correct refractive error, particularly hypermetropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occlusion or atropine for amblyopia in children",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prisms in spectacles for diplopia in acquired strabismus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Extraocular muscle surgery where non-surgical measures fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on early amblyopia treatment; neurological causes need separate care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

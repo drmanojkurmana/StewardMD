@@ -158,5 +158,323 @@
       "caption": "Overview comparison matrix for succinate dehydrogenase-deficient gastrointestinal stromal tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastrointestinal oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "succinate_dehydrogenase_deficient_gist-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SDHB immunohistochemistry with SDHA staining",
+          "cells": [
+            {
+              "text": "SDH-deficient tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT and PDGFRA mutation analysis",
+          "cells": [
+            {
+              "text": "Wild-type status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline SDHx genetic testing",
+          "cells": [
+            {
+              "text": "Underlying germline variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with endoscopic ultrasound and biopsy",
+          "cells": [
+            {
+              "text": "Gastric lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines",
+          "cells": [
+            {
+              "text": "Associated paraganglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary chondroma in Carney triad"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinate_dehydrogenase_deficient_gist-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Conventional KIT-mutant GIST",
+          "cells": [
+            {
+              "text": "KIT mutation; imatinib-sensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PDGFRA-mutant GIST",
+          "cells": [
+            {
+              "text": "PDGFRA mutation; molecular testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF1-associated GIST",
+          "cells": [
+            {
+              "text": "Associated with neurofibromatosis type 1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "succinate_dehydrogenase_deficient_gist-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "SDHB immunohistochemistry",
+          "cells": [
+            {
+              "text": "Any GIST negative for KIT and PDGFRA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and germline SDHx testing",
+          "cells": [
+            {
+              "text": "Confirmed SDH deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Annual whole-body MRI surveillance",
+          "cells": [
+            {
+              "text": "Paraganglioma screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised surgical resection",
+          "cells": [
+            {
+              "text": "Localised disease, given multifocality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation and resection of suspicious lymph nodes",
+          "cells": [
+            {
+              "text": "Nodes not assumed benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sunitinib or regorafenib",
+          "cells": [
+            {
+              "text": "Metastatic or unresectable disease; imatinib largely ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary expert planning",
+          "cells": [
+            {
+              "text": "Rare subtype with atypical surgical decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "succinate_dehydrogenase_deficient_gist-dx-mgmt",
+      "title": "Diagnosis and management of Succinate Dehydrogenase-Deficient Gastrointestinal Stromal Tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multifocal gastric GIST in a young patient: suspected SDH-deficient GIST",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (GI bleeding, catecholamine symptoms, progressive metastases)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for bleeding ulcerated gastric tumour or catecholamine excess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SDHB and SDHA staining; KIT and PDGFRA testing; germline SDHx; metanephrines",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is SDHB loss found in a KIT and PDGFRA wild-type gastric GIST?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider KIT- or PDGFRA-mutant GIST or NF1-associated GIST; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Individualised surgical resection, given frequent multifocality",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Germline SDHx testing with genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Annual whole-body MRI for paraganglioma surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sunitinib or regorafenib in metastatic disease, as imatinib is largely ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often indolent even with metastases; lifelong surveillance for new gastric lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for thrombotic thrombocytopenic purpura."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hoffbrand's Essential Haematology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thrombotic_thrombocytopenic_purpura-dx-mgmt",
+      "title": "Diagnosis and management of thrombotic thrombocytopenic purpura",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TTP: haemolysis, thrombocytopenia and fluctuating neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: neurological deficit, cardiac involvement, or active bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent plasma exchange on clinical suspicion, before ADAMTS13 results",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film for schistocytes; LDH and haptoglobin; ADAMTS13 activity; coagulation screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ADAMTS13 severely deficient with a normal coagulation screen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HUS, DIC, HELLP or drug-induced thrombotic microangiopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent plasma exchange as the mainstay, started on suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for acquired autoantibody disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Caplacizumab to reduce microthrombosis; rituximab if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid platelet transfusion unless haemorrhage is life-threatening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term ADAMTS13 monitoring to pre-empt relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated TTP is very fatal; prompt plasma exchange lets most survive the episode",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thrombotic_thrombocytopenic_purpura-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film and reticulocyte count",
+          "cells": [
+            {
+              "text": "Schistocytes, thrombocytopenia and polychromasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH, haptoglobin and unconjugated bilirubin",
+          "cells": [
+            {
+              "text": "Ongoing haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Negative in TTP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 activity and inhibitor assay",
+          "cells": [
+            {
+              "text": "Severe deficiency confirms TTP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Characteristically normal or near-normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, urinalysis, troponin and ECG",
+          "cells": [
+            {
+              "text": "Renal and cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombotic_thrombocytopenic_purpura-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Coagulation screen is usually normal in TTP, unlike DIC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "Shiga toxin or complement-mediated forms; ADAMTS13 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HELLP syndrome and severe pre-eclampsia",
+          "cells": [
+            {
+              "text": "Pregnancy-related microangiopathy; ADAMTS13 deficiency points to TTP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombotic_thrombocytopenic_purpura-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent plasma exchange",
+          "cells": [
+            {
+              "text": "Started on clinical suspicion, without waiting for ADAMTS13 results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Acquired autoantibody-mediated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caplacizumab",
+          "cells": [
+            {
+              "text": "Anti-von Willebrand factor agent to reduce microthrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory or relapsing immune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital disease management",
+          "cells": [
+            {
+              "text": "Plasma infusion or recombinant ADAMTS13 replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet transfusion avoided",
+          "cells": [
+            {
+              "text": "Unless life-threatening haemorrhage, as it may aggravate microthrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term ADAMTS13 monitoring",
+          "cells": [
+            {
+              "text": "Detect and pre-empt relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

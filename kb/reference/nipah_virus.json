@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for nipah virus infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nipah_virus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR of throat or nasal swabs, CSF, urine and blood",
+          "cells": [
+            {
+              "text": "Performed in a biosafe reference laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nipah-specific IgM and IgG serology",
+          "cells": [
+            {
+              "text": "ELISA confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Disseminated small cortical and subcortical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and infective encephalitis screen",
+          "cells": [
+            {
+              "text": "Excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nipah_virus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Japanese encephalitis",
+          "cells": [
+            {
+              "text": "Other viral encephalitis in the same region"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex encephalitis",
+          "cells": [
+            {
+              "text": "Temporal lobe encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial or tuberculous meningoencephalitis",
+          "cells": [
+            {
+              "text": "CSF findings separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis",
+          "cells": [
+            {
+              "text": "Post-infectious demyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis with meningoencephalitis",
+          "cells": [
+            {
+              "text": "Zoonotic mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nipah_virus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "No licensed antiviral; organ support for encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical ventilation",
+          "cells": [
+            {
+              "text": "For acute respiratory distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation and barrier precautions",
+          "cells": [
+            {
+              "text": "Prevents nosocomial and family spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigational therapies",
+          "cells": [
+            {
+              "text": "Ribavirin or monoclonal antibody under trial protocols"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public-health notification",
+          "cells": [
+            {
+              "text": "Required during suspected clusters"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nipah_virus-dx-mgmt",
+      "title": "Diagnosis and management of Nipah virus infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Encephalitis or respiratory illness in a patient with bat or date-palm sap exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling consciousness, brainstem signs, respiratory distress)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate isolation, notification and intensive supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR of swabs, CSF and blood, Nipah IgM and IgG, MRI in a biosafe laboratory",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Nipah RNA or specific antibody in a biosafe laboratory?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Japanese encephalitis or herpes encephalitis; retest and treat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care; no licensed antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ventilation and organ support as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Isolation and barrier precautions to prevent spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigational therapy under protocol and public-health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Among the most lethal encephalitides; survivors may have lasting neurological impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,238 @@
       "caption": "Overview comparison matrix for renal artery aneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard vascular surgery reference texts and visceral aneurysm consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_artery_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography",
+          "cells": [
+            {
+              "text": "Aneurysm confirmed, localised and sized"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Radiation-sparing alternative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_artery_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal artery pseudoaneurysm",
+          "cells": [
+            {
+              "text": "Post-traumatic or iatrogenic"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal arteriovenous malformation or fistula",
+          "cells": [
+            {
+              "text": "Arteriovenous connection"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_artery_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Small stable aneurysms",
+          "cells": [
+            {
+              "text": "Monitor with periodic Doppler ultrasound or cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk",
+          "cells": [
+            {
+              "text": "Control blood pressure and cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist review",
+          "cells": [
+            {
+              "text": "For rupture or pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_artery_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Renal artery aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal artery aneurysm: incidental finding or flank pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Flank pain with haemodynamic instability suggesting rupture, or aneurysm in pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency vascular review for suspected rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT angiography to size and localise; MRA as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the aneurysm confirmed with branch anatomy defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudoaneurysm or arteriovenous fistula; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Monitor small stable asymptomatic aneurysms with periodic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Control blood pressure and cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Specialist review for rupture or pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Vascular surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

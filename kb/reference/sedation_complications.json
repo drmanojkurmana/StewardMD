@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for sedation complications."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sedation_complications-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry and capnography",
+          "cells": [
+            {
+              "text": "Oxygenation and early hypoventilation, during sedation and recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedation depth assessment",
+          "cells": [
+            {
+              "text": "Responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and ECG",
+          "cells": [
+            {
+              "text": "Appropriate to patient risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial or capillary blood gas",
+          "cells": [
+            {
+              "text": "If significant hypoventilation is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose check",
+          "cells": [
+            {
+              "text": "Unexplained altered consciousness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sedation_complications-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration of gastric contents",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis to a sedative agent",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or metabolic disturbance",
+          "cells": [
+            {
+              "text": "Glucose check separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sedation_complications-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Pre-procedure airway, comorbidity, aspiration risk and fasting assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Pulse oximetry, capnography and conscious level through procedure and recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory depression",
+          "cells": [
+            {
+              "text": "Oxygen, airway manoeuvres and adjuncts, assisted ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversal agents",
+          "cells": [
+            {
+              "text": "Naloxone for opioids and flumazenil for benzodiazepines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulatory support",
+          "cells": [
+            {
+              "text": "IV fluids and vasopressors for hypotension; atropine for bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue readiness",
+          "cells": [
+            {
+              "text": "Oxygen, suction, resuscitation and airway equipment with trained staff"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Anaesthetic and critical care for failure to rescue or aspiration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sedation_complications-dx-mgmt",
+      "title": "Diagnosis and management of Sedation complications",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient under procedural sedation: monitor for complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Apnoea, desaturation, airway obstruction, deep sedation, hypotension or aspiration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Open airway, oxygen, assisted ventilation; call anaesthetic and critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous oximetry and capnography, sedation depth, BP and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is respiratory depression or oversedation present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue monitoring through recovery; check glucose if consciousness unexplained",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oxygen, airway manoeuvres and adjuncts, assisted ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Naloxone or flumazenil where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fluids and vasopressors for hypotension; atropine for bradycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate for failure to rescue or aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Safe with selection, monitoring and prompt rescue; unrecognised depression can cause harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for stargardt disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stargardt_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Flecks and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Photoreceptor and pigment epithelial loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCA4 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Dark or silent choroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography and electrooculography",
+          "cells": [
+            {
+              "text": "Extent of retinal dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and visual acuity",
+          "cells": [
+            {
+              "text": "Functional impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stargardt_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cone or cone-rod dystrophy",
+          "cells": [
+            {
+              "text": "Widespread rather than macular dysfunction on ERG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced (antimalarial) maculopathy",
+          "cells": [
+            {
+              "text": "Acquired toxic maculopathy; drug history separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stargardt_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Visual aids and support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid high-dose vitamin A",
+          "cells": [
+            {
+              "text": "May accelerate lipofuscin toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultraviolet and blue-light protection",
+          "cells": [
+            {
+              "text": "Sunglasses to limit photic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Fundus autofluorescence and OCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Support services",
+          "cells": [
+            {
+              "text": "Educational, occupational and visual-impairment registration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ABCA4 disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stargardt_disease-dx-mgmt",
+      "title": "Diagnosis and management of Stargardt disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Central vision loss with yellow flecks in youth: suspected Stargardt disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid or asymmetric decline, high-dose vitamin A intake)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal review for rapid or asymmetric decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus autofluorescence; OCT; fluorescein angiography; ABCA4 testing; ERG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is biallelic ABCA4 variation found with macular flecks and atrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cone-rod dystrophy, drug maculopathy or AMD; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-vision rehabilitation and visual aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid high-dose vitamin A supplements",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sunglasses for ultraviolet and blue light",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitoring with autofluorescence and OCT, and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No established disease-modifying therapy; central vision loss is progressive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

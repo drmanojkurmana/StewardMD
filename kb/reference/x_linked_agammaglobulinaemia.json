@@ -156,5 +156,222 @@
       "caption": "Overview comparison matrix for x-linked agammaglobulinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_agammaglobulinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum immunoglobulin levels (IgG, IgA, IgM)",
+          "cells": [
+            {
+              "text": "Panhypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood lymphocyte immunophenotyping",
+          "cells": [
+            {
+              "text": "Absent circulating B cells"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_agammaglobulinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "Later onset; B cells present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal recessive agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "Mu heavy chain, lambda-5 or BLNK defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_agammaglobulinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Intravenous or subcutaneous; restores humoral defence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early immunological work-up",
+          "cells": [
+            {
+              "text": "Recurrent infections in infants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_agammaglobulinaemia-dx-mgmt",
+      "title": "Diagnosis and management of X-linked agammaglobulinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected XLA: recurrent infections in a boy with low immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (enteroviral encephalitis or established bronchiectasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of encephalitis or severe infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum immunoglobulins, lymphocyte immunophenotyping, BTK sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are immunoglobulins absent with absent B cells and a BTK variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider common variable immunodeficiency or other agammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunoglobulin replacement as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early immunological work-up to avoid delayed diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt treatment of infections and monitoring for bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Replacement prevents serious infection; delayed diagnosis risks bronchiectasis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

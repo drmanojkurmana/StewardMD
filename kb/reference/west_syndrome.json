@@ -150,5 +150,231 @@
       "caption": "Overview comparison matrix for west syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification and clinical guidance on the epilepsy syndromes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "west_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged or video EEG including sleep",
+          "cells": [
+            {
+              "text": "Hypsarrhythmia and captured spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "west_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign non-epileptic infantile spasms",
+          "cells": [
+            {
+              "text": "Benign myoclonus of infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sandifer syndrome",
+          "cells": [
+            {
+              "text": "Gastro-oesophageal reflux with posturing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colic or startle",
+          "cells": [
+            {
+              "text": "Spasms mistaken for these delay diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "west_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line hormonal therapy",
+          "cells": [
+            {
+              "text": "ACTH or oral prednisolone to suppress spasms and hypsarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Structural or metabolic cause found on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "west_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of West syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected West syndrome: clusters of infantile spasms with developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (developmental regression or focal signs suggesting structural cause)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for regression or focal structural signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video EEG including sleep, MRI brain, metabolic work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EEG show hypsarrhythmia with captured spasms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign infantile spasms, myoclonus or reflux; repeat EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line ACTH or oral prednisolone to suppress spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treatment of the underlying structural or metabolic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Obtain sleep EEG to avoid missing hypsarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Early hormonal treatment improves developmental outcome; delay worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

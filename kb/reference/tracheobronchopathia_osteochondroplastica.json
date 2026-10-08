@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for tracheobronchopathia osteochondroplastica."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory Medicine and Bronchoscopy reference texts",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tracheobronchopathia_osteochondroplastica-dx-mgmt",
+      "title": "Diagnosis and management of Tracheobronchopathia osteochondroplastica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tracheobronchopathia osteochondroplastica: nodular airway with chronic cough",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: significant obstruction with stridor, or haemoptysis needing exclusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway management and bronchoscopic debulking for obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bronchoscopy for cobblestone nodules; CT for calcified nodules; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show cartilage and bone within submucosal nodules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider airway amyloidosis, endobronchial tuberculosis or papillomatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation for asymptomatic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled bronchodilators and humidification for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt antibiotics and airway clearance for recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bronchoscopic debulking for significant obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic bronchoscopic and CT surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually benign and slowly progressive; intervention for airway compromise is uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tracheobronchopathia_osteochondroplastica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Cobblestone nodules with sparing of the posterior wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the airways",
+          "cells": [
+            {
+              "text": "Calcified submucosal nodules on the anterolateral walls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Cartilage and bone within nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow-volume loops",
+          "cells": [
+            {
+              "text": "Fixed obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of amyloidosis and infiltrative disease",
+          "cells": [
+            {
+              "text": "Overlapping nodular appearance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheobronchopathia_osteochondroplastica-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyloidosis of the airway",
+          "cells": [
+            {
+              "text": "Overlapping submucosal nodular appearance; biopsy distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endobronchial tuberculosis",
+          "cells": [
+            {
+              "text": "Infective nodular disease; biopsy and microbiology separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapsing polychondritis",
+          "cells": [
+            {
+              "text": "Cartilage inflammation rather than cartilage and bone nodules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheobronchopathia_osteochondroplastica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Many asymptomatic patients given a benign, slowly progressive course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Inhaled bronchodilators, humidification and cough suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and airway clearance",
+          "cells": [
+            {
+              "text": "Recurrent infection from impaired clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopic debulking",
+          "cells": [
+            {
+              "text": "Significant obstruction, by laser, cryotherapy or mechanical removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Bronchoscopic and CT monitoring of luminal narrowing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

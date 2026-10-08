@@ -148,5 +148,247 @@
       "caption": "Overview comparison matrix for radiculopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "radiculopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spinal region",
+          "cells": [
+            {
+              "text": "Compressive pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or CT myelography when MRI is contraindicated",
+          "cells": [
+            {
+              "text": "Compressive pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Root involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radiculopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Brachial or lumbosacral plexopathy",
+          "cells": [
+            {
+              "text": "Multi-root or plexus pattern"
+            },
+            {
+              "text": "Electromyography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord compression",
+          "cells": [
+            {
+              "text": "Bladder or bowel dysfunction or saddle anaesthesia"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radiculopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Analgesia, neuropathic pain agents and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural injection",
+          "cells": [
+            {
+              "text": "Image-guided epidural or transforaminal steroid for persistent pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical review",
+          "cells": [
+            {
+              "text": "For progressive or severe motor weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "radiculopathy-dx-mgmt",
+      "title": "Diagnosis and management of Radiculopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected radiculopathy: radicular pain with root signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bladder or bowel loss, saddle numbness, bilateral symptoms, or progressive weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal surgical review for cauda equina or progressive weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI; CT myelography if MRI contraindicated; EMG and NCS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show root compression matching the clinical signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peripheral entrapment, plexopathy or referred pain; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care with analgesia and neuropathic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided epidural or transforaminal steroid for persistent pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Specialist spinal review if symptoms persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

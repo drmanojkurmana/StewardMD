@@ -149,5 +149,256 @@
       "caption": "Overview comparison matrix for pyruvate carboxylase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyruvate_carboxylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood lactate, pyruvate and lactate-to-pyruvate ratio",
+          "cells": [
+            {
+              "text": "Lactic acidosis pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Raised citrulline, lysine and proline; low aspartate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ammonia and blood glucose",
+          "cells": [
+            {
+              "text": "Decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme activity in cultured fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_carboxylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate dehydrogenase complex deficiency",
+          "cells": [
+            {
+              "text": "Lactic acidosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple carboxylase deficiency",
+          "cells": [
+            {
+              "text": "Biotinidase or holocarboxylase defect"
+            },
+            {
+              "text": "Enzyme assay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_carboxylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anaplerotic diet",
+          "cells": [
+            {
+              "text": "High-carbohydrate dietary support; no cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplementation",
+          "cells": [
+            {
+              "text": "Citrate, aspartate or triheptanoin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensation",
+          "cells": [
+            {
+              "text": "IV glucose to reverse hypoglycaemia during illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyruvate_carboxylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Pyruvate carboxylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyruvate carboxylase deficiency: neonatal lactic acidosis with hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe acidosis with hyperammonaemia, recurrent hypoglycaemia, or neurological decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent IV glucose and metabolic review for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate ratio; plasma amino acids; ammonia; fibroblast enzyme assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised citrulline with low aspartate confirmed by enzyme assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PDH deficiency or respiratory chain disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anaplerotic high-carbohydrate dietary support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Citrate, aspartate or triheptanoin supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV glucose to reverse hypoglycaemia during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Specialist metabolic follow-up; no cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

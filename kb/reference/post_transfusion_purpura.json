@@ -146,5 +146,352 @@
       "caption": "Overview comparison matrix for post-transfusion purpura."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "post_transfusion_purpura-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Isolated severe thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet antibody testing",
+          "cells": [
+            {
+              "text": "Anti-HPA-1a characteristically identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Human platelet antigen typing of recipient",
+          "cells": [
+            {
+              "text": "Typically HPA-1a negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion history and timing",
+          "cells": [
+            {
+              "text": "Platelet fall after transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heparin exposure assessment",
+          "cells": [
+            {
+              "text": "Heparin-induced thrombocytopenia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "post_transfusion_purpura-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Recent heparin exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Other causes of immune destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Temporal link to a drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Coagulation abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura",
+          "cells": [
+            {
+              "text": "Microangiopathic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Passive alloimmune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Transfused antibody"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "post_transfusion_purpura-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "First-line treatment to accelerate platelet recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and plasma exchange",
+          "cells": [
+            {
+              "text": "Refractory or severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid random-donor platelets",
+          "cells": [
+            {
+              "text": "They supply further antigen-positive platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bleeding care",
+          "cells": [
+            {
+              "text": "Local haemostatic measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen-negative components",
+          "cells": [
+            {
+              "text": "HPA-1a-negative and washed cellular products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Documentation of the alloantibody"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "post_transfusion_purpura-dx-mgmt",
+      "title": "Diagnosis and management of Post-transfusion purpura",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe isolated thrombocytopenia about one week after a transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (mucosal or GI bleeding, suspected intracranial bleed, poor platelet response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for intracranial or major bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; platelet antibodies; HPA typing; coagulation screen; heparin history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do platelet antibodies and HPA typing support post-transfusion purpura?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heparin-induced thrombocytopenia, ITP, DIC or TTP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous immunoglobulin as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids and plasma exchange for refractory or severe cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid random-donor platelet transfusion, which supplies more antigen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive bleeding care with local haemostatic measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Provide antigen-negative components and refer to haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually self-limiting, with platelet recovery over one to several weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

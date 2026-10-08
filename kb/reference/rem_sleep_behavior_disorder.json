@@ -152,5 +152,238 @@
       "caption": "Overview comparison matrix for rem sleep behaviour disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rem_sleep_behavior_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-polysomnography",
+          "cells": [
+            {
+              "text": "REM sleep without atonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history from the bed partner",
+          "cells": [
+            {
+              "text": "Dream enactment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rem_sleep_behavior_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleepwalking or sleep terrors",
+          "cells": [
+            {
+              "text": "Non-REM parasomnia"
+            },
+            {
+              "text": "Polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea with arousals",
+          "cells": [
+            {
+              "text": "Arousals"
+            },
+            {
+              "text": "Polysomnography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rem_sleep_behavior_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleep environment",
+          "cells": [
+            {
+              "text": "Padding or lowering the bed to make sleep safe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melatonin",
+          "cells": [
+            {
+              "text": "First-line pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Evolving parkinsonism or autonomic failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rem_sleep_behavior_disorder-dx-mgmt",
+      "title": "Diagnosis and management of REM sleep behaviour disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected REM sleep behaviour disorder: dream enactment with violent movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Emerging parkinsonism, cognitive decline, autonomic failure, or onset in a young person?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for emerging synucleinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-polysomnography; collateral history from bed partner",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is REM sleep without atonia confirmed on polysomnography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-REM parasomnia or OSA with arousals; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Make the sleep environment safe: padding or lowering the bed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Melatonin as first-line pharmacotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for evolving parkinsonism or autonomic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Neurology follow-up for synucleinopathy surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

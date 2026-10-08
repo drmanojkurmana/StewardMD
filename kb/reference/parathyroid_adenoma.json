@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for parathyroid adenoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parathyroid_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corrected or ionised calcium, phosphate and intact PTH",
+          "cells": [
+            {
+              "text": "Hypercalcaemia with raised PTH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary calcium",
+          "cells": [
+            {
+              "text": "Familial hypocalciuric hypercalcaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D level and renal function",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound and technetium-99m sestamibi",
+          "cells": [
+            {
+              "text": "Localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "4D-CT or selective venous sampling",
+          "cells": [
+            {
+              "text": "Reoperative or non-localising cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density (DXA) and renal imaging",
+          "cells": [
+            {
+              "text": "End-organ effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parathyroid_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PTH-related peptide or bony metastases",
+          "cells": [
+            {
+              "text": "Cancer history and malignant features separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypocalciuric hypercalcaemia",
+          "cells": [
+            {
+              "text": "Urinary calcium excretion; surgery is inappropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parathyroid_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused parathyroidectomy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Minimally invasive excision of a single adenoma; curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative localisation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Neck ultrasound and sestamibi, with 4D-CT if discordant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraoperative PTH",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Confirms biochemical cure before completing focused surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy if unfit",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Cinacalcet for calcium and a bisphosphonate for the skeleton, with hydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Hypocalcaemia, hungry bone syndrome and recurrent laryngeal nerve function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parathyroid_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of Parathyroid adenoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypercalcaemia with raised PTH, often incidental, with bones, stones or groans",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypercalcaemic crisis, very high PTH with neck mass, or renal impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent treatment of hypercalcaemic crisis with hydration and monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corrected calcium, PTH, phosphate, urine calcium, neck ultrasound and sestamibi",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a single adenoma localised, with familial hypocalciuric hypercalcaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignancy-associated hypercalcaemia, four-gland hyperplasia or FHH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Focused minimally invasive parathyroidectomy as the curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intraoperative PTH to confirm biochemical cure before closing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cinacalcet and a bisphosphonate if unfit for or declining surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for hypocalcaemia, hungry bone syndrome and recurrent laryngeal nerve injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Curative in most with a solitary adenoma; bone density and stone risk improve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

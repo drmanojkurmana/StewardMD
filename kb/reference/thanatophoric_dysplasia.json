@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for thanatophoric dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thanatophoric_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Thanatophoric dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thanatophoric dysplasia: severe micromelia and a small thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe respiratory failure at birth from pulmonary hypoplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal palliative and goals-of-care discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Prenatal or postnatal skeletal imaging; FGFR3 molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does FGFR3 testing confirm a pathogenic activating variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider homozygous achondroplasia, short-rib syndromes or osteogenesis imperfecta",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm the diagnosis with FGFR3 testing and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compassionate perinatal palliative and comfort care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-directive genetic counselling on prognosis and options",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Agree a delivery plan and ceilings of care with the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Offer autopsy and placental examination where consent is given",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Almost universally lethal in the perinatal period from respiratory failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thanatophoric_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prenatal ultrasound and fetal MRI",
+          "cells": [
+            {
+              "text": "Severe limb shortening, small chest and polyhydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postnatal skeletal survey",
+          "cells": [
+            {
+              "text": "Platyspondyly, short ribs and characteristic femoral shape"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FGFR3 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Cloverleaf skull or neurological abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autopsy with placental examination",
+          "cells": [
+            {
+              "text": "Where consent is given"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thanatophoric_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Homozygous achondroplasia",
+          "cells": [
+            {
+              "text": "Similar severe shortening; FGFR3 molecular confirmation is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-rib polydactyly syndromes",
+          "cells": [
+            {
+              "text": "Short ribs are shared; FGFR3 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thanatophoric_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "FGFR3 molecular testing and characteristic imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perinatal palliative care",
+          "cells": [
+            {
+              "text": "The mainstay, given near-universal perinatal lethality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-directive genetic counselling",
+          "cells": [
+            {
+              "text": "Prognosis and prenatal options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery planning",
+          "cells": [
+            {
+              "text": "Agreed ceilings of care with the family; avoid futile intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active support for rare survivors",
+          "cells": [
+            {
+              "text": "Ventilatory support and complex disability care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bereavement support",
+          "cells": [
+            {
+              "text": "Autopsy with placental examination where consent is given"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence counselling",
+          "cells": [
+            {
+              "text": "Almost always de novo; prenatal testing offered in future pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,258 @@
       "caption": "Overview comparison matrix for vitamin d-dependent rickets type 2 (vdr, hereditary vitamin d resistance)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_d_dependent_rickets_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and rickets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone",
+          "cells": [
+            {
+              "text": "Usually elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D normal with markedly raised 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "Receptor resistance, not substrate deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Rachitic change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_d_dependent_rickets_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin D-dependent rickets type 1A",
+          "cells": [
+            {
+              "text": "Standard-dose calcitriol suffices in type 1A; no alopecia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional vitamin D deficiency rickets",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia or other congenital alopecia",
+          "cells": [
+            {
+              "text": "Alopecia is a feature of severe type 2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_d_dependent_rickets_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose calcitriol",
+          "cells": [
+            {
+              "text": "Supraphysiological active vitamin D with high-dose oral calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous calcium infusions",
+          "cells": [
+            {
+              "text": "Severe receptor-null disease unresponsive to oral therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_d_dependent_rickets_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin D-dependent rickets type 2 (VDR, hereditary vitamin D resistance)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin D-dependent rickets type 2: infant rickets with hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, total alopecia or progressive deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of seizures or tetany; escalate therapy for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, ALP, PTH, 25-hydroxyvitamin D and 1,25-dihydroxyvitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 1,25-dihydroxyvitamin D markedly raised with normal 25-hydroxyvitamin D?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1A or nutritional rickets; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose calcitriol with high-dose oral calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous calcium infusions for receptor-null disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor deformity and growth despite therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Resistance makes treatment difficult; very high 1,25-dihydroxyvitamin D is not adequacy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for strychnine poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "strychnine_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase and myoglobin",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Acidosis and ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Potassium and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analytical confirmation in blood, urine or gastric content",
+          "cells": [
+            {
+              "text": "Strychnine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Cardiac effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "strychnine_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetanus",
+          "cells": [
+            {
+              "text": "Trismus and spasm; the wound history and onset separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff-person syndrome",
+          "cells": [
+            {
+              "text": "Stimulus-triggered spasm; antibody testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "strychnine_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Minimise sensory stimulation",
+          "cells": [
+            {
+              "text": "Dark, quiet environment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines",
+          "cells": [
+            {
+              "text": "First-line spasm control, with escalation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early airway control",
+          "cells": [
+            {
+              "text": "Controlled ventilation to prevent failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active cooling",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis and acidosis care",
+          "cells": [
+            {
+              "text": "Lactic acidosis and electrolyte correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Where the airway is protected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care and toxicology input",
+          "cells": [
+            {
+              "text": "Continuous monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "strychnine_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Strychnine poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Triggered spasms with opisthotonos and risus sardonicus: suspected strychnine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory muscle spasm, hyperthermia, myoglobinuria, acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway control and controlled ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK and myoglobin; ABG and lactate; electrolytes; core temperature; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is strychnine detected analytically, with the typical spasm pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetanus, seizures or stiff-person syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Minimise sensory stimulation in a dark, quiet room",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepines as first-line spasm control, with escalation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secure the airway early and provide controlled ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Active cooling and rhabdomyolysis care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Death follows respiratory failure from spasm; supportive intensive care is the mainstay",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

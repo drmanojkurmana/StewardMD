@@ -147,5 +147,258 @@
       "caption": "Overview comparison matrix for vitamin d deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_d_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum 25-hydroxyvitamin D",
+          "cells": [
+            {
+              "text": "Primary measure of vitamin D status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, phosphate, alkaline phosphatase and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Mineral and bone turnover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and liver function",
+          "cells": [
+            {
+              "text": "Role in vitamin D activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Rachitic change in children; osteomalacia in adults"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_d_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Raised parathyroid hormone with hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal osteodystrophy in chronic kidney disease",
+          "cells": [
+            {
+              "text": "Renal impairment and mineral disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "Inherited phosphate-wasting defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_d_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral vitamin D repletion",
+          "cells": [
+            {
+              "text": "Colecalciferol or ergocalciferol, with a loading regimen then maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary calcium and phosphate",
+          "cells": [
+            {
+              "text": "Adequate intake; calcium supplementation when needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_d_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin D deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin D deficiency: bone pain, rickets or osteomalacia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tetany, seizures, fractures or cardiomyopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of symptomatic hypocalcaemia with tetany or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum 25-hydroxyvitamin D, calcium, phosphate, ALP, PTH, radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 25-hydroxyvitamin D low with rachitic or osteomalacic change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hyperparathyroidism, renal osteodystrophy or inherited rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral vitamin D repletion with a loading regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintenance vitamin D dosing after repletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adequate dietary calcium and phosphate, with calcium supplementation when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Repletion with adequate calcium heals rickets; severe deficiency needs urgent care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

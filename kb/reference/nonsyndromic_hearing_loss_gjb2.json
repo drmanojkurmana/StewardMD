@@ -149,5 +149,278 @@
       "caption": "Overview comparison matrix for non-syndromic hearing loss (gjb2/connexin 26, dfnb1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn hearing screening",
+          "cells": [
+            {
+              "text": "Followed by diagnostic audiometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and auditory brainstem response",
+          "cells": [
+            {
+              "text": "Cochlear and nerve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GJB2 and GJB6 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic variants, including GJB6 deletion in trans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the inner ear",
+          "cells": [
+            {
+              "text": "Excludes enlarged vestibular aqueduct when loss is progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enlarged vestibular aqueduct",
+          "cells": [
+            {
+              "text": "Progressive or fluctuating loss suggests this"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cytomegalovirus hearing loss",
+          "cells": [
+            {
+              "text": "Infection can mimic genetic loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic hearing loss such as Pendred syndrome",
+          "cells": [
+            {
+              "text": "Hearing loss with other features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early hearing aids",
+          "cells": [
+            {
+              "text": "Auditory access during the critical period for language"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Referral when loss is severe and aids are insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Language and educational support",
+          "cells": [
+            {
+              "text": "Supports outcomes after early amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-dx-mgmt",
+      "title": "Diagnosis and management of Non-syndromic hearing loss (GJB2/connexin 26, DFNB1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital sensorineural hearing loss on newborn or early screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive or fluctuating loss, asymmetry, unilateral loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent audiology review for progressive or asymmetric loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diagnostic audiometry, emissions and brainstem response, GJB2 and GJB6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic GJB2 or GJB2 with GJB6 deletion with stable sensorineural loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enlarged vestibular aqueduct or congenital CMV; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fit hearing aids early after diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Refer for cochlear implantation when loss is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Language and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for family risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually stable; most children do well with early amplification and support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

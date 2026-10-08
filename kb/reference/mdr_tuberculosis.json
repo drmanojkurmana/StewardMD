@@ -159,6 +159,11 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 168-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -338,6 +343,95 @@
           "cite": "c1"
         }
       ]
+    },
+    {
+      "id": "mdr_tuberculosis-treatment-2",
+      "kind": "treatment",
+      "title": "Treatment of active tuberculosis by culture result and resistance",
+      "rowHeader": "Option",
+      "columns": [
+        "Intensive phase",
+        "Continuation phase",
+        "Extension of total treatment"
+      ],
+      "rows": [
+        {
+          "parameter": "Culture positive",
+          "cells": [
+            {
+              "text": "HRZE for 2 months, daily or intermittent (with dose adjustment)"
+            },
+            {
+              "text": "HR for 4 months, daily or 5 d/wk, or HR for 4 months intermittent (with dose adjustment)"
+            },
+            {
+              "text": "To 9 months if 2 months of Z is not completed, or culture conversion is prolonged (a), and/or cavitation is documented"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Culture negative",
+          "cells": [
+            {
+              "text": "HRZE for 2 months"
+            },
+            {
+              "text": "2 months"
+            },
+            {
+              "text": "To 6 months if the patient has HIV infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resistant to H",
+          "cells": [
+            {
+              "text": "RZE or S (Q (b)) for 6 months"
+            },
+            {
+              "text": "Not shown (printed as ellipsis)"
+            },
+            {
+              "text": "Prolonged culture conversion, cavitation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resistant to R",
+          "cells": [
+            {
+              "text": "HZEQ (b) (IA (c)) for 2 months"
+            },
+            {
+              "text": "HEQ(S) for 10 to 16 months"
+            },
+            {
+              "text": "Prolonged culture conversion, delayed response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resistant to H and R (d)",
+          "cells": [
+            {
+              "text": "ZEQ (b) (IA (c)), with or without alternative agents (e), for 18 to 24 months"
+            },
+            {
+              "text": "Not shown (printed as ellipsis)"
+            },
+            {
+              "text": "Prolonged culture conversion"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Drug letters as printed: H, R, Z, E, S, Q, IA. Footnote text was not shown on the printed page."
     }
   ],
   "flowcharts": [

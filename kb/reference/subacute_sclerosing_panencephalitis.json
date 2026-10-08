@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for subacute sclerosing panencephalitis (measles)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subacute_sclerosing_panencephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Periodic complexes synchronous with myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF measles antibody titre with paired serum",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White-matter change, later atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of measles infection",
+          "cells": [
+            {
+              "text": "Especially in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles RNA detection in brain tissue",
+          "cells": [
+            {
+              "text": "Atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of metabolic, prion and autoimmune causes",
+          "cells": [
+            {
+              "text": "Differential diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_sclerosing_panencephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Creutzfeldt-Jakob disease and other prion disorders",
+          "cells": [
+            {
+              "text": "Rapid myoclonic course; prion testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism presenting with regression",
+          "cells": [
+            {
+              "text": "Metabolic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_sclerosing_panencephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No reliably curative therapy",
+          "cells": [
+            {
+              "text": "Disease-slowing regimens in some cases, with limited evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control of myoclonus and seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity management",
+          "cells": [
+            {
+              "text": "Antispasticity agents and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and aspiration prevention",
+          "cells": [
+            {
+              "text": "Enteral feeding as swallowing fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative and psychological care",
+          "cells": [
+            {
+              "text": "End-of-life planning and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles immunisation",
+          "cells": [
+            {
+              "text": "The key preventive measure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subacute_sclerosing_panencephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Subacute sclerosing panencephalitis (measles)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cognitive decline with periodic myoclonus after childhood measles: suspected SSPE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (loss of swallowing, rapid deterioration, intractable seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent palliative and aspiration support for loss of swallow",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG for periodic complexes; CSF measles antibody; MRI; measles history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are periodic EEG complexes and raised CSF measles antibody found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CJD, progressive rubella or metabolic disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic control of myoclonus and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spasticity management with antispasticity agents and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support and aspiration prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Palliative care and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive and fatal; measles immunisation is the key preventive measure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

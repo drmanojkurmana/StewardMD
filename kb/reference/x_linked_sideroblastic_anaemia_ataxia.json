@@ -154,5 +154,231 @@
       "caption": "Overview comparison matrix for x-linked sideroblastic anaemia with ataxia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Hypochromic microcytic, sometimes dimorphic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination with Perls stain",
+          "cells": [
+            {
+              "text": "Ring sideroblasts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ALAS2-related X-linked sideroblastic anaemia",
+          "cells": [
+            {
+              "text": "Lacks ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other congenital sideroblastic anaemias",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management of the anaemia",
+          "cells": [
+            {
+              "text": "Usually mild"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion for symptomatic cases",
+          "cells": [
+            {
+              "text": "Reserved for symptomatic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid inappropriate iron therapy",
+          "cells": [
+            {
+              "text": "Iron overload"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_sideroblastic_anaemia_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of X-linked sideroblastic anaemia with ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked sideroblastic anaemia with ataxia: ataxia with mild microcytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive ataxia, symptomatic anaemia or iron overload)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for progressive ataxia or symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, marrow Perls stain, ABCB7 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ABCB7 testing confirm a variant with ataxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ALAS2 sideroblastic anaemia or other congenital form",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive management of the usually mild anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfusion for symptomatic cases only",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid inappropriate iron therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Mild anaemia can be missed; ataxia is then wrongly attributed elsewhere",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

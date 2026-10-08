@@ -153,5 +153,222 @@
       "caption": "Overview comparison matrix for x-linked nephrogenic diabetes insipidus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_nephrogenic_diabetes_insipidus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired plasma and urine osmolality with plasma sodium",
+          "cells": [
+            {
+              "text": "Concentrating defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water deprivation test with desmopressin challenge",
+          "cells": [
+            {
+              "text": "Separates nephrogenic from central diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_nephrogenic_diabetes_insipidus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autosomal recessive or dominant nephrogenic diabetes insipidus",
+          "cells": [
+            {
+              "text": "Other genes such as AQP2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central (cranial) diabetes insipidus",
+          "cells": [
+            {
+              "text": "Responds to desmopressin, unlike nephrogenic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_nephrogenic_diabetes_insipidus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Free and continuous access to water",
+          "cells": [
+            {
+              "text": "Fundamental supportive measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-solute diet",
+          "cells": [
+            {
+              "text": "Reduces the obligatory urine volume"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_nephrogenic_diabetes_insipidus-dx-mgmt",
+      "title": "Diagnosis and management of X-linked nephrogenic diabetes insipidus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked nephrogenic DI: polyuria and high sodium in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypernatraemic dehydration with seizures or failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and sodium correction for hypernatraemic dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired plasma and urine osmolality, sodium, water deprivation with desmopressin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is urine concentrating poorly despite desmopressin, with AVPR2 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central diabetes insipidus or other nephrogenic forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Guaranteed free and continuous access to water",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-solute diet to reduce urine volume",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid mistaking infantile fever and irritability for sepsis alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hypernatraemic dehydration is the main danger; supportive care is central",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for timothy syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; specialist inherited arrhythmia literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "timothy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Timothy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Timothy syndrome: marked QT prolongation with syndactyly in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: syncope, ventricular arrhythmia, or functional 2:1 block in infancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent arrhythmia care with magnesium, defibrillation and beta-blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for QT; ambulatory monitoring; echocardiography; CACNA1C testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CACNA1C testing identify a gain-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other long QT subtypes, Jervell and Lange-Nielsen or acquired QT",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockade as cornerstone of arrhythmia prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict avoidance of QT-prolonging drugs and correction of electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Implantable defibrillator in high-risk children",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Magnesium and defibrillation for torsades de pointes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary care for syndactyly and neurodevelopment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High risk of early sudden death; arrhythmia prevention reduces but does not remove it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "timothy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Marked QT prolongation and functional 2:1 atrioventricular block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CACNA1C genetic testing",
+          "cells": [
+            {
+              "text": "Pathogenic gain-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment",
+          "cells": [
+            {
+              "text": "Neurodevelopmental features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "timothy_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other genetic long QT syndrome subtypes",
+          "cells": [
+            {
+              "text": "Separated by CACNA1C testing; Timothy has syndactyly and developmental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome",
+          "cells": [
+            {
+              "text": "Congenital deafness with long QT; genetic testing separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired QT prolongation from drugs or electrolytes",
+          "cells": [
+            {
+              "text": "Reversible cause; QT-prolonging drugs and electrolytes reviewed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "timothy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Cornerstone of arrhythmia prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid QT-prolonging drugs",
+          "cells": [
+            {
+              "text": "Correct electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable defibrillator",
+          "cells": [
+            {
+              "text": "High-risk children; sympathetic denervation for breakthrough arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsades management",
+          "cells": [
+            {
+              "text": "Magnesium and defibrillation; verapamil considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracardiac support",
+          "cells": [
+            {
+              "text": "Syndactyly release, neurodevelopmental support, immune, glucose and dental care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ECG and echocardiography",
+          "cells": [
+            {
+              "text": "QT assessment and screening for congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and relative screening",
+          "cells": [
+            {
+              "text": "Most cases are de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for stonefish envenomation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stonefish_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wound imaging (ultrasound or radiography)",
+          "cells": [
+            {
+              "text": "Retained spine fragments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurovascular assessment of the limb",
+          "cells": [
+            {
+              "text": "Affected limb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and monitoring",
+          "cells": [
+            {
+              "text": "Systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and wound cultures",
+          "cells": [
+            {
+              "text": "Suspected infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and creatine kinase",
+          "cells": [
+            {
+              "text": "Severe systemic cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stonefish_envenomation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other venomous fish spine injury (lionfish, scorpionfish, stingray)",
+          "cells": [
+            {
+              "text": "Similar spine injury from another fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or necrotising soft-tissue infection",
+          "cells": [
+            {
+              "text": "Secondary infection, which can mimic envenoming"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stonefish_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hot-water immersion",
+          "cells": [
+            {
+              "text": "Tolerable temperature to inactivate heat-labile venom"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stonefish antivenom",
+          "cells": [
+            {
+              "text": "Severe pain unresponsive to immersion, or systemic envenoming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local anaesthetic infiltration or regional block",
+          "cells": [
+            {
+              "text": "With systemic analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound exploration and removal of retained material",
+          "cells": [
+            {
+              "text": "Spine fragments and foreign material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetanus prophylaxis and antibiotics",
+          "cells": [
+            {
+              "text": "Where infection is likely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring and supportive care",
+          "cells": [
+            {
+              "text": "Cardiovascular and respiratory effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical review",
+          "cells": [
+            {
+              "text": "Deep wounds and ongoing monitoring for secondary infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stonefish_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Stonefish envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intense pain and swelling after a fish spine injury: suspected stonefish sting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypotension, arrhythmia, compartment syndrome, spreading infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency antivenom and cardiac or respiratory support for systemic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Imaging for retained spines; neurovascular check; ECG; CK and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are retained spine fragments or systemic features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary infection or cellulitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate hot-water immersion at a tolerable temperature",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stonefish antivenom for severe pain unresponsive to immersion or systemic envenoming",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Removal of retained spine fragments and foreign material",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tetanus prophylaxis and antibiotics where infection develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pain often settles with immersion and antivenom; secondary infection is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,238 @@
       "caption": "Overview comparison matrix for refsum disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews Refsum Disease / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "refsum_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma phytanic acid",
+          "cells": [
+            {
+              "text": "Markedly elevated phytanic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma pristanic acid and very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Distinguishes from related disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refsum_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other syndromic retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Retinitis pigmentosa"
+            },
+            {
+              "text": "Phytanic acid level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refsum_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary restriction",
+          "cells": [
+            {
+              "text": "Lifelong restriction of phytanic acid, avoiding ruminant fats and dairy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calories",
+          "cells": [
+            {
+              "text": "Maintain adequate caloric intake and avoid fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "For arrhythmia or conduction block"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "refsum_disease-dx-mgmt",
+      "title": "Diagnosis and management of Refsum disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Refsum disease: retinitis pigmentosa with neuropathy and ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Arrhythmia or conduction block, or acute worsening after fasting or illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for conduction block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma phytanic acid; pristanic acid and VLCFA; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is phytanic acid markedly elevated with related disorders excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other retinitis pigmentosa or neuropathy syndromes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong dietary restriction of phytanic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintain adequate caloric intake and avoid fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac monitoring for arrhythmia or conduction block",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Metabolic and cardiac follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

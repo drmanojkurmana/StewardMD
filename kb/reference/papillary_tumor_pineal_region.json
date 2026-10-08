@@ -154,5 +154,312 @@
       "caption": "Overview comparison matrix for papillary tumour of the pineal region."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_tumor_pineal_region-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast brain MRI",
+          "cells": [
+            {
+              "text": "Pineal mass and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal MRI",
+          "cells": [
+            {
+              "text": "Dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF and serum germ cell tumour markers",
+          "cells": [
+            {
+              "text": "Germinoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Papillary and solid epithelial-like areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytokeratin immunohistochemistry (CK18)",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF cytology",
+          "cells": [
+            {
+              "text": "Staging, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_tumor_pineal_region-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pineal region germ cell tumour",
+          "cells": [
+            {
+              "text": "Germ cell markers; germinoma is radiosensitive, unlike this tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ependymoma",
+          "cells": [
+            {
+              "text": "Misclassified without cytokeratin staining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_tumor_pineal_region-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maximal safe resection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The primary intervention and strongest determinant of local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Fractionated or stereotactic, for residual, unresectable or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised treatment",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "No established chemotherapy regimen or randomised data"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal irradiation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Not routine, as the tumour lacks germinoma-like radiosensitivity or spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Recurrence can occur years after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_tumor_pineal_region-dx-mgmt",
+      "title": "Diagnosis and management of Papillary tumour of the pineal region",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pineal mass with obstructive hydrocephalus or Parinaud signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute obstructive hydrocephalus, falling consciousness, recurrence or spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for obstructive hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast brain MRI, craniospinal MRI, CSF and serum germ cell markers, CSF cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show papillary and solid epithelial areas with CK18 positivity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germinoma, pineoblastoma, ependymoma or pineal parenchymal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection as the primary intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy for residual, unresectable or recurrent disease, chosen by residual volume",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Craniospinal irradiation not routine; individualised care, no standard chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance, since recurrence can occur years after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intermediate and hard to predict; local recurrence is the main limit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

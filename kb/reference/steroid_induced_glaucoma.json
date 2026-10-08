@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for steroid induced glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "steroid_induced_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroid exposure history",
+          "cells": [
+            {
+              "text": "All routes, including inhaled, nasal and topical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Confirms an open angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Compared with pre-treatment baseline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Glaucomatous damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard automated perimetry",
+          "cells": [
+            {
+              "text": "Visual field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc examination and photography",
+          "cells": [
+            {
+              "text": "Cupping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for a periocular or intravitreal depot",
+          "cells": [
+            {
+              "text": "Depot as a source of steroid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "steroid_induced_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary open-angle glaucoma",
+          "cells": [
+            {
+              "text": "Same open-angle appearance; the steroid history distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveitic glaucoma",
+          "cells": [
+            {
+              "text": "Inflammation also raises pressure, confounding the steroid effect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "steroid_induced_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or reduce the steroid",
+          "cells": [
+            {
+              "text": "Or switch to the least potent agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical intraocular pressure-lowering drugs",
+          "cells": [
+            {
+              "text": "Where steroid is unavoidable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical removal of an intravitreal depot",
+          "cells": [
+            {
+              "text": "If pressure stays uncontrolled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser trabeculoplasty or filtration surgery",
+          "cells": [
+            {
+              "text": "Refractory pressure elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Pressure, optic disc, OCT nerve fibre layer and visual fields"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identify steroid responders",
+          "cells": [
+            {
+              "text": "Baseline and serial pressures whenever corticosteroids are given"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "steroid_induced_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of steroid induced glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised pressure with open angle after steroid use: suspected steroid glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (very high pressure, child on steroids, persistent high pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pressure lowering for very high pressure or rapid field loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full steroid history across all routes; gonioscopy; pressure; OCT; fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised pressure with an open angle and steroid exposure confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary open-angle or uveitic glaucoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or reduce the steroid, or switch to the least potent agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical pressure-lowering drugs where steroid is unavoidable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical removal of an intravitreal depot if pressure stays high",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laser trabeculoplasty or filtration surgery for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pressure usually normalises after withdrawal; intravitreal depots take longer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

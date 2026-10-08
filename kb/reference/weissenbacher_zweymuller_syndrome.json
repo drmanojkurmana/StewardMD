@@ -150,5 +150,240 @@
       "caption": "Overview comparison matrix for weissenbacher-zweymuller syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "weissenbacher_zweymuller_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey in infancy with serial films",
+          "cells": [
+            {
+              "text": "Long-bone remodelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL11A2 molecular testing",
+          "cells": [
+            {
+              "text": "Type XI collagenopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "weissenbacher_zweymuller_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Otospondylomegaepiphyseal dysplasia",
+          "cells": [
+            {
+              "text": "Allelic recessive disorder on the same spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stickler syndrome types I to III",
+          "cells": [
+            {
+              "text": "Type XI collagen disorders with overlapping features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kniest dysplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "weissenbacher_zweymuller_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal airway management",
+          "cells": [
+            {
+              "text": "Pierre Robin sequence with prone positioning and nasopharyngeal airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing surveillance",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "weissenbacher_zweymuller_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Weissenbacher-Zweymuller syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Weissenbacher-Zweymuller: neonatal rhizomelic shortening with flat face",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway obstruction, feeding difficulty or sensorineural loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal airway management for Pierre Robin sequence",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey with serial films, COL11A2 testing, hearing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does COL11A2 testing confirm a type XI collagenopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider OSMED, Stickler syndrome or Kniest dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neonatal airway management with prone positioning and nasopharyngeal airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding support for aspiration risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing surveillance with catch-up growth follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Expected catch-up growth; airway and hearing needs drive early care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

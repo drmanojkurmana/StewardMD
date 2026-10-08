@@ -151,5 +151,287 @@
       "caption": "Overview comparison matrix for numb chin syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology and oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "numb_chin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain, skull base and mandible",
+          "cells": [
+            {
+              "text": "Trigeminal and mental nerve pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopantomogram and dental assessment",
+          "cells": [
+            {
+              "text": "Local dental or mandibular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the whole nerve pathway",
+          "cells": [
+            {
+              "text": "Includes the skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screen",
+          "cells": [
+            {
+              "text": "Known or suspected cancer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "numb_chin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic breast or prostate cancer",
+          "cells": [
+            {
+              "text": "Malignant nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or leukaemia",
+          "cells": [
+            {
+              "text": "Haematological infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptomeningeal or skull-base disease",
+          "cells": [
+            {
+              "text": "Infiltration along the nerve pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental or mandibular pathology",
+          "cells": [
+            {
+              "text": "Local cause after dental procedure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "numb_chin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "The numbness is a sign, not a disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology review when malignancy is found",
+          "cells": [
+            {
+              "text": "Management of metastatic or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review for local causes",
+          "cells": [
+            {
+              "text": "Treatment of dental or mandibular problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full pathway imaging",
+          "cells": [
+            {
+              "text": "Directs the work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "numb_chin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Numb chin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Numbness of the chin and lower lip in the mental nerve distribution",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (known cancer, other cranial neuropathy, systemic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review and imaging of the skull base for malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of brain, skull base and mandible, orthopantomogram, dental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mental nerve injury confirmed on imaging with a cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dental or local cause; complete the imaging work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause rather than the numbness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oncology review for metastatic or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dental review for local causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Image the whole nerve pathway including skull base",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Driven by cause; malignant causes often signal advanced disease and a poor outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

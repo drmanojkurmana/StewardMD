@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for trichomoniasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichomoniasis-dx-mgmt",
+      "title": "Diagnosis and management of Trichomoniasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichomoniasis: frothy yellow-green vaginal discharge with itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: infection in pregnancy, persistent symptoms, or HIV co-infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric and HIV review for pregnancy or co-infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nucleic acid amplification test; wet mount; pH and whiff; STI screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does amplification testing confirm Trichomonas vaginalis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacterial vaginosis, candidiasis or chlamydial cervicitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral metronidazole or tinidazole, avoiding alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simultaneous treatment of sexual partners",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and treat HIV, syphilis, gonorrhoea and chlamydia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Retest for cure given reinfection risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prolonged regimen for persistent infection after adherent treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High cure rate with partner treatment; recurrence usually reflects reinfection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichomoniasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nucleic acid amplification testing",
+          "cells": [
+            {
+              "text": "Most sensitive method for Trichomonas vaginalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saline wet-mount microscopy",
+          "cells": [
+            {
+              "text": "Motile trophozoites and increased polymorphs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaginal pH and whiff testing",
+          "cells": [
+            {
+              "text": "Separates from bacterial vaginosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV, syphilis, gonorrhoea and chlamydia screen",
+          "cells": [
+            {
+              "text": "Coexisting infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective medium culture",
+          "cells": [
+            {
+              "text": "Where molecular testing is unavailable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichomoniasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial vaginosis",
+          "cells": [
+            {
+              "text": "Fishy malodorous discharge with clue cells and whiff positivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulvovaginal candidiasis",
+          "cells": [
+            {
+              "text": "Itch with thick white discharge; microscopy shows yeast"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chlamydial or gonococcal cervicitis",
+          "cells": [
+            {
+              "text": "Molecular testing for chlamydia and gonorrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichomoniasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral nitroimidazole",
+          "cells": [
+            {
+              "text": "Metronidazole or tinidazole; avoid alcohol during and shortly after"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simultaneous partner treatment",
+          "cells": [
+            {
+              "text": "Avoid intercourse until both complete therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting infection screen",
+          "cells": [
+            {
+              "text": "HIV, syphilis, gonorrhoea and chlamydia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retesting for cure",
+          "cells": [
+            {
+              "text": "High reinfection rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy management",
+          "cells": [
+            {
+              "text": "Symptomatic pregnant women, with obstetric input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged or higher-intensity regimen",
+          "cells": [
+            {
+              "text": "Persistent infection after adherent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safer-sex counselling",
+          "cells": [
+            {
+              "text": "Reduces recurrence and transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

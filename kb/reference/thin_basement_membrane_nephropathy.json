@@ -152,5 +152,325 @@
       "caption": "Overview comparison matrix for thin basement membrane nephropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Handbook of Nephrology and Hypertension",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thin_basement_membrane_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Thin basement membrane nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thin basement membrane nephropathy: persistent isolated microscopic haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: significant proteinuria, rising blood pressure, or hearing or eye features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology referral and biopsy or genetic testing for progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phase-contrast microscopy; protein quantification; renal function; family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy or COL4A3 and COL4A4 testing show thin basement membranes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Alport syndrome, IgA nephropathy or urological haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and avoidance of nephrotoxic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB only if proteinuria or hypertension develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Periodic blood pressure, protein and renal function monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen first-degree relatives and offer genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nephrology referral if proteinuria, hypertension or decline emerges",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most keep normal renal function lifelong; a minority progress, so monitoring is prudent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thin_basement_membrane_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis with phase-contrast microscopy",
+          "cells": [
+            {
+              "text": "Glomerular (dysmorphic) red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine albumin-to-creatinine or protein-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Proteinuria, which is characteristically absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and blood pressure over time",
+          "cells": [
+            {
+              "text": "Normal in most; monitored for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening for haematuria",
+          "cells": [
+            {
+              "text": "Heritable COL4A3 or COL4A4 pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and ophthalmology",
+          "cells": [
+            {
+              "text": "Alport features, when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy with electron microscopy, or COL4A3 and COL4A4 testing",
+          "cells": [
+            {
+              "text": "Diffuse thinning of the glomerular basement membrane"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thin_basement_membrane_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alport syndrome",
+          "cells": [
+            {
+              "text": "Lamellation on electron microscopy, with hearing or eye involvement, separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA nephropathy",
+          "cells": [
+            {
+              "text": "Glomerular haematuria with proteinuria and a different histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urological causes of haematuria",
+          "cells": [
+            {
+              "text": "Visible or non-glomerular haematuria needs urological evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thin_basement_membrane_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and nephrotoxin avoidance",
+          "cells": [
+            {
+              "text": "Isolated glomerular microscopic haematuria needs no disease-specific drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor or angiotensin receptor blocker",
+          "cells": [
+            {
+              "text": "Only if proteinuria or hypertension develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, urinary protein and renal function to detect progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Heritable COL4A3 or COL4A4 basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and ophthalmology review",
+          "cells": [
+            {
+              "text": "If extrarenal features suggest Alport syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Proteinuria, hypertension or declining renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

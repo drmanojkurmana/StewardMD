@@ -146,5 +146,258 @@
       "caption": "Overview comparison matrix for vocal process granuloma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vocal_process_granuloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Lesion over the vocal process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videostroboscopy",
+          "cells": [
+            {
+              "text": "Vibration and glottic closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for laryngopharyngeal reflux",
+          "cells": [
+            {
+              "text": "Principal driver"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_process_granuloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vocal fold polyp",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondroma or chondrosarcoma of the arytenoid",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior glottic carcinoma",
+          "cells": [
+            {
+              "text": "Persistent lesion that fails to settle with reflux treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous or fungal granuloma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_process_granuloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Antireflux therapy to promote mucosal healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflux precautions",
+          "cells": [
+            {
+              "text": "Lifestyle measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice therapy",
+          "cells": [
+            {
+              "text": "Eliminates hard glottal attack and habitual throat clearing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vocal_process_granuloma-dx-mgmt",
+      "title": "Diagnosis and management of Vocal process granuloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vocal process granuloma: posterior laryngeal lesion with hoarseness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (enlarging lesion, impaired mobility or airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for airway compromise or impaired arytenoid mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy over the vocal process, videostroboscopy, reflux assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the lesion settle with reflux and voice treatment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy to exclude malignancy or specific granuloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Proton pump inhibitor and reflux precautions to promote healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Voice therapy to eliminate hard glottal attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision only after reflux and vocal behaviour are controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Controlling reflux and voice behaviour limits recurrence after excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

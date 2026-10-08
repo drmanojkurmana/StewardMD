@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for sporotrichosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sporotrichosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fungal culture of pus or tissue",
+          "cells": [
+            {
+              "text": "Gold standard for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Granulomatous inflammation with yeast forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone and joint imaging",
+          "cells": [
+            {
+              "text": "Osteoarticular disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary involvement, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status and HIV testing",
+          "cells": [
+            {
+              "text": "Disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sporotrichosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous nocardiosis",
+          "cells": [
+            {
+              "text": "Sporotrichoid spread; culture separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterium marinum infection",
+          "cells": [
+            {
+              "text": "Atypical mycobacterial granuloma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sporotrichosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "First-line for lymphocutaneous and fixed cutaneous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amphotericin B",
+          "cells": [
+            {
+              "text": "Severe disseminated, pulmonary or meningeal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saturated potassium iodide",
+          "cells": [
+            {
+              "text": "Alternative for cutaneous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local hyperthermia",
+          "cells": [
+            {
+              "text": "Cutaneous disease in pregnancy, where systemic therapy is avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement or drainage",
+          "cells": [
+            {
+              "text": "Adjunct for osteoarticular or cavitary pulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune optimisation",
+          "cells": [
+            {
+              "text": "HIV testing and management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective measures",
+          "cells": [
+            {
+              "text": "Gloves and clothing during gardening, forestry and handling of soil"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sporotrichosis-dx-mgmt",
+      "title": "Diagnosis and management of Sporotrichosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nodules along lymphatics after soil or plant contact: suspected sporotrichosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated disease, cavitation, joint destruction, meningitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent amphotericin B for severe disseminated, pulmonary or meningeal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fungal culture of pus or tissue; histopathology; HIV test; imaging if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Sporothrix grown on culture or seen on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nocardiosis, atypical mycobacteria or leishmaniasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Itraconazole first-line for lymphocutaneous and fixed disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Amphotericin B for severe disseminated, pulmonary or meningeal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continue therapy until lesions have fully resolved",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective gloves and clothing for gardeners and forestry workers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually curable; stopping antifungals early risks relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

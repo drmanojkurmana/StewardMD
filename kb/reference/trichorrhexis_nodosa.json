@@ -142,5 +142,307 @@
       "caption": "Overview comparison matrix for trichorrhexis nodosa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichorrhexis_nodosa-dx-mgmt",
+      "title": "Diagnosis and management of Trichorrhexis nodosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichorrhexis nodosa: brittle hair with small nodes along the shaft",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: widespread congenital fragility, or developmental or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic review for congenital hair-shaft disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Light microscopy of shaft; trichoscopy; cosmetic history; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does shaft microscopy show paired brush-like nodes at fracture points?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pili torti, monilethrix or trichothiodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop heat styling, bleaching, relaxing and vigorous brushing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gentle hair care with low-tension styling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metabolic team management for congenital cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency and hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor regrowth of intact hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acquired distal form recovers once trauma stops; congenital forms vary by disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichorrhexis_nodosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of the hair shaft",
+          "cells": [
+            {
+              "text": "Paired brush-like fracture ends at the nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Nodes and transverse fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair-care and cosmetic history",
+          "cells": [
+            {
+              "text": "Heat, bleaching, relaxing and brushing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Argininosuccinic aciduria in congenital cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for iron deficiency and hypothyroidism",
+          "cells": [
+            {
+              "text": "Systemic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorrhexis_nodosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pili torti",
+          "cells": [
+            {
+              "text": "Twisting of the shaft without nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monilethrix",
+          "cells": [
+            {
+              "text": "Regular beading along the shaft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichothiodystrophy",
+          "cells": [
+            {
+              "text": "Tiger-tail banding and systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorrhexis_nodosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop harmful practices",
+          "cells": [
+            {
+              "text": "Heat styling, bleaching, relaxing and vigorous brushing; the mainstay for acquired distal form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle hair care",
+          "cells": [
+            {
+              "text": "Mild shampoos, conditioners and low-tension styling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic management",
+          "cells": [
+            {
+              "text": "Congenital cases under a metabolic team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct systemic contributors",
+          "cells": [
+            {
+              "text": "Iron deficiency and hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regrowth monitoring",
+          "cells": [
+            {
+              "text": "Intact hair after harmful practices cease confirms the mechanism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

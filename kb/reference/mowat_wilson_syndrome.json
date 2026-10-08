@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for mowat-wilson syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mowat_wilson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ZEB2 sequencing and deletion/duplication or microarray",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal suction biopsy and contrast studies",
+          "cells": [
+            {
+              "text": "Confirms Hirschsprung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Corpus callosum and other structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mowat_wilson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Associated syndromic features and corpus callosum agenesis point to Mowat-Wilson"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goldberg-Shprintzen syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pitt-Hopkins syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mowat_wilson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery for Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Resect the aganglionic segment; intensive bowel regimen for constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterocolitis vigilance",
+          "cells": [
+            {
+              "text": "Leading and potentially fatal complication needing prompt treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants with EEG",
+          "cells": [
+            {
+              "text": "Epilepsy control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of cardiac and genitourinary anomalies",
+          "cells": [
+            {
+              "text": "Including hypospadias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Early intervention, special education, alternative communication, physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant, almost always de novo; small germline mosaicism recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mowat_wilson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mowat-Wilson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe intellectual disability with seizures and severe constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilious vomiting, distension, enterocolitis or undiagnosed heart disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical assessment and enterocolitis treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ZEB2 testing or microarray, rectal suction biopsy, MRI brain, EEG, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ZEB2 variant or deletion found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Goldberg-Shprintzen, Pitt-Hopkins, Angelman, Rett, 22q11.2 deletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of aganglionic segment for Hirschsprung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vigilance for enterocolitis; anticonvulsants for epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair cardiac and genitourinary anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental support and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe lifelong intellectual disability; cheerful temperament; survival into adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

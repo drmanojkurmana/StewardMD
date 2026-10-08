@@ -152,5 +152,332 @@
       "caption": "Overview comparison matrix for pancreatic polypeptidoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pancreatic_polypeptidoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma pancreatic polypeptide",
+          "cells": [
+            {
+              "text": "Raised but non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromogranin A",
+          "cells": [
+            {
+              "text": "Tumour burden and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiphase contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Extent of the pancreatic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound with fine-needle aspiration",
+          "cells": [
+            {
+              "text": "Tissue and grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin receptor PET/CT (DOTATATE)",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67 proliferation index",
+          "cells": [
+            {
+              "text": "Histological grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN1 genetic testing",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_polypeptidoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic ductal adenocarcinoma",
+          "cells": [
+            {
+              "text": "Needs distinction, since neuroendocrine-directed therapy differs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other functional pancreatic neuroendocrine tumours",
+          "cells": [
+            {
+              "text": "Syndromic hormone excess; polypeptidoma has no distinct syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_polypeptidoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Pancreaticoduodenectomy for head or uncinate tumours, or enucleation for small lesions; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Octreotide or lanreotide for unresectable or metastatic well-differentiated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Everolimus, sunitinib, radiolabelled DOTATATE or chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic metastases",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Resection, ablation or embolisation where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Biochemical and imaging follow-up; MEN1 testing in younger patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pancreatic_polypeptidoma-dx-mgmt",
+      "title": "Diagnosis and management of Pancreatic polypeptidoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pancreatic head mass found incidentally, or with weight loss or jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (obstructive jaundice, rapid growth, metastases or high Ki-67)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: oncology and tumour board review for metastatic neuroendocrine disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma PP, chromogranin A, multiphase CT or MRI, EUS biopsy, DOTATATE PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does tissue confirm a well-differentiated neuroendocrine tumour with grade assigned?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ductal adenocarcinoma or other functional neuroendocrine tumours; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete resection by pancreaticoduodenectomy or enucleation for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Somatostatin analogues such as octreotide or lanreotide for unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Everolimus, sunitinib or radiolabelled DOTATATE therapy for progressive advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resect, ablate or embolise hepatic metastases where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biochemical and imaging follow-up; MEN1 testing in younger patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good if fully resected and well differentiated; high grade or metastatic disease is worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

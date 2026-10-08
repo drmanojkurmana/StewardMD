@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for thrombocytopenia-absent radius syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thrombocytopenia_absent_radius-dx-mgmt",
+      "title": "Diagnosis and management of Thrombocytopenia-absent radius syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thrombocytopenia-absent radius: bilateral absent radii with preserved thumbs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: significant haemorrhage in infancy, or evolving pancytopenia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent platelet transfusion for significant or intracranial haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; marrow for megakaryocytes; radiographs; RBM8A testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do RBM8A variants confirm the diagnosis with preserved thumbs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fanconi anaemia, MPL-related thrombocytopenia or Holt-Oram syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Platelet transfusion for significant haemorrhage or before procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude cow's milk protein from the diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid antiplatelet agents and unnecessary trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic and occupational therapy for radial aplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Echocardiography and renal imaging for associated anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thrombocytopenia is most dangerous in infancy and generally improves in childhood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thrombocytopenia_absent_radius-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia with otherwise preserved lineages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Reduced or absent megakaryocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper limb radiographs",
+          "cells": [
+            {
+              "text": "Bilateral radial aplasia with preserved thumbs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RBM8A molecular analysis",
+          "cells": [
+            {
+              "text": "Null allele and common non-coding variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and renal imaging",
+          "cells": [
+            {
+              "text": "Associated cardiac or renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosome breakage testing",
+          "cells": [
+            {
+              "text": "Fanconi anaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombocytopenia_absent_radius-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fanconi anaemia",
+          "cells": [
+            {
+              "text": "Thumbs are typically abnormal in Fanconi; TAR has preserved thumbs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital amegakaryocytic thrombocytopenia (MPL)",
+          "cells": [
+            {
+              "text": "Thrombocytopenia without radial aplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Holt-Oram syndrome",
+          "cells": [
+            {
+              "text": "Radial and cardiac anomalies; RBM8A testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombocytopenia_absent_radius-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "Significant haemorrhage, or cover before procedures; vigilance in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cow's milk protein exclusion",
+          "cells": [
+            {
+              "text": "Precipitates acute platelet falls and gastrointestinal symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet agents and trauma",
+          "cells": [
+            {
+              "text": "Prompt management of bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and occupational therapy",
+          "cells": [
+            {
+              "text": "Bilateral radial aplasia, with adaptive aids and corrective surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and renal screening",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count monitoring",
+          "cells": [
+            {
+              "text": "Thrombocytopenia improves towards near-normal counts in later childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RBM8A compound inheritance; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

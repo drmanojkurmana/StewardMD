@@ -157,6 +157,11 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine / IDSA",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 257-8",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -300,6 +305,54 @@
           "cite": "c1"
         }
       ]
+    },
+    {
+      "id": "ventilator_associated_pneumonia-treatment-2",
+      "kind": "treatment",
+      "title": "Empirical antibiotics for health care-associated pneumonia",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Patients without risk factors for MDR pathogens",
+          "cells": [
+            {
+              "text": "Ceftriaxone 2 g IV q24h; or moxifloxacin 400 mg IV q24h, ciprofloxacin 400 mg IV q8h, or levofloxacin 750 mg IV q24h; or ampicillin/sulbactam 3 g IV q6h; or ertapenem 1 g IV q24h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk factors for MDR pathogens, component 1: a beta-lactam",
+          "cells": [
+            {
+              "text": "Ceftazidime 2 g IV q8h, or cefepime 2 g IV q8 to 12h, or piperacillin/tazobactam 4.5 g IV q6h, imipenem 500 mg IV q6h or 1 g IV q8h, or meropenem 1 g IV q8h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk factors for MDR pathogens, component 2: second agent active against gram-negative bacteria",
+          "cells": [
+            {
+              "text": "Gentamicin or tobramycin 7 mg/kg IV q24h, or amikacin 20 mg/kg IV q24h, or ciprofloxacin 400 mg IV q8h, or levofloxacin 750 mg IV q24h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk factors for MDR pathogens, component 3: agent active against gram-positive bacteria",
+          "cells": [
+            {
+              "text": "Linezolid 600 mg IV q12h or vancomycin 15 mg/kg (up to 1 g) IV q12h"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "MDR means multidrug-resistant. For patients with MDR risk factors all three components are given together."
     }
   ],
   "flowcharts": [

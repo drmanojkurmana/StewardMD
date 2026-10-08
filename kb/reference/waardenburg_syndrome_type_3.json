@@ -149,5 +149,240 @@
       "caption": "Overview comparison matrix for waardenburg syndrome type 3."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "waardenburg_syndrome_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiological testing with auditory brainstem responses in infants",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Pigmentary and ocular features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Musculoskeletal examination of the upper limbs",
+          "cells": [
+            {
+              "text": "Limb anomalies that define type 3"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Waardenburg syndrome type 1",
+          "cells": [
+            {
+              "text": "Dystopia canthorum but no limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waardenburg syndrome type 2",
+          "cells": [
+            {
+              "text": "No dystopia canthorum; MITF or SOX10 involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early auditory rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids for sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Severe-to-profound loss, to protect language development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Severe upper limb contractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "waardenburg_syndrome_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Waardenburg syndrome type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Klein-Waardenburg (type 3): hearing loss with upper limb anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (profound congenital deafness or severe limb contractures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent habilitation for profound deafness; orthopaedic review for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Auditory brainstem response, ophthalmic review, upper limb examination, PAX3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are upper limb anomalies present with a PAX3 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Classify as type 1 or type 2 by dystopia canthorum and limb findings",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early auditory rehabilitation with hearing aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of upper limb musculoskeletal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hearing loss and limb contractures both affect function; early treatment helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

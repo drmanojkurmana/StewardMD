@@ -149,5 +149,238 @@
       "caption": "Overview comparison matrix for renal hypouricaemia (urat1/glut9)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_hypouricemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum uric acid",
+          "cells": [
+            {
+              "text": "Persistent hypouricaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractional excretion of urate",
+          "cells": [
+            {
+              "text": "Renal urate loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_hypouricemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Fanconi syndrome with urate wasting",
+          "cells": [
+            {
+              "text": "Urate wasting"
+            },
+            {
+              "text": "Fractional excretion of urate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome of inappropriate antidiuresis",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_hypouricemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise",
+          "cells": [
+            {
+              "text": "Avoid strenuous anaerobic exercise, the classic precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration",
+          "cells": [
+            {
+              "text": "Encourage sustained good hydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Acute kidney injury, loin pain and urolithiasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_hypouricemia-dx-mgmt",
+      "title": "Diagnosis and management of Renal hypouricaemia (URAT1/GLUT9)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal hypouricaemia: persistent low uric acid with urate wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "AKI after intense exercise, loin pain, obstructing urate calculi, or gross haematuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for AKI or obstructing urate calculi",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum uric acid; fractional excretion of urate; renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is urate wasting confirmed with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fanconi syndrome, SIADH or drug-induced hypouricaemia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Advise avoidance of strenuous anaerobic exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Encourage sustained good hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for acute kidney injury and urolithiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Renal follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

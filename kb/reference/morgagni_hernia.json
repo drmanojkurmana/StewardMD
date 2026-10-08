@@ -144,5 +144,287 @@
       "caption": "Overview comparison matrix for morgagni hernia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Shields' General Thoracic Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "morgagni_hernia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Right cardiophrenic angle opacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT thorax and abdomen",
+          "cells": [
+            {
+              "text": "Confirms herniated contents and the fatty band sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GI contrast studies",
+          "cells": [
+            {
+              "text": "When bowel is thought to be involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Characterises soft-tissue contents in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morgagni_hernia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardial fat pad",
+          "cells": [
+            {
+              "text": "Mistaken for a benign finding; leaves hernia unassessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial cyst",
+          "cells": [
+            {
+              "text": "Mistaken for a benign finding; leaves hernia unassessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bochdalek hernia",
+          "cells": [
+            {
+              "text": "Posterolateral rather than cardiophrenic defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morgagni_hernia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Elective surgical repair",
+          "cells": [
+            {
+              "text": "Definitive; recommended even if asymptomatic because of obstruction and strangulation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "For incarceration, strangulation or bowel obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative CT planning",
+          "cells": [
+            {
+              "text": "Confirm contents and plan the operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for associated anomalies",
+          "cells": [
+            {
+              "text": "In paediatric presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative follow-up",
+          "cells": [
+            {
+              "text": "Detect the uncommon recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "morgagni_hernia-dx-mgmt",
+      "title": "Diagnosis and management of Morgagni hernia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Right cardiophrenic opacity on chest film, often incidental",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pain with vomiting, bowel ischaemia or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgery for incarcerated or strangulated herniated bowel",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT thorax and abdomen; GI contrast study if bowel involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CT shows herniated omentum or bowel with fatty band sign?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pericardial fat pad or cyst, thymic lesion, eventration, pleural mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Plan repair with contrast CT of thorax and abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elective surgical repair even when asymptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for associated congenital anomalies in children",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postoperative follow-up for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent after elective repair; emergency presentation carries higher risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

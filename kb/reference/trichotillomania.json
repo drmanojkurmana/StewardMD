@@ -144,5 +144,316 @@
       "caption": "Overview comparison matrix for trichotillomania."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichotillomania-dx-mgmt",
+      "title": "Diagnosis and management of Trichotillomania",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichotillomania: irregular patches of incomplete hair loss, broken hairs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: abdominal pain, palpable mass, or loss of follicular ostia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical or endoscopic review for obstructing trichobezoar",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trichoscopy; mycology to exclude tinea; scalp biopsy if equivocal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does trichoscopy show broken hairs of varying length with preserved ostia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider alopecia areata, tinea capitis or traction alopecia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Habit-reversal training and CBT as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjunct N-acetylcysteine, SSRI or clomipramine with modest evidence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat comorbid anxiety, depression or OCD",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic or surgical removal of trichobezoar if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Psychology or psychiatry referral with family support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Non-scarring and reversible; relapsing in adults unless prolonged traction scars",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichotillomania-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Broken hairs of varying length, flame hairs and V-signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair-pull test",
+          "cells": [
+            {
+              "text": "Negative in pulled areas; follicular ostia intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycological examination",
+          "cells": [
+            {
+              "text": "Excludes tinea capitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy",
+          "cells": [
+            {
+              "text": "Equivocal cases: pigment casts, trichomalacia, empty follicles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Suspected trichophagia with bezoar"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichotillomania-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alopecia areata",
+          "cells": [
+            {
+              "text": "Smooth patches, exclamation-mark hairs and positive pull test at the margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinea capitis",
+          "cells": [
+            {
+              "text": "Scaling and broken hairs with positive mycology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traction alopecia",
+          "cells": [
+            {
+              "text": "Marginal, tension-related loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichotillomania-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Habit-reversal training and CBT",
+          "cells": [
+            {
+              "text": "First-line therapy for the body-focused behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "N-acetylcysteine, SSRI or clomipramine",
+          "cells": [
+            {
+              "text": "Adjuncts with modest evidence; SSRI or clomipramine if anxiety or OCD coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid anxiety, depression or OCD",
+          "cells": [
+            {
+              "text": "Drivers of the pulling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulus control and barrier measures",
+          "cells": [
+            {
+              "text": "Reduce access to hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichobezoar removal",
+          "cells": [
+            {
+              "text": "Endoscopic or surgical removal if Rapunzel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychology or psychiatry referral",
+          "cells": [
+            {
+              "text": "Structured therapy with family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

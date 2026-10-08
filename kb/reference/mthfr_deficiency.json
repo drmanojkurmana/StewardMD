@@ -153,5 +153,305 @@
       "caption": "Overview comparison matrix for severe methylenetetrahydrofolate reductase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mthfr_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma total homocysteine",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Low or normal methionine with raised homocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Confirm absence of methylmalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and folate status",
+          "cells": [
+            {
+              "text": "Exclude nutritional causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MTHFR gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mthfr_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classical homocystinuria (CBS deficiency)",
+          "cells": [
+            {
+              "text": "Methionine is high in CBS deficiency, low or normal here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cobalamin remethylation defects (cblC, cblD, cblE)",
+          "cells": [
+            {
+              "text": "Urine methylmalonic acid is absent in MTHFR deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcobalamin and dietary B12 deficiency",
+          "cells": [
+            {
+              "text": "Excluded by B12 and folate status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mthfr_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Betaine",
+          "cells": [
+            {
+              "text": "Mainstay; alternative pathway to remethylate homocysteine to methionine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive folate, hydroxocobalamin, methionine",
+          "cells": [
+            {
+              "text": "Folinic acid or 5-methyltetrahydrofolate; methionine where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early or presymptomatic treatment",
+          "cells": [
+            {
+              "text": "Timing strongly determines neurological outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute neonatal care",
+          "cells": [
+            {
+              "text": "Treat seizures and apnoea; metabolic stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombosis prevention and treatment",
+          "cells": [
+            {
+              "text": "Prophylaxis in high-risk periods; anticoagulate for thromboembolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "Plasma homocysteine and methionine to titrate treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mthfr_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Severe methylenetetrahydrofolate reductase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal encephalopathy with apnoea and seizures, or progressive neurological decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Apnoea and seizures, thromboembolism or decompensation in catabolic illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Metabolic stabilisation, treat seizures and apnoea, start betaine early",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma homocysteine and methionine, urine organic acids, B12, folate, MTHFR sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High homocysteine, low or normal methionine and MTHFR variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CBS deficiency, cblC/D/E defects and B12 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Betaine as mainstay, started as early as possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add folinic acid or 5-MTHF, hydroxocobalamin and methionine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thromboprophylaxis in high-risk periods",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor homocysteine and methionine; genetic counselling and newborn testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early betaine and adjunct treatment markedly improves neurological outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

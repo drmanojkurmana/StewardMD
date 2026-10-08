@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for severe acute malnutrition."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "severe_acute_malnutrition-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight, height/length and MUAC with oedema check",
+          "cells": [
+            {
+              "text": "Severe wasting and/or bilateral pitting oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes (potassium, magnesium, phosphate)",
+          "cells": [
+            {
+              "text": "Deficits and refeeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin",
+          "cells": [
+            {
+              "text": "Anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection screen (TB, HIV) and malaria in endemic areas",
+          "cells": [
+            {
+              "text": "Occult infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration assessment",
+          "cells": [
+            {
+              "text": "Difficult to judge clinically in SAM"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "severe_acute_malnutrition-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oedema from nephrotic syndrome or cardiac or hepatic failure",
+          "cells": [
+            {
+              "text": "Nutritional kwashiorkor oedema must not be mistaken for fluid overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic infection (tuberculosis, HIV)",
+          "cells": [
+            {
+              "text": "Screened for in every child with SAM"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "severe_acute_malnutrition-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged refeeding",
+          "cells": [
+            {
+              "text": "Low-protein starter therapeutic milk, then catch-up feed or ready-to-use therapeutic food"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia and hypothermia",
+          "cells": [
+            {
+              "text": "Frequent feeds and active warming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious rehydration",
+          "cells": [
+            {
+              "text": "Low-sodium oral rehydration solution; intravenous fluids only for shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Infection is common and often occult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and micronutrients",
+          "cells": [
+            {
+              "text": "Potassium, magnesium, zinc, multivitamins; withhold iron until recovery phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication monitoring",
+          "cells": [
+            {
+              "text": "Cardiac failure, sepsis and refeeding syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Developmental stimulation, caregiver education and community follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary programme",
+          "cells": [
+            {
+              "text": "Paediatric nutrition team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "severe_acute_malnutrition-dx-mgmt",
+      "title": "Diagnosis and management of Severe acute malnutrition",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with severe wasting or bilateral pitting oedema of nutritional origin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoglycaemia, hypothermia, shock or heart failure during rehydration or refeeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Feed and warm now; cautious fluids; treat sepsis; avoid IV overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight, height, MUAC; glucose; electrolytes; haemoglobin; infection and malaria screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe wasting or nutritional oedema confirmed after excluding other oedema causes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate nephrotic, cardiac, hepatic, malabsorptive or chronic illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent hypoglycaemia and hypothermia; start staged therapeutic milk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral low-sodium rehydration; empirical antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace potassium, magnesium, zinc; withhold iron until recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rehabilitation phase with catch-up growth and caregiver education",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover with phased care; deaths follow missed complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -144,5 +144,316 @@
       "caption": "Overview comparison matrix for triple x syndrome (47,xxx)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "triple_x_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Triple X syndrome (47,XXX)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected triple X: tall female with language or learning difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: significant emotional disturbance or features of ovarian insufficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent mental-health review for emotional or behavioural crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype; chromosomal microarray; developmental and language assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does karyotype show 47,XXX, including mosaic forms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constitutional tall stature, language disorder or fragile X syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early speech and language therapy and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occupational therapy and physiotherapy for coordination",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mental-health support for anxiety and behavioural problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor ovarian function and offer fertility counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and developmental follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good; most live independently with normal lifespan",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "triple_x_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Diagnostic; prompted by prenatal screen or learning assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Detects the extra X"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, speech and educational assessment",
+          "cells": [
+            {
+              "text": "Language-based difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian function assessment",
+          "cells": [
+            {
+              "text": "Menstrual irregularity or subfertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mental-health assessment",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "triple_x_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constitutional or familial tall stature",
+          "cells": [
+            {
+              "text": "Tall stature with normal karyotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic developmental language disorder",
+          "cells": [
+            {
+              "text": "Language delay without sex-chromosome aneuploidy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragile X syndrome",
+          "cells": [
+            {
+              "text": "Learning difficulty; specific genetic testing distinguishes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "triple_x_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early speech and language therapy",
+          "cells": [
+            {
+              "text": "Language-based learning difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and physiotherapy",
+          "cells": [
+            {
+              "text": "Motor coordination difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mental-health support",
+          "cells": [
+            {
+              "text": "Anxiety and behavioural or emotional problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian function monitoring",
+          "cells": [
+            {
+              "text": "Risk of premature ovarian insufficiency; fertility counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually sporadic with low recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental follow-up",
+          "cells": [
+            {
+              "text": "Early recognition improves outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

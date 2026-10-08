@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for st3gal5-cdg (gm3 synthase deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Congenital disorders of glycosylation references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "st3gal5_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ST3GAL5 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma glycosphingolipid and ganglioside profiling",
+          "cells": [
+            {
+              "text": "Reduced GM3 and downstream species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Multifocal or hypsarrhythmia-like patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Progressive cerebral atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transferrin isoelectric focusing",
+          "cells": [
+            {
+              "text": "Typically normal; does not exclude the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and audiology",
+          "cells": [
+            {
+              "text": "Visual and hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "st3gal5_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ST3GAL3-related epileptic encephalopathy",
+          "cells": [
+            {
+              "text": "A related sialyltransferase disorder with intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early-infantile epileptic encephalopathies (CDKL5, STXBP1, KCNQ2)",
+          "cells": [
+            {
+              "text": "Separated by gene testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "st3gal5_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Intractable infantile epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Feeding difficulty, including gastrostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder management",
+          "cells": [
+            {
+              "text": "Choreoathetosis and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and ophthalmology support",
+          "cells": [
+            {
+              "text": "Acquired sensorineural deafness and visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary developmental and palliative care",
+          "cells": [
+            {
+              "text": "Physiotherapy and palliative input for the progressive course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "st3gal5_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ST3GAL5-CDG (GM3 Synthase Deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intractable infant epilepsy with irritability and dyspigmentation: suspected ST3GAL5",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neuroregression, vision or hearing loss, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent seizure management and nutritional support for feeding failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ST3GAL5 testing; glycosphingolipid profiling; EEG; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biallelic ST3GAL5 variant found with a reduced ganglioside profile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ST3GAL3, other early-infantile epilepsies or gangliosidoses; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication for intractable infantile epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy and nutrition support for feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Audiology and ophthalmology support for sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and palliative care alongside developmental support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive course; supportive and palliative care needs grow over time",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

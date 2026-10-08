@@ -149,6 +149,11 @@
       "id": "c1",
       "label": "Standard toxicology references",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 393-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -330,6 +335,44 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_toxidrome-ddx-2",
+      "kind": "ddx",
+      "title": "Opioid receptor types and their actions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Actions"
+      ],
+      "rows": [
+        {
+          "parameter": "Mu (example: morphine)",
+          "cells": [
+            {
+              "text": "Analgesia, reinforcement and euphoria, cough and appetite suppression, decreased respiration, decreased GI motility, sedation, hormone changes, dopamine and acetylcholine release"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kappa (example: butorphanol)",
+          "cells": [
+            {
+              "text": "Dysphoria, decreased GI motility, decreased appetite, decreased respiration, psychotic symptoms, sedation, diuresis, analgesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delta (example: etorphine)",
+          "cells": [
+            {
+              "text": "Hormone changes, appetite suppression, dopamine release"
+            }
+          ],
+          "cite": "c2"
         }
       ]
     }

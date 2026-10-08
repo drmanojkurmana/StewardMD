@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for tubular aggregate myopathy (stim1/orai1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tubular_aggregate_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Tubular aggregate myopathy (STIM1/ORAI1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tubular aggregate myopathy: slow proximal weakness with cramps",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: bleeding tendency, or rapidly progressive weakness atypical of course?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for bleeding or thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK; EMG; muscle biopsy for tubular aggregates; FBC; STIM1 and ORAI1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biopsy tubular aggregates and a STIM1 or ORAI1 variant confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metabolic myopathy, limb-girdle dystrophy or periodic paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tailored physiotherapy and graded low-impact exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activity pacing for cramps and exercise intolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occupational therapy, orthoses and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Platelet surveillance and bleeding precautions in Stormorken spectrum",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow progression; most remain ambulant; Stormorken spectrum adds bleeding morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tubular_aggregate_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Mildly to moderately raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction and electromyography",
+          "cells": [
+            {
+              "text": "Myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with oxidative and Gomori trichrome staining, and electron microscopy",
+          "cells": [
+            {
+              "text": "Tubular aggregates in type 2 fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bleeding assessment",
+          "cells": [
+            {
+              "text": "Thrombocytopenia in the Stormorken spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Pattern of involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STIM1 and ORAI1 genetic testing",
+          "cells": [
+            {
+              "text": "With a broader myopathy panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tubular_aggregate_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metabolic myopathies",
+          "cells": [
+            {
+              "text": "Exercise intolerance and cramps; metabolic testing distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb-girdle muscular dystrophy",
+          "cells": [
+            {
+              "text": "Proximal weakness with dystrophic muscle change rather than tubular aggregates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic paralysis and other channelopathies",
+          "cells": [
+            {
+              "text": "Episodic weakness; channelopathy testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tubular_aggregate_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tailored physiotherapy",
+          "cells": [
+            {
+              "text": "Graded low-impact exercise to preserve proximal strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity pacing",
+          "cells": [
+            {
+              "text": "Cramps, myalgia and exercise intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy, orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Function and ambulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of strength, respiratory and bulbar function",
+          "cells": [
+            {
+              "text": "As weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet surveillance and bleeding precautions",
+          "cells": [
+            {
+              "text": "Stormorken spectrum; platelet support around surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

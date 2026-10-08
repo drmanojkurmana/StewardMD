@@ -146,5 +146,247 @@
       "caption": "Overview comparison matrix for quebec platelet disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "quebec_platelet_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed bleeding history",
+          "cells": [
+            {
+              "text": "Delayed post-traumatic or post-operative bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation studies",
+          "cells": [
+            {
+              "text": "Reduced response to certain agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific protein assay or immunoblot",
+          "cells": [
+            {
+              "text": "Protein deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "quebec_platelet_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Platelet alpha-granule storage pool deficiency",
+          "cells": [
+            {
+              "text": "Storage pool defect"
+            },
+            {
+              "text": "Aggregation studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "quebec_platelet_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antifibrinolytic agents",
+          "cells": [
+            {
+              "text": "Tranexamic acid or epsilon-aminocaproic acid to treat bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Antifibrinolytic cover before surgery, dental procedures and similar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug avoidance",
+          "cells": [
+            {
+              "text": "Avoid platelet-active drugs where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "quebec_platelet_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Quebec platelet disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Quebec platelet disorder: delayed severe bleeding after surgery or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding after surgery or extraction, no response to platelets, or deep bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for bleeding unresponsive to platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bleeding history; aggregation studies; protein assay or immunoblot",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are aggregation defects confirmed with a specific protein assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Willebrand disease or another inherited platelet disorder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antifibrinolytic agents such as tranexamic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic cover before surgery and dental procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid platelet-active drugs where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Haematology follow-up for bleeding risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

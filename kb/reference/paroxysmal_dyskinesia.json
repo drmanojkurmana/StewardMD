@@ -149,5 +149,303 @@
       "caption": "Overview comparison matrix for paroxysmal dyskinesia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_dyskinesia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for PRRT2, PNKD and SLC2A1",
+          "cells": [
+            {
+              "text": "Phenotype-guided gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and video capture",
+          "cells": [
+            {
+              "text": "Attacks versus seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF glucose relative to blood glucose",
+          "cells": [
+            {
+              "text": "GLUT1 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural and demyelinating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Atypical or secondary presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_dyskinesia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epileptic seizures, including frontal lobe seizures",
+          "cells": [
+            {
+              "text": "Preserved awareness and careful trigger history separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) movement disorder",
+          "cells": [
+            {
+              "text": "Trigger history and preserved awareness distinguish it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_dyskinesia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Kinesigenic attacks",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Low-dose carbamazepine or another sodium-channel blocker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-kinesigenic attacks",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Avoid alcohol and caffeine; clonazepam for troublesome attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For exercise-induced dyskinesia from GLUT1 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Consciousness preserved; kinesigenic disease often improves with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Based on PRRT2, PNKD or SLC2A1 result"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_dyskinesia-dx-mgmt",
+      "title": "Diagnosis and management of Paroxysmal dyskinesia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief attacks of dystonia or chorea triggered by movement, alcohol, caffeine or exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (impaired awareness, fixed deficits or onset in later adult life)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review if seizures suspected or attacks refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phenotype-guided PRRT2, PNKD and SLC2A1 testing, EEG with video, CSF glucose, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the attack pattern kinesigenic or non-kinesigenic, with seizures excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epileptic seizures, functional disorder, tics or secondary dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose carbamazepine or another sodium-channel blocker for kinesigenic attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid alcohol and caffeine; clonazepam for troublesome non-kinesigenic attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ketogenic diet for exercise-induced dyskinesia from GLUT1 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling based on the PRRT2, PNKD or SLC2A1 result",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Kinesigenic disease often responds well and may improve with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

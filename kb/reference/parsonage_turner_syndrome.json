@@ -149,5 +149,282 @@
       "caption": "Overview comparison matrix for parsonage-turner syndrome (neuralgic amyotrophy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parsonage_turner_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EMG and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Patchy plexus or branch involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brachial plexus",
+          "cells": [
+            {
+              "text": "Nerve oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the cervical spine",
+          "cells": [
+            {
+              "text": "Radiculopathy or structural lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and infection or vasculitis screen",
+          "cells": [
+            {
+              "text": "Alternative causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parsonage_turner_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cervical radiculopathy",
+          "cells": [
+            {
+              "text": "Single root pattern rather than patchy plexus involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary neuralgic amyotrophy (SEPT9)",
+          "cells": [
+            {
+              "text": "Recurrent or familial episodes point to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parsonage_turner_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and short steroid course",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Early oral corticosteroids may shorten pain and hasten recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Gabapentinoids or amitriptyline for persistent pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Once pain settles: range of movement and scapular stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Phrenic nerve involvement can compromise breathing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parsonage_turner_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Parsonage-Turner syndrome (neuralgic amyotrophy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden severe shoulder and arm pain, then patchy weakness and wasting over weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive weakness, systemic features or respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for respiratory compromise from phrenic involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG and NCS for patchy pattern, MRI plexus, MRI cervical spine, inflammatory bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EMG show a patchy multi-nerve pattern with radiculopathy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider radiculopathy, neoplastic plexopathy, vasculitis or rotator cuff disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia with a short early course of oral corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentinoids or amitriptyline for persistent neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy once pain settles, for range of movement and scapular stability",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess for a hereditary cause in recurrent or familial cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover useful function over months to years; recovery can be slow and incomplete",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

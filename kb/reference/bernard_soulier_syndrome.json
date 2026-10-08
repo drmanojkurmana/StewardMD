@@ -155,6 +155,11 @@
       "id": "c1",
       "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 58-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -163,14 +168,64 @@
       "kind": "diagnostic",
       "title": "Diagnostic tests in Bernard-Soulier syndrome",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Full blood count and blood film", "cells": [{"text": "Thrombocytopenia with giant platelets"}], "cite": "c1"},
-        {"parameter": "Platelet aggregometry", "cells": [{"text": "Absent ristocetin-induced agglutination, not corrected by normal plasma"}], "cite": "c1"},
-        {"parameter": "Flow cytometry for glycoprotein Ib-IX-V", "cells": [{"text": "Reduced expression"}], "cite": "c1"},
-        {"parameter": "Von Willebrand studies", "cells": [{"text": "Excludes von Willebrand disease"}], "cite": "c1"},
-        {"parameter": "Review of the film", "cells": [{"text": "Excludes pseudothrombocytopenia and other macrothrombocytopenias"}], "cite": "c1"},
-        {"parameter": "Genetic testing of GP1BA, GP1BB and GP9", "cells": [{"text": "Pathogenic variants in these genes"}], "cite": "c1"}
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia with giant platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregometry",
+          "cells": [
+            {
+              "text": "Absent ristocetin-induced agglutination, not corrected by normal plasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for glycoprotein Ib-IX-V",
+          "cells": [
+            {
+              "text": "Reduced expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the film",
+          "cells": [
+            {
+              "text": "Excludes pseudothrombocytopenia and other macrothrombocytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of GP1BA, GP1BB and GP9",
+          "cells": [
+            {
+              "text": "Pathogenic variants in these genes"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -178,12 +233,46 @@
       "kind": "ddx",
       "title": "Look-alike conditions for Bernard-Soulier syndrome",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Glanzmann thrombasthenia", "cells": [{"text": "Mirror image: ristocetin response preserved, but other agonist responses absent"}], "cite": "c1"},
-        {"parameter": "Von Willebrand disease", "cells": [{"text": "A normal plasma mixing study is needed; this ristocetin defect is not corrected by it"}], "cite": "c1"},
-        {"parameter": "Immune thrombocytopenia", "cells": [{"text": "Giant platelets and a mucocutaneous bleeding history point away from ITP"}], "cite": "c1"},
-        {"parameter": "Pseudothrombocytopenia from platelet clumping", "cells": [{"text": "Excluded by review of the film"}], "cite": "c1"}
+        {
+          "parameter": "Glanzmann thrombasthenia",
+          "cells": [
+            {
+              "text": "Mirror image: ristocetin response preserved, but other agonist responses absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "A normal plasma mixing study is needed; this ristocetin defect is not corrected by it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Giant platelets and a mucocutaneous bleeding history point away from ITP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudothrombocytopenia from platelet clumping",
+          "cells": [
+            {
+              "text": "Excluded by review of the film"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -191,15 +280,142 @@
       "kind": "treatment",
       "title": "Management options in Bernard-Soulier syndrome",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Local measures and antifibrinolytics", "cells": [{"text": "Local pressure and antifibrinolytics such as tranexamic acid as first-line"}, {"text": "For mucocutaneous and menstrual bleeding"}], "cite": "c1"},
-        {"parameter": "Desmopressin", "cells": [{"text": "Trial for minor bleeding where a response is documented"}, {"text": "Less reliable than in some other platelet disorders"}], "cite": "c1"},
-        {"parameter": "Platelet transfusion", "cells": [{"text": "For major or refractory bleeding and surgical cover, using leucodepleted HLA-matched units"}, {"text": "Reduces alloimmunisation"}], "cite": "c1"},
-        {"parameter": "Recombinant activated factor VII", "cells": [{"text": "For bleeds unresponsive to platelets or in alloimmunised patients"}, {"text": "Considered for refractory bleeding"}], "cite": "c1"},
-        {"parameter": "Avoid antiplatelet agents", "cells": [{"text": "Avoid aspirin, antiplatelet and NSAID agents; correct iron deficiency from chronic loss"}, {"text": "These worsen bleeding"}], "cite": "c1"},
-        {"parameter": "Procedure planning", "cells": [{"text": "Haematology review and a defined haemostatic strategy before surgery, childbirth or procedures"}, {"text": "Planned in advance"}], "cite": "c1"},
-        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for the autosomal recessive GP1BA, GP1BB or GP9 disorder"}, {"text": "Family testing offered"}], "cite": "c1"}
+        {
+          "parameter": "Local measures and antifibrinolytics",
+          "cells": [
+            {
+              "text": "Local pressure and antifibrinolytics such as tranexamic acid as first-line"
+            },
+            {
+              "text": "For mucocutaneous and menstrual bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Trial for minor bleeding where a response is documented"
+            },
+            {
+              "text": "Less reliable than in some other platelet disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "For major or refractory bleeding and surgical cover, using leucodepleted HLA-matched units"
+            },
+            {
+              "text": "Reduces alloimmunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant activated factor VII",
+          "cells": [
+            {
+              "text": "For bleeds unresponsive to platelets or in alloimmunised patients"
+            },
+            {
+              "text": "Considered for refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet agents",
+          "cells": [
+            {
+              "text": "Avoid aspirin, antiplatelet and NSAID agents; correct iron deficiency from chronic loss"
+            },
+            {
+              "text": "These worsen bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedure planning",
+          "cells": [
+            {
+              "text": "Haematology review and a defined haemostatic strategy before surgery, childbirth or procedures"
+            },
+            {
+              "text": "Planned in advance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Counselling for the autosomal recessive GP1BA, GP1BB or GP9 disorder"
+            },
+            {
+              "text": "Family testing offered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bernard_soulier_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Primary hemostatic (platelet plug) disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Defects of platelet adhesion",
+          "cells": [
+            {
+              "text": "Von Willebrand disease; Bernard-Soulier syndrome (absence or dysfunction of GpIb-IX-V)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defects of platelet aggregation",
+          "cells": [
+            {
+              "text": "Glanzmann's thrombasthenia (absence or dysfunction of GpIIbIIIa); afibrinogenemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defects of platelet secretion",
+          "cells": [
+            {
+              "text": "Decreased cyclooxygenase activity (drug-induced: aspirin, nonsteroidal anti-inflammatory agents, thienopyridines; or inherited); granule storage pool defects (inherited or acquired); nonspecific inherited secretory defects; nonspecific drug effects; uremia; platelet coating (for example paraprotein, penicillin)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defect of platelet coagulant activity",
+          "cells": [
+            {
+              "text": "Scott's syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
       ]
     }
   ],
@@ -209,28 +425,118 @@
       "title": "Diagnosis and management of Bernard-Soulier syndrome",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Mucocutaneous bleeding, mild thrombocytopenia and giant platelets on the blood film", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: major haemorrhage, severe menorrhagia, uncontrolled bleeding or platelet refractoriness?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: leucodepleted HLA-matched platelets; consider recombinant factor VIIa", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Check film for pseudothrombocytopenia; avoid aspirin and NSAIDs", "cite": "c1"},
-        {"id": "n5", "type": "action", "text": "Ristocetin aggregometry with normal plasma mixing; flow cytometry for GPIb-IX-V", "cite": "c1"},
-        {"id": "n6", "type": "decision", "text": "Ristocetin defect not corrected by normal plasma, with reduced GPIb?", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Genetic testing of GP1BA, GP1BB and GP9; tranexamic acid as first-line", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "No: consider Glanzmann, von Willebrand disease, ITP or pseudothrombocytopenia", "cite": "c1"},
-        {"id": "n9", "type": "action", "text": "Defined haemostatic plan before procedures; counsel and offer family testing", "cite": "c1"},
-        {"id": "n10", "type": "outcome", "text": "Most do well with prophylaxis; serious bleeds and alloimmunisation remain risks", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mucocutaneous bleeding, mild thrombocytopenia and giant platelets on the blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: major haemorrhage, severe menorrhagia, uncontrolled bleeding or platelet refractoriness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: leucodepleted HLA-matched platelets; consider recombinant factor VIIa",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Check film for pseudothrombocytopenia; avoid aspirin and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Ristocetin aggregometry with normal plasma mixing; flow cytometry for GPIb-IX-V",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Ristocetin defect not corrected by normal plasma, with reduced GPIb?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic testing of GP1BA, GP1BB and GP9; tranexamic acid as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider Glanzmann, von Willebrand disease, ITP or pseudothrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Defined haemostatic plan before procedures; counsel and offer family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most do well with prophylaxis; serious bleeds and alloimmunisation remain risks",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n5", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Next"},
-        {"from": "n6", "to": "n7", "label": "Yes"},
-        {"from": "n6", "to": "n8", "label": "No"},
-        {"from": "n7", "to": "n9", "label": "Next"},
-        {"from": "n9", "to": "n10", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
       ]
     }
   ]

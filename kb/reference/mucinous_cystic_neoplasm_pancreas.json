@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for mucinous cystic neoplasm of the pancreas."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mucinous_cystic_neoplasm_pancreas-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with MRCP",
+          "cells": [
+            {
+              "text": "Cyst morphology; absence of ductal communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS with fine-needle aspiration",
+          "cells": [
+            {
+              "text": "Fluid analysis and wall assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid CEA and cytology",
+          "cells": [
+            {
+              "text": "CEA typically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid KRAS testing",
+          "cells": [
+            {
+              "text": "Supports a mucinous diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Mural nodules, solid components, calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucinous_cystic_neoplasm_pancreas-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Branch-duct IPMN",
+          "cells": [
+            {
+              "text": "MRCP shows ductal communication, absent in MCN"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serous cystadenoma",
+          "cells": [
+            {
+              "text": "Mistaken for MCN; characterise the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic pseudocyst",
+          "cells": [
+            {
+              "text": "Mistaken for MCN; characterise the cyst"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucinous_cystic_neoplasm_pancreas-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Typically distal pancreatectomy for body and tail lesions; curative if non-invasive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spleen preservation",
+          "cells": [
+            {
+              "text": "Where oncologically appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification before surgery",
+          "cells": [
+            {
+              "text": "Imaging and EUS-FNA using cyst fluid CEA, cytology and KRAS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "Small, low-risk lesions not meeting resection criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "For invasive cystadenocarcinoma, managed as pancreatic adenocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative monitoring",
+          "cells": [
+            {
+              "text": "Exocrine insufficiency and diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mucinous_cystic_neoplasm_pancreas-dx-mgmt",
+      "title": "Diagnosis and management of Mucinous cystic neoplasm of the pancreas",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cyst in the body or tail of the pancreas in a woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Enhancing mural nodule, rapid growth, duct dilatation, jaundice or weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatobiliary and pancreatic MDT review for resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI/MRCP, EUS-FNA with cyst fluid CEA, cytology and KRAS, CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mucinous cyst without ductal communication?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider IPMN, serous cystadenoma, pseudocyst, solid pseudopapillary neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Distal pancreatectomy, spleen-preserving where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Imaging surveillance only for small low-risk lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant chemotherapy if invasive cystadenocarcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor exocrine function and diabetes after resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Non-invasive disease cured by resection; invasive disease has worse outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

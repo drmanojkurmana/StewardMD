@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for polyhydramnios."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / ISUOG guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polyhydramnios-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound quantification (deepest vertical pool or AFI)",
+          "cells": [
+            {
+              "text": "Amniotic fluid volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed fetal anomaly ultrasound",
+          "cells": [
+            {
+              "text": "Stomach bubble, swallowing and structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose tolerance testing",
+          "cells": [
+            {
+              "text": "Maternal diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MCA peak systolic velocity Doppler",
+          "cells": [
+            {
+              "text": "Fetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection screening",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal karyotype or microarray",
+          "cells": [
+            {
+              "text": "When structural anomalies are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chorionicity and inter-twin discordance",
+          "cells": [
+            {
+              "text": "Multiple pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polyhydramnios-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple pregnancy",
+          "cells": [
+            {
+              "text": "Inter-twin fluid discordance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal obesity",
+          "cells": [
+            {
+              "text": "False impression of a large uterus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polyhydramnios-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Optimise maternal glycaemic control in diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amnioreduction",
+          "cells": [
+            {
+              "text": "Therapeutic amniocentesis for severe maternal breathlessness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indometacin",
+          "cells": [
+            {
+              "text": "Prostaglandin synthetase inhibitor to reduce fetal urine production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial ultrasound of fluid volume, growth and wellbeing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Antenatal corticosteroids where preterm birth is likely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery",
+          "cells": [
+            {
+              "text": "Obstetric unit with controlled amniotomy and readiness for postpartum haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal review",
+          "cells": [
+            {
+              "text": "Causes such as oesophageal or duodenal atresia after delivery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polyhydramnios-dx-mgmt",
+      "title": "Diagnosis and management of Polyhydramnios",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Excess liquor on ultrasound with a large uterus for dates",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid fluid increase, breathlessness, preterm labour, major anomaly, hydrops)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review for respiratory distress or preterm labour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluid volume measurement; anomaly scan; glucose tolerance; MCA Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does anomaly scan show a structural or chromosomal cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider multiple pregnancy, macrosomia, fibroids, dating error or maternal obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise maternal glycaemic control where diabetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Therapeutic amnioreduction for severe maternal breathlessness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider indometacin to reduce fetal urine production",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial ultrasound of fluid volume, growth and wellbeing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Deliver in an obstetric unit ready for postpartum haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mild idiopathic polyhydramnios does well; moderate to severe cases carry more risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

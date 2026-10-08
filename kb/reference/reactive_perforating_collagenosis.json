@@ -148,5 +148,238 @@
       "caption": "Overview comparison matrix for reactive perforating collagenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reactive_perforating_collagenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Cup-shaped epidermal invagination with transepidermal elimination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Special stains (Masson trichrome, elastic stain)",
+          "cells": [
+            {
+              "text": "Collagen degeneration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reactive_perforating_collagenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Prurigo nodularis",
+          "cells": [
+            {
+              "text": "Intractable pruritus"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perforating granulomatous disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reactive_perforating_collagenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Optimise glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Manage the underlying chronic kidney disease and dialysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pruritus",
+          "cells": [
+            {
+              "text": "Control pruritus and interrupt the scratch-Koebner cycle"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reactive_perforating_collagenosis-dx-mgmt",
+      "title": "Diagnosis and management of Reactive perforating collagenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected reactive perforating collagenosis: papules with intractable pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New or poorly controlled diabetes or CKD, or intractable pruritus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent medical review for uncontrolled diabetes or CKD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with special stains; glycaemic and renal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show transepidermal elimination of collagen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider prurigo nodularis or other perforating dermatoses; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise glycaemic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage underlying CKD and dialysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control pruritus and interrupt the scratch-Koebner cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Dermatology follow-up with medical management of comorbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

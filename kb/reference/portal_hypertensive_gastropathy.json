@@ -144,5 +144,307 @@
       "caption": "Overview comparison matrix for portal hypertensive gastropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portal_hypertensive_gastropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Mosaic pattern and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and iron studies",
+          "cells": [
+            {
+              "text": "Chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LFTs and liver disease assessment",
+          "cells": [
+            {
+              "text": "Severity of underlying liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler or cross-sectional imaging of portal system",
+          "cells": [
+            {
+              "text": "Portal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic venous pressure gradient",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal occult blood testing",
+          "cells": [
+            {
+              "text": "Suspected occult loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_hypertensive_gastropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastric antral vascular ectasia",
+          "cells": [
+            {
+              "text": "Endoscopic distinction required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric varices",
+          "cells": [
+            {
+              "text": "Varices rather than mosaic mucosa"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_hypertensive_gastropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Propranolol or carvedilol to lower portal pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron and transfusion",
+          "cells": [
+            {
+              "text": "Oral or intravenous iron and transfusion as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease",
+          "cells": [
+            {
+              "text": "Treatment of the underlying liver disease, which drives the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute bleeding",
+          "cells": [
+            {
+              "text": "Resuscitation and vasoactive splanchnic vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "TIPS or surgical shunt for refractory or transfusion-dependent bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portal_hypertensive_gastropathy-dx-mgmt",
+      "title": "Diagnosis and management of Portal hypertensive gastropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic occult blood loss or iron deficiency with portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (overt bleeding, falling haemoglobin, decompensated liver disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent resuscitation and endoscopy for overt upper GI bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy; FBC and iron studies; LFTs; portal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does endoscopy show a mosaic pattern of portal hypertensive gastropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider gastric antral vascular ectasia, gastric varices, angiodysplasia or peptic ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Propranolol or carvedilol to lower portal pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and transfusion as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying liver disease, whose severity drives the course",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resuscitation and vasoactive therapy for acute overt bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "TIPS or surgical shunt for refractory or transfusion-dependent bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually chronic, manageable blood loss; course mirrors the underlying liver disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

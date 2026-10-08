@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for superior mesenteric artery syndrome (wilkie syndrome)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superior_mesenteric_artery_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI contrast study",
+          "cells": [
+            {
+              "text": "Duodenal dilatation with abrupt cut-off"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Aorto-mesenteric angle and distance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Mucosal and obstructing lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment",
+          "cells": [
+            {
+              "text": "Weight and body-mass index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tests for gastroparesis and dysmotility",
+          "cells": [
+            {
+              "text": "Other causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superior_mesenteric_artery_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer disease with gastric outlet obstruction",
+          "cells": [
+            {
+              "text": "Mucosal lesion on endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic or other gastroparesis",
+          "cells": [
+            {
+              "text": "Dysmotility without mechanical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eating disorder without mechanical obstruction",
+          "cells": [
+            {
+              "text": "Imaging shows no duodenal compression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superior_mesenteric_artery_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional restoration",
+          "cells": [
+            {
+              "text": "Nasojejunal feeding or parenteral nutrition; first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postural measures after eating",
+          "cells": [
+            {
+              "text": "Prone, left-lateral or knee-chest positioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasogastric decompression",
+          "cells": [
+            {
+              "text": "Acute obstruction; fluid and electrolyte correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small frequent meals and prokinetics",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eating disorder and catabolic care",
+          "cells": [
+            {
+              "text": "Psychiatric and dietetic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenojejunostomy",
+          "cells": [
+            {
+              "text": "When conservative measures fail or fixed obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and BMI monitoring",
+          "cells": [
+            {
+              "text": "Multidisciplinary follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superior_mesenteric_artery_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Superior mesenteric artery syndrome (Wilkie syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Postprandial pain and bilious vomiting after weight loss: suspected SMA syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dehydration, profound weight loss, gastric dilatation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent correction of dehydration and electrolytes; nasogastric decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI contrast study; CT or MR angiography of aorto-mesenteric angle; endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is duodenal dilatation with an abrupt cut-off seen on contrast study?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peptic outlet obstruction, gastroparesis or eating disorder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nutritional restoration by nasojejunal or parenteral feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Postural measures after eating to open the aorto-mesenteric angle",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric decompression and fluid and electrolyte correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Duodenojejunostomy when conservative measures fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Weight loss and obstruction feed each other; surgery only after nutritional trial",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

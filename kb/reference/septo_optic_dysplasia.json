@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for septo-optic dysplasia (de morsier)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "septo_optic_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic triad",
+          "cells": [
+            {
+              "text": "At least two of: optic nerve hypoplasia, midline brain abnormality, hypothalamic-pituitary dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and pituitary",
+          "cells": [
+            {
+              "text": "Midline structures, such as septum pellucidum and corpus callosum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary hormone evaluation and dynamic testing",
+          "cells": [
+            {
+              "text": "Anterior and posterior pituitary deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and orthoptic evaluation",
+          "cells": [
+            {
+              "text": "Refractive error and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Where a familial or syndromic pattern is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "septo_optic_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated optic nerve hypoplasia",
+          "cells": [
+            {
+              "text": "Only one of the three components is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated congenital hypopituitarism",
+          "cells": [
+            {
+              "text": "Only the hypothalamic-pituitary component is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Holoprosencephaly spectrum disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "septo_optic_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong pituitary hormone replacement",
+          "cells": [
+            {
+              "text": "Hydrocortisone, levothyroxine, growth hormone, desmopressin for diabetes insipidus, sex steroids at puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency treatment",
+          "cells": [
+            {
+              "text": "Neonatal hypoglycaemia and adrenal crisis are presenting emergencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual support",
+          "cells": [
+            {
+              "text": "Low-vision support, refractive correction and orthoptic management of nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological therapies",
+          "cells": [
+            {
+              "text": "For associated impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine surveillance",
+          "cells": [
+            {
+              "text": "Growth and puberty monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology, ophthalmology and neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress-dose corticosteroid cover",
+          "cells": [
+            {
+              "text": "During intercurrent illness; genetic counselling for familial or HESX1 pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "septo_optic_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Septo-optic dysplasia (de Morsier)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with nystagmus or poor vision, optic nerve hypoplasia, or neonatal hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoglycaemia, adrenal crisis, diabetes insipidus or hypernatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency hydrocortisone, glucose and fluid correction; urgent endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and pituitary; pituitary hormones; OCT and VEP; orthoptic assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "At least two of optic nerve hypoplasia, midline defect, pituitary dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for isolated hypoplasia, hypopituitarism, holoprosencephaly or Leber amaurosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Replace deficient pituitary hormones for life",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give stress-dose corticosteroid cover during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision support, refraction and orthoptic care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor growth and puberty; developmental therapies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision usually stable; outcome rests on timely lifelong hormone replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

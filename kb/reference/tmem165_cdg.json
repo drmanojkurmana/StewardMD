@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for tmem165-cdg (cdg-iik)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tmem165_cdg-dx-mgmt",
+      "title": "Diagnosis and management of TMEM165-CDG (CDG-IIk)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TMEM165-CDG: skeletal dysplasia, short stature and type II transferrin pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive skeletal deformity, significant liver dysfunction, or regression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatic and nutritional review for multisystem decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin focusing; TMEM165 genetic testing; skeletal survey; liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TMEM165 testing confirm a pathogenic variant with a type II pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other type II CDGs or primary spondylo-epi-metaphyseal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial of oral galactose with monitoring of glycosylation markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multidisciplinary supportive care for skeletal, hepatic and developmental features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic input and physiotherapy for skeletal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver function and imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable; skeletal and growth problems prominent; galactose benefit still being defined",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tmem165_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TMEM165 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Pathogenic variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Spondylo-epi-metaphyseal dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and imaging",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and endocrine assessment",
+          "cells": [
+            {
+              "text": "Short stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring during galactose trial",
+          "cells": [
+            {
+              "text": "Glycosylation markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tmem165_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other type II CDG subtypes (MGAT2, B4GALT1, COG, SLC35A2)",
+          "cells": [
+            {
+              "text": "Separated by molecular testing; skeletal phenotype points to TMEM165"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spondylo-epi-metaphyseal dysplasias",
+          "cells": [
+            {
+              "text": "Skeletal dysplasia without a glycosylation defect on transferrin analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type I CDGs",
+          "cells": [
+            {
+              "text": "Different transferrin pattern when the picture is ambiguous"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tmem165_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Galactose supplementation trial",
+          "cells": [
+            {
+              "text": "Golgi manganese dependence of galactosylation; glycosylation markers monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary supportive care",
+          "cells": [
+            {
+              "text": "Skeletal, hepatic and developmental manifestations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic input and physiotherapy",
+          "cells": [
+            {
+              "text": "Spondylo-epi-metaphyseal dysplasia and short stature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "Function tests and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, endocrine and developmental review",
+          "cells": [
+            {
+              "text": "Developmental support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Inherited disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

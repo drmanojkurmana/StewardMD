@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for sheehan syndrome (postpartum pituitary necrosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sheehan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Cortisol, thyroid and gonadal axes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Deficiency, reflected in failure to lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic pituitary testing",
+          "cells": [
+            {
+              "text": "When basal results are equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI pituitary",
+          "cells": [
+            {
+              "text": "Empty or partially empty sella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes",
+          "cells": [
+            {
+              "text": "Hyponatraemia from cortisol or thyroid deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstetric history",
+          "cells": [
+            {
+              "text": "Peripartum haemorrhage and hypotension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sheehan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Empty sella syndrome from other causes",
+          "cells": [
+            {
+              "text": "Empty sella on MRI; peripartum haemorrhage history points to Sheehan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression and non-endocrine postpartum fatigue",
+          "cells": [
+            {
+              "text": "Failed lactation and fatigue wrongly attributed to normal recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocytic hypophysitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sheehan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoid replacement first",
+          "cells": [
+            {
+              "text": "Lifelong anterior pituitary replacement starts with glucocorticoid to avoid adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "For secondary hypothyroidism, once glucocorticoid cover is adequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen with progestogen",
+          "cells": [
+            {
+              "text": "For gonadotrophin deficiency until usual age of menopause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone",
+          "cells": [
+            {
+              "text": "In selected adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress-dose glucocorticoid cover",
+          "cells": [
+            {
+              "text": "During illness or surgery; steroid emergency card and education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Urgent parenteral hydrocortisone and fluid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical and biochemical adequacy of replacement, including electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinology follow-up",
+          "cells": [
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sheehan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sheehan syndrome (postpartum pituitary necrosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Failed lactation, no menses, hair loss and fatigue after severe postpartum haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Adrenal crisis, hypotension, severe hyponatraemia or severe hypothyroidism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent parenteral hydrocortisone and fluid resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cortisol, thyroid and gonadal axes; prolactin; electrolytes; pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anterior pituitary hormone deficiencies after peripartum haemorrhage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypophysitis, pituitary tumour, postpartum thyroiditis or depression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start glucocorticoid replacement first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add levothyroxine only after glucocorticoid cover is adequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oestrogen with progestogen; growth hormone in selected adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stress-dose cover, steroid card, lifelong endocrinology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good with lifelong replacement; deficits are permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

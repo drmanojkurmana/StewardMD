@@ -148,5 +148,249 @@
       "caption": "Overview comparison matrix for vitamin a deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_a_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum retinol level",
+          "cells": [
+            {
+              "text": "Vitamin A status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical ocular examination",
+          "cells": [
+            {
+              "text": "Bitot spots, xerosis and corneal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of nutritional status and dietary intake",
+          "cells": [
+            {
+              "text": "Dietary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for fat malabsorption",
+          "cells": [
+            {
+              "text": "Cystic fibrosis or cholestatic liver disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_a_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Night blindness from retinal disease rather than deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective keratoconjunctivitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zinc deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_a_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral vitamin A (retinol) supplementation",
+          "cells": [
+            {
+              "text": "Age-based course to reverse deficiency and halt xerophthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplementation during measles",
+          "cells": [
+            {
+              "text": "At-risk children to prevent acute deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_a_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin A Deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin A deficiency: night blindness or Bitot spots in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (corneal ulceration, rapid ocular change or severe infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmic review for keratomalacia and high-dose vitamin A",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum retinol, ocular examination, nutritional history, malabsorption screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is serum retinol low with ocular signs of deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinitis pigmentosa or other causes of night blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral vitamin A (retinol) as an age-based course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supplementation during measles in at-risk children",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any fat malabsorption and nutritional deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Early treatment reverses night blindness; delay risks irreversible blindness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

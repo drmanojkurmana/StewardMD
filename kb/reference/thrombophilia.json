@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for thrombophilia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thrombophilia-dx-mgmt",
+      "title": "Diagnosis and management of Thrombophilia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thrombophilia: venous thrombosis at a young age, recurrent or unusual site",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: massive embolism, cerebral vein thrombosis, or skin necrosis on warfarin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anticoagulation for life-threatening thrombosis; manage skin necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Genetic testing for factor V Leiden and prothrombin; functional assays after recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are functional antithrombin, protein C or protein S levels reliably low when tested?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider antiphospholipid syndrome, occult malignancy or a provoked event",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-molecular-weight heparin, then DOAC or vitamin K antagonist for acute events",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vitamin K antagonist rather than DOAC in antiphospholipid syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extended anticoagulation for high-risk defects such as antithrombin deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Heparin prophylaxis in surgery and immobility; avoid oestrogen contraceptives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Heparin-based pregnancy prophylaxis under specialist care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on the defect and whether events are provoked; many carriers never clot",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thrombophilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for factor V Leiden and prothrombin G20210A",
+          "cells": [
+            {
+              "text": "Unaffected by acute event or anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombin, protein C and protein S assays",
+          "cells": [
+            {
+              "text": "Timed away from acute events and anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody panel",
+          "cells": [
+            {
+              "text": "Lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and JAK2 testing",
+          "cells": [
+            {
+              "text": "Myeloproliferative disorder, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy evaluation",
+          "cells": [
+            {
+              "text": "Unprovoked events, by age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombophilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Recurrent pregnancy loss or arterial events; warfarin is preferred over a DOAC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult malignancy",
+          "cells": [
+            {
+              "text": "Unprovoked events and thrombosis at unusual sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provoked thrombosis from surgery, immobility or hormonal therapy",
+          "cells": [
+            {
+              "text": "Clear provoking factor, such as surgery, immobility or hormonal therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombophilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticoagulation for acute venous thromboembolism",
+          "cells": [
+            {
+              "text": "Low-molecular-weight heparin, then a direct oral anticoagulant or vitamin K antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K antagonist in antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Rather than a direct oral anticoagulant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended anticoagulation",
+          "cells": [
+            {
+              "text": "High-risk defects such as antithrombin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Low-molecular-weight heparin in surgery and immobility; avoid oestrogen contraceptives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing of testing",
+          "cells": [
+            {
+              "text": "Away from the acute event and anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy management",
+          "cells": [
+            {
+              "text": "Heparin-based prophylaxis; low-dose aspirin added in obstetric antiphospholipid syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy evaluation",
+          "cells": [
+            {
+              "text": "After an unprovoked event"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

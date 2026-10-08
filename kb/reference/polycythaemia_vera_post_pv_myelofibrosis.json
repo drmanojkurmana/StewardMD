@@ -143,5 +143,316 @@
       "caption": "Overview comparison matrix for post-polycythaemia vera myelofibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC and film",
+          "cells": [
+            {
+              "text": "Leucoerythroblastic changes and teardrop cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow trephine",
+          "cells": [
+            {
+              "text": "Fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK2 and driver-mutation status",
+          "cells": [
+            {
+              "text": "Usually known from prior PV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spleen size and constitutional symptoms",
+          "cells": [
+            {
+              "text": "Disease burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognostic scoring",
+          "cells": [
+            {
+              "text": "Myelofibrosis risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-essential-thrombocythaemia myelofibrosis",
+          "cells": [
+            {
+              "text": "Prior essential thrombocythaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive marrow fibrosis",
+          "cells": [
+            {
+              "text": "Infection or malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk-stratified care",
+          "cells": [
+            {
+              "text": "Mirrors primary myelofibrosis; prognostic score guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK inhibition",
+          "cells": [
+            {
+              "text": "Ruxolitinib for symptomatic splenomegaly and constitutional symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant",
+          "cells": [
+            {
+              "text": "Allogeneic stem cell transplantation, the only curative option, for eligible patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Transfusion and erythropoiesis-stimulating agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic care",
+          "cells": [
+            {
+              "text": "Splenectomy or splenic irradiation in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood counts, spleen size and leukaemic transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Infection prevention and transfusion-related care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Post-polycythaemia vera myelofibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known polycythaemia vera with rising spleen size, anaemia or constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rising blasts, severe anaemia or thrombocytopenia, massive splenomegaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for leukaemic transformation or painful splenomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; marrow trephine for fibrosis; JAK2 status; spleen size",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does marrow trephine show fibrosis in a patient with known PV?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary myelofibrosis, reactive fibrosis, MDS with fibrosis or CML",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk-stratified management with prognostic scoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ruxolitinib to reduce splenomegaly and constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation for eligible patients, the only cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transfusion and erythropoiesis-stimulating agents for anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor blood counts and spleen size for leukaemic transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Fibrotic phase generally worsens prognosis compared with polycythaemia vera",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

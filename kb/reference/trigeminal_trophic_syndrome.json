@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for trigeminal trophic syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigeminal_trophic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Trigeminal trophic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trigeminal trophic syndrome: numb, itching nasal ala with self-made ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: indurated non-healing ulcer or rapidly progressive necrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy and cultures for malignancy or invasive fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ulcer biopsy; fungal and mycobacterial cultures; MRI of brain and skull base",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy exclude malignancy, infection and vasculitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider carcinoma, mucormycosis, granulomatosis with polyangiitis or pyoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interrupt self-manipulation with barriers and occlusive dressings",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wound care and antimicrobials for secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathic agents such as carbamazepine or gabapentin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy to exclude mimics before attributing the ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying trigeminal lesion where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Defer reconstruction until self-manipulation is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Chronic and hard to heal; recurrence common unless self-manipulation stops",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigeminal_trophic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of ulcer edge",
+          "cells": [
+            {
+              "text": "Excludes malignancy and specific infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal and mycobacterial cultures",
+          "cells": [
+            {
+              "text": "Invasive or atypical infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of brain and skull base",
+          "cells": [
+            {
+              "text": "Underlying trigeminal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA vasculitis screen",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed trigeminal sensory examination",
+          "cells": [
+            {
+              "text": "Territory of loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior procedures, zoster or stroke",
+          "cells": [
+            {
+              "text": "Cause of nerve injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_trophic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal or squamous cell carcinoma of the nose",
+          "cells": [
+            {
+              "text": "Indurated edge; biopsy distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous infection including mucormycosis",
+          "cells": [
+            {
+              "text": "Rapidly progressive necrosis; cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Systemic vasculitic features; ANCA testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_trophic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural measures, barriers and occlusive dressings",
+          "cells": [
+            {
+              "text": "Interrupt the itch-scratch-pick cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and antimicrobials",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbamazepine, gabapentin, pregabalin or amitriptyline",
+          "cells": [
+            {
+              "text": "Neuropathic dysaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pimozide",
+          "cells": [
+            {
+              "text": "Compulsive picking predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Exclude malignancy, deep infection and vasculitis first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defer reconstruction",
+          "cells": [
+            {
+              "text": "Until self-manipulation is controlled; innervated flaps when repaired"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

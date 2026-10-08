@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for sticky platelet syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sticky_platelet_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light transmission aggregometry at low agonist concentrations",
+          "cells": [
+            {
+              "text": "Increased platelet aggregation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited thrombophilia screen",
+          "cells": [
+            {
+              "text": "Established inherited causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody testing",
+          "cells": [
+            {
+              "text": "Acquired cause excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Myeloproliferative neoplasm excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Homocysteine",
+          "cells": [
+            {
+              "text": "Hyperhomocysteinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the suspected thrombotic event",
+          "cells": [
+            {
+              "text": "Confirms and characterises the event"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sticky_platelet_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor V Leiden and prothrombin G20210A thrombophilias",
+          "cells": [
+            {
+              "text": "Established inherited causes, excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Acquired antibody-mediated thrombophilia; must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sticky_platelet_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "Mainstay, to reduce platelet hyperaggregability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation for acute venous thromboembolism",
+          "cells": [
+            {
+              "text": "Standard treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of acute arterial events",
+          "cells": [
+            {
+              "text": "Stroke or myocardial infarction, alongside standard care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspirin-based prophylaxis in pregnancy",
+          "cells": [
+            {
+              "text": "Recurrent pregnancy loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modification of risk factors",
+          "cells": [
+            {
+              "text": "Smoking and other cardiovascular and thrombotic risks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Aggregometry-guided assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sticky_platelet_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sticky platelet syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained arterial or recurrent venous thrombosis: suspected sticky platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (young stroke or MI, recurrent VTE, recurrent pregnancy loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of acute thrombosis; anticoagulation for VTE",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aggregometry at low agonist concentrations; thrombophilia screen; FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is platelet hyperaggregability found after established causes are excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inherited or acquired thrombophilia, APS or MPN; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose aspirin as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulation for acute venous thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspirin-based prophylaxis in pregnancy with recurrent loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haematology referral and modification of smoking and other risks",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Debated diagnosis of exclusion; testing standardisation is incomplete",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

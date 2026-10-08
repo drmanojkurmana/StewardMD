@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for transposition of the great arteries."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transposition_of_great_arteries-dx-mgmt",
+      "title": "Diagnosis and management of Transposition of the Great Arteries",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected d-transposition of the great arteries: profound neonatal cyanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: cyanosis not improving with oxygen, or falling as ductus closes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent prostaglandin infusion and septostomy if mixing is poor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography for discordance and coronaries; hyperoxia test; blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography show discordant ventriculoarterial connections?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetralogy, tricuspid atresia or lung disease causing cyanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prostaglandin infusion at presentation to keep the duct open",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Balloon atrial septostomy if cyanosis remains severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ventilation and inotropes to correct acidosis and hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neonatal arterial switch operation as definitive repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong cardiology follow-up after repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most do well after neonatal arterial switch; untreated disease is rapidly fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transposition_of_great_arteries-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Discordant connections, mixing sites and coronary anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperoxia test",
+          "cells": [
+            {
+              "text": "Little rise in oxygenation, suggesting a cardiac cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Egg-on-a-string silhouette, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Hypoxaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre- and post-ductal oximetry",
+          "cells": [
+            {
+              "text": "Mixing and ductal dependence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transposition_of_great_arteries-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetralogy of Fallot",
+          "cells": [
+            {
+              "text": "Hypoxaemia with a different anatomy; echocardiography separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total anomalous pulmonary venous return",
+          "cells": [
+            {
+              "text": "Pulmonary venous return to systemic veins; echocardiography defines the anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension with ductal shunting; echocardiography excludes d-TGA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transposition_of_great_arteries-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin infusion",
+          "cells": [
+            {
+              "text": "Maintains ductal patency and intercirculatory mixing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon atrial septostomy",
+          "cells": [
+            {
+              "text": "Severe cyanosis, to enlarge the atrial communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stabilisation",
+          "cells": [
+            {
+              "text": "Ventilation and inotropes; acidosis and hypoxaemia corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial switch operation",
+          "cells": [
+            {
+              "text": "Definitive neonatal repair with coronary transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary cardiac care",
+          "cells": [
+            {
+              "text": "Paediatric cardiology and cardiac surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong follow-up",
+          "cells": [
+            {
+              "text": "Coronary, neo-aortic valve and great-artery complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

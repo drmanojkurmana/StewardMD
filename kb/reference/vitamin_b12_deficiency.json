@@ -147,5 +147,419 @@
       "caption": "Overview comparison matrix for vitamin b12 deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 105-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e37-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_b12_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Macrocytosis and hypersegmented neutrophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum cobalamin with methylmalonic acid and homocysteine",
+          "cells": [
+            {
+              "text": "Used when the cobalamin level is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-intrinsic factor and anti-parietal cell antibodies",
+          "cells": [
+            {
+              "text": "Pernicious anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_b12_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Folate deficiency",
+          "cells": [
+            {
+              "text": "Other cause of megaloblastic anaemia; neurological disease is specific to B12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplastic syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism causing macrocytosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_b12_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intramuscular hydroxocobalamin",
+          "cells": [
+            {
+              "text": "Pernicious anaemia and malabsorptive causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral cyanocobalamin",
+          "cells": [
+            {
+              "text": "Alternative for some patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong parenteral maintenance",
+          "cells": [
+            {
+              "text": "Pernicious anaemia and after gastric surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_b12_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of megaloblastic anemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Cobalamin deficiency or abnormal cobalamin metabolism",
+          "cells": [
+            {
+              "text": "See Tables 105-3 and 105-4 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Folate deficiency or abnormal folate metabolism",
+          "cells": [
+            {
+              "text": "See Table 105-5 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antifolate drug therapy",
+          "cells": [
+            {
+              "text": "For example methotrexate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: leukemia and myelodysplasia",
+          "cells": [
+            {
+              "text": "Some cases of acute myeloid leukemia and myelodysplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: DNA synthesis inhibitors",
+          "cells": [
+            {
+              "text": "Cytosine arabinoside, hydroxyurea, 6-mercaptopurine, azidothymidine (AZT)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: orotic aciduria",
+          "cells": [
+            {
+              "text": "Responds to uridine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: thiamine-responsive",
+          "cells": [
+            {
+              "text": "Thiamine-responsive megaloblastic anemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_b12_deficiency-ddx-2",
+      "kind": "ddx",
+      "title": "Schilling test results by cause of cobalamin malabsorption",
+      "rowHeader": "Condition",
+      "columns": [
+        "58Co-Cbl alone",
+        "With intrinsic factor",
+        "With pancreatic enzymes",
+        "After 5 days of antibiotics"
+      ],
+      "rows": [
+        {
+          "parameter": "Pernicious anemia",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ileal disease",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_b12_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin B12 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin B12 deficiency: macrocytic anaemia or neurological symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive myelopathy, gait disturbance or severe anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for subacute combined degeneration or cardiorespiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, cobalamin, methylmalonic acid, homocysteine, intrinsic factor antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is cobalamin deficiency confirmed by raised methylmalonic acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider folate deficiency, myelodysplasia or hypothyroidism; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intramuscular hydroxocobalamin for pernicious anaemia and malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral cyanocobalamin as an alternative where suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong parenteral maintenance in pernicious anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Neurological deficits may not fully reverse; treat before they become permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for spinocerebellar ataxia type 7 (atxn7, with retinopathy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_7-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN7 CAG repeat sizing",
+          "cells": [
+            {
+              "text": "Expansion confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with fundoscopy, colour vision and fields",
+          "cells": [
+            {
+              "text": "Cone-rod retinopathy and macular change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography and OCT",
+          "cells": [
+            {
+              "text": "Characterises the retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and brainstem (olivopontocerebellar) atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated tract involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and vitamin screen",
+          "cells": [
+            {
+              "text": "Treatable mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_7-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxias 1, 2 and 3",
+          "cells": [
+            {
+              "text": "Dominant ataxias without retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abetalipoproteinaemia and vitamin E deficiency ataxia",
+          "cells": [
+            {
+              "text": "Ataxia with retinopathy; a treatable mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa or cone-rod dystrophy from other causes",
+          "cells": [
+            {
+              "text": "Retinal dystrophy without ataxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_7-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmology-led low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Visual aids for the progressive cone-rod dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Gait, balance and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow management",
+          "cells": [
+            {
+              "text": "Dysarthria and proactive dysphagia management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmology and neurology review of retinal and motor progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric care for the severe infantile form",
+          "cells": [
+            {
+              "text": "Feeding and failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Anticipation, particularly on paternal transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_7-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 7 (ATXN7, with retinopathy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dominant ataxia with cone-rod retinal degeneration and visual loss: suspected SCA7",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infantile form, rapid visual loss, severe dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for the infantile form; low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN7 CAG sizing; ophthalmology with ERG and OCT; brain MRI; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN7 CAG repeat confirmed with cone-rod retinopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCA1, SCA2, SCA3 or vitamin E deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ophthalmology-led low-vision rehabilitation and visual aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for gait and aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proactive dysphagia management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular ophthalmology and neurology surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; visual loss progresses and needs active support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

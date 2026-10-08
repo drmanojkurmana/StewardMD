@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for schnitzler syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Strasbourg diagnostic criteria for Schnitzler syndrome",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schnitzler_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal component, the defining gammopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Neutrophilic urticarial dermatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP and serum amyloid A",
+          "cells": [
+            {
+              "text": "Acute phase reactants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone imaging",
+          "cells": [
+            {
+              "text": "Osteosclerosis or osteolytic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Monitor for lymphoproliferative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NLRP3 testing",
+          "cells": [
+            {
+              "text": "Exclude late-presenting cryopyrin-associated periodic syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schnitzler_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Antihistamines largely ineffective in Schnitzler; monoclonal gammopathy present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryopyrin-associated periodic syndromes",
+          "cells": [
+            {
+              "text": "Excluded by NLRP3 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waldenstrom macroglobulinaemia",
+          "cells": [
+            {
+              "text": "Lymphoproliferative transformation to watch for"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schnitzler_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab; mainstay with dramatic response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic measures",
+          "cells": [
+            {
+              "text": "Antihistamines, NSAIDs, colchicine for milder disease or as adjuncts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Control, but limit long-term use for toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory marker monitoring",
+          "cells": [
+            {
+              "text": "CRP and SAA guide therapy and limit amyloidosis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gammopathy surveillance",
+          "cells": [
+            {
+              "text": "Lifelong, for progression to lymphoproliferative disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone symptoms",
+          "cells": [
+            {
+              "text": "Symptomatic care; assess pathological complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shared care",
+          "cells": [
+            {
+              "text": "Clinical immunology and haematology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schnitzler_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Schnitzler syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic urticarial rash with recurrent fever and bone pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising paraprotein, cytopenias, proteinuria, lymphadenopathy or lytic lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology work-up for lymphoproliferative disease; check for AA amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum immunofixation, skin biopsy, CRP and SAA, bone imaging, marrow if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are urticarial rash, fever and a monoclonal band all present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider urticarial vasculitis, adult-onset Still disease, CAPS, chronic urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anakinra or canakinumab as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antihistamines, NSAIDs or colchicine as adjuncts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limit long-term corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor CRP, SAA and the paraprotein lifelong",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms well controlled by IL-1 inhibition; chronic with malignancy risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

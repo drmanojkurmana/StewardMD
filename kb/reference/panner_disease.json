@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for panner disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "panner_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP and lateral elbow radiographs",
+          "cells": [
+            {
+              "text": "Capitellar fragmentation and sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral elbow comparison views",
+          "cells": [
+            {
+              "text": "Normal ossification for the child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Articular cartilage; distinguishes from osteochondritis dissecans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Range of motion and flexion contracture assessment",
+          "cells": [
+            {
+              "text": "Stiffness and contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Infection or inflammatory arthritis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up radiographs",
+          "cells": [
+            {
+              "text": "Reossification of the capitellum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panner_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteochondritis dissecans of the capitellum",
+          "cells": [
+            {
+              "text": "Older adolescents with locking or loose bodies; a poorer prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or osteomyelitis of the elbow",
+          "cells": [
+            {
+              "text": "An effusion or systemic features point to infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panner_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rest and activity modification",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Stop throwing and upper-limb weight-bearing until symptoms settle; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Simple analgesia, NSAIDs and ice during the symptomatic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Short-term splinting if pain is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Gentle range-of-motion exercises for stiffness and flexion contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Radiographs to confirm reossification and remodelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "panner_disease-dx-mgmt",
+      "title": "Diagnosis and management of Panner disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral elbow pain and stiffness in a young throwing child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (locking, progressive contracture, effusion or systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: orthopaedic review for loose body or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP and lateral elbow radiographs, contralateral comparison, MRI if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do radiographs show capitellar fragmentation in a young child without locking?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider capitellar OCD, medial apophysitis, radial head fracture or septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rest from throwing and upper-limb weight-bearing until symptoms settle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia, NSAIDs and ice during the symptomatic phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-term splinting if pain is marked; gentle range-of-motion exercises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial radiographs to confirm reossification and remodelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable; the capitellum usually reossifies with rest and growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

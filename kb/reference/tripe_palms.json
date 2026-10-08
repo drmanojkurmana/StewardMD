@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for tripe palms."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tripe_palms-dx-mgmt",
+      "title": "Diagnosis and management of tripe palms",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tripe palms: thickened velvety palms with ridged dermatoglyphics",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new tripe palms in an adult, especially a smoker, or weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cancer pathway for suspected gastric or lung primary",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT chest; endoscopy if acanthosis nigricans coexists; skin biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the search identify a gastric or pulmonary primary carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider palmoplantar keratoderma, eczema or psoriasis without malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying gastric or pulmonary malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent search for an occult primary, guided by acanthosis nigricans",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical urea, salicylic acid or retinoids for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address Leser-Trelat sign and malignant acanthosis nigricans",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor palmar changes as a marker of relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Indicates often advanced gastric or lung malignancy; prognosis is that of the tumour",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tripe_palms-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT chest",
+          "cells": [
+            {
+              "text": "Lung carcinoma, especially in isolated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Gastric carcinoma when acanthosis nigricans coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Other primaries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis, papillomatosis and acanthosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum cytology or bronchoscopy",
+          "cells": [
+            {
+              "text": "Suspected lung primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Directed by suspected primary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tripe_palms-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary or acquired palmoplantar keratoderma",
+          "cells": [
+            {
+              "text": "Diffuse thickening without a tumour association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant acanthosis nigricans",
+          "cells": [
+            {
+              "text": "Frequently coexists; part of the same paraneoplastic spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkeratotic hand eczema or palmar psoriasis",
+          "cells": [
+            {
+              "text": "Inflammatory or scaling change rather than velvety ridged palms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tripe_palms-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying malignancy",
+          "cells": [
+            {
+              "text": "Palmar changes typically improve with tumour control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent search for occult primary",
+          "cells": [
+            {
+              "text": "Lung if isolated; stomach if acanthosis nigricans coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics or retinoids",
+          "cells": [
+            {
+              "text": "Urea, salicylic acid or retinoids for symptomatic softening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor palmar changes",
+          "cells": [
+            {
+              "text": "Recurrence prompts search for relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address paraneoplastic signs",
+          "cells": [
+            {
+              "text": "Sign of Leser-Trelat and malignant acanthosis nigricans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and oncology coordination",
+          "cells": [
+            {
+              "text": "Tumour-directed treatment guided by stage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -163,6 +163,11 @@
       "id": "c1",
       "label": "Harrison 22e, p.2908-2909",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 327-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -171,17 +176,108 @@
       "kind": "diagnostic",
       "title": "Diagnostic criteria and findings in Behcet syndrome",
       "rowHeader": "Criterion",
-      "columns": ["Finding or threshold"],
+      "columns": [
+        "Finding or threshold"
+      ],
       "rows": [
-        {"parameter": "ISG criteria: recurrent oral ulceration", "unit": "episodes in 12 months", "cells": [{"text": "At least 3 in 12 months", "op": ">=", "value": 3}], "cite": "c1"},
-        {"parameter": "ISG criteria: additional features", "cells": [{"text": "Two of recurrent genital ulcers, skin lesions, eye lesions or positive pathergy test"}], "cite": "c1"},
-        {"parameter": "ISG criteria performance", "cells": [{"text": "Sensitivity ~95%, specificity ~96%"}], "cite": "c1"},
-        {"parameter": "Pathergy test", "unit": "hours", "cells": [{"text": "Papule or pustule read at 24-48 h after 20-gauge needle insertion", "range": [24, 48]}], "cite": "c1"},
-        {"parameter": "HLA-B*51", "unit": "% positive", "cells": [{"text": "Positive in up to 50-60%; supports but does not establish diagnosis", "range": [50, 60]}], "cite": "c1"},
-        {"parameter": "Hypopyon in eye disease", "unit": "% of patients with eye disease", "cells": [{"text": "About 10%; quite specific for Behcet syndrome"}], "cite": "c1"},
-        {"parameter": "Endoscopy of ileocecal ulcers", "unit": "ulcers", "cells": [{"text": "Usually single or fewer than five; deep, round, prone to perforation", "op": "<", "value": 5}], "cite": "c1"},
-        {"parameter": "Severity classification", "cells": [{"text": "No formal grade; stratified by organ involvement"}], "cite": "c1"},
-        {"parameter": "Confirmation", "cells": [{"text": "No specific test confirms the diagnosis; investigations mainly exclude mimics"}], "cite": "c1"}
+        {
+          "parameter": "ISG criteria: recurrent oral ulceration",
+          "unit": "episodes in 12 months",
+          "cells": [
+            {
+              "text": "At least 3 in 12 months",
+              "op": ">=",
+              "value": 3
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ISG criteria: additional features",
+          "cells": [
+            {
+              "text": "Two of recurrent genital ulcers, skin lesions, eye lesions or positive pathergy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ISG criteria performance",
+          "cells": [
+            {
+              "text": "Sensitivity ~95%, specificity ~96%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathergy test",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Papule or pustule read at 24-48 h after 20-gauge needle insertion",
+              "range": [
+                24,
+                48
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B*51",
+          "unit": "% positive",
+          "cells": [
+            {
+              "text": "Positive in up to 50-60%; supports but does not establish diagnosis",
+              "range": [
+                50,
+                60
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopyon in eye disease",
+          "unit": "% of patients with eye disease",
+          "cells": [
+            {
+              "text": "About 10%; quite specific for Behcet syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy of ileocecal ulcers",
+          "unit": "ulcers",
+          "cells": [
+            {
+              "text": "Usually single or fewer than five; deep, round, prone to perforation",
+              "op": "<",
+              "value": 5
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity classification",
+          "cells": [
+            {
+              "text": "No formal grade; stratified by organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "No specific test confirms the diagnosis; investigations mainly exclude mimics"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -189,11 +285,37 @@
       "kind": "ddx",
       "title": "Look-alike conditions for Behcet syndrome",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Crohn's disease", "cells": [{"text": "Gastrointestinal Behcet can look identical; extraintestinal features help separate them"}], "cite": "c1"},
-        {"parameter": "Recurrent aphthous stomatitis", "cells": [{"text": "Genital ulcers are larger, deeper and scar, which favours Behcet"}], "cite": "c1"},
-        {"parameter": "Acne vulgaris", "cells": [{"text": "The pathergy reaction is a fairly unique skin hyperreactivity"}], "cite": "c1"}
+        {
+          "parameter": "Crohn's disease",
+          "cells": [
+            {
+              "text": "Gastrointestinal Behcet can look identical; extraintestinal features help separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent aphthous stomatitis",
+          "cells": [
+            {
+              "text": "Genital ulcers are larger, deeper and scar, which favours Behcet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acne vulgaris",
+          "cells": [
+            {
+              "text": "The pathergy reaction is a fairly unique skin hyperreactivity"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -201,15 +323,124 @@
       "kind": "treatment",
       "title": "Management options in Behcet syndrome",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Mucocutaneous disease", "cells": [{"text": "Topical corticosteroids for oral and genital ulcers; colchicine for mucocutaneous lesions and arthritis"}, {"text": "Add apremilast for resistant oral ulceration"}], "cite": "c1"},
-        {"parameter": "Sight-threatening uveitis or retinal vasculitis", "cells": [{"text": "Systemic corticosteroids plus immunosuppression such as azathioprine or ciclosporin"}, {"text": "Escalate to TNF-alpha inhibitors (infliximab or adalimumab) or interferon-alpha"}], "cite": "c1"},
-        {"parameter": "Major organ involvement", "cells": [{"text": "Corticosteroids with azathioprine or cyclophosphamide, or a biologic"}, {"text": "Applies to major organ involvement"}], "cite": "c1"},
-        {"parameter": "Vascular thrombosis", "cells": [{"text": "Immunosuppression for the underlying inflammation rather than anticoagulation alone"}, {"text": "Arterial and pulmonary artery aneurysms managed with immunosuppression and considered intervention"}], "cite": "c1"},
-        {"parameter": "Gastrointestinal disease", "cells": [{"text": "Corticosteroids, aminosalicylates, azathioprine or anti-TNF therapy"}, {"text": "Watch for perforation"}], "cite": "c1"},
-        {"parameter": "Parenchymal neuro-Behcet", "cells": [{"text": "Corticosteroids and immunosuppression"}, {"text": "Avoid ciclosporin because of neurotoxicity"}], "cite": "c1"},
-        {"parameter": "Multidisciplinary care", "cells": [{"text": "Ophthalmology, rheumatology and relevant organ specialists"}, {"text": "Escalate early in organ-threatening disease"}], "cite": "c1"}
+        {
+          "parameter": "Mucocutaneous disease",
+          "cells": [
+            {
+              "text": "Topical corticosteroids for oral and genital ulcers; colchicine for mucocutaneous lesions and arthritis"
+            },
+            {
+              "text": "Add apremilast for resistant oral ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sight-threatening uveitis or retinal vasculitis",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids plus immunosuppression such as azathioprine or ciclosporin"
+            },
+            {
+              "text": "Escalate to TNF-alpha inhibitors (infliximab or adalimumab) or interferon-alpha"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Major organ involvement",
+          "cells": [
+            {
+              "text": "Corticosteroids with azathioprine or cyclophosphamide, or a biologic"
+            },
+            {
+              "text": "Applies to major organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular thrombosis",
+          "cells": [
+            {
+              "text": "Immunosuppression for the underlying inflammation rather than anticoagulation alone"
+            },
+            {
+              "text": "Arterial and pulmonary artery aneurysms managed with immunosuppression and considered intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal disease",
+          "cells": [
+            {
+              "text": "Corticosteroids, aminosalicylates, azathioprine or anti-TNF therapy"
+            },
+            {
+              "text": "Watch for perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenchymal neuro-Behcet",
+          "cells": [
+            {
+              "text": "Corticosteroids and immunosuppression"
+            },
+            {
+              "text": "Avoid ciclosporin because of neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Ophthalmology, rheumatology and relevant organ specialists"
+            },
+            {
+              "text": "Escalate early in organ-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beh_et_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for Behcet disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent oral ulceration",
+          "cells": [
+            {
+              "text": "Required"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plus any two of the following",
+          "cells": [
+            {
+              "text": "Recurrent genital ulceration; eye lesions; skin lesions; positive pathergy test"
+            }
+          ],
+          "cite": "c2"
+        }
       ]
     }
   ],
@@ -219,26 +450,107 @@
       "title": "Diagnosis and management of Behcet syndrome",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Recurrent oral ulcers (about 98% of patients), often with genital, eye or skin lesions", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: thrombophlebitis in a man, neurological signs, or deep ileocecal ulcers?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: vascular and neuroimaging for pulmonary artery aneurysm, CNS or thrombosis", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Count ISG features: oral ulcers at least 3 in 12 months plus two other features", "cite": "c1"},
-        {"id": "n5", "type": "action", "text": "Pathergy test read at 24-48 h; HLA-B*51 supportive only; exclude Crohn's and aphthae", "cite": "c1"},
-        {"id": "n6", "type": "decision", "text": "ISG criteria met on clinical features and pathergy?", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Treat by organ: topical steroids and colchicine; systemic steroids for eye disease", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "No: diagnosis may take months to years; re-review as features evolve", "cite": "c1"},
-        {"id": "n9", "type": "outcome", "text": "Symptoms often diminish over time; most new features appear within 5 years", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent oral ulcers (about 98% of patients), often with genital, eye or skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: thrombophlebitis in a man, neurological signs, or deep ileocecal ulcers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: vascular and neuroimaging for pulmonary artery aneurysm, CNS or thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Count ISG features: oral ulcers at least 3 in 12 months plus two other features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Pathergy test read at 24-48 h; HLA-B*51 supportive only; exclude Crohn's and aphthae",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ISG criteria met on clinical features and pathergy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat by organ: topical steroids and colchicine; systemic steroids for eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: diagnosis may take months to years; re-review as features evolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Symptoms often diminish over time; most new features appear within 5 years",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n5", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Next"},
-        {"from": "n6", "to": "n7", "label": "Yes"},
-        {"from": "n6", "to": "n8", "label": "No"},
-        {"from": "n7", "to": "n9", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
       ]
     }
   ]

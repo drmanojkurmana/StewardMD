@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for thallium poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thallium_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Thallium poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thallium poisoning: GI upset and painful ascending neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: ascending weakness, bulbar or respiratory involvement, or arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent poisons-centre advice; start Prussian blue and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "24-hour urine and blood thallium; nerve conduction; ECG; nail and hair examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are urine or blood thallium concentrations raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Guillain-Barre syndrome, arsenic poisoning or vitamin deficiency neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral Prussian blue to bind thallium and block recirculation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider multi-dose activated charcoal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early haemodialysis in severe poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fluids, electrolyte correction and neuropathic analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Safeguarding and forensic involvement where poisoning is deliberate",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mild cases may recover fully; severe poisoning can leave permanent deficits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thallium_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "24-hour urinary and blood thallium concentration",
+          "cells": [
+            {
+              "text": "Raised concentration confirms exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Axonal sensorimotor neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, renal and liver function, electrolytes",
+          "cells": [
+            {
+              "text": "Organ involvement and baseline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Conduction disturbance and repolarisation change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Radio-opaque thallium salts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of nails and hair",
+          "cells": [
+            {
+              "text": "Mees' lines and follicular changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thallium_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Alopecia appears weeks later; GI upset and a toxic history favour thallium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arsenic or other heavy-metal poisoning",
+          "cells": [
+            {
+              "text": "Confirmed only by specific urine or blood thallium concentrations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thallium_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral Prussian blue",
+          "cells": [
+            {
+              "text": "Binds thallium in the gut and interrupts enterohepatic recirculation; the specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-dose activated charcoal",
+          "cells": [
+            {
+              "text": "Considered under poisons-centre guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early haemodialysis",
+          "cells": [
+            {
+              "text": "Severe poisoning, to augment clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fluids, electrolyte correction and neuropathic analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control and safeguarding",
+          "cells": [
+            {
+              "text": "Remove exposure; involve safeguarding where poisoning is deliberate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "Conduction and repolarisation disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial urinary thallium",
+          "cells": [
+            {
+              "text": "Response to decontamination and binding therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

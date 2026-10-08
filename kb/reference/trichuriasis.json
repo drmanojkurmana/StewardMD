@@ -146,5 +146,325 @@
       "caption": "Overview comparison matrix for trichuriasis (whipworm)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichuriasis-dx-mgmt",
+      "title": "Diagnosis and management of Trichuriasis (whipworm)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichuriasis: chronic colitis-type symptoms in an endemic setting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rectal prolapse in a child, significant anaemia, or growth faltering?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for dysentery with prolapse or severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy and Kato-Katz; full blood count; iron studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are barrel-shaped eggs with bipolar plugs seen on stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amoebic or bacillary dysentery, inflammatory bowel disease or other helminths",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Albendazole or mebendazole, with extended course for heavy infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron supplementation and nutritional rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gentle reduction of rectal prolapse in dysentery syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool microscopy and repeat treatment if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Sanitation, hand hygiene and community deworming",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Light infection benign; heavy infection improves but reinfection is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichuriasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Barrel-shaped eggs with bipolar mucous plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kato-Katz egg quantification",
+          "cells": [
+            {
+              "text": "Gauges worm burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia and eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy or sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Adult worms attached to inflamed mucosa in heavy infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional assessment",
+          "cells": [
+            {
+              "text": "Affected children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies",
+          "cells": [
+            {
+              "text": "Where anaemia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichuriasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Stool parasitology needed in endemic settings before attributing colitis to IBD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other soil-transmitted helminthiases",
+          "cells": [
+            {
+              "text": "Different egg morphology on stool microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amoebic or bacillary dysentery",
+          "cells": [
+            {
+              "text": "Acute dysenteric illness; stool testing differentiates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichuriasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Albendazole or mebendazole",
+          "cells": [
+            {
+              "text": "Benzimidazole anthelmintic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended mebendazole or ivermectin combination",
+          "cells": [
+            {
+              "text": "Heavy colonic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron supplementation and nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Anaemia and growth support in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle manual reduction of rectal prolapse",
+          "cells": [
+            {
+              "text": "Trichuris dysentery syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool microscopy",
+          "cells": [
+            {
+              "text": "Repeat courses if clearance is incomplete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sanitation, hand hygiene and deworming programmes",
+          "cells": [
+            {
+              "text": "Limit reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

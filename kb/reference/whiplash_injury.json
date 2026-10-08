@@ -149,5 +149,231 @@
       "caption": "Overview comparison matrix for whiplash injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "whiplash_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Canadian C-spine rule or NEXUS criteria",
+          "cells": [
+            {
+              "text": "Clinical clearance before imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the cervical spine",
+          "cells": [
+            {
+              "text": "Suspected fracture or dislocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whiplash_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cervical fracture or dislocation",
+          "cells": [
+            {
+              "text": "Excluded by clinical rule and CT before a benign label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spinal cord or nerve root injury",
+          "cells": [
+            {
+              "text": "Neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical disc prolapse or radiculopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whiplash_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude fracture and cord injury first",
+          "cells": [
+            {
+              "text": "Validated clinical rule before any benign diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prolonged collar use",
+          "cells": [
+            {
+              "text": "Prescribing a soft collar for longer than needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "whiplash_injury-dx-mgmt",
+      "title": "Diagnosis and management of Whiplash injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected whiplash injury: neck pain after rapid neck acceleration-deceleration",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deficit or midline cervical tenderness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal imaging and specialist review for cord injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Canadian C-spine rule or NEXUS, CT cervical spine if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are fracture, dislocation and cord injury excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Image further or treat as spinal injury until cleared",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude cervical fracture, dislocation and cord injury with a validated rule",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid prolonged collar and early rest; encourage mobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for persistent symptoms or neurological change",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most whiplash recovers; missed fracture or cord injury is the key risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

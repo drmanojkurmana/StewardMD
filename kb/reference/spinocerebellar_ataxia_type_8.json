@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for spinocerebellar ataxia type 8 (atxn8)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_8-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN8/ATXN8OS CTG-CAG repeat analysis",
+          "cells": [
+            {
+              "text": "Expansion, interpreted with the clinical picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad SCA repeat-expansion panel",
+          "cells": [
+            {
+              "text": "Excludes other subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy, sometimes pontine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxia screen",
+          "cells": [
+            {
+              "text": "Vitamin, thyroid, autoimmune and paraneoplastic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Reduced penetrance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_8-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myotonic dystrophy and other RNA repeat-expansion disorders",
+          "cells": [
+            {
+              "text": "Shared RNA toxicity; myotonia or cardiac features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other repeat-expansion SCAs (SCA1, SCA2, SCA3, SCA6)",
+          "cells": [
+            {
+              "text": "Separated by repeat testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_8-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Balance, gait, aids and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow assessment",
+          "cells": [
+            {
+              "text": "Scanning dysarthria and dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment",
+          "cells": [
+            {
+              "text": "Nystagmus and oscillopsia; antispasticity agents where spasticity occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic neurological review",
+          "cells": [
+            {
+              "text": "Progression and safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Reduced penetrance and variable expansion size"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_8-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 8 (ATXN8)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult-onset slowly progressive cerebellar ataxia with nystagmus: suspected SCA8",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (subacute course, autonomic failure, myotonia or cardiac features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acquired cause, MSA or myotonic dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN8/ATXN8OS CTG-CAG analysis; broad SCA panel; brain MRI; acquired screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN8 CTG-CAG repeat found with a compatible picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myotonic dystrophy, other SCAs or acquired ataxia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for balance, gait and falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech therapy for scanning dysarthria and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of nystagmus and oscillopsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on reduced penetrance and variable expansion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Not every carrier develops disease; the test alone does not confirm it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

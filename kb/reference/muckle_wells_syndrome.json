@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for muckle wells syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "muckle_wells_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NLRP3 gene analysis",
+          "cells": [
+            {
+              "text": "Test for somatic mosaicism if germline sequencing is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Monitors sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Perivascular and interstitial neutrophilic infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP and serum amyloid A",
+          "cells": [
+            {
+              "text": "Acute-phase reactants for activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis, Congo red biopsy",
+          "cells": [
+            {
+              "text": "Proteinuria and amyloidosis if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muckle_wells_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial cold autoinflammatory syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Neutrophilic rash is mistaken for allergic urticaria; antihistamines ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schnitzler syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muckle_wells_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra, canakinumab or rilonacept; mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early and sustained treatment",
+          "cells": [
+            {
+              "text": "Before irreversible cochlear damage or amyloid deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing care",
+          "cells": [
+            {
+              "text": "Serial audiometry; hearing aids or cochlear implants for established loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid surveillance",
+          "cells": [
+            {
+              "text": "Urinalysis, renal function, serum amyloid A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose titration",
+          "cells": [
+            {
+              "text": "Keep acute-phase reactants suppressed; escalate if inflammation persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant NLRP3 disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "muckle_wells_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of muckle wells syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent fever with urticarial rash, arthralgia and progressive hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New hearing loss, proteinuria, persistent raised markers or papilloedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent audiology and renal review; start or escalate IL-1 blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NLRP3 testing including mosaicism, CRP, SAA, audiometry, urinalysis, skin biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "NLRP3 variant with neutrophilic urticarial rash and raised SAA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FCAS, CINCA, Schnitzler, Still disease, other hereditary fevers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IL-1 blockade with anakinra, canakinumab or rilonacept",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial audiometry; hearing aids or cochlear implant if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveil for AA amyloidosis with urinalysis, renal function and SAA",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Titrate to suppress acute-phase reactants; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early IL-1 blockade preserves hearing and lowers amyloidosis risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

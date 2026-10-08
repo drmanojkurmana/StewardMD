@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for morvan syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / peer-reviewed autoimmune neurology literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "morvan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF CASPR2 and VGKC-complex antibodies",
+          "cells": [
+            {
+              "text": "Defines the antibody syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NCS and EMG",
+          "cells": [
+            {
+              "text": "Fasciculations, myokymic and neuromyotonic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and malignancy screen",
+          "cells": [
+            {
+              "text": "Detects thymoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Limbic or thalamic signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic testing and polysomnography",
+          "cells": [
+            {
+              "text": "Dysautonomia and sleep loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morvan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isaacs syndrome",
+          "cells": [
+            {
+              "text": "Acquired neuromyotonia without prominent encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limbic encephalitis (LGI1 or other)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatal familial insomnia and prion disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morvan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids with IVIG or plasma exchange",
+          "cells": [
+            {
+              "text": "Immunotherapy mainstay to remove the pathogenic antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab or cyclophosphamide",
+          "cells": [
+            {
+              "text": "Refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymoma screening and resection",
+          "cells": [
+            {
+              "text": "Thymectomy essential in paraneoplastic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Carbamazepine or phenytoin for neuromyotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dependency care",
+          "cells": [
+            {
+              "text": "Labile blood pressure, dysrhythmia and profound insomnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse and malignancy surveillance",
+          "cells": [
+            {
+              "text": "Continue after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "morvan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Morvan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Insomnia, confusion and hallucinations with fasciculations and neuromyotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Agrypnia with agitation, autonomic crisis or paraneoplastic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "High-dependency care with early immunotherapy and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CASPR2 antibodies, EMG, chest imaging for thymoma, brain MRI, polysomnography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CASPR2 positive with neuromyotonia and encephalopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Isaacs syndrome, LGI1 encephalitis, prion disease, delirium",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Steroids with IVIG or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab or cyclophosphamide if refractory or relapsing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for and resect thymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carbamazepine or phenytoin for neuromyotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with immunotherapy and tumour removal; relapses occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

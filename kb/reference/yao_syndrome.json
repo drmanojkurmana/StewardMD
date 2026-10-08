@@ -148,5 +148,240 @@
       "caption": "Overview comparison matrix for yao syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "yao_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NOD2 genotyping",
+          "cells": [
+            {
+              "text": "Associated variants; supportive, not diagnostic alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants during and between episodes",
+          "cells": [
+            {
+              "text": "Inflammation during flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody testing",
+          "cells": [
+            {
+              "text": "Excludes other autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yao_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Adult-onset periodic fever with overlapping features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Other hereditary periodic fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blau syndrome",
+          "cells": [
+            {
+              "text": "Granulomatous arthritis with NOD2 variants; a distinct disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yao_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Short courses of glucocorticoids",
+          "cells": [
+            {
+              "text": "Acute flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term steroid-sparing therapy",
+          "cells": [
+            {
+              "text": "Recurrent or persistent inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "yao_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Yao syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Yao syndrome: adult-onset periodic fever with inflammatory episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (persistent rather than episodic inflammation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for persistent inflammation suggesting another diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NOD2 genotyping, acute-phase reactants, autoantibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do episodes and NOD2 variant fit Yao syndrome, not another periodic fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Still disease, FMF or Blau syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Short glucocorticoid courses to control flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing therapy for persistent inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid diagnosing on genotype alone without clinical features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Episodic fever; flares respond to glucocorticoids",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

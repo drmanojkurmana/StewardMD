@@ -145,5 +145,303 @@
       "caption": "Overview comparison matrix for paratubal cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paratubal_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Cyst separate from a normal ovary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Split sign",
+          "cells": [
+            {
+              "text": "Confirms the ovary is distinct from the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Larger or complex cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision histology",
+          "cells": [
+            {
+              "text": "Benign confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paratubal_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovarian follicular or functional cyst",
+          "cells": [
+            {
+              "text": "Arises from the ovary; the split sign separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrioma or ovarian neoplasm",
+          "cells": [
+            {
+              "text": "Ovarian origin; ultrasound and MRI features distinguish them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paratubal_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Small, asymptomatic, simple cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Split sign confirmation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Cyst separate from the ipsilateral ovary before deciding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic cystectomy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Large, symptomatic, enlarging or uncertain cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsion surgery",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Prompt laparoscopy and detorsion; preserve tube and ovary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Confirms the benign diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paratubal_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Paratubal cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental or painful adnexal cyst lying beside a normal ovary on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute torsion, rapid growth, solid components or pressure symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent laparoscopy for suspected adnexal torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound with split sign, MRI if complex, tumour markers if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the split sign confirm a cyst separate from a normal ovary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ovarian cyst, hydrosalpinx, endometrioma, cystadenoma or neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant observation for small, asymptomatic, simple cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laparoscopic cystectomy for large, symptomatic, enlarging or uncertain cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency laparoscopy and detorsion for torsion, preserving tube and ovary",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histology to confirm the benign diagnosis and exclude neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with an excellent outlook; surgery is curative when warranted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for thyroglossal duct cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroglossal_duct_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Thyroglossal duct cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroglossal duct cyst: midline neck swelling that moves on swallowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: solid or fixed component, lymphadenopathy, or airway compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and antibiotics for abscess, with airway assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neck ultrasound; thyroid function if ectopic thyroid is a concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a normal orthotopic thyroid confirmed before excision?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dermoid, ectopic thyroid or nodal enlargement; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sistrunk procedure for definitive excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm a normal orthotopic thyroid before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat infection first; excise once inflammation resolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thyroxine if the orthotopic thyroid is ectopic or absent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Histological examination of the excised specimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excision by Sistrunk gives low recurrence; malignancy within the cyst is rare",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroglossal_duct_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Cyst and a normal orthotopic thyroid gland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Ectopic or absent thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Atypical or recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration cytology",
+          "cells": [
+            {
+              "text": "Suspected malignancy or atypical mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radionuclide thyroid scanning",
+          "cells": [
+            {
+              "text": "Ectopic functioning tissue, when it must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroglossal_duct_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoid or epidermoid cyst of the midline neck",
+          "cells": [
+            {
+              "text": "Midline cyst without the thyroglossal tract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic or lingual thyroid tissue",
+          "cells": [
+            {
+              "text": "Thyroid tissue at an ectopic site; sole functioning gland must be checked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plunging ranula or other cystic neck lesion",
+          "cells": [
+            {
+              "text": "Cystic neck lesion; excision pathway differs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroglossal_duct_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sistrunk procedure",
+          "cells": [
+            {
+              "text": "Definitive treatment; simple cystectomy recurs more often"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid check before surgery",
+          "cells": [
+            {
+              "text": "Avoids excising the only functioning thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management",
+          "cells": [
+            {
+              "text": "Antibiotics and drainage; excision after inflammation resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroxine replacement",
+          "cells": [
+            {
+              "text": "Ectopic or absent orthotopic thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of specimen",
+          "cells": [
+            {
+              "text": "Rare carcinoma within the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otolaryngology or head and neck referral",
+          "cells": [
+            {
+              "text": "Planned excision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

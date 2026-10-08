@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for seborrhoeic keratosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "seborrhoeic_keratosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Milia-like cysts and comedo-like openings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography",
+          "cells": [
+            {
+              "text": "Lesion monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shave or punch biopsy",
+          "cells": [
+            {
+              "text": "Atypical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy with histopathology",
+          "cells": [
+            {
+              "text": "When melanoma cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult malignancy screening",
+          "cells": [
+            {
+              "text": "If the sign of Leser-Trelat is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seborrhoeic_keratosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignant melanoma",
+          "cells": [
+            {
+              "text": "Heavily pigmented or irritated lesion; asymmetry, irregular network or ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigmented basal cell carcinoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary rapidly enlarging keratotic nodule",
+          "cells": [
+            {
+              "text": "Raises concern for squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seborrhoeic_keratosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Entirely benign with no malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Removal of troublesome lesions",
+          "cells": [
+            {
+              "text": "Cryotherapy, curettage, shave excision or electrocautery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Whenever melanoma or another pigmented malignancy cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic biopsy",
+          "cells": [
+            {
+              "text": "Atypical lesions, rather than blind destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leser-Trelat work-up",
+          "cells": [
+            {
+              "text": "Occult internal adenocarcinoma when a sudden eruption occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "New lesions accumulate with age; superficially treated lesions may recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "seborrhoeic_keratosis-dx-mgmt",
+      "title": "Diagnosis and management of seborrhoeic keratosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stuck-on waxy pigmented plaque: suspected seborrhoeic keratosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden itchy eruption of many lesions, asymmetry, ulceration or recent change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy for melanoma or SCC; search for internal malignancy if Leser-Trelat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy for milia-like cysts and comedo-like openings",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical benign dermoscopy with no atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Shave, punch or excisional biopsy with histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cryotherapy, curettage or shave for symptomatic or unwanted lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Send tissue whenever melanoma cannot be excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel that new lesions accumulate with age",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with no malignant potential; lesions persist indefinitely",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

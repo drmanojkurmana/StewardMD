@@ -144,5 +144,343 @@
       "caption": "Overview comparison matrix for posterior cruciate ligament injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_cruciate_ligament_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Posterior drawer and posterior sag tests",
+          "cells": [
+            {
+              "text": "PCL injury; dial test for posterolateral corner"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the knee",
+          "cells": [
+            {
+              "text": "Tear confirmed and graded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress radiographs",
+          "cells": [
+            {
+              "text": "Quantified posterior translation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular assessment",
+          "cells": [
+            {
+              "text": "Knee dislocation suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Multiligament injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_cruciate_ligament_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior cruciate ligament injury",
+          "cells": [
+            {
+              "text": "False-positive anterior drawer may occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterolateral corner injury",
+          "cells": [
+            {
+              "text": "Rotatory instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiligament knee injury",
+          "cells": [
+            {
+              "text": "Reduced dislocation or multiple ligaments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meniscal tear",
+          "cells": [
+            {
+              "text": "Mechanical symptoms without posterior laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensor mechanism disruption",
+          "cells": [
+            {
+              "text": "Loss of active extension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_cruciate_ligament_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-operative care",
+          "cells": [
+            {
+              "text": "Structured quadriceps strengthening for isolated low-grade injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic brace",
+          "cells": [
+            {
+              "text": "Posterior cruciate brace and protected weight-bearing early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical reconstruction",
+          "cells": [
+            {
+              "text": "High-grade, symptomatic or combined injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterolateral corner repair",
+          "cells": [
+            {
+              "text": "Addressed at the same operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduced dislocation",
+          "cells": [
+            {
+              "text": "Urgent management with vascular assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic instability",
+          "cells": [
+            {
+              "text": "Monitor for patellofemoral and medial compartment change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Orthopaedic or sports medicine referral and staged physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_cruciate_ligament_injury-dx-mgmt",
+      "title": "Diagnosis and management of Posterior cruciate ligament injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Posterior knee pain or instability after a fall onto a flexed knee",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (signs of knee dislocation, possible popliteal artery injury, nerve palsy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular assessment for suspected knee dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Posterior drawer, sag and dial tests; MRI; stress radiographs; vascular assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI confirm a PCL tear with grade and any associated ligament injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ACL injury, meniscal tear or posterolateral corner injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-operative rehabilitation for isolated low-grade injuries",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dynamic posterior cruciate brace with protected weight-bearing early",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical reconstruction for high-grade, symptomatic or combined injuries",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address associated posterolateral corner injury at the same operation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Urgent management of reduced knee dislocation with vascular assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated low-grade injuries usually do well; combined injuries have poorer outcomes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

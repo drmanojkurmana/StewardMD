@@ -209,6 +209,11 @@
       "id": "c1",
       "label": "Harrison 22e, p.808-818",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 107-3",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -217,19 +222,130 @@
       "kind": "diagnostic",
       "title": "Diagnostic criteria and findings in bone marrow failure and myelodysplasia",
       "rowHeader": "Criterion",
-      "columns": ["Finding or threshold"],
+      "columns": [
+        "Finding or threshold"
+      ],
       "rows": [
-        {"parameter": "Bone marrow cellularity (aspirate and trephine)", "unit": "% hematopoietic cells", "cells": [{"text": "Hypocellular marrow supports aplastic anaemia", "op": "<", "value": 25}], "cite": "c1"},
-        {"parameter": "Severe aplastic anaemia: absolute neutrophil count", "unit": "per uL", "cells": [{"text": "Below 500 per uL (two of three criteria)", "op": "<", "value": 500}], "cite": "c1"},
-        {"parameter": "Severe aplastic anaemia: platelet count", "unit": "per uL", "cells": [{"text": "Below 20,000 per uL (two of three criteria)", "op": "<", "value": 20000}], "cite": "c1"},
-        {"parameter": "Severe aplastic anaemia: corrected reticulocyte count", "unit": "%", "cells": [{"text": "Below 1% (two of three criteria)", "op": "<", "value": 1}], "cite": "c1"},
-        {"parameter": "Absolute reticulocyte count (immunosuppression era)", "unit": "per uL", "cells": [{"text": "Above 25,000 per uL predicts response", "op": ">", "value": 25000}], "cite": "c1"},
-        {"parameter": "Absolute lymphocyte count (immunosuppression era)", "unit": "per uL", "cells": [{"text": "Above 1000 per uL predicts response", "op": ">", "value": 1000}], "cite": "c1"},
-        {"parameter": "Marrow blasts (AML versus MDS threshold)", "unit": "%", "cells": [{"text": "20% threshold separates AML from MDS", "op": ">=", "value": 20}], "cite": "c1"},
-        {"parameter": "Peripheral smear and reticulocytes", "cells": [{"text": "Absent reticulocytes and large red cells in aplasia; immature forms suggest MDS or myelophthisis"}], "cite": "c1"},
-        {"parameter": "Flow cytometry for a PNH clone", "cells": [{"text": "Found in up to half of patients at presentation of aplastic anaemia"}], "cite": "c1"},
-        {"parameter": "Chromosome breakage testing (diepoxybutane or mitomycin C)", "cells": [{"text": "Fanconi anaemia, in children and younger adults"}], "cite": "c1"},
-        {"parameter": "Marrow cytogenetics and FISH", "cells": [{"text": "Abnormal in MDS; expected normal in typical aplastic anaemia"}], "cite": "c1"}
+        {
+          "parameter": "Bone marrow cellularity (aspirate and trephine)",
+          "unit": "% hematopoietic cells",
+          "cells": [
+            {
+              "text": "Hypocellular marrow supports aplastic anaemia",
+              "op": "<",
+              "value": 25
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe aplastic anaemia: absolute neutrophil count",
+          "unit": "per uL",
+          "cells": [
+            {
+              "text": "Below 500 per uL (two of three criteria)",
+              "op": "<",
+              "value": 500
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe aplastic anaemia: platelet count",
+          "unit": "per uL",
+          "cells": [
+            {
+              "text": "Below 20,000 per uL (two of three criteria)",
+              "op": "<",
+              "value": 20000
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe aplastic anaemia: corrected reticulocyte count",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Below 1% (two of three criteria)",
+              "op": "<",
+              "value": 1
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Absolute reticulocyte count (immunosuppression era)",
+          "unit": "per uL",
+          "cells": [
+            {
+              "text": "Above 25,000 per uL predicts response",
+              "op": ">",
+              "value": 25000
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Absolute lymphocyte count (immunosuppression era)",
+          "unit": "per uL",
+          "cells": [
+            {
+              "text": "Above 1000 per uL predicts response",
+              "op": ">",
+              "value": 1000
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marrow blasts (AML versus MDS threshold)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20% threshold separates AML from MDS",
+              "op": ">=",
+              "value": 20
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral smear and reticulocytes",
+          "cells": [
+            {
+              "text": "Absent reticulocytes and large red cells in aplasia; immature forms suggest MDS or myelophthisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for a PNH clone",
+          "cells": [
+            {
+              "text": "Found in up to half of patients at presentation of aplastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosome breakage testing (diepoxybutane or mitomycin C)",
+          "cells": [
+            {
+              "text": "Fanconi anaemia, in children and younger adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marrow cytogenetics and FISH",
+          "cells": [
+            {
+              "text": "Abnormal in MDS; expected normal in typical aplastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
       ],
       "footnote": "Severe aplastic anaemia has historically required two of the three count criteria; the reticulocyte and lymphocyte thresholds are the immunosuppression-era predictors."
     },
@@ -238,12 +354,46 @@
       "kind": "ddx",
       "title": "Look-alike causes of marrow failure",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Hypoplastic MDS", "cells": [{"text": "Marrow blasts and abnormal cytogenetics separate it from aplastic anaemia"}], "cite": "c1"},
-        {"parameter": "Constitutional aplastic anaemia (Fanconi anaemia, telomere biology disorders)", "cells": [{"text": "Short stature, cafe-au-lait spots and thumb anomalies; chromosome breakage and telomere length testing"}], "cite": "c1"},
-        {"parameter": "Persistent parvovirus B19 infection (pure red cell aplasia)", "cells": [{"text": "Giant pronormoblasts; viral DNA detection, because antibodies are often absent"}], "cite": "c1"},
-        {"parameter": "Vitamin B12, folate or copper deficiency", "cells": [{"text": "Dysplastic marrow that resolves with replacement; levels of B12, folate and copper are measured"}], "cite": "c1"}
+        {
+          "parameter": "Hypoplastic MDS",
+          "cells": [
+            {
+              "text": "Marrow blasts and abnormal cytogenetics separate it from aplastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional aplastic anaemia (Fanconi anaemia, telomere biology disorders)",
+          "cells": [
+            {
+              "text": "Short stature, cafe-au-lait spots and thumb anomalies; chromosome breakage and telomere length testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent parvovirus B19 infection (pure red cell aplasia)",
+          "cells": [
+            {
+              "text": "Giant pronormoblasts; viral DNA detection, because antibodies are often absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12, folate or copper deficiency",
+          "cells": [
+            {
+              "text": "Dysplastic marrow that resolves with replacement; levels of B12, folate and copper are measured"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -251,15 +401,142 @@
       "kind": "treatment",
       "title": "Management options in bone marrow failure and myelodysplasia",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Severe acquired aplastic anaemia", "cells": [{"text": "Allogeneic transplant in younger patients with a matched donor, or antithymocyte globulin with ciclosporin"}, {"text": "Immunosuppression is increasingly combined with eltrombopag"}], "cite": "c1"},
-        {"parameter": "Transfusion support", "cells": [{"text": "Leucodepleted and irradiated red cells and platelets; iron chelation"}, {"text": "For transfusional iron overload"}], "cite": "c1"},
-        {"parameter": "Infection prevention", "cells": [{"text": "Broad-spectrum antibiotics and antifungal cover for neutropenic sepsis"}, {"text": "Prompt treatment"}], "cite": "c1"},
-        {"parameter": "Myelodysplastic syndromes", "cells": [{"text": "Erythropoiesis-stimulating agents and lenalidomide (especially del(5q)) in lower-risk disease; azacitidine, decitabine or transplant in higher-risk disease"}, {"text": "Risk-adapted"}], "cite": "c1"},
-        {"parameter": "Inherited marrow failure", "cells": [{"text": "Tailored transplant conditioning avoiding excess radiation and alkylating agents; androgens in selected cases"}, {"text": "For inherited syndromes"}], "cite": "c1"},
-        {"parameter": "Monitoring for clonal evolution", "cells": [{"text": "Blood counts, transfusion needs, PNH clone size and cytogenetics"}, {"text": "Watches for progression to MDS or leukaemia"}], "cite": "c1"},
-        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling, with family and donor screening where an inherited syndrome is identified"}, {"text": "Germline predisposition"}], "cite": "c1"}
+        {
+          "parameter": "Severe acquired aplastic anaemia",
+          "cells": [
+            {
+              "text": "Allogeneic transplant in younger patients with a matched donor, or antithymocyte globulin with ciclosporin"
+            },
+            {
+              "text": "Immunosuppression is increasingly combined with eltrombopag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion support",
+          "cells": [
+            {
+              "text": "Leucodepleted and irradiated red cells and platelets; iron chelation"
+            },
+            {
+              "text": "For transfusional iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Broad-spectrum antibiotics and antifungal cover for neutropenic sepsis"
+            },
+            {
+              "text": "Prompt treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplastic syndromes",
+          "cells": [
+            {
+              "text": "Erythropoiesis-stimulating agents and lenalidomide (especially del(5q)) in lower-risk disease; azacitidine, decitabine or transplant in higher-risk disease"
+            },
+            {
+              "text": "Risk-adapted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited marrow failure",
+          "cells": [
+            {
+              "text": "Tailored transplant conditioning avoiding excess radiation and alkylating agents; androgens in selected cases"
+            },
+            {
+              "text": "For inherited syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for clonal evolution",
+          "cells": [
+            {
+              "text": "Blood counts, transfusion needs, PNH clone size and cytogenetics"
+            },
+            {
+              "text": "Watches for progression to MDS or leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Counselling, with family and donor screening where an inherited syndrome is identified"
+            },
+            {
+              "text": "Germline predisposition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bone_marrow_failure_syndromes_including-ddx-2",
+      "kind": "ddx",
+      "title": "Agents associated with aplastic anemia, by strength of association",
+      "rowHeader": "Condition",
+      "columns": [
+        "Agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Regularly cause marrow depression at usual doses or exposures",
+          "cells": [
+            {
+              "text": "cytotoxic cancer drugs: alkylating agents, antimetabolites, antimitotics, some antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Frequently but not always cause marrow aplasia",
+          "cells": [
+            {
+              "text": "benzene"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Associated with aplastic anemia, relatively low probability",
+          "cells": [
+            {
+              "text": "chloramphenicol; insecticides; quinacrine, chloroquine, mepacrine; NSAIDs (phenylbutazone, indomethacin, ibuprofen, sulindac, aspirin); anticonvulsants (hydantoins, carbamazepine, phenacemide, felbamate); heavy metals (gold, arsenic, bismuth, mercury); sulfonamides; some antibiotics; antithyroid drugs (methimazole, methylthiouracil, propylthiouracil); antidiabetes drugs (tolbutamide, chlorpropamide); carbonic anhydrase inhibitors (acetazolamide, methazolamide); antihistamines (cimetidine, chlorpheniramine); d-penicillamine; estrogens (in pregnancy, and in high doses in animals)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "More tenuous association",
+          "cells": [
+            {
+              "text": "other antibiotics (streptomycin, tetracycline, methicillin, mebendazole, trimethoprim/sulfamethoxazole, flucytosine); sedatives and tranquilizers (chlorpromazine, prochlorperazine, piperacetazine, chlordiazepoxide, meprobamate, methyprylon); allopurinol; methyldopa; quinidine; lithium; guanidine; potassium perchlorate; thiocyanate; carbimazole"
+            }
+          ],
+          "cite": "c2"
+        }
       ]
     }
   ],
@@ -269,28 +546,118 @@
       "title": "Diagnosis and management of bone marrow failure and myelodysplasia",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Pancytopenia with bleeding in a young adult, or macrocytic cytopenias in an older adult", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: neutropenic fever, CNS or retinal bleeding, or new blasts or cytogenetic change?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: empirical broad-spectrum antibiotics; platelet support; urgent haematology", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Peripheral smear, reticulocyte count, and bone marrow aspirate with trephine", "cite": "c1"},
-        {"id": "n5", "type": "action", "text": "Cytogenetics; PNH flow cytometry; telomere length; chromosome breakage test if young", "cite": "c1"},
-        {"id": "n6", "type": "decision", "text": "Hypocellular marrow (under 25% cellularity) with normal cytogenetics?", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Grade severity by counts; transplant, or antithymocyte globulin with ciclosporin and eltrombopag", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "No: consider MDS, myelophthisis, Fanconi anaemia or another cytopenia cause", "cite": "c1"},
-        {"id": "n9", "type": "action", "text": "Transfusion support, infection prophylaxis; monitor for clonal evolution", "cite": "c1"},
-        {"id": "n10", "type": "outcome", "text": "Untreated severe aplastic anaemia is fatal; clonal evolution occurs in roughly 10-15% over a decade", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pancytopenia with bleeding in a young adult, or macrocytic cytopenias in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: neutropenic fever, CNS or retinal bleeding, or new blasts or cytogenetic change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: empirical broad-spectrum antibiotics; platelet support; urgent haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Peripheral smear, reticulocyte count, and bone marrow aspirate with trephine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Cytogenetics; PNH flow cytometry; telomere length; chromosome breakage test if young",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Hypocellular marrow (under 25% cellularity) with normal cytogenetics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Grade severity by counts; transplant, or antithymocyte globulin with ciclosporin and eltrombopag",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider MDS, myelophthisis, Fanconi anaemia or another cytopenia cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfusion support, infection prophylaxis; monitor for clonal evolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Untreated severe aplastic anaemia is fatal; clonal evolution occurs in roughly 10-15% over a decade",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n5", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Next"},
-        {"from": "n6", "to": "n7", "label": "Yes"},
-        {"from": "n6", "to": "n8", "label": "No"},
-        {"from": "n7", "to": "n9", "label": "Next"},
-        {"from": "n9", "to": "n10", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
       ]
     }
   ]

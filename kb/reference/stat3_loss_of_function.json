@@ -153,5 +153,323 @@
       "caption": "Overview comparison matrix for stat3 loss-of-function (autosomal dominant hyper-ige / job syndrome)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stat3_loss_of_function-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IgE with FBC and eosinophil count",
+          "cells": [
+            {
+              "text": "Very high IgE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enumeration of IL-17-producing T helper cells",
+          "cells": [
+            {
+              "text": "Reduced count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative immunoglobulins and specific antibody responses",
+          "cells": [
+            {
+              "text": "Antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAT3 sequencing",
+          "cells": [
+            {
+              "text": "Dominant-negative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pneumatocoeles and secondary fungal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density and dental review",
+          "cells": [
+            {
+              "text": "Skeletal and dental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Aneurysm or tortuosity, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stat3_loss_of_function-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "DOCK8 deficiency (autosomal recessive hyper-IgE)",
+          "cells": [
+            {
+              "text": "A recessive form; inheritance and genetic testing separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Recurrent pneumonia with cavitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stat3_loss_of_function-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-staphylococcal prophylaxis",
+          "cells": [
+            {
+              "text": "Long-term co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal therapy",
+          "cells": [
+            {
+              "text": "Mucocutaneous candidiasis, with surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive pneumonia treatment",
+          "cells": [
+            {
+              "text": "Drainage of empyema, with attention to pneumatocoeles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health management",
+          "cells": [
+            {
+              "text": "Density monitoring and fracture prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular surveillance",
+          "cells": [
+            {
+              "text": "Aneurysm formation and arterial tortuosity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Immunology, respiratory, dermatology, dental and orthopaedics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant STAT3 disorder; family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stat3_loss_of_function-dx-mgmt",
+      "title": "Diagnosis and management of STAT3 loss-of-function (autosomal dominant hyper-IgE / Job syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent cold abscesses with very high IgE: suspected STAT3 loss of function",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pneumatocoeles, fungal infection, fractures, aneurysm)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review for cavitary disease or secondary fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum IgE and FBC; STAT3 sequencing; Th17 count; chest imaging; bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a STAT3 variant found with high IgE and typical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DOCK8 deficiency, cystic fibrosis or atopic eczema; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-term anti-staphylococcal prophylaxis such as co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifungal therapy for mucocutaneous candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive pneumonia treatment and drainage of empyema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone health monitoring and vascular surveillance for aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multisystem disease with recurrent infection and skeletal and vascular complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

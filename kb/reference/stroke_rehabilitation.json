@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for stroke rehabilitation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stroke_rehabilitation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bedside dysphagia screening, then videofluoroscopy or endoscopy",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised scales (modified Rankin, Barthel)",
+          "cells": [
+            {
+              "text": "Function and impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive, mood and communication assessment",
+          "cells": [
+            {
+              "text": "Post-stroke depression and cognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated neuroimaging",
+          "cells": [
+            {
+              "text": "Unexplained neurological deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac rhythm monitoring",
+          "cells": [
+            {
+              "text": "Secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stroke_rehabilitation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent or extending stroke",
+          "cells": [
+            {
+              "text": "A new or worsening deficit; imaging is required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subdural haematoma after a fall",
+          "cells": [
+            {
+              "text": "Fall with headache or reduced consciousness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stroke_rehabilitation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Dedicated stroke unit, once medically stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Task-specific, repetitive practice",
+          "cells": [
+            {
+              "text": "Meaningful functional goals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia screening before oral intake",
+          "cells": [
+            {
+              "text": "Modified diet or textures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity management",
+          "cells": [
+            {
+              "text": "Stretching, splinting, botulinum toxin and antispasticity agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication prevention",
+          "cells": [
+            {
+              "text": "VTE prophylaxis, pressure care and shoulder support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet or anticoagulant therapy and blood pressure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progress tracking",
+          "cells": [
+            {
+              "text": "Modified Rankin Scale and Barthel Index"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stroke_rehabilitation-dx-mgmt",
+      "title": "Diagnosis and management of Stroke rehabilitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recent stroke with motor or swallowing deficit: rehabilitation pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new deficit, aspiration, PE or DVT, sudden headache, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent medical review for recurrent stroke, aspiration or thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dysphagia screen and videofluoroscopy; function scales; cognitive and mood assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a swallowing or motor deficit confirmed on structured assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider recurrent stroke, seizure or depression; repeat neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early coordinated multidisciplinary rehabilitation in a stroke unit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dysphagia screening before oral intake, with modified textures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spasticity management with stretching, splinting and botulinum toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Secondary prevention with antiplatelet or anticoagulant and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery follows repetitive task-specific practice; progress tracked by mRS and Barthel",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

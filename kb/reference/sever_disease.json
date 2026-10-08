@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for sever disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sever_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Heel squeeze test",
+          "cells": [
+            {
+              "text": "Reproduces pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrocnemius-soleus and ankle dorsiflexion assessment",
+          "cells": [
+            {
+              "text": "Tight calf complex supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Mainly to exclude fracture, infection or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Reserved for atypical, persistent or unilateral cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "If infection or inflammatory arthropathy suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait and footwear assessment",
+          "cells": [
+            {
+              "text": "Active child"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sever_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcaneal stress fracture",
+          "cells": [
+            {
+              "text": "Can present as atypical heel pain; image if atypical or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis or bone tumour",
+          "cells": [
+            {
+              "text": "Rest pain, night pain or systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteonecrosis of the apophysis",
+          "cells": [
+            {
+              "text": "Sclerosis and fragmentation are normal ossification, not avascular necrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sever_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting; resolves at skeletal maturity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Reduce running and jumping during flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calf stretching",
+          "cells": [
+            {
+              "text": "Gastrocnemius-soleus and heel-cord flexibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heel cushioning or heel-raise orthoses",
+          "cells": [
+            {
+              "text": "Reduce traction on the calcaneal apophysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol or NSAIDs during flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to sport",
+          "cells": [
+            {
+              "text": "With footwear review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassess or image",
+          "cells": [
+            {
+              "text": "Only for atypical, unilateral or persistent presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sever_disease-dx-mgmt",
+      "title": "Diagnosis and management of Sever disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Active child aged 8 to 14 with activity-related posterior heel pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rest or night pain, systemic features, focal bony lesion or persistent unilateral pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Image and bloods to exclude infection, tumour or stress fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Heel squeeze test; calf tightness; radiographs only to exclude other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Positive squeeze test and tight calf with no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pursue MRI for stress fracture, infection, tumour or other heel pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; reduce running and jumping load during flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calf and heel-cord stretching",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Heel cups or heel-raise orthoses; paracetamol or NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graded return to sport with footwear review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent: resolves with skeletal maturity and no long-term sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

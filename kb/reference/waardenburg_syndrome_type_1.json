@@ -151,5 +151,231 @@
       "caption": "Overview comparison matrix for waardenburg syndrome type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and audiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "waardenburg_syndrome_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiological assessment with newborn hearing screening and pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Congenital sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Iris colour, heterochromia and dystopia canthorum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Waardenburg syndrome type 2",
+          "cells": [
+            {
+              "text": "No dystopia canthorum; more frequent deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waardenburg syndrome type 3",
+          "cells": [
+            {
+              "text": "Additional limb and musculoskeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early amplification",
+          "cells": [
+            {
+              "text": "Congenital sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Severe-to-profound loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enrolment in early intervention",
+          "cells": [
+            {
+              "text": "Affected children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "waardenburg_syndrome_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Waardenburg syndrome type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Waardenburg type 1: congenital deafness with dystopia canthorum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (confirmed congenital deafness or new neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent early intervention for confirmed congenital deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Newborn hearing screen, audiometry, ophthalmic examination, PAX3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is dystopia canthorum present with a PAX3 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Classify as type 2 if dystopia canthorum is absent",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early amplification for the congenital sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Enrolment of affected children in early intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hearing outcome depends on early amplification and implantation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

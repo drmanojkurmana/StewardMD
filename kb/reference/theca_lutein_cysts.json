@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for theca lutein cysts."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Berek & Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "theca_lutein_cysts-dx-mgmt",
+      "title": "Diagnosis and management of theca lutein cysts",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected theca-lutein cysts: multicystic ovaries in gestational trophoblastic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: acute pelvic pain, haemodynamic instability, or rising hCG after evacuation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical or resuscitative care for torsion or intraperitoneal haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Quantitative hCG and trend; pelvic ultrasound with Doppler; uterine evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hCG elevated, with multilocular cysts and no solid component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hyperreactio luteinalis, OHSS or cystadenoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management while hCG falls; regression can lag by weeks to months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Evacuation, delivery or chemotherapy for trophoblastic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for ovarian hyperstimulation after ovulation induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial hCG and Doppler ultrasound to track regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgery with ovarian conservation for torsion, rupture or haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and self-limiting once the hCG source resolves; complications need prompt care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "theca_lutein_cysts-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum hCG and trend",
+          "cells": [
+            {
+              "text": "Hormonal driver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Cyst morphology, ovarian perfusion and possible torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uterine evaluation",
+          "cells": [
+            {
+              "text": "Hydatidiform mole or retained trophoblastic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Clinical hyperthyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Choriocarcinoma or metastatic disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "theca_lutein_cysts-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperreactio luteinalis",
+          "cells": [
+            {
+              "text": "Florid cysts in pregnancy without trophoblastic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian hyperstimulation syndrome",
+          "cells": [
+            {
+              "text": "Follows ovulation induction, with cysts from exogenous stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral cystadenoma or borderline tumour",
+          "cells": [
+            {
+              "text": "Solid or papillary components, or failure to regress, raise suspicion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "theca_lutein_cysts-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Regression can lag the fall in hCG by weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Evacuation, delivery or chemotherapy for choriocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovulation-induction cases",
+          "cells": [
+            {
+              "text": "Managed as ovarian hyperstimulation with supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial hCG and Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Tracks regression and ovarian perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery with ovarian conservation",
+          "cells": [
+            {
+              "text": "Torsion, rupture or intraperitoneal haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid and androgen checks",
+          "cells": [
+            {
+              "text": "If clinically hyperthyroid or virilised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

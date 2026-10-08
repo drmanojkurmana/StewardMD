@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for stiff-person syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stiff_person_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-GAD65 antibodies (with glycine receptor and amphiphysin when relevant)",
+          "cells": [
+            {
+              "text": "High-titre GAD65 antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Continuous motor unit activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune screen",
+          "cells": [
+            {
+              "text": "Diabetes and thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy investigation",
+          "cells": [
+            {
+              "text": "Suspected paraneoplastic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Structural spinal or cerebral causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stiff_person_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuromyotonia and peripheral hyperexcitability",
+          "cells": [
+            {
+              "text": "Distinct EMG pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinsonism with axial rigidity",
+          "cells": [
+            {
+              "text": "Antibody testing and EMG separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stiff_person_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "GABAergic therapy",
+          "cells": [
+            {
+              "text": "Benzodiazepines and or baclofen to control rigidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotherapy",
+          "cells": [
+            {
+              "text": "Intravenous immunoglobulin, corticosteroids or plasma exchange"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and mobility support",
+          "cells": [
+            {
+              "text": "Gait aids and fall and fracture prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for autoimmune disease",
+          "cells": [
+            {
+              "text": "Type 1 diabetes and thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour evaluation",
+          "cells": [
+            {
+              "text": "Suspected paraneoplastic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Monitoring of progression and treatment response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stiff_person_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Stiff-person syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Trunk rigidity with startle-triggered spasms: suspected stiff person syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (breathing impairment, fractures, autonomic instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and critical care support for severe spasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-GAD65 antibodies; EMG for continuous activity; autoimmune screen; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is high-titre anti-GAD65 found with continuous motor unit activity on EMG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetanus, neuromyotonia or dystonia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "GABAergic therapy with benzodiazepines and or baclofen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunotherapy with IVIG, corticosteroids or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, gait aids and fall and fracture prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for diabetes and thyroid disease, and tumour in paraneoplastic cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often coexists with type 1 diabetes; spasm-related falls and fractures are key risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

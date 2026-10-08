@@ -146,5 +146,291 @@
       "caption": "Overview comparison matrix for parachute mitral valve."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parachute_mitral_valve-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echo with short-axis papillary muscle count",
+          "cells": [
+            {
+              "text": "A single dominant papillary muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal and 3D echo",
+          "cells": [
+            {
+              "text": "Subvalvar inflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler inflow gradients",
+          "cells": [
+            {
+              "text": "Severity of the obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic arch imaging",
+          "cells": [
+            {
+              "text": "Shone-complex lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Right ventricular hypertrophy and left atrial enlargement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parachute_mitral_valve-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Supravalvar mitral ring",
+          "cells": [
+            {
+              "text": "Another Shone component; supravalvar rather than subvalvar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cor triatriatum",
+          "cells": [
+            {
+              "text": "A membrane above the mitral valve, not subvalvar obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parachute_mitral_valve-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical relief of subvalvar stenosis",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Repair by splitting fused chordae and the papillary muscle, or replacement when repair is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shone-complex correction",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Supravalvar ring resection, subaortic relief and coarctation repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical management",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Diuretics for pulmonary congestion while optimising for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Treatment and monitoring of secondary pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parachute_mitral_valve-dx-mgmt",
+      "title": "Diagnosis and management of parachute mitral valve",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with heart failure or failure to thrive and a mitral inflow gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe pulmonary hypertension, heart failure or low cardiac output)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac surgery for low output and severe obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo with papillary muscle count and Doppler gradient, TOE, MRI, arch imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo show all chordae into one papillary muscle with subvalvar obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider supravalvar mitral ring, cor triatriatum or mitral valve dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical relief of subvalvar stenosis by repair, or replacement if repair fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correction of associated Shone-complex lesions such as supravalvar ring or coarctation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics for pulmonary congestion while optimising for surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment and monitoring of secondary pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild isolated lesions are tolerated; severe stenosis carries surgical and restenosis risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

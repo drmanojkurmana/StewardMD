@@ -143,5 +143,247 @@
       "caption": "Overview comparison matrix for relentless placoid chorioretinitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / white-dot syndrome literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "relentless_placoid_chorioretinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein and indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Active lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Active and healed lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Retinal changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "relentless_placoid_chorioretinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Serpiginous choroiditis",
+          "cells": [
+            {
+              "text": "Serpiginous spread"
+            },
+            {
+              "text": "Fluorescein angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous serpiginous-like choroiditis",
+          "cells": [
+            {
+              "text": "Infective cause"
+            },
+            {
+              "text": "Infection screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "relentless_placoid_chorioretinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Infection screen",
+          "cells": [
+            {
+              "text": "Exclude tuberculosis and syphilis before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active inflammation",
+          "cells": [
+            {
+              "text": "Induce control of active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Autofluorescence and OCT for new lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "relentless_placoid_chorioretinitis-dx-mgmt",
+      "title": "Diagnosis and management of Relentless placoid chorioretinitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected relentless placoid chorioretinitis: recurrent lesions, central threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Foveal or peripapillary lesions, frequent relapses, or infective features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent retinal review for threat to central vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein and ICG angiography; fundus autofluorescence; OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is recurrent placoid chorioretinitis confirmed with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider serpiginous or tuberculous choroiditis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude tuberculosis and syphilis before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Induce control of active inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor with autofluorescence and OCT for new lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Retinal follow-up for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,231 @@
       "caption": "Overview comparison matrix for weber syndrome (midbrain)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "weber_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI of the midbrain",
+          "cells": [
+            {
+              "text": "Paramedian peduncular infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography of the posterior circulation",
+          "cells": [
+            {
+              "text": "Posterior communicating artery aneurysm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "weber_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benedikt syndrome",
+          "cells": [
+            {
+              "text": "Tegmental midbrain involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Claude syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior communicating artery aneurysm",
+          "cells": [
+            {
+              "text": "Compressive third nerve palsy with pupil involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "weber_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute posterior-circulation stroke pathway",
+          "cells": [
+            {
+              "text": "Hyperacute care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous thrombolysis",
+          "cells": [
+            {
+              "text": "Where eligible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "weber_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Weber syndrome (midbrain)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Weber syndrome: contralateral hemiparesis with ipsilateral third nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pupil-involving third nerve palsy or declining consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway with angiography to exclude aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diffusion-weighted MRI of the midbrain, MR or CT angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a paramedian midbrain infarct without aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude posterior communicating artery aneurysm before attributing to ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute posterior-circulation stroke care with thrombolysis where eligible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider neurosurgical review if aneurysm is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not attribute a pupil-involving palsy to microvascular ischaemia alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on infarct size; pupil-involving palsy suggests compression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

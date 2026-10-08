@@ -149,5 +149,282 @@
       "caption": "Overview comparison matrix for peeling skin syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peeling_skin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy for superficial separation",
+          "cells": [
+            {
+              "text": "Subcorneal or intragranular cleavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TGM5 and CDSN molecular testing",
+          "cells": [
+            {
+              "text": "Causative genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythroderma, atopy and raised IgE screen",
+          "cells": [
+            {
+              "text": "Generalised inflammatory form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair examination",
+          "cells": [
+            {
+              "text": "Helps exclude Netherton syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peeling_skin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Netherton syndrome",
+          "cells": [
+            {
+              "text": "Hair shaft abnormality and atopy; hair examination separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Infection-driven peeling without a genetic basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peeling_skin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Barrier protection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Liberal emollients, gentle skin handling and avoidance of friction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory and antihistamine therapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Topical agents and antihistamines for the generalised form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Treat recurrent skin infection arising from the compromised barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peeling_skin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Peeling skin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless continuous superficial skin peeling from infancy, sometimes with erythroderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (extensive erythroderma, fluid loss or infection in infancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for fluid loss, sepsis or extensive erythroderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for superficial separation, TGM5 and CDSN testing, IgE and atopy screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a superficial cleavage found with a TGM5 or CDSN variant on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Netherton, staphylococcal scalded skin, EB simplex or atopic erythroderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liberal emollients, gentle skin handling and avoidance of friction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical anti-inflammatory agents and antihistamines for generalised inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat recurrent infection arising from the compromised barrier",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic; acral form mild, generalised form troublesome but not life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

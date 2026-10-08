@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for transfusional iron overload."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusional_iron_overload-dx-mgmt",
+      "title": "Diagnosis and management of Transfusional iron overload",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transfusional iron overload: long-term transfused patient with rising ferritin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new heart failure or arrhythmia, or rising ferritin despite chelation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for iron cardiomyopathy and intensified chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum ferritin; transferrin saturation; cardiac and hepatic MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show raised myocardial or liver iron with transfusion dependence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemochromatosis, fatty liver disease or porphyria cutanea tarda",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Iron chelation with deferoxamine, deferasirox or deferiprone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensified or combination chelation for cardiac iron",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial ferritin and cardiac and liver MRI to guide chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat endocrine complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Support long-term chelation adherence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Effective chelation prevents or partly reverses organ damage; cardiac iron drives death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusional_iron_overload-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ferritin trend",
+          "cells": [
+            {
+              "text": "Iron burden over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transferrin saturation",
+          "cells": [
+            {
+              "text": "Characteristically high in iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac magnetic resonance",
+          "cells": [
+            {
+              "text": "Myocardial iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic magnetic resonance or biopsy",
+          "cells": [
+            {
+              "text": "Liver iron concentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and fibrosis assessment",
+          "cells": [
+            {
+              "text": "Hepatic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screen",
+          "cells": [
+            {
+              "text": "Glucose, thyroid and gonadal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusional_iron_overload-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary haemochromatosis",
+          "cells": [
+            {
+              "text": "Iron overload without chronic transfusion dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic or fatty liver disease",
+          "cells": [
+            {
+              "text": "Liver injury without a transfusion history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda with iron loading",
+          "cells": [
+            {
+              "text": "Skin and porphyrin findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusional_iron_overload-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferoxamine, deferasirox or deferiprone to keep burden below organ-damage threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified or combination chelation",
+          "cells": [
+            {
+              "text": "High cardiac iron or established iron cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Ferritin, transferrin saturation and cardiac and hepatic MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine treatment",
+          "cells": [
+            {
+              "text": "Insulin for diabetes, sex-hormone replacement, and thyroid or parathyroid replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology input",
+          "cells": [
+            {
+              "text": "Iron cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower transfusion burden",
+          "cells": [
+            {
+              "text": "Optimise treatment of the underlying anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence support",
+          "cells": [
+            {
+              "text": "Key to preventing cardiac and hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

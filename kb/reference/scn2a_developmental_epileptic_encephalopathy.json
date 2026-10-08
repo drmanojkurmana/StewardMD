@@ -146,5 +146,267 @@
       "caption": "Overview comparison matrix for scn2a developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scn2a_developmental_epileptic_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SCN2A testing or epilepsy panel/exome",
+          "cells": [
+            {
+              "text": "Variant with functional interpretation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Appropriate to age and seizure type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "Neonatal presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, cognitive and autism assessment",
+          "cells": [
+            {
+              "text": "Neurodevelopmental profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scn2a_developmental_epileptic_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Carbamazepine, phenytoin or lacosamide for early-onset gain-of-function cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Later-onset loss-of-function cases, where seizures may worsen; use alternative broad-spectrum agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age at onset as a guide",
+          "cells": [
+            {
+              "text": "Practical proxy for the channel effect when choosing drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental interventions",
+          "cells": [
+            {
+              "text": "Cognitive and autism-focused therapies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-resistant seizures",
+          "cells": [
+            {
+              "text": "Rational combination therapy and consideration of the ketogenic diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Frequently de novo variant; recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scn2a_developmental_epileptic_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of SCN2A developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset seizures with developmental delay: suspected SCN2A encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory seizures with arrest, worsening on a sodium-channel blocker, or regression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop the sodium-channel blocker if worsening; urgent epileptology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SCN2A testing, EEG, brain MRI, metabolic screen in neonates",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Early onset suggesting gain of function, or later onset suggesting loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Later onset: avoid sodium-channel blockers and use alternative broad agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early onset: carbamazepine, phenytoin or lacosamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combination therapy and ketogenic diet if drug-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental, cognitive and autism interventions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for a frequently de novo variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Highly variable, from self-limited neonatal-infantile seizures to severe disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

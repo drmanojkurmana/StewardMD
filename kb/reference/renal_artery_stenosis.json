@@ -149,5 +149,231 @@
       "caption": "Overview comparison matrix for renal artery stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_artery_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex ultrasound of the renal arteries",
+          "cells": [
+            {
+              "text": "Renal artery velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Anatomy of the stenosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_artery_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Essential (primary) hypertension",
+          "cells": [
+            {
+              "text": "Hypertension without renal artery narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperaldosteronism",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_artery_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Optimal medical therapy with antihypertensives and statin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAS blockade",
+          "cells": [
+            {
+              "text": "Monitor serum creatinine closely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist review",
+          "cells": [
+            {
+              "text": "For rapidly deteriorating renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_artery_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Renal artery stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal artery stenosis: hypertension with atherosclerotic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid renal decline on RAS blockade, flash pulmonary oedema, or resistant hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent renal review for rapid renal decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal artery duplex; CT or MR angiography to define stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is haemodynamically significant stenosis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential hypertension or primary aldosteronism; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimal medical therapy with antihypertensives and statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor serum creatinine closely with RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Specialist review for rapidly deteriorating renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Vascular and nephrology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

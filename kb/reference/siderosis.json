@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for siderosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Occupational and Environmental Respiratory Medicine reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "siderosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph and HRCT",
+          "cells": [
+            {
+              "text": "Nodular or reticular opacities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational history",
+          "cells": [
+            {
+              "text": "Welding and metalworking exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry and diffusing capacity",
+          "cells": [
+            {
+              "text": "Preserved function in pure disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Iron-laden macrophages where sampled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silica exposure assessment",
+          "cells": [
+            {
+              "text": "Coexisting silica changes prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Partial regression after exposure ends"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "siderosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Siderosilicosis or mixed-dust fibrosis",
+          "cells": [
+            {
+              "text": "Coexisting silica; progressive breathlessness or fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Miliary tuberculosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "siderosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove from exposure",
+          "cells": [
+            {
+              "text": "Iron oxide fume and dust; local exhaust ventilation and respiratory protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Pure siderosis is benign and imaging may partly regress; no drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Limits additional airways disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging and lung function",
+          "cells": [
+            {
+              "text": "Spirometry with diffusing capacity to detect fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silica exposure assessment",
+          "cells": [
+            {
+              "text": "Excludes fibrotic siderosilicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health",
+          "cells": [
+            {
+              "text": "Referral and reporting as an occupational lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "siderosis-dx-mgmt",
+      "title": "Diagnosis and management of Siderosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Welder or metalworker with nodular chest radiograph opacities and few symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive dyspnoea, new mass or cavitation, functional decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for mixed-dust fibrosis, malignancy or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph and HRCT, occupational history, spirometry with diffusing capacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is it pure siderosis with preserved function and no silica exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate siderosilicosis, sarcoidosis, miliary TB or hypersensitivity pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove from iron oxide exposure with workplace controls",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure; no specific drug therapy, and imaging may regress",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Smoking cessation and serial imaging with lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational health referral and reporting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and often partly reversible; worse only with coexisting silica",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

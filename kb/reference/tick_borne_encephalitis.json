@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for tick-borne encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tick_borne_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Tick-borne encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tick-borne encephalitis: biphasic febrile illness after a tick bite",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: falling consciousness, respiratory weakness, or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care for encephalitis with bulbar or respiratory involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and CSF IgM and IgG; CSF analysis; brain and spinal MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do serology and CSF show tick-borne encephalitis virus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Lyme neuroborreliosis, HSV encephalitis or Guillain-Barre syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care, as there is no specific antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inactivated tick-borne encephalitis vaccine for at-risk people",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Critical care with ventilatory support for bulbar or respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurorehabilitation for cognitive impairment, ataxia and paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Test for and treat co-transmitted Lyme borreliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many recover fully; Far Eastern subtype carries higher mortality and sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tick_borne_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Tick-borne encephalitis virus antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis and raised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and spinal cord",
+          "cells": [
+            {
+              "text": "Thalamic, cerebellar, brainstem or anterior horn involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR on blood in the early viraemic phase",
+          "cells": [
+            {
+              "text": "Often negative by the neurological phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme borreliosis testing",
+          "cells": [
+            {
+              "text": "Co-transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiology",
+          "cells": [
+            {
+              "text": "Myelitis or peripheral involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tick_borne_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lyme neuroborreliosis",
+          "cells": [
+            {
+              "text": "Also Ixodes-transmitted; co-infection is tested for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Flaccid paralysis predominates; CSF and electrophysiology help separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "West Nile virus and other flaviviral disease",
+          "cells": [
+            {
+              "text": "Related flavivirus neuroinvasive disease; serology distinguishes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tick_borne_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No specific antiviral; analgesia, antipyretics, fluid and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inactivated vaccine",
+          "cells": [
+            {
+              "text": "Residents of and travellers to endemic areas; tick avoidance; no unpasteurised dairy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care for severe disease",
+          "cells": [
+            {
+              "text": "Ventilation for bulbar or respiratory involvement; raised pressure and seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and airway monitoring",
+          "cells": [
+            {
+              "text": "Swallowing and airway safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Cognitive impairment, ataxia and flaccid paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme co-infection treatment",
+          "cells": [
+            {
+              "text": "Tested for and treated if confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

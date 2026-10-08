@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for superficial vein thrombosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superficial_vein_thrombosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-leg duplex ultrasound",
+          "cells": [
+            {
+              "text": "Extent and distance to the deep junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex for coexisting deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Common in this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen",
+          "cells": [
+            {
+              "text": "Recurrent, unprovoked or unusual-site cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy evaluation",
+          "cells": [
+            {
+              "text": "Migratory or unexplained pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and inflammatory markers",
+          "cells": [
+            {
+              "text": "Suspected septic process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous reflux studies",
+          "cells": [
+            {
+              "text": "Underlying chronic venous disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superficial_vein_thrombosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis or soft tissue infection",
+          "cells": [
+            {
+              "text": "Erythema and warmth without a venous cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Whole-leg imaging separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suppurative thrombophlebitis",
+          "cells": [
+            {
+              "text": "Fever, purulence or fluctuance; a separate emergency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superficial_vein_thrombosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic measures for short-segment thrombosis",
+          "cells": [
+            {
+              "text": "NSAIDs, compression and mobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defined course of prophylactic-intensity anticoagulation",
+          "cells": [
+            {
+              "text": "Significant length, away from saphenous junctions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic anticoagulation",
+          "cells": [
+            {
+              "text": "Close to or extending into the deep system"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-leg compression ultrasound",
+          "cells": [
+            {
+              "text": "Extent and coexisting deep vein thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy or thromboangiitis evaluation",
+          "cells": [
+            {
+              "text": "Migratory or recurrent thrombophlebitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen",
+          "cells": [
+            {
+              "text": "Recurrent, unprovoked or unusual-site cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of chronic venous disease",
+          "cells": [
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superficial_vein_thrombosis-dx-mgmt",
+      "title": "Diagnosis and management of superficial vein thrombosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender superficial cord along a varicose tributary: suspected superficial vein thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (chest symptoms, fever or pus, extensive or junctional clot)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected pulmonary embolism or septic thrombophlebitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-leg duplex; deep vein assessment; thrombophilia and malignancy as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does whole-leg duplex confirm superficial thrombus and its distance to the deep junction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cellulitis, deep vein thrombosis or septic thrombophlebitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic care for short-segment thrombosis away from the junction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Defined course of prophylactic-intensity anticoagulation for significant length",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Therapeutic anticoagulation for thrombus near or in the deep system",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Malignancy or thrombophilia evaluation in migratory or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Carries a real risk of deep vein thrombosis and pulmonary embolism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

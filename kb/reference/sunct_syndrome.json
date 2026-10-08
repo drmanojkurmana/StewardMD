@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for sunct/suna."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sunct_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Attack characterisation: duration, frequency, triggers, autonomic features",
+          "cells": [
+            {
+              "text": "Short, frequent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain with pituitary and posterior fossa imaging",
+          "cells": [
+            {
+              "text": "Symptomatic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for neurovascular contact of the trigeminal nerve",
+          "cells": [
+            {
+              "text": "Vascular compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of indometacin",
+          "cells": [
+            {
+              "text": "Helps exclude paroxysmal hemicrania"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of cutaneous trigger zones and refractory period",
+          "cells": [
+            {
+              "text": "Pattern assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sunct_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "First-division trigeminal neuralgia",
+          "cells": [
+            {
+              "text": "Pain without prominent autonomic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal hemicrania",
+          "cells": [
+            {
+              "text": "Indometacin-responsive; poor response here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cluster headache",
+          "cells": [
+            {
+              "text": "Longer attacks with a different pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sunct_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lamotrigine",
+          "cells": [
+            {
+              "text": "Preferred preventive to reduce attack frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative preventives",
+          "cells": [
+            {
+              "text": "Topiramate, gabapentin or oxcarbazepine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous lidocaine",
+          "cells": [
+            {
+              "text": "Transitional measure for severe bouts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and treatment of any symptomatic lesion",
+          "cells": [
+            {
+              "text": "Pituitary or posterior fossa lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular decompression",
+          "cells": [
+            {
+              "text": "Demonstrated trigeminal neurovascular contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital nerve stimulation",
+          "cells": [
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist headache service",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sunct_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of SUNCT/SUNA",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief unilateral attacks with conjunctival injection and tearing: suspected SUNCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abnormal neurology, structural lesion, raised pressure features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent MRI and neurology review for a structural or raised-pressure cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attack characterisation; MRI with pituitary and posterior fossa; indometacin trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are very short, very frequent attacks with autonomic features seen with no lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider paroxysmal hemicrania, trigeminal neuralgia or a symptomatic lesion; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lamotrigine as the preferred preventive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topiramate, gabapentin or oxcarbazepine if lamotrigine fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous lidocaine to settle severe bouts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microvascular decompression where neurovascular contact is shown",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often refractory; opioids are not appropriate for this neuralgiform disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

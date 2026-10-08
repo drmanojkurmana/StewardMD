@@ -158,6 +158,11 @@
       "id": "c1",
       "label": "Middleton's Allergy: Principles and Practice",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -166,14 +171,64 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in C2 deficiency",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "CH50 classical-pathway haemolytic assay", "cells": [{"text": "Markedly reduced or absent"}], "cite": "c1"},
-        {"parameter": "AH50 alternative-pathway assay", "cells": [{"text": "Normal"}], "cite": "c1"},
-        {"parameter": "Specific C2 antigenic level", "cells": [{"text": "Confirms the diagnosis once an isolated classical-pathway defect is identified"}], "cite": "c1"},
-        {"parameter": "Genetic testing for the common C2 deletion", "cells": [{"text": "Most cases of European descent"}], "cite": "c1"},
-        {"parameter": "ANA", "cells": [{"text": "Where a lupus-like syndrome is suspected"}], "cite": "c1"},
-        {"parameter": "Vaccination status and antibody responses", "cells": [{"text": "Protection against encapsulated organisms"}], "cite": "c1"}
+        {
+          "parameter": "CH50 classical-pathway haemolytic assay",
+          "cells": [
+            {
+              "text": "Markedly reduced or absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AH50 alternative-pathway assay",
+          "cells": [
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific C2 antigenic level",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis once an isolated classical-pathway defect is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for the common C2 deletion",
+          "cells": [
+            {
+              "text": "Most cases of European descent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA",
+          "cells": [
+            {
+              "text": "Where a lupus-like syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination status and antibody responses",
+          "cells": [
+            {
+              "text": "Protection against encapsulated organisms"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -181,16 +236,198 @@
       "kind": "treatment",
       "title": "Management options in C2 deficiency",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Vaccination", "cells": [{"text": "Pneumococcal, Haemophilus influenzae type b and meningococcal conjugate vaccines"}, {"text": "Central to management"}], "cite": "c1"},
-        {"parameter": "Febrile or suspected invasive illness", "cells": [{"text": "Prompt empirical antibiotics active against Streptococcus pneumoniae, without waiting for confirmation"}, {"text": "Acute"}], "cite": "c1"},
-        {"parameter": "Prophylaxis", "cells": [{"text": "Consider prophylactic penicillin after recurrent invasive pneumococcal infection"}, {"text": "Selected patients"}], "cite": "c1"},
-        {"parameter": "Lupus-like syndrome", "cells": [{"text": "Sun protection, hydroxychloroquine and immunosuppression proportionate to activity"}, {"text": "Photosensitive"}], "cite": "c1"},
-        {"parameter": "Autoimmune surveillance", "cells": [{"text": "Periodic autoimmune serology and renal surveillance"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Genetic counselling", "cells": [{"text": "Autosomal recessive; screen affected siblings"}, {"text": "Family"}], "cite": "c1"},
-        {"parameter": "Patient education", "cells": [{"text": "Urgent review with any fever given lifelong invasive-infection risk"}, {"text": "Ongoing"}], "cite": "c1"}
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Pneumococcal, Haemophilus influenzae type b and meningococcal conjugate vaccines"
+            },
+            {
+              "text": "Central to management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile or suspected invasive illness",
+          "cells": [
+            {
+              "text": "Prompt empirical antibiotics active against Streptococcus pneumoniae, without waiting for confirmation"
+            },
+            {
+              "text": "Acute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Consider prophylactic penicillin after recurrent invasive pneumococcal infection"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus-like syndrome",
+          "cells": [
+            {
+              "text": "Sun protection, hydroxychloroquine and immunosuppression proportionate to activity"
+            },
+            {
+              "text": "Photosensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune surveillance",
+          "cells": [
+            {
+              "text": "Periodic autoimmune serology and renal surveillance"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screen affected siblings"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient education",
+          "cells": [
+            {
+              "text": "Urgent review with any fever given lifelong invasive-infection risk"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
+    },
+    {
+      "id": "c2_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
     }
   ],
   "flowcharts": [
@@ -199,24 +436,96 @@
       "title": "Diagnosis and management of C2 deficiency",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Recurrent encapsulated-organism infection or lupus-like illness, often asymptomatic", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: invasive pneumococcal or meningococcal infection, meningitis, or fulminant sepsis?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: immediate empirical antibiotics; urgent admission", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "CH50 and AH50; specific C2 level; autoimmune serology", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Classical pathway defect with normal AH50 and low C2?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Vaccinate against encapsulated organisms; consider prophylaxis after recurrent invasive infection", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Re-evaluate for other causes such as lupus, asplenia or antibody deficiency", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "Lifelong invasive-infection risk; vaccination and prompt antibiotics reduce mortality", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent encapsulated-organism infection or lupus-like illness, often asymptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: invasive pneumococcal or meningococcal infection, meningitis, or fulminant sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: immediate empirical antibiotics; urgent admission",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50 and AH50; specific C2 level; autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Classical pathway defect with normal AH50 and low C2?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Vaccinate against encapsulated organisms; consider prophylaxis after recurrent invasive infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-evaluate for other causes such as lupus, asplenia or antibody deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Lifelong invasive-infection risk; vaccination and prompt antibiotics reduce mortality",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        }
       ]
     }
   ]

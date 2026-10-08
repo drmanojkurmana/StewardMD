@@ -143,5 +143,240 @@
       "caption": "Overview comparison matrix for zoon balanitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology and urology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zoon_balanitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of the characteristic plaque",
+          "cells": [
+            {
+              "text": "Benign inflammatory plaque of the glans or prepuce"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Plasma-cell infiltrate; excludes carcinoma in situ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swabs",
+          "cells": [
+            {
+              "text": "Infective balanitis excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zoon_balanitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythroplasia of Queyrat",
+          "cells": [
+            {
+              "text": "Penile carcinoma in situ that looks similar; biopsy separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen planus of the glans",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candidal balanitis",
+          "cells": [
+            {
+              "text": "Does not respond to treatment for candidiasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zoon_balanitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Circumcision",
+          "cells": [
+            {
+              "text": "Definitive cure by removing smegma, moisture and friction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of non-responding lesions",
+          "cells": [
+            {
+              "text": "Failure to respond to conservative treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zoon_balanitis-dx-mgmt",
+      "title": "Diagnosis and management of Zoon balanitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zoon balanitis: red plaque on the glans or prepuce in an uncircumcised man",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features of erythroplasia of Queyrat or invasive carcinoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy for suspected carcinoma in situ",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment, biopsy for plasma-cell infiltrate, swabs for infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a plasma-cell infiltrate without carcinoma in situ?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy to exclude carcinoma in situ, lichen planus or psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Circumcision for definitive cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Biopsy any lesion that fails to respond",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not treat as candidal balanitis without a response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Benign; circumcision removes the cause, but carcinoma must be excluded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

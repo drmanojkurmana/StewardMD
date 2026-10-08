@@ -157,6 +157,11 @@
       "id": "c1",
       "label": "Clinical immunology references",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -165,14 +170,64 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in C1 esterase inhibitor deficiency",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Serum C4", "cells": [{"text": "Typically low; screening clue during and between attacks"}], "cite": "c1"},
-        {"parameter": "C1 esterase inhibitor antigenic level", "cells": [{"text": "Low in type I disease"}], "cite": "c1"},
-        {"parameter": "C1 esterase inhibitor functional assay", "cells": [{"text": "Reduced function in type II disease with normal antigenic level"}], "cite": "c1"},
-        {"parameter": "C1q level", "cells": [{"text": "Distinguishes acquired from hereditary deficiency"}], "cite": "c1"},
-        {"parameter": "SERPING1 gene analysis", "cells": [{"text": "Diagnostic uncertainty and family studies"}], "cite": "c1"},
-        {"parameter": "Screen for lymphoproliferative or autoimmune disease", "cells": [{"text": "When the acquired form is suspected"}], "cite": "c1"}
+        {
+          "parameter": "Serum C4",
+          "cells": [
+            {
+              "text": "Typically low; screening clue during and between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1 esterase inhibitor antigenic level",
+          "cells": [
+            {
+              "text": "Low in type I disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1 esterase inhibitor functional assay",
+          "cells": [
+            {
+              "text": "Reduced function in type II disease with normal antigenic level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1q level",
+          "cells": [
+            {
+              "text": "Distinguishes acquired from hereditary deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SERPING1 gene analysis",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty and family studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for lymphoproliferative or autoimmune disease",
+          "cells": [
+            {
+              "text": "When the acquired form is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -180,11 +235,37 @@
       "kind": "ddx",
       "title": "Look-alike causes of angio-oedema",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Histaminergic angio-oedema with or without urticaria", "cells": [{"text": "Urticaria present; mast cell-mediated; responds to antihistamines"}], "cite": "c1"},
-        {"parameter": "ACE inhibitor-induced angio-oedema", "cells": [{"text": "Drug history of angiotensin-converting-enzyme inhibitor; bradykinin-mediated"}], "cite": "c1"},
-        {"parameter": "Acquired C1 esterase inhibitor deficiency", "cells": [{"text": "Later onset; low C1q; associated lymphoproliferative or autoimmune disease"}], "cite": "c1"}
+        {
+          "parameter": "Histaminergic angio-oedema with or without urticaria",
+          "cells": [
+            {
+              "text": "Urticaria present; mast cell-mediated; responds to antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor-induced angio-oedema",
+          "cells": [
+            {
+              "text": "Drug history of angiotensin-converting-enzyme inhibitor; bradykinin-mediated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired C1 esterase inhibitor deficiency",
+          "cells": [
+            {
+              "text": "Later onset; low C1q; associated lymphoproliferative or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -192,16 +273,198 @@
       "kind": "treatment",
       "title": "Management options in C1 esterase inhibitor deficiency",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Acute attacks", "cells": [{"text": "C1-inhibitor concentrate, icatibant, or ecallantide"}, {"text": "Antihistamines, corticosteroids and adrenaline are ineffective"}], "cite": "c1"},
-        {"parameter": "Laryngeal attacks", "cells": [{"text": "Airway emergency; immediate specific therapy and readiness to secure the airway"}, {"text": "Principal cause of death"}], "cite": "c1"},
-        {"parameter": "Long-term prophylaxis", "cells": [{"text": "C1-inhibitor replacement, lanadelumab or oral berotralstat; attenuated androgens or antifibrinolytics where unavailable"}, {"text": "Frequent or severe attacks"}], "cite": "c1"},
-        {"parameter": "Procedural prophylaxis", "cells": [{"text": "Short-term C1-inhibitor concentrate before dental, surgical or other high-risk procedures"}, {"text": "Before procedures"}], "cite": "c1"},
-        {"parameter": "Trigger avoidance", "cells": [{"text": "Avoid ACE inhibitors and oestrogen-containing contraceptives; manage infection and trauma"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Self-management", "cells": [{"text": "Self-administration training, emergency action plan, on-demand therapy carried at all times"}, {"text": "Patient safety"}], "cite": "c1"},
-        {"parameter": "Monitoring and counselling", "cells": [{"text": "Attack frequency, treatment response and quality of life; genetic counselling and family screening"}, {"text": "Autosomal dominant SERPING1"}], "cite": "c1"}
+        {
+          "parameter": "Acute attacks",
+          "cells": [
+            {
+              "text": "C1-inhibitor concentrate, icatibant, or ecallantide"
+            },
+            {
+              "text": "Antihistamines, corticosteroids and adrenaline are ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal attacks",
+          "cells": [
+            {
+              "text": "Airway emergency; immediate specific therapy and readiness to secure the airway"
+            },
+            {
+              "text": "Principal cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term prophylaxis",
+          "cells": [
+            {
+              "text": "C1-inhibitor replacement, lanadelumab or oral berotralstat; attenuated androgens or antifibrinolytics where unavailable"
+            },
+            {
+              "text": "Frequent or severe attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedural prophylaxis",
+          "cells": [
+            {
+              "text": "Short-term C1-inhibitor concentrate before dental, surgical or other high-risk procedures"
+            },
+            {
+              "text": "Before procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Avoid ACE inhibitors and oestrogen-containing contraceptives; manage infection and trauma"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Self-management",
+          "cells": [
+            {
+              "text": "Self-administration training, emergency action plan, on-demand therapy carried at all times"
+            },
+            {
+              "text": "Patient safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and counselling",
+          "cells": [
+            {
+              "text": "Attack frequency, treatment response and quality of life; genetic counselling and family screening"
+            },
+            {
+              "text": "Autosomal dominant SERPING1"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
+    },
+    {
+      "id": "c1_esterase_inhibitor_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
     }
   ],
   "flowcharts": [
@@ -210,26 +473,107 @@
       "title": "Diagnosis and management of C1 esterase inhibitor deficiency",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Non-pitting angio-oedema without urticaria, with or without abdominal pain", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: laryngeal or tongue swelling, stridor or voice change?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: airway emergency; C1-inhibitor concentrate or icatibant; secure airway", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Serum C4; C1-INH antigenic and functional levels; C1q", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Low C1-INH level or function with low C4?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Low C1q with later onset: screen for lymphoproliferative or autoimmune disease", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Acute treatment; prophylaxis for frequent attacks; avoid ACE inhibitors and oestrogens", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "No: consider histaminergic angio-oedema or ACE inhibitor angio-oedema", "cite": "c1"},
-        {"id": "n9", "type": "outcome", "text": "Lifelong disease; good control with modern therapy; untreated laryngeal attacks can be fatal", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-pitting angio-oedema without urticaria, with or without abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: laryngeal or tongue swelling, stridor or voice change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: airway emergency; C1-inhibitor concentrate or icatibant; secure airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum C4; C1-INH antigenic and functional levels; C1q",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low C1-INH level or function with low C4?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Low C1q with later onset: screen for lymphoproliferative or autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute treatment; prophylaxis for frequent attacks; avoid ACE inhibitors and oestrogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider histaminergic angio-oedema or ACE inhibitor angio-oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Lifelong disease; good control with modern therapy; untreated laryngeal attacks can be fatal",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n8", "label": "No"},
-        {"from": "n6", "to": "n7", "label": "Next"},
-        {"from": "n7", "to": "n9", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
       ]
     }
   ]

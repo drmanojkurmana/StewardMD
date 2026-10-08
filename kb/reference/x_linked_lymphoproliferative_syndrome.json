@@ -162,5 +162,222 @@
       "caption": "Overview comparison matrix for x-linked lymphoproliferative syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing of SH2D1A and XIAP",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for SAP and XIAP expression",
+          "cells": [
+            {
+              "text": "Protein deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "PRF1, UNC13D or related defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other EBV-susceptibility immunodeficiencies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency treatment of EBV-driven HLH",
+          "cells": [
+            {
+              "text": "Immunosuppressive and cytotoxic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_lymphoproliferative_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of X-Linked Lymphoproliferative Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked lymphoproliferative syndrome: severe infectious mononucleosis in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fulminant EBV infection or haemophagocytosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of EBV-driven haemophagocytic lymphohistiocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SH2D1A and XIAP testing, flow cytometry for SAP and XIAP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing or flow cytometry confirm SAP or XIAP deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial HLH or other EBV-susceptibility disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency immunosuppressive therapy for EBV-driven HLH",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not dismiss severe mononucleosis in a young boy as ordinary EBV",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Definitive transplantation planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Often catastrophic; early recognition of the immune defect matters",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for tracheoesophageal fistula."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tracheoesophageal_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Tracheoesophageal Fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tracheoesophageal fistula: newborn with drooling, choking and feed cyanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: aspiration pneumonitis, gastric distension, or critical cardiac anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway protection, suction and surgical referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasogastric tube passage with radiograph; echocardiography; VACTERL screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the tube coil in the upper pouch, with gas pattern showing a fistula?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated atresia, laryngeal cleft, choanal atresia or vascular ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nil by mouth, continuous pouch suction and head-up nursing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical ligation and division with oesophageal anastomosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Preoperative echocardiography and VACTERL screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Careful ventilation and treatment of aspiration pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Endoscopic dilatation and reflux control after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable with early repair; prematurity and cardiac anomalies drive outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tracheoesophageal_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasogastric tube with radiograph",
+          "cells": [
+            {
+              "text": "Tube coiling in the upper pouch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest and abdominal radiograph",
+          "cells": [
+            {
+              "text": "Gas pattern; gasless abdomen suggests atresia without distal fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac anomalies and aortic arch side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and spinal and limb assessment",
+          "cells": [
+            {
+              "text": "VACTERL anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy or contrast study",
+          "cells": [
+            {
+              "text": "H-type fistula, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheoesophageal_fistula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated oesophageal atresia without fistula",
+          "cells": [
+            {
+              "text": "Gasless abdomen on radiograph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal cleft",
+          "cells": [
+            {
+              "text": "Aspiration without an oesophageal pouch on tube passage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular ring causing feeding difficulty",
+          "cells": [
+            {
+              "text": "Feeding difficulty without a fistula or pouch on tube passage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheoesophageal_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway and lung protection",
+          "cells": [
+            {
+              "text": "Nil by mouth, continuous suction of the upper pouch, head-up positioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive surgery",
+          "cells": [
+            {
+              "text": "Ligation and division of the fistula with primary oesophageal anastomosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative cardiac and VACTERL screen",
+          "cells": [
+            {
+              "text": "Echocardiography and associated anomaly review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Treatment of aspiration pneumonitis with careful ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative management",
+          "cells": [
+            {
+              "text": "Endoscopic stricture dilation, acid suppression or fundoplication, and tracheomalacia care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Feeding, growth and respiratory status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

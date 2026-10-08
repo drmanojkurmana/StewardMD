@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for trichorhinophalangeal syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichorhinophalangeal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Trichorhinophalangeal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichorhinophalangeal syndrome: sparse hair, bulbous nose and short digits",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: nerve or cord compression from exostoses, or painful progressive arthropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal or neurosurgical review for exostosis compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hand radiographs for cone-shaped epiphyses; TRPS1 testing; deletion analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TRPS1 testing or radiography show cone-shaped epiphyses?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acrodysostosis, multiple exostoses or ectodermal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no disease-specific drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, analgesia and orthopaedic surgery for hip and hand disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Paediatric endocrinology review for short stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision of symptomatic exostoses in Langer-Giedion syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family TRPS1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Normal life expectancy; morbidity from short stature, hand deformity and arthropathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichorhinophalangeal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Cone-shaped epiphyses of phalanges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRPS1 molecular testing",
+          "cells": [
+            {
+              "text": "Pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray or deletion analysis",
+          "cells": [
+            {
+              "text": "Langer-Giedion syndrome with EXT1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip imaging",
+          "cells": [
+            {
+              "text": "Degenerative or Perthes-like change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Suspected type II"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorhinophalangeal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acrodysostosis",
+          "cells": [
+            {
+              "text": "Acromelic dysplasia without the hair and nose triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple hereditary exostoses",
+          "cells": [
+            {
+              "text": "Exostoses without the cone-shaped epiphyses and hair change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia with sparse hair",
+          "cells": [
+            {
+              "text": "Dental and skin features; no cone-shaped epiphyses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorhinophalangeal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip and joint management",
+          "cells": [
+            {
+              "text": "Physiotherapy, analgesia, and surgery including joint replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and hand therapy",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology review; hand therapy for brachydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exostosis surgery in type II",
+          "cells": [
+            {
+              "text": "Symptomatic osteochondromas, with malignancy vigilance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair and cosmetic advice",
+          "cells": [
+            {
+              "text": "Camouflage or hairpieces for sparse hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "TRPS1 testing and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

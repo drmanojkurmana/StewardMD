@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for tuberous sclerosis skin."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tuberous_sclerosis_skin-dx-mgmt",
+      "title": "Diagnosis and management of tuberous sclerosis skin",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tuberous sclerosis skin signs: facial angiofibromas or ash-leaf macules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: refractory seizures, or respiratory symptoms in a woman?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for refractory seizures or developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood's lamp examination; TSC1 and TSC2 testing; systemic screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do Wood's lamp findings and genetic testing fit tuberous sclerosis criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acne, naevus depigmentosus or vitiligo, NF1 or Birt-Hogg-Dube syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical sirolimus for facial angiofibromas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laser, excision or curettage for angiofibromas and Koenen tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Camouflage and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trigger full multisystem evaluation from cutaneous signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic dermatological review and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Skin lesions benign but cause cosmetic burden; systemic disease drives prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tuberous_sclerosis_skin-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Hypomelanotic macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSC1 and TSC2 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cortical tubers, subependymal nodules and giant cell astrocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging",
+          "cells": [
+            {
+              "text": "Angiomyolipomas and cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac rhabdomyomas, especially in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Retinal hamartomas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tuberous_sclerosis_skin-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acne vulgaris or rosacea",
+          "cells": [
+            {
+              "text": "Mimics facial angiofibromas; no hypomelanotic macules or other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules rather than ash-leaf macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Birt-Hogg-Dube syndrome",
+          "cells": [
+            {
+              "text": "Fibrofolliculomas rather than angiofibromas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tuberous_sclerosis_skin-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical sirolimus",
+          "cells": [
+            {
+              "text": "Facial angiofibromas; reduces size and vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser, excision, dermabrasion or curettage",
+          "cells": [
+            {
+              "text": "Angiofibromas, fibrous cephalic plaques and Koenen tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Camouflage and psychological support",
+          "cells": [
+            {
+              "text": "Cosmetic and social burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation and mTOR therapy",
+          "cells": [
+            {
+              "text": "Triggered by cutaneous signs when brain, renal or lung disease present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic dermatological review",
+          "cells": [
+            {
+              "text": "Lesions emerge through adolescence and adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

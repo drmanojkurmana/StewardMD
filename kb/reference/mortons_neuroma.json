@@ -147,5 +147,287 @@
       "caption": "Overview comparison matrix for morton neuroma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mortons_neuroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mulder click and web space compression test",
+          "cells": [
+            {
+              "text": "Clinical signs of the interdigital neuroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "First-line imaging to confirm and size the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "When ultrasound is equivocal or other pathology is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weightbearing radiographs",
+          "cells": [
+            {
+              "text": "Exclude stress fracture or Freiberg disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic local anaesthetic injection",
+          "cells": [
+            {
+              "text": "Confirms the web space as pain source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mortons_neuroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metatarsophalangeal synovitis or plantar plate instability",
+          "cells": [
+            {
+              "text": "Common true source of pain mistaken for neuroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metatarsal stress fracture",
+          "cells": [
+            {
+              "text": "Excluded by weightbearing radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Freiberg disease",
+          "cells": [
+            {
+              "text": "Excluded by weightbearing radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mortons_neuroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Footwear modification",
+          "cells": [
+            {
+              "text": "Wide, low-heeled shoes with metatarsal pads or orthoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Often combined with local anaesthetic into the web space"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts",
+          "cells": [
+            {
+              "text": "Activity modification, analgesia; alcohol or sclerosing injection or radiofrequency ablation in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurectomy or nerve decompression",
+          "cells": [
+            {
+              "text": "For symptoms resistant to conservative care; counsel on recurrent stump neuroma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mortons_neuroma-dx-mgmt",
+      "title": "Diagnosis and management of Morton neuroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Forefoot pain over an interdigital web space",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Suspected soft-tissue tumour, bilateral lesions or progressive neurological deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "MRI and referral for tumour or proximal nerve entrapment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mulder click, ultrasound, weightbearing films, diagnostic web-space injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neuroma on imaging with relief after local anaesthetic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MTP synovitis, plantar plate instability, stress fracture, Freiberg",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide low-heeled shoes with metatarsal pad",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroid and local anaesthetic injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alcohol, sclerosing injection or radiofrequency ablation if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurectomy or decompression if resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with footwear and injection; excision gives good relief",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

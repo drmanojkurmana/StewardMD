@@ -152,5 +152,278 @@
       "caption": "Overview comparison matrix for visceral artery aneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "visceral_artery_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography of the abdomen",
+          "cells": [
+            {
+              "text": "Diagnosis, size and anatomical relationships"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital subtraction catheter angiography",
+          "cells": [
+            {
+              "text": "Usually with intent to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Splenic and hepatic lesions and surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Alternative anatomical assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "visceral_artery_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic pseudocyst or cystic neoplasm",
+          "cells": [
+            {
+              "text": "Imaging mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal aortic aneurysm",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arteriovenous malformation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "visceral_artery_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endovascular repair",
+          "cells": [
+            {
+              "text": "Coil embolisation or covered stenting for true aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open surgical reconstruction",
+          "cells": [
+            {
+              "text": "Alternative to endovascular repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat all pseudoaneurysms",
+          "cells": [
+            {
+              "text": "Regardless of size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat splenic aneurysms in women of childbearing age",
+          "cells": [
+            {
+              "text": "Given rupture risk in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "visceral_artery_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Visceral artery aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected visceral artery aneurysm: abdominal pain or gastrointestinal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rupture with instability, GI bleeding or pregnancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intervention for rupture or haemodynamic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT angiography, catheter angiography, duplex ultrasound for splenic or hepatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT angiography confirm a visceral artery aneurysm or pseudoaneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pancreatic pseudocyst, aortic aneurysm or other abdominal mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endovascular repair by coil embolisation or covered stent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Open surgical reconstruction where endovascular repair is unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat all pseudoaneurysms regardless of size",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat splenic aneurysms in women of childbearing age",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rupture carries high mortality; elective treatment reduces risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

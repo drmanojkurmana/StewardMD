@@ -147,5 +147,352 @@
       "caption": "Overview comparison matrix for postdural puncture headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postdural_puncture_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of postural headache",
+          "cells": [
+            {
+              "text": "Postural nature confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Focal signs excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI brain",
+          "cells": [
+            {
+              "text": "Atypical, worsening or neurological features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia investigations",
+          "cells": [
+            {
+              "text": "Postpartum patient where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection assessment",
+          "cells": [
+            {
+              "text": "Fever or meningism present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postdural_puncture_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Migraine or tension-type headache",
+          "cells": [
+            {
+              "text": "Not postural"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective meningitis or chemical meningism",
+          "cells": [
+            {
+              "text": "Fever or neck stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Venous territory on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subdural haematoma",
+          "cells": [
+            {
+              "text": "Focal deficit or reduced consciousness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia or eclampsia",
+          "cells": [
+            {
+              "text": "Postpartum hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocephalus or caffeine withdrawal",
+          "cells": [
+            {
+              "text": "Other causes of headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postdural_puncture_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Rest, and oral or intravenous rehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic measures",
+          "cells": [
+            {
+              "text": "Antiemetics and caffeine as an adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Many cases settle spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural blood patch",
+          "cells": [
+            {
+              "text": "Definitive treatment for severe or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early anaesthetic input",
+          "cells": [
+            {
+              "text": "Blood patch and management of complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for red flags",
+          "cells": [
+            {
+              "text": "Loss of postural character or focal neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum pre-eclampsia",
+          "cells": [
+            {
+              "text": "Actively exclude pre-eclampsia and cortical vein thrombosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postdural_puncture_headache-dx-mgmt",
+      "title": "Diagnosis and management of Postdural puncture headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache worse on sitting or standing after dural puncture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (loss of postural pattern, focal deficit, fever, thunderclap onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological imaging for focal deficit, seizure or reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Postural history; neurological examination; CT or MRI if atypical; infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the headache postural and temporally linked to the dural puncture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meningitis, subdural haematoma, cerebral venous thrombosis or migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care with rest, rehydration and symptomatic measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure the patient and adopt a stepwise approach",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Autologous epidural blood patch for severe or persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Involve the anaesthetic or pain service early for blood patch",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Exclude pre-eclampsia and cortical vein thrombosis postpartum",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve within days to weeks; a blood patch relieves most remaining cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,231 @@
       "caption": "Overview comparison matrix for x-linked retinoschisis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_retinoschisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spectral-domain OCT",
+          "cells": [
+            {
+              "text": "Inner retinal foveal schisis in a spoke-wheel pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral retinal examination",
+          "cells": [
+            {
+              "text": "Peripheral schisis and retinal tears"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_retinoschisis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystoid macular oedema from other causes",
+          "cells": [
+            {
+              "text": "Leaks on angiography; foveal schisis does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goldmann-Favre syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhegmatogenous retinal detachment",
+          "cells": [
+            {
+              "text": "Sudden visual loss needs urgent assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_retinoschisis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbonic anhydrase inhibitors",
+          "cells": [
+            {
+              "text": "Topical or systemic first-line to reduce foveal schisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent review for complications",
+          "cells": [
+            {
+              "text": "Vitreous haemorrhage or retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_retinoschisis-dx-mgmt",
+      "title": "Diagnosis and management of X-linked retinoschisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked retinoschisis: reduced central vision in a male with RS1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden visual loss, new floaters or flashes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitreoretinal assessment for haemorrhage or detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spectral-domain OCT, peripheral examination, RS1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT show inner foveal schisis with an RS1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cystoid macular oedema or Goldmann-Favre syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical or systemic carbonic anhydrase inhibitor first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Examine the periphery for schisis and retinal tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent review for vitreous haemorrhage or retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Complications need urgent treatment; schisis response to inhibitors varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

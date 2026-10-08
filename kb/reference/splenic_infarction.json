@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for splenic infarction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sabiston Textbook of Surgery / Postgraduate Haematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "splenic_infarction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT of the abdomen",
+          "cells": [
+            {
+              "text": "Wedge-shaped perfusion defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Cardioembolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, blood film and JAK2 screen",
+          "cells": [
+            {
+              "text": "Myeloproliferative cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia and antiphospholipid screen",
+          "cells": [
+            {
+              "text": "Hypercoagulable state, particularly in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Infective endocarditis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin electrophoresis",
+          "cells": [
+            {
+              "text": "Sickling disorder, where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_infarction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Left upper quadrant pain that is often misattributed to it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic rupture or subcapsular haematoma",
+          "cells": [
+            {
+              "text": "A complication to exclude when haemodynamically unstable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_infarction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and hydration",
+          "cells": [
+            {
+              "text": "Uncomplicated infarction, which is usually managed conservatively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation for cardioembolic sources",
+          "cells": [
+            {
+              "text": "Such as atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for hypercoagulable states",
+          "cells": [
+            {
+              "text": "Such as antiphospholipid syndrome, with anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell crisis management",
+          "cells": [
+            {
+              "text": "Hydration, oxygenation and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobials and drainage",
+          "cells": [
+            {
+              "text": "If the infarct becomes infected; splenectomy occasionally"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Abscess, pseudocyst or haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunisation and prophylaxis",
+          "cells": [
+            {
+              "text": "Functional asplenia or autosplenectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "splenic_infarction-dx-mgmt",
+      "title": "Diagnosis and management of splenic infarction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Left upper quadrant pain with splenic perfusion defect: suspected infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemodynamic instability, swinging fever, falling haemoglobin)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for rupture, haemorrhage or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT abdomen; echocardiography; ECG and monitoring; FBC, blood film, JAK2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a cardioembolic or hypercoagulable source identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pancreatitis, pyelonephritis or pneumonia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia and hydration for uncomplicated infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulation for cardioembolic sources such as atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Investigate and treat hypercoagulable states such as antiphospholipid syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunisation and prophylaxis for functional asplenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most uncomplicated cases settle conservatively; abscess and haemorrhage are risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

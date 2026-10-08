@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for splenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grainger & Allison's Diagnostic Radiology / Postgraduate Haematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "splenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Technetium heat-damaged red cell scintigraphy with SPECT/CT",
+          "cells": [
+            {
+              "text": "Confirms splenic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Nodules and their distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with superparamagnetic iron oxide sequences",
+          "cells": [
+            {
+              "text": "Reticuloendothelial uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Howell-Jolly bodies and hyposplenic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of splenic trauma or splenectomy",
+          "cells": [
+            {
+              "text": "Likely cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided biopsy",
+          "cells": [
+            {
+              "text": "Only where the diagnosis remains uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Accessory spleen",
+          "cells": [
+            {
+              "text": "Congenital and usually solitary; splenosis is acquired after rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritoneal carcinomatosis or metastatic deposits",
+          "cells": [
+            {
+              "text": "Implants can mimic peritoneal metastases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment for asymptomatic splenosis",
+          "cells": [
+            {
+              "text": "Benign; requires only recognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive confirmation",
+          "cells": [
+            {
+              "text": "Heat-damaged red cell scintigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid resection or biopsy",
+          "cells": [
+            {
+              "text": "Unless the diagnosis is genuinely uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination and infection prophylaxis",
+          "cells": [
+            {
+              "text": "Implants restore only partial splenic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film monitoring",
+          "cells": [
+            {
+              "text": "Hyposplenic features such as Howell-Jolly bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Only for symptomatic implants or complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "splenosis-dx-mgmt",
+      "title": "Diagnosis and management of splenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Peritoneal nodules after prior splenic trauma: suspected splenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features that cannot be separated from malignancy, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review where features cannot be separated from malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tc heat-damaged red cell scintigraphy with SPECT/CT; contrast CT; blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does scintigraphy confirm ectopic splenic tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peritoneal carcinomatosis or another tumour; biopsy if still uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No treatment for asymptomatic splenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vaccination and infection prophylaxis, since implants give partial function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Blood film monitoring for hyposplenic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical excision only for symptomatic implants or complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign and incidental; partial splenic function persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for sarcopenia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sarcopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Handgrip dynamometry",
+          "cells": [
+            {
+              "text": "Muscle strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DXA or bioimpedance",
+          "cells": [
+            {
+              "text": "Muscle mass, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait speed, SPPB or timed up-and-go",
+          "cells": [
+            {
+              "text": "Physical performance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SARC-F questionnaire",
+          "cells": [
+            {
+              "text": "Screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory evaluation",
+          "cells": [
+            {
+              "text": "Reversible causes: vitamin D, thyroid function, inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cancer cachexia",
+          "cells": [
+            {
+              "text": "Rapid muscle loss with inflammation-driven wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular disorders",
+          "cells": [
+            {
+              "text": "Neurological features pointing to motor neuron disease or myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frailty syndrome",
+          "cells": [
+            {
+              "text": "Broader multisystem construct that overlaps with sarcopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resistance and strength training",
+          "cells": [
+            {
+              "text": "Cornerstone intervention for strength and performance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein intake",
+          "cells": [
+            {
+              "text": "Distributed across meals; oral supplements if intake is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D and nutrition",
+          "cells": [
+            {
+              "text": "Correct deficiency with dietitian input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Treat endocrine disorders, inactivity, undernutrition; review medications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and comprehensive geriatric assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Handgrip strength and gait speed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sarcopenia-dx-mgmt",
+      "title": "Diagnosis and management of Sarcopenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older adult with weakness, slow gait or falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid muscle loss, injurious falls, rising dependence or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Look for malignancy, cachexia or a primary neuromuscular disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Handgrip, gait speed, DXA or bioimpedance, SARC-F, vitamin D and thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are low strength and low muscle mass or performance confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cachexia, disuse atrophy, endocrine causes, undernutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Progressive resistance training",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adequate protein across meals; correct vitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat secondary causes and review medications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Falls prevention and physiotherapy; monitor grip and gait speed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Predicts falls, fractures and mortality; improves with exercise and nutrition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

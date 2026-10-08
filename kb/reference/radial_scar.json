@@ -151,5 +151,256 @@
       "caption": "Overview comparison matrix for radial scar."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Breast Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "radial_scar-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic mammography with additional projections",
+          "cells": [
+            {
+              "text": "Stellate lesion characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tomosynthesis",
+          "cells": [
+            {
+              "text": "Stellate lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted ultrasound",
+          "cells": [
+            {
+              "text": "Mammographic abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided biopsy",
+          "cells": [
+            {
+              "text": "Histological sampling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radial_scar-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive carcinoma of no special type",
+          "cells": [
+            {
+              "text": "Presents as a stellate lesion"
+            },
+            {
+              "text": "Core needle biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat necrosis with scarring",
+          "cells": [
+            {
+              "text": "Postsurgical or traumatic scar"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "radial_scar-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Image-guided biopsy",
+          "cells": [
+            {
+              "text": "Core or vacuum-assisted biopsy of the stellate lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision",
+          "cells": [
+            {
+              "text": "When core sampling is non-diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical review",
+          "cells": [
+            {
+              "text": "Excision for atypia or discordance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "radial_scar-dx-mgmt",
+      "title": "Diagnosis and management of Radial scar",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected radial scar: stellate lesion on mammography",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Atypical hyperplasia or in situ carcinoma on biopsy, discordance, or growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent breast surgical review for atypia or discordance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mammography; tomosynthesis; targeted ultrasound; image-guided biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a benign radial scar confirmed on biopsy without atypia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Excise to exclude carcinoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Image-guided core or vacuum biopsy of the stellate lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision when core sampling is non-diagnostic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision for atypia or discordance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Imaging follow-up of confirmed benign lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

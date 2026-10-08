@@ -146,5 +146,258 @@
       "caption": "Overview comparison matrix for vitiligo."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitiligo-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Aids the clinical diagnosis of depigmented patches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests and thyroid autoantibodies",
+          "cells": [
+            {
+              "text": "Autoimmune association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for other autoimmune disease",
+          "cells": [
+            {
+              "text": "When clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitiligo-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pityriasis versicolor, hypopigmented type",
+          "cells": [
+            {
+              "text": "Confused with vitiligo; separated by fungal examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-inflammatory hypopigmentation",
+          "cells": [
+            {
+              "text": "Follows an inflammatory skin condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis alba",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculoid leprosy",
+          "cells": [
+            {
+              "text": "Solitary hypopigmented anaesthetic patch"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitiligo-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids and calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "First-line to arrest progression and promote repigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical ruxolitinib",
+          "cells": [
+            {
+              "text": "Non-segmental facial vitiligo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sun protection",
+          "cells": [
+            {
+              "text": "Depigmented skin is prone to sunburn and photodamage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitiligo-dx-mgmt",
+      "title": "Diagnosis and management of Vitiligo",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitiligo: well-demarcated chalk-white macules with complete loss of pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly spreading depigmentation or anaesthetic patch)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for leprosy where endemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood's lamp examination, thyroid function and autoantibodies, autoimmune screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does clinical examination with Wood's lamp confirm vitiligo?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pityriasis versicolor, post-inflammatory change or leprosy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors to arrest progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical ruxolitinib for non-segmental facial vitiligo",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sun protection for depigmented skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Disease may progress or stabilise; repigmentation varies between patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

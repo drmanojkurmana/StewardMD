@@ -144,5 +144,296 @@
       "caption": "Overview comparison matrix for subacute thyroiditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subacute_thyroiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Phase of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioiodine uptake scan",
+          "cells": [
+            {
+              "text": "Low uptake in the thyrotoxic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound with vascularity",
+          "cells": [
+            {
+              "text": "Reduced vascularity, unlike Graves disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH-receptor antibodies",
+          "cells": [
+            {
+              "text": "Where Graves disease is a serious consideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_thyroiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease",
+          "cells": [
+            {
+              "text": "Raised uptake and vascularity; subacute thyroiditis shows reduced vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Painless (silent) thyroiditis",
+          "cells": [
+            {
+              "text": "Painless, whereas subacute thyroiditis is tender"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_thyroiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Milder thyroid pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral corticosteroids",
+          "cells": [
+            {
+              "text": "Severe or unremitting pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Adrenergic thyrotoxic symptoms in the destructive phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting illness; no antithyroid drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "Symptomatic hypothyroid phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function monitoring",
+          "cells": [
+            {
+              "text": "Through the phases of disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subacute_thyroiditis-dx-mgmt",
+      "title": "Diagnosis and management of Subacute thyroiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender thyroid after a viral illness: suspected subacute thyroiditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe fever, fluctuance, cardiac compromise, compression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suppurative thyroiditis or cardiac compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TFTs; ESR and CRP; radioiodine uptake; thyroid ultrasound with vascularity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are raised ESR and CRP with low uptake and reduced vascularity seen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Graves disease, silent thyroiditis or suppurative thyroiditis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs for milder thyroid pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral corticosteroids for severe or unremitting pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blockade for adrenergic thyrotoxic symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Levothyroxine during a symptomatic hypothyroid phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting; a minority are left with permanent hypothyroidism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

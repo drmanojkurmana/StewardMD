@@ -148,5 +148,345 @@
       "caption": "Overview comparison matrix for trismus-pseudocamptodactyly syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trismus_pseudocamptodactyly_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Trismus-pseudocamptodactyly syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trismus-pseudocamptodactyly: limited mouth opening with finger flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: anticipated difficult intubation or feeding difficulty in infancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anaesthetic airway planning before any procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wrist-dependent flexion test; mouth opening; MYH8 testing; pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does finger flexion appear on wrist extension and vanish on wrist flexion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other distal arthrogryposis, isolated trismus or Freeman-Sheldon syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stretching and physiotherapy for mouth opening and finger tightness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical lengthening of short flexor tendons in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic correction of associated talipes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dental and maxillofacial care adapted to limited opening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Plan anaesthesia for the difficult airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Genetic counselling for the autosomal dominant MYH8 variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Good prognosis; normal intellect and lifespan; function improves with stretching",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trismus_pseudocamptodactyly_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical demonstration of wrist-dependent finger flexion",
+          "cells": [
+            {
+              "text": "Pseudocamptodactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal mouth opening measurement",
+          "cells": [
+            {
+              "text": "Trismus severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYH8 testing and distal arthrogryposis panel",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-generation pedigree",
+          "cells": [
+            {
+              "text": "Examination of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TMJ and hand imaging",
+          "cells": [
+            {
+              "text": "Where surgery is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and maxillofacial assessment",
+          "cells": [
+            {
+              "text": "Access and hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and anaesthetic evaluation",
+          "cells": [
+            {
+              "text": "Before any procedure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trismus_pseudocamptodactyly_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal arthrogryposis with true camptodactyly",
+          "cells": [
+            {
+              "text": "Fixed finger contracture that does not depend on wrist position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated congenital trismus or TMJ ankylosis",
+          "cells": [
+            {
+              "text": "Limited mouth opening without finger flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Freeman-Sheldon syndrome",
+          "cells": [
+            {
+              "text": "Microstomia with distinctive facial and hand features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trismus_pseudocamptodactyly_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stretching and physiotherapy",
+          "cells": [
+            {
+              "text": "Mouth opening and finger flexor tightness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical lengthening of short flexor tendons",
+          "cells": [
+            {
+              "text": "Selected cases with functional limitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic correction of talipes",
+          "cells": [
+            {
+              "text": "Associated foot deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adapted dental and maxillofacial care",
+          "cells": [
+            {
+              "text": "Limited mouth opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful anaesthetic planning",
+          "cells": [
+            {
+              "text": "Difficult airway from restricted opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant MYH8 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

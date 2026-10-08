@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for toddler's diarrhoea (chronic nonspecific diarrhoea)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard paediatric gastroenterology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toddler_diarrhea-dx-mgmt",
+      "title": "Diagnosis and management of Toddler's diarrhoea (chronic nonspecific diarrhoea)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toddler's diarrhoea: frequent loose stools in a thriving toddler",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: faltering growth, blood in stool, or nocturnal or systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for organic disease such as coeliac disease or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth chart review; dietary history; coeliac serology if concerns",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the child growing well with a dietary pattern of excess fluid and juice?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coeliac disease, giardiasis or inflammatory bowel disease; investigate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; benign functional disorder requiring no medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce fluid and fruit juice; limit fructose and sorbitol drinks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintain adequate dietary fat and moderate fibre",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial growth monitoring to confirm thriving",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid unnecessary investigation and restrictive diets",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent outlook; resolves spontaneously by school age without consequences",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toddler_diarrhea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful growth monitoring",
+          "cells": [
+            {
+              "text": "Thriving growth confirms the functional diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed dietary history",
+          "cells": [
+            {
+              "text": "Fluid, fruit juice, fat and fibre intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology",
+          "cells": [
+            {
+              "text": "Growth or symptom concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy, culture and parasite testing",
+          "cells": [
+            {
+              "text": "Infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal elastase",
+          "cells": [
+            {
+              "text": "Pancreatic insufficiency concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal calprotectin",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease consideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toddler_diarrhea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Faltering growth is a red flag; coeliac serology tests for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis or other chronic enteric infection",
+          "cells": [
+            {
+              "text": "Stool testing for parasites and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Blood or mucus in the stool; faecal calprotectin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toddler_diarrhea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign self-limiting functional disorder in a thriving child; no medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary modification (four Fs)",
+          "cells": [
+            {
+              "text": "Reduce excess fluid and fruit juice; limit fructose and sorbitol drinks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate dietary fat",
+          "cells": [
+            {
+              "text": "Avoid a low-fat, high-fibre diet that slows transit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Serial plotting to confirm continued thriving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigation",
+          "cells": [
+            {
+              "text": "No restrictive diets without red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net review",
+          "cells": [
+            {
+              "text": "Faltering growth, blood in stool, nocturnal or systemic symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for thoracic outlet syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy / Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thoracic_outlet_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Thoracic outlet syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thoracic outlet syndrome: arm pain, paraesthesiae, swelling or hand ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: hand ischaemia, acute arm swelling with cyanosis, or progressive wasting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular review for arterial compromise or subclavian vein thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex ultrasound with manoeuvres; CT or MR angiography; nerve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show subclavian compression and identify the subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cervical radiculopathy, distal entrapment or complex regional pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm the subtype with imaging and nerve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and postural correction for neurogenic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation and catheter-directed thrombolysis for venous effort thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bony anomaly resection and subclavian artery repair for arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Urgent escalation for arterial disease given the limb risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neurogenic disease often improves with physiotherapy; arterial disease risks the limb",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thoracic_outlet_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex ultrasound with positional manoeuvres",
+          "cells": [
+            {
+              "text": "Subclavian vessel compression or thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography and venography",
+          "cells": [
+            {
+              "text": "Vascular anatomy and bony anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest and cervical spine radiographs",
+          "cells": [
+            {
+              "text": "Cervical rib or first-rib anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Neurogenic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter venography or arteriography",
+          "cells": [
+            {
+              "text": "Venous or arterial subtype, before intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thoracic_outlet_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cervical radiculopathy",
+          "cells": [
+            {
+              "text": "Neck-related root pain; nerve studies and MRI separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal or cubital tunnel syndrome",
+          "cells": [
+            {
+              "text": "Distal entrapment; nerve studies localise the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complex regional pain syndrome",
+          "cells": [
+            {
+              "text": "Pain out of proportion without vascular or nerve compression on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thoracic_outlet_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Subtype confirmation",
+          "cells": [
+            {
+              "text": "Imaging and nerve studies first, as neurogenic, venous and arterial disease differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic disease",
+          "cells": [
+            {
+              "text": "Physiotherapy and postural correction; decompression for refractory or true neurogenic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous effort thrombosis",
+          "cells": [
+            {
+              "text": "Anticoagulation and catheter-directed thrombolysis, then decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial disease",
+          "cells": [
+            {
+              "text": "Resection of the bony anomaly and subclavian artery repair; thromboembolectomy for emboli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Neuropathic pain control for neurogenic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent arterial escalation",
+          "cells": [
+            {
+              "text": "Risk of hand ischaemia, digital embolism and limb loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

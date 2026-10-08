@@ -151,5 +151,247 @@
       "caption": "Overview comparison matrix for renal oncocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Uro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_oncocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Solid renal mass characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal mass biopsy, where it would change management",
+          "cells": [
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Tumour markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_oncocytoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromophobe renal cell carcinoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear cell renal cell carcinoma with eosinophilic features",
+          "cells": [
+            {
+              "text": "Imaging features overlapping with malignancy"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_oncocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign tumour",
+          "cells": [
+            {
+              "text": "Benign and non-metastasising"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incidental mass",
+          "cells": [
+            {
+              "text": "Work-up of an incidentally found renal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval change",
+          "cells": [
+            {
+              "text": "Urgent review for interval growth or new symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_oncocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Renal oncocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal oncocytoma: solid renal mass, often incidental",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Interval growth, new symptoms, imaging overlapping malignancy, or multiple lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent uro-oncology review for interval growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI; renal mass biopsy if it would change management; IHC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is oncocytoma confirmed with malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chromophobe or clear cell RCC; manage as malignancy and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benign, non-metastasising tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Work up an incidentally found renal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent review for interval growth or new symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Imaging surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

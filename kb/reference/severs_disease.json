@@ -142,5 +142,314 @@
       "caption": "Overview comparison matrix for sever's disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "severs_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Age, activity pattern and positive squeeze test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calf flexibility and footwear assessment",
+          "cells": [
+            {
+              "text": "Calf tightness and footwear contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Training load review",
+          "cells": [
+            {
+              "text": "Recent increase in sporting activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Only to exclude other pathology if the picture is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further imaging",
+          "cells": [
+            {
+              "text": "If red flags for another diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "severs_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcaneal stress fracture",
+          "cells": [
+            {
+              "text": "Missed when features are atypical; image atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone cyst or tumour of the calcaneus",
+          "cells": [
+            {
+              "text": "Night pain, rest pain or focal bony swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "severs_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; resolves with skeletal maturity once the apophysis fuses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relative rest",
+          "cells": [
+            {
+              "text": "Reduce training load in painful periods; avoid complete rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calf stretching",
+          "cells": [
+            {
+              "text": "Heel-cord flexibility exercises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heel cushions, heel raises or shock-absorbing insoles",
+          "cells": [
+            {
+              "text": "Offload the apophysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol or NSAIDs during flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear review and graded return to sport",
+          "cells": [
+            {
+              "text": "As pain settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Reserved for atypical or persistent presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "severs_disease-dx-mgmt",
+      "title": "Diagnosis and management of Sever's disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Active child with back-of-heel pain worse on running and jumping, eased by rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Night or rest pain, systemic features, bony swelling, unexplained unilateral pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Radiographs and further imaging for stress fracture, infection or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Squeeze test of the calcaneus; calf flexibility; footwear and training load review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Positive squeeze test, typical age and activity, and no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Image for stress fracture, tumour or infection; consider other heel pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure the family that it resolves at skeletal maturity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Relative rest and reduced training load during flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Calf stretching, heel cushions or heel raises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Footwear review; graded return to sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, self-limiting; resolves once the calcaneal apophysis fuses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

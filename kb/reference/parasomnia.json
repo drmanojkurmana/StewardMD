@@ -149,5 +149,303 @@
       "caption": "Overview comparison matrix for parasomnia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parasomnia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed history from patient and bed partner",
+          "cells": [
+            {
+              "text": "Timing within the night and degree of recall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video polysomnography with expanded EEG montage",
+          "cells": [
+            {
+              "text": "Captures events and excludes seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment and dopaminergic imaging",
+          "cells": [
+            {
+              "text": "REM sleep behaviour disorder suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for coexisting sleep apnoea",
+          "cells": [
+            {
+              "text": "Trigger of arousals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and substance review",
+          "cells": [
+            {
+              "text": "Provoking agents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parasomnia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nocturnal frontal-lobe epilepsy",
+          "cells": [
+            {
+              "text": "Stereotyped events within one night; expanded-montage polysomnography separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea with confusional arousals",
+          "cells": [
+            {
+              "text": "Arousals from fragmented sleep; a sleep study identifies apnoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parasomnia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove NREM precipitants",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Sleep deprivation, alcohol, fever, stress and offending medications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedroom safety",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Remove hazards and secure windows and doors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat sleep apnoea",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Fragments sleep and provokes arousals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedtime medication",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Clonazepam for injurious NREM events; melatonin or clonazepam for REM sleep behaviour disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and follow-up",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Alpha-synucleinopathy risk; neurology review for parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parasomnia-dx-mgmt",
+      "title": "Diagnosis and management of Parasomnia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent nocturnal episodes of complex behaviour or dream enactment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (violent dream enactment, adult onset, clustered episodes or injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for suspected nocturnal seizures or injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History from bed partner, video polysomnography with expanded EEG, apnoea screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does polysomnography confirm a parasomnia, with seizures and apnoea excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nocturnal seizures, sleep apnoea, nocturnal panic or periodic limb movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove NREM precipitants: sleep deprivation, alcohol, fever, stress, offending drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bedroom safety measures to prevent injury during sleepwalking or dream enactment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat coexisting sleep apnoea; clonazepam for injurious events or REM disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on REM behaviour disorder risk and arrange neurology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Childhood NREM usually benign; REM behaviour disorder carries neurodegenerative risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

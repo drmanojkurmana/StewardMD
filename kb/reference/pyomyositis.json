@@ -152,5 +152,249 @@
       "caption": "Overview comparison matrix for pyomyositis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyomyositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Muscle inflammation and abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or drainage of pus",
+          "cells": [
+            {
+              "text": "Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Often only mildly raised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyomyositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep vein thrombosis of the limb",
+          "cells": [
+            {
+              "text": "Limb swelling and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising fasciitis",
+          "cells": [
+            {
+              "text": "Rapidly spreading pain and toxicity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyomyositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "IV antistaphylococcal antibiotics with MRSA cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Image-guided percutaneous or surgical drainage of collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia; sepsis resuscitation in the septic phase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyomyositis-dx-mgmt",
+      "title": "Diagnosis and management of Pyomyositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyomyositis: painful swollen muscle with fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Septic shock, spreading toxicity, or spread to joint or bone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and surgical review for necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI; blood cultures; inflammatory markers; aspiration for Gram stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pus confirmed on aspiration or drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DVT, haematoma or sarcoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical IV antistaphylococcal antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Image-guided or surgical drainage of collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and sepsis resuscitation if septic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Culture-guided antibiotic course; monitor for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

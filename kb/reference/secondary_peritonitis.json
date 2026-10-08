@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for secondary peritonitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "secondary_peritonitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bloods",
+          "cells": [
+            {
+              "text": "FBC, U&E, CRP, amylase or lipase, blood cultures and lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Acid-base status and organ perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest radiograph",
+          "cells": [
+            {
+              "text": "Free subdiaphragmatic gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Source and any collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritoneal fluid sampling and culture",
+          "cells": [
+            {
+              "text": "When diagnosis or source is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "secondary_peritonitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary (spontaneous bacterial) peritonitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Amylase or lipase and CT help separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured abdominal aortic aneurysm",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "secondary_peritonitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive IV resuscitation",
+          "cells": [
+            {
+              "text": "Correct electrolyte and acid-base derangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Cover enteric Gram-negative coliforms and anaerobes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Surgical repair, resection or washout, or radiological drainage of collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gut decompression and analgesia",
+          "cells": [
+            {
+              "text": "Nasogastric tube for ileus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care",
+          "cells": [
+            {
+              "text": "Vasopressors and organ support for sepsis and septic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "During recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassess and re-image",
+          "cells": [
+            {
+              "text": "Persistent or recurrent collections needing further drainage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "secondary_peritonitis-dx-mgmt",
+      "title": "Diagnosis and management of Secondary peritonitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute abdomen with guarding and rigidity: suspected secondary peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Septic shock, rising lactate, faeculent contamination or organ dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate, antibiotics and emergency source control with critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bloods with lactate and cultures, blood gas, erect CXR, CT abdomen and pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peritoneal source identified on imaging or free gas?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pancreatitis, mesenteric ischaemia, ruptured AAA or primary peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV fluids and empirical broad-spectrum antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical source control or radiological drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric decompression and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess and re-image for persistent collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on early resuscitation and timely source control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

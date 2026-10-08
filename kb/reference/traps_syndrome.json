@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for traps syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "traps_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of traps syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TRAPS: prolonged febrile attacks with migratory limb erythema and myalgia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new proteinuria, rising steroid dependence, or unexcluded infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review for suspected AA amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TNFRSF1A sequencing; CRP and serum amyloid A; urinalysis; MRI of muscles",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TNFRSF1A sequencing show a pathogenic variant with compatible attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial Mediterranean fever, mevalonate kinase deficiency or Still disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra or canakinumab as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids to attenuate attacks, with limited reliance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Etanercept if IL-1 blockade is unsuitable; avoid infliximab",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor CRP, serum amyloid A and urine protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for the autosomal dominant disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "IL-1 blockade controls most disease; cysteine variants risk AA amyloidosis if untreated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "traps_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TNFRSF1A gene sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic variant; low-penetrance variants interpreted with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP and serum amyloid A",
+          "cells": [
+            {
+              "text": "Acute-phase response during and between episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum soluble TNF receptor 1 between attacks",
+          "cells": [
+            {
+              "text": "Reduced shedding supports, but does not confirm, diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of affected muscle groups",
+          "cells": [
+            {
+              "text": "Fasciitis rather than myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and Congo red biopsy",
+          "cells": [
+            {
+              "text": "Proteinuria and AA amyloid, when present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traps_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Shorter attacks in most; genetic testing of both genes separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate kinase deficiency",
+          "cells": [
+            {
+              "text": "Raised serum IgD and urinary mevalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic JIA and adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Overlapping fever and rash; TNFRSF1A testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traps_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab; the most reliably effective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Attenuate attacks; reliance limited by escalating requirements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Etanercept",
+          "cells": [
+            {
+              "text": "Where IL-1 blockade is unsuitable; infliximab avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase and urine monitoring",
+          "cells": [
+            {
+              "text": "CRP, serum amyloid A and proteinuria for AA amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation and counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology involvement",
+          "cells": [
+            {
+              "text": "Amyloid or renal impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

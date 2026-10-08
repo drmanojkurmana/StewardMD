@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for panic disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "panic_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Arrhythmia excluded in appropriate presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Hyperthyroidism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose during symptomatic episodes",
+          "cells": [
+            {
+              "text": "Hypoglycaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance and caffeine use screening",
+          "cells": [
+            {
+              "text": "Stimulant or withdrawal drivers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised anxiety rating scales",
+          "cells": [
+            {
+              "text": "Severity and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panic_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac arrhythmia or acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Syncope or sustained chest pain points to a primary cardiac event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "An endocrine mimic that thyroid testing excludes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caffeine, stimulant or withdrawal states",
+          "cells": [
+            {
+              "text": "Substance-driven attacks; reducing exposure is part of care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panic_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Interoceptive exposure, cognitive restructuring and breathing retraining; first-line psychological care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SSRI or SNRI",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "First-line drug treatment, started at a low dose and titrated upwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Time-limited, for short-term or severe symptoms only, avoiding dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychoeducation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "The mind-body basis of attacks and the benign nature of physical symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical mimics and substances",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Address arrhythmia, hyperthyroidism and hypoglycaemia; reduce caffeine and alcohol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "panic_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Panic disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent sudden surges of fear with palpitations and breathlessness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (syncope, sustained chest pain, suicidal thoughts or escalating sedative use)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac review for syncope or sustained chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, thyroid function, glucose during episodes, substance and caffeine screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are attacks recurrent and unexpected, with medical and substance causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider arrhythmia, hyperthyroidism, hypoglycaemia or substance effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CBT with interoceptive exposure, cognitive restructuring and breathing retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "SSRI or SNRI first-line, started low and titrated upwards",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Time-limited benzodiazepine only for short-term or severe symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychoeducation on the physical symptoms of attacks and their benign nature",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reduce caffeine, stimulants and alcohol; address medical mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and fluctuating; many improve markedly, more so with early CBT",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

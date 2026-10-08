@@ -148,5 +148,240 @@
       "caption": "Overview comparison matrix for wandering spleen."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sabiston Textbook of Surgery / Grainger & Allison's Diagnostic Radiology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wandering_spleen-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Splenic fossa and vascular pedicle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of the ectopic spleen",
+          "cells": [
+            {
+              "text": "Blood supply and viability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wandering_spleen-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovarian or other adnexal mass or torsion",
+          "cells": [
+            {
+              "text": "Pelvic mass that can mimic a tender mobile spleen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric or omental cyst",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retroperitoneal or gastrointestinal tumour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic or ptotic kidney",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wandering_spleen-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Splenopexy",
+          "cells": [
+            {
+              "text": "Fixes a viable spleen in its normal position; preferred in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Non-viable spleen after torsion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wandering_spleen-dx-mgmt",
+      "title": "Diagnosis and management of wandering spleen",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected wandering spleen: mobile abdominal mass in the wrong position",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute pain with tender mobile mass or signs of infarction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for pedicle torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT of the abdomen and pelvis, Doppler ultrasound of the spleen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a spleen outside the splenic fossa with its pedicle?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adnexal mass, mesenteric cyst or tumour; avoid biopsy of the spleen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Splenopexy to fix a viable spleen in its normal position",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Splenectomy if the spleen is non-viable after torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid biopsy or resection of a mistaken tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Torsion of the pedicle can cause spleen infarction; early recognition preserves the organ",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

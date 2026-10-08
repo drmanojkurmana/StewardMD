@@ -148,5 +148,361 @@
       "caption": "Overview comparison matrix for posterior ischaemic optic neuropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_ischaemic_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Giant cell arteritis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and orbits with contrast",
+          "cells": [
+            {
+              "text": "Compression and inflammation excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Later nerve fibre layer thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative record review",
+          "cells": [
+            {
+              "text": "Hypotension, blood loss, positioning and fluid balance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal artery biopsy",
+          "cells": [
+            {
+              "text": "Arteritic mechanism suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_ischaemic_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retrobulbar optic neuritis",
+          "cells": [
+            {
+              "text": "Pain on eye movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive optic neuropathy",
+          "cells": [
+            {
+              "text": "Progressive visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior ischaemic optic neuropathy",
+          "cells": [
+            {
+              "text": "Disc swelling rather than posterior lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chiasmal or retrochiasmal lesion",
+          "cells": [
+            {
+              "text": "Field defect pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortical visual loss",
+          "cells": [
+            {
+              "text": "No optic nerve signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic or nutritional optic neuropathy",
+          "cells": [
+            {
+              "text": "Exposure or deficiency history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional visual loss",
+          "cells": [
+            {
+              "text": "Inconsistent examination findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_ischaemic_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Immediate start when arteritic form suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm giant cell arteritis",
+          "cells": [
+            {
+              "text": "Inflammatory markers and temporal artery biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct hypoperfusion",
+          "cells": [
+            {
+              "text": "Precipitating hypoperfusion in non-arteritic and perioperative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Meticulous haemodynamic management in high-risk surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude compressive causes",
+          "cells": [
+            {
+              "text": "Contrast MRI of brain and orbits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factors and referral",
+          "cells": [
+            {
+              "text": "Vascular risk management and neuro-ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_ischaemic_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of posterior ischaemic optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless sudden visual loss after prolonged surgery or systemic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (GCA features, bilateral loss after surgery, progressive compression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dose corticosteroids if giant cell arteritis is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ESR and CRP; MRI brain and orbits; perimetry; OCT; temporal artery biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do inflammatory markers and biopsy support an arteritic or perioperative cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider optic neuritis, compression, anterior ischaemic neuropathy or chiasmal lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate high-dose systemic corticosteroids for suspected arteritic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm giant cell arteritis with inflammatory markers and temporal artery biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct the precipitating hypoperfusion in non-arteritic and perioperative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prevent through meticulous haemodynamic management in high-risk surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Exclude compressive and inflammatory causes with contrast MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual recovery is generally poor, particularly in arteritic and perioperative forms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

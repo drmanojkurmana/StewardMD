@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for toxic optic neuropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxic_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of toxic optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toxic optic neuropathy: bilateral painless visual loss with colour defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: acute severe visual loss with acidosis, or no recovery after withdrawal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent methanol poisoning treatment with fomepizole, bicarbonate and dialysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug and toxin history; colour vision and fields; OCT; blood gas if methanol suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does history implicate a toxic agent with a symmetric centrocaecal defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nutritional optic neuropathy, LHON or a compressive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the offending agent, such as ethambutol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fomepizole or ethanol, bicarbonate and haemodialysis for methanol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baseline and periodic visual and colour vision monitoring on toxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct any coexisting nutritional deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neuro-ophthalmology and low-vision rehabilitation for established loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Ethambutol-related loss often improves after withdrawal; methanol loss is often permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxic_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Medication, occupational and toxin exposure history",
+          "cells": [
+            {
+              "text": "Offending agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and automated perimetry",
+          "cells": [
+            {
+              "text": "Centrocaecal scotoma and dyschromatopsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Optic nerve fibre loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Compressive or chiasmal lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and osmolar gap",
+          "cells": [
+            {
+              "text": "Methanol poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and folate",
+          "cells": [
+            {
+              "text": "Coexisting nutritional cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional optic neuropathy",
+          "cells": [
+            {
+              "text": "Coexisting deficiency aggravates toxic injury; B12 and folate testing separates the causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leber hereditary optic neuropathy",
+          "cells": [
+            {
+              "text": "Inherited mitochondrial disease; drug history is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive or chiasmal lesion",
+          "cells": [
+            {
+              "text": "MRI excludes a compressive cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdrawal of offending agent",
+          "cells": [
+            {
+              "text": "Ethambutol, linezolid or amiodarone; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methanol poisoning treatment",
+          "cells": [
+            {
+              "text": "Fomepizole or ethanol to inhibit alcohol dehydrogenase; bicarbonate; folinic acid; haemodialysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual monitoring on toxic drugs",
+          "cells": [
+            {
+              "text": "Baseline and periodic acuity and colour vision, as for ethambutol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "B-complex vitamins and folate where a deficiency contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid contributory toxins",
+          "cells": [
+            {
+              "text": "Tobacco and alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmology and low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Established visual loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

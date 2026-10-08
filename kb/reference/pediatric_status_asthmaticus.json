@@ -149,5 +149,282 @@
       "caption": "Overview comparison matrix for pediatric status asthmaticus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pediatric_status_asthmaticus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous pulse oximetry and severity scoring",
+          "cells": [
+            {
+              "text": "Oxygenation and clinical severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas in severe or deteriorating cases",
+          "cells": [
+            {
+              "text": "Rising carbon dioxide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peak expiratory flow where age allows",
+          "cells": [
+            {
+              "text": "Objective airflow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph if complicated",
+          "cells": [
+            {
+              "text": "Pneumothorax, consolidation or foreign body"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pediatric_status_asthmaticus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchiolitis or viral-induced wheeze",
+          "cells": [
+            {
+              "text": "Younger children; age and viral history distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body aspiration",
+          "cells": [
+            {
+              "text": "Sudden onset with focal signs; history separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pediatric_status_asthmaticus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Controlled oxygen and bronchodilators",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Repeated or continuous nebulised short-acting beta-agonists with ipratropium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early systemic corticosteroids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Oral where tolerated, intravenous if severely unwell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory cases",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Specialist care for non-response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Work of breathing and mental state, not saturation alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pediatric_status_asthmaticus-dx-mgmt",
+      "title": "Diagnosis and management of Pediatric Status Asthmaticus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe asthma attack not responding to initial bronchodilators, in a tiring child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (silent chest, drowsiness, rising carbon dioxide or cyanosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric critical care review for impending respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous oximetry, severity score, blood gas if deteriorating, chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the exacerbation severe, with hypoxia or rising carbon dioxide on assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bronchiolitis, foreign body, anaphylaxis, pneumonia or vocal cord dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Controlled oxygen with repeated or continuous nebulised short-acting beta-agonists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ipratropium added to nebulised bronchodilators in severe attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early systemic corticosteroids, oral or intravenous as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalation for refractory cases, judged on work of breathing and mental state",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover fully with prompt treatment; a minority progress to ventilation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

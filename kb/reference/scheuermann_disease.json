@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for scheuermann disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scheuermann_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing lateral spinal radiograph",
+          "cells": [
+            {
+              "text": "Kyphotic angle and vertebral wedging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral endplate review",
+          "cells": [
+            {
+              "text": "Anterior wedging of consecutive vertebrae, Schmorl nodes, endplate irregularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperextension lateral view",
+          "cells": [
+            {
+              "text": "Curve flexibility and rigidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Cord compromise, infection or tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hamstring and neurological examination",
+          "cells": [
+            {
+              "text": "Tightness and neurological signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging during growth",
+          "cells": [
+            {
+              "text": "Curve progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scheuermann_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Postural (flexible) kyphosis",
+          "cells": [
+            {
+              "text": "Flexible curve; Scheuermann is a rigid structural kyphosis with wedging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital kyphosis",
+          "cells": [
+            {
+              "text": "Vertebral malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral osteomyelitis or discitis",
+          "cells": [
+            {
+              "text": "Fever, constitutional symptoms or night pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scheuermann_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild non-progressive curves with serial radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Extension exercises, hamstring stretching, postural training"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing",
+          "cells": [
+            {
+              "text": "Skeletally immature adolescent with moderate or progressive curve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia and NSAIDs with activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal fusion",
+          "cells": [
+            {
+              "text": "Severe, progressive or painful curves, or neurological compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Through the growth spurt to guide escalation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scheuermann_disease-dx-mgmt",
+      "title": "Diagnosis and management of Scheuermann disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adolescent with fixed round-back kyphosis and back pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological signs, fever or night pain, or rapid progression in growth spurt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "MRI and spinal surgeon referral for cord compression, infection or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing lateral spine film for kyphosis angle and wedging of several vertebrae",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is wedging of several consecutive vertebrae shown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider postural kyphosis, congenital kyphosis, discitis, fracture, spondyloarthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe mild curves with serial radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Extension exercises and hamstring stretching",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing for moderate or progressive curves while growing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spinal fusion for severe, progressive or painful curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most curves stable with observation or bracing; severe curves may progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

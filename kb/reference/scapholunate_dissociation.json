@@ -151,5 +151,267 @@
       "caption": "Overview comparison matrix for scapholunate dissociation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scapholunate_dissociation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PA, lateral and clenched-fist stress radiographs",
+          "cells": [
+            {
+              "text": "With contralateral comparison; scapholunate gap and angle measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the scapholunate ligament",
+          "cells": [
+            {
+              "text": "Interosseous ligament status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT arthrography",
+          "cells": [
+            {
+              "text": "Ligament integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist arthroscopy",
+          "cells": [
+            {
+              "text": "Definitive staging by the Geissler classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluoroscopic dynamic studies and grip-loaded views",
+          "cells": [
+            {
+              "text": "Dynamic gapping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scapholunate_dissociation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary ligament repair",
+          "cells": [
+            {
+              "text": "Acute reducible injuries, often with dorsal capsulodesis and temporary K-wire fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tendon graft or capsulodesis reconstruction",
+          "cells": [
+            {
+              "text": "Chronic reducible instability when direct repair is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salvage procedures",
+          "cells": [
+            {
+              "text": "Established SLAC arthritis: proximal row carpectomy, scaphoid excision with four-corner fusion, or wrist fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist denervation",
+          "cells": [
+            {
+              "text": "Pain relief when motion-preserving reconstruction is not possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation and hand therapy",
+          "cells": [
+            {
+              "text": "Restore controlled motion after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt hand surgeon referral",
+          "cells": [
+            {
+              "text": "Best outcome if complete injuries are treated before arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scapholunate_dissociation-dx-mgmt",
+      "title": "Diagnosis and management of scapholunate dissociation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dorsal wrist pain and weak grip after a fall on the outstretched hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Radiographic DISI or gapping, early SLAC narrowing, or perilunate instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt hand surgeon review; perilunate injury or dislocation needs urgent care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stress radiographs with comparison, gap and angle, MRI or arthrography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging or arthroscopy show scapholunate ligament disruption?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider scaphoid fracture, lunotriquetral injury, Kienbock disease, ganglion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute: primary ligament repair with capsulodesis and K-wire",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chronic reducible: tendon graft or capsulodesis reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "SLAC arthritis: proximal row carpectomy, four-corner fusion or wrist fusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy after immobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Best outcome with early repair; untreated complete tears progress to arthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

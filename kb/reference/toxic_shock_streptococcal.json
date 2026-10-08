@@ -152,5 +152,278 @@
       "caption": "Overview comparison matrix for streptococcal toxic shock syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxic_shock_streptococcal-dx-mgmt",
+      "title": "Diagnosis and management of Streptococcal toxic shock syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected streptococcal toxic shock: pain out of proportion, falling blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: pain out of proportion, crepitus or bullae, or falling urine output?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical debridement and intensive care for septic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and wound cultures; serial lactate; organ function tests; surgical exploration",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are group A streptococci isolated with necrotising soft-tissue infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider staphylococcal toxic shock, meningococcaemia or other septic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-lactam with clindamycin to switch off exotoxin production",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent surgical debridement of any necrotising focus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive fluids, vasopressors and intensive care support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous immunoglobulin in severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Manage acute kidney injury and disseminated intravascular coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mortality is substantial; highest with necrotising infection and delayed source control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxic_shock_streptococcal-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood cultures and wound cultures",
+          "cells": [
+            {
+              "text": "Group A Streptococcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial lactate, renal and liver function, coagulation and CK",
+          "cells": [
+            {
+              "text": "Organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of a deep soft-tissue focus",
+          "cells": [
+            {
+              "text": "Only without delaying surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Tissue diagnosis when necrotising fasciitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DIC assessment",
+          "cells": [
+            {
+              "text": "Coagulation involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_shock_streptococcal-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Combination antibiotics",
+          "cells": [
+            {
+              "text": "Beta-lactam such as benzylpenicillin with clindamycin to switch off toxin production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgical source control",
+          "cells": [
+            {
+              "text": "Debridement of any necrotising soft-tissue focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid resuscitation and vasopressors",
+          "cells": [
+            {
+              "text": "Refractory shock in intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Neutralises circulating superantigen in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Acute kidney injury and disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early escalation",
+          "cells": [
+            {
+              "text": "Critical care and surgery, with a low threshold for repeat exploration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

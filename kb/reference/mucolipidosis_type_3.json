@@ -153,5 +153,305 @@
       "caption": "Overview comparison matrix for mucolipidosis type iii (pseudo-hurler polydystrophy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mucolipidosis_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum lysosomal enzyme panel",
+          "cells": [
+            {
+              "text": "Elevated, with reduced fibroblast enzyme assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary GAG and oligosaccharide screen",
+          "cells": [
+            {
+              "text": "Normal GAGs do not exclude the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey of hips, spine, hands",
+          "cells": [
+            {
+              "text": "Skeletal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Valvular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNPTAB and GNPTG testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucolipidosis_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucolipidosis II",
+          "cells": [
+            {
+              "text": "Severe allelic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Early joint stiffness; immunosuppression is not the treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attenuated MPS (MPS I-S, MPS VI)",
+          "cells": [
+            {
+              "text": "Normal urinary GAGs and preserved intellect should not falsely reassure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucolipidosis_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; focus on connective-tissue and skeletal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Joint replacement for destructive hip dysplasia; analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve mobility against stiffness and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal tunnel decompression",
+          "cells": [
+            {
+              "text": "Median nerve entrapment; scoliosis bracing or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic surveillance",
+          "cells": [
+            {
+              "text": "Aortic and mitral valve disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive, GNPTAB or GNPTG variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mucolipidosis_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Mucolipidosis Type III (Pseudo-Hurler Polydystrophy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with joint stiffness, hip destruction and short stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hip destruction, worsening valve disease, median nerve symptoms or restriction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Orthopaedic and cardiology review; decompress nerve entrapment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzyme panels, urinary screen, skeletal survey, echo, GNPTAB and GNPTG testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High serum and low fibroblast enzymes with GNPTAB or GNPTG variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider JIA, attenuated MPS, pseudorheumatoid dysplasia, epiphyseal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for stiffness and contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Joint replacement for hip destruction; carpal tunnel decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Scoliosis bracing or surgery; echocardiographic surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow progression; survival into adulthood with significant joint disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

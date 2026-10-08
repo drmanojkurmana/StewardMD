@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for popliteal artery entrapment syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy / Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "popliteal_artery_entrapment-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex with plantar- and dorsiflexion manoeuvres",
+          "cells": [
+            {
+              "text": "Provoked compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography with dynamic positioning",
+          "cells": [
+            {
+              "text": "Compression and anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABPI at rest and after exercise",
+          "cells": [
+            {
+              "text": "Positional arterial compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the popliteal fossa",
+          "cells": [
+            {
+              "text": "Musculotendinous anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography with stress positioning",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral limb assessment",
+          "cells": [
+            {
+              "text": "Frequent bilaterality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "popliteal_artery_entrapment-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Popliteal artery aneurysm",
+          "cells": [
+            {
+              "text": "Complicates chronic entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Venous claudication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "popliteal_artery_entrapment-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical release",
+          "cells": [
+            {
+              "text": "Division of the anomalous or hypertrophied medial gastrocnemius head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial reconstruction",
+          "cells": [
+            {
+              "text": "Bypass or interposition graft when the vessel is already damaged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Limit provocative plantarflexion while awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute thrombosis",
+          "cells": [
+            {
+              "text": "Catheter-directed thrombolysis or thrombectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral limb",
+          "cells": [
+            {
+              "text": "Assessment and treatment, given frequent bilaterality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Vascular surgery for early decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "popliteal_artery_entrapment-dx-mgmt",
+      "title": "Diagnosis and management of Popliteal artery entrapment syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional calf pain or pulse loss with provocative foot movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute limb ischaemia, popliteal aneurysm, rest pain or tissue loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency revascularisation for acute limb ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex with provocative manoeuvres; dynamic CT or MR angiography; ABPI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does dynamic imaging show popliteal artery compression on provocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atherosclerotic PAD, cystic adventitial disease, compartment syndrome or DVT",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical release by division of the anomalous medial gastrocnemius head",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bypass or interposition graft when the vessel is already damaged",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limit provocative plantarflexion while awaiting surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Catheter-directed thrombolysis or thrombectomy for acute occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assess and treat the contralateral limb",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early release before fixed arterial damage relieves symptoms and preserves the artery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

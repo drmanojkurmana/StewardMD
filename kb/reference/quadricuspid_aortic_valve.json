@@ -147,5 +147,259 @@
       "caption": "Overview comparison matrix for quadricuspid aortic valve."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "quadricuspid_aortic_valve-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Cusp count and regurgitation grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Cusp morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Regurgitant fraction and LV volumes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "quadricuspid_aortic_valve-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bicuspid aortic valve",
+          "cells": [
+            {
+              "text": "Two cusps"
+            },
+            {
+              "text": "Echocardiographic cusp count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid aortic valve with degenerative regurgitation",
+          "cells": [
+            {
+              "text": "Three cusps"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic root dilatation",
+          "cells": [
+            {
+              "text": "Root dilatation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "quadricuspid_aortic_valve-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Most patients remain asymptomatic for decades"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valve intervention",
+          "cells": [
+            {
+              "text": "Repair or replacement when regurgitation is severe or symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative assessment",
+          "cells": [
+            {
+              "text": "Assess coronary ostia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "quadricuspid_aortic_valve-dx-mgmt",
+      "title": "Diagnosis and management of Quadricuspid aortic valve",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected quadricuspid aortic valve: aortic regurgitation with four cusps",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe regurgitation with LV dilatation, heart failure, or endocarditis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac surgical review for severe symptomatic regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE cusp count; TOE; cardiac MRI for regurgitant fraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are four cusps confirmed on echocardiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bicuspid or tricuspid valve disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surveillance, as many remain asymptomatic for decades",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aortic valve repair or replacement when severe or symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess coronary ostia before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lifelong cardiology surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,300 @@
       "caption": "Overview comparison matrix for paraganglioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraganglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma free metanephrines or 24-hour urinary metanephrines",
+          "cells": [
+            {
+              "text": "Secretory tumour screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary methoxytyramine",
+          "cells": [
+            {
+              "text": "Dopamine-secreting tumour, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Extent in neck, thorax, abdomen or pelvis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DOTATATE PET with MIBG scintigraphy",
+          "cells": [
+            {
+              "text": "Staging, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline SDHx and extended panel testing",
+          "cells": [
+            {
+              "text": "Hereditary basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDHB immunohistochemistry",
+          "cells": [
+            {
+              "text": "Guides genetic evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraganglioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anxiety or thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Paroxysmal symptoms mimic the catecholamine syndrome; metanephrines distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head and neck schwannoma or carotid aneurysm",
+          "cells": [
+            {
+              "text": "Mimic carotid body tumours; biochemistry and imaging separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraganglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Definitive treatment for localised paraganglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative adrenergic blockade",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Alpha blockade with phenoxybenzamine or doxazosin, then beta-blockade, with volume expansion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "I-131 MIBG or lutetium-177 DOTATATE, cytotoxic chemotherapy or external-beam radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline genetic testing",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "With genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraganglioma-dx-mgmt",
+      "title": "Diagnosis and management of Paraganglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal headache, palpitations and sweating, or a painless neck or abdominal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypertensive crisis, arrhythmia, cranial neuropathy or rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent alpha blockade and cardiac review for hypertensive crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma metanephrines or urine, methoxytyramine, cross-sectional imaging, DOTATATE PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are metanephrines raised, with imaging localising a paraganglioma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anxiety disorder, thyrotoxicosis, schwannoma or carotid aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection as definitive treatment for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Alpha blockade, then beta-blockade, with volume expansion before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radionuclide therapy, chemotherapy or radiotherapy for metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Germline genetic testing and counselling for SDHx and related genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent after complete resection; SDHB-related metastatic disease has a worse outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

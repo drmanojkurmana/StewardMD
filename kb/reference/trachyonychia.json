@@ -146,5 +146,307 @@
       "caption": "Overview comparison matrix for trachyonychia (twenty-nail dystrophy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trachyonychia-dx-mgmt",
+      "title": "Diagnosis and management of Trachyonychia (twenty-nail dystrophy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trachyonychia: rough, ridged nails across several or all twenty nails",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: pterygium, destructive nail change, or single-nail atypical change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent dermatology review for scarring nail lichen planus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine all nails and skin; onychoscopy; matrix biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are rough ridged nails associated with a matrix dermatosis on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nail lichen planus, psoriasis or fungal infection; biopsy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe the benign idiopathic childhood form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients, nail-hardening lacquers and avoidance of trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any associated lichen planus, psoriasis or alopecia areata",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intralesional corticosteroid for refractory matrix disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy for atypical or scarring cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and non-scarring; childhood cases often improve over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trachyonychia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination of all twenty nails, hair and skin",
+          "cells": [
+            {
+              "text": "Associated alopecia areata, lichen planus or psoriasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Pitting, ridging and surface change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix biopsy",
+          "cells": [
+            {
+              "text": "Atypical, scarring or uncertain cases only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology",
+          "cells": [
+            {
+              "text": "Fungal infection, when it needs excluding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longitudinal review",
+          "cells": [
+            {
+              "text": "Spontaneous improvement in children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trachyonychia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nail lichen planus",
+          "cells": [
+            {
+              "text": "Scarring with pterygium in severe cases; needs earlier intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail psoriasis",
+          "cells": [
+            {
+              "text": "Associated psoriatic changes on skin or elsewhere on the nail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alopecia areata-associated nail change",
+          "cells": [
+            {
+              "text": "Coexisting alopecia areata on scalp or hair"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trachyonychia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Idiopathic childhood form is benign, non-scarring and often resolves over years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail care",
+          "cells": [
+            {
+              "text": "Emollients, hydration, nail-hardening lacquers, avoidance of trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat associated matrix dermatosis",
+          "cells": [
+            {
+              "text": "Corticosteroids for lichen planus; vitamin D analogues or corticosteroids for psoriasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional corticosteroid",
+          "cells": [
+            {
+              "text": "Troublesome or refractory matrix disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Matrix biopsy",
+          "cells": [
+            {
+              "text": "Atypical or scarring cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

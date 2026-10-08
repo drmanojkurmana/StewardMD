@@ -144,5 +144,231 @@
       "caption": "Overview comparison matrix for woolly hair."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "woolly_hair-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of the hair shaft",
+          "cells": [
+            {
+              "text": "Curl, fineness and associated shaft defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the palms and soles",
+          "cells": [
+            {
+              "text": "Palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "woolly_hair-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal tightly curled or afro-textured hair",
+          "cells": [
+            {
+              "text": "Normal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pili torti",
+          "cells": [
+            {
+              "text": "Twisted shaft on microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uncombable hair syndrome",
+          "cells": [
+            {
+              "text": "Spun-glass hair on microscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "woolly_hair-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Screen for cardiocutaneous syndromes",
+          "cells": [
+            {
+              "text": "Palms and soles examined for keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Naxos or Carvajal syndrome when keratoderma is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "woolly_hair-dx-mgmt",
+      "title": "Diagnosis and management of Woolly hair",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected woolly hair: tightly curled, fine scalp hair in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (palmoplantar keratoderma or palpitations)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac assessment for cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair shaft microscopy, palm and sole examination, cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination show palmoplantar keratoderma with woolly hair?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Hair shaft variant without keratoderma; reassure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Examine palms and soles for keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Arrange cardiac assessment for Naxos or Carvajal syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not regard woolly hair as purely cosmetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Not cosmetic alone; the cardiac component can be life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

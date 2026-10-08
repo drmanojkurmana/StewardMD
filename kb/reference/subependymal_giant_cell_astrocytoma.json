@@ -158,5 +158,323 @@
       "caption": "Overview comparison matrix for subependymal giant cell astrocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subependymal_giant_cell_astrocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI of the brain",
+          "cells": [
+            {
+              "text": "Enhancing, often calcified lesion near the foramen of Monro"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification and ventricular size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Serial growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSC1 and TSC2 genetic testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of other TSC features",
+          "cells": [
+            {
+              "text": "Skin, cardiac and renal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Confirms the glial lesion when resected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subependymal_giant_cell_astrocytoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subependymal nodule of tuberous sclerosis",
+          "cells": [
+            {
+              "text": "A non-growing lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central neurocytoma",
+          "cells": [
+            {
+              "text": "Intraventricular neoplasm; histology separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subependymal_giant_cell_astrocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Everolimus",
+          "cells": [
+            {
+              "text": "mTOR inhibitor for growing lesions that do not need emergency surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Acute or symptomatic hydrocephalus, or significant mass effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent CSF diversion",
+          "cells": [
+            {
+              "text": "If hydrocephalus needs relief independent of tumour removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical escalation",
+          "cells": [
+            {
+              "text": "Any sign of raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No oncological treatment",
+          "cells": [
+            {
+              "text": "Stable, non-growing subependymal nodule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No established role for radiotherapy or chemotherapy",
+          "cells": [
+            {
+              "text": "Lesion-directed decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial contrast-enhanced MRI",
+          "cells": [
+            {
+              "text": "Lesion size, since growth on serial imaging matters"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subependymal_giant_cell_astrocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Subependymal giant cell astrocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Growing subependymal lesion in a child with tuberous sclerosis: suspected SEGA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised pressure, acute hydrocephalus, new focal deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for raised intracranial pressure or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of brain; CT for calcification; surveillance MRI; TSC1 and TSC2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is interval growth of a subependymal lesion confirmed in TSC?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider a stable subependymal nodule or another intraventricular tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection for acute or symptomatic hydrocephalus or mass effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Everolimus to reduce volume in growing lesions that do not need surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No specific oncological treatment for a stable, non-growing nodule",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial contrast-enhanced MRI tracking lesion size",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Growth on imaging drives treatment; TSC surveillance is lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

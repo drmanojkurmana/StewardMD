@@ -146,5 +146,259 @@
       "caption": "Overview comparison matrix for recurrent pregnancy loss."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "recurrent_pregnancy_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid antibody testing",
+          "cells": [
+            {
+              "text": "Lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental karyotyping",
+          "cells": [
+            {
+              "text": "Balanced chromosomal translocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uterine assessment",
+          "cells": [
+            {
+              "text": "Submucosal fibroids or uterine anomaly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "recurrent_pregnancy_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Antiphospholipid antibodies"
+            },
+            {
+              "text": "Antiphospholipid antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental balanced chromosomal translocation",
+          "cells": [
+            {
+              "text": "Balanced chromosomal translocation"
+            },
+            {
+              "text": "Parental karyotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uterine anomalies or submucosal fibroids",
+          "cells": [
+            {
+              "text": "Uterine anomaly"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "recurrent_pregnancy_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Low-dose aspirin, the key treatable cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine contributors",
+          "cells": [
+            {
+              "text": "Optimise thyroid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical insufficiency",
+          "cells": [
+            {
+              "text": "Assess after second-trimester loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "recurrent_pregnancy_loss-dx-mgmt",
+      "title": "Diagnosis and management of Recurrent pregnancy loss",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected recurrent pregnancy loss with prior miscarriages",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Confirmed or suspected APS, second-trimester loss, or uterine anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent obstetric review for second-trimester loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antiphospholipid antibodies; parental karyotype; uterine assessment; thyroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is antiphospholipid syndrome confirmed on repeat testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider parental translocation, uterine or endocrine causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose aspirin for antiphospholipid syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise thyroid status for endocrine contributors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess for cervical insufficiency after second-trimester loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Specialist obstetric follow-up in subsequent pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

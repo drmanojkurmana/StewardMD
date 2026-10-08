@@ -146,5 +146,249 @@
       "caption": "Overview comparison matrix for vocal cord palsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vocal_cord_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Reduced or absent cord movement and position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI along the vagus and recurrent laryngeal nerve course",
+          "cells": [
+            {
+              "text": "Lesion from skull base to chest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Thoracic disease, such as malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_cord_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cricoarytenoid joint fixation",
+          "cells": [
+            {
+              "text": "Arthritis or trauma fixes the joint without nerve loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal carcinoma restricting cord movement",
+          "cells": [
+            {
+              "text": "Mass restricting movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional or psychogenic dysphonia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal fold nodules, polyps or scarring",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_cord_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause along the nerve course",
+          "cells": [
+            {
+              "text": "Malignancy, surgical injury or thoracic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice therapy",
+          "cells": [
+            {
+              "text": "Improves glottic closure and compensation in unilateral palsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vocal_cord_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Vocal cord palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vocal cord palsy: breathy, weak voice with reduced cord movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bilateral palsy with stridor, neck mass or haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway management for bilateral palsy with stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy, CT or MRI of the nerve course, chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging identify a cause along the vagus or recurrent nerve?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cricoarytenoid fixation or functional dysphonia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause along the whole nerve course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Voice therapy to improve glottic closure and compensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess airway and aspiration risk, especially in bilateral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on the cause; bilateral palsy carries airway risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

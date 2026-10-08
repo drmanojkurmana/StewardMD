@@ -150,5 +150,240 @@
       "caption": "Overview comparison matrix for x-linked thrombocytopenia with thalassaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_thrombocytopenia_thalassaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with platelet count and indices",
+          "cells": [
+            {
+              "text": "Thrombocytopenia with small platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film for red cell morphology and inclusions",
+          "cells": [
+            {
+              "text": "Dyserythropoietic and thalassaemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_thrombocytopenia_thalassaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "GATA1-related X-linked thrombocytopenia with dyserythropoietic anaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-thalassaemia trait",
+          "cells": [
+            {
+              "text": "Microcytosis without the thrombocytopenia and platelet dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wiskott-Aldrich syndrome",
+          "cells": [
+            {
+              "text": "Other inherited thrombocytopenia with small platelets"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_thrombocytopenia_thalassaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive haematological care",
+          "cells": [
+            {
+              "text": "No drug corrects the GATA1 defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion of red cells",
+          "cells": [
+            {
+              "text": "Anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet support for significant bleeding",
+          "cells": [
+            {
+              "text": "Spontaneous, surgical or trauma-related bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_thrombocytopenia_thalassaemia-dx-mgmt",
+      "title": "Diagnosis and management of X-linked thrombocytopenia with thalassaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked thrombocytopenia: thrombocytopenia with microcytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (significant bleeding or rapidly falling platelets)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent platelet and red cell support for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with platelet indices, blood film, reticulocyte count, GATA1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GATA1 testing confirm the R216Q variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider beta-thalassaemia trait or other inherited thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive haematological care as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfuse red cells for anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid missing the platelet defect when diagnosing thalassaemia trait",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Bleeding risk depends on platelet count and trauma or surgery exposure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

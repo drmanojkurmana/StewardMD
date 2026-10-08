@@ -149,5 +149,278 @@
       "caption": "Overview comparison matrix for nutritional rickets."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nutritional_rickets-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Biochemical rickets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D level",
+          "cells": [
+            {
+              "text": "Vitamin D status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone",
+          "cells": [
+            {
+              "text": "Secondary hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinary studies",
+          "cells": [
+            {
+              "text": "Excludes renal causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nutritional_rickets-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "Vitamin D-resistant with low phosphate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D-dependent rickets",
+          "cells": [
+            {
+              "text": "Types 1 and 2; genetic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal osteodystrophy",
+          "cells": [
+            {
+              "text": "Chronic kidney disease bone disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nutritional_rickets-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin D replacement",
+          "cells": [
+            {
+              "text": "Cholecalciferol or ergocalciferol to restore mineralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary or supplemental calcium",
+          "cells": [
+            {
+              "text": "Given alongside vitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat hypocalcaemic emergencies",
+          "cells": [
+            {
+              "text": "Seizures, tetany or laryngospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor healing",
+          "cells": [
+            {
+              "text": "Biochemical recovery in weeks and radiographic healing over months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nutritional_rickets-dx-mgmt",
+      "title": "Diagnosis and management of Nutritional Rickets",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bowed legs or delayed walking with widened growth plates in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, tetany, laryngospasm, cardiomyopathy, fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calcium correction for seizures, tetany or laryngospasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, alkaline phosphatase, 25-hydroxyvitamin D, PTH, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low vitamin D with raised alkaline phosphatase on radiographs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypophosphataemic or vitamin D-dependent rickets; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vitamin D replacement to restore mineralisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adequate dietary or supplemental calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent treatment of hypocalcaemic emergencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor biochemical and radiographic healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biochemical recovery within weeks; most deformities remodel in young children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

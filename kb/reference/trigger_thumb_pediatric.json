@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for paediatric trigger thumb."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigger_thumb_pediatric-dx-mgmt",
+      "title": "Diagnosis and management of Paediatric trigger thumb",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected paediatric trigger thumb: fixed flexion of the thumb IP joint in a toddler",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: thumb cannot be passively extended, or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for multi-digit involvement or syndromic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Palpation of Notta node; examine both thumbs; radiographs if bony",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a Notta node palpable with fixed or catching IP flexion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital clasped thumb, thumb-in-palm deformity or arthrogryposis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation, as many cases resolve spontaneously",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Passive IP extension stretching and night extension splint",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Examine both thumbs and other digits at each review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Open A1 pulley release for persistent fixed deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to paediatric hand surgeon if locked or function impaired",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many resolve spontaneously, especially in infancy; release gives durable correction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigger_thumb_pediatric-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Palpation of Notta node",
+          "cells": [
+            {
+              "text": "Fixed or catching IP flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of both thumbs and other digits",
+          "cells": [
+            {
+              "text": "Frequent bilaterality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological or arthrogrypotic assessment",
+          "cells": [
+            {
+              "text": "Atypical presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Only if bony abnormality suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial passive and active IP extension",
+          "cells": [
+            {
+              "text": "Tracks spontaneous resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigger_thumb_pediatric-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital clasped thumb",
+          "cells": [
+            {
+              "text": "Extensor deficiency rather than flexor tendon stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thumb-in-palm deformity",
+          "cells": [
+            {
+              "text": "Spasticity in cerebral palsy or other neurological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthrogryposis with thumb contracture",
+          "cells": [
+            {
+              "text": "Multiple joint contractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigger_thumb_pediatric-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Many resolve spontaneously, especially in the youngest children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Passive IP extension stretching and night splint",
+          "cells": [
+            {
+              "text": "During the observation period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open A1 pulley release",
+          "cells": [
+            {
+              "text": "Thumb stays fixed in flexion or fails to resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examine both thumbs and other digits at review",
+          "cells": [
+            {
+              "text": "Frequent bilaterality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial documentation",
+          "cells": [
+            {
+              "text": "Passive and active IP extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric hand surgeon referral",
+          "cells": [
+            {
+              "text": "Thumb stays locked or function impaired"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

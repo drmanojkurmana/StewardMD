@@ -150,5 +150,276 @@
       "caption": "Overview comparison matrix for pyle disease (metaphyseal dysplasia, sfrp4)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyle_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Erlenmeyer-flask metaphyseal flaring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Metaphyseal undermodelling and cortical thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Relative sparing of the skull"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb alignment assessment",
+          "cells": [
+            {
+              "text": "Genu valgum and deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyle_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniometaphyseal dysplasia",
+          "cells": [
+            {
+              "text": "Skull involvement"
+            },
+            {
+              "text": "Skull imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopetrosis",
+          "cells": [
+            {
+              "text": "Sclerosis and marrow failure"
+            },
+            {
+              "text": "Full blood count"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyle_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic correction",
+          "cells": [
+            {
+              "text": "Genu valgum and limb deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractures",
+          "cells": [
+            {
+              "text": "Careful management of fractures through thin cortices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyle_disease-dx-mgmt",
+      "title": "Diagnosis and management of Pyle disease (metaphyseal dysplasia, SFRP4)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Pyle disease: metaphyseal flaring with genu valgum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fractures through thin cortices, progressive deformity, or atypical skull involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent orthopaedic review for fracture or progressive deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; skeletal survey; skull imaging; limb alignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is metaphyseal flaring with skull sparing confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider craniometaphyseal or frontometaphyseal dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no disease-specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic correction of genu valgum",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful management of fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Simple analgesia and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term orthopaedic follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,352 @@
       "caption": "Overview comparison matrix for powassan virus encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "powassan_virus_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF IgM serology for Powassan virus",
+          "cells": [
+            {
+              "text": "Specific antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis and raised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Deep grey-matter, brainstem and cerebellar involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR on CSF or blood",
+          "cells": [
+            {
+              "text": "Early disease, with limited sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick-borne co-infection testing",
+          "cells": [
+            {
+              "text": "Lyme disease and anaplasmosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex encephalitis testing",
+          "cells": [
+            {
+              "text": "Excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "powassan_virus_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex virus encephalitis",
+          "cells": [
+            {
+              "text": "Temporal lobe involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "West Nile virus neuroinvasive disease",
+          "cells": [
+            {
+              "text": "Mosquito-borne flavivirus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eastern equine encephalitis",
+          "cells": [
+            {
+              "text": "Mosquito-borne alphavirus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme neuroborreliosis",
+          "cells": [
+            {
+              "text": "Tick-borne bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningoencephalitis",
+          "cells": [
+            {
+              "text": "Purulent CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune encephalitis",
+          "cells": [
+            {
+              "text": "Antibody-mediated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "powassan_virus_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No specific antiviral or licensed vaccine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Manage and control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical aciclovir",
+          "cells": [
+            {
+              "text": "Until herpes simplex encephalitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-infection treatment",
+          "cells": [
+            {
+              "text": "Empirical doxycycline where tick-borne co-infection suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and cognitive support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Tick-bite avoidance, clothing and repellents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "powassan_virus_infection-dx-mgmt",
+      "title": "Diagnosis and management of Powassan virus encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Encephalitis after a tick bite in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (declining consciousness, seizures, brainstem signs, respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ICU review for coma, seizures or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and CSF IgM; CSF analysis; MRI brain; RT-PCR; herpes simplex testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does IgM serology or CSF testing confirm Powassan virus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpes simplex encephalitis, Lyme neuroborreliosis or bacterial meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care, as no specific antiviral exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage raised intracranial pressure and control seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Give empirical aciclovir until herpes simplex encephalitis is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat co-transmitted tick-borne infections empirically where suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurorehabilitation and cognitive support for long-term deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Appreciable mortality, and many survivors have lasting neurological deficits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

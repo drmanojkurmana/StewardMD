@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for septic bursitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "septic_bursitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bursal fluid aspiration",
+          "cells": [
+            {
+              "text": "Gram stain, culture, cell count and crystal analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "When systemic signs are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with adjacent joint fluid",
+          "cells": [
+            {
+              "text": "If joint infection is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a bursal collection and guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for immunosuppression or trauma",
+          "cells": [
+            {
+              "text": "Predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "septic_bursitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Crystal-induced (gout) bursitis",
+          "cells": [
+            {
+              "text": "Mimics warmth and erythema; crystal analysis of fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic or haemorrhagic bursitis",
+          "cells": [
+            {
+              "text": "Trauma can mimic infection; aspirate to separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis of the adjacent joint",
+          "cells": [
+            {
+              "text": "Passive joint movement is preserved in bursitis; arthritis needs more aggressive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid or inflammatory bursitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "septic_bursitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration",
+          "cells": [
+            {
+              "text": "Diagnostic fluid analysis and therapeutic decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antistaphylococcal antibiotics",
+          "cells": [
+            {
+              "text": "Cover Staphylococcus aureus and beta-haemolytic streptococci; narrow to culture results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat aspiration or surgery",
+          "cells": [
+            {
+              "text": "Repeat for reaccumulation; bursectomy or incision and drainage for abscess or refractory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia, rest and elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing factors",
+          "cells": [
+            {
+              "text": "Recurrent trauma and immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Admission and intravenous therapy for spreading cellulitis, sepsis or oral treatment failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "septic_bursitis-dx-mgmt",
+      "title": "Diagnosis and management of Septic bursitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Warm, red, tender superficial olecranon or prepatellar bursa after skin breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Joint or deep spread, sepsis, spreading cellulitis or immunocompromised host?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit; intravenous antibiotics; image for septic arthritis or deep infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aspirate for Gram stain, culture, cell count and crystals; ultrasound; blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does fluid show infection rather than crystals or trauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as gout, traumatic or inflammatory bursitis; do not inject steroid blindly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aspirate to decompress and send fluid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start antistaphylococcal and streptococcal cover; narrow to sensitivities",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repeat aspiration; bursectomy or drainage for abscess or failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia, rest, elevation; correct predisposing trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolves well with aspiration and antibiotics; recurrence if trauma persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

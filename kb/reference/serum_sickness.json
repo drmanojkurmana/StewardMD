@@ -148,5 +148,350 @@
       "caption": "Overview comparison matrix for serum sickness."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serum_sickness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum C3 and C4",
+          "cells": [
+            {
+              "text": "Fall during the active immune-complex phase; track resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammatory response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulating immune complexes or cryoglobulins",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral and autoimmune serologies",
+          "cells": [
+            {
+              "text": "Exclude mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Vasculitis, in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serum_sickness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum-sickness-like reaction (e.g. cefaclor)",
+          "cells": [
+            {
+              "text": "Lacks immune-complex and hypocomplementaemic features; generally benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute viral infection (hepatitis B, parvovirus)",
+          "cells": [
+            {
+              "text": "Rash and arthralgia; excluded by serologies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus and other connective-tissue disease",
+          "cells": [
+            {
+              "text": "Excluded by autoimmune serologies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urticarial vasculitis and small-vessel vasculitis",
+          "cells": [
+            {
+              "text": "Skin biopsy in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DRESS or urticarial drug eruption",
+          "cells": [
+            {
+              "text": "Features of a severe drug reaction rather than simple serum sickness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute IgE-mediated allergy",
+          "cells": [
+            {
+              "text": "Serum sickness begins one to three weeks after first exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serum_sickness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the causative agent",
+          "cells": [
+            {
+              "text": "Antiserum, antivenom, therapeutic antibody or a drug such as cefaclor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines and NSAIDs",
+          "cells": [
+            {
+              "text": "Urticaria, pruritus and arthralgia in mild, self-limiting cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Severe or organ-involving disease, to hasten resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and reassurance",
+          "cells": [
+            {
+              "text": "Resolves once antigen is cleared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor complement and urinalysis",
+          "cells": [
+            {
+              "text": "Track activity and detect renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document trigger and counsel",
+          "cells": [
+            {
+              "text": "Premedication or an alternative agent if re-exposure is unavoidable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy and immunology referral",
+          "cells": [
+            {
+              "text": "Severe reaction or significant organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serum_sickness-dx-mgmt",
+      "title": "Diagnosis and management of Serum sickness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, urticarial rash, arthralgia, nodes 1 to 3 weeks after antiserum or drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Renal involvement, anaphylaxis or angioedema, neurologic signs or DRESS features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit; systemic corticosteroids; allergy and immunology and nephrology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum C3 and C4; blood count, ESR, CRP; urinalysis; viral and autoimmune serologies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low C3 and C4 with a recent trigger and a compatible illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider serum-sickness-like reaction, viral infection, lupus or vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop the causative agent immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antihistamines and NSAIDs for mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids for severe or organ-involving disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Track C3, C4 and urinalysis; counsel on future avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting over days to two weeks once the trigger is removed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

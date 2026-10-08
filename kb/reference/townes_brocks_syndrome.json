@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for townes-brocks syndrome (sall1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "townes_brocks_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Townes-Brocks syndrome (SALL1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Townes-Brocks syndrome: anal, ear and thumb anomalies in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive renal impairment, significant heart disease, or anorectal atresia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal surgery for anorectal malformation and cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SALL1 testing; renal ultrasound and function; hearing tests; limb radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SALL1 testing show a pathogenic truncating variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider VACTERL association, Duane-radial ray syndrome or branchio-oto-renal syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neonatal surgery for imperforate anus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong renal function monitoring with progression management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids and speech support for hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical repair of congenital heart disease as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hand surgery for triphalangeal or duplicated thumbs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifespan usually normal; renal involvement drives long-term outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "townes_brocks_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SALL1 molecular testing",
+          "cells": [
+            {
+              "text": "Pathogenic truncating variant confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and renal function",
+          "cells": [
+            {
+              "text": "Renal anomalies and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological evaluation",
+          "cells": [
+            {
+              "text": "Sensorineural or conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb radiography",
+          "cells": [
+            {
+              "text": "Triphalangeal or duplicated thumb and other skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal assessment",
+          "cells": [
+            {
+              "text": "Anorectal malformation and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "townes_brocks_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "VACTERL association",
+          "cells": [
+            {
+              "text": "Overlapping anorectal, cardiac, renal and limb anomalies; SALL1 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duane-radial ray (Okihiro) syndrome from SALL4 variants",
+          "cells": [
+            {
+              "text": "Thumb hypoplasia rather than a triphalangeal thumb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Branchio-oto-renal syndrome",
+          "cells": [
+            {
+              "text": "Ear and renal involvement; genetic testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "townes_brocks_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal anorectal surgery",
+          "cells": [
+            {
+              "text": "Repair of imperforate anus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong renal monitoring",
+          "cells": [
+            {
+              "text": "Chronic kidney disease management; dialysis or transplantation if it progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology support",
+          "cells": [
+            {
+              "text": "Hearing aids and speech support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac repair",
+          "cells": [
+            {
+              "text": "Congenital heart defects as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Triphalangeal or duplicated thumbs and other limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with variable expression; parental evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

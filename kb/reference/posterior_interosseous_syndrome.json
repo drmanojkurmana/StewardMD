@@ -148,5 +148,361 @@
       "caption": "Overview comparison matrix for posterior interosseous syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_interosseous_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and needle EMG",
+          "cells": [
+            {
+              "text": "Posterior interosseous nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tenodesis test",
+          "cells": [
+            {
+              "text": "Extensor tendon integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound of the radial tunnel",
+          "cells": [
+            {
+              "text": "Mass or focal nerve change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of elbow and proximal forearm",
+          "cells": [
+            {
+              "text": "Lipoma, ganglion or synovitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Monteggia fracture-dislocation or bony abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and rheumatoid serology",
+          "cells": [
+            {
+              "text": "Synovitis considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_interosseous_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Radial tunnel syndrome",
+          "cells": [
+            {
+              "text": "Pain without motor weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensor tendon rupture",
+          "cells": [
+            {
+              "text": "Rheumatoid arthritis, for example"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Main radial nerve palsy",
+          "cells": [
+            {
+              "text": "Wrist drop with sensory loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C7-C8 radiculopathy",
+          "cells": [
+            {
+              "text": "Cervical source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuralgic amyotrophy",
+          "cells": [
+            {
+              "text": "Preceding severe pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sagittal band rupture",
+          "cells": [
+            {
+              "text": "Extensor tendon subluxation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_interosseous_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision of compressive lesion",
+          "cells": [
+            {
+              "text": "Mass such as lipoma or ganglion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid synovitis",
+          "cells": [
+            {
+              "text": "Disease-modifying antirheumatic treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Activity modification, splinting and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuralgic amyotrophy",
+          "cells": [
+            {
+              "text": "Analgesia and recovery monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Dynamic extension splinting while awaiting recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Examination and electrophysiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tendon transfer",
+          "cells": [
+            {
+              "text": "Restore finger and thumb extension when long-standing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_interosseous_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of posterior interosseous syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Weakness of finger and thumb extension with preserved sensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute severe pain before weakness, proximal mass, progressive weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for progressive weakness suggesting a structural compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction and EMG; tenodesis test; ultrasound; MRI elbow; radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do EMG and imaging localise compression of the posterior interosseous nerve?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider radial tunnel syndrome, tendon rupture or main radial nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excise compressive lesions such as lipoma or ganglion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat rheumatoid synovitis of the elbow with disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative management with splinting and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia and monitoring for inflammatory neuralgic amyotrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Tendon transfer to restore extension when weakness is long-standing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Compressive lesions improve with decompression; inflammatory cases often recover well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

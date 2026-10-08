@@ -142,5 +142,316 @@
       "caption": "Overview comparison matrix for trichiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichiasis-dx-mgmt",
+      "title": "Diagnosis and management of Trichiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichiasis: lashes rubbing the eye with watering and foreign-body feeling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: corneal ulceration, progressive scarring, or pemphigoid features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent corneal protection and ophthalmology review for ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination; fluorescein staining; lid eversion to exclude entropion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are lashes misdirected from a normally positioned lid margin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider entropion, distichiasis or cicatricial disease; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Epilation for immediate relief, with recurrence expected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ablation of recurrent localised lashes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lid rotation surgery for cicatricial or trachomatous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the cause, including azithromycin for trachoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor the cornea and protect the surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated trichiasis is readily treated but recurs; cicatricial disease needs lid surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination of lash direction and cornea",
+          "cells": [
+            {
+              "text": "Posteriorly directed lashes and corneal damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein staining",
+          "cells": [
+            {
+              "text": "Corneal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid eversion",
+          "cells": [
+            {
+              "text": "Entropion or scarring excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for cicatricial or infective cause",
+          "cells": [
+            {
+              "text": "Trachoma, blepharitis or pemphigoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Suspected cicatrising immunobullous disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Entropion",
+          "cells": [
+            {
+              "text": "Whole lid margin turns inward; trichiasis is posterior lash misdirection only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distichiasis",
+          "cells": [
+            {
+              "text": "Extra lashes from the meibomian gland orifices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cicatricial conjunctival disease such as trachoma or ocular pemphigoid",
+          "cells": [
+            {
+              "text": "Lid margin scarring and conjunctival disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilation",
+          "cells": [
+            {
+              "text": "Immediate relief; recurrence follows regrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablation of aberrant follicles",
+          "cells": [
+            {
+              "text": "Electrolysis, cryotherapy or laser for localised recurrent lashes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid rotation surgery",
+          "cells": [
+            {
+              "text": "Bilamellar tarsal rotation for cicatricial or trachomatous trichiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Blepharitis, cicatrising disease, or trachoma with azithromycin and SAFE strategy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface protection",
+          "cells": [
+            {
+              "text": "Lubricants and bandage contact lens if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal monitoring",
+          "cells": [
+            {
+              "text": "Fluorescein staining for breakdown and scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

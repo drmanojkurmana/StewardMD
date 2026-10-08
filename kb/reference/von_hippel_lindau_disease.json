@@ -151,5 +151,249 @@
       "caption": "Overview comparison matrix for von hippel-lindau disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "von_hippel_lindau_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline VHL molecular testing",
+          "cells": [
+            {
+              "text": "Deletion and duplication analysis included"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated retinal examination",
+          "cells": [
+            {
+              "text": "Retinal haemangioblastomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced imaging",
+          "cells": [
+            {
+              "text": "Renal, pancreatic and central nervous system tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "von_hippel_lindau_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic haemangioblastoma or isolated renal cell carcinoma",
+          "cells": [
+            {
+              "text": "Sporadic tumours without germline VHL variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary phaeochromocytoma-paraganglioma syndromes",
+          "cells": [
+            {
+              "text": "SDHx or MAX variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple endocrine neoplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "von_hippel_lindau_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Belzutifan",
+          "cells": [
+            {
+              "text": "HIF-2-alpha inhibitor for VHL-associated renal cell carcinoma, haemangioblastomas and pancreatic tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat clear-cell renal cell carcinoma",
+          "cells": [
+            {
+              "text": "Surgical or other treatment as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude phaeochromocytoma before surgery",
+          "cells": [
+            {
+              "text": "Prevents hypertensive crisis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "von_hippel_lindau_disease-dx-mgmt",
+      "title": "Diagnosis and management of Von Hippel-Lindau disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected von Hippel-Lindau disease: haemangioblastoma or renal tumour in a young patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unrecognised phaeochromocytoma or rapidly growing CNS lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of phaeochromocytoma before surgery or procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline VHL testing, retinal examination, contrast imaging of kidneys and CNS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does germline testing confirm a VHL variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic tumour or other hereditary tumour syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude phaeochromocytoma before any surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Belzutifan as systemic therapy for VHL-associated tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical treatment of clear-cell renal cell carcinoma as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lifelong surveillance is needed for new tumours across organ systems",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

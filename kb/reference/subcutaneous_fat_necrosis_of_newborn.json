@@ -155,5 +155,323 @@
       "caption": "Overview comparison matrix for subcutaneous fat necrosis of newborn."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Weedon's Skin Pathology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subcutaneous_fat_necrosis_of_newborn-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial serum calcium, including ionised calcium",
+          "cells": [
+            {
+              "text": "Hypercalcaemia over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate, magnesium, PTH and vitamin D metabolites",
+          "cells": [
+            {
+              "text": "Metabolic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum triglycerides and glucose",
+          "cells": [
+            {
+              "text": "Hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy, when uncertain",
+          "cells": [
+            {
+              "text": "Fat necrosis with granulomatous infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and urinary calcium",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG, if hypercalcaemia is significant",
+          "cells": [
+            {
+              "text": "Arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subcutaneous_fat_necrosis_of_newborn-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sclerema neonatorum",
+          "cells": [
+            {
+              "text": "A systemic illness with a far graver prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal cellulitis or abscess",
+          "cells": [
+            {
+              "text": "Infection with inflammatory features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subcutaneous_fat_necrosis_of_newborn-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Self-limiting panniculitis; supportive management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial serum calcium",
+          "cells": [
+            {
+              "text": "Several weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperhydration with intravenous fluids",
+          "cells": [
+            {
+              "text": "Symptomatic hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Suppress extrarenal 1-alpha-hydroxylase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary restriction",
+          "cells": [
+            {
+              "text": "Limit calcium and vitamin D; avoid supplements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "Renal ultrasound and urinary calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perinatal care",
+          "cells": [
+            {
+              "text": "Correction of hypoxia and hypothermia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subcutaneous_fat_necrosis_of_newborn-dx-mgmt",
+      "title": "Diagnosis and management of subcutaneous fat necrosis of newborn",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm nodules on pressure sites in a term neonate: suspected subcutaneous fat necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypercalcaemia symptoms, nephrocalcinosis, arrhythmia, sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of symptomatic hypercalcaemia with hyperhydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial calcium; phosphate, magnesium, PTH, vitamin D; FBC; triglycerides; renal US",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hypercalcaemia or thrombocytopenia found with the typical nodules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sclerema neonatorum or neonatal infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care for the self-limiting panniculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial serum calcium for several weeks to months",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous hyperhydration for symptomatic hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids, with limited dietary calcium and vitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Skin lesions resolve over weeks to months; the metabolic risk needs monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

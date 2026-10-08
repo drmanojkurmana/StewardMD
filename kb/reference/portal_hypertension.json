@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for portal hypertension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portal_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Varices graded and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of portal and hepatic veins",
+          "cells": [
+            {
+              "text": "Flow and thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LFTs, coagulation and FBC",
+          "cells": [
+            {
+              "text": "Synthetic function and hypersplenism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Hepatic architecture, collaterals and vascular patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic venous pressure gradient",
+          "cells": [
+            {
+              "text": "Portal pressure, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy or elastography",
+          "cells": [
+            {
+              "text": "Fibrosis and aetiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Hepatic venous outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal or splenic vein thrombosis",
+          "cells": [
+            {
+              "text": "Prehepatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Principally cirrhosis management, including abstinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockers",
+          "cells": [
+            {
+              "text": "Propranolol or carvedilol to lower portal pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Band ligation",
+          "cells": [
+            {
+              "text": "To eradicate oesophageal varices, with surveillance endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute bleeding",
+          "cells": [
+            {
+              "text": "Resuscitation and vasoactive splanchnic vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascites",
+          "cells": [
+            {
+              "text": "Sodium restriction and diuretics such as spironolactone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Encephalopathy",
+          "cells": [
+            {
+              "text": "Lactulose and rifaximin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "TIPS for refractory ascites or recurrent variceal bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portal_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Portal hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Varices, ascites or splenomegaly with thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (variceal haemorrhage, encephalopathy, tense ascites, SBP, decompensation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency resuscitation and vasoactive therapy for variceal haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy; Doppler ultrasound; LFTs and coagulation; cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does Doppler or imaging confirm portal hypertension with collaterals?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Budd-Chiari, portal vein thrombosis, schistosomiasis or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, principally cirrhosis with abstinence",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Propranolol or carvedilol to lower portal pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Band ligation to eradicate oesophageal varices, with surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lactulose and rifaximin for hepatic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "TIPS for refractory ascites or recurrent variceal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis is set by the underlying liver disease and any decompensation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

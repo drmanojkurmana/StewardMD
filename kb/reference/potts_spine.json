@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for pott's spine."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "potts_spine-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spine",
+          "cells": [
+            {
+              "text": "Bone destruction, abscess and cord compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided biopsy or aspiration",
+          "cells": [
+            {
+              "text": "Histopathology, molecular testing and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cartridge-based nucleic acid amplification",
+          "cells": [
+            {
+              "text": "Rapid diagnosis and rifampicin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiography and CT",
+          "cells": [
+            {
+              "text": "Bony detail and deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and pulmonary tuberculosis screen",
+          "cells": [
+            {
+              "text": "Concurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "potts_spine-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic vertebral osteomyelitis and discitis",
+          "cells": [
+            {
+              "text": "Bacterial spondylodiscitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brucellar spondylitis",
+          "cells": [
+            {
+              "text": "Brucella infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral malignancy",
+          "cells": [
+            {
+              "text": "Metastatic or primary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal spondylitis",
+          "cells": [
+            {
+              "text": "Fungal spinal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporotic vertebral collapse",
+          "cells": [
+            {
+              "text": "No infective features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "potts_spine-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidrug antituberculous chemotherapy",
+          "cells": [
+            {
+              "text": "Prolonged, with an intensive rifampicin-containing phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility-guided regimen",
+          "cells": [
+            {
+              "text": "Second-line agents if rifampicin resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation and analgesia",
+          "cells": [
+            {
+              "text": "Bracing during healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Debridement and stabilisation for neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess drainage",
+          "cells": [
+            {
+              "text": "Cold paravertebral or psoas abscess where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Neurological status, adherence and drug toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and pulmonary TB screen",
+          "cells": [
+            {
+              "text": "Co-infection tested and managed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "potts_spine-dx-mgmt",
+      "title": "Diagnosis and management of Pott's spine",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Back pain with night sweats, weight loss or low-grade fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive neurological deficit, bladder or bowel dysfunction, instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal surgery review for progressive cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI spine; image-guided biopsy; nucleic acid amplification; radiography and CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy or nucleic acid testing confirm tuberculosis of the spine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyogenic spondylodiscitis, brucellosis, fungal infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged multidrug antituberculous chemotherapy with an intensive phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tailor the regimen to drug-susceptibility results",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spinal immobilisation with bracing and adequate analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical decompression and stabilisation for neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Drain cold abscesses where indicated and screen for HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With early diagnosis and prolonged therapy most patients recover well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

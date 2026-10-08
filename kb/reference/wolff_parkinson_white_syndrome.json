@@ -155,5 +155,231 @@
       "caption": "Overview comparison matrix for wolff parkinson white syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wolff_parkinson_white_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Delta wave and pathway localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise stress testing",
+          "cells": [
+            {
+              "text": "Abrupt loss of pre-excitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolff_parkinson_white_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "AV nodal reentrant tachycardia",
+          "cells": [
+            {
+              "text": "Narrow complex without pre-excitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concealed accessory pathway AV reentrant tachycardia",
+          "cells": [
+            {
+              "text": "No pre-excitation on the resting ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bundle branch block with rate-related conduction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolff_parkinson_white_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiofrequency catheter ablation",
+          "cells": [
+            {
+              "text": "Curative for symptomatic pre-excitation and recurrent tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid AV-nodal blockers in pre-excited atrial fibrillation",
+          "cells": [
+            {
+              "text": "Can precipitate ventricular fibrillation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wolff_parkinson_white_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of wolff parkinson white syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Wolff-Parkinson-White: pre-excitation on ECG with paroxysmal tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pre-excited AF with short RR interval, or exertional syncope)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent electrical cardioversion for unstable pre-excited AF",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for delta wave, exercise testing, electrophysiology assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ECG show a delta wave with a pre-excited tachycardia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider AV nodal reentrant tachycardia or concealed pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radiofrequency catheter ablation of the accessory pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid AV-nodal blockers in pre-excited atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Exercise testing to assess pathway behaviour during follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Ablation is curative for most symptomatic pathways",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

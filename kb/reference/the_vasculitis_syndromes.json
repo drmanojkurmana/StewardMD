@@ -214,5 +214,346 @@
       "caption": "Overview comparison matrix for the vasculitis syndromes."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Entry text (source not recorded)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "the_vasculitis_syndromes-dx-mgmt",
+      "title": "Diagnosis and management of The Vasculitis Syndromes",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected systemic vasculitis: unexplained systemic illness with organ involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapid renal decline, haemoptysis, or new visual symptoms over age 50?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucocorticoids for impending GCA-related blindness; nephrology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy of involved organ; ANCA; ESR and CRP; urinalysis and creatinine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy of the involved organ show vasculitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infection, malignancy, antiphospholipid syndrome or connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose glucocorticoids with rituximab or cyclophosphamide for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintenance with rituximab, azathioprine or methotrexate during steroid taper",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plasma exchange for rapidly progressive glomerulonephritis or alveolar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the trigger: antivirals for hepatitis-associated disease; stop culprit drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Infection prophylaxis, including Pneumocystis, and relapse monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Modern regimens achieve remission in about 75 percent of GPA; relapse is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "the_vasculitis_syndromes-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy of the clinically involved organ",
+          "cells": [
+            {
+              "text": "Highest yield, for example lung in granulomatosis with polyangiitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-PR3 (cANCA)",
+          "cells": [
+            {
+              "text": "Positive in active granulomatosis with polyangiitis",
+              "op": ">",
+              "value": 90
+            }
+          ],
+          "cite": "c1",
+          "unit": "percent"
+        },
+        {
+          "parameter": "Anti-MPO (pANCA)",
+          "cells": [
+            {
+              "text": "Variably positive in microscopic polyangiitis, EGPA and necrotising disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter-directed arteriography",
+          "cells": [
+            {
+              "text": "Suspected polyarteritis nodosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal artery biopsy",
+          "cells": [
+            {
+              "text": "Segment of 3 to 5 cm with serial sections, for giant cell arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR, CRP and full blood count",
+          "cells": [
+            {
+              "text": "Inflammation, anaemia and eosinophilia in EGPA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and serum creatinine",
+          "cells": [
+            {
+              "text": "Haematuria, proteinuria and red-cell casts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_vasculitis_syndromes-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-glomerular basement membrane disease",
+          "cells": [
+            {
+              "text": "Anti-GBM antibody positivity can coexist with ANCA vasculitis; test for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related disease",
+          "cells": [
+            {
+              "text": "Aortitis or periaortitis can mimic Takayasu arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extranodal NK/T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Midline destructive lesions must be distinguished from granulomatosis with polyangiitis by biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_vasculitis_syndromes-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose glucocorticoids with rituximab or cyclophosphamide",
+          "cells": [
+            {
+              "text": "Induction for severe, organ-threatening ANCA-associated vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance therapy",
+          "cells": [
+            {
+              "text": "Rituximab, azathioprine or methotrexate while glucocorticoids are tapered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Selected cases: rapidly progressive glomerulonephritis or alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the trigger",
+          "cells": [
+            {
+              "text": "Antiviral therapy for hepatitis B or C-associated disease; withdraw culprit drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent glucocorticoids in giant cell arteritis",
+          "cells": [
+            {
+              "text": "Prevents visual loss; tocilizumab as a steroid-sparing agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Including Pneumocystis; monitor for toxicity and relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Rheumatology, nephrology, ENT and respiratory medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

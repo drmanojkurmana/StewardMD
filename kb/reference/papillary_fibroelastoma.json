@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for papillary fibroelastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease / ESC guidelines on cardiac tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_fibroelastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Frond-like mobile valvular mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Further characterisation in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Infective endocarditis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Cerebral embolism, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary assessment",
+          "cells": [
+            {
+              "text": "Coronary embolism, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised specimen",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_fibroelastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective endocarditis vegetation",
+          "cells": [
+            {
+              "text": "Mimics the mass; blood cultures and markers separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lambl's excrescences or valvular thrombus",
+          "cells": [
+            {
+              "text": "Benign look-alikes; the embolic potential must still be weighed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_fibroelastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Valve-sparing surgical excision",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Definitive treatment, especially for left-sided, large or highly mobile lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Priority excision",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Symptomatic patients and those with stroke, TIA or coronary or peripheral embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance echocardiography",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Small, incidental, asymptomatic lesions when surgery is deferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic therapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Antiplatelet or anticoagulant to reduce embolic risk when surgery is not immediate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection exclusion",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Blood cultures before treatment decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_fibroelastoma-dx-mgmt",
+      "title": "Diagnosis and management of Papillary fibroelastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental mobile valve mass on echocardiography, or an embolic event",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (stroke or TIA, coronary embolism or peripheral embolic events)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac surgery review for embolic or large mobile lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE and TOE for mobile mass, blood cultures, neuro and coronary imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a frond-like mass confirmed, with endocarditis excluded by cultures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infective endocarditis vegetation, marantic thrombus or Lambl excrescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Valve-sparing surgical excision for left-sided, large or highly mobile lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prioritise excision for patients with stroke, TIA or other embolic events",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance echocardiography for small asymptomatic lesions when surgery is deferred",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy to reduce embolic risk before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and usually curable by excision; prognosis is driven by pre-treatment embolism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

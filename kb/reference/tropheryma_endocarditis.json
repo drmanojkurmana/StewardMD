@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for tropheryma whipplei endocarditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tropheryma_endocarditis-dx-mgmt",
+      "title": "Diagnosis and management of Tropheryma whipplei endocarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tropheryma endocarditis: culture-negative endocarditis of a normal valve",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive heart failure, embolic events or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent valve surgery review for haemodynamic deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Valve PCR and PAS staining; extended blood cultures; echo; CSF PCR if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does valve tissue PCR confirm Tropheryma whipplei?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coxiella or Bartonella endocarditis, marantic endocarditis or Libman-Sacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged antibiotics: ceftriaxone induction, then co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Doxycycline with hydroxychloroquine as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Valve surgery for destruction, heart failure or persistent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CNS-penetrating regimen and CSF assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prolonged clinical and echocardiographic follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable with surgery and prolonged antibiotics; relapse if inadequate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tropheryma_endocarditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excised valve PAS staining and PCR",
+          "cells": [
+            {
+              "text": "Tropheryma whipplei detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood serology and molecular testing",
+          "cells": [
+            {
+              "text": "When valve tissue is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Vegetations and valve damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple blood cultures with extended incubation",
+          "cells": [
+            {
+              "text": "Documents culture negativity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad culture-negative workup",
+          "cells": [
+            {
+              "text": "Other fastidious organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF PCR",
+          "cells": [
+            {
+              "text": "If central nervous system involvement suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tropheryma_endocarditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coxiella burnetii or Bartonella endocarditis",
+          "cells": [
+            {
+              "text": "Other blood-culture-negative organisms; specific serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-bacterial thrombotic endocarditis",
+          "cells": [
+            {
+              "text": "Sterile vegetations without an organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Libman-Sacks endocarditis",
+          "cells": [
+            {
+              "text": "Immune-mediated valve disease rather than infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tropheryma_endocarditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral induction then oral co-trimoxazole",
+          "cells": [
+            {
+              "text": "Ceftriaxone induction, then long-term co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doxycycline with hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Alternative prolonged regimen with tissue penetration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valve surgery",
+          "cells": [
+            {
+              "text": "Significant destruction, heart failure or persistent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS-penetrating regimen with CSF assessment",
+          "cells": [
+            {
+              "text": "Risk of neurological Whipple disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical heart failure management",
+          "cells": [
+            {
+              "text": "Alongside antimicrobial treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged follow-up",
+          "cells": [
+            {
+              "text": "Detect relapse if therapy is insufficient"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

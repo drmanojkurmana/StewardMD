@@ -146,5 +146,323 @@
       "caption": "Overview comparison matrix for papillary thyroid carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_thyroid_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Nodule and cervical nodal compartments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided FNA with Bethesda reporting",
+          "cells": [
+            {
+              "text": "Cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum TSH and thyroid function",
+          "cells": [
+            {
+              "text": "Euthyroid status before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum thyroglobulin and antibodies",
+          "cells": [
+            {
+              "text": "Baseline and post-operative marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF testing of indeterminate aspirates",
+          "cells": [
+            {
+              "text": "MAPK-pathway alterations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional neck imaging",
+          "cells": [
+            {
+              "text": "Bulky nodal or extrathyroidal extension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_thyroid_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Follicular thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Indeterminate aspirate; molecular testing for MAPK alterations helps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign colloid nodule",
+          "cells": [
+            {
+              "text": "Lacks the nuclear features of malignancy on cytology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_thyroid_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid surgery",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Lobectomy for low-risk intrathyroidal tumours, or total thyroidectomy for larger or higher-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck dissection",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Compartment-oriented, for proven nodal metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioactive iodine",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Selective ablation after total thyroidectomy in intermediate and high-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid hormone",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Levothyroxine with TSH suppression titrated to recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Thyroglobulin, antibodies and neck ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_thyroid_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Papillary thyroid carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless thyroid nodule in a euthyroid adult with suspicious ultrasound features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fixed mass, stridor, vocal cord palsy, bulky nodes or distant metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for airway, nerve or bulky nodal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neck ultrasound, Bethesda FNA, TSH, thyroglobulin, BRAF if indeterminate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does cytology show papillary nuclear features consistent with carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign colloid nodule, follicular neoplasm or reactive nodes; repeat FNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lobectomy for low-risk intrathyroidal tumours, or total thyroidectomy for larger disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compartment-oriented neck dissection for proven nodal metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective radioactive iodine after total thyroidectomy in intermediate or high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Levothyroxine with TSH suppression titrated to recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance with thyroglobulin, antibodies and neck ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally excellent, especially in younger patients with intrathyroidal disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

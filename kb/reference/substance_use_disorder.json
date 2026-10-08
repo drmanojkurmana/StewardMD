@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for substance use disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "substance_use_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Validated screening instruments and detailed use history",
+          "cells": [
+            {
+              "text": "Pattern and severity of use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine or serum toxicology",
+          "cells": [
+            {
+              "text": "Recent substance use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and organ damage markers",
+          "cells": [
+            {
+              "text": "Harm from use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood-borne virus screening",
+          "cells": [
+            {
+              "text": "Injecting drug use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised withdrawal severity scales",
+          "cells": [
+            {
+              "text": "Withdrawal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric comorbidity and suicide risk screen",
+          "cells": [
+            {
+              "text": "Comorbid mental disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "substance_use_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary mood or anxiety disorder",
+          "cells": [
+            {
+              "text": "Drives or mimics substance-related symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance-induced psychosis",
+          "cells": [
+            {
+              "text": "Psychotic disorder versus intoxication-related psychosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delirium from intoxication or withdrawal",
+          "cells": [
+            {
+              "text": "Acute cognitive change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "substance_use_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychosocial interventions",
+          "cells": [
+            {
+              "text": "Motivational interviewing, CBT and mutual-support groups"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid agonist substitution",
+          "cells": [
+            {
+              "text": "Methadone or buprenorphine for opioid use disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol pharmacotherapy",
+          "cells": [
+            {
+              "text": "Acamprosate, naltrexone or disulfiram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitored detoxification",
+          "cells": [
+            {
+              "text": "Benzodiazepines and thiamine for alcohol withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Harm reduction",
+          "cells": [
+            {
+              "text": "Take-home naloxone and needle and syringe provision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid psychiatric care",
+          "cells": [
+            {
+              "text": "Treatment of comorbid disorders and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Long-term engagement and social support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "substance_use_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Substance use disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Continued substance use despite harm, with craving or failed cut-downs: suspected SUD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (overdose, severe withdrawal, suicidal intent, injecting sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent care for overdose, seizures or delirium tremens, or acute suicide risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Screening tools; toxicology; liver function; viral screen; withdrawal scale",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a use disorder confirmed, not physiological dependence on a prescribed drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider a primary mood disorder or dependence on prescribed medication; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Psychosocial interventions as the foundation of care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Opioid agonist substitution with methadone or buprenorphine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitored detoxification with benzodiazepines and thiamine for alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Harm reduction with take-home naloxone and blood-borne virus screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relapse is common; comorbid illness and suicide risk shape long-term outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -155,5 +155,332 @@
       "caption": "Overview comparison matrix for eyelid sebaceous gland carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / WHO Classification of Eye Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sebaceous_carcinoma_eyelid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-thickness eyelid biopsy",
+          "cells": [
+            {
+              "text": "Any suspicious or recurrent lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid stain on fresh tissue; adipophilin and EMA",
+          "cells": [
+            {
+              "text": "Sebaceous differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Map conjunctival biopsies",
+          "cells": [
+            {
+              "text": "Pagetoid intraepithelial spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mismatch-repair immunohistochemistry",
+          "cells": [
+            {
+              "text": "Muir-Torre evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preauricular and cervical node assessment, orbital imaging",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic examination",
+          "cells": [
+            {
+              "text": "Conjunctival and orbital involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sebaceous_carcinoma_eyelid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chalazion or recurrent chalazion",
+          "cells": [
+            {
+              "text": "Failure to resolve or recurrence after drainage should prompt biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic unilateral blepharoconjunctivitis",
+          "cells": [
+            {
+              "text": "Unresponsive to conventional treatment suggests carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sebaceous_carcinoma_eyelid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with map biopsies",
+          "cells": [
+            {
+              "text": "Attend to depth and margins given pagetoid spread and multicentric foci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muir-Torre screening",
+          "cells": [
+            {
+              "text": "Mayo risk score; refer to clinical genetics if score is 3 or higher"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel node biopsy",
+          "cells": [
+            {
+              "text": "Considered for tumours staged T2c or higher on AJCC8"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision or Mohs surgery",
+          "cells": [
+            {
+              "text": "5 to 6 mm margins; margin-controlled Mohs preferred where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Not surgical candidates, positive or inadequate margins, or aggressive histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital invasion",
+          "cells": [
+            {
+              "text": "Consider exenteration or adjuvant radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodal or distant disease",
+          "cells": [
+            {
+              "text": "Medical oncology and tumour board; follow current NCCN guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Eyelid, periocular region and regional nodes for late recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sebaceous_carcinoma_eyelid-dx-mgmt",
+      "title": "Diagnosis and management of Eyelid sebaceous gland carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent chalazion or chronic unilateral blepharoconjunctivitis in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Madarosis, firm margin lesion, diffuse injection, orbital signs or Muir-Torre history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent full-thickness biopsy with map biopsies and oculoplastic referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Eyelid biopsy, lipid stain, adipophilin, EMA, MMR stains, node and orbital imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sebaceous carcinoma confirmed on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider chalazion, BCC, SCC, sebaceoma or ocular cicatricial pemphigoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for Muir-Torre syndrome with the Mayo score",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wide excision 5 to 6 mm margins or Mohs surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sentinel node biopsy for T2c or higher",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exenteration or radiotherapy for orbital invasion; tumour board for metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aggressive; worse with delay, large size, pagetoid spread and orbital or nodal disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

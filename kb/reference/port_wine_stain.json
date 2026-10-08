@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for port-wine stain."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "port_wine_stain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from a congenital, well-demarcated vascular patch",
+          "cells": [
+            {
+              "text": "Non-involuting lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Glaucoma with ophthalmic-distribution lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Leptomeningeal involvement in suspected Sturge-Weber"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb overgrowth assessment",
+          "cells": [
+            {
+              "text": "Associated vascular or overgrowth anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Syndromic or extensive presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "port_wine_stain-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infantile haemangioma",
+          "cells": [
+            {
+              "text": "Proliferates, then involutes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naevus simplex (salmon patch)",
+          "cells": [
+            {
+              "text": "Transient and midline; fades"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "port_wine_stain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulsed-dye laser",
+          "cells": [
+            {
+              "text": "Mainstay to lighten the malformation, started early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye review",
+          "cells": [
+            {
+              "text": "Glaucoma screening for ophthalmic-distribution lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sturge-Weber",
+          "cells": [
+            {
+              "text": "Brain MRI and neurology referral when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overgrowth",
+          "cells": [
+            {
+              "text": "Limb asymmetry assessment with orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Skin camouflage and support for cosmetic and social impact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Syndromic or extensive presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "port_wine_stain-dx-mgmt",
+      "title": "Diagnosis and management of Port-Wine Stain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital, well-demarcated vascular facial or limb stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ophthalmic-distribution stain, eye signs, progressive overgrowth, ulceration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology and neurology review for glaucoma or Sturge-Weber",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; ophthalmology; brain MRI if Sturge-Weber suspected; limb assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a congenital, non-involuting capillary malformation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infantile haemangioma, naevus simplex, angioma serpiginosum or cutis marmorata",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pulsed-dye laser therapy as mainstay, started early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmological review for glaucoma in ophthalmic-distribution lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Brain MRI and neurology referral when Sturge-Weber is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assessment for limb asymmetry and overgrowth with orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Psychological support and skin camouflage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "A lifelong lesion that darkens and thickens over time; the skin lesion itself is benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,282 @@
       "caption": "Overview comparison matrix for patulous eustachian tube."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "patulous_eustachian_tube-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tympanometry during quiet and forced breathing",
+          "cells": [
+            {
+              "text": "Breathing-related pressure swings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Other causes of aural symptoms excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasoendoscopy of the tubal orifice",
+          "cells": [
+            {
+              "text": "Tubal opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Tympanic membrane movement synchronous with breathing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patulous_eustachian_tube-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Superior semicircular canal dehiscence",
+          "cells": [
+            {
+              "text": "Sound- or pressure-induced vertigo rather than autophony alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive eustachian tube dysfunction",
+          "cells": [
+            {
+              "text": "Opposite mechanism; ventilation tubes usually fail here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patulous_eustachian_tube-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct precipitants",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Rehydrate, restore lost weight, and review oestrogen or GLP-1 agonist therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positional manoeuvres",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Lowering the head engorges tubal mucosa and relieves autophony"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical measures",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Trial for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedural intervention",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For a minority with persistent troublesome autophony"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "patulous_eustachian_tube-dx-mgmt",
+      "title": "Diagnosis and management of Patulous eustachian tube",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Autophony with breathing-synchronous sounds, relieved on lying down",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (unilateral symptoms with nasopharyngeal mass or rapid hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT review for suspected nasopharyngeal tumour or hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tympanometry with breathing, audiometry, nasoendoscopy, otoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does tympanometry show breathing-related pressure swings, with others excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider superior canal dehiscence, obstructive tube dysfunction, Meniere or effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rehydrate, restore weight and review oestrogen or GLP-1 agonist therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lowering the head relieves autophony by engorging tubal mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trial of topical measures for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Procedural intervention for a minority with troublesome autophony",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often benign and self-limiting once a trigger such as dehydration is corrected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

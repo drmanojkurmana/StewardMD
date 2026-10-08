@@ -152,5 +152,403 @@
       "caption": "Overview comparison matrix for non-st-elevation myocardial infarction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 244-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nstemi-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial high-sensitivity troponin",
+          "cells": [
+            {
+              "text": "Rise or fall with interval delta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial 12-lead ECGs",
+          "cells": [
+            {
+              "text": "Dynamic or evolving changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous rhythm monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Regional wall motion and function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nstemi-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Unstable angina",
+          "cells": [
+            {
+              "text": "Ischaemia without myocardial necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STEMI",
+          "cells": [
+            {
+              "text": "Persistent ST elevation needs reperfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 2 myocardial infarction",
+          "cells": [
+            {
+              "text": "Supply-demand mismatch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myocarditis or Takotsubo cardiomyopathy",
+          "cells": [
+            {
+              "text": "Non-ischaemic troponin rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Troponin rise from another cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nstemi-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dual antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin plus a P2Y12 inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral anticoagulation",
+          "cells": [
+            {
+              "text": "Fondaparinux or low-molecular-weight heparin during the acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-based invasive management",
+          "cells": [
+            {
+              "text": "Timed by risk stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Long-term cardiovascular protection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nstemi-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Class I indications for an early invasive strategy (level of evidence A)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent angina or ischemia",
+          "cells": [
+            {
+              "text": "Angina at rest or with low-level activity despite treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Troponin",
+          "cells": [
+            {
+              "text": "Elevated troponin T or troponin I"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "New ST-segment depression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrent angina or ischemia with heart failure features",
+          "cells": [
+            {
+              "text": "With CHF symptoms, rales or mitral regurgitation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stress test",
+          "cells": [
+            {
+              "text": "Positive stress test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ejection fraction",
+          "cells": [
+            {
+              "text": "Below 0.40"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Decreased blood pressure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Arrhythmia",
+          "cells": [
+            {
+              "text": "Sustained ventricular tachycardia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prior revascularization",
+          "cells": [
+            {
+              "text": "PCI within 6 months, or prior CABG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk score",
+          "cells": [
+            {
+              "text": "High-risk score"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The asterisk footnote text is not shown on the source page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nstemi-dx-mgmt",
+      "title": "Diagnosis and management of Non-ST-elevation myocardial infarction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chest pain with raised troponin and no persistent ST elevation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Medical emergency: ongoing ischaemia, instability or arrhythmia present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent admission, monitoring and antithrombotic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial high-sensitivity troponin, serial ECGs, continuous monitoring, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Troponin rise and fall with ischaemic symptoms and no ST elevation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 2 injury or non-ischaemic cause; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dual antiplatelet therapy with aspirin and a P2Y12 inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Parenteral anticoagulation during the acute phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risk-based invasive management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Secondary prevention after the acute event",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on infarct size, coronary anatomy, ventricular function and comorbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

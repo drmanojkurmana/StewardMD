@@ -156,6 +156,16 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 327-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -164,14 +174,64 @@
       "kind": "diagnostic",
       "title": "Diagnostic findings in Behcet disease",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Clinical assessment against classification criteria", "cells": [{"text": "Clinical diagnosis; there is no confirmatory laboratory test"}], "cite": "c1"},
-        {"parameter": "Pathergy test", "cells": [{"text": "Papulo-pustular skin reaction to needle prick; supports the diagnosis where present"}], "cite": "c1"},
-        {"parameter": "Ophthalmological examination", "cells": [{"text": "Uveitis and retinal vasculitis, including relapsing posterior uveitis"}], "cite": "c1"},
-        {"parameter": "Vascular imaging", "cells": [{"text": "Venous thrombosis and arterial aneurysms, including pulmonary vessels"}], "cite": "c1"},
-        {"parameter": "MRI brain and CSF analysis", "cells": [{"text": "Assesses neuro-Behcet when suspected"}], "cite": "c1"},
-        {"parameter": "HLA-B51 typing", "cells": [{"text": "Supportive only"}], "cite": "c1"}
+        {
+          "parameter": "Clinical assessment against classification criteria",
+          "cells": [
+            {
+              "text": "Clinical diagnosis; there is no confirmatory laboratory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathergy test",
+          "cells": [
+            {
+              "text": "Papulo-pustular skin reaction to needle prick; supports the diagnosis where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Uveitis and retinal vasculitis, including relapsing posterior uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Venous thrombosis and arterial aneurysms, including pulmonary vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and CSF analysis",
+          "cells": [
+            {
+              "text": "Assesses neuro-Behcet when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B51 typing",
+          "cells": [
+            {
+              "text": "Supportive only"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -179,15 +239,678 @@
       "kind": "treatment",
       "title": "Management options in Behcet disease",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Oral and genital ulcers", "cells": [{"text": "Topical corticosteroids and colchicine; apremilast for refractory oral ulceration"}, {"text": "Topical measures for mucocutaneous disease"}], "cite": "c1"},
-        {"parameter": "Arthritis and erythema nodosum", "cells": [{"text": "Colchicine; short corticosteroid courses or azathioprine"}, {"text": "For persistent disease"}], "cite": "c1"},
-        {"parameter": "Posterior uveitis and retinal vasculitis", "cells": [{"text": "Systemic corticosteroids with immunosuppression such as azathioprine or ciclosporin"}, {"text": "Escalate to infliximab, adalimumab or interferon-alpha to preserve vision"}], "cite": "c1"},
-        {"parameter": "Major vascular disease", "cells": [{"text": "Corticosteroids and immunosuppression such as cyclophosphamide or anti-TNF therapy"}, {"text": "Preferred over relying on anticoagulation alone"}], "cite": "c1"},
-        {"parameter": "Neuro-Behcet", "cells": [{"text": "Corticosteroids and immunosuppressants"}, {"text": "Avoid ciclosporin owing to neurotoxicity"}], "cite": "c1"},
-        {"parameter": "Gastrointestinal involvement", "cells": [{"text": "Corticosteroids, aminosalicylates, azathioprine or anti-TNF agents"}, {"text": "Surgery for perforation or uncontrolled bleeding"}], "cite": "c1"},
-        {"parameter": "Multidisciplinary follow-up", "cells": [{"text": "Escalate immunosuppression promptly for organ- or sight-threatening disease"}, {"text": "Course is more severe in young men"}], "cite": "c1"}
+        {
+          "parameter": "Oral and genital ulcers",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and colchicine; apremilast for refractory oral ulceration"
+            },
+            {
+              "text": "Topical measures for mucocutaneous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthritis and erythema nodosum",
+          "cells": [
+            {
+              "text": "Colchicine; short corticosteroid courses or azathioprine"
+            },
+            {
+              "text": "For persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior uveitis and retinal vasculitis",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids with immunosuppression such as azathioprine or ciclosporin"
+            },
+            {
+              "text": "Escalate to infliximab, adalimumab or interferon-alpha to preserve vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Major vascular disease",
+          "cells": [
+            {
+              "text": "Corticosteroids and immunosuppression such as cyclophosphamide or anti-TNF therapy"
+            },
+            {
+              "text": "Preferred over relying on anticoagulation alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-Behcet",
+          "cells": [
+            {
+              "text": "Corticosteroids and immunosuppressants"
+            },
+            {
+              "text": "Avoid ciclosporin owing to neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal involvement",
+          "cells": [
+            {
+              "text": "Corticosteroids, aminosalicylates, azathioprine or anti-TNF agents"
+            },
+            {
+              "text": "Surgery for perforation or uncontrolled bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Escalate immunosuppression promptly for organ- or sight-threatening disease"
+            },
+            {
+              "text": "Course is more severe in young men"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "behcet_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "behcet_disease-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for Behcet disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent oral ulceration",
+          "cells": [
+            {
+              "text": "Required"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Plus any two of the following",
+          "cells": [
+            {
+              "text": "Recurrent genital ulceration; eye lesions; skin lesions; positive pathergy test"
+            }
+          ],
+          "cite": "c3"
+        }
       ]
     }
   ],
@@ -197,28 +920,118 @@
       "title": "Diagnosis and management of Behcet disease",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Recurrent oral aphthous ulcers with genital ulcers, skin lesions, eye or vascular features", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: visual loss, neuro deficits, pulmonary artery aneurysm, major thrombosis or GI bleeding?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate urgently to ophthalmology, neurology and vascular teams; start immunosuppression", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Assess against classification criteria; pathergy test where available", "cite": "c1"},
-        {"id": "n5", "type": "action", "text": "Eye examination, vascular imaging; MRI brain and CSF if neuro-Behcet is suspected", "cite": "c1"},
-        {"id": "n6", "type": "decision", "text": "Clinical criteria met? (no confirmatory laboratory test exists)", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Treat by organ: topical steroids and colchicine for mucocutaneous disease", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "No: stays unconfirmed; HLA-B51 and pathergy alone do not settle the diagnosis", "cite": "c1"},
-        {"id": "n9", "type": "action", "text": "Systemic steroids with azathioprine or ciclosporin for uveitis; anti-TNF if refractory", "cite": "c1"},
-        {"id": "n10", "type": "outcome", "text": "Relapsing course; organ-threatening disease needs early escalation", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent oral aphthous ulcers with genital ulcers, skin lesions, eye or vascular features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: visual loss, neuro deficits, pulmonary artery aneurysm, major thrombosis or GI bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate urgently to ophthalmology, neurology and vascular teams; start immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Assess against classification criteria; pathergy test where available",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Eye examination, vascular imaging; MRI brain and CSF if neuro-Behcet is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Clinical criteria met? (no confirmatory laboratory test exists)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat by organ: topical steroids and colchicine for mucocutaneous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: stays unconfirmed; HLA-B51 and pathergy alone do not settle the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic steroids with azathioprine or ciclosporin for uveitis; anti-TNF if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Relapsing course; organ-threatening disease needs early escalation",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n5", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Next"},
-        {"from": "n6", "to": "n7", "label": "Yes"},
-        {"from": "n6", "to": "n8", "label": "No"},
-        {"from": "n7", "to": "n9", "label": "Next"},
-        {"from": "n9", "to": "n10", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
       ]
     }
   ]

@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for papillon-lefevre syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillon_lefevre_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CTSC molecular testing and cathepsin C activity",
+          "cells": [
+            {
+              "text": "Causative variant and enzyme function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental radiographs of alveolar bone",
+          "cells": [
+            {
+              "text": "Periodontal bone loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of keratoderma",
+          "cells": [
+            {
+              "text": "Hyperkeratosis with variable inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology and imaging",
+          "cells": [
+            {
+              "text": "Pyogenic or hepatic infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and consanguinity",
+          "cells": [
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillon_lefevre_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haim-Munk syndrome",
+          "cells": [
+            {
+              "text": "An allelic CTSC disorder with additional features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other diffuse palmoplantar keratodermas",
+          "cells": [
+            {
+              "text": "Lack the periodontitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leucocyte adhesion deficiency",
+          "cells": [
+            {
+              "text": "A neutrophil disorder that can also cause periodontitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillon_lefevre_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral acitretin",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Started early to improve keratoderma and help preserve the dentition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive periodontal care",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Mechanical debridement and chlorhexidine mouthwash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic antibiotics",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Amoxicillin with metronidazole around tooth eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratolytics and emollients",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For keratoderma; attention to hyperhidrosis and secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental rehabilitation",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Extraction of hopeless teeth and prosthetic or implant replacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillon_lefevre_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Papillon-Lefevre syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thick palmoplantar keratoderma with early loss of primary teeth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid periodontal loss, liver abscess features or deep pyogenic infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for liver abscess or systemic sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CTSC testing, cathepsin C activity, dental radiographs, skin biopsy, microbiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a CTSC variant found, with reduced cathepsin C activity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Haim-Munk syndrome, leucocyte adhesion deficiency or other keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral acitretin, started early, to improve keratoderma and help preserve dentition",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive periodontal care with mechanical debridement and chlorhexidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic antibiotics around tooth eruption, with amoxicillin and metronidazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical keratolytics and emollients; attention to hyperhidrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dental rehabilitation, extraction of hopeless teeth and prosthetic replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic but manageable; the main morbidity is early tooth loss and infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

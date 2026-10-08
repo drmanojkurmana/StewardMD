@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for thermal burns."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thermal_burns-dx-mgmt",
+      "title": "Diagnosis and management of Thermal burns",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thermal burn: partial- or full-thickness injury with possible inhalation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: hoarseness, stridor, soot, or circumferential full-thickness burns?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent early intubation before airway oedema, and escharotomy if circumferential",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Airway assessment; carboxyhaemoglobin and blood gas; urine output; bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does assessment show inhalational injury or carbon monoxide exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chemical or electrical burns, toxic epidermal necrolysis or scalds",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Primary survey and early airway control where inhalation is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warmed crystalloid titrated to urine output for large burns",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-flow oxygen for carbon monoxide; hydroxocobalamin for cyanide",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early tangential excision and grafting for deep burns",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Escharotomy for circumferential burns causing ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome depends on size, depth, age and inhalation; large deep burns carry high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thermal_burns-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway assessment",
+          "cells": [
+            {
+              "text": "Facial burns, soot, hoarseness and stridor warn of inhalational injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carboxyhaemoglobin and arterial blood gas",
+          "cells": [
+            {
+              "text": "Carbon monoxide exposure where inhalation is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine output monitoring",
+          "cells": [
+            {
+              "text": "Titrates fluid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline bloods including electrolytes and haematocrit",
+          "cells": [
+            {
+              "text": "Renal function and fluid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Inhalational airway injury in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial examination of circumferential burns",
+          "cells": [
+            {
+              "text": "Compartment compromise"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thermal_burns-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Toxic epidermal necrolysis or Stevens-Johnson syndrome",
+          "cells": [
+            {
+              "text": "Mimics a burn; the pattern and drug history distinguish them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Scald-like skin loss; a different cause and management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frostbite",
+          "cells": [
+            {
+              "text": "Cold injury as a cause of tissue necrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thermal_burns-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trauma primary survey and early airway control",
+          "cells": [
+            {
+              "text": "Intubate before oedema develops when inhalational injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Titrated resuscitation",
+          "cells": [
+            {
+              "text": "Warmed crystalloid titrated to urine output, starting from a body-surface-area and weight formula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asphyxiant treatment",
+          "cells": [
+            {
+              "text": "High-flow oxygen for carbon monoxide; hydroxocobalamin for suspected cyanide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Cleaning, topical antimicrobials and dressings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision and grafting",
+          "cells": [
+            {
+              "text": "Early tangential excision with skin grafting for deep partial- and full-thickness burns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escharotomy",
+          "cells": [
+            {
+              "text": "Circumferential full-thickness burns causing limb ischaemia or ventilatory compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, tetanus and nutrition",
+          "cells": [
+            {
+              "text": "Adequate analgesia, tetanus prophylaxis and early high-protein nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist burns centre referral",
+          "cells": [
+            {
+              "text": "Major burns; rehabilitation and scar management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

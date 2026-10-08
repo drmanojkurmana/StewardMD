@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for trimethylaminuria (fish-odour syndrome, fmo3)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trimethylaminuria-dx-mgmt",
+      "title": "Diagnosis and management of Trimethylaminuria (fish-odour syndrome, FMO3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trimethylaminuria: persistent fishy body odour without cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: significant depression, social withdrawal or systemic illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychological support for severe distress or withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary trimethylamine and TMAO ratio after precursor load; FMO3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the trimethylamine to TMAO ratio raised after standardised precursor load?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider exogenous malodour, localised infection or secondary liver-related causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrict dietary precursors of trimethylamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short gut-flora-modifying antibiotic courses during flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Slightly acidic soaps and lotions to lower skin pH",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Riboflavin to maximise residual FMO3 activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Psychological support and counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Genetic counselling for the recessive FMO3 basis",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Medically benign with normal lifespan; odour controllable but not curable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trimethylaminuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary trimethylamine and TMAO ratio",
+          "cells": [
+            {
+              "text": "Raised ratio, ideally after standardised precursor load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choline loading test",
+          "cells": [
+            {
+              "text": "Unmasks reduced oxidising capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FMO3 gene analysis",
+          "cells": [
+            {
+              "text": "Pathogenic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary precursor intake assessment",
+          "cells": [
+            {
+              "text": "Choline, lecithin and marine fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Excludes secondary odour from liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for infective sources",
+          "cells": [
+            {
+              "text": "Localised malodour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trimethylaminuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Poor hygiene or exogenous malodour",
+          "cells": [
+            {
+              "text": "No abnormal urinary trimethylamine ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial vaginosis or localised infection",
+          "cells": [
+            {
+              "text": "Localised infective odour; examination and microbiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary trimethylaminuria",
+          "cells": [
+            {
+              "text": "Heavy precursor intake or liver disease; dietary history and liver tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trimethylaminuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restrict dietary precursors",
+          "cells": [
+            {
+              "text": "Choline, lecithin, marine fish and other trimethylamine N-oxide sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metronidazole or neomycin courses",
+          "cells": [
+            {
+              "text": "Gut-flora suppression during flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slightly acidic soaps and lotions",
+          "cells": [
+            {
+              "text": "Lower skin surface pH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riboflavin supplementation",
+          "cells": [
+            {
+              "text": "Maximises residual FMO3 activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activated charcoal or copper chlorophyllin",
+          "cells": [
+            {
+              "text": "Adjunct sequestrants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support and counselling",
+          "cells": [
+            {
+              "text": "Social and emotional distress"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

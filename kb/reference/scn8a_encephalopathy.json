@@ -154,5 +154,285 @@
       "caption": "Overview comparison matrix for scn8a-related developmental and epileptic encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scn8a_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or exome/genome",
+          "cells": [
+            {
+              "text": "SCN8A and other sodium-channel genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged video-EEG",
+          "cells": [
+            {
+              "text": "Seizure types and interictal abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiology review",
+          "cells": [
+            {
+              "text": "Arrhythmia and sudden-death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement-disorder assessment",
+          "cells": [
+            {
+              "text": "Dystonia, chorea or stereotypies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental testing",
+          "cells": [
+            {
+              "text": "De novo versus inherited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scn8a_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium-channel blockers",
+          "cells": [
+            {
+              "text": "For the gain-of-function severe phenotype, which responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid blockers in loss of function",
+          "cells": [
+            {
+              "text": "Intellectual disability, autism and movement problems phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder management",
+          "cells": [
+            {
+              "text": "Dystonia, choreoathetosis and stereotypies alongside epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiology review",
+          "cells": [
+            {
+              "text": "Arrhythmia and sudden-death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination therapy and ketogenic diet",
+          "cells": [
+            {
+              "text": "Drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Developmental regression with multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental testing and counselling",
+          "cells": [
+            {
+              "text": "De novo versus inherited status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scn8a_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of SCN8A-related developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with drug-resistant seizures and movement disorder: suspected SCN8A disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Status, syncope or conduction abnormality, regression, or SUDEP risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Acute seizure treatment, ECG and cardiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-EEG, MRI, ECG, gene panel or exome, movement assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SCN8A variant with gain-of-function phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Loss-of-function: avoid sodium-channel blockers and tailor therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium-channel blockers for gain-of-function disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat dystonia and choreoathetosis alongside epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination therapy and ketogenic diet if resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiology review and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe gain-of-function disease: resistant epilepsy, disability and movement disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

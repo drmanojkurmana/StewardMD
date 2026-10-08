@@ -149,5 +149,261 @@
       "caption": "Overview comparison matrix for pelizaeus-merzbacher-like disease (gjc2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pelizaeus_merzbacher_like-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI for diffuse hypomyelination",
+          "cells": [
+            {
+              "text": "Pattern and stability over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PLP1 analysis including dosage",
+          "cells": [
+            {
+              "text": "Main differential excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GJC2 sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelizaeus_merzbacher_like-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelizaeus-Merzbacher disease",
+          "cells": [
+            {
+              "text": "X-linked PLP1; PLP1 analysis separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POLR3-related (4H) leukodystrophy",
+          "cells": [
+            {
+              "text": "Hypomyelinating pattern; genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelizaeus_merzbacher_like-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity management",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Physiotherapy, baclofen, botulinum toxin and orthoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and dysphagia support",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Gastrostomy when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For bulbar and truncal weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pelizaeus_merzbacher_like-dx-mgmt",
+      "title": "Diagnosis and management of Pelizaeus-Merzbacher-like disease (GJC2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with hypomyelinating MRI and developmental failure, later spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (poor head control, feeding failure or respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for respiratory compromise from bulbar weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI pattern, PLP1 analysis with dosage, GJC2 sequencing, developmental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GJC2 variant found with PLP1 excluded and a hypomyelinating MRI pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Pelizaeus-Merzbacher disease, 4H, TUBB4A-related disease or cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, baclofen, botulinum toxin and orthoses for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy when needed for dysphagia and to support nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory support for bulbar and truncal weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the consequences of dysarthria and dysphagia as they arise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Spectrum: severely affected children may never walk; milder cases gain more motor skills",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

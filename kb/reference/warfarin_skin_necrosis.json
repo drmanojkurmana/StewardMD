@@ -151,5 +151,267 @@
       "caption": "Overview comparison matrix for warfarin-induced skin necrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Goldman-Cecil Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "warfarin_skin_necrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Coagulation profile including INR",
+          "cells": [
+            {
+              "text": "Warfarin effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein C and protein S activity",
+          "cells": [
+            {
+              "text": "Deficiency, interpreted with awareness of warfarin effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet count and heparin antibodies",
+          "cells": [
+            {
+              "text": "Heparin-induced thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warfarin_skin_necrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heparin-induced skin necrosis or thrombocytopenia",
+          "cells": [
+            {
+              "text": "Heparin exposure; platelet count and antibodies separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calciphylaxis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising soft tissue infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Purpura fulminans",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warfarin_skin_necrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop warfarin immediately",
+          "cells": [
+            {
+              "text": "Halts microvascular thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K reversal",
+          "cells": [
+            {
+              "text": "Reverses warfarin effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replete natural anticoagulant",
+          "cells": [
+            {
+              "text": "Protein C deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral anticoagulation",
+          "cells": [
+            {
+              "text": "Bridging in at-risk patients, rather than loading with warfarin alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "warfarin_skin_necrosis-dx-mgmt",
+      "title": "Diagnosis and management of Warfarin-induced skin necrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected warfarin skin necrosis: painful erythema in the first days of warfarin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly expanding necrosis or systemic thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical debridement and reversal for extensive full-thickness necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "INR, protein C and S activity, platelet count, heparin antibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is warfarin-induced protein C deficiency confirmed in the context of necrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heparin-induced necrosis, calciphylaxis or infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop warfarin immediately and reverse with vitamin K",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replete natural anticoagulant deficiency where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parenteral anticoagulation to bridge in at-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Extensive necrosis may need debridement; early stopping limits damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,278 @@
       "caption": "Overview comparison matrix for natural killer cell deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nk_cell_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subset analysis of NK cells",
+          "cells": [
+            {
+              "text": "CD3-negative, CD56 and CD16-positive cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NK cell cytotoxicity functional assay",
+          "cells": [
+            {
+              "text": "Functional deficiency with normal counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing including GATA2 and MCM4",
+          "cells": [
+            {
+              "text": "Defines the specific defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Cytopenias in GATA2-associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nk_cell_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Combined immunodeficiency affecting T-cell antiviral immunity",
+          "cells": [
+            {
+              "text": "Broader lymphocyte defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GATA2 deficiency",
+          "cells": [
+            {
+              "text": "Bone marrow failure with immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Impaired NK cytotoxicity drives it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nk_cell_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt antiviral treatment",
+          "cells": [
+            {
+              "text": "Aciclovir or valaciclovir for herpesvirus; ganciclovir or valganciclovir for CMV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term antiviral prophylaxis",
+          "cells": [
+            {
+              "text": "For recurrent or severe herpesvirus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "For GATA2 deficiency with severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Live vaccine avoidance",
+          "cells": [
+            {
+              "text": "In immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nk_cell_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Natural killer cell deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe or recurrent herpesvirus infection with normal lymphocyte counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated herpesvirus, evolving cytopenia, myeloid malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antiviral therapy; immunological workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NK cell subsets, cytotoxicity assay, GATA2 and MCM4 testing, full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Absent or defective NK function with a recognised genetic defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider combined immunodeficiency or HLH; widen testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt antiviral treatment of herpesvirus infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term antiviral prophylaxis for recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stem cell transplantation for severe GATA2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on the defect; GATA2 deficiency carries risk of myeloid malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

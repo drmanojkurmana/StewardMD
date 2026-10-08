@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for pancreatic pseudocyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pancreatic_pseudocyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the abdomen",
+          "cells": [
+            {
+              "text": "Collection and its wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS-guided fluid aspiration",
+          "cells": [
+            {
+              "text": "Amylase, CEA and cytology exclude neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amylase, lipase and liver tests",
+          "cells": [
+            {
+              "text": "Pancreatic activity and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP or ERP",
+          "cells": [
+            {
+              "text": "Ductal anatomy and communication before drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound follow-up",
+          "cells": [
+            {
+              "text": "Size of conservatively managed cysts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_pseudocyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystic pancreatic neoplasm (cystadenoma, IPMN)",
+          "cells": [
+            {
+              "text": "Drainage is inappropriate; these may need resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Walled-off necrosis",
+          "cells": [
+            {
+              "text": "An acute collection with necrotic debris; a pseudocyst needs about four weeks to mature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_pseudocyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Serial imaging for small, asymptomatic pseudocysts, many of which resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS-guided transmural drainage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "First-line for mature, symptomatic or enlarging collections, by cystgastrostomy or cystduodenostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transpapillary drainage",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Pancreatic duct stenting where there is ductal communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical or percutaneous drainage",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "When endoscopic drainage fails or anatomy is unfavourable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Antibiotics and drainage for infection; angiographic embolisation for pseudoaneurysm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pancreatic_pseudocyst-dx-mgmt",
+      "title": "Diagnosis and management of Pancreatic pseudocyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent epigastric pain and mass after pancreatitis or pancreatic trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sudden severe pain or bleeding, sepsis, or rupture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent drainage and angiography for bleeding or pseudoaneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT, EUS aspiration with amylase and cytology, MRCP before drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mature, non-neoplastic collection confirmed, with cystic tumour excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cystic neoplasm or walled-off necrosis; reassess and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation with serial imaging for small asymptomatic collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "EUS-guided transmural drainage as first-line for mature, symptomatic collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transpapillary drainage or duct stenting where there is ductal communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical or percutaneous drainage when endoscopic drainage fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antibiotics and drainage for infection; embolisation for pseudoaneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Small pseudocysts often resolve; complications and recurrence worsen the outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

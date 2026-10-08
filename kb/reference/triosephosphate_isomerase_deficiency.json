@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for triosephosphate isomerase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "triosephosphate_isomerase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Triosephosphate isomerase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TPI deficiency: chronic haemolysis with progressive neuromuscular decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive weakness, respiratory compromise or cardiac involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and cardiac review for weakness or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Red-cell TPI assay; DHAP accumulation; haemolysis screen; TPI1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is red-cell TPI activity reduced with DHAP accumulation and a TPI1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyruvate kinase deficiency, GPI deficiency or autoimmune haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Folic acid and red-cell transfusion for severe anaemia or aplastic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vaccination and aggressive treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and management of spasticity and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac surveillance for arrhythmia and cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary care with early palliative input in infantile form",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Infantile form has poor prognosis with neurological decline; milder variants do better",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "triosephosphate_isomerase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell TPI enzyme assay",
+          "cells": [
+            {
+              "text": "Reduced enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell dihydroxyacetone phosphate measurement",
+          "cells": [
+            {
+              "text": "Metabolic hallmark: marked accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocytes and blood film",
+          "cells": [
+            {
+              "text": "Chronic non-spherocytic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen",
+          "cells": [
+            {
+              "text": "Bilirubin, lactate dehydrogenase and haptoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment",
+          "cells": [
+            {
+              "text": "Neurophysiology and imaging for neuromuscular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TPI1 gene testing",
+          "cells": [
+            {
+              "text": "Confirmatory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "triosephosphate_isomerase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate kinase deficiency",
+          "cells": [
+            {
+              "text": "Chronic haemolysis without the neuromuscular syndrome; enzyme assay distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose phosphate isomerase deficiency",
+          "cells": [
+            {
+              "text": "Haemolysis with neuromuscular features; enzyme assay distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Antibody-mediated haemolysis; direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "triosephosphate_isomerase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Folic acid supplementation",
+          "cells": [
+            {
+              "text": "Chronic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "Severe anaemia or aplastic crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination and prompt antibiotics",
+          "cells": [
+            {
+              "text": "Marked susceptibility to bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and spasticity management",
+          "cells": [
+            {
+              "text": "Neuromuscular disease; respiratory support as weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Arrhythmia and cardiomyopathy; sudden death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive TPI1 defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

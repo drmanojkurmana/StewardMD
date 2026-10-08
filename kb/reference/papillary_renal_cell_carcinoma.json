@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for papillary renal cell carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Uro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_renal_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Characterises and stages the mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal mass biopsy",
+          "cells": [
+            {
+              "text": "Where it will guide management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry and fumarate hydratase staining",
+          "cells": [
+            {
+              "text": "FH-deficient tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment",
+          "cells": [
+            {
+              "text": "Hereditary features or syndromic signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and bloods",
+          "cells": [
+            {
+              "text": "Staging of larger tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_renal_cell_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Clear cell renal cell carcinoma",
+          "cells": [
+            {
+              "text": "Hypovascular, enhancing less avidly than clear cell tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fumarate hydratase-deficient renal cell carcinoma",
+          "cells": [
+            {
+              "text": "A more aggressive type 2 subtype identified by FH staining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_renal_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Classify type 1 or type 2",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Guides treatment intensity and follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small localised masses",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Radical nephrectomy, partial nephrectomy, thermal ablation or active surveillance, by size and comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partial nephrectomy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Favoured for small masses where feasible, to preserve renal tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Serial imaging for selected small masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Hereditary papillary or fumarate hydratase syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_renal_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Papillary renal cell carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypovascular renal mass found on imaging, often multifocal",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (type 2 or FH-deficient histology, advanced disease or hereditary signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent kidney cancer review for advanced or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI, renal mass biopsy, FH staining, chest imaging and bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show papillary histology, with FH-deficient type excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider clear cell, chromophobe or collecting duct carcinoma; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Classify as type 1 or type 2, which guides treatment intensity and follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Choose nephrectomy, partial nephrectomy, ablation or surveillance for small masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Favour partial nephrectomy for small masses where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial imaging for active surveillance of selected small masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic assessment for hereditary papillary or fumarate hydratase syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Type 1 low-grade localised disease does well; type 2 and FH-deficient disease is worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,325 @@
       "caption": "Overview comparison matrix for toddler's diarrhoea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toddlers_diarrhoea-dx-mgmt",
+      "title": "Diagnosis and management of Toddler's diarrhoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toddler's diarrhoea: loose stools with undigested food in a growing child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: faltering growth, nocturnal diarrhoea, blood or steatorrhoea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Organic work-up for coeliac disease, giardiasis or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth chart; dietary diary; coeliac serology and stool studies if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is growth normal with a classic diurnal pattern and no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coeliac disease, giardiasis, malabsorption or overflow soiling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; functional disorder of rapid transit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce excess fluid and fructose or sorbitol-rich juices",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Increase dietary fat and moderate fibre",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial growth plotting to confirm thriving",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Organic investigation only if red flags appear",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and self-limiting, usually resolving by four to five years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toddlers_diarrhoea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth chart review",
+          "cells": [
+            {
+              "text": "Plotting; central to confirming the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology (tissue transglutaminase IgA with total IgA)",
+          "cells": [
+            {
+              "text": "Coeliac disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy, culture and Giardia antigen",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal calprotectin",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal elastase or sweat test",
+          "cells": [
+            {
+              "text": "Pancreatic insufficiency or cystic fibrosis, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary diary review",
+          "cells": [
+            {
+              "text": "Fluid, juice, fat and fibre intake"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toddlers_diarrhoea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Faltering growth; coeliac serology separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis and other chronic enteric infections",
+          "cells": [
+            {
+              "text": "Giardia antigen and stool culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constipation with overflow soiling",
+          "cells": [
+            {
+              "text": "Apparent diarrhoea from overflow around retained stool"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toddlers_diarrhoea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign functional disorder of rapid transit; no drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce fluid and juice",
+          "cells": [
+            {
+              "text": "Fructose- and sorbitol-rich juices and squashes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Increase fat, moderate fibre",
+          "cells": [
+            {
+              "text": "Lengthens intestinal transit time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial growth plotting",
+          "cells": [
+            {
+              "text": "Preserved growth confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unwarranted investigation",
+          "cells": [
+            {
+              "text": "No empirical exclusion diets without red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organic review",
+          "cells": [
+            {
+              "text": "Only if growth falters or nocturnal or systemic symptoms appear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

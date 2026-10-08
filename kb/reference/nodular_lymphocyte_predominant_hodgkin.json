@@ -156,5 +156,269 @@
       "caption": "Overview comparison matrix for nodular lymphocyte-predominant hodgkin lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nodular_lymphocyte_predominant_hodgkin-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional lymph node biopsy",
+          "cells": [
+            {
+              "text": "Nodular architecture; fine-needle aspiration is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "CD20 and CD45 positive LP popcorn cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Extent of disease and bulk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nodular_lymphocyte_predominant_hodgkin-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic Hodgkin lymphoma",
+          "cells": [
+            {
+              "text": "Lymphocyte-rich subtype; different therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell or histiocyte-rich large B-cell lymphoma",
+          "cells": [
+            {
+              "text": "Histiocyte-rich background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follicular lymphoma",
+          "cells": [
+            {
+              "text": "Nodular B-cell pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nodular_lymphocyte_predominant_hodgkin-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Manage as a distinct entity",
+          "cells": [
+            {
+              "text": "Different from classic Hodgkin lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised non-bulky disease",
+          "cells": [
+            {
+              "text": "Lower-intensity approach with high cure rates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-CD20 therapy for disease with CD20 expression",
+          "cells": [
+            {
+              "text": "CD20 is retained on LP cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for late relapse",
+          "cells": [
+            {
+              "text": "Indolent course with transformation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nodular_lymphocyte_predominant_hodgkin-dx-mgmt",
+      "title": "Diagnosis and management of Nodular lymphocyte-predominant Hodgkin lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless nodal enlargement in an adult with popcorn-like large cells on biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid enlargement, bulk, B symptoms, extranodal spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for transformation to aggressive large B-cell lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excisional node biopsy, CD20 and CD45 immunohistochemistry, staging imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "LP popcorn cells in a nodular pattern on excisional biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider classic Hodgkin or T-cell rich lymphoma; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat as a distinct entity from classic Hodgkin lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lower-intensity therapy for localised non-bulky disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-CD20 therapy given retained CD20 expression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for late relapse and transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent cure rates when early; late relapse and transformation remain risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

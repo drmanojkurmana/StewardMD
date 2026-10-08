@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for subaortic stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Congenital heart disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subaortic_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography localising the obstruction",
+          "cells": [
+            {
+              "text": "Level and gradient of the subvalvular obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic valve assessment",
+          "cells": [
+            {
+              "text": "Secondary aortic regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left ventricular hypertrophy and function",
+          "cells": [
+            {
+              "text": "Myocardial effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of hypertrophic cardiomyopathy and valvular stenosis",
+          "cells": [
+            {
+              "text": "Mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial follow-up",
+          "cells": [
+            {
+              "text": "Progression and recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subaortic_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Valvular aortic stenosis",
+          "cells": [
+            {
+              "text": "Valve-level obstruction; echocardiography localises the level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic obstructive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Dynamic obstruction; confusion with fixed subaortic stenosis is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subaortic_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Fibrous or fibromuscular membrane, for significant gradient or progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiographic surveillance",
+          "cells": [
+            {
+              "text": "Outflow gradient and aortic valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of progressive aortic regurgitation",
+          "cells": [
+            {
+              "text": "Caused by the subvalvular jet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prevention",
+          "cells": [
+            {
+              "text": "Oral hygiene and dental care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reoperation",
+          "cells": [
+            {
+              "text": "Recurrent obstruction, which is common after initial resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital or structural cardiology referral",
+          "cells": [
+            {
+              "text": "Cardiac surgery input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subaortic_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Subaortic stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ejection murmur from obstruction below the aortic valve: suspected subaortic stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid gradient rise, worsening regurgitation, syncope or angina)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac surgery review for a rapidly progressive gradient or syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography localising the obstruction and gradient; aortic valve; LV function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a fixed subvalvular membrane confirmed on echocardiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider valvular or hypertrophic obstruction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the membrane for significant gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial echo surveillance of gradient and aortic regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endocarditis prevention with oral hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reoperation for recurrent obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrence after resection is common, so follow-up is lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

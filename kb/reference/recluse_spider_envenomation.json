@@ -149,5 +149,240 @@
       "caption": "Overview comparison matrix for recluse (loxosceles) spider envenomation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "recluse_spider_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC and blood film",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haptoglobin, LDH, reticulocytes and bilirubin",
+          "cells": [
+            {
+              "text": "Intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "recluse_spider_envenomation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial skin and soft-tissue infection or abscess",
+          "cells": [
+            {
+              "text": "Local infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising fasciitis",
+          "cells": [
+            {
+              "text": "Spreading necrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "recluse_spider_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Cleansing, immobilisation, elevation and dressings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical timing",
+          "cells": [
+            {
+              "text": "Defer surgical debridement until the necrotic lesion is demarcated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Haemolysis and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "recluse_spider_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Recluse (Loxosceles) spider envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected recluse spider envenomation: spreading necrotic skin lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, dark urine, falling haemoglobin, AKI, or rapidly spreading lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology and renal review for haemolysis or AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; haptoglobin, LDH, reticulocytes, bilirubin; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is intravascular haemolysis confirmed with necrosis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacterial infection, necrotising fasciitis or vasculitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive wound care: cleansing, immobilisation, elevation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Defer surgical debridement until the lesion is demarcated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for haemolysis and acute kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Wound and renal follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

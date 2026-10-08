@@ -149,5 +149,345 @@
       "caption": "Overview comparison matrix for trigeminal autonomic cephalalgias."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigeminal_autonomic_cephalalgia-dx-mgmt",
+      "title": "Diagnosis and management of Trigeminal autonomic cephalalgias",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trigeminal autonomic cephalalgia: unilateral pain with autonomic signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: atypical presentation, fixed Horner syndrome or raised intracranial pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging for suspected sellar or posterior fossa lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain with pituitary views; headache diary; indometacin trial if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do attack pattern and indometacin response fit a defined subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trigeminal neuralgia, migraine or symptomatic lesion; exclude glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-flow oxygen and triptan to abort cluster attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Verapamil under ECG monitoring for cluster prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Indometacin with gastroprotection for paroxysmal hemicrania",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lamotrigine or antiseizure agents for SUNCT and SUNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "MRI with pituitary views before long-term treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Neuromodulation for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Chronic or relapsing; most respond to targeted therapy once correctly classified",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigeminal_autonomic_cephalalgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Headache diary",
+          "cells": [
+            {
+              "text": "Attack duration, frequency, timing and autonomic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain with pituitary and cavernous sinus views",
+          "cells": [
+            {
+              "text": "Excludes symptomatic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography",
+          "cells": [
+            {
+              "text": "Suspected arterial dissection or vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indometacin trial",
+          "cells": [
+            {
+              "text": "Suspected paroxysmal hemicrania or hemicrania continua"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary function tests",
+          "cells": [
+            {
+              "text": "Sellar lesion found or suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic or ENT assessment",
+          "cells": [
+            {
+              "text": "Red, watering eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_autonomic_cephalalgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigeminal neuralgia",
+          "cells": [
+            {
+              "text": "Brief pain without conjunctival injection or tearing; differs from SUNCT and SUNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine",
+          "cells": [
+            {
+              "text": "Different phenotype with fewer ipsilateral autonomic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic trigeminal autonomic cephalalgia",
+          "cells": [
+            {
+              "text": "Pituitary, cavernous sinus or posterior fossa lesion on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigeminal_autonomic_cephalalgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-flow oxygen and triptan",
+          "cells": [
+            {
+              "text": "Abort cluster attacks; sumatriptan or zolmitriptan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verapamil under ECG monitoring",
+          "cells": [
+            {
+              "text": "Cluster prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid or greater occipital nerve block",
+          "cells": [
+            {
+              "text": "Transitional bridge in cluster headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lithium, topiramate or CGRP antibody",
+          "cells": [
+            {
+              "text": "Alternative preventives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indometacin with gastroprotection",
+          "cells": [
+            {
+              "text": "Paroxysmal hemicrania and hemicrania continua; diagnostic and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lamotrigine or antiseizure agents",
+          "cells": [
+            {
+              "text": "SUNCT and SUNA; intravenous lidocaine for severe exacerbation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromodulation",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

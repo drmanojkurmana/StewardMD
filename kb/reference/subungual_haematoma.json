@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for subungual haematoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subungual_haematoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy of the nail plate",
+          "cells": [
+            {
+              "text": "Homogeneous red-black pattern without a parallel network"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiograph of the digit",
+          "cells": [
+            {
+              "text": "Underlying phalangeal fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial review of pigment migration",
+          "cells": [
+            {
+              "text": "Distal movement with nail growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail plate paring or clipping",
+          "cells": [
+            {
+              "text": "Blood versus melanin pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix biopsy",
+          "cells": [
+            {
+              "text": "Melanoma cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subungual_haematoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subungual melanoma",
+          "cells": [
+            {
+              "text": "Non-migrating pigment with dystrophy or periungual spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanocytic naevus of the nail matrix",
+          "cells": [
+            {
+              "text": "Parallel pigment network on dermoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual exostosis",
+          "cells": [
+            {
+              "text": "Bony lesion that lifts the nail"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subungual_haematoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trephination",
+          "cells": [
+            {
+              "text": "Painful acute haematoma involving a large part of the nail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and elevation",
+          "cells": [
+            {
+              "text": "Smaller or settling lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiograph after significant trauma",
+          "cells": [
+            {
+              "text": "Exclude distal phalangeal fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail plate removal and nail bed repair",
+          "cells": [
+            {
+              "text": "Extensive laceration or displaced fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Matrix biopsy",
+          "cells": [
+            {
+              "text": "Pigment fails to migrate or melanoma not excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear advice",
+          "cells": [
+            {
+              "text": "Recurrent runner's toenail lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up of pigment migration",
+          "cells": [
+            {
+              "text": "Confirms resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subungual_haematoma-dx-mgmt",
+      "title": "Diagnosis and management of Subungual haematoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subungual blood after crush injury or footwear trauma: suspected subungual haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (non-migrating pigment, Hutchinson sign, no trauma history)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected subungual melanoma or open nail bed injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy; digit radiograph; serial review of pigment; nail plate paring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pigment migrate distally with nail growth after a trauma history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subungual melanoma or matrix naevus; matrix biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trephination for painful acute haematoma over a large nail area",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiograph after significant trauma to exclude fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nail bed repair for extensive laceration, with tetanus for open injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Matrix biopsy if pigment fails to migrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolves with nail growth, which is slower in toenails; melanoma must be excluded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -141,5 +141,296 @@
       "caption": "Overview comparison matrix for stercoral colitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Colorectal surgery and gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stercoral_colitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Faeces-filled colon, wall thickening and pericolonic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of faecal impaction",
+          "cells": [
+            {
+              "text": "Degree of impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and lactate",
+          "cells": [
+            {
+              "text": "Ischaemia or sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation of constipation cause",
+          "cells": [
+            {
+              "text": "Comorbidities driving constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical review",
+          "cells": [
+            {
+              "text": "Suspected perforation or necrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stercoral_colitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diverticulitis",
+          "cells": [
+            {
+              "text": "Confused with stercoral colitis; CT distinguishes faecal impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic colitis",
+          "cells": [
+            {
+              "text": "Ischaemic colon; pressure necrosis from impaction differs in cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stercoral_colitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Manual disimpaction and bowel decompression",
+          "cells": [
+            {
+              "text": "Enemas, osmotic or stimulant laxatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgical resection with stoma",
+          "cells": [
+            {
+              "text": "Stercoral perforation or necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Intravenous fluids, bowel rest and broad-spectrum antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial assessment",
+          "cells": [
+            {
+              "text": "Clinical and CT review with inflammatory markers and lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term bowel regimen",
+          "cells": [
+            {
+              "text": "Laxatives, hydration, fibre and mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of underlying causes",
+          "cells": [
+            {
+              "text": "Comorbidities driving chronic constipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stercoral_colitis-dx-mgmt",
+      "title": "Diagnosis and management of Stercoral colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe constipation with abdominal pain in the frail: suspected stercoral colitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (peritonitis, free air, necrosis, sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review: resection with stoma for perforation or necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT abdomen and pelvis; inflammatory markers and lactate; impaction assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT show a faeces-filled colon with wall thickening and pericolonic change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider diverticulitis, ischaemic colitis or malignancy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Manual disimpaction and bowel decompression with enemas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive care: fluids, bowel rest and antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial clinical and CT assessment with lactate monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term bowel regimen and treatment of constipation causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Perforation risk is high; untreated impaction can progress to necrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

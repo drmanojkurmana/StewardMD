@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for porcelain gallbladder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "porcelain_gallbladder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Extent and pattern of wall calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Wall, gallstones and any mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue characterisation or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and CA 19-9",
+          "cells": [
+            {
+              "text": "Carcinoma suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Mass or malignancy identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fitness assessment",
+          "cells": [
+            {
+              "text": "Cholecystectomy candidacy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "porcelain_gallbladder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Emphysematous cholecystitis",
+          "cells": [
+            {
+              "text": "Gas rather than calcium in the wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallbladder adenocarcinoma with calcification",
+          "cells": [
+            {
+              "text": "Focal or asymmetric wall thickening or a mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "porcelain_gallbladder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cholecystectomy",
+          "cells": [
+            {
+              "text": "Generally recommended given the association with adenocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Approach",
+          "cells": [
+            {
+              "text": "Laparoscopic for uncomplicated disease; conversion to open if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging and referral",
+          "cells": [
+            {
+              "text": "Cross-sectional staging and hepatobiliary and oncology referral if malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fitness",
+          "cells": [
+            {
+              "text": "If unfit or declining surgery, imaging surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary review",
+          "cells": [
+            {
+              "text": "Hepatobiliary meeting for equivocal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "porcelain_gallbladder-dx-mgmt",
+      "title": "Diagnosis and management of Porcelain gallbladder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Calcified gallbladder wall found incidentally on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (focal wall thickening, mass, weight loss, jaundice, nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatobiliary and oncology referral for suspected carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT for calcification pattern; ultrasound; MRI; CA 19-9 and LFTs if concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the calcification confined to the wall, without focal thickening or mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider emphysematous cholecystitis, adenomyomatosis or chronic cholecystitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cholecystectomy, generally recommended given the adenocarcinoma association",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laparoscopic approach for uncomplicated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staging imaging and referral if a mass is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess surgical fitness; imaging surveillance if unfit or declining surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hepatobiliary multidisciplinary review where features are equivocal",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Uncomplicated incidental disease has a good outlook; cholecystectomy removes the risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

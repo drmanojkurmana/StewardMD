@@ -155,6 +155,11 @@
       "id": "c1",
       "label": "Firestein & Kelley's Textbook of Rheumatology",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 333-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -163,16 +168,82 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in calcium pyrophosphate deposition disease",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Synovial fluid polarised microscopy", "cells": [{"text": "Positively birefringent rhomboid CPP crystals"}], "cite": "c1"},
-        {"parameter": "Radiographs of knees, wrists and pelvis", "cells": [{"text": "Chondrocalcinosis, including the symphysis pubis"}], "cite": "c1"},
-        {"parameter": "Ultrasound", "cells": [{"text": "Crystal deposits within cartilage"}], "cite": "c1"},
-        {"parameter": "Ferritin and transferrin saturation", "cells": [{"text": "Haemochromatosis"}], "cite": "c1"},
-        {"parameter": "Calcium, parathyroid hormone and magnesium", "cells": [{"text": "Hyperparathyroidism and hypomagnesaemia"}], "cite": "c1"},
-        {"parameter": "Alkaline phosphatase", "cells": [{"text": "Hypophosphatasia screen"}], "cite": "c1"},
-        {"parameter": "Synovial fluid cell count and culture", "cells": [{"text": "Excludes infection during flares"}], "cite": "c1"},
-        {"parameter": "CT or cross-sectional imaging", "cells": [{"text": "Deep joints or the spine involved"}], "cite": "c1"}
+        {
+          "parameter": "Synovial fluid polarised microscopy",
+          "cells": [
+            {
+              "text": "Positively birefringent rhomboid CPP crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of knees, wrists and pelvis",
+          "cells": [
+            {
+              "text": "Chondrocalcinosis, including the symphysis pubis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Crystal deposits within cartilage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin and transferrin saturation",
+          "cells": [
+            {
+              "text": "Haemochromatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, parathyroid hormone and magnesium",
+          "cells": [
+            {
+              "text": "Hyperparathyroidism and hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Hypophosphatasia screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid cell count and culture",
+          "cells": [
+            {
+              "text": "Excludes infection during flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Deep joints or the spine involved"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -180,11 +251,37 @@
       "kind": "ddx",
       "title": "Look-alike inflammatory and degenerative arthritis",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Osteoarthritis", "cells": [{"text": "Chronic CPPD mimics it, especially in wrist, metacarpophalangeal and shoulder joints; crystal identification and chondrocalcinosis separate them"}], "cite": "c1"},
-        {"parameter": "Rheumatoid arthritis", "cells": [{"text": "Symmetrical inflammatory pattern that chronic CPPD can resemble; synovial crystal analysis separates them"}], "cite": "c1"},
-        {"parameter": "Septic arthritis", "cells": [{"text": "Exclude during acute flares with synovial fluid culture"}], "cite": "c1"}
+        {
+          "parameter": "Osteoarthritis",
+          "cells": [
+            {
+              "text": "Chronic CPPD mimics it, especially in wrist, metacarpophalangeal and shoulder joints; crystal identification and chondrocalcinosis separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Symmetrical inflammatory pattern that chronic CPPD can resemble; synovial crystal analysis separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Exclude during acute flares with synovial fluid culture"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -192,15 +289,124 @@
       "kind": "treatment",
       "title": "Management options in calcium pyrophosphate deposition disease",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Joint aspiration", "cells": [{"text": "Confirms crystals, excludes sepsis and gives symptomatic relief"}, {"text": "Acutely inflamed joint"}], "cite": "c1"},
-        {"parameter": "Acute pseudogout", "cells": [{"text": "Intra-articular corticosteroid, NSAID, colchicine or short oral corticosteroid by comorbidity"}, {"text": "Acute attack"}], "cite": "c1"},
-        {"parameter": "Prophylaxis", "cells": [{"text": "Low-dose colchicine or an NSAID for frequently recurrent attacks"}, {"text": "Recurrent attacks"}], "cite": "c1"},
-        {"parameter": "Chronic inflammatory CPPD", "cells": [{"text": "Methotrexate or hydroxychloroquine where simpler measures fail"}, {"text": "Refractory"}], "cite": "c1"},
-        {"parameter": "Metabolic driver", "cells": [{"text": "Venesection for haemochromatosis; correct hypomagnesaemia; treat primary hyperparathyroidism"}, {"text": "Treat the cause"}], "cite": "c1"},
-        {"parameter": "Degenerative arthropathy", "cells": [{"text": "Analgesia, physiotherapy and joint protection"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Asymptomatic chondrocalcinosis", "cells": [{"text": "No treatment; reserve therapy for symptomatic disease"}, {"text": "Observation"}], "cite": "c1"}
+        {
+          "parameter": "Joint aspiration",
+          "cells": [
+            {
+              "text": "Confirms crystals, excludes sepsis and gives symptomatic relief"
+            },
+            {
+              "text": "Acutely inflamed joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pseudogout",
+          "cells": [
+            {
+              "text": "Intra-articular corticosteroid, NSAID, colchicine or short oral corticosteroid by comorbidity"
+            },
+            {
+              "text": "Acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Low-dose colchicine or an NSAID for frequently recurrent attacks"
+            },
+            {
+              "text": "Recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory CPPD",
+          "cells": [
+            {
+              "text": "Methotrexate or hydroxychloroquine where simpler measures fail"
+            },
+            {
+              "text": "Refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic driver",
+          "cells": [
+            {
+              "text": "Venesection for haemochromatosis; correct hypomagnesaemia; treat primary hyperparathyroidism"
+            },
+            {
+              "text": "Treat the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degenerative arthropathy",
+          "cells": [
+            {
+              "text": "Analgesia, physiotherapy and joint protection"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic chondrocalcinosis",
+          "cells": [
+            {
+              "text": "No treatment; reserve therapy for symptomatic disease"
+            },
+            {
+              "text": "Observation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "calcium_pyrophosphate_deposition-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Conditions associated with CPPD disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated conditions"
+      ],
+      "rows": [
+        {
+          "parameter": "Aging",
+          "cells": [
+            {
+              "text": "Aging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disease-associated",
+          "cells": [
+            {
+              "text": "Primary hyperparathyroidism; hemochromatosis; hypophosphatasia; hypomagnesemia; chronic gout; postmeniscectomy; Gitelman's syndrome; epiphyseal dysplasias"
+            }
+          ],
+          "cite": "c2"
+        }
       ]
     }
   ],
@@ -210,26 +416,107 @@
       "title": "Diagnosis and management of calcium pyrophosphate deposition disease",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Acute or chronic joint inflammation, or chondrocalcinosis on imaging", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: hot acute joint, younger patient with chondrocalcinosis, or spinal involvement with neurological symptoms?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: urgent aspiration to exclude sepsis; metabolic screen; spinal imaging if neck pain", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Joint aspiration for polarised microscopy; radiographs for chondrocalcinosis", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Positively birefringent rhomboid crystals identified?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Treat acute attack with corticosteroid, NSAID or colchicine; prophylaxis if recurrent", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Consider osteoarthritis, rheumatoid arthritis or sepsis; reassess the diagnosis", "cite": "c1"},
-        {"id": "n8", "type": "action", "text": "Screen for ferritin, parathyroid, magnesium and alkaline phosphatase; treat underlying driver", "cite": "c1"},
-        {"id": "n9", "type": "outcome", "text": "Acute attacks settle with therapy; chronic forms may cause progressive joint damage", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute or chronic joint inflammation, or chondrocalcinosis on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: hot acute joint, younger patient with chondrocalcinosis, or spinal involvement with neurological symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent aspiration to exclude sepsis; metabolic screen; spinal imaging if neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Joint aspiration for polarised microscopy; radiographs for chondrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Positively birefringent rhomboid crystals identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat acute attack with corticosteroid, NSAID or colchicine; prophylaxis if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider osteoarthritis, rheumatoid arthritis or sepsis; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for ferritin, parathyroid, magnesium and alkaline phosphatase; treat underlying driver",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Acute attacks settle with therapy; chronic forms may cause progressive joint damage",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Next"},
-        {"from": "n8", "to": "n9", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
       ]
     }
   ]

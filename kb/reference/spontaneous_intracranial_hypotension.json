@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for spontaneous intracranial hypotension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spontaneous_intracranial_hypotension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Pachymeningeal enhancement and brain sagging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal MRI",
+          "cells": [
+            {
+              "text": "Extradural CSF collections and dilated nerve root sleeves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or dynamic digital subtraction myelography",
+          "cells": [
+            {
+              "text": "Localises the CSF leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with opening pressure",
+          "cells": [
+            {
+              "text": "Pressure may be low or normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heavily T2-weighted spinal imaging",
+          "cells": [
+            {
+              "text": "CSF leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for connective tissue disorder",
+          "cells": [
+            {
+              "text": "Predisposition to dural tear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spontaneous_intracranial_hypotension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-dural puncture (iatrogenic) low-pressure headache",
+          "cells": [
+            {
+              "text": "Recent lumbar puncture; history clarifies the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postural orthostatic tachycardia syndrome",
+          "cells": [
+            {
+              "text": "Orthostatic intolerance without a CSF leak"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spontaneous_intracranial_hypotension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Bed rest, hydration and caffeine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural blood patch",
+          "cells": [
+            {
+              "text": "Mainstay when conservative measures fail; may be repeated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted fibrin sealant or transvenous embolisation",
+          "cells": [
+            {
+              "text": "CSF-venous fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leak localisation before treatment",
+          "cells": [
+            {
+              "text": "CT or dynamic myelography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and antiemetics",
+          "cells": [
+            {
+              "text": "Headache, nausea and associated symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for rebound intracranial hypertension",
+          "cells": [
+            {
+              "text": "After leak closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of connective tissue disorder",
+          "cells": [
+            {
+              "text": "Such as Marfan or Ehlers-Danlos syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spontaneous_intracranial_hypotension-dx-mgmt",
+      "title": "Diagnosis and management of Spontaneous intracranial hypotension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Orthostatic headache that worsens upright: suspected intracranial hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling consciousness, focal deficit, brainstem signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for brainstem signs or subdural haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast brain MRI; spinal MRI; CT or DSA myelography; opening pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI findings and leak localisation confirm a CSF leak?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider post-dural puncture headache, POTS or migraine; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care: bed rest, hydration and caffeine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Epidural blood patch as the mainstay if conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Targeted fibrin sealant or transvenous embolisation for CSF-venous fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for rebound intracranial hypertension after closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent leaks need leak localisation and targeted repair",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

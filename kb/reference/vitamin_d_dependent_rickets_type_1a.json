@@ -148,5 +148,249 @@
       "caption": "Overview comparison matrix for vitamin d-dependent rickets type 1a (cyp27b1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_d_dependent_rickets_type_1a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and rickets pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone",
+          "cells": [
+            {
+              "text": "Typically elevated as a secondary response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D with 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "25-hydroxyvitamin D normal or high; 1,25-dihydroxyvitamin D characteristically low"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_d_dependent_rickets_type_1a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional vitamin D deficiency rickets",
+          "cells": [
+            {
+              "text": "Standard parent vitamin D corrects it; 1,25-dihydroxyvitamin D is not low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D-dependent rickets type 2",
+          "cells": [
+            {
+              "text": "Receptor defect with markedly raised 1,25-dihydroxyvitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophosphataemic (FGF23-mediated) rickets",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophosphatasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_d_dependent_rickets_type_1a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Active vitamin D replacement",
+          "cells": [
+            {
+              "text": "Calcitriol or alfacalcidol, bypassing the defective 1-alpha-hydroxylase; lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium supplementation",
+          "cells": [
+            {
+              "text": "Initial healing, to correct hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_d_dependent_rickets_type_1a-dx-mgmt",
+      "title": "Diagnosis and management of Vitamin D-dependent rickets type 1A (CYP27B1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitamin D-dependent rickets type 1A: infant rickets with hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypocalcaemic seizures, tetany or cardiac dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of hypocalcaemic seizures or tetany",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, ALP, PTH, 25-hydroxyvitamin D and 1,25-dihydroxyvitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 1,25-dihydroxyvitamin D low with normal or high 25-hydroxyvitamin D?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nutritional rickets or vitamin D-dependent rickets type 2",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong replacement with active vitamin D (calcitriol or alfacalcidol)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcium supplementation during initial healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor calcium, phosphate and PTH during healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Physiological replacement heals rickets; parent vitamin D alone does not work",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

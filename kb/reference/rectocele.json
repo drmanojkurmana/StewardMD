@@ -151,5 +151,247 @@
       "caption": "Overview comparison matrix for rectocele."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rectocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Defecating proctography",
+          "cells": [
+            {
+              "text": "Rectocele size and barium trapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic pelvic-floor MRI",
+          "cells": [
+            {
+              "text": "All three compartments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry",
+          "cells": [
+            {
+              "text": "Anorectal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Enterocele or sigmoidocele",
+          "cells": [
+            {
+              "text": "Herniation into the rectovaginal space"
+            },
+            {
+              "text": "Dynamic pelvic MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal intussusception or internal rectal prolapse",
+          "cells": [
+            {
+              "text": "Internal rectal prolapse"
+            },
+            {
+              "text": "Defecating proctography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Dietary fibre, fluids, stool softeners and bowel habit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic-floor physiotherapy",
+          "cells": [
+            {
+              "text": "Physiotherapy and biofeedback"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "For persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rectocele-dx-mgmt",
+      "title": "Diagnosis and management of Rectocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rectocele: difficult evacuation with a vaginal bulge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding, weight loss, bowel change, or non-reducing ulcerated mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for suspected neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Defecating proctography; dynamic pelvic MRI; anorectal manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a rectocele confirmed with other compartment defects assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enterocele, intussusception or anismus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary fibre, fluids, stool softeners and bowel habit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic-floor physiotherapy and biofeedback",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassessment for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Colorectal or urogynaecology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

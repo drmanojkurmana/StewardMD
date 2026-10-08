@@ -160,5 +160,361 @@
       "caption": "Diagnosis requires presence of any 3 of the 5 risk factors above."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Entry text (source not recorded)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "the_metabolic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of The Metabolic Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected metabolic syndrome: central obesity with raised pressure, lipids or glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: acanthosis, lipoatrophy, diabetes, or features of advanced liver fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatology review for suspected advanced liver fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting lipids and glucose; waist and blood pressure; FIB-4 for fatty liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are three or more of the five criteria met?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 2 diabetes, PCOS, Cushing syndrome or lipodystrophy; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Calorie-reduced diet, physical activity and weight loss as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Statin for atherogenic dyslipidaemia; fibrate for high triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Renin-angiotensin system inhibitor for blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Metformin for hyperglycaemia alongside lifestyle",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "GLP-1 receptor agonist or bariatric surgery for uncontrolled obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Roughly doubles cardiovascular death risk; diabetes risk rises three- to fivefold",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "the_metabolic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Waist circumference, men",
+          "cells": [
+            {
+              "text": "Central obesity",
+              "op": ">",
+              "value": 102
+            }
+          ],
+          "cite": "c1",
+          "unit": "cm"
+        },
+        {
+          "parameter": "Waist circumference, women",
+          "cells": [
+            {
+              "text": "Central obesity",
+              "op": ">",
+              "value": 88
+            }
+          ],
+          "cite": "c1",
+          "unit": "cm"
+        },
+        {
+          "parameter": "Triglycerides",
+          "cells": [
+            {
+              "text": "Atherogenic dyslipidaemia",
+              "op": ">=",
+              "value": 150
+            }
+          ],
+          "cite": "c1",
+          "unit": "mg/dL"
+        },
+        {
+          "parameter": "HDL cholesterol, men",
+          "cells": [
+            {
+              "text": "Low HDL",
+              "op": "<",
+              "value": 40
+            }
+          ],
+          "cite": "c1",
+          "unit": "mg/dL"
+        },
+        {
+          "parameter": "HDL cholesterol, women",
+          "cells": [
+            {
+              "text": "Low HDL",
+              "op": "<",
+              "value": 50
+            }
+          ],
+          "cite": "c1",
+          "unit": "mg/dL"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Hypertension, 130/85 mmHg or more",
+              "op": ">=",
+              "value": 130
+            }
+          ],
+          "cite": "c1",
+          "unit": "mmHg systolic"
+        },
+        {
+          "parameter": "Fasting glucose",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_metabolic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic lipodystrophies",
+          "cells": [
+            {
+              "text": "Lipoatrophy with severe insulin resistance; lipoatrophy is rare in the usual syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cushing syndrome",
+          "cells": [
+            {
+              "text": "Central adiposity, hypertension and hyperglycaemia overlap; endocrine causes need excluding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Anovulation and clinical features; testosterone, LH and FSH testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_metabolic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle modification",
+          "cells": [
+            {
+              "text": "Calorie-reduced diet, physical activity and weight loss; first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Statin and fibrate",
+          "cells": [
+            {
+              "text": "Atherogenic dyslipidaemia; fibrate added for persistent hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renin-angiotensin system inhibitor",
+          "cells": [
+            {
+              "text": "Blood pressure control, favoured given its metabolic profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "Hyperglycaemia and insulin resistance, alongside lifestyle measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLP-1 receptor agonist or bariatric surgery",
+          "cells": [
+            {
+              "text": "Obesity not controlled by lifestyle alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated conditions",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea and fatty liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation and monitoring",
+          "cells": [
+            {
+              "text": "Glycaemia, lipids and blood pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

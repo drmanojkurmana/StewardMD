@@ -148,5 +148,294 @@
       "caption": "Overview comparison matrix for pure red cell aplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / WHO classification of haematolymphoid tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pure_red_cell_aplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Reticulocyte count",
+          "cells": [
+            {
+              "text": "Reticulocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Absent erythroid precursors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19 PCR",
+          "cells": [
+            {
+              "text": "Parvovirus B19, particularly if immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional chest imaging",
+          "cells": [
+            {
+              "text": "Thymoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunophenotyping and T-cell clonality",
+          "cells": [
+            {
+              "text": "Large granular lymphocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pure_red_cell_aplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Aplastic anaemia",
+          "cells": [
+            {
+              "text": "Pancytopenia rather than isolated anaemia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute parvovirus B19 aplastic crisis",
+          "cells": [
+            {
+              "text": "Haemolytic anaemia"
+            },
+            {
+              "text": "Parvovirus B19 PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pure_red_cell_aplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parvovirus B19",
+          "cells": [
+            {
+              "text": "Intravenous immunoglobulin for parvovirus-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymoma",
+          "cells": [
+            {
+              "text": "Thymectomy when an associated thymoma is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune-mediated disease",
+          "cells": [
+            {
+              "text": "Immunosuppression such as corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Red cell transfusion for symptomatic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying disorder",
+          "cells": [
+            {
+              "text": "Treat any lymphoproliferative or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pure_red_cell_aplasia-dx-mgmt",
+      "title": "Diagnosis and management of Pure red cell aplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pure red cell aplasia: profound anaemia with reticulocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Symptomatic anaemia, thymoma, lymphoproliferative disease, or persistent aplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transfusion for profound symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Reticulocytes; marrow; parvovirus PCR; chest imaging; immunophenotyping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are erythroid precursors absent with pancytopenia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aplastic anaemia or MDS; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the cause: IVIG for parvovirus B19",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thymectomy when thymoma is identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for immune-mediated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Red cell transfusion for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor for persistence; treat any associated lymphoproliferative or autoimmune disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

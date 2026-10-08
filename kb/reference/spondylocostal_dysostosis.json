@@ -151,5 +151,296 @@
       "caption": "Overview comparison matrix for spondylocostal dysostosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondylocostal_dysostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-spine and chest radiographs",
+          "cells": [
+            {
+              "text": "Vertebral and rib segmentation defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DLL3, MESP2, LFNG, HES7 gene testing",
+          "cells": [
+            {
+              "text": "Segmentation-pathway genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function and thoracic dimensions",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac screen",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylocostal_dysostosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spondylothoracic dysostosis",
+          "cells": [
+            {
+              "text": "Symmetric posterior rib fusion, a different rib pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VACTERL association",
+          "cells": [
+            {
+              "text": "Shares vertebral anomalies; visceral screening separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylocostal_dysostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory surveillance and support",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency, with non-invasive ventilation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expansion thoracoplasty or growth-friendly instrumentation",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency and scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management of scoliosis",
+          "cells": [
+            {
+              "text": "Bracing or corrective surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Prompt treatment of respiratory infection and immunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac screening",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Mostly autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondylocostal_dysostosis-dx-mgmt",
+      "title": "Diagnosis and management of Spondylocostal dysostosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short trunk with vertebral and rib segmentation defects: suspected SCD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory distress, rapid scoliosis, neurological deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support for thoracic insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-spine and chest radiographs; segmentation gene testing; lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a segmentation-pathway gene variant found with the typical pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider spondylothoracic dysostosis or VACTERL; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory surveillance and non-invasive ventilation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expansion thoracoplasty or growth-friendly spinal instrumentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of scoliosis with bracing or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for renal and cardiac anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Thoracic insufficiency is the main life-limiting threat",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

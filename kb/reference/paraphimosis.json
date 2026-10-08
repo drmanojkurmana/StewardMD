@@ -148,5 +148,303 @@
       "caption": "Overview comparison matrix for paraphimosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraphimosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inspection of the retracted foreskin and constricting ring",
+          "cells": [
+            {
+              "text": "Clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glans colour and capillary refill",
+          "cells": [
+            {
+              "text": "Perfusion of the glans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Diabetes with recurrent balanoposthitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab if secondary infection suspected",
+          "cells": [
+            {
+              "text": "Organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter or instrumentation history",
+          "cells": [
+            {
+              "text": "Iatrogenic trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraphimosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Penile tourniquet syndrome",
+          "cells": [
+            {
+              "text": "An encircling hair or thread causes the constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balanoposthitis or penile cellulitis",
+          "cells": [
+            {
+              "text": "Infective swelling without a trapped, constricting foreskin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraphimosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Manual reduction",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Sustained circumferential compression, then advance the foreskin over the glans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Adequate analgesia or a penile dorsal-nerve block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oedema reduction",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Cold compression, osmotic agents such as sugar, or elastic bandage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical release",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Dorsal slit or emergency circumcision if reduction fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Replace the foreskin after catheterisation; elective circumcision for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraphimosis-dx-mgmt",
+      "title": "Diagnosis and management of Paraphimosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Retracted foreskin stuck behind the glans with painful swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (dusky or blistering glans, absent capillary refill or failed reduction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical release for ischaemia or failed manual reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inspect glans, capillary refill, blood glucose, swab if infected, instrumentation history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the foreskin trapped behind a constricting ring with the glans perfused?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tourniquet syndrome, balanoposthitis, cellulitis or allergic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Manual reduction: compress the glans, then draw the foreskin forward over it",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adequate analgesia or dorsal-nerve block to facilitate reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cold compression or osmotic agents to shrink oedema before reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dorsal slit or emergency circumcision if manual reduction fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent when reduced promptly; delay risks glans ischaemia and necrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

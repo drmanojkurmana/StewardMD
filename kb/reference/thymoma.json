@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for thymoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thymoma-dx-mgmt",
+      "title": "Diagnosis and management of Thymoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thymoma: anterior mediastinal mass, often with myasthenia gravis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: SVC obstruction, respiratory compromise or myasthenic crisis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway, neuromuscular and SVC management before any procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT chest; MRI; acetylcholine receptor antibodies; FBC and immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a mediastinal mass with epithelial histology on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphoma, germ cell tumour or thyroid mass; biopsy to confirm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary evaluation before any biopsy or resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete resection for early-stage disease, the strongest survival predictor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiotherapy and platinum chemotherapy for advanced or unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for myasthenia and paraneoplastic syndromes before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term surveillance for late local or pleural recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Completely resected encapsulated disease does well; invasion matters most",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thymoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the chest",
+          "cells": [
+            {
+              "text": "Anterior mediastinal mass and local invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Cystic versus solid components and vascular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-acetylcholine receptor antibodies",
+          "cells": [
+            {
+              "text": "Myasthenia gravis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Red cell aplasia or hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with PET-CT",
+          "cells": [
+            {
+              "text": "Uncertain diagnosis or suspected thymic carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thymoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma of the anterior mediastinum",
+          "cells": [
+            {
+              "text": "Biopsy and immunohistochemistry distinguish it from thymoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal germ cell tumour",
+          "cells": [
+            {
+              "text": "Serum germ cell tumour markers help separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymic cyst or thymic hyperplasia",
+          "cells": [
+            {
+              "text": "Thin-walled fluid lesion on imaging, without solid epithelial tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thymoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary planning",
+          "cells": [
+            {
+              "text": "Thoracic surgery, radiation oncology and medical oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete resection for Masaoka I/II",
+          "cells": [
+            {
+              "text": "Open or minimally invasive thymectomy; the strongest survival predictor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No adjuvant radiation for stage I",
+          "cells": [
+            {
+              "text": "After complete resection; individualised for stage II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended resection for Masaoka III/IV",
+          "cells": [
+            {
+              "text": "When feasible; even incomplete resection improves survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy and platinum chemotherapy",
+          "cells": [
+            {
+              "text": "After incomplete resection or for unresectable locally advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line options",
+          "cells": [
+            {
+              "text": "Repeat resection, tyrosine kinase inhibitors, mTOR inhibition or somatostatin analogues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia and paraneoplastic screening",
+          "cells": [
+            {
+              "text": "Optimise neuromuscular status before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Clinical review and chest imaging; local or pleural recurrence can be late"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

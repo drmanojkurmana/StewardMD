@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for tick paralysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tick_paralysis-dx-mgmt",
+      "title": "Diagnosis and management of Tick paralysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tick paralysis: ascending symmetrical flaccid paralysis in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: bulbar weakness, falling vital capacity, or deterioration after removal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ventilatory support for respiratory muscle weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-body and scalp skin examination; serial forced vital capacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an engorged tick found on the skin or scalp?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "No tick found: consider Guillain-Barre syndrome, botulism or myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Locate and completely remove the attached tick, without crushing it",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial forced vital capacity with ventilatory support if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observe after removal, especially with Ixodes holocyclus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive nursing and airway protection during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reconsider Guillain-Barre syndrome if no improvement after removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent once the tick is removed; respiratory failure before diagnosis is the main risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tick_paralysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-body skin and scalp examination",
+          "cells": [
+            {
+              "text": "Attached engorged tick; the key diagnostic step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial forced vital capacity",
+          "cells": [
+            {
+              "text": "Respiratory muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Distinguishes from Guillain-Barre syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Inflammatory neuropathy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes including potassium and calcium",
+          "cells": [
+            {
+              "text": "Alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry and arterial blood gases",
+          "cells": [
+            {
+              "text": "Respiratory involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tick_paralysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Tick paralysis is symmetrical flaccid with preserved sensation and an attached tick"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Descending cranial nerve signs; no tick is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis or myasthenic crisis",
+          "cells": [
+            {
+              "text": "Fatigable weakness; tick removal does not relieve it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tick_paralysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete removal of the tick",
+          "cells": [
+            {
+              "text": "Whole-body and scalp examination; curative in the North American form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial respiratory monitoring",
+          "cells": [
+            {
+              "text": "Forced vital capacity; ventilatory support if respiratory muscles are involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation after removal",
+          "cells": [
+            {
+              "text": "Ixodes holocyclus paralysis may transiently worsen; avoid squeezing the tick"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive nursing and airway protection",
+          "cells": [
+            {
+              "text": "While weakness resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconsider diagnosis",
+          "cells": [
+            {
+              "text": "If no improvement after tick removal, consider Guillain-Barre syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

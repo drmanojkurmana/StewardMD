@@ -155,5 +155,249 @@
       "caption": "Overview comparison matrix for vulvar cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles and Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vulvar_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy of the vulvar lesion",
+          "cells": [
+            {
+              "text": "Histological diagnosis and depth of invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the vulva and inguinal regions",
+          "cells": [
+            {
+              "text": "Extent and lymph node status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvar_cancer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vulvar intraepithelial neoplasia",
+          "cells": [
+            {
+              "text": "Pre-invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen sclerosus or lichen planus",
+          "cells": [
+            {
+              "text": "Chronic vulvar itching; biopsy separates them from carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulvar dermatitis or eczema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital warts",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vulvar_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision of high-grade VIN",
+          "cells": [
+            {
+              "text": "Preferred over ablation, as it can uncover invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of small early-stage invasive lesions",
+          "cells": [
+            {
+              "text": "Surgical treatment of the primary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inguinal lymph node assessment",
+          "cells": [
+            {
+              "text": "Appropriate staging of nodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vulvar_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Vulvar cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vulvar cancer: persistent vulvar lump, ulcer or plaque",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lesion persisting after treatment or bleeding in older woman)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy for a persistent or ulcerated lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vulvar biopsy for histology and depth, inguinal node examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show squamous cell carcinoma or high-grade VIN?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichen sclerosus or dermatitis; repeat biopsy if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excision of high-grade VIN rather than ablation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical management of small early-stage invasive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assessment and management of inguinal lymph nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on stage and nodal status; persistent lesions need biopsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,278 @@
       "caption": "Overview comparison matrix for norrie disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Emery's Principles of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "norrie_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia with fundoscopy",
+          "cells": [
+            {
+              "text": "Retrolental mass and detachment in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular ultrasound",
+          "cells": [
+            {
+              "text": "Characterises retrolental mass and detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NDP gene testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "norrie_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinoblastoma",
+          "cells": [
+            {
+              "text": "Leukocoria that must be excluded urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent fetal vasculature",
+          "cells": [
+            {
+              "text": "Persistent hyperplastic primary vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial exudative vitreoretinopathy",
+          "cells": [
+            {
+              "text": "Peripheral retinal vascular disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "norrie_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No therapy restores retinal dysplasia",
+          "cells": [
+            {
+              "text": "Visual outcome is generally poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early vitreoretinal surgery",
+          "cells": [
+            {
+              "text": "May be attempted for retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing support",
+          "cells": [
+            {
+              "text": "For sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for late complications",
+          "cells": [
+            {
+              "text": "Including developmental and neurological issues"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "norrie_disease-dx-mgmt",
+      "title": "Diagnosis and management of Norrie disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leukocoria in a male infant with a family history of blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (leukocoria, rapid progression to detachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent examination under anaesthesia to exclude retinoblastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia, ocular ultrasound, hearing assessment, NDP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bilateral congenital blindness with an NDP variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retinoblastoma or persistent fetal vasculature; investigate urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No therapy restores the retinal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early vitreoretinal surgery for detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing support for sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for late complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very poor visual prognosis; most affected males are blind from infancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

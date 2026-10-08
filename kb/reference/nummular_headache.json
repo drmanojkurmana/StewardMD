@@ -143,5 +143,278 @@
       "caption": "Overview comparison matrix for nummular headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nummular_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful mapping of the painful area",
+          "cells": [
+            {
+              "text": "Small sharply demarcated patch and sensory change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palpation for local masses",
+          "cells": [
+            {
+              "text": "Scalp or skull abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination",
+          "cells": [
+            {
+              "text": "Local skin change beneath the area"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nummular_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary stabbing headache",
+          "cells": [
+            {
+              "text": "Brief stabbing pain rather than fixed patch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital or other scalp neuralgia",
+          "cells": [
+            {
+              "text": "Nerve pain in a wider distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp or skull lesion such as a cyst or osteoma",
+          "cells": [
+            {
+              "text": "Local structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes zoster",
+          "cells": [
+            {
+              "text": "Vesicles and dermatomal pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nummular_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and simple analgesia",
+          "cells": [
+            {
+              "text": "For mild, intermittent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gabapentinoids or tricyclic antidepressants",
+          "cells": [
+            {
+              "text": "For troublesome or persistent pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local injection",
+          "cells": [
+            {
+              "text": "Can give relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for giant cell arteritis",
+          "cells": [
+            {
+              "text": "When the patch overlies the temporal artery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nummular_headache-dx-mgmt",
+      "title": "Diagnosis and management of Nummular headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sharply demarcated fixed patch of scalp pain a few centimetres across",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (palpable mass, progressive enlargement, arteritis features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for giant cell arteritis if the temporal artery is involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mapping of the painful area, palpation, skin and scalp examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fixed, sharply demarcated scalp pain with no local lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider local scalp pathology or neuralgia; image or refer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and simple analgesia for mild symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentinoid or tricyclic antidepressant for troublesome pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local injection for relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude giant cell arteritis when indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign; chronic but stable, often responding to simple measures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

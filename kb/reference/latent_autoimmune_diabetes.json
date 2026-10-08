@@ -155,6 +155,11 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 344-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -325,6 +330,54 @@
           "cite": "c1"
         }
       ]
+    },
+    {
+      "id": "latent_autoimmune_diabetes-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Criteria for diagnosing diabetes mellitus (any one)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptoms of diabetes plus random glucose",
+          "cells": [
+            {
+              "text": ">=11.1 mmol/L (200 mg/dL)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasting plasma glucose",
+          "cells": [
+            {
+              "text": ">=7.0 mmol/L (126 mg/dL)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "A1C",
+          "cells": [
+            {
+              "text": ">6.5%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Two-hour plasma glucose during oral glucose tolerance test",
+          "cells": [
+            {
+              "text": ">=11.1 mmol/L (200 mg/dL)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Each criterion carries a footnote letter (a to d) whose text is not on the source page. A1C is printed as >6.5%."
     }
   ],
   "flowcharts": [

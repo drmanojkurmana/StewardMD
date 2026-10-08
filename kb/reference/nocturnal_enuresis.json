@@ -147,5 +147,287 @@
       "caption": "Overview comparison matrix for nocturnal enuresis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nocturnal_enuresis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Infection and glucosuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel habit assessment",
+          "cells": [
+            {
+              "text": "Constipation as a contributor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder diary",
+          "cells": [
+            {
+              "text": "Daytime voiding pattern and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "When polyuria or polydipsia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nocturnal_enuresis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection",
+          "cells": [
+            {
+              "text": "Causes secondary enuresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constipation with secondary bladder dysfunction",
+          "cells": [
+            {
+              "text": "Common and treatable contributor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes mellitus or diabetes insipidus",
+          "cells": [
+            {
+              "text": "Polyuria with weight loss or polydipsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overactive bladder",
+          "cells": [
+            {
+              "text": "Daytime voiding dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nocturnal_enuresis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Education and reassurance",
+          "cells": [
+            {
+              "text": "Child is not to blame"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and caffeine advice",
+          "cells": [
+            {
+              "text": "Sensible daytime fluids; avoid caffeine-containing drinks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voiding before sleep",
+          "cells": [
+            {
+              "text": "Simple behavioural measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat constipation",
+          "cells": [
+            {
+              "text": "Can resolve secondary symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nocturnal_enuresis-dx-mgmt",
+      "title": "Diagnosis and management of Nocturnal Enuresis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Involuntary night-time wetting in a child of about five years or older",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new onset, weight loss, polyuria, daytime symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent work-up for diabetes or infection if red flags are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, bowel assessment, bladder diary, blood glucose if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Primary monosymptomatic enuresis with no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infection, constipation or diabetes; treat and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Education, reassurance and lifestyle measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sensible daytime fluids and no caffeine-containing drinks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Voiding before sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; spontaneous resolution with age is common, treatment speeds dryness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

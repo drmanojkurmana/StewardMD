@@ -147,5 +147,352 @@
       "caption": "Overview comparison matrix for portopulmonary hypertension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portopulmonary_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Screening for elevated pulmonary pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pre-capillary physiology, confirming true PoPH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal hypertension assessment",
+          "cells": [
+            {
+              "text": "Imaging, endoscopy or hepatic venous pressure measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and synthetic tests",
+          "cells": [
+            {
+              "text": "Severity of chronic liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scan",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiopulmonary exercise testing and six-minute walk",
+          "cells": [
+            {
+              "text": "Functional assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portopulmonary_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatopulmonary syndrome",
+          "cells": [
+            {
+              "text": "Gas exchange abnormality rather than pressure elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-output pulmonary pressure elevation",
+          "cells": [
+            {
+              "text": "Hyperdynamic cirrhotic circulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Volume overload with post-capillary hypertension",
+          "cells": [
+            {
+              "text": "Raised wedge pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic or heritable pulmonary arterial hypertension",
+          "cells": [
+            {
+              "text": "No liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Perfusion defects on V/Q scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left heart disease-related pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Group 2 physiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portopulmonary_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "PAH-targeted therapy",
+          "cells": [
+            {
+              "text": "Endothelin-receptor antagonists and other pulmonary vasodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuresis",
+          "cells": [
+            {
+              "text": "Careful, to relieve right ventricular volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid worsening agents",
+          "cells": [
+            {
+              "text": "Avoid agents and interventions that worsen the picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic monitoring",
+          "cells": [
+            {
+              "text": "Right heart catheterisation to confirm and monitor response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Evaluation, with vasodilators used to reduce pulmonary pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension centre working with the liver team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portopulmonary_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Portopulmonary hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Portal hypertension with breathlessness or raised pulmonary pressure on echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe PH in transplant candidate, syncope, right heart failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review for right heart failure or syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo; right heart catheterisation; portal assessment; LFTs; V/Q scan; exercise testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does right heart catheterisation confirm pre-capillary pulmonary hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hepatopulmonary syndrome, volume overload or left heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Targeted pulmonary arterial hypertension therapy with endothelin antagonists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Careful diuresis to relieve right ventricular volume overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid agents and interventions that worsen the pulmonary picture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Right heart catheterisation to confirm physiology and monitor response",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Liver transplantation evaluation, with vasodilators to reduce pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis depends on both the pulmonary vascular disease and the underlying liver disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

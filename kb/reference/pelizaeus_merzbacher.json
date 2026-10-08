@@ -145,5 +145,270 @@
       "caption": "Overview comparison matrix for pelizaeus-merzbacher disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pelizaeus_merzbacher-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PLP1 dosage analysis and sequencing",
+          "cells": [
+            {
+              "text": "Duplication or point mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypomyelinating pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nystagmus and visual pathway assessment",
+          "cells": [
+            {
+              "text": "Visual involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological evaluation over time",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelizaeus_merzbacher-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other hypomyelinating leukodystrophies",
+          "cells": [
+            {
+              "text": "Imaging pattern; PLP1 testing narrows the field"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelizaeus-Merzbacher-like disease (GJC2)",
+          "cells": [
+            {
+              "text": "Autosomal recessive; PLP1-negative cases warrant GJC2 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelizaeus_merzbacher-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity management",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Physiotherapy, baclofen, botulinum toxin and orthoses to prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Gastrostomy where swallowing is unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Directed at symptoms and comfort"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pelizaeus_merzbacher-dx-mgmt",
+      "title": "Diagnosis and management of Pelizaeus-Merzbacher disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant boy with nystagmus, hypotonia, later spasticity and developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (connatal presentation, airway compromise, seizures or regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and respiratory review for connatal or airway risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PLP1 dosage analysis and sequencing, brain MRI, visual assessment, development",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PLP1 duplication or point variant found with a hypomyelinating MRI pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other hypomyelinating leukodystrophy, GJC2 disease or cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, baclofen, botulinum toxin and orthoses to limit spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy where swallowing is unsafe, to counter failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care directed at symptoms and comfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dosage analysis as well as sequencing, since duplications are missed otherwise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies widely: connatal form poor, classic slower, allelic SPG2 form milder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

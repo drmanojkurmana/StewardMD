@@ -149,5 +149,249 @@
       "caption": "Overview comparison matrix for vitreous haemorrhage."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitreous_hemorrhage-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination of both eyes",
+          "cells": [
+            {
+              "text": "Underlying retinal pathology when the view allows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Retinal tear or detachment when the retina cannot be seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the fellow eye",
+          "cells": [
+            {
+              "text": "Co-existing disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitreous_hemorrhage-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proliferative diabetic retinopathy",
+          "cells": [
+            {
+              "text": "Common cause of vitreous haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal tear or rhegmatogenous retinal detachment",
+          "cells": [
+            {
+              "text": "Underlying retinal tear requiring urgent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior vitreous detachment",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal vein occlusion with neovascularisation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitreous_hemorrhage-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Upright rest with head elevation",
+          "cells": [
+            {
+              "text": "Lets blood settle inferiorly and clears the visual axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of retinal tear or detachment",
+          "cells": [
+            {
+              "text": "Laser retinopexy or cryotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitreous_hemorrhage-dx-mgmt",
+      "title": "Diagnosis and management of Vitreous haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitreous haemorrhage: sudden painless floaters, haze or profound visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (retinal tear, detachment or neovascularisation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal treatment to preserve vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus examination, B-scan ultrasound if fundus obscured, fellow eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a retinal tear or detachment excluded on examination or B-scan?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause of bleeding, such as diabetic retinopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Upright rest with head elevation to clear the visual axis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent laser retinopexy or cryotherapy for any retinal tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying retinal disease such as proliferative diabetic retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on the underlying retinal cause and timing of treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

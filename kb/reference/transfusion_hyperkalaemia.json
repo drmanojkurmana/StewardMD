@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for transfusion-associated hyperkalaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusion_hyperkalaemia-dx-mgmt",
+      "title": "Diagnosis and management of Transfusion-associated hyperkalaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transfusion-associated hyperkalaemia: rapid transfusion with ECG change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: peaked T waves, QRS widening, or bradycardia during rapid transfusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calcium salts for myocardial stabilisation and potassium shift therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Potassium and ionised calcium; ECG; blood gas; storage age of units",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is potassium raised with ECG changes during rapid or old-unit transfusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider citrate hypocalcaemia, renal hyperkalaemia or haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Use fresher or washed cells for neonatal and massive transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid rapid large-volume central boluses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor potassium, calcium and ECG during high-risk transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcium salts, insulin-dextrose and salbutamol for established hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Correct acidosis, hypocalcaemia and hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rare when prevented; arrest has high mortality, particularly in infants",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusion_hyperkalaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum or point-of-care potassium during rapid transfusion",
+          "cells": [
+            {
+              "text": "Hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Peaked T waves and QRS widening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium",
+          "cells": [
+            {
+              "text": "Interplay with citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Acidosis and potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Storage age and irradiation status",
+          "cells": [
+            {
+              "text": "Potassium load of the units"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_hyperkalaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Citrate toxicity causing hypocalcaemic arrhythmia",
+          "cells": [
+            {
+              "text": "Low ionised calcium rather than high potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia from renal failure",
+          "cells": [
+            {
+              "text": "Pre-existing renal impairment and no transfusion timing link"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Releases intracellular potassium with haemolysis markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_hyperkalaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Component choice",
+          "cells": [
+            {
+              "text": "Fresher, washed or volume-reduced red cells for neonatal, exchange and massive transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Controlled infusion",
+          "cells": [
+            {
+              "text": "Avoid rapid large boluses through central lines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Potassium, ionised calcium and ECG during rapid transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute treatment",
+          "cells": [
+            {
+              "text": "Calcium salts for stabilisation; insulin-dextrose and nebulised salbutamol to shift potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct compounding factors",
+          "cells": [
+            {
+              "text": "Acidosis, hypocalcaemia and hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrest preparedness",
+          "cells": [
+            {
+              "text": "Especially in small infants during rapid infusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

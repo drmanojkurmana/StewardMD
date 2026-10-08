@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for paroxysmal kinesigenic dyskinesia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_kinesigenic_dyskinesia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PRRT2 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG, ictal if possible",
+          "cells": [
+            {
+              "text": "Distinguishes focal epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Secondary structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF or blood glucose ratio and SLC2A1 testing",
+          "cells": [
+            {
+              "text": "GLUT1 deficiency when exercise-triggered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Secondary cause suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attack diary",
+          "cells": [
+            {
+              "text": "Triggers, duration and semiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_kinesigenic_dyskinesia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paroxysmal non-kinesigenic dyskinesia",
+          "cells": [
+            {
+              "text": "Spontaneous or ingestion-triggered; poor response to sodium blockers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal motor seizures",
+          "cells": [
+            {
+              "text": "Prolonged attacks and ictal EEG separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_kinesigenic_dyskinesia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamazepine or oxcarbazepine",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "First-line low-dose therapy; characteristically abolishes attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative sodium-channel blockers",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Lamotrigine or phenytoin if carbamazepine is not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger reduction",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Warm-up before activity and avoid sudden movement starts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Dose reduction or withdrawal, as attacks lessen with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For PRRT2 variants; watch for benign familial infantile epilepsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_kinesigenic_dyskinesia-dx-mgmt",
+      "title": "Diagnosis and management of Paroxysmal kinesigenic dyskinesia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief dystonic or choreic attacks from sudden movement or startle, consciousness kept",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (prolonged attacks, impaired awareness or deficits)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review if seizures suspected or imaging abnormal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PRRT2 testing, ictal EEG, MRI brain, glucose ratio if exercise-triggered, attack diary",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PRRT2 variant found, or is there a dramatic response to sodium-channel blockers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider focal epilepsy, PNKD, GLUT1 deficiency or functional movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose carbamazepine or oxcarbazepine, which characteristically abolish attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lamotrigine or phenytoin if carbamazepine is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Warm-up before activity and avoid sudden movement starts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic review for dose reduction or withdrawal as attacks lessen with age",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and non-degenerative; attacks often respond dramatically and diminish",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

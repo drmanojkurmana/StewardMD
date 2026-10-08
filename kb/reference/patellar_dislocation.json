@@ -142,5 +142,282 @@
       "caption": "Overview comparison matrix for patellar dislocation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "patellar_dislocation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skyline or axial patellar radiographs",
+          "cells": [
+            {
+              "text": "Patellar position and osteochondral injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the MPFL, osteochondral injury and trochlea",
+          "cells": [
+            {
+              "text": "MPFL tear and trochlear morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI tibial-tubercle-to-trochlear-groove distance",
+          "cells": [
+            {
+              "text": "Tubercle lateralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ligamentous laxity and limb alignment assessment",
+          "cells": [
+            {
+              "text": "Predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patellar_dislocation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ACL rupture",
+          "cells": [
+            {
+              "text": "Also causes acute haemarthrosis, but without a persisting dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patellofemoral pain syndrome",
+          "cells": [
+            {
+              "text": "Pain pattern without an acute reducible dislocation event"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patellar_dislocation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute reduction and brace",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Gentle knee extension, then a brace with controlled mobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-operative rehabilitation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "First-time dislocation without loose body: quadriceps, VMO and hip strengthening, taping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fixation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For an osteochondral fragment or loose body"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bony risk factor correction",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Soft-tissue repair alone fails without addressing dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "patellar_dislocation-dx-mgmt",
+      "title": "Diagnosis and management of Patellar dislocation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute knee giving way with lateral patellar displacement, often reducing on extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (locked knee, irreducible dislocation or lost straight-leg raise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent orthopaedic review for irreducible or locked patella",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skyline radiographs, MRI for MPFL and osteochondral injury, TT-TG distance",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a lateral dislocation confirmed with no displaced osteochondral fragment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ACL rupture, osteochondral fracture, extensor rupture or meniscal tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gentle extension reduction, then a brace with controlled early mobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy for quadriceps, VMO and hip strengthening, with taping or bracing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical fixation for a displaced osteochondral fragment or locked knee",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address bony risk factors such as dysplasia when stabilising recurrent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most first-time dislocations recover; recurrence is common in young dysplastic patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

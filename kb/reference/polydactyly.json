@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for polydactyly."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polydactyly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand radiographs",
+          "cells": [
+            {
+              "text": "Level of skeletal duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and examination of relatives",
+          "cells": [
+            {
+              "text": "Autosomal dominant postaxial forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical screening for syndromic features",
+          "cells": [
+            {
+              "text": "Heart, kidneys, retina and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Heart-hand or VACTERL association, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Syndromic, central or bilateral patterns"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polydactyly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Syndactyly or polysyndactyly",
+          "cells": [
+            {
+              "text": "Coexisting syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrodactyly",
+          "cells": [
+            {
+              "text": "Enlarged rather than duplicated digit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar dimelia",
+          "cells": [
+            {
+              "text": "Mirror hand"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polydactyly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rudimentary digit",
+          "cells": [
+            {
+              "text": "Excision of a rudimentary pedunculated postaxial digit by suture ligation or formal excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplicated well-formed digit",
+          "cells": [
+            {
+              "text": "Reconstruction that preserves the most functional digit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thumb reconstruction",
+          "cells": [
+            {
+              "text": "Timing and technique guided by the Wassel-Flatt level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central polysyndactyly",
+          "cells": [
+            {
+              "text": "Complex staged reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome screening",
+          "cells": [
+            {
+              "text": "Heart, kidneys, retina and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Postoperative therapy and monitoring for instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; examination of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polydactyly-dx-mgmt",
+      "title": "Diagnosis and management of Polydactyly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Extra digit on the hand, with a duplicated skeletal level on radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (serious syndrome, complex central polydactyly, unstable duplicated thumb)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent genetic and cardiac review for a serious syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hand radiographs; family history; echocardiography if heart-hand suspected; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does radiograph define a duplicated skeletal level consistent with polydactyly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider syndactyly, macrodactyly, ulnar dimelia, triphalangeal thumb or constriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excision of a rudimentary postaxial digit by ligation or formal excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reconstruction of a well-formed duplicated digit that preserves function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thumb reconstruction timed and planned by the Wassel-Flatt level",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged reconstruction for central polysyndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for syndromic associations affecting heart, kidneys, retina and growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated postaxial and most preaxial duplications do well after reconstruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

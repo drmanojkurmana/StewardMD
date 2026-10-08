@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for scombroid (histamine) fish poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scombroid_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Rapid onset after fish with characteristic flushing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of others affected by the same meal",
+          "cells": [
+            {
+              "text": "Corroborates a shared toxin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to antihistamines",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and monitoring",
+          "cells": [
+            {
+              "text": "If palpitations or hypotension occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histamine level in the implicated fish",
+          "cells": [
+            {
+              "text": "Where laboratory capability exists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scombroid_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "True IgE-mediated seafood allergy or anaphylaxis",
+          "cells": [
+            {
+              "text": "Scombroid is a toxin effect, so fish need not be avoided lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciguatera fish poisoning",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scombroid_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "H1 and H2 antihistamines",
+          "cells": [
+            {
+              "text": "Mainstay for this histamine-mediated reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis-style care",
+          "cells": [
+            {
+              "text": "IM adrenaline, oxygen and IV fluids for bronchospasm or hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and monitoring",
+          "cells": [
+            {
+              "text": "Cardiorespiratory monitoring if palpitations or hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting; a toxin rather than a seafood allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention advice",
+          "cells": [
+            {
+              "text": "Proper refrigeration and cold-chain handling of susceptible fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outbreak reporting",
+          "cells": [
+            {
+              "text": "Public and environmental health authorities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scombroid_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Scombroid (histamine) fish poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flushing, headache and palpitations minutes after eating fish: suspected scombroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway compromise, bronchospasm, hypotension or cardiorespiratory comorbidity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat as anaphylaxis: IM adrenaline, oxygen, IV fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; history of others ill from the same meal; ECG if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rapid onset after fish with flushing and response to antihistamines?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider true fish allergy, ciguatera or other flushing causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Give H1 and H2 antihistamines",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor cardiorespiratory status",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassure: toxin not allergy, so no lifelong fish avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Report outbreaks to public health authorities",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually mild and self-limiting, resolving within hours",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

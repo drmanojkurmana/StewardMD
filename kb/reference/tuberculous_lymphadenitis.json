@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for tuberculous lymphadenitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tuberculous_lymphadenitis-dx-mgmt",
+      "title": "Diagnosis and management of Tuberculous lymphadenitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tuberculous lymphadenitis: firm, painless, enlarging cervical node",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapid enlargement, systemic illness or airway compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for airway compression or disseminated tuberculosis with HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FNAC with caseation; cartridge NAAT and culture; HIV test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspirate show caseating granulomas or a positive NAAT for M. tuberculosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphoma, non-tuberculous mycobacteria or pyogenic lymphadenitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Standard multidrug antituberculous regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multidrug-resistant regimen if rifampicin resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continue therapy for paradoxical node enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aspiration or excision of large cold abscess or persistent sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Adherence support and HIV testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with standard regimen; drug resistance worsens outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tuberculous_lymphadenitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fine-needle aspiration cytology",
+          "cells": [
+            {
+              "text": "Granulomas with caseation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cartridge-based nucleic acid amplification on aspirate",
+          "cells": [
+            {
+              "text": "Detects rifampicin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of aspirate or tissue",
+          "cells": [
+            {
+              "text": "Confirmation and susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional node biopsy",
+          "cells": [
+            {
+              "text": "When cytology is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Concurrent pulmonary or mediastinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Association with extrapulmonary tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tuberculous_lymphadenitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Atypical cytology; biopsy needed to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-tuberculous mycobacterial lymphadenitis",
+          "cells": [
+            {
+              "text": "Especially in children; culture and speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic bacterial lymphadenitis",
+          "cells": [
+            {
+              "text": "Acute bacterial infection rather than granulomatous change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tuberculous_lymphadenitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Standard multidrug regimen",
+          "cells": [
+            {
+              "text": "Rifampicin, isoniazid, pyrazinamide and ethambutol; intensive then continuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidrug-resistant regimen",
+          "cells": [
+            {
+              "text": "Guided by susceptibility when rifampicin resistance found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continue therapy for paradoxical enlargement",
+          "cells": [
+            {
+              "text": "Usually not treatment failure; steroids or aspiration only if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or excision",
+          "cells": [
+            {
+              "text": "Large fluctuant cold abscess or persistent discharging sinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence support and directly observed therapy",
+          "cells": [
+            {
+              "text": "Monitor toxicity and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and co-infection management",
+          "cells": [
+            {
+              "text": "Association with extrapulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

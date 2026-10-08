@@ -151,5 +151,229 @@
       "caption": "Overview comparison matrix for rectal intussusception."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rectal_intussusception-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Defecating proctography",
+          "cells": [
+            {
+              "text": "Grade of intussusception (Oxford classification)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic pelvic-floor MRI",
+          "cells": [
+            {
+              "text": "Associated compartment defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectal_intussusception-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "External full-thickness rectal prolapse",
+          "cells": [
+            {
+              "text": "Full-thickness external prolapse"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectocele or enterocele",
+          "cells": [
+            {
+              "text": "Obstructed defecation"
+            },
+            {
+              "text": "Dynamic pelvic MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectal_intussusception-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Dietary fibre and adequate fluids for obstructed defecation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biofeedback",
+          "cells": [
+            {
+              "text": "Pelvic-floor biofeedback and defecatory retraining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rectal_intussusception-dx-mgmt",
+      "title": "Diagnosis and management of Rectal intussusception",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rectal intussusception: obstructed defecation with straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rectal bleeding or mass suggesting neoplasia, persistent ulcer, or new symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent colorectal review for suspected neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Defecating proctography; dynamic pelvic MRI; biopsy of persistent ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is intussusception graded on proctography with neoplasia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rectocele, enterocele or anismus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary fibre, adequate fluids and bowel habit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic-floor biofeedback and defecatory retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy of persistent ulcer to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Colorectal follow-up for refractory obstructed defecation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for obstructed defecation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "obstructed_defecation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Defecography, fluoroscopic or MR",
+          "cells": [
+            {
+              "text": "Rectocele, intussusception, enterocele and evacuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry",
+          "cells": [
+            {
+              "text": "Sphincter and pelvic floor function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Palpable mass or pelvic floor pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Excludes malignancy when bleeding or anaemia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstructed_defecation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Slow-transit constipation",
+          "cells": [
+            {
+              "text": "Colonic transit delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyssynergic defecation or anismus",
+          "cells": [
+            {
+              "text": "Paradoxical pelvic floor contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectocele or enterocele",
+          "cells": [
+            {
+              "text": "Structural pelvic floor defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Internal rectal intussusception",
+          "cells": [
+            {
+              "text": "Full-thickness prolapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstructed_defecation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary fibre, fluid and laxatives",
+          "cells": [
+            {
+              "text": "First-line conservative measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toileting and behavioural advice",
+          "cells": [
+            {
+              "text": "Evacuation habits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor biofeedback",
+          "cells": [
+            {
+              "text": "Where dyssynergia predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for structural lesions",
+          "cells": [
+            {
+              "text": "Results vary; treat only the true cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "obstructed_defecation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Obstructed defecation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Straining, incomplete evacuation and a sense of anorectal blockage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, weight loss, anaemia, palpable mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colonoscopy for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Defecography, anorectal manometry, rectal examination, colonoscopy if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Evacuatory failure with a structural or dyssynergic cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider slow-transit constipation; investigate transit",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fibre, fluid and laxatives as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Toileting and behavioural advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pelvic floor biofeedback for dyssynergia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery only for the true structural cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often improves with conservative measures and biofeedback; surgical results vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

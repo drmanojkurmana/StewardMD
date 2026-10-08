@@ -151,5 +151,238 @@
       "caption": "Overview comparison matrix for rat-bite fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases / Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rat_bite_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood cultures with prolonged incubation",
+          "cells": [
+            {
+              "text": "Fastidious organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dark-field microscopy of blood, exudate or lymph",
+          "cells": [
+            {
+              "text": "Spirochaetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rat_bite_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcaemia",
+          "cells": [
+            {
+              "text": "Fever with petechial rash"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated gonococcal infection",
+          "cells": [
+            {
+              "text": "Fever, rash and arthritis"
+            },
+            {
+              "text": "Culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rat_bite_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line antibiotic",
+          "cells": [
+            {
+              "text": "Penicillin as first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular infection",
+          "cells": [
+            {
+              "text": "Prolonged intravenous therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "For septic complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rat_bite_fever-dx-mgmt",
+      "title": "Diagnosis and management of Rat-bite fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rat-bite fever: fever after rodent bite or exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Endocarditis, myocarditis, meningism, or septic shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for endocarditis or CNS involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Prolonged blood cultures; joint culture; dark-field microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the organism isolated on culture or seen on microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meningococcaemia or disseminated gonococcal infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Penicillin as first-line antimicrobial therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged intravenous therapy for endovascular involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for septic complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Infectious diseases follow-up; watch for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

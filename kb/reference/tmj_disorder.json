@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for temporomandibular joint disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tmj_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Temporomandibular joint disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected temporomandibular disorder: jaw pain with clicking or restricted opening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: temporal headache in an older patient, hard end-feel, or cranial nerve signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of giant cell arteritis or sinister cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Jaw movement and joint sounds; occlusion review; MRI if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination show muscle tenderness or joint sounds without red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider odontogenic pain, trigeminal neuralgia or temporal arteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance, jaw rest and removal of clenching and grinding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short-term analgesia and a muscle relaxant trial for muscular pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supervised jaw physiotherapy with stretching",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occlusal splint to offload the joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Injection or arthrocentesis for refractory locking",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most improve with reversible measures; a minority develop chronic pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tmj_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of jaw movement and joint sounds",
+          "cells": [
+            {
+              "text": "Clicking or crepitus, limited or deviated opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation of occlusion and parafunctional habits",
+          "cells": [
+            {
+              "text": "Clenching and grinding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Internal derangement, when symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or cone-beam imaging",
+          "cells": [
+            {
+              "text": "Bony or degenerative joint change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Temporal arteritis, when a concern in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tmj_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Giant cell (temporal) arteritis",
+          "cells": [
+            {
+              "text": "Older patient with jaw and temporal symptoms; inflammatory markers and red flags are checked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Odontogenic pain from pulpal or periapical disease",
+          "cells": [
+            {
+              "text": "Dental source of pain; dental examination separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigeminal neuralgia or neuropathic facial pain",
+          "cells": [
+            {
+              "text": "Neuropathic facial pain; joint sounds and muscle tenderness are absent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tmj_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance, jaw rest and soft diet",
+          "cells": [
+            {
+              "text": "Elimination of clenching and grinding; first-line reversible therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia and muscle relaxant",
+          "cells": [
+            {
+              "text": "NSAIDs short term; a muscle relaxant trial for muscular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised jaw physiotherapy",
+          "cells": [
+            {
+              "text": "Range-of-motion and stretching exercises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusal splint",
+          "cells": [
+            {
+              "text": "Offloads the joint and protects against nocturnal bruxism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial management",
+          "cells": [
+            {
+              "text": "Stress management and cognitive behavioural therapy for chronic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid or arthrocentesis",
+          "cells": [
+            {
+              "text": "Refractory intra-articular pain or persistent locking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral and maxillofacial surgery referral",
+          "cells": [
+            {
+              "text": "Arthroscopy or open surgery when conservative care fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

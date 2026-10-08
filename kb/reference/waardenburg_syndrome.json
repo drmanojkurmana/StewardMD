@@ -148,5 +148,240 @@
       "caption": "Overview comparison matrix for waardenburg syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "waardenburg_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiometry with age-appropriate testing",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological and ophthalmic examination",
+          "cells": [
+            {
+              "text": "Pigmentary features and iris colour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pendred or branchio-oto-renal syndrome",
+          "cells": [
+            {
+              "text": "Other syndromic sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Piebaldism",
+          "cells": [
+            {
+              "text": "KIT-related depigmentation without hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early auditory rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids for milder loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Severe-to-profound sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early speech therapy",
+          "cells": [
+            {
+              "text": "Language development with hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "waardenburg_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Waardenburg syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Waardenburg syndrome: sensorineural hearing loss with pigmentary change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal bowel obstruction or bilateral profound deafness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for Hirschsprung disease with neonatal obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, dermatological and ophthalmic examination, genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm a Waardenburg-related variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Pendred syndrome, piebaldism or isolated pigment change",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early auditory rehabilitation with hearing aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hearing loss is the main functional risk; early intervention supports language",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

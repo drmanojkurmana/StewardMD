@@ -152,5 +152,348 @@
       "caption": "Overview comparison matrix for serotonin syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Drug-Induced Hyperthermia (p3)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serotonin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical triad",
+          "cells": [
+            {
+              "text": "Neuromuscular excitation, autonomic instability and altered mental state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonus",
+          "cells": [
+            {
+              "text": "Inducible or spontaneous, often more prominent in the lower limbs; a useful sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and drug history",
+          "cells": [
+            {
+              "text": "Identifies serotonergic agents and interactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, electrolytes and coagulation",
+          "cells": [
+            {
+              "text": "Complications such as kidney injury and DIC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serotonin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuroleptic malignant syndrome",
+          "cells": [
+            {
+              "text": "Slower onset with lead-pipe rigidity and hyporeflexia; serotonin syndrome has clonus and hyperreflexia within hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Excluded by infection work-up, including lumbar puncture where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serotonin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop all serotonergic agents",
+          "cells": [
+            {
+              "text": "SSRIs, SNRIs, MAO inhibitors, tramadol, triptans and linezolid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Intravenous fluids and benzodiazepine sedation for agitation and neuromuscular hyperactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyproheptadine",
+          "cells": [
+            {
+              "text": "Serotonin antagonist for moderate to severe cases not settling with supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthermia",
+          "cells": [
+            {
+              "text": "Active external cooling; severe rigidity needs paralysis and intubation, not antipyretics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis, metabolic acidosis, DIC and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and critical care",
+          "cells": [
+            {
+              "text": "Continuous core temperature and cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication reconciliation",
+          "cells": [
+            {
+              "text": "On recovery, to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serotonin_syndrome-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that cause hyperthermia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced hyperthermia",
+          "cells": [
+            {
+              "text": "amphetamines, cocaine, phencyclidine (PCP), MDMA (ecstasy), LSD, salicylates, lithium, anticholinergics, sympathomimetics"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serotonin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Serotonin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Agitation, clonus, hyperreflexia, tremor and fever soon after a serotonergic drug change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hyperthermia, rigidity limiting ventilation, seizures, rhabdomyolysis or DIC?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Critical care: paralysis, intubation and active cooling for severe hyperthermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug history; core temperature; creatine kinase; renal function; gases and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clonus and hyperreflexia with serotonergic exposure and rapid onset?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neuroleptic malignant syndrome, CNS infection or other toxidromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop every serotonergic agent immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV fluids and benzodiazepines; external cooling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyproheptadine if moderate to severe and not settling",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat rhabdomyolysis, acidosis, DIC and kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve within a day or two; severe hyperthermia can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

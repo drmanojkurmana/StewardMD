@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for short bowel syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_bowel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Remnant bowel anatomy and length",
+          "cells": [
+            {
+              "text": "Taken from operative records and imaging; guides diet and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and nutritional panel",
+          "cells": [
+            {
+              "text": "Magnesium, calcium and trace-element deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin, B12 and iron status",
+          "cells": [
+            {
+              "text": "Deficiencies from malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid balance and stool or stoma output",
+          "cells": [
+            {
+              "text": "Ongoing losses and dehydration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and overgrowth evaluation",
+          "cells": [
+            {
+              "text": "Parenteral-nutrition liver disease and bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_bowel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pancreatic exocrine insufficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-intestinal bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Can coexist and is evaluated in the patient on parenteral nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteric fistula",
+          "cells": [
+            {
+              "text": "Causes functional bowel loss without resection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_bowel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral nutrition and IV fluids",
+          "cells": [
+            {
+              "text": "Initial prevention of dehydration and malnutrition; weaned as adaptation occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured enteral and oral nutrition",
+          "cells": [
+            {
+              "text": "Stimulates adaptation; diet tailored to anatomy and colon continuity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loperamide and proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Slow transit and reduce output; PPI for gastric hypersecretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile-acid sequestrants and B12",
+          "cells": [
+            {
+              "text": "Bile-salt diarrhoea; parenteral B12 after terminal ileal loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Teduglutide (GLP-2 analogue)",
+          "cells": [
+            {
+              "text": "Enhances absorption and reduces parenteral dependence in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrient correction",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamins and trace elements, monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Liver disease, catheter sepsis, thrombosis and bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist intestinal failure team",
+          "cells": [
+            {
+              "text": "Surgical lengthening or transplantation for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_bowel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Short bowel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short bowel syndrome after resection: diarrhoea, dehydration, weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (AKI, line sepsis, cholestasis, central venous thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fluid and electrolyte repair; treat line sepsis; protect venous access",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Remnant length and anatomy, Mg, Ca, trace elements, vitamins, stoma output",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is intestinal failure established with ongoing parenteral need?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess fistula, pancreatic insufficiency or overgrowth as the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parenteral fluids and nutrition first; keep enteral feeding to drive adaptation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Loperamide, PPI, bile-acid sequestrant; B12 after terminal ileal loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Teduglutide in selected patients to cut parenteral dependence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor liver, catheter and micronutrients in an intestinal failure team",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on residual length; many reach enteral autonomy, some need transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

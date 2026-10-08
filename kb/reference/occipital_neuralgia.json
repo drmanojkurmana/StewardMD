@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for occipital neuralgia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "occipital_neuralgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Palpation for an occipital trigger point",
+          "cells": [
+            {
+              "text": "Reproduces the pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic occipital nerve block",
+          "cells": [
+            {
+              "text": "Local anaesthetic response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of the cervical spine",
+          "cells": [
+            {
+              "text": "Upper cervical or facet cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP in older patients",
+          "cells": [
+            {
+              "text": "Excludes giant cell arteritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occipital_neuralgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cervicogenic headache",
+          "cells": [
+            {
+              "text": "Neck-origin headache with reduced range"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine",
+          "cells": [
+            {
+              "text": "Pulsating pain with associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tension-type headache",
+          "cells": [
+            {
+              "text": "Bilateral band-like pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper cervical degenerative or facet disease",
+          "cells": [
+            {
+              "text": "Structural neck cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell arteritis",
+          "cells": [
+            {
+              "text": "Must be excluded in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occipital_neuralgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Rest, local heat, massage, physiotherapy and posture correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital nerve block",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain medication",
+          "cells": [
+            {
+              "text": "Anticonvulsants or tricyclics for persistent pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral for refractory cases",
+          "cells": [
+            {
+              "text": "Interventional or surgical options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "occipital_neuralgia-dx-mgmt",
+      "title": "Diagnosis and management of Occipital neuralgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal shooting pain from the suboccipital region over the scalp",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (jaw claudication, visual symptoms, myelopathy or deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent arteritis screen in older patients with jaw or visual symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trigger point palpation, diagnostic nerve block, cervical imaging, ESR and CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Occipital trigger point with response to a nerve block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cervicogenic headache or migraine; reassess the pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care with heat, massage and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occipital nerve block for diagnosis and relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsant or tricyclic for persistent neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer refractory cases to a specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; often responds to conservative care and nerve blocks, though relapses are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

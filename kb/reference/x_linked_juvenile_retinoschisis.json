@@ -152,5 +152,222 @@
       "caption": "Overview comparison matrix for x-linked juvenile retinoschisis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_juvenile_retinoschisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Foveal and inner-retinal schisis cavities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-field electroretinogram",
+          "cells": [
+            {
+              "text": "Retinal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_juvenile_retinoschisis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Degenerative retinoschisis of older adults",
+          "cells": [
+            {
+              "text": "Acquired rather than X-linked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoid macular oedema",
+          "cells": [
+            {
+              "text": "Leaks on angiography, unlike foveal schisis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_juvenile_retinoschisis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbonic anhydrase inhibitor trial",
+          "cells": [
+            {
+              "text": "Topical or oral; may reduce foveal schisis cavities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for complications",
+          "cells": [
+            {
+              "text": "Vitreous haemorrhage or retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_juvenile_retinoschisis-dx-mgmt",
+      "title": "Diagnosis and management of X-linked juvenile retinoschisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked juvenile retinoschisis: reduced central vision in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden vision loss, flashes, floaters or detachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitreoretinal review for detachment or vitreous haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT for foveal schisis, full-field electroretinogram, RS1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT show foveal schisis with an RS1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider degenerative retinoschisis or cystoid macular oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial of carbonic anhydrase inhibitor for foveal schisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not treat foveal schisis as cystoid macular oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent review for vitreous haemorrhage or retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Visual loss varies; complications need prompt review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

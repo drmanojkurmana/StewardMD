@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for sialolithiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sialolithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound of gland and duct",
+          "cells": [
+            {
+              "text": "First-line test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Detects and localises calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialography or MR sialography",
+          "cells": [
+            {
+              "text": "Ductal anatomy and strictures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialendoscopy",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of ductal discharge",
+          "cells": [
+            {
+              "text": "When infection is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sialolithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sialadenitis without a stone",
+          "cells": [
+            {
+              "text": "Acute bacterial or viral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salivary gland tumour",
+          "cells": [
+            {
+              "text": "Firm, fixed or rapidly enlarging mass; facial nerve weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ductal stricture or stenosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune sialadenitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sialolithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Hydration, sialogogues, gland massage and warm compresses to pass the stone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland-preserving removal",
+          "cells": [
+            {
+              "text": "Sialendoscopy, intraoral duct incision or lithotripsy for larger stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and analgesia",
+          "cells": [
+            {
+              "text": "For secondary bacterial sialadenitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialadenectomy",
+          "cells": [
+            {
+              "text": "Reserved for recurrent obstruction or irreversible gland damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for planning",
+          "cells": [
+            {
+              "text": "Ultrasound first; CT or sialography to localise stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and salivary stimulation",
+          "cells": [
+            {
+              "text": "To reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sialolithiasis-dx-mgmt",
+      "title": "Diagnosis and management of Sialolithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent mealtime gland swelling and pain: suspected sialolithiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sepsis, floor-of-mouth spread, fixed mass, facial nerve weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: airway protection, IV antibiotics and drainage of floor-of-mouth abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gland and duct ultrasound, non-contrast CT, sialography if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a calculus shown on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tumour, stricture, autoimmune sialadenitis or sialadenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydration, sialogogues, massage and warm compresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sialendoscopy, intraoral duct incision or lithotripsy for larger stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics and analgesia for secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sialadenectomy for recurrent obstruction or irreversible damage",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outcome after conservative or gland-preserving stone removal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

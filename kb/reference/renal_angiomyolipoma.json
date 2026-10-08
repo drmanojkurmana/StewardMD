@@ -145,5 +145,238 @@
       "caption": "Overview comparison matrix for renal angiomyolipoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Uro-radiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_angiomyolipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Macroscopic fat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion size and intratumoural aneurysm assessment",
+          "cells": [
+            {
+              "text": "Size and aneurysms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_angiomyolipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Fat-poor angiomyolipoma versus renal cell carcinoma",
+          "cells": [
+            {
+              "text": "Fat-poor lesion"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retroperitoneal liposarcoma",
+          "cells": [
+            {
+              "text": "Fat-containing retroperitoneal mass"
+            },
+            {
+              "text": "CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_angiomyolipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Small asymptomatic lesions",
+          "cells": [
+            {
+              "text": "Active imaging surveillance to track growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "mTOR inhibitor",
+          "cells": [
+            {
+              "text": "Such as everolimus, offered in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage",
+          "cells": [
+            {
+              "text": "Urgent management of haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_angiomyolipoma-dx-mgmt",
+      "title": "Diagnosis and management of Renal angiomyolipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal angiomyolipoma: renal mass with macroscopic fat",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute flank pain with hypotension, rapidly enlarging or large symptomatic lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for haemorrhage with hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI for macroscopic fat; size and aneurysm assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is macroscopic fat confirmed on CT or MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider renal cell carcinoma or liposarcoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Active imaging surveillance for small asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "mTOR inhibitor such as everolimus in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent management of haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Urology and imaging surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

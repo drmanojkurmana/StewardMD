@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for titinopathy (ttn-related myopathy and cardiomyopathy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular and cardiomyopathy genetics references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "titinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Titinopathy (TTN-related myopathy and cardiomyopathy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected titinopathy: distal or limb weakness with cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: dilated cardiomyopathy, infant myopathy, or respiratory weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for heart failure or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTN sequencing with copy-number analysis; muscle MRI; echocardiography and cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TTN analysis show a pathogenic truncating or missense variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider calpainopathy, Emery-Dreifuss, myofibrillar or other cardiomyopathy genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Guideline-directed heart failure therapy for dilated cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Defibrillator or pacemaker for high-risk cardiac phenotypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, ankle-foot orthoses and contracture management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-invasive ventilation for respiratory muscle failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiac surveillance of relatives and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Varies by domain; recessive early-onset cardiomyopathy can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "titinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TTN analysis by next-generation sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic variant, including copy-number change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with calpain-3 immunoblot",
+          "cells": [
+            {
+              "text": "Cores or rimmed vacuoles; secondary calpain-3 reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Selective pattern of muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Dilated cardiomyopathy and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and ambulatory rhythm monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing",
+          "cells": [
+            {
+              "text": "Congenital and severe recessive forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "titinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calpainopathy",
+          "cells": [
+            {
+              "text": "Primary calpain-3 deficiency; secondary reduction in titinopathy must not lead to this label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emery-Dreifuss muscular dystrophy",
+          "cells": [
+            {
+              "text": "Contractures with cardiac conduction disease; lamin A/C or emerin testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal myopathies (GNE, dysferlin, anoctamin-5)",
+          "cells": [
+            {
+              "text": "Distal weakness; gene testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "titinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Guideline-directed for dilated cardiomyopathy; no disease-specific drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia management",
+          "cells": [
+            {
+              "text": "Defibrillator or pacemaker for high-risk cardiac phenotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthoses",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses for foot drop; contracture management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation for respiratory muscle failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Including relatives of carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "Tailored to domain and inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

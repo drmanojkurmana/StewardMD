@@ -147,5 +147,361 @@
       "caption": "Overview comparison matrix for posterior scleritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_scleritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Scleral thickening and the T-sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Subretinal fluid and choroidal folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein and ICG angiography",
+          "cells": [
+            {
+              "text": "Posterior inflammatory pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of orbits",
+          "cells": [
+            {
+              "text": "Orbital or mass pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory and autoimmune serology",
+          "cells": [
+            {
+              "text": "Systemic association sought"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis and tuberculosis screen",
+          "cells": [
+            {
+              "text": "Before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_scleritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital inflammatory disease or cellulitis",
+          "cells": [
+            {
+              "text": "Proptosis and restricted motility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choroidal melanoma or metastasis",
+          "cells": [
+            {
+              "text": "Mass rather than inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vogt-Koyanagi-Harada disease",
+          "cells": [
+            {
+              "text": "Bilateral serous detachments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "Localised subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic neuritis or papilloedema",
+          "cells": [
+            {
+              "text": "Optic disc involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveal effusion syndrome",
+          "cells": [
+            {
+              "text": "Choroidal effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_scleritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay, oral or intravenous as severity dictates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Milder disease and adjunctive symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Methotrexate or mycophenolate for recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infective mimics",
+          "cells": [
+            {
+              "text": "Syphilis and tuberculosis before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-manage autoimmune disease",
+          "cells": [
+            {
+              "text": "Associated systemic disease such as rheumatoid arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor response",
+          "cells": [
+            {
+              "text": "B-scan and OCT during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalate for recurrence",
+          "cells": [
+            {
+              "text": "Prompt immunosuppression to prevent permanent visual loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_scleritis-dx-mgmt",
+      "title": "Diagnosis and management of posterior scleritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deep orbital or eye pain with reduced vision and posterior eye signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe pain with visual loss, proptosis, systemic vasculitis, mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for proptosis and restricted motility suggesting orbital cellulitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "B-scan; OCT; angiography; MRI or CT orbits; inflammatory serology; infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does B-scan show scleral thickening with a T-sign and choroidal folds?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orbital inflammation, choroidal tumour, VKH or central serous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as the mainstay, route chosen by severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs in milder disease and for adjunctive symptom relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Steroid-sparing immunosuppression such as methotrexate or mycophenolate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude syphilis and tuberculosis before starting immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor response with B-scan ultrasonography and OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good when treatment is prompt and intensive; recurrences do occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

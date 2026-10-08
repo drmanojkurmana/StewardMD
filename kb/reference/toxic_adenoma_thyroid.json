@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for toxic thyroid adenoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxic_adenoma_thyroid-dx-mgmt",
+      "title": "Diagnosis and management of Toxic thyroid adenoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected toxic thyroid adenoma: thyrotoxicosis with a single nodule on palpation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: thyroid storm, atrial fibrillation, heart failure, or compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of thyrotoxic cardiac complications or thyroid storm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TSH and free thyroid hormones; uptake scan; TSH-receptor antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does uptake scan show a focal hot nodule with suppressed background?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Graves disease, toxic multinodular goitre or iodine-induced thyrotoxicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antithyroid drug to render the patient euthyroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radioactive iodine concentrated by the autonomous nodule, or lobectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Propranolol for adrenergic symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid iodinated contrast and amiodarone",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Thyroid function monitoring for hypothyroidism after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Nodule benign; hyperthyroidism is controlled, but untreated disease adds cardiac risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxic_adenoma_thyroid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Free T4, free T3 and TSH",
+          "cells": [
+            {
+              "text": "Suppressed TSH with raised free thyroid hormones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioiodine or technetium uptake scan",
+          "cells": [
+            {
+              "text": "Focal hot nodule with suppressed background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH-receptor antibodies",
+          "cells": [
+            {
+              "text": "Absent in autonomy; distinguishes from Graves disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Nodule size and structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recent iodine exposure review",
+          "cells": [
+            {
+              "text": "Contrast and amiodarone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration",
+          "cells": [
+            {
+              "text": "Only if a coexisting non-functioning suspicious nodule"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_adenoma_thyroid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease",
+          "cells": [
+            {
+              "text": "Diffuse uptake and TSH-receptor antibodies; a single hot nodule is autonomous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic multinodular goitre",
+          "cells": [
+            {
+              "text": "Multiple hot areas on scanning rather than one focal nodule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-functioning (cold) thyroid nodule",
+          "cells": [
+            {
+              "text": "Cold on scan; autonomous nodules are hot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_adenoma_thyroid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radioactive iodine or lobectomy",
+          "cells": [
+            {
+              "text": "Definitive treatment; the nodule concentrates radioiodine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithyroid drug",
+          "cells": [
+            {
+              "text": "Carbimazole or propylthiouracil to render the patient euthyroid first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Propranolol for adrenergic symptoms and tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid iodine loads",
+          "cells": [
+            {
+              "text": "Iodinated contrast and amiodarone can precipitate thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablation alternative",
+          "cells": [
+            {
+              "text": "Percutaneous ethanol or thermal ablation for a solitary nodule in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment monitoring",
+          "cells": [
+            {
+              "text": "Resolution of thyrotoxicosis and later hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

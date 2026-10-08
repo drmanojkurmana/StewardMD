@@ -143,5 +143,316 @@
       "caption": "Overview comparison matrix for fourth nerve palsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trochlear_nerve_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Fourth nerve palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fourth nerve palsy: vertical and torsional diplopia worse on descending",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: other neurological signs, bilateral palsy or progressive deviation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-imaging for bilateral or non-traumatic palsy with other signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three-step test; torsion measurement; old photographs; MRI if not traumatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the three-step test show worse hypertropia on tilt toward the affected side?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider skew deviation, myasthenia, thyroid eye disease or partial third nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause and vascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe microvascular and traumatic palsies for recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prisms or temporary monocular occlusion for diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Strabismus surgery when the deviation is stable but persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthoptic, ophthalmology and neurology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Microvascular and traumatic palsies often recover in weeks to months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trochlear_nerve_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthoptic three-step test and torsion measurement",
+          "cells": [
+            {
+              "text": "Localises the palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with old photographs",
+          "cells": [
+            {
+              "text": "Long-standing head tilt suggests decompensated congenital palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and orbits",
+          "cells": [
+            {
+              "text": "When palsy is not clearly traumatic or vasculopathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculopathic risk-factor evaluation",
+          "cells": [
+            {
+              "text": "Microvascular palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine-receptor antibody testing",
+          "cells": [
+            {
+              "text": "If myasthenia is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trochlear_nerve_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Skew deviation",
+          "cells": [
+            {
+              "text": "Vertical misalignment from posterior fossa disease; not a superior oblique palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable, variable diplopia; acetylcholine-receptor antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Inferior rectus restriction rather than superior oblique weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trochlear_nerve_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Optimise vascular risk factors in microvascular palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Microvascular and many traumatic palsies recover over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms or temporary monocular occlusion",
+          "cells": [
+            {
+              "text": "Symptomatic relief of diplopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Superior oblique strengthening or inferior oblique weakening when stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms or surgery for decompensated congenital palsy",
+          "cells": [
+            {
+              "text": "Supported by old photographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic, ophthalmology and neurology follow-up",
+          "cells": [
+            {
+              "text": "Re-image if progressive or not resolving"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

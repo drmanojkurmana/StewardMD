@@ -151,5 +151,256 @@
       "caption": "Overview comparison matrix for rabson-mendenhall syndrome (insr)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rabson_mendenhall_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting and postprandial glucose",
+          "cells": [
+            {
+              "text": "Characteristic oscillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "INSR gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HbA1c",
+          "cells": [
+            {
+              "text": "Glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rabson_mendenhall_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Donohue syndrome",
+          "cells": [
+            {
+              "text": "More severe INSR defect"
+            },
+            {
+              "text": "INSR gene sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital generalised lipodystrophy",
+          "cells": [
+            {
+              "text": "Lipodystrophy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rabson_mendenhall_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recombinant IGF-1",
+          "cells": [
+            {
+              "text": "With or without IGFBP-3, to bypass the defective receptor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin and insulin",
+          "cells": [
+            {
+              "text": "Insulin sensitisers; high-dose insulin where used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "DKA and recurrent fasting hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rabson_mendenhall_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Rabson-Mendenhall syndrome (INSR)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Rabson-Mendenhall syndrome: severe insulin resistance with growth failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "DKA, recurrent fasting hypoglycaemia, growth failure, or microvascular disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent management of DKA or severe hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose profile; insulin and C-peptide; INSR sequencing; HbA1c",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic INSR mutations confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Donohue syndrome, type A insulin resistance or lipodystrophy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant IGF-1, with or without IGFBP-3",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metformin and high-dose insulin where used",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for DKA and hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Endocrine and genetic follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

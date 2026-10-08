@@ -150,5 +150,300 @@
       "caption": "Overview comparison matrix for paraneoplastic sensory neuronopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF anti-Hu (ANNA-1) panel",
+          "cells": [
+            {
+              "text": "Onconeural antibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Sensory ganglionopathy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-Ro/La antibodies and Schirmer test",
+          "cells": [
+            {
+              "text": "Sjogren syndrome excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body FDG-PET/CT and CT chest",
+          "cells": [
+            {
+              "text": "Occult malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI spine",
+          "cells": [
+            {
+              "text": "Posterior column T2 hyperintensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and B6 levels",
+          "cells": [
+            {
+              "text": "Deficiency mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sjogren syndrome-associated ganglionopathy",
+          "cells": [
+            {
+              "text": "Principal non-paraneoplastic cause; antibodies and Schirmer test screen it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum chemotherapy or pyridoxine toxicity",
+          "cells": [
+            {
+              "text": "Drug or vitamin exposure is the clue; B6 level and history separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying malignancy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Most often small-cell lung carcinoma; the only realistic chance of halting loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotherapy trial",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Corticosteroids, IVIG, plasma exchange or cytotoxic agents; response often limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain relief",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Gabapentinoids, tricyclic antidepressants or duloxetine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Physiotherapy and occupational therapy for sensory ataxia, with gait aids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-dx-mgmt",
+      "title": "Diagnosis and management of paraneoplastic sensory neuronopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute asymmetric sensory loss, non-length-dependent, with painful paraesthesiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid sensory ataxia, autonomic failure or constitutional symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent oncology and neurology review for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Hu panel, NCS and EMG, Sjogren screen, PET/CT, MRI spine, B12 and B6",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is anti-Hu positive with small-cell carcinoma, and mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sjogren ganglionopathy, platinum toxicity, pyridoxine excess or CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Search for and treat the underlying malignancy as the definitive intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of corticosteroids, IVIG, plasma exchange or cytotoxic immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathic pain relief with gabapentinoids, tricyclics or duloxetine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for sensory ataxia, with fall prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sensory recovery usually poor; aim is stabilisation through tumour control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

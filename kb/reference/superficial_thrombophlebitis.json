@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for superficial thrombophlebitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superficial_thrombophlebitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous duplex ultrasound",
+          "cells": [
+            {
+              "text": "Clot length and junctional or deep involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for deep vein thrombosis",
+          "cells": [
+            {
+              "text": "When suspicion exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia evaluation",
+          "cells": [
+            {
+              "text": "Recurrent or unprovoked cases without varicosities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Migratory or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of intravenous access sites",
+          "cells": [
+            {
+              "text": "Catheter-related cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superficial_thrombophlebitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Erythema and warmth; antibiotics alone are wrong for thrombophlebitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Deep system involvement; duplex separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured Baker cyst",
+          "cells": [
+            {
+              "text": "Calf swelling from a popliteal cyst"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superficial_thrombophlebitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic measures",
+          "cells": [
+            {
+              "text": "NSAIDs, warm compresses, compression and mobilisation for limited disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic-intensity anticoagulation",
+          "cells": [
+            {
+              "text": "Extensive thrombus or near the saphenous junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic anticoagulation",
+          "cells": [
+            {
+              "text": "Thrombus extending into the deep system"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cannula removal",
+          "cells": [
+            {
+              "text": "Catheter-related phlebitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat duplex imaging",
+          "cells": [
+            {
+              "text": "If clinical extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia or malignancy investigation",
+          "cells": [
+            {
+              "text": "Recurrent, migratory or unprovoked cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of varicose veins",
+          "cells": [
+            {
+              "text": "After the acute episode settles"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superficial_thrombophlebitis-dx-mgmt",
+      "title": "Diagnosis and management of Superficial thrombophlebitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender cord along a superficial vein: suspected superficial thrombophlebitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (thrombus near junction, deep signs, fever or pus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for septic thrombophlebitis or concurrent deep vein thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Venous duplex ultrasound for extent and junctional proximity; deep system assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does duplex confirm a superficial clot with its distance to the junction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cellulitis, deep vein thrombosis or Baker cyst; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic care for limited disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic anticoagulation for extensive or junction-approaching thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Therapeutic anticoagulation if thrombus extends into the deep system",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thrombophilia or malignancy screen in recurrent or unprovoked cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign, but can extend into deep vein thrombosis or pulmonary embolism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

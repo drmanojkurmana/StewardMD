@@ -149,5 +149,278 @@
       "caption": "Overview comparison matrix for normal tension glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "normal_tension_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diurnal intraocular pressure phasing",
+          "cells": [
+            {
+              "text": "Detects peaks missed on single readings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central corneal thickness",
+          "cells": [
+            {
+              "text": "Corrects apparent pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc and visual field assessment",
+          "cells": [
+            {
+              "text": "Structural and functional progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging when disc pallor is disproportionate",
+          "cells": [
+            {
+              "text": "Compressive or neurological cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "normal_tension_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary open-angle glaucoma with pressure spikes",
+          "cells": [
+            {
+              "text": "Unrecognised peaks in pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burnt-out glaucoma",
+          "cells": [
+            {
+              "text": "Previously raised pressure now resolved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive optic neuropathy",
+          "cells": [
+            {
+              "text": "Disc pallor out of proportion to cupping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "normal_tension_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical prostaglandin analogue",
+          "cells": [
+            {
+              "text": "First-line to lower intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substantial pressure reduction",
+          "cells": [
+            {
+              "text": "Slows progression even from a normal baseline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular field and disc monitoring",
+          "cells": [
+            {
+              "text": "Tracks progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address vascular risk factors",
+          "cells": [
+            {
+              "text": "Relevant in a subset with vascular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "normal_tension_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Normal tension glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Optic nerve cupping and field loss with normal pressure readings",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disc pallor out of proportion, rapid field loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging if disc pallor suggests a compressive cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diurnal pressure phasing, corneal thickness, disc and field assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Glaucomatous cupping and field loss with pressure in the normal range?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider compressive or other optic neuropathy; image the optic pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lower intraocular pressure with a prostaglandin analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Substantial reduction to slow progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular field and disc monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address vascular risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many progress slowly; lowering pressure reduces the rate of field loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

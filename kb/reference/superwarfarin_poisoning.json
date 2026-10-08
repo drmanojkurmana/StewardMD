@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for superwarfarin (long-acting anticoagulant rodenticide) poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superwarfarin_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial prothrombin time and INR",
+          "cells": [
+            {
+              "text": "Delayed coagulopathy over an extended window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APTT and fibrinogen",
+          "cells": [
+            {
+              "text": "Wider coagulation pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia from blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clotting factor assays and mixing studies",
+          "cells": [
+            {
+              "text": "Unclear cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superwarfarin plasma concentration",
+          "cells": [
+            {
+              "text": "Confirmation and monitoring, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superwarfarin_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic warfarin over-anticoagulation",
+          "cells": [
+            {
+              "text": "Prescribed anticoagulant; history separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease with impaired synthetic function",
+          "cells": [
+            {
+              "text": "Synthetic failure rather than a toxin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superwarfarin_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin K1 (phytomenadione)",
+          "cells": [
+            {
+              "text": "Specific antidote, high oral doses for a prolonged period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin complex concentrate or fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Urgent reversal of major bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Recent substantial ingestion presenting early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial INR monitoring",
+          "cells": [
+            {
+              "text": "Titrating and tapering vitamin K to the response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding site management and transfusion",
+          "cells": [
+            {
+              "text": "Anaemia from blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric and safeguarding review",
+          "cells": [
+            {
+              "text": "Intentional ingestion or childhood exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical toxicology and haematology input",
+          "cells": [
+            {
+              "text": "Ongoing management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superwarfarin_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Superwarfarin (long-acting anticoagulant rodenticide) poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged INR or bleeding after rodenticide exposure: suspected superwarfarin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intracranial or GI bleed, falling haemoglobin, large ingestion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent reversal with prothrombin complex concentrate or fresh frozen plasma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial PT and INR; APTT and fibrinogen; FBC; factor assays; plasma concentration",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a prolonged delayed INR found with no prescribed anticoagulant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider warfarin, DOAC, liver disease or DIC; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose oral vitamin K1 continued for a prolonged period",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Factor replacement with PCC or FFP for life-threatening bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial INR monitoring to taper vitamin K by response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychiatric and safeguarding review for intentional or childhood exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coagulopathy can persist for weeks to months; rebound follows early vitamin K withdrawal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

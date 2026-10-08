@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for sex cord-stromal tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sex_cord_stromal_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oestradiol and/or testosterone, basal LH and FSH",
+          "cells": [
+            {
+              "text": "Sex steroid raised; LH and FSH suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH stimulation test",
+          "cells": [
+            {
+              "text": "Prepubertal, suppressed response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic or scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Identifies and characterises a gonadal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibin and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Tumour markers accompanying some tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Staging once a tumour is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation (DICER1, Peutz-Jeghers)",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sex_cord_stromal_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central precocious puberty",
+          "cells": [
+            {
+              "text": "Gonadotropins suppressed and GnRH response prepubertal in the tumour; not so in central puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other gonadotropin-independent precocity (McCune-Albright, testotoxicosis)",
+          "cells": [
+            {
+              "text": "Unilateral gonadal mass on imaging points to a tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia or virilising adrenal tumour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sex_cord_stromal_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Mainstay; typically fertility-sparing unilateral oophorectomy or orchidectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant platinum-based chemotherapy",
+          "cells": [
+            {
+              "text": "Higher-stage or aggressive histological subtypes only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expected regression",
+          "cells": [
+            {
+              "text": "Precocious pseudopuberty or virilisation regresses after removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence surveillance",
+          "cells": [
+            {
+              "text": "Serial inhibin and anti-Mullerian hormone, sex steroids and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation and counselling",
+          "cells": [
+            {
+              "text": "DICER1 and Peutz-Jeghers, with family screening where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and bone maturation",
+          "cells": [
+            {
+              "text": "Monitor effects of prior sex steroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric oncology and endocrinology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sex_cord_stromal_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Sex cord-stromal tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with oestrogen or androgen excess: breast development, bleeding or virilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Gonadal mass with sex-steroid excess, rapid progression, ascites or syndrome features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and surgical oncology referral for staging and resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oestradiol or testosterone; LH, FSH; GnRH stimulation test; gonadal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Suppressed gonadotropins with a gonadal mass on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate central puberty, McCune-Albright, adrenal causes or exogenous steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resect completely, fertility-sparing where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Platinum-based chemotherapy only for higher-stage or aggressive subtypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveil with inhibin, anti-Mullerian hormone, sex steroids and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic evaluation for DICER1 and Peutz-Jeghers; family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent if low stage and completely resected; hormonal signs regress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

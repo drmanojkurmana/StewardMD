@@ -143,5 +143,316 @@
       "caption": "Overview comparison matrix for traction alopecia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "traction_alopecia-dx-mgmt",
+      "title": "Diagnosis and management of Traction alopecia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected traction alopecia: marginal and frontotemporal thinning from tight hairstyles",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: lost follicular ostia, perifollicular scaling, or progression despite change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Scalp biopsy to exclude frontal fibrosing alopecia or scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hairstyling history; trichoscopy for hair casts and ostia; photographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do trichoscopy findings show hair casts with preserved ostia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider frontal fibrosing alopecia, trichotillomania or androgenetic alopecia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop tight styles and adopt low-tension hairstyles",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for early reversible inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical minoxidil where follicles remain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics for secondary folliculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hair transplantation or camouflage for irreversible scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early tension relief lets hair regrow; longstanding traction causes irreversible scarring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "traction_alopecia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hairstyling and cultural or occupational history",
+          "cells": [
+            {
+              "text": "Chronic tension from tight styles or extensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Hair casts, reduced density and preserved ostia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marginal loss with fringe sign",
+          "cells": [
+            {
+              "text": "Frontotemporal and marginal pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy",
+          "cells": [
+            {
+              "text": "Scarring or alternative diagnosis such as frontal fibrosing alopecia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traction_alopecia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Frontal fibrosing alopecia",
+          "cells": [
+            {
+              "text": "Also affects the hairline and eyebrows; scarring on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichotillomania",
+          "cells": [
+            {
+              "text": "Irregular breakage from pulling rather than marginal traction loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgenetic alopecia",
+          "cells": [
+            {
+              "text": "Pattern loss without traction history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traction_alopecia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the mechanical cause",
+          "cells": [
+            {
+              "text": "Stop tight braids, weaves, ponytails, buns and extensions; the essential step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or intralesional corticosteroid",
+          "cells": [
+            {
+              "text": "Early reversible inflammatory phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "Where follicles are still preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for folliculitis",
+          "cells": [
+            {
+              "text": "Associated pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behaviour change",
+          "cells": [
+            {
+              "text": "Styling practices to prevent progression to scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation or camouflage",
+          "cells": [
+            {
+              "text": "Established irreversible scarring alopecia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

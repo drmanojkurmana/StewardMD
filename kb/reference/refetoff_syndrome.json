@@ -150,5 +150,238 @@
       "caption": "Overview comparison matrix for refetoff syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "refetoff_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Free T4, free T3 and TSH",
+          "cells": [
+            {
+              "text": "Thyroid hormone pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha subunit and alpha-subunit-to-TSH ratio",
+          "cells": [
+            {
+              "text": "Alpha subunit ratio"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refetoff_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH-secreting pituitary adenoma",
+          "cells": [
+            {
+              "text": "Pituitary mass with headache or visual field defect"
+            },
+            {
+              "text": "Alpha subunit ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory assay interference from heterophile antibodies",
+          "cells": [
+            {
+              "text": "Assay interference"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refetoff_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid inappropriate treatment",
+          "cells": [
+            {
+              "text": "Recognise the diagnosis to avoid anti-thyroid drugs or ablation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compensated patients",
+          "cells": [
+            {
+              "text": "Many compensated, euthyroid patients are managed without treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhythm",
+          "cells": [
+            {
+              "text": "Monitor for atrial fibrillation or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "refetoff_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Refetoff Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected resistance to thyroid hormone: raised thyroid hormones with non-suppressed TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pituitary mass with headache or visual defect, or arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pituitary review for mass with visual defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FT4, FT3, TSH; alpha subunit ratio; pituitary imaging if mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is non-suppressed TSH with raised thyroid hormones confirmed on repeat testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TSH-secreting adenoma or assay interference; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise the diagnosis to avoid anti-thyroid drugs or ablation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Many compensated, euthyroid patients are managed without treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Endocrine follow-up with family counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

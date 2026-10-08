@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for scurvy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scurvy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary history",
+          "cells": [
+            {
+              "text": "Prolonged lack of fruit and vegetables"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or leucocyte ascorbic acid",
+          "cells": [
+            {
+              "text": "Level where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Associated anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and platelet studies",
+          "cells": [
+            {
+              "text": "Exclude a primary bleeding disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs in children",
+          "cells": [
+            {
+              "text": "Metaphyseal and subperiosteal changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scurvy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bleeding disorders and thrombocytopenia",
+          "cells": [
+            {
+              "text": "Excluded by normal coagulation and platelet studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Child abuse",
+          "cells": [
+            {
+              "text": "Bone and periosteal changes in children can mimic it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scurvy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascorbic acid replacement",
+          "cells": [
+            {
+              "text": "Definitive treatment, oral where tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary correction",
+          "cells": [
+            {
+              "text": "Vitamin C-rich fruit and vegetables with dietitian input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Painful subperiosteal and joint haemorrhages; gentle handling in pseudoparalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia treatment",
+          "cells": [
+            {
+              "text": "Including iron for associated iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gingival and dental care",
+          "cells": [
+            {
+              "text": "Spongy, bleeding gums"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributory factors",
+          "cells": [
+            {
+              "text": "Chronic alcohol use, eating disorders, social isolation or malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Rapid resolution of bleeding and gum changes expected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scurvy-dx-mgmt",
+      "title": "Diagnosis and management of Scurvy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bleeding gums, perifollicular purpura or limb pain with poor diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Major bleeding, pseudoparalysis in a child, collapse or severe malnutrition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitamin C replacement, analgesia and broader nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dietary history, ascorbic acid level, FBC, iron studies, coagulation, child radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dietary deficit with low vitamin C or typical findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pursue primary bleeding disorder, vasculitis or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ascorbic acid replacement, oral where tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietitian input and vitamin C-rich foods",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat anaemia and give gingival care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address alcohol, eating disorder, isolation or malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; bleeding and gum changes resolve in days to weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

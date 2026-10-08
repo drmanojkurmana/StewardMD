@@ -152,6 +152,11 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -322,6 +327,95 @@
           "cite": "c1"
         }
       ]
+    },
+    {
+      "id": "massive_transfusion-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
     }
   ],
   "flowcharts": [

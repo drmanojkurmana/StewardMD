@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for greater trochanteric pain syndrome (trochanteric bursitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trochanteric_bursitis-dx-mgmt",
+      "title": "Diagnosis and management of Greater trochanteric pain syndrome (trochanteric bursitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected greater trochanteric pain: lateral hip pain worse on lying on the side",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: night pain with systemic features, or cannot single-leg stand?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected infection or malignancy with systemic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound or MRI of gluteal tendons; radiographs; provocative tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show gluteal tendinopathy with reproduced lateral tenderness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hip osteoarthritis, abductor tear or lumbar radiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Load management and progressive gluteal abductor rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Posture and activity modification to reduce compressive load",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Simple analgesia and short-term NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Peritrochanteric steroid injection for refractory short-term relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Shockwave therapy if symptoms persist after rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Surgery only for confirmed tendon tear failing conservative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Most improve with load management; refractory cases may need shockwave or surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trochanteric_bursitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Gluteal tendons and bursal change; guides injection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Tendinopathy, tears, hip joint or bony pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip and pelvis radiographs",
+          "cells": [
+            {
+              "text": "Joint and enthesophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provocative testing",
+          "cells": [
+            {
+              "text": "Resisted abduction and single-leg stance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar spine assessment",
+          "cells": [
+            {
+              "text": "Referred pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trochanteric_bursitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hip osteoarthritis",
+          "cells": [
+            {
+              "text": "Joint-based pain with radiographic joint change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gluteal abductor tendon tear",
+          "cells": [
+            {
+              "text": "Inability to weight bear or single-leg stance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar radiculopathy",
+          "cells": [
+            {
+              "text": "Neurological signs and referred spinal pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trochanteric_bursitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Load management and gluteal abductor rehabilitation",
+          "cells": [
+            {
+              "text": "Progressive tendon programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posture and activity modification",
+          "cells": [
+            {
+              "text": "Avoid leg-crossing and lying on the affected side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia and short-term NSAIDs",
+          "cells": [
+            {
+              "text": "Symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritrochanteric corticosteroid injection",
+          "cells": [
+            {
+              "text": "Short-term relief in refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracorporeal shockwave therapy",
+          "cells": [
+            {
+              "text": "Symptoms persisting after rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Confirmed gluteal tendon tear failing conservative care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

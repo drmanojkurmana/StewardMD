@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for sea snake envenomation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sea_snake_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase with serial trends",
+          "cells": [
+            {
+              "text": "Myotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium with cardiac monitoring",
+          "cells": [
+            {
+              "text": "Hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Myoglobinuria and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial forced vital capacity or spirometry",
+          "cells": [
+            {
+              "text": "Neurotoxic respiratory decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Helps distinguish from procoagulant terrestrial snakes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sea_snake_envenomation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Terrestrial elapid envenomation",
+          "cells": [
+            {
+              "text": "Coagulation studies help separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary neuromuscular disorder",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sea_snake_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pressure immobilisation",
+          "cells": [
+            {
+              "text": "First aid to slow venom spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antivenom",
+          "cells": [
+            {
+              "text": "Sea snake or appropriate polyvalent, definitive for systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "For progressive bulbar and respiratory paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis and myoglobinuria; renal replacement therapy if AKI severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia care",
+          "cells": [
+            {
+              "text": "Treat and keep continuous cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged observation",
+          "cells": [
+            {
+              "text": "Serial neurological assessment and CK trends"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation",
+          "cells": [
+            {
+              "text": "Ventilatory failure or refractory hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sea_snake_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Sea snake envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sea snake bite, often painless: observe for delayed myotoxicity and paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar or respiratory weakness, rising CK, hyperkalaemia or myoglobinuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Antivenom, airway protection, treat hyperkalaemia, critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK trend, potassium, renal function, spirometry, ECG, coagulation studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic neurotoxic or myotoxic envenomation evident?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prolonged observation; do not discharge until delayed effects excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Apply pressure immobilisation first aid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give sea snake or polyvalent antivenom",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ventilate for respiratory paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IV fluids for rhabdomyolysis; treat hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually complete recovery with timely antivenom and supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

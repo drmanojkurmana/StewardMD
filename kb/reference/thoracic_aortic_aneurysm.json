@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for thoracic aortic aneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thoracic_aortic_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Thoracic aortic aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thoracic aortic aneurysm: often found incidentally on chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: sudden severe chest or back pain, syncope, or rapid interval growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical or endovascular management for dissection or rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MR angiography for diameter and extent; echocardiography; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a thoracic aortic dilatation above threshold or growing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atherosclerotic ulcer, mediastinal mass or pseudoaneurysm; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockade and statin, with ARB in Marfan syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CT or MR angiography surveillance for growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elective open or endovascular repair by diameter, growth and aetiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid heavy straining and blood pressure surges",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic evaluation and family screening for heritable aortopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Small aneurysms often remain stable; elective repair markedly improves survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thoracic_aortic_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography of the thoracic aorta",
+          "cells": [
+            {
+              "text": "Diameter, extent and branch involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Radiation-sparing surveillance alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Aortic root and valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation and family screening",
+          "cells": [
+            {
+              "text": "Heritable aortopathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and respiratory fitness assessment",
+          "cells": [
+            {
+              "text": "Before intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thoracic_aortic_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute aortic dissection",
+          "cells": [
+            {
+              "text": "Sudden severe chest or back pain; dissection must not be missed in aneurysm follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Chest pain presentations; cardiac causes must be separated from dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Chest pain presentation that can mimic aortic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thoracic_aortic_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antihypertensive therapy",
+          "cells": [
+            {
+              "text": "Beta-blockers, and angiotensin receptor blockers in Marfan syndrome, with statin and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "CT or MR angiography for maximal diameter and growth rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective repair",
+          "cells": [
+            {
+              "text": "Open graft replacement or thoracic endovascular repair; thresholds lower in connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid straining and stimulants",
+          "cells": [
+            {
+              "text": "Heavy isometric straining and drugs causing blood pressure surges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency care for dissection or rupture",
+          "cells": [
+            {
+              "text": "Urgent blood pressure and heart rate control, analgesia and surgery or endovascular repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Marfan, Loeys-Dietz or bicuspid-valve disease; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

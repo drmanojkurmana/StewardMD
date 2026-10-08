@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for polyarticular juvenile idiopathic arthritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polyarticular_juvenile_idiopathic_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RF and anti-CCP antibodies",
+          "cells": [
+            {
+              "text": "Subclassification and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody",
+          "cells": [
+            {
+              "text": "Uveitis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs, ultrasound or MRI of joints",
+          "cells": [
+            {
+              "text": "Synovitis and erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of temporomandibular joints",
+          "cells": [
+            {
+              "text": "Jaw involvement, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp ophthalmology",
+          "cells": [
+            {
+              "text": "Uveitis surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polyarticular_juvenile_idiopathic_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral arthritis (e.g. parvovirus B19)",
+          "cells": [
+            {
+              "text": "Viral cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia or other malignancy",
+          "cells": [
+            {
+              "text": "Constitutional symptoms, night pain or cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polyarticular_juvenile_idiopathic_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Early disease-modifying first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologics",
+          "cells": [
+            {
+              "text": "TNF inhibitors and other biologic DMARDs when escalation is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Intra-articular or short courses for flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic relief of pain and stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveitis screening",
+          "cells": [
+            {
+              "text": "Regular slit-lamp screening, especially in ANA-positive children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Attention to jaw and cervical spine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, bone health and drug toxicity; transition to adult services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Paediatric rheumatology with ophthalmology and dental input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polyarticular_juvenile_idiopathic_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of Polyarticular juvenile idiopathic arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arthritis in several joints in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid erosive disease, jaw or cervical involvement, constitutional symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric rheumatology review for erosive disease or airway or feeding risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antibody panel (RF, anti-CCP, ANA); ESR and CRP; joint imaging; slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the picture fit polyarticular JIA with RF and ANA status defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reactive arthritis, SLE, viral arthritis, IBD arthritis or leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early methotrexate as first-line disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to TNF inhibitors or other biologics when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short courses of corticosteroids for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular slit-lamp screening for chronic anterior uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for joint function",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "RF-positive subtype is persistent and erosive; other subtypes vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

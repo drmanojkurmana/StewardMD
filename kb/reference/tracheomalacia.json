@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for tracheomalacia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray and Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tracheomalacia-dx-mgmt",
+      "title": "Diagnosis and management of tracheomalacia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tracheomalacia: harsh barking cough worse with crying or coughing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: dying spells, cough syncope, or respiratory distress with secretion retention?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway support with positive pressure for life-threatening events",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dynamic CT; awake bronchoscopy during breathing; flow-volume loops",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does dynamic imaging show excessive expiratory collapse of the trachea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider asthma, vocal cord dysfunction, fixed stenosis or vascular ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management for congenital disease with humidity and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous positive airway pressure as a pneumatic stent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance and prompt antibiotics for infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat vascular ring or immunosuppress relapsing polychondritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical stabilisation or stenting for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Congenital forms often improve with age; acquired and syndromic forms tend to persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tracheomalacia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dynamic inspiratory-expiratory CT",
+          "cells": [
+            {
+              "text": "Excessive expiratory collapse of central airways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Awake flexible bronchoscopy during breathing",
+          "cells": [
+            {
+              "text": "Dynamic collapse on expiration and cough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow-volume loops",
+          "cells": [
+            {
+              "text": "Expiratory flow oscillations or notch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Symptomatic response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography or CT angiography",
+          "cells": [
+            {
+              "text": "Vascular ring or compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast oesophagram",
+          "cells": [
+            {
+              "text": "Tracheo-oesophageal fistula or vascular ring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheomalacia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asthma with poorly reversible airflow obstruction",
+          "cells": [
+            {
+              "text": "Barking cough without response to bronchodilators; dynamic imaging separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal cord dysfunction",
+          "cells": [
+            {
+              "text": "Inducible laryngeal obstruction rather than tracheal collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrinsic compression by vascular ring or mediastinal mass",
+          "cells": [
+            {
+              "text": "Compression on imaging; treatable cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tracheomalacia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management of congenital disease",
+          "cells": [
+            {
+              "text": "Cartilage often matures over the first one to two years; humidified air and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Pneumatic stent for severe or symptomatic collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance and antibiotics",
+          "cells": [
+            {
+              "text": "Recurrent infection from impaired clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Immunosuppression for relapsing polychondritis; relief of vascular ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for severe disease",
+          "cells": [
+            {
+              "text": "Aortopexy, tracheobronchoplasty, or airway stenting in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

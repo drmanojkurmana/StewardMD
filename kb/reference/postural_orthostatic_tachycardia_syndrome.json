@@ -149,5 +149,370 @@
       "caption": "Overview comparison matrix for postural orthostatic tachycardia syndrome (pots)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postural_orthostatic_tachycardia_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Active-stand test with serial heart rate and blood pressure",
+          "cells": [
+            {
+              "text": "Sustained tachycardia on standing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head-up tilt-table testing",
+          "cells": [
+            {
+              "text": "Active-stand test equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and thyroid function",
+          "cells": [
+            {
+              "text": "Anaemia and thyrotoxicosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supine and standing catecholamines",
+          "cells": [
+            {
+              "text": "Hyperadrenergic subtype suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory ECG",
+          "cells": [
+            {
+              "text": "Primary arrhythmia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing including QSART",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postural_orthostatic_tachycardia_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthostatic hypotension from autonomic failure",
+          "cells": [
+            {
+              "text": "Falling pressure on standing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inappropriate sinus tachycardia",
+          "cells": [
+            {
+              "text": "Resting tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety or panic disorder",
+          "cells": [
+            {
+              "text": "Psychiatric symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Abnormal thyroid function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Paroxysmal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dehydration or anaemia",
+          "cells": [
+            {
+              "text": "Low volume or low haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal supraventricular tachycardia",
+          "cells": [
+            {
+              "text": "Abrupt onset and offset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postural_orthostatic_tachycardia_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Volume support",
+          "cells": [
+            {
+              "text": "Increased salt and fluid intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded reconditioning",
+          "cells": [
+            {
+              "text": "Recumbent exercise progressing to standing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart-rate control",
+          "cells": [
+            {
+              "text": "Beta-blocker or ivabradine for symptomatic tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fludrocortisone and midodrine",
+          "cells": [
+            {
+              "text": "Hypovolaemia or vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw aggravating agents",
+          "cells": [
+            {
+              "text": "Treat anaemia, migraine and similar conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Prolonged standing, heat and large carbohydrate meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary support",
+          "cells": [
+            {
+              "text": "Autonomic specialists, cardiology and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postural_orthostatic_tachycardia_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Postural orthostatic tachycardia syndrome (POTS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symptomatic tachycardia and dizziness on standing, without a fall in blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (exertional syncope, significant orthostatic fall, phaeochromocytoma features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac review for exertional syncope or injurious collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Active-stand test; tilt-table if equivocal; FBC and thyroid tests; catecholamines",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does active standing show a sustained rise in heart rate of 30 or more beats per minute?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orthostatic hypotension, anxiety, thyrotoxicosis or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line volume support with increased salt and fluid intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured graded reconditioning starting recumbent or semi-recumbent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker or ivabradine for symptomatic orthostatic tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fludrocortisone or midodrine for hypovolaemia or vasoconstriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Educate on trigger avoidance such as prolonged standing and heat",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many improve substantially over months to years, particularly after post-viral onset",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

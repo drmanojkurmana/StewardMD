@@ -151,5 +151,231 @@
       "caption": "Overview comparison matrix for wiedemann-steiner syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nature Reviews chromatinopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wiedemann_steiner_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing",
+          "cells": [
+            {
+              "text": "KMT2A variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DNA methylation episignature analysis",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wiedemann_steiner_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cornelia de Lange syndrome",
+          "cells": [
+            {
+              "text": "NIPBL and related genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kabuki syndrome",
+          "cells": [
+            {
+              "text": "KMT2D or KDM6A variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coffin-Siris syndrome",
+          "cells": [
+            {
+              "text": "BAF complex variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wiedemann_steiner_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Educational support for delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and infection support",
+          "cells": [
+            {
+              "text": "Feeding difficulty and recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wiedemann_steiner_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Wiedemann-Steiner syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Wiedemann-Steiner syndrome: hypertrichosis with developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe feeding difficulty or recurrent infections)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and immune assessment for severe infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing for KMT2A, methylation episignature analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing identify a KMT2A variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Cornelia de Lange, Kabuki or Coffin-Siris syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental intervention and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding support and infection prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not exclude the diagnosis on absent hypertrichosis alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Developmental delay is lifelong; early support improves function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

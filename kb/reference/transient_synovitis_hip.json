@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for transient synovitis hip."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transient_synovitis_hip-dx-mgmt",
+      "title": "Diagnosis and management of transient synovitis hip",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transient synovitis: acute atraumatic hip pain and limp in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: unable to bear weight with fever and raised markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review and joint aspiration for septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hip ultrasound; CRP, ESR and FBC; frog-lateral radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are markers normal or mildly raised, with a well, weight-bearing child?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic arthritis, Perthes, slipped epiphysis or leukaemia; aspirate or image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rest, activity limitation and simple analgesia or NSAID",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Validated prediction rules and aspiration to exclude septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Outpatient care for the well, weight-bearing child",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Safety-netting for fever or refusal to weight-bear",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow-up to confirm resolution within one to two weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; most recover within one to two weeks, and some recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transient_synovitis_hip-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hip ultrasound",
+          "cells": [
+            {
+              "text": "Joint effusion; guides aspiration if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP, ESR and FBC",
+          "cells": [
+            {
+              "text": "Normal or mildly raised, unlike septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs with frog-lateral views",
+          "cells": [
+            {
+              "text": "Perthes disease and slipped epiphysis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration with Gram stain and culture",
+          "cells": [
+            {
+              "text": "Septic arthritis, when it cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Osteomyelitis, Perthes or occult pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transient_synovitis_hip-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis of the hip",
+          "cells": [
+            {
+              "text": "Fever, non-weight-bearing and marked inflammatory markers favour septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Legg-Calve-Perthes disease",
+          "cells": [
+            {
+              "text": "Missed on radiographs without frog-lateral views"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slipped capital femoral epiphysis",
+          "cells": [
+            {
+              "text": "Older or heavier children; radiographs define the epiphysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transient_synovitis_hip-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rest and simple analgesia",
+          "cells": [
+            {
+              "text": "Self-limiting synovitis; NSAID for symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of septic arthritis",
+          "cells": [
+            {
+              "text": "Validated prediction rules with ultrasound and aspiration when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outpatient care",
+          "cells": [
+            {
+              "text": "Well, afebrile, weight-bearing children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-netting",
+          "cells": [
+            {
+              "text": "Fever, increasing pain or refusal to weight-bear prompts review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Resolution within one to two weeks; detect later Perthes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic referral",
+          "cells": [
+            {
+              "text": "Uncertain diagnosis, persistent symptoms or suspected septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

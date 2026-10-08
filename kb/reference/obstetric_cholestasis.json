@@ -152,5 +152,287 @@
       "caption": "Overview comparison matrix for obstetric cholestasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "obstetric_cholestasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum bile acids with serial peak monitoring",
+          "cells": [
+            {
+              "text": "Diagnosis and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests with transaminases and bilirubin",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and urine protein",
+          "cells": [
+            {
+              "text": "Excludes pre-eclampsia or HELLP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal surveillance",
+          "cells": [
+            {
+              "text": "Stillbirth risk with markedly raised bile acids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstetric_cholestasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological pruritus of pregnancy",
+          "cells": [
+            {
+              "text": "Itch without raised bile acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymorphic eruption of pregnancy",
+          "cells": [
+            {
+              "text": "Rash-related pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pemphigoid gestationis",
+          "cells": [
+            {
+              "text": "Blistering pregnancy skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute fatty liver of pregnancy",
+          "cells": [
+            {
+              "text": "Must be excluded with pre-eclampsia or HELLP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstetric_cholestasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Relieves maternal pruritus; limited effect on foetal outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and topical antipruritics",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned delivery when bile acids are markedly raised",
+          "cells": [
+            {
+              "text": "Reduces stillbirth risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Close foetal monitoring",
+          "cells": [
+            {
+              "text": "Until delivery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "obstetric_cholestasis-dx-mgmt",
+      "title": "Diagnosis and management of Obstetric Cholestasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pruritus in the late second or third trimester with raised bile acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (markedly raised bile acids, pre-eclampsia or HELLP features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review; consider planned delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum bile acids, liver function tests, blood pressure, urine protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised bile acids with pruritus and no other liver disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pre-eclampsia, HELLP or physiological itch; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ursodeoxycholic acid to relieve maternal pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and topical antipruritics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Planned delivery when bile acids are markedly raised",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Close foetal surveillance until delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mother usually recovers after birth; recurs in later pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

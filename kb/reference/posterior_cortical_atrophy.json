@@ -149,5 +149,352 @@
       "caption": "Overview comparison matrix for posterior cortical atrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_cortical_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Parieto-occipital and posterior temporal atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Posterior cortical hypometabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid PET or CSF amyloid and tau",
+          "cells": [
+            {
+              "text": "Alzheimer pathology confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and visual acuity assessment",
+          "cells": [
+            {
+              "text": "Primary eye disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological testing",
+          "cells": [
+            {
+              "text": "Visuospatial and higher visual function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Parkinsonian or myoclonic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_cortical_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical amnestic Alzheimer disease",
+          "cells": [
+            {
+              "text": "Memory-predominant rather than visual"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies",
+          "cells": [
+            {
+              "text": "Fluctuations and visual hallucinations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticobasal syndrome",
+          "cells": [
+            {
+              "text": "Asymmetrical limb apraxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Rapid progression and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary ophthalmological disease",
+          "cells": [
+            {
+              "text": "Eye disease causes visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital stroke or posterior lesion",
+          "cells": [
+            {
+              "text": "Focal structural lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_cortical_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cholinesterase inhibitors",
+          "cells": [
+            {
+              "text": "Donepezil, rivastigmine or galantamine where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy",
+          "cells": [
+            {
+              "text": "Environmental adaptation such as decluttering and high contrast"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision aids",
+          "cells": [
+            {
+              "text": "Reading and navigation strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood treatment",
+          "cells": [
+            {
+              "text": "Psychological support and antidepressants for depression and anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, ophthalmology and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carer support",
+          "cells": [
+            {
+              "text": "Driving cessation advice and advance care planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_cortical_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Posterior cortical atrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive visual or spatial disability out of proportion to memory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid progression, myoclonus, parkinsonism, marked fluctuations)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for suspected prion disease or Lewy body disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain; FDG-PET; amyloid PET or CSF markers; eye review; neuropsychology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show posterior cortical atrophy with Alzheimer pathology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dementia with Lewy bodies, corticobasal syndrome or CJD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cholinesterase inhibitors where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occupational therapy and environmental adaptation at home",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision aids and reading and navigation strategies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat associated depression and anxiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Coordinate neurology, ophthalmology and occupational therapy care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive; visual and spatial disability worsen, later broader cognitive spread",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

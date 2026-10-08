@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for struma ovarii."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "struma_ovarii-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioiodine imaging",
+          "cells": [
+            {
+              "text": "Suppressed neck uptake with pelvic uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Adnexal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Ovarian malignancy in the differential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the resected specimen",
+          "cells": [
+            {
+              "text": "Malignant thyroid histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroglobulin",
+          "cells": [
+            {
+              "text": "Monitoring after malignant struma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "struma_ovarii-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease or toxic nodular thyroid disease",
+          "cells": [
+            {
+              "text": "Active neck gland; the uptake pattern separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mature cystic teratoma without significant thyroid tissue",
+          "cells": [
+            {
+              "text": "Teratoma without thyroid tissue on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "struma_ovarii-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection of the ovarian tumour",
+          "cells": [
+            {
+              "text": "Cystectomy or oophorectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative beta-blockade",
+          "cells": [
+            {
+              "text": "Thyrotoxic symptoms, with antithyroid drugs as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excludes malignant struma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Completion thyroidectomy",
+          "cells": [
+            {
+              "text": "Malignant struma, to enable radioiodine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative thyroid function",
+          "cells": [
+            {
+              "text": "Confirms resolution of thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroglobulin and imaging surveillance",
+          "cells": [
+            {
+              "text": "Malignant struma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecology and endocrinology input",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "struma_ovarii-dx-mgmt",
+      "title": "Diagnosis and management of Struma ovarii",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thyrotoxicosis with a normal neck gland and pelvic mass: suspected struma ovarii",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe thyrotoxicosis, malignant features, rapid mass, torsion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery and beta-blockade for severe thyrotoxicosis or torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thyroid function; radioiodine imaging; pelvic ultrasound; tumour markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is suppressed neck uptake with pelvic uptake confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Graves disease, toxic nodular goitre or teratoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the ovarian tumour by cystectomy or oophorectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preoperative beta-blockade, with antithyroid drugs as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histology to exclude malignant struma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Completion thyroidectomy and thyroglobulin surveillance if malignant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hyperthyroidism usually resolves after removal; malignant struma needs thyroid care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

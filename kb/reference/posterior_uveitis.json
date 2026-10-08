@@ -148,5 +148,361 @@
       "caption": "Overview comparison matrix for posterior uveitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_uveitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination and vitreous haze grading",
+          "cells": [
+            {
+              "text": "Activity of inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Macular oedema and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein and ICG angiography",
+          "cells": [
+            {
+              "text": "Retinal and choroidal inflammation mapped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for toxoplasma, syphilis, tuberculosis and sarcoidosis",
+          "cells": [
+            {
+              "text": "Targeted aetiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreous or aqueous sampling for PCR or cytology",
+          "cells": [
+            {
+              "text": "Infection or lymphoma suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic imaging, such as chest imaging",
+          "cells": [
+            {
+              "text": "Sarcoidosis or tuberculosis considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_uveitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intraocular lymphoma",
+          "cells": [
+            {
+              "text": "Chronic vitritis in an older patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "Localised subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal vein occlusion with macular oedema",
+          "cells": [
+            {
+              "text": "Venous occlusion pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endophthalmitis",
+          "cells": [
+            {
+              "text": "Infective and post-surgical or post-injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age-related macular degeneration",
+          "cells": [
+            {
+              "text": "Choroidal neovascular membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary retinal dystrophy",
+          "cells": [
+            {
+              "text": "Progressive inherited retinal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_uveitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Establish infective or immune cause",
+          "cells": [
+            {
+              "text": "Immunosuppression is contraindicated in infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-infective therapy",
+          "cells": [
+            {
+              "text": "Targeted antimicrobials such as anti-toxoplasma therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Non-infective immune-mediated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroids",
+          "cells": [
+            {
+              "text": "Periocular or intravitreal adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular oedema management",
+          "cells": [
+            {
+              "text": "Treat and monitor inflammatory complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen before immunosuppression",
+          "cells": [
+            {
+              "text": "Latent tuberculosis and syphilis covered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist co-management",
+          "cells": [
+            {
+              "text": "Uveitis specialists and relevant physicians"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_uveitis-dx-mgmt",
+      "title": "Diagnosis and management of Posterior uveitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vitritis or posterior segment inflammation with floaters and reduced vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid retinitis, post-injury panuveitis, persistent vitritis in older adult)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for necrotising retinitis suspected to be viral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus and OCT; angiography; serology; vitreous sampling if infection or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sampling or serology identify an infective or immune-mediated cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intraocular lymphoma, CSC, RVO or endophthalmitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Establish infective or immune-mediated cause before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Targeted antimicrobials for infective causes such as toxoplasmosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids for non-infective immune-mediated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Local corticosteroids by periocular or intravitreal route as adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for latent tuberculosis and syphilis before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on the cause and on whether the macula and optic nerve are spared",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

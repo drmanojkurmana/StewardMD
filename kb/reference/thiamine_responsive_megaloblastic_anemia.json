@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for thiamine-responsive megaloblastic anaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews / Nathan and Oski's Haematology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thiamine_responsive_megaloblastic_anemia-dx-mgmt",
+      "title": "Diagnosis and management of Thiamine-responsive megaloblastic anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thiamine-responsive anaemia: megaloblastic anaemia, diabetes and deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: transfusion-requiring anaemia, diabetic ketoacidosis, or rapid hearing loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of ketoacidosis or transfusion-requiring anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SLC19A2 genetic testing; blood film; marrow; HbA1c; audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC19A2 testing show biallelic pathogenic variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider B12 or folate deficiency, Wolfram syndrome or sideroblastic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong high-dose thiamine supplementation as specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin as diabetes becomes insulin-dependent, adjusted with thiamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for sensorineural deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor blood counts, HbA1c and hearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and screening of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thiamine corrects anaemia and improves diabetes; deafness is usually irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thiamine_responsive_megaloblastic_anemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SLC19A2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic pathogenic variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and blood film",
+          "cells": [
+            {
+              "text": "Macrocytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Megaloblastic change and ringed sideroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and echocardiographic assessment",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thiamine_responsive_megaloblastic_anemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin B12 or folate deficiency megaloblastic anaemia",
+          "cells": [
+            {
+              "text": "Anaemia does not respond to B12 or folate in this syndrome; thiamine is the specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wolfram syndrome (DIDMOAD)",
+          "cells": [
+            {
+              "text": "Diabetes with deafness; genetic testing separates the syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital sideroblastic anaemias",
+          "cells": [
+            {
+              "text": "Ringed sideroblasts on marrow examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thiamine_responsive_megaloblastic_anemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong high-dose thiamine",
+          "cells": [
+            {
+              "text": "Corrects the anaemia and improves diabetes control; the specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin for diabetes",
+          "cells": [
+            {
+              "text": "When it becomes insulin-dependent, adjusted as thiamine improves glycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids or cochlear implantation",
+          "cells": [
+            {
+              "text": "Progressive sensorineural deafness, usually irreversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count, HbA1c and hearing; screening for cardiac and ocular anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Biallelic SLC19A2 variants; screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

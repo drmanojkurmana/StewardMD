@@ -150,5 +150,269 @@
       "caption": "Overview comparison matrix for nursemaids elbow."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nursemaids_elbow-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from history and examination",
+          "cells": [
+            {
+              "text": "No imaging needed in classic presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elbow radiographs, anteroposterior and lateral",
+          "cells": [
+            {
+              "text": "Only if the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the mechanism of injury",
+          "cells": [
+            {
+              "text": "Consistent with traction on the arm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nursemaids_elbow-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Supracondylar fracture of the humerus",
+          "cells": [
+            {
+              "text": "Swelling and deformity rather than a clean reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radial head or radial neck fracture",
+          "cells": [
+            {
+              "text": "Bony tenderness and swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clavicle fracture",
+          "cells": [
+            {
+              "text": "Reluctance to use the arm in a toddler"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nursemaids_elbow-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Closed reduction by supination-flexion",
+          "cells": [
+            {
+              "text": "Or a hyperpronation manoeuvre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No radiographs for classic presentation",
+          "cells": [
+            {
+              "text": "Clinical diagnosis guides reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm success by observing spontaneous use",
+          "cells": [
+            {
+              "text": "Return of normal arm use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid reduction when a fracture is suspected",
+          "cells": [
+            {
+              "text": "Swelling or deformity signals fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nursemaids_elbow-dx-mgmt",
+      "title": "Diagnosis and management of nursemaids elbow",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Toddler holding an arm still after sudden pull on an extended, pronated forearm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (swelling, bruising, deformity, inconsistent mechanism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Image the elbow and manage as fracture if red flags are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment; elbow radiographs only if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Classic traction history with no swelling or bony tenderness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider supracondylar or radial fracture; image and treat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Closed reduction by supination-flexion or hyperpronation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiographs not needed for classic presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm reduction by spontaneous use of the arm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid reduction when a fracture is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; reduction is usually rapid and complete, with no lasting effects",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

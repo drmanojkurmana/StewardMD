@@ -152,5 +152,300 @@
       "caption": "Overview comparison matrix for renal tubular acidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 47-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_tubular_acidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes and anion gap",
+          "cells": [
+            {
+              "text": "Normal-gap acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine pH and urine electrolytes",
+          "cells": [
+            {
+              "text": "Distal acidification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_tubular_acidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diarrhoea and gastrointestinal bicarbonate loss",
+          "cells": [
+            {
+              "text": "Diarrhoea"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic kidney disease acidosis",
+          "cells": [
+            {
+              "text": "Reduced GFR"
+            },
+            {
+              "text": "Renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_tubular_acidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral alkali",
+          "cells": [
+            {
+              "text": "Alkali therapy with potassium citrate or bicarbonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal type 1 RTA",
+          "cells": [
+            {
+              "text": "Potassium citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium monitoring",
+          "cells": [
+            {
+              "text": "Avoid severe hypokalaemia or hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_tubular_acidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of non-anion gap acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Gastrointestinal bicarbonate loss",
+          "cells": [
+            {
+              "text": "Diarrhea; external pancreatic or small-bowel drainage; ureterosigmoidostomy, jejunal loop, ileal loop; drugs: calcium chloride (acidifying agent), magnesium sulfate (diarrhea), cholestyramine (bile acid diarrhea)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II.A Renal acidosis with hypokalemia",
+          "cells": [
+            {
+              "text": "Proximal RTA (type 2), drug-induced: acetazolamide, topiramate; distal (classic) RTA (type 1), drug-induced: amphotericin B, ifosfamide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II.B Renal acidosis with hyperkalemia",
+          "cells": [
+            {
+              "text": "Generalized distal nephron dysfunction (type 4 RTA): mineralocorticoid deficiency; mineralocorticoid resistance (autosomal dominant PHA I); voltage defect (autosomal dominant PHA I and PHA II); tubulointerstitial disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "III. Drug-induced hyperkalemia (with renal insufficiency)",
+          "cells": [
+            {
+              "text": "Potassium-sparing diuretics (amiloride, triamterene, spironolactone); trimethoprim; pentamidine; ACE inhibitors and ARBs; nonsteroidal anti-inflammatory drugs; cyclosporine and tacrolimus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV. Other",
+          "cells": [
+            {
+              "text": "Acid loads (ammonium chloride, hyperalimentation); loss of potential bicarbonate (ketosis with ketone excretion); expansion acidosis (rapid saline administration); hippurate; cation exchange resins"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The last row is partly cut off at the bottom of the printed page; any further rows are unreadable."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_tubular_acidosis-dx-mgmt",
+      "title": "Diagnosis and management of Renal tubular acidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal tubular acidosis: normal anion gap metabolic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypokalaemia with weakness or arrhythmia, or dangerous hyperkalaemia in type 4?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent potassium correction for arrhythmia or paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum electrolytes and anion gap; urine pH and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is normal-gap acidosis with renal bicarbonate or acid loss confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GI bicarbonate loss or CKD acidosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral alkali therapy with potassium citrate or bicarbonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium citrate in distal (type 1) RTA",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor potassium to avoid hypokalaemia or hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Nephrology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

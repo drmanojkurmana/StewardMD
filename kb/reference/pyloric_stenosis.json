@@ -147,5 +147,278 @@
       "caption": "Overview comparison matrix for hypertrophic pyloric stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyloric_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Pyloric muscle thickness and channel length"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes, chloride and bicarbonate",
+          "cells": [
+            {
+              "text": "Hypochloraemia and hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status and weight",
+          "cells": [
+            {
+              "text": "Dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyloric_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malrotation with volvulus",
+          "cells": [
+            {
+              "text": "Bilious vomiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux",
+          "cells": [
+            {
+              "text": "Non-pyloric causes of vomiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyloric_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Correct dehydration and hypochloraemic, hypokalaemic alkalosis with IV fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression",
+          "cells": [
+            {
+              "text": "Nasogastric tube; nil by mouth pending surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Ramstedt pyloromyotomy once resuscitation is complete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding",
+          "cells": [
+            {
+              "text": "Graded enteral feeds postoperatively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyloric_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Hypertrophic pyloric stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyloric stenosis: non-bilious vomiting in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dehydration, shock, severe electrolyte derangement, bilious vomiting, or lethargy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for bilious vomiting or shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal ultrasound; electrolytes; blood gas; hydration; glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound show pyloric thickening with alkalosis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GORD, malrotation or gastroenteritis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct dehydration and alkalosis with IV fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nasogastric decompression; nil by mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ramstedt pyloromyotomy after resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graded feeds after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Graded postoperative feeding and monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

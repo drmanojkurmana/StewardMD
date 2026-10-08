@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for thelaziasis (eye worm)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thelaziasis-dx-mgmt",
+      "title": "Diagnosis and management of Thelaziasis (eye worm)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thelaziasis: foreign-body sensation and tearing with visible white worms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: corneal ulceration, visual impairment, or purulent discharge?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for keratitis or corneal ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination of sac and fornices; eyelid eversion; surface staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are slender worms found in the conjunctival sac or fornices?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as allergic or bacterial conjunctivitis; re-inspect the fornices",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mechanical removal of worms under topical anaesthesia at slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Irrigate the conjunctival sac to flush larvae",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider moxidectin or ivermectin in heavy or recurrent infestation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical antibiotics for secondary bacterial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Fly control and hygiene measures to reduce reinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent once worms are removed, unless corneal damage has already occurred",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thelaziasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination of conjunctival sac and eyelid margins",
+          "cells": [
+            {
+              "text": "Worms visualised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eversion of the eyelids",
+          "cells": [
+            {
+              "text": "Worms in the fornices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopic identification of extracted worms",
+          "cells": [
+            {
+              "text": "Species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface staining",
+          "cells": [
+            {
+              "text": "Corneal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival swab",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thelaziasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic or infective conjunctivitis",
+          "cells": [
+            {
+              "text": "Persistent conjunctivitis should prompt inspection for worms before a diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body on the ocular surface",
+          "cells": [
+            {
+              "text": "Slender white moving worms, visible on slit-lamp examination, distinguish thelaziasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial or viral keratitis",
+          "cells": [
+            {
+              "text": "Corneal involvement can accompany worm infestation and needs ocular-surface review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thelaziasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical removal of adult worms",
+          "cells": [
+            {
+              "text": "Under topical anaesthesia, with forceps or a cotton swab at slit-lamp; definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival sac irrigation",
+          "cells": [
+            {
+              "text": "Flushes larvae and remaining worms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthelmintic adjunct",
+          "cells": [
+            {
+              "text": "Topical or systemic macrocyclic lactone such as moxidectin or ivermectin, in heavy or recurrent infestation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotics",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Keratitis and corneal ulceration with ophthalmology review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fly control and hygiene",
+          "cells": [
+            {
+              "text": "Reduces reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

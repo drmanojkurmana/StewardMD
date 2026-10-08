@@ -145,5 +145,296 @@
       "caption": "Overview comparison matrix for spondylolisthesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondylolisthesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing lateral radiographs",
+          "cells": [
+            {
+              "text": "Demonstrates and grades the slip"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexion-extension views",
+          "cells": [
+            {
+              "text": "Dynamic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Neural compression, disc and nerve root involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or oblique views",
+          "cells": [
+            {
+              "text": "Pars defect, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPECT or MRI in young athletes",
+          "cells": [
+            {
+              "text": "Active pars stress"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylolisthesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar disc herniation",
+          "cells": [
+            {
+              "text": "Radicular pain from a disc; MRI defines the level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar spinal stenosis without slip",
+          "cells": [
+            {
+              "text": "Canal narrowing without a slip"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylolisthesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Activity modification and physiotherapy for most low-grade slips"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs and simple analgesia",
+          "cells": [
+            {
+              "text": "Epidural or nerve-root corticosteroid for radicular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing",
+          "cells": [
+            {
+              "text": "Young patients with an active pars lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression and instrumented fusion",
+          "cells": [
+            {
+              "text": "High-grade or progressive slips, or persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "Slip grade and dynamic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surgery referral",
+          "cells": [
+            {
+              "text": "Red-flag neurology, cauda equina features or refractory pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondylolisthesis-dx-mgmt",
+      "title": "Diagnosis and management of Spondylolisthesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Low back pain with a vertebra slipped forward: suspected spondylolisthesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive neurology, cauda equina, rapidly progressive slip)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency spinal surgery review for cauda equina syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing lateral and flexion-extension radiographs; MRI; CT for pars defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a graded slip that matches the symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical back pain, disc herniation or stenosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care: activity modification and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and epidural or nerve-root corticosteroid for radicular pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing for young patients with an active pars lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Decompression with instrumented fusion for high-grade or progressive slips",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many slips are asymptomatic; surgery is for persistent symptoms or progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

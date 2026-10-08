@@ -148,5 +148,256 @@
       "caption": "Overview comparison matrix for pyruvate kinase deficiency (haemolytic anaemia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyruvate_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Immune haemolysis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell pyruvate kinase activity",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_kinase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Positive direct antiglobulin test"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitapivat",
+          "cells": [
+            {
+              "text": "Oral pyruvate kinase activator as targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid and transfusion",
+          "cells": [
+            {
+              "text": "For symptomatic or transfusion-dependent anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Considered to reduce haemolysis and transfusion need"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyruvate_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Pyruvate kinase deficiency (haemolytic anaemia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyruvate kinase deficiency: chronic non-spherocytic haemolytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Aplastic crisis, neonatal jaundice risk, symptomatic anaemia, or iron overload?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transfusion for aplastic crisis or symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, reticulocytes, film; haemolysis markers; DAT; PK enzyme assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is red-cell PK activity deficient with immune haemolysis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider membrane disorders, G6PD deficiency or autoimmune haemolysis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mitapivat as targeted oral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid and red cell transfusion for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider splenectomy to reduce haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor for iron overload and gallstones; haematology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

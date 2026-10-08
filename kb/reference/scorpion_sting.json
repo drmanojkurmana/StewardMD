@@ -146,5 +146,267 @@
       "caption": "Overview comparison matrix for scorpion sting."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scorpion_sting-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous ECG monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and ischaemic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Left ventricular function in systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Troponin",
+          "cells": [
+            {
+              "text": "Myocardial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, electrolytes, arterial blood gas",
+          "cells": [
+            {
+              "text": "Severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scorpion_sting-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prazosin",
+          "cells": [
+            {
+              "text": "Early alpha-blockade to counter the adrenergic surge and offload the failing heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species-specific antivenom",
+          "cells": [
+            {
+              "text": "Systemic envenomation where available, ideally early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and wound care",
+          "cells": [
+            {
+              "text": "Painful sting site; tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Ventilatory and inotropic or vasoactive support for pulmonary oedema and cardiogenic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Continuous ECG, cardiac biomarkers and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prioritise children",
+          "cells": [
+            {
+              "text": "Highest risk of fatal cardiorespiratory complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scorpion_sting-dx-mgmt",
+      "title": "Diagnosis and management of Scorpion sting",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Scorpion sting with pain, sweating or vomiting: assess for systemic envenomation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulmonary oedema, cardiogenic shock, priapism, arrhythmia or young child?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Early prazosin and antivenom; intensive care for oedema or shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous ECG, troponin, echocardiography, chest imaging, blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic features or myocardial dysfunction present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Analgesia, wound care and tetanus; observe for evolving systemic toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Give prazosin early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give species-specific antivenom early",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat pulmonary oedema and shock with ventilatory and vasoactive support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continuous ECG, troponin and echo monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most stings are local; systemic myocardial disease and pulmonary oedema can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

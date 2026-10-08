@@ -153,5 +153,291 @@
       "caption": "Overview comparison matrix for head and neck paraganglioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraganglioma_head_neck-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or urine metanephrines and normetanephrines",
+          "cells": [
+            {
+              "text": "Secretory tumours, before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast MRI of neck and skull base",
+          "cells": [
+            {
+              "text": "Vascular salt-and-pepper appearance; cranial nerve relations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of skull base and jugular foramen",
+          "cells": [
+            {
+              "text": "Bony erosion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin-receptor PET or MIBG imaging",
+          "cells": [
+            {
+              "text": "Multifocal or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline SDHx testing",
+          "cells": [
+            {
+              "text": "Hereditary susceptibility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraganglioma_head_neck-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Phaeochromocytoma or sympathetic paraganglioma",
+          "cells": [
+            {
+              "text": "Secretory and metanephrine-positive, unlike most head and neck tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid artery aneurysm",
+          "cells": [
+            {
+              "text": "A pulsatile neck mass; vascular imaging separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraganglioma_head_neck-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Individualised treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Resection, radiotherapy including stereotactic radiosurgery, or surveillance, weighing growth against cranial nerve risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Small, slow-growing or multifocal tumours, especially in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative embolisation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Reduces vascularity of larger tumours before resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical screening",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Alpha-adrenergic then beta-adrenergic blockade for any catecholamine excess before intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraganglioma_head_neck-dx-mgmt",
+      "title": "Diagnosis and management of Head and neck paraganglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless pulsatile neck mass at the carotid bifurcation, or pulsatile tinnitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (catecholamine excess, rapid growth, new cranial nerve palsy or airway threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent alpha blockade before surgery or anaesthesia if secretory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Metanephrines, contrast MRI of neck and skull base, CT for bone, DOTATATE PET, SDHx",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the mass a vascular paraganglioma, with secretion excluded or treated?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider carotid aneurysm, schwannoma, nodal mass or salivary tumour; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Individualised choice of resection, radiotherapy, radiosurgery or surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Active surveillance for small, slow-growing or multifocal tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Preoperative angiographic embolisation of larger, highly vascular tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alpha then beta blockade for any catecholamine excess before intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mostly slow-growing and benign; nerve deficits can follow; SDHB carries metastatic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

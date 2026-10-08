@@ -147,5 +147,300 @@
       "caption": "Overview comparison matrix for parry-romberg syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parry_romberg_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of face and brain",
+          "cells": [
+            {
+              "text": "Soft-tissue and bony atrophy; intracranial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography and serial measurement",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological assessment",
+          "cells": [
+            {
+              "text": "Sclerodermatous skin change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Enophthalmos and uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology",
+          "cells": [
+            {
+              "text": "Inflammatory process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parry_romberg_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Linear scleroderma en coup de sabre",
+          "cells": [
+            {
+              "text": "Overlapping localised scleroderma spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis with facial involvement",
+          "cells": [
+            {
+              "text": "Systemic features and serology distinguish it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parry_romberg_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Methotrexate with corticosteroids; mycophenolate as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Photography, measurement and MRI to judge progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defer reconstruction",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Fat grafting or free-tissue transfer after the disease stabilises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ocular care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Specific management of seizures and uveitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parry_romberg_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Parry-Romberg syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive unilateral facial atrophy of skin, fat and muscle, usually in childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new seizures, rapid tissue loss or ocular inflammation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for uveitis or visual disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI face and brain, clinical photography, eye examination, serology, EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hemifacial atrophy confirmed with intracranial and eye disease assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider en coup de sabre scleroderma, systemic sclerosis or facial lipoatrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunosuppression with methotrexate and corticosteroids, or mycophenolate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial photography, measurement and MRI to judge progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Defer fat grafting or free-tissue transfer until the atrophy stabilises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specific management of any seizures or ocular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progresses over years then stabilises; neurological or ocular complications persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

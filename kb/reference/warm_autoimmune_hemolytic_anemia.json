@@ -149,5 +149,249 @@
       "caption": "Overview comparison matrix for warm autoimmune haemolytic anaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "warm_autoimmune_hemolytic_anemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "IgG with or without complement on red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Spherocytes, polychromasia and nucleated red cells"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warm_autoimmune_hemolytic_anemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold agglutinin disease",
+          "cells": [
+            {
+              "text": "Cold-reactive autoantibody; warm disease binds at body temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis",
+          "cells": [
+            {
+              "text": "Spherocytes without a positive antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced haemolysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warm_autoimmune_hemolytic_anemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Prednisolone as first-line immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory disease",
+          "cells": [
+            {
+              "text": "Steroid-refractory haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion when life-threatening",
+          "cells": [
+            {
+              "text": "Do not withhold for fear of incompatibility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "warm_autoimmune_hemolytic_anemia-dx-mgmt",
+      "title": "Diagnosis and management of Warm autoimmune haemolytic anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected warm autoimmune haemolytic anaemia: anaemia with spherocytes and haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly falling haemoglobin or cardiovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transfusion and cardiovascular support for life-threatening anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Direct antiglobulin test, blood film, reticulocytes, underlying cause search",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the direct antiglobulin test positive for IgG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cold agglutinin disease or hereditary spherocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids such as prednisolone as first-line immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to second-line therapy for refractory haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Search for and treat an underlying lymphoproliferative or other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Response to steroids is often good; refractory disease needs escalation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

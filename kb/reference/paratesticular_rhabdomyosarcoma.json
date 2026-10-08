@@ -151,5 +151,312 @@
       "caption": "Overview comparison matrix for paratesticular rhabdomyosarcoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paratesticular_rhabdomyosarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Characterises the primary mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers: AFP, beta-hCG and LDH",
+          "cells": [
+            {
+              "text": "Germ cell tumour excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidectomy histology with desmin, myogenin and MyoD1",
+          "cells": [
+            {
+              "text": "Diagnostic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FOXO1 gene fusion testing",
+          "cells": [
+            {
+              "text": "Alveolar versus embryonal subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest, abdomen and pelvis imaging",
+          "cells": [
+            {
+              "text": "Nodal and metastatic staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow and bone or metabolic imaging",
+          "cells": [
+            {
+              "text": "Higher-risk or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paratesticular_rhabdomyosarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Testicular germ cell tumour",
+          "cells": [
+            {
+              "text": "Tumour markers and histology separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Mimics the mass; antibiotics delay the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paratesticular_rhabdomyosarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "High cord ligation; avoid a trans-scrotal approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-agent chemotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Vincristine, actinomycin D and cyclophosphamide as the backbone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-stratified intensity",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Escalate for alveolar, FOXO1-fusion-positive tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retroperitoneal staging",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Para-aortic and paracaval nodes; nodal dissection in adolescents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy and fertility",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Radiotherapy by risk group; sperm banking before gonadotoxic therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paratesticular_rhabdomyosarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Paratesticular rhabdomyosarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless, firm, rapidly enlarging unilateral scrotal or inguinal mass in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid growth, abdominal mass, nodes or prior trans-scrotal biopsy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric oncology referral for staging and treatment planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal Doppler ultrasound, tumour markers, orchidectomy histology, FOXO1, CT staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show a rhabdomyoblastic tumour that is desmin and myogenin positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germ cell tumour, epididymo-orchitis, cyst, hydrocele or inguinal hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical inguinal orchidectomy with high cord ligation, avoiding a trans-scrotal approach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vincristine, actinomycin D and cyclophosphamide as the chemotherapy backbone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Retroperitoneal staging and nodal dissection, especially in adolescents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy by risk group, and sperm banking before gonadotoxic treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable, especially for localised embryonal tumours in young children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

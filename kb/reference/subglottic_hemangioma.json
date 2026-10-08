@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for subglottic haemangioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subglottic_hemangioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Initial airway assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rigid endoscopy under anaesthesia",
+          "cells": [
+            {
+              "text": "Compressible subglottic vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Extent of segmental or transspatial lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination for beard-distribution haemangioma",
+          "cells": [
+            {
+              "text": "Likely airway involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac, cerebrovascular and eye evaluation",
+          "cells": [
+            {
+              "text": "PHACE association suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subglottic_hemangioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Croup (laryngotracheobronchitis)",
+          "cells": [
+            {
+              "text": "Biphasic stridor that mimics the haemangioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subglottic stenosis",
+          "cells": [
+            {
+              "text": "Fixed narrowing rather than a compressible swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngomalacia",
+          "cells": [
+            {
+              "text": "Dynamic airway collapse in infancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subglottic_hemangioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral propranolol",
+          "cells": [
+            {
+              "text": "First-line to accelerate involution and relieve obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline cardiovascular assessment",
+          "cells": [
+            {
+              "text": "Before propranolol, with monitoring for bradycardia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Where beta-blockade is contraindicated or insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser ablation or open excision",
+          "cells": [
+            {
+              "text": "Lesions refractory to medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway securing during proliferation",
+          "cells": [
+            {
+              "text": "Tracheostomy reserved for severe obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial airway endoscopy",
+          "cells": [
+            {
+              "text": "Monitor response and wean propranolol after involution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric otolaryngology team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subglottic_hemangioma-dx-mgmt",
+      "title": "Diagnosis and management of Subglottic haemangioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Biphasic stridor and barky cough in an infant: suspected subglottic haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (worsening stridor, beard haemangioma, facial segmental lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment and securing for worsening respiratory distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flexible laryngoscopy; rigid endoscopy under anaesthesia; MRI; skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a compressible subglottic vascular swelling seen on endoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider croup, subglottic stenosis or laryngomalacia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral propranolol as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cardiovascular baseline and monitoring for bradycardia and hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids where beta-blockade is contraindicated or insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laser or open excision for lesions refractory to medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often involutes with time; airway obstruction during proliferation is the risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }
