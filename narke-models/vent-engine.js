@@ -158,6 +158,11 @@
       late (missedAlarms[i].late). A patient on target at the start with no scripted harm: nothingToImprove true,
       countsForBest false, Time not scored. Time follows the spell that held to the end when goals were lost after
       first being met (goals.settledMin, goals.lostAfterFirst).
+   16. ROUND 6 (additive fields; old fields unchanged unless named).
+      E1 (safety): causedBy for spo2Low and hrLow never names an FiO2, PEEP, EPAP or P low INCREASE. alarms()[i].causeChecked
+      (true unless arrested: the engine looked, so a missing causedBy means no learner change caused it). spo2Low alarms and
+      alarmPlan("spo2Low") carry oxygenKeep {key "fio2", from, to, minutesAgo, text {en, hi}} when the learner raised FiO2
+      in the last 30 min: "You raised FiO2 to 50%: keep it until SpO2 is back, then wean it in steps."
    Settings also accept flowPattern "square" | "decel" for volume breaths (not in SETTINGS until learn.json covers it).
    Integration: step() sub-steps at 10 s or less with exact exponential updates, so dt from 1 s to 3600 s is stable.
    Teaching gains marked above are model choices for a clinical reviewer to tune, not measured patient data.
@@ -1312,6 +1317,26 @@
     etco2High: ["rr", "vt", "pinsp", "ps", "mode", "ipap", "pPeakHigh"]
   };
   var SLOW_ALARMS = { spo2Low: 1, hrLow: 1, hrHigh: 1, etco2High: 1 };
+  /* Round 6 (E1, safety): a low oxygen alarm (low SpO2, the hypoxic slow heart) never names an FiO2 or PEEP INCREASE
+     as its cause, so no card offers taking oxygen away from a desaturating patient. */
+  var OXY_ALARM = { spo2Low: 1, hrLow: 1 }, OXY_KEYS = { fio2: 1, peep: 1, epap: 1, plow: 1 };
+  function oxyUp(c) { return !!OXY_KEYS[c.key] && typeof c.from === "number" && typeof c.to === "number" && c.to > c.from; }
+  /* The newest FiO2 rise in the last 30 min (pending change included): "keep it until SpO2 is back, wean after". */
+  function oxygenKeep(state, st) {
+    var ch = (state.changes || []).slice(), cur = state.settings || {}, i;
+    if (cur.fio2 != null && st.fio2 != null && cur.fio2 !== st.fio2) ch.push({ t: state.t, key: "fio2", from: cur.fio2, to: st.fio2 });
+    for (i = ch.length - 1; i >= 0; i--) {
+      var c = ch[i];
+      if (state.t - c.t > 1800) break;
+      if (c.key !== "fio2") continue;
+      if (!oxyUp(c) || st.fio2 < c.to) return null; // the last FiO2 change was a cut, or the rise is already undone
+      var ago = Math.max(0, Math.round((state.t - c.t) / 60));
+      return { key: "fio2", from: c.from, to: c.to, minutesAgo: ago,
+        text: T("You raised FiO2 to " + c.to + "%" + (ago >= 1 ? " " + ago + " min ago" : "") + ": keep it until SpO2 is back, then wean it in steps.",
+          "आपने FiO2 " + c.to + "% किया" + (ago >= 1 ? " (" + ago + " मिनट पहले)" : "") + ": SpO2 लौटने तक इसे रखें, फिर क़दम दर क़दम घटाएँ।") };
+    }
+    return null;
+  }
   /* causedBy: the newest learner change (within 30 min) whose reversal clears this alarm. Fast alarms are tested on the
      current state; SpO2 and heart rate, which follow oxygen stores, are tested after 10 min at both settings. */
   function causeOf(state, st, id, settled) {
@@ -1321,6 +1346,7 @@
       var c = ch[i];
       if (state.t - c.t > 1800) break;
       if ((CAUSE_KEYS[id] || []).indexOf(c.key) < 0) continue;
+      if (OXY_ALARM[id] && oxyUp(c)) continue; // round 6 (E1): more oxygen support is never blamed for low oxygen
       var alt = clone(st); alt[c.key] = c.from; alt = norm(alt);
       var gone;
       if (id === "etco2High") gone = etco2Clears(state, st, alt); // CO2 settles over 10 to 30 min: judge the steady state
@@ -1354,6 +1380,7 @@
     for (i = 0; i < a.length; i++) {
       var c = state.arrest ? null : causeOf(state, st, a[i].id, settled);
       if (c) { causeSafety(state, st, mo, c, a[i].id); a[i].causedBy = c; }
+      a[i].causeChecked = !state.arrest; // round 6 (E1): the engine looked; no causedBy means no learner change caused it
       pl = planOf(state, st, mo, a[i], sugOf(state, a[i]), c, ctx);
       for (k in pl) if (own(pl, k)) a[i][k] = pl[k];
     }
@@ -1632,6 +1659,7 @@
     if (call) out.callWhy = call;
     if (fl) out.fio2Line = fl;
     if (band) out.spo2Band = band;
+    if (id === "spo2Low") { var kp = oxygenKeep(state, st); if (kp) out.oxygenKeep = kp; }
     return out;
   }
   /* suggestions that belong to one alarm (the state-aware cause) */
