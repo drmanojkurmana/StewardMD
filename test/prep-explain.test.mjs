@@ -8,7 +8,7 @@ import os from "node:os";
 import path from "node:path";
 import {
   passagesOf, index, namesOther, misaligned, fixTables, pyqCopy, buildVersion, collectResults, queryOf, groundFor, explainPrompt, readX, tidy, keyAgrees, tableOk, xGate, gateWhy, reviewPrompt, readReview,
-  reviewOk, XPASS, toR, applyX, scopeItems, pickPilot, estimate, run, XSchema, PER,
+  reviewOk, XPASS, numberGap, toR, applyX, scopeItems, pickPilot, estimate, run, XSchema, PER,
 } from "../tools/prep-explain.mjs";
 
 const IT = { id: "s1", q: "A 30 year old has beaded renal arteries on angiography. Most likely cause?", o: ["Atheroma", "Fibromuscular dysplasia", "Arteritis", "Embolism"], a: 1, exp: "Beaded look of the mid renal artery in young women is fibromuscular dysplasia.", t: "x-mod", prov: "LIC" };
@@ -310,7 +310,7 @@ test("buildVersion: a new version with x and r, index v and note, manifest hashe
     fs.writeFileSync(path.join(pyq, "index.json"), JSON.stringify({ v: 1, file: "items-00000000.json", papers: [] }));
     const before = fs.readFileSync(path.join(from, "anatomy", "mcq", "m1.json"), "utf8");
     const out = buildVersion({ from, to, results: { a1: { x: GOOD } }, pyqDir: pyq, log: () => {} });
-    assert.deepEqual(out, { items: 1, subjects: ["anatomy"], pyq: 1 });
+    assert.deepEqual(out, { items: 1, subjects: ["anatomy"], pyq: 1, changed: ["anatomy/mcq/m1.json"] });
     assert.equal(fs.readFileSync(path.join(from, "anatomy", "mcq", "m1.json"), "utf8"), before, "v4 untouched");
     const m1 = JSON.parse(fs.readFileSync(path.join(to, "anatomy", "mcq", "m1.json"), "utf8")).items;
     assert.deepEqual(m1[0].x, GOOD); assert.equal(m1[0].r[1], GOOD.key); assert.equal(m1[0].exp, ""); assert.equal(m1[1].x, undefined);
@@ -334,5 +334,43 @@ test("buildVersion: a new version with x and r, index v and note, manifest hashe
     fs.writeFileSync(path.join(dir, "runs", "b-p02", "results.json"), JSON.stringify({ q: { x: GOOD }, r: { pending: true } }));
     const all = collectResults(path.join(dir, "runs"), ["b"]);
     assert.ok(all.q.x && all.r.pending);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("looser number rule (owner 2026-10-09): standard named facts and the item's own whole exp ground a number; other numbers still fail", () => {
+  const long = { ...IT, exp: IT.exp + " " + "filler words here. ".repeat(120) + "Drug Z is given 50 mg in the first week.", r: ["", "Grade 3 is meant", "", ""], kp: "" };
+  const G = { exp: long.exp.slice(0, 1800), notes: "", text: long.exp.slice(0, 1800) + "\n" };
+  const P = (pearl) => xGate(long, { ...GOOD, pearl }, G);
+  assert.equal(P("Type 2 diabetes, stage IV, NYHA class 3, t(9;22) and 22q11 are names."), null, "named classifications and cytogenetics are not quantities");
+  assert.equal(P("Factors 2, 7, 9 and 10 are vitamin K dependent."), null, "a list of named factors");
+  assert.equal(P("Drug Z is given 50 mg in week 1."), null, "a dose past the 1,800 character clip of the item's own exp, and 'first' read as 1");
+  assert.equal(P("Grade 3 and 3 days."), null, "a number in the item's stored reasons");
+  assert.equal(P("Give 75 mg daily."), "g9b", "a dose that is nowhere in the item still fails");
+  assert.equal(P("Seen in 90% of cases."), "g9b");
+  assert.deepEqual(numberGap(long, { ...GOOD, pearl: "Serum levels 20 matter." }, G), ["20"], "levels are values, not names");
+});
+
+test("buildVersion --in-place: x only on items without one, changed module files listed, manifest counts the retry", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pxi-"));
+  try {
+    const v = path.join(dir, "v5");
+    fs.mkdirSync(path.join(v, "anatomy", "mcq"), { recursive: true });
+    const OLD = { ...GOOD, pearl: "Published pearl." };
+    fs.writeFileSync(path.join(v, "anatomy", "mcq", "m1.json"), JSON.stringify({ topic: "m1", items: [{ ...IT, id: "a1" }, { ...IT, id: "a2", x: OLD }] }));
+    fs.writeFileSync(path.join(v, "anatomy", "mcq", "m2.json"), JSON.stringify({ topic: "m2", items: [{ ...IT, id: "a3" }] }));
+    const ixBody = JSON.stringify({ id: "anatomy", v: 5, modifications: "Cleaned. Structured explanations (topic notes) added." });
+    fs.writeFileSync(path.join(v, "anatomy", "index.json"), ixBody);
+    fs.writeFileSync(path.join(v, "manifest.json"), JSON.stringify({ v: 5, subjects: [{ id: "anatomy", items: 3, bytes: 1, index: "x" }], explained: { from: "v4", items: 10 } }));
+    const m2 = fs.readFileSync(path.join(v, "anatomy", "mcq", "m2.json"), "utf8");
+    assert.throws(() => buildVersion({ from: v, to: path.join(dir, "v6"), results: {}, inPlace: true, log: () => {} }), /--in-place needs/);
+    const out = buildVersion({ from: v, to: v, results: { a1: { x: GOOD }, a2: { x: GOOD } }, inPlace: true, log: () => {} });
+    assert.deepEqual(out.changed, ["anatomy/mcq/m1.json"]); assert.equal(out.items, 1);
+    const it = JSON.parse(fs.readFileSync(path.join(v, "anatomy", "mcq", "m1.json"), "utf8")).items;
+    assert.deepEqual(it[0].x, GOOD); assert.deepEqual(it[1].x, OLD, "a published explanation is never replaced");
+    assert.equal(fs.readFileSync(path.join(v, "anatomy", "mcq", "m2.json"), "utf8"), m2, "other modules untouched");
+    assert.equal(fs.readFileSync(path.join(v, "anatomy", "index.json"), "utf8"), ixBody, "an unchanged index is not rewritten");
+    const man = JSON.parse(fs.readFileSync(path.join(v, "manifest.json"), "utf8"));
+    assert.equal(man.explained.items, 11); assert.equal(man.explained.retried, 1); assert.equal(man.explained.from, "v4");
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir, "v5-changed.json"), "utf8")).files, ["anatomy/mcq/m1.json"]);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
