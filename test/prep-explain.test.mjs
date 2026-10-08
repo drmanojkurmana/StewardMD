@@ -325,6 +325,10 @@ test("buildVersion: a new version with x and r, index v and note, manifest hashe
     assert.equal(pits[1].x, undefined);
     assert.ok(fs.existsSync(path.join(to, "pyq", "img", "p-1.webp")));
     assert.throws(() => buildVersion({ from, to, results: {}, log: () => {} }), /immutable/);
+    const to2 = path.join(dir, "v6");
+    buildVersion({ from: to, to: to2, results: {}, move: true, log: () => {} });
+    assert.ok(fs.existsSync(path.join(to2, "anatomy", "mcq", "m1.json")) && !fs.existsSync(path.join(to, "anatomy", "mcq")), "--move moves the module files");
+    assert.ok(fs.existsSync(path.join(to, "anatomy", "index.json")) && fs.existsSync(path.join(to2, "anatomy", "index.json")), "--move copies the small committed files");
     fs.mkdirSync(path.join(dir, "runs", "b-p01"), { recursive: true }); fs.mkdirSync(path.join(dir, "runs", "b-p02"), { recursive: true });
     fs.writeFileSync(path.join(dir, "runs", "b-p01", "results.json"), JSON.stringify({ q: { pending: true } }));
     fs.writeFileSync(path.join(dir, "runs", "b-p02", "results.json"), JSON.stringify({ q: { x: GOOD }, r: { pending: true } }));

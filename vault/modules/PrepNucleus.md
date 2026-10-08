@@ -571,7 +571,7 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Headless: run-prep-ui.mjs checks the answer line, the dimmed options, the sticky row, the tapped-Next slide, the timed
   pick check and the result recap; run-prep-pyq-ui.mjs checks the right / others headings and the three reasons.
 
-## Structured explanations (2026-10-08, branch `feat/prep-explain`, `?v=prep21`)
+## Structured explanations (2026-10-08, branch `feat/prep-explain`, `?v=prep22`, bank v5)
 - Owner (iPad, 2026-10-08): "How is explanation missing ... more details related to topic ... in easy readable way"
   (Marrow screenshots). Bank v1: 24,497 items with empty `exp`, 29,436 under 200 chars.
 - Data: an item may carry `x = { key, notes, others: { letter: reason }, pearl }`; `exp` is never touched; `r` is
@@ -593,6 +593,18 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   "*a *b" bullets -> list), `explainOf`. Runner and review screens: key line `.pn-xkey`, `.pn-xnotes`, why the others
   are wrong (from r or x), `.pn-kp` "Remember". Headless: `test/run-prep-explain-ui.mjs` (synthetic fixture
   `test/fixtures/prep-explain/items.json`, or `ITEMS=<pilot applied.json>` for real screenshots).
+- Grounding rule (owner, 2026-10-08): a pack or KB passage is sent only when on topic (a strong stem word plus a strong
+  key word; any option's word for "All of the above" or an EXCEPT stem; two stem words when no option has a word), else
+  none and the model works from the item's exp and the stem. Names with digits (CD20, CD 20, IL-2, I-131, 50S) are
+  exempt from the number gate. These cleared the 3 pilot pendings: pilot 60/60.
+- Scope (b) run (owner approved: empty + short exp, 46,173 items after the pilot): `--scope short --run scope-b
+  --skip-runs pilot,pilot-fix --parts 10 --conc 5 --max-usd 32` (a job that would pass the cap is never submitted).
+- Bank v5 = v4 + x/r: `node tools/prep-explain.mjs --apply --runs pilot,pilot-fix,pilot-fix2,scope-b --bank <v4>
+  --pyq <prep/pyq/out> --to <v5>` (refuses an existing folder). PYQ items matching a bank item with x (same key,
+  options one to one) and a thinner explanation take the bank's x; the PYQ files go to v5/pyq/ and the client reads
+  PYQ from `SMD_PREP_PYQ_VER` (default v5). A later PYQ build must be written under the version the client reads.
+- Images in explanations: an item may carry `img` (webp names) and `imgPlace` "stem" | "exp"; bank item images are
+  served at `/api/prep/bank/<VER>/img/<file>.webp` (route `IMG_RE`); `PREP_PYQ.figure(it, host, where)` draws both.
 
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;

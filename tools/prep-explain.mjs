@@ -593,11 +593,26 @@ export function pyqCopy(p, b) {
  * recomputed. pyqDir: the PYQ out folder; its items that match a bank item with x (same key, options one to one) and
  * carry a thinner explanation get the bank's x, written to <to>/pyq/ (index.json + a new items-<hash>.json + img/).
  * A published version is immutable: an existing <to> is refused unless replace. */
-export function buildVersion({ from, to, results, pyqDir, replace = false, log = console.log }) {
+export function buildVersion({ from, to, results, pyqDir, replace = false, move = false, log = console.log }) {
   if (!fs.existsSync(from)) throw new Error("no source bank at " + from);
   if (path.resolve(from) === path.resolve(to)) throw new Error("--to must differ from the source");
   if (fs.existsSync(to)) { if (!replace) throw new Error(`${to} exists; a published version is immutable (pass --replace for an unpublished one)`); fs.rmSync(to, { recursive: true, force: true }); }
-  fs.cpSync(from, to, { recursive: true, filter: (src) => !/[\\/]pyq([\\/]|$)/.test(path.relative(from, src)) });
+  if (!move) fs.cpSync(from, to, { recursive: true, filter: (src) => !/[\\/]pyq([\\/]|$)/.test(path.relative(from, src)) });
+  else {
+    // --move (low disk): the source's gitignored heavy files (mcq/, search.json, already published to R2) are moved,
+    // not copied, so one copy of the bank stays on disk; its small committed files (index.json, manifest) stay put.
+    fs.mkdirSync(to, { recursive: true });
+    for (const e of fs.readdirSync(from, { withFileTypes: true })) {
+      const src = path.join(from, e.name), dst = path.join(to, e.name);
+      if (!e.isDirectory()) { fs.copyFileSync(src, dst); continue; }
+      if (e.name === "pyq") continue;
+      fs.mkdirSync(dst, { recursive: true });
+      for (const c of fs.readdirSync(src, { withFileTypes: true })) {
+        if (c.name === "mcq" || c.name === "search.json") fs.renameSync(path.join(src, c.name), path.join(dst, c.name));
+        else fs.cpSync(path.join(src, c.name), path.join(dst, c.name), { recursive: true });
+      }
+    }
+  }
   const ver = Number((/v(\d+)$/.exec(path.basename(to)) || [])[1]) || 0;
   const touched = new Set(), withX = new Map();
   let n = 0;
@@ -652,7 +667,7 @@ export function buildVersion({ from, to, results, pyqDir, replace = false, log =
     manifest.pyq = { from: path.basename(path.dirname(pyqDir)) + "/" + path.basename(pyqDir), file, explained: pyqN };
   }
   fs.writeFileSync(manifestP, JSON.stringify(manifest));
-  log(`built ${to}: x on ${n} bank items in ${touched.size} subjects${pyqDir ? `, ${pyqN} PYQ items took a matching bank item's x` : ""}; ${from} untouched`);
+  log(`built ${to}: x on ${n} bank items in ${touched.size} subjects${pyqDir ? `, ${pyqN} PYQ items took a matching bank item's x` : ""}; ${move ? from + " heavy files moved (they are on R2)" : from + " untouched"}`);
   return { items: n, subjects: [...touched], pyq: pyqN };
 }
 
@@ -664,7 +679,7 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
   if (args.flags.has("apply")) {
     if (!args.runs || !args.to) throw new Error("--apply needs --runs <id,prefix,...> and --to <new version dir>");
     const results = collectResults(outBase, String(args.runs).split(","));
-    return buildVersion({ from: bankDir, to: path.resolve(root, args.to), results, pyqDir: args.pyq ? path.resolve(root, args.pyq) : null, replace: args.flags.has("replace"), log });
+    return buildVersion({ from: bankDir, to: path.resolve(root, args.to), results, pyqDir: args.pyq ? path.resolve(root, args.pyq) : null, replace: args.flags.has("replace"), move: args.flags.has("move"), log });
   }
   log(`loading bank ${bankDir}`);
   const bank = deps.bank || bankItems(bankDir);
