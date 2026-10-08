@@ -5,7 +5,7 @@
 - **Flag:** `smd_narke` (kill switch "0") and `?narke=0`. Home tile `act: "narke"` is ON for all
   (owner 2026-10-06). Route `stewardmd://narke`. Lidocaine plain default 3 mg/kg max 200 mg confirmed by the owner;
   clinical sign-off pending (an anaesthesiologist via the Review Desk).
-- **Files:** `narke.js` (host config), `narke-loader.js` (only boot file, token `nrk5`), `narke.css` (palette on `.nrk-root`),
+- **Files:** `narke.js` (host config), `narke-loader.js` (only boot file, token `nrk6`), `narke.css` (palette on `.nrk-root`),
   `narke-explore-ui.js`/`.css` (the six explorers: ODC, MAC, TOF, dermatomes, ventilator, circle circuit; one persistent
   `#nkxSay` live region), `narke-clinic.js`/`.css` (reading clinics `capno` and `monitor`, decks `narke/decks/capno.json`,
   `monitor.json`), `narke/` (tracks, models list, reviews ledger, learn, decks, drill), `narke-models/` (window.NARKE_MODELS;
