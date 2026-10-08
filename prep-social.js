@@ -128,7 +128,7 @@
   }
   function renderAccuracy() {
     H.paint(H.bar("Accuracy", "How often our questions are wrong", "back") + '<div class="pn-body ps-acc">' +
-      (S.acc == null ? '<p class="pn-load" role="status">Loading the numbers</p>' : accuracyHtml(S.acc || null)) + "</div>");
+      (S.acc == null ? '<p class="pn-load" role="status">Loading the numbers…</p>' : accuracyHtml(S.acc || null)) + "</div>");
   }
 
   /* ---------- data ---------- */
@@ -197,7 +197,9 @@
       var n = (x.to && x.to.name) || "your friend";
       return person(n, esc(BATTLE_EXAMS[x.exam] || "NEET-PG") + " · waiting for them · " + left(x.expiresAt, now), btn("s-chjoin", "Join", x.room, "", "Join the battle room for " + n, x.exam));
     }).join("") + "</ul>";
-    if (!f) return h + '<p class="pn-load" role="status">Loading your friends</p>';
+    if (!f) return h + '<p class="pn-load" role="status">Loading your friends…</p>';
+    var nf = (f.friends || []).length, nreq = (f.incoming || []).length;
+    if (H.hband) h = H.hband("friends", String(nf), nf === 1 ? "friend" : "friends", inc.length ? inc.length + (inc.length === 1 ? " challenge is" : " challenges are") + " waiting for you." : nreq ? nreq + (nreq === 1 ? " friend request" : " friend requests") + " to answer." : nf ? "Challenge one to a 1v1 battle." : "Add a friend by their StewardMD ID, then challenge them.") + h;
     if ((f.incoming || []).length) h += '<h2 class="pn-sec">Friend requests</h2><ul class="ps-list">' + f.incoming.map(function (x) {
       return person(x.name, "Asked " + esc(day(x.at)), btn("s-frno", "Decline", x.smdId, "", "Decline " + x.name) + btn("s-fryes", "Accept", x.smdId, "pri", "Accept " + x.name));
     }).join("") + "</ul>";
@@ -217,7 +219,7 @@
   /* ---------- college boards ---------- */
   function boardsHtml() {
     var c = S.college;
-    if (c == null) return '<p class="pn-load" role="status">Loading</p>';
+    if (c == null) return '<p class="pn-load" role="status">Loading…</p>';
     if (!c) {
       var list = S.colleges || [], states = {};
       list.forEach(function (x) { if (x.state) states[x.state] = 1; });
@@ -229,7 +231,7 @@
         '<button type="submit" class="pn-btn pri">Show my college boards</button>' + msg("psColMsg") + "</form>";
     }
     var b = S.board, rows = "";
-    if (!b) rows = '<p class="pn-load" role="status">Loading the board</p>';
+    if (!b) rows = '<p class="pn-load" role="status">Loading the board…</p>';
     else if (b.error) rows = '<p class="pn-err" role="alert">' + esc(b.error) + "</p>";
     else if (!(b.rows || []).length) rows = '<p class="ps-empty">No one else from your ' + (S.scope === "state" ? "state" : "college") + " is on this board yet.</p>";
     else {
@@ -248,7 +250,7 @@
   /* ---------- study groups ---------- */
   function groupsHtml() {
     var g = S.groups;
-    if (!g) return '<p class="pn-load" role="status">Loading your groups</p>';
+    if (!g) return '<p class="pn-load" role="status">Loading your groups…</p>';
     var h = '<h2 class="pn-sec">Your groups</h2>' + (g.length ? '<div class="pn-group">' + g.map(function (x) {
       var m = x.members || [], done = m.filter(function (y) { return (y.todayDone || 0) >= (x.dailyTarget || 1); }).length;
       return H.row("s-group", '<span class="ps-gi">' + esc(initials(x.name)) + "</span>", esc(x.name), (x.mine ? "Yours · " : "") + m.length + (m.length === 1 ? " member" : " members") + " · " + done + " hit " + fmt(x.dailyTarget) + " today", ' data-v="' + esc(x.code) + '"');
@@ -272,7 +274,7 @@
         var d = x.todayDone || 0, ok = d >= t;
         return '<li class="' + (ok ? "ok" : "") + '"><span class="ps-mn">' + esc(String(x.name || "Doctor").slice(0, 40)) + '</span><span class="ps-mv">' + (ok ? ico("check") : "") + fmt(d) + '<small> / ' + fmt(t) + '</small></span><span class="pn-meter" aria-hidden="true"><i style="width:' + Math.min(100, Math.round(d * 100 / t)) + '%"></i></span></li>';
       }).join("") + "</ul>" +
-      '<h2 class="pn-sec">This week\'s sprint</h2>' + (!b ? '<p class="pn-load" role="status">Loading the week</p>' : b.error ? '<p class="pn-err" role="alert">' + esc(b.error) + "</p>" : !(b.rows || []).length ? '<p class="ps-empty">No sprint scores this week yet.</p>' :
+      '<h2 class="pn-sec">This week\'s sprint</h2>' + (!b ? '<p class="pn-load" role="status">Loading the week…</p>' : b.error ? '<p class="pn-err" role="alert">' + esc(b.error) + "</p>" : !(b.rows || []).length ? '<p class="ps-empty">No sprint scores this week yet.</p>' :
         '<ol class="pn-board" aria-label="This week">' + b.rows.map(function (x, i) { return '<li class="pn-lb"><span class="pn-lb-r">' + (i + 1) + '</span><span class="pn-lb-n">' + esc(String(x.name || "Doctor").slice(0, 40)) + '</span><span class="pn-lb-v">' + fmt(x.score) + "</span></li>"; }).join("") + "</ol>" +
         (b.week ? '<p class="pn-mut pn-small">Daily sprint scores added up, ' + esc(String(b.week)) + "</p>" : "")) +
       '<button type="button" class="pn-link pn-danger" data-act="s-gleave" data-v="' + esc(g.code) + '">' + ico("leave") + " Leave this group</button></div>");

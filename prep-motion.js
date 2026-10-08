@@ -16,7 +16,7 @@
   "use strict";
   if (!G || !G.document) return;
   var D = G.document, SRC = "/vendor/motion/motion.js";
-  var M = null, loading = false, root = null, attachedAt = 0, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0, lastSk = 0;
+  var M = null, loading = false, root = null, attachedAt = 0, navAt = 0, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0, lastSk = 0;
   var TILT = ".pn-tile, .pn-home > .pn-next + .pn-group > .pn-row, #pnCompete > .pn-group > .pn-row";
 
   function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
@@ -71,7 +71,7 @@
 
   function scan(el) {
     if (!el || el.nodeType !== 1) return;
-    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb")));
+    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb,.pn-mods,.pc-decks,.ps-list,.pl-ws,.pn-hbn")));
     list.forEach(function (n) {
       if (n.__pnMo) return;
       var c = n.classList;
@@ -112,6 +112,16 @@
         return;
       }
       if (c.contains("pn-vsi")) { n.__pnMo = 1; vsIntro(n); return; }
+      // Round 5: a list's rows settle in one after another, only on the first paint after a push (or when the list
+      // arrives within 1.5 s of it) and when a readiness sheet opens; a filter, an answer or a repaint keeps still.
+      if (c.contains("pn-mods") || c.contains("pc-decks") || c.contains("ps-list") || c.contains("pl-ws") || c.contains("pn-hbn")) {
+        n.__pnMo = 1;
+        if (n.closest(".pn-home") || (!c.contains("pl-ws") && Date.now() - navAt > 1500)) return;
+        if (c.contains("pn-hbn")) { rollNum(n); return; }
+        var rows = Array.prototype.slice.call(n.children, 0, 12);
+        if (rows.length > 1) anim(rows, { opacity: [0, 1], transform: ["translateY(10px)", "translateY(0px)"] }, { duration: 0.26, ease: EASE, delay: M.stagger(0.035, { startDelay: c.contains("pl-ws") ? 0.2 : 0.06 }) });
+        return;
+      }
       if (c.contains("pn-rtick")) { n.__pnMo = 1; tickNum(n, +n.getAttribute("data-from"), +n.getAttribute("data-to"), 900); return; }
       if (c.contains("pn-heat")) { n.__pnMo = 1; var cells = n.querySelectorAll("i.l1,i.l2,i.l3,i.l4"); if (cells.length) anim(cells, { opacity: [0, 1], transform: ["scale(0.4)", "scale(1)"] }, { duration: 0.24, ease: EASE, delay: M.stagger(0.006) }); return; }
       if (c.contains("pn-mast") || c.contains("pn-lvb")) {
@@ -163,6 +173,18 @@
     el.style.transform = to;
     var a = anim(el, { transform: [from, to] }, { type: "spring", visualDuration: 0.35, bounce: 0.24 });
     return !!a;
+  }
+  // A hero band's figure rolls up from 0 (700 ms). Clocked by a WAAPI animation, so finishing it (tests, a tab switch)
+  // lands the real value at once.
+  function rollNum(el) {
+    var t = el.firstChild, to = t && t.nodeType === 3 && /^\d+$/.test(t.nodeValue) ? +t.nodeValue : -1, a;
+    if (to < 2 || !el.animate) return;
+    try { a = el.animate([{ opacity: 1 }, { opacity: 1 }], { duration: 700 }); } catch (e) { return; }
+    (function tick() {
+      var p = 1; try { p = a.playState === "finished" ? 1 : Math.min(1, (a.currentTime || 0) / 700); } catch (e) {}
+      t.nodeValue = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
+      if (p < 1 && t.isConnected) G.requestAnimationFrame(tick); else t.nodeValue = String(to);
+    })();
   }
   // "+80" counts up from 0 with the same curve as the ring.
   function countUp(el) {
@@ -229,6 +251,7 @@
       return;
     }
     var x = d > 0 ? 1 : -1;
+    if (d > 0) navAt = Date.now();
     body.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 28 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 240, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
     head.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 12 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 200, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
   }

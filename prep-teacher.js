@@ -296,6 +296,15 @@
   }
 
   var busy = false, seq = 0;
+  /* Round 5: both teacher screens are a chat. The question (or lesson step) is pinned on top as a context card; the
+     student's ask is the first bubble; MaiK's reply arrives as the second, with a typing indicator while the phone
+     works (the reply is still shown only once it is checked, never streamed). Suggestion chips sit under the thread. */
+  function avatar() { return '<span class="pt-av" aria-hidden="true"></span>'; }
+  function typing(caption) { return '<li class="pt-msg ai">' + avatar() + '<div class="pt-bub pt-typing"><span class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></span><p class="pn-mut pn-small" role="status">' + caption + "</p></div></li>"; }
+  function reply(html, note) { return '<li class="pt-msg ai">' + avatar() + '<div class="pt-col"><section class="pt-bub pt-ans-b" role="status" tabindex="-1">' + html + "</section>" + (note ? '<p class="pt-note">' + note + "</p>" : "") + "</div></li>"; }
+  function chips(backLabel, extra) { return '<div class="pt-chips" role="group" aria-label="What next"><button type="button" class="pn-chip pt-chip" data-act="back">' + backLabel + "</button>" + (extra || "") + "</div>"; }
+  function chat(ctx, ask, msgs, after) { return ctx + '<ol class="pt-thread"><li class="pt-msg me"><p class="pt-bub">' + ask + "</p></li>" + msgs + "</ol>" + after; }
+
   /* explain(item, chosenIndex, host): pushes the teacher screen. Waits for the model (never streams unchecked text),
      then shows the checked answer or the stored explanation with a note. */
   function explain(item, chosenIndex, host) {
@@ -309,18 +318,20 @@
         "<h3>Answer " + esc(f.key) + "</h3>" + (f.exp ? para(f.exp) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') +
         (f.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(f.kp) + "</p>" : "");
     }
+    var ctx = '<section class="pt-ctx" aria-label="The question"><p class="pt-q">' + esc(str(item.q)) + '</p><p class="pt-pills">' +
+      (c >= 0 ? '<span class="pt-pill ' + (wrong ? "bad" : "ok") + '">You chose ' + letter(c) + "</span>" : "") + (a >= 0 ? '<span class="pt-pill ok">Answer ' + letter(a) + "</span>" : "") + "</p></section>";
     function body() {
-      var back = '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back to the question</button></div>';
-      if (S.phase === "wait") return '<p class="pn-load" role="status">Checking for MaiK on this phone...</p>';
-      if (S.phase === "none") return '<div class="pn-empty"><p><b>The offline teacher needs MaiK on this phone.</b></p><p class="pn-mut">It runs only on a downloaded on-device model (MaiK Lite or MxCore: Settings, MaiK) in the StewardMD app. Nothing is sent to a server.</p></div>' + back;
-      if (S.phase === "busy") return '<p class="pn-load" role="status">MaiK is still working on another answer. Try again in a moment.</p>' + back;
-      if (S.phase === "run") return '<p class="pn-q">' + esc(clip(item.q, 240)) + '</p><p class="pn-load" role="status">MaiK is working on your phone: <span id="ptSecs">0</span> s. This takes 10 to 40 seconds.</p>';
+      var back = chips("Back to the question");
+      if (S.phase === "wait") return chat(ctx, esc(title), typing("Checking for MaiK on this phone…"), "");
+      if (S.phase === "none") return chat(ctx, esc(title), reply("<p><b>The offline teacher needs MaiK on this phone.</b></p><p class=\"pn-mut\">It runs only on a downloaded on-device model (MaiK Lite or MxCore: Settings, MaiK) in the StewardMD app. Nothing is sent to a server.</p>", ""), back);
+      if (S.phase === "busy") return chat(ctx, esc(title), reply('<p>MaiK is still working on another answer. Try again in a moment.</p>', ""), back);
+      if (S.phase === "run") return chat(ctx, esc(title), typing('MaiK is working on your phone: <span id="ptSecs">0</span> s. This takes 10 to 40 seconds.'), "");
       var r = S.res || {};
-      if (r.ok) return '<section class="pn-fb" role="status" tabindex="-1"><h3>MaiK explains</h3>' + para(r.text) +
-        '<p class="pn-note">Written on this phone by ' + esc(packLabel()) + " from this question's stored explanation. Checked: every drug and number in it appears there.</p></section>" + back;
-      return '<section class="pn-fb" role="status" tabindex="-1"><p class="pn-mut pn-small">' + esc(r.note || NOTES["model-error"]) + "</p>" + stored(r.fallback || fallbackFor(item, c)) + "</section>" + back;
+      if (r.ok) return chat(ctx, esc(title), reply('<p class="pt-who">MaiK explains</p>' + para(r.text), "Written on this phone by " + esc(packLabel()) + " from this question's stored explanation. Checked: every drug and number in it appears there."),
+        chips("Back to the question", '<details class="pt-more"><summary class="pn-chip pt-chip">Show the stored explanation</summary><div class="pt-bub pt-stored">' + stored(fallbackFor(item, c)) + "</div></details>"));
+      return chat(ctx, esc(title), reply('<p class="pn-mut pn-small">' + esc(r.note || NOTES["model-error"]) + "</p>" + stored(r.fallback || fallbackFor(item, c)), ""), back);
     }
-    function view() { host.paint(host.bar(esc(title), "MaiK offline teacher", "back") + '<div class="pn-body pn-run" data-pt="' + token + '">' + body() + "</div>", S.phase === "done" ? ".pn-fb" : null); }
+    function view() { host.paint(host.bar(esc(title), "MaiK offline teacher", "back") + '<div class="pn-body pn-run pt-chat" data-pt="' + token + '">' + body() + "</div>", S.phase === "done" ? ".pt-ans-b" : null); }
     function alive() { try { var rt = host.root && host.root(); return !!(rt && rt.querySelector('[data-pt="' + token + '"]')); } catch (e) { return false; } }
     function update() { if (alive()) view(); }
     function tick() {
@@ -345,18 +356,18 @@
   function explainStep(step, title, host) {
     if (!step || !host || !host.push) return;
     var token = "ps" + (++seq), S = { phase: "wait", res: null }, esc = host.esc;
+    var ctx = '<section class="pt-ctx" aria-label="The lesson step"><p class="pt-q">' + esc(str(step.tx).replace(/\*\*/g, "")) + '</p><p class="pt-pills"><span class="pt-pill">' + esc(title) + "</span></p></section>", ask = "Explain this step another way.";
     function body() {
-      var back = '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back to the lesson</button></div>';
-      if (S.phase === "wait") return '<p class="pn-load" role="status">Checking for MaiK on this phone...</p>';
-      if (S.phase === "none") return '<div class="pn-empty"><p><b>Ask MaiK needs MaiK on this phone.</b></p><p class="pn-mut">It runs only on a downloaded on-device model. Nothing is sent to a server.</p></div>' + back;
-      if (S.phase === "busy") return '<p class="pn-load" role="status">MaiK is still working on another answer. Try again in a moment.</p>' + back;
-      if (S.phase === "run") return '<p class="pn-load" role="status">MaiK is working on your phone. This takes 10 to 40 seconds.</p>';
+      var back = chips("Back to the lesson");
+      if (S.phase === "wait") return chat(ctx, ask, typing("Checking for MaiK on this phone…"), "");
+      if (S.phase === "none") return chat(ctx, ask, reply('<p><b>Ask MaiK needs MaiK on this phone.</b></p><p class="pn-mut">It runs only on a downloaded on-device model. Nothing is sent to a server.</p>', ""), back);
+      if (S.phase === "busy") return chat(ctx, ask, reply("<p>MaiK is still working on another answer. Try again in a moment.</p>", ""), back);
+      if (S.phase === "run") return chat(ctx, ask, typing("MaiK is working on your phone. This takes 10 to 40 seconds."), "");
       var r = S.res || {};
-      if (r.ok) return '<section class="pn-fb" role="status" tabindex="-1"><h3>MaiK explains</h3>' + r.text.split(/\n{2,}|\n/).map(function (p) { return '<p class="pn-exp">' + esc(p) + "</p>"; }).join("") +
-        '<p class="pn-note">Written on this phone by ' + esc(packLabel()) + " from this step. Checked: every drug and number in it appears in the step.</p></section>" + back;
-      return '<section class="pn-fb" role="status" tabindex="-1"><p class="pn-mut pn-small">' + esc(r.note || "MaiK could not answer just now.") + '</p><p class="pn-exp">' + esc(str(step.tx).replace(/\*\*/g, "")) + "</p></section>" + back;
+      if (r.ok) return chat(ctx, ask, reply('<p class="pt-who">MaiK explains</p>' + r.text.split(/\n{2,}|\n/).map(function (p) { return '<p class="pn-exp">' + esc(p) + "</p>"; }).join(""), "Written on this phone by " + esc(packLabel()) + " from this step. Checked: every drug and number in it appears in the step."), back);
+      return chat(ctx, ask, reply('<p class="pn-mut pn-small">' + esc(r.note || "MaiK could not answer just now.") + '</p><p class="pn-exp">' + esc(str(step.tx).replace(/\*\*/g, "")) + "</p>", ""), back);
     }
-    function view() { host.paint(host.bar("Ask MaiK", esc(title), "back") + '<div class="pn-body pn-run" data-pt="' + token + '">' + body() + "</div>", S.phase === "done" ? ".pn-fb" : null); }
+    function view() { host.paint(host.bar("Ask MaiK", esc(title), "back") + '<div class="pn-body pn-run pt-chat" data-pt="' + token + '">' + body() + "</div>", S.phase === "done" ? ".pt-ans-b" : null); }
     function update() { try { var rt = host.root && host.root(); if (rt && rt.querySelector('[data-pt="' + token + '"]')) view(); } catch (e) {} }
     host.push(view);
     available().then(function (ok) {

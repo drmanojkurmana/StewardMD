@@ -475,7 +475,7 @@
   // One module deck: due first, then new up to today's allowance.
   function openModule(sid, mid, title, h) {
     host = h; keysOn();
-    var loading = function () { host.paint(host.bar("Cards", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the cards</p></div>'); };
+    var loading = function () { host.paint(host.bar("Cards", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the cards…</p></div>'); };
     var view = function () { draw(); };
     K.view = view; K.loading = loading;
     host.push(loading);
@@ -495,7 +495,7 @@
   function openDue(h) {
     host = h; keysOn();
     var s = store(), today = host.today(), by = dueByModule(s, today), mids = Object.keys(by);
-    var loading = function () { host.paint(host.bar("Cards due", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the cards</p></div>'); };
+    var loading = function () { host.paint(host.bar("Cards due", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the cards…</p></div>'); };
     var view = function () { draw(); };
     K.view = view; K.loading = loading;
     host.push(loading);

@@ -199,7 +199,7 @@ try {
   ok(factsSents[0].h === "Iron deficiency anaemia" && factsSents[15].h === "Haemolytic anaemia" && factsSents[5].tx === "Call his son on [removed] before the transfusion." && !factsSents.some((s) => /^\[removed\]/.test(s.tx)), "sentence headings come from the note headings; a line left empty by the scrub is not sent");
   const text = await screenText();
   ok(/14\s+new questions/.test(text) && /14 in the deck/.test(text), "progress result: 14 new questions" + (/14\s+new/.test(text) ? "" : ": " + text.slice(0, 200)));
-  ok(/Cost so far: Rs /.test(text) && !/\bAI\b/.test(text) && /4 of 10 decks this month, 1 of 3 today/.test(text), "shows the cost line and the cap line from the server's counters");
+  ok(!/Cost so far|tokens\)/.test(text) && !/\bAI\b/.test(text) && /4 of 10 decks this month, 1 of 3 today/.test(text), "no cost or token line for the student (owner rule); the cap line comes from the server's counters");
   ok(!DASH.test(text), "no em or en dash on screen");
 
   // ---- the deck in the list

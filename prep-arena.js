@@ -191,7 +191,7 @@
     if (!user()) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("user") + '</span><span class="pn-rb"><b>Sign in to compete</b><small>Daily sprints, the weekly grand test and 1v1 battles need a StewardMD account. Practice works without one.</small></span></div></div>';
     if (SOON[exam()]) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + SOON[exam()] + ". NEET-PG and USMLE are open.</small></span></div></div>";
     var now = Date.now(), ev = A.events || [], d = pickEvent(ev, "daily", now), w = pickEvent(ev, "weekly", now);
-    var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading"; };
+    var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading…"; };
     var cdAttr = function (e) { return e ? ' data-cd="' + esc(e.id) + '"' : ""; };
     return '<div class="pn-group">' +
       H.row("a-event", H.ico("bolt"), "Daily sprint", '<span class="pn-cd"' + cdAttr(d) + ">" + esc(line(d)) + "</span>", ' data-k="daily"') +
@@ -255,7 +255,7 @@
     return s;
   }
   function join(btn) {
-    btn.disabled = true; btn.textContent = "Joining";
+    btn.disabled = true; btn.textContent = "Joining…";
     api("POST", "consent", {}).then(function (j) {
       consentIs({ joined: true, name: (j && j.name) || displayName() });
       var s = closeSheet(); if (s && s.then) s.then();
@@ -309,7 +309,7 @@
   }
   function startEvent(btn) {
     var ev = A.ev; if (!ev) return;
-    btn.disabled = true; btn.textContent = "Loading questions";
+    btn.disabled = true; btn.textContent = "Loading questions…";
     api("POST", "events/" + encodeURIComponent(ev.id) + "/start", {}).then(function (j) {
       var items = (j.items || []).filter(function (it) { return it && it.id && it.q && Array.isArray(it.o); }).map(function (it) {
         return { id: String(it.id), q: String(it.q), o: it.o.map(String), _s: "arena", _m: ev.id };
@@ -341,7 +341,7 @@
   }
   function renderEventResult(r) {
     var a = r.arena || { state: "sending" }, head = H.bar(esc(r.title), "Result", "back");
-    if (a.state === "sending") return H.paint(head + '<div class="pn-body"><p class="pn-load" role="status">Submitting your answers</p></div>');
+    if (a.state === "sending") return H.paint(head + '<div class="pn-body"><p class="pn-load" role="status">Submitting your answers…</p></div>');
     if (a.state === "fail") return H.paint(head + '<div class="pn-body"><p class="pn-err" role="alert">' + esc(a.msg) + ' Your answers are kept on this screen.</p><button type="button" class="pn-btn pri" data-act="a-resubmit">Send again</button></div>');
     if (a.state === "dup") return H.paint(head + '<div class="pn-body"><p class="pn-empty">' + esc(a.msg) + '</p><button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>');
     var x = a.res, missed = [];
@@ -360,7 +360,7 @@
   /* ---------- leaderboards ---------- */
   // rows: [{ rank, name, score | rating, ms }]; me: the caller's row (also marked when it is in rows).
   function boardHtml(b, field, max) {
-    if (!b) return '<p class="pn-load" role="status">Loading the leaderboard</p>';
+    if (!b) return '<p class="pn-load" role="status">Loading the leaderboard…</p>';
     var rows = (b.rows || []).slice(0, max || 50), me = b.me || null, meIn = false;
     if (!rows.length) return '<p class="pn-empty">No one on this board yet.</p>';
     var li = function (x, mine) {
@@ -528,7 +528,7 @@
         var d = new Date(m.ts), ds = ""; try { ds = d.toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (e) {}
         return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + esc(m.label) + "</b><small>" + esc(ds) + " · " + m.n + ' questions</small></span><span class="pn-st">' + esc(String(m.marks)) + " / " + m.max + "</span></div></li>";
       }).join("") + "</ul>" : '<p class="pn-empty">Finished mock exams are listed here with their marks.</p>') +
-      (arena ? '<h2 class="pn-h">Arena</h2><div id="pnArenaStats"><p class="pn-load" role="status">Loading your Arena record</p></div>' : "") + "</div>");
+      (arena ? '<h2 class="pn-h">Arena</h2><div id="pnArenaStats"><p class="pn-load" role="status">Loading your Arena record…</p></div>' : "") + "</div>");
     if (!arena) return;
     var put = function (html) { var el = root() && root().querySelector("#pnArenaStats"); if (el) el.innerHTML = html; };
     api("GET", "consent").then(function (c) {

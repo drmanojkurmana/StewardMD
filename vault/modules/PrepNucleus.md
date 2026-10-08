@@ -491,6 +491,43 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Headless: run-prep-ui.mjs checks the push and back slides, the tab cross-fade, Escape without animation, the reduced
   motion fade, the skeleton and the search prompt.
 
+## Premium UI round 5 (2026-10-08, same branch, `?v=prep18`)
+- Sheets (prep.js `bindSheetDrag`): every `.pn-sheet-wrap > .pn-sheet` follows a touch or pen drag down 1:1 (rubber band
+  up), the scrim dims with it; release past 30% of the height (max 160 px) or faster than 0.5 px/ms (measured over the
+  last 100 ms of movement, else the whole drag) slides it out from the finger and taps the sheet's own `.pn-scrim`, so
+  each module closes it its own way; anything less springs back (`PREP_MOTION.settle`). A sheet scrolled into its
+  content scrolls first unless the drag starts on `.pn-grab`; form fields never drag; a non-passive `touchmove` stops
+  the top-of-sheet overscroll from stealing the gesture; the trusted click that ends a drag is swallowed (350 ms).
+  Actions are a row (primary right); scrolling sheets keep them sticky at the bottom.
+- Settings sheet (prep-plan.js `drawSettings`): header with `plan.webp` and the plan in one line, sections
+  `.pl-grp.pl-g-<k>` with hued icon tiles (`.pl-sic`), exam and minutes as grouped rows (hairlines, check on the chosen,
+  minutes detail only on the chosen row), date, time, reminder and sync (`prep-native.js syncHtml`) as cells.
+- Readiness sheet (`whySheet`): `ready.webp` band with the score (`.pl-rnum`, the h2 text stays "X readiness: N"),
+  three rings coverage x retention x accuracy (`.pl-meters .pl-m`, drawn by CSS `pn-draw`, staggered), the three
+  factor rows with meters filling by scaleX (`.pl-fbar`, colour per factor), a level card (`.pl-rlv`, level.webp), the
+  weakest subjects with subject icon tiles, a score pill and one action each.
+- Limit sheet (prep-pro.js): `limit.webp`, used/limit meter, three icon rows.
+- Teacher (prep-teacher.js `explain`, `explainStep`): a chat. `.pt-ctx` pins the stem (3-line clamp) with "You chose X"
+  and "Answer Y" pills; the ask is the student's bubble; MaiK (`maik.webp` avatar) types (`.pt-dots`) while the phone
+  works, then the checked reply (`.pt-ans-b`, "MaiK explains" sender line) with the check note under it; chips "Back to
+  the question" and, after a good reply, "Show the stored explanation" (a native `details`). Nothing is streamed.
+- List screens: `hband(art, figure, label, line)` in prep.js (`HOST.hband`) is a painted band with one big figure:
+  bookmarks, mistakes (most common reason), custom module (live count), downloads (n of m offline), question grid
+  (answered, marked), Your decks (prep-create.js, after the list loads), Friends (prep-social.js). The figure rolls up
+  (prep-motion.js `rollNum`, WAAPI-clocked). Rows of `.pn-mods`, `.pc-decks`, `.ps-list` stagger in (35 ms) only on the
+  first paint after a push (or a list arriving within 1.5 s of it), and the readiness rows when that sheet opens.
+  The module hero carries the subject's icon tile above its figure (`.pn-modi`; a large glyph watermark was tried and
+  dropped: the anatomy figure read as a stick man over the text); the PYQ paper panel the papers art;
+  the accuracy hero the balance art; search hits a hued icon tile; mistakes and decks empty states have art.
+- Owner rule: the student no longer sees "Cost so far: Rs ... (N tokens)" on the Layer C progress or saved screens
+  (`costLine` stays for internal accounting and its tests). Every loading or busy label ends with the single
+  character ellipsis.
+- Art: 11 calls, $0.74 (job imagen/log.tsv): `accuracy custom decks friends grid limit maik mistakes empty-mt plan ready`.
+- Headless: run-prep-plan-ui.mjs checks the readiness rings and bars against the factors and drag-to-dismiss (a 50 px
+  pull springs back, a flick dismisses); run-prep-ui.mjs checks the teacher chat (stubbed native runtime).
+- Screenshots in dark need the OS in dark mode or Chrome started with `--force-dark-mode` (the app follows
+  prefers-color-scheme at boot).
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

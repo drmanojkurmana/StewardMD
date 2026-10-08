@@ -425,7 +425,7 @@
     host = h;
     L.sid = sid; L.mid = mid; L.fin = false; L.zoom = false; L.playing = false;
     var view = function () { if (L.les && L.les.module === mid) draw(); };
-    var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson</p></div>'); };
+    var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
     host.push(loading);
     lessonFile(mid).then(function (les) {

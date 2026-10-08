@@ -142,6 +142,23 @@ try {
   ok(await ev(`return document.querySelectorAll("#pnPlanSheet .pl-w").length;`) === 1 && /Anatomy/.test(await text("#pnPlanSheet .pl-w")), "weakest subjects listed (the fixture exam has one)");
   ok(await ev(`return document.querySelectorAll("#pnPlanSheet .pl-w .pn-btn").length;`) === 1, "one action per weak subject: " + await text("#pnPlanSheet .pl-w .pn-btn"));
   await shot("why");
+  // Round 5: the breakdown is three rings in the order of the formula, each drawn to its part, and the factor meters.
+  const rings = JSON.parse(await ev(`var ms=Array.from(document.querySelectorAll("#pnPlanSheet .pl-meters .pl-m")); return JSON.stringify({ n: ms.length, labels: ms.map(function(m){return m.querySelector(".pl-ml").textContent;}).join("|"), arcs: ms.map(function(m){var rv=m.querySelector(".rv"); return rv ? parseFloat(rv.getAttribute("stroke-dasharray")) : 0;}), pct: Array.from(document.querySelectorAll("#pnPlanSheet .pl-f .pl-fv")).map(function(v){return parseFloat(v.textContent);}), bars: Array.from(document.querySelectorAll("#pnPlanSheet .pl-fbar i")).map(function(i){return i.style.transform;}), score: document.querySelector("#pnPlanSheet .pl-rnum").textContent, h2: document.getElementById("pnWhyT").textContent });`));
+  ok(rings.n === 3 && rings.labels === "Coverage|Retention|Accuracy" && rings.arcs.join() === rings.pct.join() && rings.bars.length === 3 && rings.bars.every((t, i) => Math.abs(parseFloat(t.slice(7)) * 100 - rings.pct[i]) <= 0.6) && /^\d+$/.test(rings.score) && /readiness: \d+$/.test(rings.h2), "readiness meters: three rings and three bars drawn to the three parts, the score on the band: " + JSON.stringify(rings));
+  // Drag to dismiss (touch): a short pull springs back; a flick down dismisses through the sheet's own close.
+  const pull = (dy, steps, ms) => ev(`var sh=document.querySelector("#pnPlanSheet .pn-sheet"), r=sh.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+20, o={bubbles:true,pointerType:"touch",isPrimary:true,pointerId:9};
+    sh.querySelector(".pn-grab").dispatchEvent(new PointerEvent("pointerdown",Object.assign({clientX:x,clientY:y},o)));
+    var t0=performance.now(); while(performance.now()-t0<${ms}){}
+    for (var i=1;i<=${steps};i++){ sh.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x,clientY:y+${dy}*i/${steps}},o))); }
+    var tr=sh.style.transform, op=sh.parentNode.querySelector(".pn-scrim").style.opacity;
+    sh.dispatchEvent(new PointerEvent("pointerup",Object.assign({clientX:x,clientY:y+${dy}},o))); return JSON.stringify({tr:tr, op:op});`);
+  const p1 = JSON.parse(await pull(50, 5, 120));
+  ok(/translateY\(50(\.0)?px\)/.test(p1.tr) && +p1.op < 1 && await until(`var sh=document.querySelector("#pnPlanSheet .pn-sheet"); return !!sh && !document.getAnimations().some(function(a){return a.effect&&a.effect.target===sh&&a.playState==="running";}) && !/translateY\\((?!0)/.test(sh.style.transform);`, 2000), "a 50 px pull follows the finger 1:1, dims the scrim and springs back: " + JSON.stringify(p1));
+  await sleep(400);
+  const p2 = JSON.parse(await pull(220, 3, 0));
+  ok(/translateY\(220/.test(p2.tr) && await until(`return !document.getElementById("pnPlanSheet") && !!document.querySelector("#smdPrep .pl-hero");`, 2000), "a flick down dismisses the sheet and home stays: " + JSON.stringify(p2));
+  await click("#smdPrep .pl-hero");
+  await until(`return !!document.querySelector("#pnPlanSheet .pl-w");`, 3000);
   await click("#pnPlanSheet .pl-w .pn-btn");
   ok(await until(`return !document.getElementById("pnPlanSheet") && !!document.querySelector("#smdPrep #pnModPanel");`, 5000), "the action opens that module");
   await ev(`PREP.back(); return 1;`);

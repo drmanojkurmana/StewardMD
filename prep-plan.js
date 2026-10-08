@@ -190,6 +190,7 @@
     book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     redo: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',
     flame: '<path d="M12 21c-3.9 0-7-2.8-7-6.6 0-3.1 2-5.2 3.6-7 .4 1.8 1.5 3 2.6 3.4C11 7.4 12.6 4.6 15 3c-.3 2.6.9 4.4 2.2 6 1.1 1.4 1.8 3 1.8 4.9C19 18 15.9 21 12 21z"/>',
+    bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/>', cap: '<path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/>',
     spark: '<path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>', plus: '<path d="M12 5v14M5 12h14"/>', chev: '<path d="M9 6l6 6-6 6"/>'
   };
   function ic(n) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
@@ -332,7 +333,7 @@
     if (k === "rev") return startReviews(Math.max(1, it.n - pr.x));
     if (k === "new") return startNew(it, Math.max(5, it.n - pr.x));
   }
-  function loadingScreen(t) { H.stack().push(function () {}); H.paint(H.bar(t, "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading questions</p></div>'); }
+  function loadingScreen(t) { H.stack().push(function () {}); H.paint(H.bar(t, "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading questions…</p></div>'); }
   function loadPairs(pairs) { return Promise.all(pairs.map(function (x) { return H.loadModule(x.s, x.m).then(function (items) { return { s: x.s, m: x.m, items: items }; }, function () { return { s: x.s, m: x.m, items: [] }; }); })); }
   function done(list, title, empty) {
     H.stack().pop();
@@ -390,30 +391,40 @@
     if (!quiet && s && s.prev && s.prev.isConnected) try { s.prev.focus(); } catch (e) {}
   }
   function pct(x) { return Math.round(x * 100); }
-  function factor(name, v, line) {
-    return '<li class="pl-f"><div class="pl-fh"><b>' + name + '</b><span class="pl-fv">' + pct(v) + '%</span></div><span class="pn-prog" aria-hidden="true"><i style="width:' + pct(v) + '%"></i></span><small>' + line + "</small></li>";
+  // Round 5: the readiness sheet is a visual breakdown. A painted band carries the score; three rings (coverage x
+  // retention x accuracy, the order of the formula) draw from empty on arrival (CSS, off under reduced motion); each
+  // part then has its own line with a meter, then the level and the three weakest subjects with one action each.
+  var FAC = [["cov", "Coverage"], ["ret", "Retention"], ["acc", "Accuracy"]];
+  function meter(k, label, v) {
+    return '<span class="pl-m pl-m-' + k + '"><span class="pl-mr"><svg viewBox="0 0 64 64"><circle class="rt" cx="32" cy="32" r="27" pathLength="100"/>' + (v > 0 ? '<circle class="rv" cx="32" cy="32" r="27" pathLength="100" stroke-dasharray="' + pct(v) + ' 100"/>' : "") + "</svg><b>" + pct(v) + '<small>%</small></b></span><span class="pl-ml">' + label + "</span></span>";
+  }
+  function factor(k, name, v, line) {
+    return '<li class="pl-f pl-f-' + k + '"><div class="pl-fh"><b>' + name + '</b><span class="pl-fv">' + pct(v) + '%</span></div><span class="pn-prog pl-fbar" aria-hidden="true"><i style="transform:scaleX(' + Math.max(0, Math.min(1, v)).toFixed(3) + ')"></i></span><small>' + line + "</small></li>";
   }
   function actionFor(sid) {
     var ex = H.exam(), t = H.ix()[sid], mods = t && t.topics ? t.topics.filter(function (x) { return x.group !== "mixed"; }).map(function (x) { return { id: x.id, title: H.tx(x.title), n: H.pure.countFor(x, ex.id) }; }) : [];
     return subjectAction(mods, store(), H.today());
   }
   function whySheet() {
-    var rd = computeReadiness(), ex = H.exam(), bp = !!BLUEPRINT[ex.id], name = examLabel();
+    var rd = computeReadiness(), ex = H.exam(), bp = !!BLUEPRINT[ex.id], name = examLabel(), lv = levelOf(xpOf(store()));
     var weak = rd.weakest.map(function (r) {
       var a = actionFor(r.id), lab = !a ? "Open subject" : a.k === "due" ? "Review " + a.n + " due" : a.k === "weak" ? "Practise " + a.title : "Start " + a.title;
       var detail = !r.att ? "Not started" : pct(r.cov) + "% covered · " + (r.n ? pct(r.acc) + "% right" : "no answers yet");
-      return '<li class="pl-w"><div class="pl-wh"><b>' + esc(r.name) + '</b><span class="pl-fv">' + r.score + '</span></div><small class="pn-mut">' + esc(detail) + "</small>" +
-        (a ? '<button type="button" class="pn-btn sm" data-act="p-mod" data-s="' + esc(r.id) + '" data-m="' + esc(a.m) + '">' + esc(lab) + "</button>" : '<button type="button" class="pn-btn sm" data-act="p-sub" data-s="' + esc(r.id) + '">Open subject</button>') + "</li>";
+      return '<li class="pl-w"><div class="pl-wh"><span class="pn-ic sm" style="--h:' + H.subjHue(r.id) + '" aria-hidden="true">' + H.subjIco(r.id) + '</span><span class="pl-wn"><b>' + esc(r.name) + '</b><small class="pn-mut">' + esc(detail) + '</small></span><span class="pl-fv pl-wsc" aria-label="Score ' + r.score + '">' + r.score + "</span></div>" +
+        (a ? '<button type="button" class="pn-btn sm" data-act="p-mod" data-s="' + esc(r.id) + '" data-m="' + esc(a.m) + '">' + esc(lab) + ic("chev") + "</button>" : '<button type="button" class="pn-btn sm" data-act="p-sub" data-s="' + esc(r.id) + '">Open subject' + ic("chev") + "</button>") + "</li>";
     }).join("");
-    var html = '<span class="pn-grab" aria-hidden="true"></span><h2 id="pnWhyT">' + esc(name) + " readiness: " + rd.score + "</h2>" +
-      '<p class="pn-mut">' + (rd.empty ? "Nothing answered yet, so all three parts are at zero. Each question you answer moves them." : "Three parts, each from 0 to 100%, combined as a geometric mean: a low part pulls the score down more than a high one lifts it.") + "</p>" +
+    var html = '<span class="pn-grab" aria-hidden="true"></span>' +
+      '<div class="pl-rhead"><h2 id="pnWhyT"><span class="pl-rk">' + esc(name) + ' readiness<span class="pl-sr">: </span></span><b class="pl-rnum">' + rd.score + "</b></h2>" +
+      '<div class="pl-meters" aria-hidden="true">' + meter("cov", "Coverage", rd.cov) + '<i class="pl-x">\u00d7</i>' + meter("ret", "Retention", rd.ret) + '<i class="pl-x">\u00d7</i>' + meter("acc", "Accuracy", rd.acc) + "</div></div>" +
+      '<p class="pn-mut pl-rwhy">' + (rd.empty ? "Nothing answered yet, so all three parts are at zero. Each question you answer moves them." : "Three parts, each from 0 to 100%, combined as a geometric mean: a low part pulls the score down more than a high one lifts it.") + "</p>" +
       '<ul class="pl-fs">' +
-      factor("Coverage", rd.cov, rd.attempted + " of " + H.fmt(rd.modules) + " modules attempted" + (bp ? ", weighted by the " + esc(name) + " blueprint" : ", each subject weighted by its module count")) +
-      factor("Retention", rd.ret, rd.cards ? "Chance you recall the " + H.fmt(rd.cards) + " questions you have seen, today (spaced-review model)" : "No questions seen yet") +
-      factor("Accuracy", rd.acc, rd.answers ? "Right in your last " + H.fmt(Math.min(rd.answers, RECENT)) + " answers" : "No answers yet") + "</ul>" +
-      '<h3 class="pl-sh">Level</h3><p class="pn-mut pn-small">' + (function () { var lv = levelOf(xpOf(store())); return "Level " + lv.n + ", " + esc(lv.rank) + ": " + H.fmt(lv.xp) + " XP. You earn 1 XP for each answer, 1 more when it is right, plus lesson XP. Level " + (lv.n + 1) + " starts at " + H.fmt(lv.hi) + " XP."; })() + "</p>" +
-      '<h3 class="pl-sh">Weakest subjects</h3><ul class="pl-ws">' + weak + "</ul>" +
-      '<button type="button" class="pn-btn" data-act="p-close">Close</button>';
+      factor("cov", "Coverage", rd.cov, rd.attempted + " of " + H.fmt(rd.modules) + " modules attempted" + (bp ? ", weighted by the " + esc(name) + " blueprint" : ", each subject weighted by its module count")) +
+      factor("ret", "Retention", rd.ret, rd.cards ? "Chance you recall the " + H.fmt(rd.cards) + " questions you have seen, today (spaced-review model)" : "No questions seen yet") +
+      factor("acc", "Accuracy", rd.acc, rd.answers ? "Right in your last " + H.fmt(Math.min(rd.answers, RECENT)) + " answers" : "No answers yet") + "</ul>" +
+      '<h3 class="pl-sh">Level</h3><div class="pl-rlv"><span class="pl-rlvart" aria-hidden="true"></span><div class="pl-rlvb"><p><b>Level ' + lv.n + "</b> · " + esc(lv.rank) + '</p><span class="pl-lvbar" aria-hidden="true"><i style="transform:scaleX(' + Math.max(0, Math.min(1, lv.p)).toFixed(3) + ')"></i></span>' +
+      '<p class="pn-mut pn-small">' + H.fmt(lv.xp) + " XP. You earn 1 XP for each answer, 1 more when it is right, plus lesson XP. Level " + (lv.n + 1) + " starts at " + H.fmt(lv.hi) + " XP.</p></div></div>" +
+      (weak ? '<h3 class="pl-sh">Weakest subjects</h3><ul class="pl-ws">' + weak + "</ul>" : "") +
+      '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="p-close">Close</button></div>';
     openSheet("why", html, "pnWhyT");
   }
 
@@ -445,8 +456,10 @@
   }
   function drawSettings(first) {
     var f = fieldsHtml(SET);
-    var html = '<span class="pn-grab" aria-hidden="true"></span><h2 id="pnSetT">Your plan</h2><div class="pl-setbody">' +
-      '<h3 class="pl-sh">Exam</h3>' + f.exam + '<h3 class="pl-sh">Exam date</h3>' + f.date + '<h3 class="pl-sh">Time a day</h3>' + f.min + '<h3 class="pl-sh">Reminder</h3>' + f.rem + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
+    var ch = choiceOf(SET.exam), mins = SET.min < 60 ? SET.min + " min" : SET.min === 60 ? "1 hour" : SET.min === 90 ? "1 h 30 min" : "2 hours";
+    var sec = function (k, icon, title, body) { return '<section class="pl-grp pl-g-' + k + '"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true">' + ic(icon) + "</span>" + title + "</h3>" + body + "</section>"; };
+    var html = '<span class="pn-grab" aria-hidden="true"></span><div class="pl-shead"><span class="pl-shart" aria-hidden="true"></span><div><h2 id="pnSetT">Your plan</h2><p class="pn-mut pn-small">' + esc((ch ? ch.label : "Your exam") + " · " + mins + " a day" + (SET.rem ? " · reminder " + SET.rem : "")) + '</p></div></div><div class="pl-setbody">' +
+      sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="p-save">Save</button><button type="button" class="pn-btn" data-act="p-close">Cancel</button></div>';
     if (first) openSheet("set", html, "pnSetT");
     else { var sh = root().querySelector("#pnPlanSheet .pn-sheet"), body = sh && sh.querySelector(".pl-setbody"), y = body ? body.scrollTop : 0; if (sh) sh.innerHTML = html; body = sh && sh.querySelector(".pl-setbody"); if (body) body.scrollTop = y; }

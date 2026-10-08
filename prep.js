@@ -350,6 +350,11 @@
     pct = Math.max(0, Math.min(100, Math.round(pct || 0)));
     return '<span class="pn-mring" aria-hidden="true"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="22" cy="22" r="18" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + "</svg><b>" + label + "</b></span>";
   }
+  // Round 5: a list screen's hero band. Painted art (prep/art/<art>.webp) fading into the deep hero surface, one large
+  // figure and its label laid over it, an optional line under them. Decorative art; the text is the content.
+  function hband(art, fig, label, sub) {
+    return '<section class="pn-hband pn-hb-' + art + '"><p class="pn-hbt"><b class="pn-hbn">' + fig + '</b> <span class="pn-hbl">' + label + "</span></p>" + (sub ? '<p class="pn-hbs">' + sub + "</p>" : "") + "</section>";
+  }
   function bar(title, sub, left, right) {
     var isPN = title === "PrepNucleus";
     var tHtml = isPN
@@ -399,6 +404,7 @@
     D.body.appendChild(root); D.body.style.overflow = "hidden";
     try { if (G.PREP_MOTION) G.PREP_MOTION.attach(root); } catch (e) {}
     root.addEventListener("click", onClick);
+    bindSheetDrag();
     root.addEventListener("input", function (e) {
       if (!e.target || e.target.id !== "pnSearch") return;
       srch.q = e.target.value;
@@ -410,7 +416,7 @@
     refreshHidden();
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
     if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
-    root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus</div>';
+    root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus…</div>';
     loadTax().then(function () {
       if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
@@ -515,7 +521,7 @@
     var FILTERS = [["all", "All"], ["paused", "In progress"], ["done", "Completed"], ["new", "Unattempted"]];
     paint(bar(tx(sb.name), "", "back", '<button type="button" class="pn-ib" data-act="search" data-s="' + esc(sid) + '" aria-label="Search ' + tx(sb.name) + ' questions">' + ico("search") + "</button>") + '<div class="pn-filters" role="group" aria-label="Show">' + FILTERS.map(function (f) {
       return '<button type="button" class="pn-chip' + (st.filter === f[0] ? " on" : "") + '" aria-pressed="' + (st.filter === f[0]) + '" data-act="filter" data-v="' + f[0] + '">' + f[1] + "</button>";
-    }).join("") + '</div><div class="pn-body" id="pnSub"><p class="pn-load" role="status">Loading modules</p></div>');
+    }).join("") + '</div><div class="pn-body" id="pnSub"><p class="pn-load" role="status">Loading modules…</p></div>');
     loadIndex(sid).then(function (ix) {
       if (!st.open || st.sub !== sid) return;
       var prog = progressByModule(s, today()), n = 0, html = "";
@@ -557,7 +563,7 @@
     // PYQ (prep-pyq.js): the slot draws "All questions / PYQ n" chips when the module has previous-year questions.
     var apct = n ? Math.min(100, Math.round(Math.min(p.answered, n) * 100 / n)) : 0;
     paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnCardSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel pn-modp" id="pnModPanel" style="--h:' + subjHue(sid) + '">' +
-      '<div class="pn-modh"><div class="pn-modt"><p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p></div>" + mring(apct, apct + "%") + "</div>" +
+      '<div class="pn-modh"><div class="pn-modt"><span class="pn-ic sm pn-modi" aria-hidden="true">' + subjIco(sid) + '</span><p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p></div>" + mring(apct, apct + "%") + "</div>" +
       (p.due ? '<button type="button" class="pn-btn pri" data-act="start" data-k="due">' + ico("play") + " Review " + fmt(p.due) + " due</button>" : "") +
       '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + " Practice " + Math.min(SESSION, n) + " questions</button>" +
       '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min</button>" +
@@ -569,7 +575,7 @@
   }
   function startModule(sid, mid, kind, n) {
     var s = load(), size = n || SESSION;
-    paint(bar("Loading", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading questions</p></div>');
+    paint(bar("Loading", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading questions…</p></div>');
     loadModule(sid, mid).then(function (items) {
       var pool = poolFor(items, s.exam, hidden()), dk = deckKey(mid), td = today(), list;
       if (kind === "due") list = pool.filter(function (it) { var c = s.cards[C.key(dk, it.id)]; return c && c[3] <= td; }).slice(0, size);
@@ -742,6 +748,69 @@
     body.addEventListener("pointerup", end);
     body.addEventListener("pointercancel", end);
   }
+  /* Round 5: every sheet (.pn-sheet in a .pn-sheet-wrap: plan, readiness, reminder and sync, the Pro limit, the Arena
+     consent) follows a finger down 1:1 and leaves past 30% of its height (at most 160 px) or on a downward flick
+     (0.5 px/ms), continuing at the finger's speed; anything less springs back. Upward is a rubber band. The dismissal
+     taps the sheet's own scrim, so each module closes it its own way (focus return included). Touch and pen only; a
+     sheet scrolled into its content scrolls first; form fields never start a drag. Transform and opacity only. */
+  function bindSheetDrag() {
+    var g = null;
+    var rm = function () { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
+    var scrolled = function (t, sh) { for (var n = t; n && n !== sh.parentNode; n = n.parentNode) if (n.scrollTop > 0) return true; return false; };
+    var put = function (d, y) {
+      d.y = y; d.sh.style.transform = "translateY(" + y.toFixed(1) + "px)";
+      if (d.scrim) d.scrim.style.opacity = String(Math.max(0, Math.min(1, 1 - y / (d.h * 1.1))).toFixed(3));
+    };
+    root.addEventListener("pointerdown", function (e) {
+      if (g || e.pointerType === "mouse" || !e.target.closest) return;
+      var sh = e.target.closest(".pn-sheet-wrap > .pn-sheet");
+      if (!sh || e.target.closest("input, select, textarea, label")) return;
+      g = { sh: sh, id: e.pointerId, x0: e.clientX, y0: e.clientY, y: 0, v: 0, on: false, top: !!e.target.closest(".pn-grab") || !scrolled(e.target, sh), h: sh.offsetHeight || 400, t0: Date.now(), hist: [], scrim: sh.parentNode.querySelector(".pn-scrim") };
+    });
+    root.addEventListener("pointermove", function (e) {
+      if (!g || e.pointerId !== g.id) return;
+      var dy = e.clientY - g.y0, dx = e.clientX - g.x0, now = Date.now();
+      if (!g.on) {
+        if (Math.abs(dy) < 8 && Math.abs(dx) < 8) return;
+        if (!g.top || dy < 0 || Math.abs(dx) > Math.abs(dy)) { g = null; return; }
+        g.on = true; g.sh.classList.add("pn-drag");
+        try { g.sh.setPointerCapture(g.id); } catch (x) {}
+      }
+      g.hist.push([now, e.clientY]); while (g.hist.length > 2 && now - g.hist[0][0] > 100) g.hist.shift();
+      put(g, dy >= 0 ? dy : -(-dy * 0.55 * g.h) / (g.h + 0.55 * -dy) * 0.4);
+    });
+    // Without this the page would claim a downward drag at the top of a scrolling sheet as an overscroll.
+    root.addEventListener("touchmove", function (e) {
+      if (g && g.top && e.touches && e.touches.length === 1 && (g.on || e.touches[0].clientY > g.y0) && e.cancelable) e.preventDefault();
+    }, { passive: false });
+    var end = function (e) {
+      if (!g || e.pointerId !== g.id) return;
+      var d = g; g = null;
+      if (!d.on) return;
+      st.sheetDragAt = Date.now(); d.sh.classList.remove("pn-drag");
+      // Release speed over the last 100 ms of movement; a window under 16 ms is too short to trust, so the whole drag.
+      var h0 = d.hist[0], h1 = d.hist[d.hist.length - 1], now = Date.now();
+      d.v = h0 && h1[0] - h0[0] >= 16 ? (h1[1] - h0[1]) / (h1[0] - h0[0]) : d.y / Math.max(16, now - d.t0);
+      var close = function () { if (d.scrim && d.scrim.isConnected) d.scrim.click(); };
+      if (e.type === "pointerup" && d.y > 0 && (d.y > Math.min(160, d.h * 0.3) || d.v > 0.5)) {
+        if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic("light");
+        if (rm() || !d.sh.animate) return close();
+        var ms = Math.round(Math.max(140, Math.min(260, (d.h - d.y) / Math.max(d.v, 1.4)))), a;
+        try {
+          a = d.sh.animate([{ transform: "translateY(" + d.y.toFixed(1) + "px)" }, { transform: "translateY(100%)" }], { duration: ms, easing: "cubic-bezier(.32, .72, 0, 1)", fill: "forwards" });
+          if (d.scrim) d.scrim.animate([{ opacity: d.scrim.style.opacity || 1 }, { opacity: 0 }], { duration: ms, easing: "ease-out", fill: "forwards" });
+        } catch (x) { return close(); }
+        var once = function () { if (once.done) return; once.done = 1; close(); };
+        a.onfinish = once; G.setTimeout(once, ms + 80);
+        return;
+      }
+      var from = "translateY(" + d.y.toFixed(1) + "px)";
+      if (d.scrim) d.scrim.style.opacity = "";
+      if (!(G.PREP_MOTION && G.PREP_MOTION.settle && G.PREP_MOTION.settle(d.sh, from, "translateY(0px)"))) d.sh.style.transform = "";
+    };
+    root.addEventListener("pointerup", end);
+    root.addEventListener("pointercancel", end);
+  }
   // Keys on a tablet or laptop: A to D (or 1 to 4) answer, Enter or the right arrow goes on, the left arrow goes back in a
   // timed test. No motion for keys.
   function onRunKey(e) {
@@ -806,7 +875,7 @@
       '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>") +
       (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
-        return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 117) + "..." : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
+        return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 119) + "…" : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
       }).join("") + "</ol>" : "") +
       '<div class="pn-navrow">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">Retry the missed</button>' : "") + '<button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>' +
       '<p class="pn-mut pn-small">Missed questions come back sooner for review; ones you got right come back just before you would forget them.</p></div>');
@@ -840,12 +909,12 @@
   function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
   function subjectByCode(code) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { if (sb.code === code) r = sb.id; }); }); return r; }
   function loadingScreen(title, msg) { paint(bar(title, "", "back") + '<div class="pn-body"><p class="pn-load" role="status" id="pnLoadMsg">' + msg + "</p></div>"); }
-  function stepMsg(d, n) { var el = root && root.querySelector("#pnLoadMsg"); if (el) el.textContent = "Loading questions: " + d + " of " + n + " modules"; }
+  function stepMsg(d, n) { var el = root && root.querySelector("#pnLoadMsg"); if (el) el.textContent = "Loading questions: " + d + " of " + n + " modules…"; }
   // Today's set: due reviews from the modules with the most due (up to 6 files), then adaptive new questions from
   // "solve next" to reach the day's goal, 20 at a time.
   function startPlan() {
     var s = load(), td = today(), p = planToday(s, td), hid = hidden();
-    st.stack.push(function () {}); loadingScreen("Today", "Loading questions");
+    st.stack.push(function () {}); loadingScreen("Today", "Loading questions…");
     var pairs = p.dueModules.slice(0, 6).map(function (x) { return { s: subjectOfModule(x.m), m: x.m }; }).filter(function (x) { return x.s; });
     var nx = solveNext(subjectsOf(s.exam), st.ix, s, td, s.exam);
     if (nx && !pairs.some(function (x) { return x.m === nx.module; })) pairs.push({ s: nx.subject, m: nx.module });
@@ -863,7 +932,7 @@
     var s = load(), hid = hidden(), weak = weakModules(s, 3), mids = Object.keys(s.mt), pairs = [], seen = {};
     mids.slice(0, 40).forEach(function (id) { var b = s.mt[id]; if (!seen[b[1]] && pairs.length < 4) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
     weak.forEach(function (m) { var sid = subjectOfModule(m); if (sid && !seen[m]) { seen[m] = 1; pairs.push({ s: sid, m: m }); } });
-    st.stack.push(function () {}); loadingScreen("Weak areas", "Loading questions");
+    st.stack.push(function () {}); loadingScreen("Weak areas", "Loading questions…");
     loadMany(pairs, stepMsg).then(function (lists) {
       var out = [];
       lists.forEach(function (l) { l.items.forEach(function (it) { if (s.mt[it.id] && usable(it, hid) && out.length < 10) out.push(it); }); });
@@ -880,11 +949,13 @@
     var chips = [["all", "All"]].concat(MISTAKE_TAGS).concat([["untagged", "Not tagged"]]).map(function (t) {
       return '<button type="button" class="pn-chip' + (mf.tag === t[0] ? " on" : "") + '" aria-pressed="' + (mf.tag === t[0]) + '" data-act="mfilter" data-v="' + t[0] + '">' + t[1] + " " + (c[t[0]] || 0) + "</button>";
     }).join("");
+    var top = MISTAKE_TAGS.filter(function (t) { return c[t[0]]; }).sort(function (a, b) { return c[b[0]] - c[a[0]]; })[0];
     paint(bar("My mistakes", fmt(c.all) + " to fix", "back") + '<div class="pn-body">' + (c.all ?
+      hband("mt", fmt(c.all), c.all === 1 ? "question to fix" : "questions to fix", top ? "Most often: " + esc(top[1].toLowerCase()) + " (" + c[top[0]] + ")." : "Tag each one in the runner to see a pattern.") +
       '<div class="pn-wrap pn-scroll" role="group" aria-label="Filter by reason">' + chips + '</div><button type="button" class="pn-btn pri" data-act="mpractice"' + (ids.length ? "" : " disabled") + ">" + ico("play") + " Practise these " + Math.min(ids.length, 50) + "</button>" +
       '<ul class="pn-mods">' + ids.slice(0, 100).map(function (id) { var b = s.mt[id], t = topicOf(b[0], b[1]); return '<li><div class="pn-mod static pn-mx"' + (b[2] ? ' data-tag="' + esc(b[2]) + '"' : "") + '><span class="pn-ri" aria-hidden="true">' + ico("x") + '</span><span class="pn-mb"><b>' + esc(b[4]) + "</b><small>" + (t ? tx(t.title) : esc(b[1])) + (b[2] ? " · " + esc(tagLabel(b[2])) : "") + "</small></span></div></li>"; }).join("") + "</ul>" +
       '<p class="pn-mut pn-small">A question leaves this list when you answer it right.</p>'
-      : '<p class="pn-empty pn-art-nb">No mistakes to fix. Questions you get wrong collect here.</p>') + "</div>");
+      : '<p class="pn-empty pn-art-mt">No mistakes to fix. Questions you get wrong collect here.</p>') + "</div>");
     var subs = {}; Object.keys(s.mt).forEach(function (id) { subs[s.mt[id][0]] = 1; }); Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
   }
   function tagLabel(t) { for (var i = 0; i < MISTAKE_TAGS.length; i++) if (MISTAKE_TAGS[i][0] === t) return MISTAKE_TAGS[i][1]; return ""; }
@@ -892,7 +963,7 @@
     var s = load(), hid = hidden(), ids = Object.keys(s.mt).filter(function (id) { return mf.tag === "all" || (mf.tag === "untagged" ? !s.mt[id][2] : s.mt[id][2] === mf.tag); }).slice(0, 50), pairs = [], seen = {};
     ids.forEach(function (id) { var b = s.mt[id]; if (!seen[b[1]]) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
     var want = {}; ids.forEach(function (id) { want[id] = 1; });
-    st.stack.push(function () {}); loadingScreen("My mistakes", "Loading questions");
+    st.stack.push(function () {}); loadingScreen("My mistakes", "Loading questions…");
     loadMany(pairs.slice(0, 12), stepMsg).then(function (lists) {
       var out = []; lists.forEach(function (l) { l.items.forEach(function (it) { if (want[it.id] && usable(it, hid)) out.push(it); }); });
       st.stack.pop();
@@ -953,14 +1024,14 @@
     if (!box) return;
     if (q.trim().length < 3) { box.innerHTML = q.trim() ? '<p class="pn-mut pn-small">Type at least 3 letters.</p>' : '<p class="pn-empty pn-art-sc pn-hint">Search every question by a word from its stem or options.</p>'; return; }
     if (!BANK) { box.innerHTML = '<p class="pn-err">Search did not load. Close and open PrepNucleus again.</p>'; return; }
-    box.innerHTML = '<p class="pn-load" role="status">Searching</p>';
+    box.innerHTML = '<p class="pn-load" role="status">Searching…</p>';
     loadSearch(sid).then(function (sx) {
       if (srch.q !== q || !root) return;
       var hid = hidden(), hits = BANK.searchIndex(sx, q, 60).filter(function (h) { return !hid[h.id]; }).slice(0, 40);
       var el = root.querySelector("#pnHits"); if (!el) return;
       el.innerHTML = hits.length ? '<p class="pn-mut pn-small">' + hits.length + (hits.length === 40 ? "+" : "") + " found</p><ul class=\"pn-mods\">" + hits.map(function (h) {
         var t = topicOf(sid, h.t);
-        return '<li><button type="button" class="pn-mod" data-act="hit" data-m="' + esc(h.t) + '" data-i="' + esc(h.id) + '"><span class="pn-mb"><b>' + esc(h.p) + "</b><small>" + (t ? tx(t.title) : "") + "</small></span>" + ico("chev") + "</button></li>";
+        return '<li><button type="button" class="pn-mod" data-act="hit" data-m="' + esc(h.t) + '" data-i="' + esc(h.id) + '"><span class="pn-ic sm" style="--h:' + subjHue(sid) + '" aria-hidden="true">' + ico("search") + '</span><span class="pn-mb"><b>' + esc(h.p) + "</b><small>" + (t ? tx(t.title) : "") + "</small></span>" + ico("chev") + "</button></li>";
       }).join("") + "</ul>" : '<p class="pn-empty pn-art-sc">No question matches. Try fewer or other words.</p>';
     }, function () {
       var el = root && root.querySelector("#pnHits");
@@ -986,7 +1057,9 @@
   function renderBookmarks() {
     var s = load(), ids = Object.keys(s.bm), by = {};
     ids.forEach(function (id) { var b = s.bm[id]; (by[b[0] + "|" + b[1]] = by[b[0] + "|" + b[1]] || []).push(id); });
+    var nbs = {}; ids.forEach(function (id) { nbs[s.bm[id][0]] = 1; }); nbs = Object.keys(nbs).length;
     paint(bar("Bookmarks", fmt(ids.length) + " saved", "back") + '<div class="pn-body">' + (ids.length ?
+      hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + Object.keys(by).length + (Object.keys(by).length === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + " Practise all bookmarks</button>" +
       '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(p[0]) + '" aria-hidden="true">' + subjIco(p[0]) + '</span><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + " · " + by[k].length + " saved</small></span></div></li>"; }).join("") + "</ul>"
       : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
@@ -1025,7 +1098,9 @@
     var s = load(), subs = subjectsOf(s.exam);
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
     var nsub = Object.keys(cm.subs).length;
-    paint(bar("Custom module", examOf(s.exam).label, "back") + '<div class="pn-body pn-cm"><section class="pn-panel"><h2 class="pn-sec">Subjects</h2><div class="pn-wrap">' +
+    paint(bar("Custom module", examOf(s.exam).label, "back") + '<div class="pn-body pn-cm">' +
+      hband("cm", String(cm.n), "questions", nsub ? (cm.mode === "exam" ? "A timed test" : "Practice") + (cm.d ? ", " + ["", "easy", "medium", "hard"][cm.d] + " questions" : "") + ", from " + nsub + (nsub === 1 ? " subject" : " subjects") + "." : "Pick the subjects, then how hard and how many.") +
+      '<section class="pn-panel"><h2 class="pn-sec">Subjects</h2><div class="pn-wrap">' +
       subs.map(function (sb) { return chip("cmsub", sb.id, !!cm.subs[sb.id], tx(sb.name)); }).join("") + "</div></section>" +
       '<section class="pn-panel"><h2 class="pn-sec">Difficulty</h2><div class="pn-wrap pn-seg4">' + [[0, "Any"], [1, "Easy"], [2, "Medium"], [3, "Hard"]].map(function (x) { return chip("cmd", x[0], cm.d === x[0], x[1]); }).join("") + "</div>" +
       '<h2 class="pn-sec">Questions</h2><div class="pn-wrap pn-seg4">' + [10, 25, 50, 100].map(function (x) { return chip("cmn", x, cm.n === x, String(x)); }).join("") + "</div>" +
@@ -1035,7 +1110,7 @@
   }
   function startCustom() {
     var s = load(), sids = Object.keys(cm.subs);
-    paint(bar("Custom module", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Gathering questions</p></div>');
+    paint(bar("Custom module", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Gathering questions…</p></div>');
     Promise.all(sids.map(loadIndex)).then(function () {
       // Modules weighted by size; at most 10 module files so the draw stays light on a phone.
       var mods = [];
@@ -1054,7 +1129,8 @@
   /* ---------- offline downloads ---------- */
   function renderDownloads() {
     var s = load(), subs = subjectsOf(s.exam);
-    paint(bar("Offline downloads", "", "back") + '<div class="pn-body"><div class="pn-dlhead"><span class="pn-dlart" aria-hidden="true"></span><p class="pn-mut">A downloaded subject opens every module without a connection. Opened modules are kept anyway.</p></div><ul class="pn-mods" id="pnDl">' +
+    var ndl = subs.filter(function (sb) { return !!s.dl[sb.id]; }).length;
+    paint(bar("Offline downloads", "", "back") + '<div class="pn-body">' + hband("dl", ndl + " of " + subs.length, subs.length === 1 ? "subject offline" : "subjects offline", "A downloaded subject opens every module without a connection. Opened modules are kept anyway.") + '<ul class="pn-mods" id="pnDl">' +
       subs.map(function (sb) {
         var on = !!s.dl[sb.id];
         return '<li><div class="pn-mod static' + (on ? " on" : "") + '"><span class="pn-ic sm" style="--h:' + subjHue(sb.id) + '" aria-hidden="true">' + subjIco(sb.id) + '</span><span class="pn-mb"><b>' + tx(sb.name) + '</b><small id="pnDl-' + esc(sb.id) + '">' + (on ? "Downloaded" : "Not downloaded") + "</small></span>" +
@@ -1068,7 +1144,7 @@
       if (!ts.length) { var e0 = el(); if (e0) e0.textContent = "No questions yet"; return; }
       var step = function (i) {
         if (i >= ts.length) { s.dl[sid] = Date.now(); save(); return renderDownloads(); }
-        return loadModule(sid, ts[i].id).then(function () { done++; var e = el(); if (e) e.textContent = "Downloading " + done + " of " + ts.length; return step(i + 1); }, function () { var e = el(); if (e) e.textContent = "Stopped: no connection"; });
+        return loadModule(sid, ts[i].id).then(function () { done++; var e = el(); if (e) e.textContent = "Downloading " + done + " of " + ts.length + "…"; return step(i + 1); }, function () { var e = el(); if (e) e.textContent = "Stopped: no connection"; });
       };
       return step(0);
     });
@@ -1085,6 +1161,8 @@
   function onClick(e) {
     var b = e.target.closest ? e.target.closest("[data-act]") : null;
     if (!b || !root.contains(b) || b.getAttribute("aria-disabled") === "true" || b.disabled) return;
+    // The tap that ends a sheet drag is not a press on whatever it lifted over.
+    if (e.isTrusted && Date.now() - (st.sheetDragAt || 0) < 350 && b.closest(".pn-sheet-wrap")) return;
     var a = b.getAttribute("data-act"), v = b.getAttribute("data-v"), s = load();
     // Starting an item of today's plan may start the Live Activity (prep-native.js).
     if (G.PREP_NATIVE && b.classList.contains("pl-item")) G.PREP_NATIVE.planStarted();
@@ -1154,7 +1232,8 @@
   function openGrid() {
     var r = st.run;
     st.stack.push(function () {
-      paint(bar("All questions", esc(r.title), "back") + '<div class="pn-body"><div class="pn-qgrid">' + r.items.map(function (it, i) {
+      var na = r.ans.filter(function (x) { return x >= 0; }).length, nm = Object.keys(r.mark).filter(function (k) { return r.mark[k]; }).length;
+      paint(bar("All questions", esc(r.title), "back") + '<div class="pn-body">' + hband("grid", na + " of " + r.items.length, "answered", nm ? nm + (nm === 1 ? " question" : " questions") + " marked for review." : "Tap a number to go to that question.") + '<div class="pn-qgrid">' + r.items.map(function (it, i) {
         var c = r.ans[i] >= 0 ? " ans" : ""; if (r.mark[i]) c += " mark";
         return '<button type="button" class="pn-qn' + c + '" data-act="goq" data-i="' + i + '" aria-label="Question ' + (i + 1) + (r.ans[i] >= 0 ? ", answered" : ", not answered") + (r.mark[i] ? ", marked for review" : "") + '">' + (i + 1) + "</button>";
       }).join("") + '</div><p class="pn-mut pn-small pn-qkey"><span><i class="ans" aria-hidden="true"></i>Answered</span><span><i class="mark" aria-hidden="true"></i>Marked for review</span><span><i aria-hidden="true"></i>Not answered</span></p><button type="button" class="pn-btn pri" data-act="submit">Submit test</button></div>');
@@ -1165,7 +1244,7 @@
   /* The surface Layer C (window.PREP_C: prep-create.js, prep-cards.js) draws through, so its screens share this
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
-  var HOST = { push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, ico: ico, esc: esc, toast: toast, fmt: fmt,
+  var HOST = { push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
     run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // Arena and My stats (prep-arena.js)

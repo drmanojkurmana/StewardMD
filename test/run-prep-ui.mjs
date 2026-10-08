@@ -281,6 +281,32 @@ try {
     await ev(`PREP.close(); return 1;`);
   }
 
+  // ---- Round 5: the offline teacher is a chat. The runtime is stubbed (native app, MaiK Lite downloaded); the model's
+  // answer is held until the test releases it, so the typing state can be checked first.
+  await ev(`PREP.close(); window.__capWas = window.Capacitor; window.Capacitor = { isNativePlatform: function () { return true; } };
+    window.SMD_MAIK_MODELS = { PACKS: { "maik-lite": { label: "MaiK Lite" } }, installed: function () { return Promise.resolve(true); }, installedCached: function () { return true; } };
+    window.SMD_MAIK_LOCAL = { available: function () { return true; }, currentPack: function () { return "maik-lite"; }, answer: function () { return new Promise(function (r) { window.__ptGo = r; }); } };
+    PREP.open(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep .pn-home");`, 8000);
+  await ev(`window.__ptItem = { id: "pt-1", q: "Primary oocytes stay arrested in which phase of meiosis until just before ovulation?", o: ["Prophase I, diplotene stage", "Metaphase II", "Anaphase I", "Telophase II"], a: 0,
+    exp: "Primary oocytes enter meiosis I in fetal life and arrest in the diplotene stage of prophase I. The arrest lasts until the LH surge before ovulation, when meiosis I completes.\\n\\nThe secondary oocyte then arrests in metaphase II until fertilisation.", kp: "Two arrests: prophase I until ovulation, metaphase II until fertilisation." };
+    PREP_TEACHER.explain(window.__ptItem, 1, PREP._host); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep .pt-chat .pt-dots") && !!window.__ptGo;`, 5000), "teacher chat: MaiK types while the phone works");
+  const ptRun = JSON.parse(await ev(`var c=document.querySelector("#smdPrep .pt-ctx"); return JSON.stringify({ sticky: getComputedStyle(c).position, q: /Primary oocytes/.test(c.textContent), pills: Array.from(c.querySelectorAll(".pt-pill")).map(function(p){return p.className+":"+p.textContent;}).join("|"), me: document.querySelector("#smdPrep .pt-msg.me").textContent, secs: !!document.querySelector("#smdPrep #ptSecs"), ai: document.querySelectorAll("#smdPrep .pt-msg.ai").length });`));
+  ok(ptRun.sticky === "sticky" && ptRun.q && ptRun.pills === "pt-pill bad:You chose B|pt-pill ok:Answer A" && ptRun.me === "Why is B wrong?" && ptRun.secs && ptRun.ai === 1, "teacher chat: the question is pinned on top with both answers, the ask is the student's bubble, a seconds counter: " + JSON.stringify(ptRun));
+  await shot("teacher-typing");
+  await ev(`window.__ptGo({ text: "B is wrong because metaphase II is the second arrest, after ovulation. Primary oocytes arrest in the diplotene stage of prophase I from fetal life, and the arrest lasts until the LH surge before ovulation.\\n\\nThe secondary oocyte then arrests in metaphase II until fertilisation." }); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep .pt-ans-b") && !document.querySelector("#smdPrep .pt-dots");`, 5000), "teacher chat: the checked reply replaces the typing bubble");
+  const ptDone = JSON.parse(await ev(`return JSON.stringify({ reply: /second arrest/.test(document.querySelector("#smdPrep .pt-ans-b").textContent), focus: document.activeElement === document.querySelector("#smdPrep .pt-ans-b"), note: /Checked: every drug and number/.test((document.querySelector("#smdPrep .pt-note")||{}).textContent||""), chips: Array.from(document.querySelectorAll("#smdPrep .pt-chips .pt-chip, #smdPrep .pt-more summary")).map(function(c){return c.textContent;}).join("|"), chipH: Math.min.apply(null, Array.from(document.querySelectorAll("#smdPrep .pt-chip")).map(function(c){return c.offsetHeight;})) });`));
+  ok(ptDone.reply && ptDone.focus && ptDone.note && ptDone.chips === "Back to the question|Show the stored explanation" && ptDone.chipH >= 44, "teacher chat: reply bubble focused, the check note under it, suggestion chips at 44 px: " + JSON.stringify(ptDone));
+  await ev(`document.querySelector("#smdPrep .pt-more summary").click(); return 1;`);
+  ok(await ev(`var d=document.querySelector("#smdPrep .pt-more"); return d.open && /Exam pearl/.test(d.textContent) && /Why B is wrong|Answer A/.test(d.textContent);`) === true, "teacher chat: the stored explanation opens under its chip");
+  await ev(`document.querySelector("#smdPrep .pt-more").open = false; return 1;`);
+  await shot("teacher");
+  await click("#smdPrep .pt-chips [data-act=back]");
+  ok(await until(`return !document.querySelector("#smdPrep .pt-chat") && !!document.querySelector("#smdPrep .pn-home");`, 3000), "teacher chat: Back to the question leaves the chat");
+  await ev(`PREP.close(); delete window.SMD_MAIK_LOCAL; delete window.SMD_MAIK_MODELS; window.Capacitor = window.__capWas; return 1;`);
+
   // ---- offline: reload, block the bank route, the module still opens from IndexedDB
   await load(BASE + "?prep=1");
   await call("Network.setBlockedURLs", { urls: ["*" + FIX + "api/*"] });
