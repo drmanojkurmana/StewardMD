@@ -112,13 +112,15 @@
     return r;
   }
 
-  /* The first unfinished lesson in the weakest subject that has one. lessons: [{ m, s, title, minutes }];
+  /* The first unfinished lesson in the weakest subject that has one. lessons: [{ m, k?, s, title, minutes }] (k: the
+     lesson key when it is not the module id, e.g. "radnotes-<section>"; progress is kept per key);
      order: subject ids, weakest first. */
   function pickLesson(lessons, order, store) {
     var ls = store.ls || {};
     for (var i = 0; i < order.length; i++) for (var j = 0; j < lessons.length; j++) {
       var l = lessons[j];
-      if (l.s === order[i] && !(ls[l.m] && ls[l.m].done)) return l;
+      var lk = l.k || l.m;
+      if (l.s === order[i] && !(ls[lk] && ls[lk].done)) return l;
     }
     return null;
   }
@@ -136,7 +138,7 @@
       if (nr > 0) { rev = { k: "rev", n: nr, min: Math.ceil(nr * REV_MIN) }; left -= rev.min; }
     }
     if (o.mock && (o.weekend || late) && left >= o.mock.min) { mock = { k: "mock", id: o.mock.id, label: o.mock.label, min: o.mock.min }; left -= mock.min; }
-    if (o.lesson && !late && left >= o.lesson.minutes) { lesson = { k: "lsn", m: o.lesson.m, s: o.lesson.s, title: o.lesson.title, min: o.lesson.minutes }; left -= lesson.min; }
+    if (o.lesson && !late && left >= o.lesson.minutes) { lesson = { k: "lsn", m: o.lesson.m, s: o.lesson.s, title: o.lesson.title, min: o.lesson.minutes }; if (o.lesson.k && o.lesson.k !== o.lesson.m) lesson.l = o.lesson.k; left -= lesson.min; }
     var per = o.perQ || 1, nn = Math.floor(left / per);
     if (nn >= 5) { fresh = { k: "new", n: nn, min: Math.ceil(nn * per), mods: (o.weak || []).slice(0, 3) }; left -= fresh.min; }
     var items = [rev, lesson, fresh, mock].filter(Boolean);
@@ -154,7 +156,7 @@
   function itemProgress(it, store, today, dayOf) {
     if (it.k === "rev") { var x = Math.min(it.n, Math.max(0, (it.due0 || 0) - dueNow(store, today))); return { x: x, of: it.n, done: x >= it.n }; }
     if (it.k === "new") { var y = Math.min(it.n, Math.max(0, newToday(store, today) - (it.base || 0))); return { x: y, of: it.n, done: y >= it.n }; }
-    if (it.k === "lsn") { var l = (store.ls || {})[it.m], d = !!(l && l.done && dayOf(l.done) === today); return { x: d ? 1 : 0, of: 1, done: d }; }
+    if (it.k === "lsn") { var l = (store.ls || {})[it.l || it.m], d = !!(l && l.done && dayOf(l.done) === today); return { x: d ? 1 : 0, of: 1, done: d }; }
     if (it.k === "mock") { var m = (store.mh || []).some(function (h) { return dayOf(h.ts) === today && h.ts >= (it.t0 || 0); }); return { x: m ? 1 : 0, of: 1, done: m }; }
     return { x: 0, of: 1, done: false };
   }
@@ -230,7 +232,7 @@
   function lessonList() {
     if (!G.PREP_LESSONS || !G.PREP_LESSONS.index) return Promise.resolve([]);
     return G.PREP_LESSONS.index().then(function (ix) {
-      return Object.keys((ix && ix.modules) || {}).map(function (m) { var x = ix.modules[m]; return { m: m, s: H.subjectOfModule(m), title: x.title, minutes: x.minutes || 5 }; }).filter(function (l) { return l.s; });
+      return Object.keys((ix && ix.modules) || {}).map(function (k) { var x = ix.modules[k], m = x.module || k; return { m: m, k: k, s: H.subjectOfModule(m), title: x.title, minutes: x.minutes || 5 }; }).filter(function (l) { return l.s; });
     }, function () { return []; });
   }
   function makePlan(lessons) {
@@ -281,7 +283,7 @@
   function itemHtml(it, pr) {
     var t = itemTitle(it), sub, attrs = "";
     if (it.k === "rev") { sub = "About " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
-    else if (it.k === "lsn") { sub = "About " + it.min + " min, then 3 quick questions"; attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"'; }
+    else if (it.k === "lsn") { sub = "About " + it.min + " min" + (it.l ? "" : ", then 3 quick questions"); attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"' + (it.l ? ' data-l="' + esc(it.l) + '"' : ""); }
     else if (it.k === "new") { sub = (it.mods && it.mods.length ? "In your weakest modules" : "Where you left off") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
     else { sub = "50 questions, " + it.min + " min, marked like the exam"; }
     var act = it.k === "lsn" ? "l-open" : "p-go";

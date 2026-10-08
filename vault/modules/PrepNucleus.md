@@ -647,6 +647,34 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   deck image step), `test/prep-imcq.test.mjs` (request shape, gates), headless `test/run-prep-setup-ui.mjs`. Out of
   scope: CT or MRI cine and video.
 
+## Radiology notes, set "radnotes" (2026-10-09, branch `feat/prep-radnotes-app`, `?v=prep25`)
+- Source: the owner's two radiology notes books (owner 2026-10-08: his own work, he holds the rights and authorises use;
+  third-party logos, exam-question screenshots, watermarks and citations are kept and listed for him, his call).
+  Built by `tools/prep-radnotes.mjs` (+ `tools/prep-radnotes-extract.py`, `test/prep-radnotes.test.mjs`). The PDFs, their
+  text and figures never enter git; work and outputs live in `~/prep-data/radnotes` (manifest with SHA-256:
+  `out/manifest.json`).
+- R2 (`stewardmd-offline/prep-bank/`): 50 lessons `v1/lessons/radnotes-<sid>.json`, the lessons index `v1/lessons/index.json`
+  (1,132 entries: the 1,082 generated + 50 radnotes; a radnotes entry carries `module` and `set: "radnotes"`), 54 figures
+  `img/radnotes/rn-<figid>.webp`, 12 MCQ overlays `overlay/radnotes/radiology/<module>.json` ({topic, set, v, items}; 256
+  items, 27 with a figure).
+- Route: `RADNOTES_RE` in `functions/api/prep/bank/[[path]].js` serves `img/radnotes/rn-<id>.webp` and
+  `overlay/radnotes/<subject>/<module>.json`, immutable.
+- Lessons: an index key is no longer always a module id. `lessonsFor(ix, mid)` lists the module's own lesson (key = mid)
+  first, then entries whose `module` is mid; one row reads "Lesson", several read by title (3, then "Show all N lessons",
+  `l-more`). Rows carry `data-l` (key); `open(sid, mid, h, key)`; progress `store.ls` is per key. Image steps
+  (`api/prep/bank/...`) resolve through the bank API base (`imgUrl`; tests point it at fixtures) and get
+  `SMD_API_BASE` (https://stewardmd.in) on native. Plan (`prep-plan.js`): lesson list entries carry `k` (key), the plan
+  item carries `l` when the key is not the module.
+- MCQs: `loadModule` = bank file + overlay items (`OVERLAYS`, default `{ radiology: ["radnotes"] }`, `mergeOverlay`: bank
+  first, then overlay items by new id; items untouched). Overlay files are cached in IndexedDB like module files; a 404
+  adds nothing; an offline miss is asked again later. Overlay items carry `_ov` (set); `PREP_PYQ.figure` draws them from
+  `img/<set>/` (prefixed with `SMD_API_BASE` on native, which also fixes PYQ and bank item figures on native). Lesson quick
+  questions, practice, setup, bookmarks and mistakes all see overlay items through `loadModule`.
+- Module MCQ counts on screens still come from the bank index (overlay items are not counted).
+- Tests: `test/prep-server.test.mjs` (route), `test/prep-lessons.test.mjs` / `test/prep-app.test.mjs` / `test/prep-plan.test.mjs`
+  (lessonsFor, imgUrl, mergeOverlay, plan by key), headless `test/run-prep-radnotes-ui.mjs` (synthetic fixture
+  `test/fixtures/prep-radnotes/api/`, no content from the notes).
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

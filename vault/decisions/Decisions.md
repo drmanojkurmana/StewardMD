@@ -11513,6 +11513,13 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   rule. Owner calls are still metered, so they show in the dashboards and still count toward the breaker
   for everyone else. The admin "pause" kill switch still applies to owners. Tests: `test/maik-owner-exempt.test.mjs`.
 
+## 2026-10-08 - PrepNucleus radiology notes: the owner's own books, keep everything, flag third-party marks
+- **Decision** (owner, binding; [[modules/PrepNucleus]] "Radiology notes"): both radiology notes books are the owner's own
+  work; he is the rights holder and authorises their use in PrepNucleus. Nothing is deleted or rolled back (lessons, the
+  1,132-entry lessons index, overlays, images, source PDFs). Third-party logos, exam-question screenshots, watermarks and
+  citations found in the books are kept and listed for him by file and item; attribution, replacement, exclusion or
+  separate treatment is his call. The PDFs, their text and figures stay out of the public repo (R2 and `~/prep-data` only).
+
 ## 2026-10-06 - PrepNucleus nudges: personal and playful, but every line true
 - **Decision** ([[plans/PrepNucleus-Nudges]], [[modules/PrepNucleus]]): the owner asked for automatic, personal follow-up
   notifications after seeing a competitor's ("Your friends are studying", "Your parents think you're studying rn"). We

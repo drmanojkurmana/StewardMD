@@ -240,3 +240,20 @@ test("index merge: a generated (bank) lesson fills modules with none bundled and
   assert.deepEqual(P.mergeIx(app, null).modules["sur-breast-benign"], { from: "app", gen: "AI", n: 4 }, "offline with no bank index: bundled only");
   assert.deepEqual(P.mergeIx(undefined, undefined), { v: 1, modules: {} });
 });
+
+test("radnotes lessons: a module lists its own lesson first, then every entry naming it as module (by key); image steps resolve for web, tests and native", () => {
+  const ix = { v: 1, modules: { "rad-gi": { title: "GI", minutes: 5, steps: 4 }, "radnotes-n2-abd-b": { title: "B", module: "rad-gi", set: "radnotes", minutes: 5, steps: 4 },
+    "radnotes-n1-abd-a": { title: "A", module: "rad-gi", set: "radnotes", minutes: 7, steps: 6 }, "radnotes-n1-chest": { title: "C", module: "rad-chest", set: "radnotes", minutes: 4, steps: 4 } } };
+  assert.deepEqual(P.lessonsFor(ix, "rad-gi").map((x) => x[0]), ["rad-gi", "radnotes-n1-abd-a", "radnotes-n2-abd-b"]);
+  assert.deepEqual(P.lessonsFor(ix, "rad-chest").map((x) => x[0]), ["radnotes-n1-chest"]);
+  assert.deepEqual(P.lessonsFor(ix, "rad-xray"), []);
+  assert.deepEqual(P.lessonsFor(null, "rad-gi"), []);
+  assert.equal(P.moduleOf("radnotes-n1-chest", ix.modules["radnotes-n1-chest"]), "rad-chest");
+  assert.equal(P.moduleOf("rad-gi", ix.modules["rad-gi"]), "rad-gi");
+  const src = "api/prep/bank/img/radnotes/rn-n1-p031-2.webp";
+  assert.ok(P.IMG_RE.test(src), "the phase-1 lesson figure path passes the lesson checker");
+  assert.equal(P.imgUrl(src, "/api/prep/bank/", ""), "/api/prep/bank/img/radnotes/rn-n1-p031-2.webp", "web: same origin");
+  assert.equal(P.imgUrl(src, "/api/prep/bank/", "https://stewardmd.in"), "https://stewardmd.in/api/prep/bank/img/radnotes/rn-n1-p031-2.webp", "native: API origin");
+  assert.equal(P.imgUrl(src, "/test/fixtures/x/api/", ""), "/test/fixtures/x/api/img/radnotes/rn-n1-p031-2.webp", "tests: the bank API base");
+  assert.equal(P.imgUrl("prep/lessons/media/breast-t-size.svg", "/api/prep/bank/", "https://stewardmd.in"), "/prep/lessons/media/breast-t-size.svg", "bundled media stays in the app");
+});

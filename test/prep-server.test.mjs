@@ -88,6 +88,24 @@ test("bank: a bank item's images (v<n>/img/<name>.webp, immutable, image/webp); 
   assert.equal(asked, 0);
 });
 
+test("bank: radnotes figures and overlays (img/radnotes/rn-<id>.webp, overlay/radnotes/<subject>/<module>.json, immutable); nothing else", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/img/radnotes/rn-n1-p031-2.webp": "RIFF", "prep-bank/overlay/radnotes/radiology/rad-gi.json": '{"topic":"rad-gi","set":"radnotes","v":1,"items":[]}' }) };
+  const im = await get("img/radnotes/rn-n1-p031-2.webp", env);
+  assert.equal(im.status, 200);
+  assert.equal(im.headers.get("Content-Type"), "image/webp");
+  assert.match(im.headers.get("Cache-Control"), /immutable/);
+  const ov = await get("overlay/radnotes/radiology/rad-gi.json", env);
+  assert.equal(ov.status, 200);
+  assert.match(ov.headers.get("Content-Type"), /application\/json/);
+  assert.match(ov.headers.get("Cache-Control"), /immutable/);
+  assert.equal(JSON.parse(await ov.text()).set, "radnotes");
+  let asked = 0;
+  const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
+  for (const p of ["img/radnotes/x.webp", "img/radnotes/rn-a.png", "img/radnotes/../rn-ab.webp", "img/radnotes/rn-AB.webp", "img/other/rn-ab.webp", "img/radnotes/a/rn-ab.webp",
+    "overlay/radnotes/rad-gi.json", "overlay/radnotes/radiology/rad-gi.webp", "overlay/radnotes/radiology/../x.json", "overlay/other/radiology/rad-gi.json", "overlay/radnotes/radiology/a/b.json", "overlay/radnotes/Radiology/rad-gi.json"]) assert.equal((await get(p, spy)).status, 404, p);
+  assert.equal(asked, 0);
+});
+
 test("bank: lessons and cards (index short cache; module files and lesson media immutable, right types); nothing else", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v1/lessons/index.json": '{"v":1}', "prep-bank/v1/lessons/sur-thyroid.json": '{"v":1}', "prep-bank/v1/lessons/media/thyroid-flow.svg": "<svg/>",
     "prep-bank/v1/lessons/media/neck-us.webp": "RIFF", "prep-bank/v1/cards/index.json": '{"v":1}', "prep-bank/v1/cards/sur-thyroid.json": '{"v":1}' }) };

@@ -313,3 +313,14 @@ test("PrepNucleus 4K logo icon and banner assets ship and are wired", () => {
   assert.match(homeJs, /act: "prep"[\s\S]*anim: "prep"/, "HOME_TOOLS must declare anim: prep");
 });
 
+
+test("mergeOverlay: bank items first, overlay items added once by id, kept whole (x, r, img, imgPlace, prov, set, sid, key)", () => {
+  const bank = [{ id: "b1", a: 0 }, { id: "rn-1", a: 2, q: "bank copy" }];
+  const ov = [{ id: "rn-1", a: 1, q: "overlay copy" }, { id: "rn-2", a: 3, x: { key: "k" }, r: ["a", "b", "c", "d"], img: ["rn-n1-p093-1.webp"], imgPlace: "stem", prov: "SMD", set: "radnotes", sid: "n1-x" }, { id: "rn-2", a: 0 }, null, { a: 1 }];
+  const m = P.mergeOverlay(bank, ov);
+  assert.deepEqual(m.map((i) => i.id), ["b1", "rn-1", "rn-2"]);
+  assert.equal(m[1].q, "bank copy", "the bank copy wins a clash");
+  assert.deepEqual(m[2], ov[1], "overlay item untouched");
+  assert.equal(m[2].a, 3, "answer key unchanged");
+  assert.deepEqual(P.mergeOverlay(null, undefined), []);
+});
