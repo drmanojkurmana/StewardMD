@@ -31,13 +31,15 @@ const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
 // The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"): figures img/radnotes/rn-<id>.webp and MCQ
 // overlays overlay/radnotes/<subject>/<module>.json (both immutable: a new run writes new names or a new version).
 const RADNOTES_RE = /^(?:img\/radnotes\/rn-[a-z0-9-]{2,80}\.webp|overlay\/radnotes\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
+// Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
+const MEDCOV_RE = /^overlay\/medcov\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || RAD_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || RAD_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {
