@@ -938,3 +938,40 @@ Root causes and fixes:
   (All; Mix for difficulty), row by row. Options with 0 questions are `disabled` (faded, no press); arrow keys skip them.
 Not verifiable here: real finger scrolling and momentum (Playwright mobile WebKit has no wheel or touch drag; the suite
 scrolls in steps), the WKWebView rubber band, and the iOS scroll indicator itself. No iOS simulator runtime is installed.
+## Interactive lessons + image-rich radiology lessons (2026-10-09, branch `feat/prep-interactive-lessons`, prep41)
+Owner 2026-10-09: radiology lessons "don't have images as much as needed ... make it interesting, interactive and the
+best way of learning."
+- **Reader (`prep-lessons.js` + `prep-lx.css`, loader CSS list):** new optional parts, all drawn from data:
+  spot the sign (`vis.spot { q, box [x,y,w,h] 0..1, label, why }`: tap on the image, hit = in the box or within 4%,
+  miss ring, second miss or "Show me" reveals), labelled figure (`vis.marks [{x,y,label}]`: numbered points, tap a
+  number or Show all, a key list under it), compare (`vis.pair { src, alt, tag, tagA, why, ar }`: a clip-path slider
+  when both shapes are within 12% (`sliderPair`), drag with pointer capture, range input for keys, Show buttons as the
+  single-tap alternative; else side by side, each enlarges), quick check (`step.qc { q, o, a, why }`, true/false when
+  o is ["True","False"]; one tap, in-place feedback), classic signs deck (`lesson.cards [{f,b}]`, flip cards, a page
+  after the steps) and key points (`lesson.keys`, the last page, with the score and best streak). `vis.ar` reserves the
+  figure's shape (and sizes the stage on landscape iPad so overlays stay aligned: never object-fit an overlaid img).
+  XP: 10 a step + 5 a right answer (first finish only). Pages = steps + cards + keys (`pages()`).
+- **Fallback:** a file with every new part still passes the old `checkLesson` (figures stay kind "image"), and
+  `tidyLesson()` drops any malformed optional part instead of failing the lesson. Revised lessons ship at
+  `v2/lessons/<key>.json` and their v1 index entry gets `"r": 2` (same key, progress kept); older readers ignore `r`
+  and keep their v1 copy (files are cached forever per path).
+- **Viewer:** `l-zoom` calls `window.PREP_VIEWER.open({ src, alt, caption, from })` when the shared viewer is loaded,
+  else the reader's own enlarge (now for any figure, the second image of a compare included).
+- **Data (`tools/prep-radlx.mjs`, private data `~/prep-data/radnotes/lx`):** pool (the book's figures for the topic,
+  the strict vote's dropped uses back in as candidates, licensed Open-i / Commons figures when the book has fewer than
+  4 spare; licence from the article's own <permissions> or Commons extmetadata) -> plan (gemini-2.5-flash, images
+  attached, one request a lesson) -> code gates -> two Haiku votes per element with a lesson rubric (labels and arrows
+  on a figure are fine; refuse only wrong for the step, unreadable, identifiers or third-party marks; overlays checked
+  on the figure with the box or numbered dots drawn) -> assemble -> upload (SHA-verified over the route).
+- Tests: `test/prep-radlx.test.mjs`, `test/run-prep-lessons-ix-ui.mjs` (fixture `test/fixtures/prep-lx`, synthetic
+  shapes; W=390|820|1180, PN_LIGHT=1). `test/serve.mjs` serves fixture lesson media immutable like the bank route so
+  the offline check sees the real HTTP cache.
+- **Run 2026-10-09 (results):** 340 radbook lessons revised (v2 files, `r: 2`). Images 350 -> 982 (lessons with 3+
+  images 39 -> 207; with none 144 -> 46, mostly anatomy lessons from the true/false book, which has no figures);
+  interactive elements 0 -> 1,234 (222 spot, 118 label sets, 15 compares, 577 quick checks, 302 sign decks; 325 lessons
+  with 2+); 163 figure steps added; 306 figure uses the strict vote had dropped came back under the lesson rubric.
+  Licensed figures: 12 Open-i case-report figures (11 CC BY 4.0, 1 CC BY 3.0), credited in terms.html; Commons gave
+  none that passed. Animal and veterinary study figures are excluded in code (`ANIMAL`), hand vetoes in
+  `<dir>/veto.json`. Spend $4.83 (plan gemini-2.5-flash $2.21, locate $2.62). Lesson: the plan request's own boxes
+  were wrong (laterality, guessed round numbers); a detection-only request per image (`locate`) fixed them, so keep
+  the two stages separate.

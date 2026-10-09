@@ -122,9 +122,9 @@ try {
       ok(await until(`var i=document.querySelector("#smdPrep .pn-vfig img"); return !!(i && i.complete && i.naturalWidth > 0);`, 8000), "the lesson figure loads");
       await shot("lesson-figure");
       await click("#smdPrep [data-act=l-zoom]");
-      ok(await until(`var i=document.querySelector("#smdPrep #pnZoom img"); return !!(i && i.src === ${JSON.stringify(s)});`, 3000), "tapping the figure enlarges the same image");
+      ok(await until(`var i=document.querySelector("#smdPrep #pnZoom img") || document.querySelector(".pv img"); return !!(i && i.src === ${JSON.stringify(s)});`, 3000), "tapping the figure enlarges the same image");
       await ev(`PREP.back(); return 1;`);
-      ok(await until(`return !document.querySelector("#smdPrep #pnZoom") && !!document.querySelector("#smdPrep .pn-lsn-tx");`, 3000), "back() closes the enlarged figure first");
+      ok(await until(`return !document.querySelector("#smdPrep #pnZoom") && !(window.PREP_VIEWER && PREP_VIEWER.isOpen()) && !!document.querySelector("#smdPrep .pn-lsn-tx");`, 3000), "back() closes the enlarged figure first");
     }
     if (k < nSteps - 1) await click("#smdPrep [data-act=l-next]");
     await sleep(120);

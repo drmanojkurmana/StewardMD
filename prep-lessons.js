@@ -13,6 +13,18 @@
    Built by tools/prep-lessons.mjs (gates there) or by hand (gen "hand"). Files ship in www/prep/lessons and are kept
    in IndexedDB after the first open, like the bank's module files.
 
+   Interactive lessons (2026-10-09, tools/prep-radlx.mjs). Every field below is optional and a file that has them still
+   passes the old checkLesson (an image step stays kind "image"), so an older reader shows plain figures:
+     image vis + spot  { q: "Tap the ...", box: [x, y, w, h] (0..1 of the image), label, why }   spot the sign
+     image vis + marks [{ x, y, label }] (0..1)                                                 labels toggled on tap
+     image vis + pair  { src, alt, tag, tagA?, why?, ar? }                                     compare two images
+     image vis + ar    width / height of the image (reserves its space)
+     step.qc           { q, o: [2 to 4], a, why }  a quick check under the step (o ["True", "False"] for true/false)
+     lesson.cards      [{ f, b }]  classic signs, a deck of flip cards after the last step
+     lesson.keys       [string]    key points, the last page before the finish
+   tidyLesson() drops any malformed optional part instead of failing the lesson. An index entry with "r": 2 lives at
+   v2/lessons/<key>.json (a new path, since a lesson file is cached forever per path); older readers ignore "r".
+
    Narration: @capacitor-community/text-to-speech on native (the plugin maik-ask.js and CliniX viva use), else the
    browser's speechSynthesis. Neither sends audio or text anywhere. Pure helpers load under node for tests. */
 (function (G) {
@@ -43,7 +55,13 @@
     if (v.kind === "table") return [].concat(v.cols || [], [].concat.apply([], v.rows || [])).join(" \n");
     if (v.kind === "flow") return (v.nodes || []).map(function (n) { return n.label + (n.sub ? " " + n.sub : ""); }).concat((v.edges || []).map(function (e) { return e[2] || ""; })).join(" \n");
     if (v.kind === "compare") return [v.left.title].concat(v.left.points, [v.right.title], v.right.points).join(" \n");
-    if (v.kind === "image") return str(v.alt) + " \n" + str(v.caption);
+    if (v.kind === "image") {
+      var t = [str(v.alt), str(v.caption)];
+      if (v.spot) t.push(str(v.spot.label), str(v.spot.why));
+      if (v.marks) v.marks.forEach(function (m) { t.push(str(m.label)); });
+      if (v.pair) t.push(str(v.pair.tagA), str(v.pair.tag), str(v.pair.alt), str(v.pair.why));
+      return t.filter(Boolean).join(" \n");
+    }
     return "";
   }
   /* flowLevels(nodes, edges) -> [[id, ...], ...] by longest path from the roots, in node order; null on a cycle or an
@@ -130,6 +148,74 @@
     if (l.gen !== "AI" && l.gen !== "hand") p.push('gen must be "AI" or "hand"');
     return p;
   }
+  /* ---- interactive parts (all optional) ---- */
+  var XP_HIT = 5, BOX_PAD = 0.04;
+  function num01(v) { return typeof v === "number" && isFinite(v) && v >= 0 && v <= 1; }
+  function spotOk(sp) {
+    if (!sp || !nonEmpty(sp.q) || !nonEmpty(sp.label) || !Array.isArray(sp.box) || sp.box.length !== 4 || !sp.box.every(num01)) return false;
+    return sp.box[2] > 0 && sp.box[3] > 0 && sp.box[0] + sp.box[2] <= 1.001 && sp.box[1] + sp.box[3] <= 1.001;
+  }
+  function marksOk(m) { return Array.isArray(m) && m.length >= 1 && m.length <= 6 && m.every(function (k) { return k && num01(k.x) && num01(k.y) && nonEmpty(k.label); }); }
+  function pairOk(p) { return !!p && IMG_RE.test(str(p.src)) && nonEmpty(p.tag); }
+  function qcOk(q) {
+    if (!q || !nonEmpty(q.q) || !Array.isArray(q.o) || q.o.length < 2 || q.o.length > 4 || !q.o.every(nonEmpty)) return false;
+    return typeof q.a === "number" && q.a === Math.floor(q.a) && q.a >= 0 && q.a < q.o.length;
+  }
+  function isTF(q) { return !!q && q.o && q.o.length === 2 && /^true$/i.test(q.o[0]) && /^false$/i.test(q.o[1]); }
+  /* tidyLesson(lesson) -> a copy without the malformed optional parts (spot, marks, pair, ar, qc, cards, keys), so one bad
+     overlay never costs the whole lesson. Required fields are left for checkLesson. */
+  function tidyLesson(l) {
+    if (!l || typeof l !== "object" || !Array.isArray(l.steps)) return l;
+    var out = {}, k;
+    for (k in l) out[k] = l[k];
+    out.steps = l.steps.map(function (s) {
+      if (!s || typeof s !== "object") return s;
+      var c = {}, j; for (j in s) c[j] = s[j];
+      if (c.qc != null && !qcOk(c.qc)) delete c.qc;
+      var v = c.vis;
+      if (v && v.kind === "image" && (v.spot != null || v.marks != null || v.pair != null || v.ar != null)) {
+        var w = {}; for (j in v) w[j] = v[j];
+        if (w.spot != null && !spotOk(w.spot)) delete w.spot;
+        if (w.marks != null && !marksOk(w.marks)) delete w.marks;
+        if (w.pair != null && !pairOk(w.pair)) delete w.pair;
+        if (w.spot && (w.marks || w.pair)) { delete w.marks; delete w.pair; }      // one interaction a figure
+        if (w.marks && w.pair) delete w.pair;
+        if (w.ar != null && !(typeof w.ar === "number" && w.ar > 0.2 && w.ar < 5)) delete w.ar;
+        c.vis = w;
+      }
+      return c;
+    });
+    var cards = Array.isArray(l.cards) ? l.cards.filter(function (x) { return x && nonEmpty(x.f) && nonEmpty(x.b); }).slice(0, 8) : [];
+    var keys = Array.isArray(l.keys) ? l.keys.filter(nonEmpty).slice(0, 8) : [];
+    if (cards.length) out.cards = cards; else delete out.cards;
+    if (keys.length) out.keys = keys; else delete out.keys;
+    return out;
+  }
+  /* hitBox(box, x, y) -> true when (x, y), 0..1 of the image, falls in the box or within 4% of its edge. */
+  function hitBox(b, x, y, pad) {
+    var p = pad == null ? BOX_PAD : pad;
+    return x >= b[0] - p && x <= b[0] + b[2] + p && y >= b[1] - p && y <= b[1] + b[3] + p;
+  }
+  /* pages(lesson) -> the reader's pages: every step, then "cards" (when the lesson has sign cards), then "keys". */
+  function pages(l) {
+    var out = ((l && l.steps) || []).map(function (s, i) { return i; });
+    if (l && l.cards && l.cards.length) out.push("cards");
+    if (l && l.keys && l.keys.length) out.push("keys");
+    return out;
+  }
+  /* interactions(lesson) -> { spot, marks, pair, qc, cards } counts as the reader draws them. */
+  function interactions(l) {
+    var n = { spot: 0, marks: 0, pair: 0, qc: 0, cards: l && l.cards && l.cards.length ? 1 : 0 };
+    ((l && l.steps) || []).forEach(function (s) {
+      var v = s && s.vis;
+      if (v && v.kind === "image") { if (v.spot) n.spot++; else if (v.marks) n.marks++; else if (v.pair) n.pair++; }
+      if (s && s.qc) n.qc++;
+    });
+    return n;
+  }
+  /* sliderPair(v) -> true when the two images of a compare have near equal shapes (within 12%), so a swipe slider over
+     one frame reads well; otherwise they sit side by side. */
+  function sliderPair(v) { return !!(v && v.pair && v.ar && v.pair.ar && Math.abs(v.ar / v.pair.ar - 1) <= 0.12); }
   function nextSpeed(r) { var i = SPEEDS.indexOf(r); return SPEEDS[(i + 1) % SPEEDS.length]; }
   function speedLabel(r) { return String(r).replace(/^0\./, ".") + "x"; }
   function xpFor(l) { return (l && l.steps ? l.steps.length : 0) * XP_STEP; }
@@ -169,7 +255,11 @@
   /* lessonImages(les) -> the image srcs of a lesson's steps, in order, each once. */
   function lessonImages(l) {
     var out = [];
-    ((l && l.steps) || []).forEach(function (s) { var v = s && s.vis; if (v && v.kind === "image" && v.src && out.indexOf(v.src) < 0) out.push(v.src); });
+    ((l && l.steps) || []).forEach(function (s) {
+      var v = s && s.vis;
+      if (v && v.kind === "image" && v.src && out.indexOf(v.src) < 0) out.push(v.src);
+      if (v && v.kind === "image" && v.pair && v.pair.src && out.indexOf(v.pair.src) < 0) out.push(v.pair.src);
+    });
     return out;
   }
   function pickQuiz(items, ids) { var by = {}; (items || []).forEach(function (it) { by[it.id] = it; }); return (ids || []).map(function (id) { return by[id]; }).filter(Boolean); }
@@ -185,13 +275,16 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl };
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
+    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
   var BASE = G.SMD_PREP_LESSONS_BASE || (G.SMD_PREP_BASE || "/prep/") + "lessons/";
   var VER = "v1";
-  var L = { ix: null, ixP: null, mem: {}, les: null, sid: null, mid: null, key: null, more: {}, i: 0, fin: false, playing: false, tok: 0, zoom: false, dir: 0, view: null, firstXp: 0 };
+  // ans: this sitting's answers per page (spot, labels, compare, quick check, cards); sc: right answers and the streak.
+  var L = { ix: null, ixP: null, mem: {}, les: null, sid: null, mid: null, key: null, more: {}, i: 0, fin: false, playing: false, tok: 0, zoom: null, dir: 0, view: null, firstXp: 0,
+    ans: {}, sc: { ok: 0, n: 0, run: 0, best: 0 } };
   var host = null;
 
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
@@ -219,15 +312,17 @@
   }
   // Bank file: immutable once uploaded, so IndexedDB first (like the bank's module files), then the API; the bundled
   // file when the bank one cannot be had (offline before first open, or a 404).
-  function bankFile(mid) {
-    var key = VER + "/lessons/" + mid + ".json";
+  // A revised lesson ("r": 2 in the index) lives at v2/lessons/<key>.json; when that cannot be had the v1 copy stands in.
+  function bankFile(mid, rev) {
+    var ver = rev ? "v" + rev : VER, key = ver + "/lessons/" + mid + ".json", url = api().replace(/\/v\d{1,3}\/lessons\/$/, "/" + ver + "/lessons/");
     return (host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : Promise.resolve(null)).then(function (hit) {
-      return hit || getJSON(api() + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
-    }).then(null, function () { return appFile(mid); });
+      return hit || getJSON(url + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
+    }).then(null, function () { return rev ? bankFile(mid, 0) : appFile(mid); });
   }
   function lessonFile(mid) {
     if (L.mem[mid]) return Promise.resolve(L.mem[mid]);
-    return index().then(function (ix) { var m = ix.modules[mid]; return m && m.from === "bank" ? bankFile(mid) : appFile(mid); }).then(function (f) {
+    return index().then(function (ix) { var m = ix.modules[mid]; return m && m.from === "bank" ? bankFile(mid, m.r > 1 && m.r < 100 ? m.r | 0 : 0) : appFile(mid); }).then(function (f) {
+      f = tidyLesson(f);
       if (checkLesson(f).length) throw new Error("bad lesson");
       return (L.mem[mid] = f);
     });
@@ -254,10 +349,10 @@
     } catch (e) { L.playing = false; }
   }
   function narrate() {
-    var s = store(), step = L.les.steps[L.i];
-    speak(step.say, s.lsp.r, function () {
+    var s = store();
+    speak(pageSay(), s.lsp.r, function () {
       if (!L.playing || L.fin) return;
-      if (s.lsp.au && L.i < L.les.steps.length - 1) { go(L.i + 1, true); return; }
+      if (s.lsp.au && L.i < pages(L.les).length - 1) { go(L.i + 1, true); return; }
       L.playing = false; drawBar();
     });
   }
@@ -269,7 +364,13 @@
   var ICO = {
     pause: '<path d="M8 5v14M16 5v14"/>',
     book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7M8 11h5"/>', ask: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 16.5h.01"/>',
-    zoom: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/>', redo: '<path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.7M4 4v4.7h4.7"/>'
+    zoom: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/>', redo: '<path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.7M4 4v4.7h4.7"/>',
+    target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
+    expand: '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>', bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    tick: '<path d="M20 6L9 17l-5-5"/>', cross: '<path d="M18 6L6 18M6 6l12 12"/>',
+    tagl: '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+    cmp: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/>', lr: '<path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/>',
+    cards: '<rect x="3" y="6" width="13" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v12"/>', list: '<path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/>'
   };
   function svg(body, size) { return '<svg viewBox="0 0 24 24" width="' + (size || 20) + '" height="' + (size || 20) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + body + "</svg>"; }
   function ic(n) { return ICO[n] ? svg(ICO[n]) : ico(n); }
@@ -319,21 +420,204 @@
   function warm(les) {
     try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.src = imgSrc(src); }); } catch (e) {}
   }
-  function imageHtml(v) {
-    return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '" loading="lazy" decoding="async"></button>' +
+  // width and height from the image's shape reserve its box before it loads (no jump under the text).
+  function imgTag(src, alt, ar) {
+    return '<img src="' + escH(imgSrc(src)) + '" alt="' + escH(alt) + '"' + (ar ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "") + ' loading="lazy" decoding="async">';
+  }
+  function imageHtml(v, i) {
+    if (v.spot) return spotHtml(v, i);
+    if (v.marks) return marksHtml(v, i);
+    if (v.pair) return pairHtml(v, i);
+    return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '">' + imgTag(v.src, v.alt, v.ar) + "</button>" +
       '<figcaption><span class="pn-vzi" aria-hidden="true">' + ic("zoom") + "</span><span>" + escH(v.caption) + " Tap to enlarge.</span></figcaption></figure>";
   }
-  function visHtml(v) {
+  function visHtml(v, i) {
     if (!v) return "";
-    var inner = v.kind === "table" ? tableHtml(v) : v.kind === "flow" ? flowHtml(v) : v.kind === "compare" ? compareHtml(v) : v.kind === "image" ? imageHtml(v) : "";
-    return '<section class="pn-vis pn-vis-' + v.kind + '" aria-label="' + (v.kind === "image" ? "Figure" : v.kind === "flow" ? "Flow diagram" : v.kind === "compare" ? "Comparison" : "Table") + '">' + inner + "</section>";
+    var inner = v.kind === "table" ? tableHtml(v) : v.kind === "flow" ? flowHtml(v) : v.kind === "compare" ? compareHtml(v) : v.kind === "image" ? imageHtml(v, i) : "";
+    if (!inner) return "";
+    return '<section class="pn-vis pn-vis-' + v.kind + '" aria-label="' + (v.kind === "image" ? (v.spot ? "Spot the sign" : v.marks ? "Labelled figure" : v.pair ? "Compare two images" : "Figure") : v.kind === "flow" ? "Flow diagram" : v.kind === "compare" ? "Comparison" : "Table") + '">' + inner + "</section>";
+  }
+
+  /* ---------- interactive parts ----------
+     Answers live in L.ans[page] for this sitting, so going back shows what was done. A tap updates the part in place
+     (classes and the feedback line), never the whole screen, so the figure does not reload or jump. */
+  function ansOf(i) { return L.ans[i] || (L.ans[i] = {}); }
+  function arVar(ar) { return ar ? ' style="--ar:' + ar + '"' : ""; }
+  function pc(x) { return (x * 100).toFixed(2) + "%"; }
+  function tag(icon, t) { return '<span class="pn-ix-tag">' + svg(ICO[icon], 15) + escH(t) + "</span>"; }
+  function zoomBtn(z, alt) { return '<button type="button" class="pn-ix-zb" data-act="l-zoom" data-z="' + z + '" aria-label="Enlarge image: ' + escH(alt) + '">' + svg(ICO.expand, 18) + "</button>"; }
+  function streakHtml() { return L.sc.run >= 2 ? '<p class="pn-streak">' + svg(ICO.bolt, 15) + "<b>" + L.sc.run + "</b> in a row</p>" : ""; }
+  function score(ok) {
+    L.sc.n++;
+    if (ok) { L.sc.ok++; L.sc.run++; if (L.sc.run > L.sc.best) L.sc.best = L.sc.run; } else L.sc.run = 0;
+    try { if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic(ok ? "success" : "error"); } catch (e) {}
+  }
+
+  // Spot the sign: tap where the finding is. Right (inside the box, or within 4% of it) lights the box and its label;
+  // a miss leaves a ring where the tap fell; the second miss, or "Show me", shows the answer.
+  function spotFb(sp, a) {
+    if (a.done) {
+      return '<p class="pn-ix-res' + (a.hit ? " ok" : "") + '">' + (a.hit ? svg(ICO.tick, 18) + "<b>Found it.</b> " : "<b>Here it is:</b> ") + escH(sp.label) + "</p>" +
+        '<p class="pn-ix-why">' + escH(sp.why) + "</p>" + (a.hit ? streakHtml() : "");
+    }
+    return (a.miss && a.miss.length ? '<p class="pn-ix-res bad">' + svg(ICO.cross, 18) + "<b>Not there.</b> One more try.</p>" : '<p class="pn-ix-hint">Tap the image where you see it.</p>') +
+      '<button type="button" class="pn-btn pn-ix-show" data-act="l-show">Show me</button>';
+  }
+  function missHtml(m) { return '<i class="pn-spot-miss" style="left:' + pc(m[0]) + ";top:" + pc(m[1]) + '" aria-hidden="true"></i>'; }
+  function spotHtml(v, i) {
+    var a = ansOf(i), sp = v.spot, b = sp.box;
+    return '<figure class="pn-vfig pn-ix pn-spot' + (a.done ? " done" + (a.hit ? " hit" : "") : "") + '">' +
+      '<div class="pn-ix-head">' + tag("target", "Spot the sign") + '<p class="pn-ix-q">' + escH(sp.q) + "</p></div>" +
+      '<div class="pn-ix-stage" data-spot="' + i + '"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) +
+      '<span class="pn-spot-box' + (b[1] < 0.14 ? " lo" : "") + '" style="left:' + pc(b[0]) + ";top:" + pc(b[1]) + ";width:" + pc(b[2]) + ";height:" + pc(b[3]) + '" aria-hidden="true"><b>' + escH(sp.label) + "</b></span>" +
+      '<span class="pn-spot-ms">' + (a.miss || []).map(missHtml).join("") + "</span>" + zoomBtn("a", v.alt) + "</div>" +
+      '<div class="pn-ix-fb" role="status" aria-live="polite">' + spotFb(sp, a) + "</div>" +
+      "<figcaption>" + escH(v.caption) + "</figcaption></figure>";
+  }
+  function spotTap(stage, e) {
+    var i = +stage.getAttribute("data-spot"), st = L.les.steps[i], sp = st && st.vis && st.vis.spot, a = ansOf(i), img = stage.querySelector("img");
+    if (!sp || a.done || !img || (e.target.closest && e.target.closest(".pn-ix-zb"))) return;
+    var r = img.getBoundingClientRect(), x = (e.clientX - r.left) / (r.width || 1), y = (e.clientY - r.top) / (r.height || 1);
+    if (!(x >= 0 && x <= 1 && y >= 0 && y <= 1)) return;
+    if (hitBox(sp.box, x, y)) { a.done = 1; a.hit = 1; score(true); }
+    else {
+      (a.miss = a.miss || []).push([x, y]);
+      if (a.miss.length >= 2) { a.done = 1; score(false); }
+      else try { if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic("error"); } catch (x2) {}
+      if (!reduced()) { stage.classList.remove("shake"); void stage.offsetWidth; stage.classList.add("shake"); }
+    }
+    spotPaint(stage.closest(".pn-spot"), sp, a);
+  }
+  function spotPaint(fig, sp, a) {
+    if (!fig) return;
+    fig.className = "pn-vfig pn-ix pn-spot" + (a.done ? " done" + (a.hit ? " hit" : "") : "");
+    var ms = fig.querySelector(".pn-spot-ms"), fb = fig.querySelector(".pn-ix-fb");
+    if (ms) ms.innerHTML = (a.miss || []).map(missHtml).join("");
+    if (fb) fb.innerHTML = spotFb(sp, a);
+    if (a.done) { var nx = host.root && host.root().querySelector("[data-act=l-next]"); if (nx && G.document.activeElement && G.document.activeElement.getAttribute && G.document.activeElement.getAttribute("data-act") === "l-show") nx.focus(); }
+  }
+
+  // Reveal: numbered points on the figure; a tap on a number names that structure, "Show all" names every one.
+  function marksHtml(v, i) {
+    var a = ansOf(i), all = !!a.all, open = a.open || {};
+    return '<figure class="pn-vfig pn-ix pn-reveal' + (all ? " all" : "") + '">' +
+      '<div class="pn-ix-head">' + tag("tagl", "Label it") + '<p class="pn-ix-q">Tap a number to name it.</p>' +
+      '<button type="button" class="pn-ix-tog" data-act="l-marks" aria-pressed="' + all + '">' + (all ? "Hide all" : "Show all") + "</button></div>" +
+      '<div class="pn-ix-stage"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + v.marks.map(function (m, k) {
+        var on = all || !!open[k];
+        return '<button type="button" class="pn-mk' + (on ? " on" : "") + (m.x > 0.6 ? " l" : "") + '" style="left:' + pc(m.x) + ";top:" + pc(m.y) + '" data-act="l-mark" data-k="' + k + '" aria-expanded="' + on + '" aria-label="Point ' + (k + 1) + (on ? ": " + escH(m.label) : ", show its name") + '">' +
+          "<i>" + (k + 1) + '</i><span class="pn-mk-l" aria-hidden="true">' + escH(m.label) + "</span></button>";
+      }).join("") + zoomBtn("a", v.alt) + "</div>" +
+      '<ol class="pn-mk-key">' + v.marks.map(function (m, k) { var on = all || !!open[k]; return '<li class="' + (on ? "on" : "") + '"><i>' + (k + 1) + "</i><span>" + (on ? escH(m.label) : "") + "</span></li>"; }).join("") + "</ol>" +
+      "<figcaption>" + escH(v.caption) + "</figcaption></figure>";
+  }
+  function marksPaint(fig, v, a) {
+    if (!fig) return;
+    var all = !!a.all, open = a.open || {};
+    fig.classList.toggle("all", all);
+    var tg = fig.querySelector(".pn-ix-tog"); if (tg) { tg.setAttribute("aria-pressed", String(all)); tg.textContent = all ? "Hide all" : "Show all"; }
+    [].forEach.call(fig.querySelectorAll(".pn-mk"), function (b, k) {
+      var on = all || !!open[k], m = v.marks[k];
+      b.classList.toggle("on", on); b.setAttribute("aria-expanded", String(on)); b.setAttribute("aria-label", "Point " + (k + 1) + (on ? ": " + m.label : ", show its name"));
+    });
+    [].forEach.call(fig.querySelectorAll(".pn-mk-key li"), function (li, k) { var on = all || !!open[k]; li.className = on ? "on" : ""; li.lastChild.textContent = on ? v.marks[k].label : ""; });
+  }
+
+  // Compare: a swipe slider over one frame when both images have the same shape, else the two side by side. The
+  // slider also moves by keys (a range input) and by the three buttons under it (single-tap alternative to dragging).
+  function pairHtml(v, i) {
+    var p = v.pair, a = ansOf(i), ta = p.tagA || "This image", why = p.why ? '<p class="pn-ix-why">' + escH(p.why) + "</p>" : "";
+    var head = '<div class="pn-ix-head">' + tag("cmp", "Compare") + '<p class="pn-ix-q">' + escH(ta) + " and " + escH(p.tag) + "</p></div>";
+    if (sliderPair(v)) {
+      var pos = a.pos == null ? 50 : a.pos;
+      return '<figure class="pn-vfig pn-ix pn-pair sl">' + head +
+        '<div class="pn-ix-stage pn-cmp-sl" data-cmp="' + i + '" style="--pos:' + pos + "%" + (v.ar ? ";--ar:" + v.ar : "") + '">' + imgTag(p.src, p.alt || p.tag, p.ar) +
+        '<div class="pn-cmp-top" aria-hidden="true">' + imgTag(v.src, v.alt, v.ar) + "</div>" +
+        '<span class="pn-cmp-h" aria-hidden="true"><i>' + svg(ICO.lr, 18) + "</i></span>" +
+        '<span class="pn-cmp-t a" aria-hidden="true">' + escH(ta) + '</span><span class="pn-cmp-t b" aria-hidden="true">' + escH(p.tag) + "</span>" +
+        '<input type="range" class="pn-cmp-r" min="0" max="100" step="1" value="' + pos + '" aria-label="Slide between ' + escH(ta) + " and " + escH(p.tag) + '" aria-valuetext="' + escH(cmpText(pos, ta, p.tag)) + '"></div>' +
+        '<div class="pn-cmp-go" role="group" aria-label="Show">' + [[100, ta], [50, "Half and half"], [0, p.tag]].map(function (x) {
+          return '<button type="button" class="pn-chip' + (pos === x[0] ? " on" : "") + '" data-act="l-cmp" data-v="' + x[0] + '" aria-pressed="' + (pos === x[0]) + '">' + escH(x[1]) + "</button>";
+        }).join("") + "</div>" + why + "<figcaption>" + escH(v.caption) + "</figcaption></figure>";
+    }
+    var cell = function (z, src, alt, ar, t) { return '<button type="button" class="pn-cmp-cell" data-act="l-zoom" data-z="' + z + '" aria-label="Enlarge: ' + escH(t) + '"><span class="pn-cmp-t">' + escH(t) + "</span>" + imgTag(src, alt, ar) + "</button>"; };
+    return '<figure class="pn-vfig pn-ix pn-pair">' + head + '<div class="pn-cmp2">' + cell("a", v.src, v.alt, v.ar, ta) + cell("b", p.src, p.alt || p.tag, p.ar, p.tag) + "</div>" +
+      why + "<figcaption>" + escH(v.caption) + " Tap an image to enlarge.</figcaption></figure>";
+  }
+  function cmpText(pos, a, b) { return pos >= 95 ? a : pos <= 5 ? b : a + " " + pos + " percent, " + b + " " + (100 - pos) + " percent"; }
+  function cmpSet(stage, pos, ease) {
+    var i = +stage.getAttribute("data-cmp"), st = L.les.steps[i], p = st && st.vis && st.vis.pair;
+    pos = Math.max(0, Math.min(100, Math.round(pos)));
+    ansOf(i).pos = pos;
+    stage.classList.toggle("ease", !!ease && !reduced());
+    stage.style.setProperty("--pos", pos + "%");
+    var r = stage.querySelector(".pn-cmp-r"); if (r) { r.value = String(pos); if (p) r.setAttribute("aria-valuetext", cmpText(pos, p.tagA || "This image", p.tag)); }
+    var fig = stage.closest(".pn-pair");
+    if (fig) [].forEach.call(fig.querySelectorAll("[data-act=l-cmp]"), function (b) { var on = +b.getAttribute("data-v") === pos; b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
+  }
+  function bindCmp(stage) {
+    var on = false, x0 = 0, y0 = 0, lock = 0, last = null;
+    var at = function (e) { var r = stage.getBoundingClientRect(); return (e.clientX - r.left) / (r.width || 1) * 100; };
+    ON(stage, "lsn-cmp", "pointerdown", function (e) { if (e.target.closest && e.target.closest(".pn-cmp-r")) return; on = true; lock = 0; x0 = e.clientX; y0 = e.clientY; if (e.pointerType === "mouse") { cmpSet(stage, at(e), true); lock = 1; } });
+    ON(stage, "lsn-cmp", "pointermove", function (e) {
+      if (!on) return;
+      if (!lock) { var dx = Math.abs(e.clientX - x0), dy = Math.abs(e.clientY - y0); if (dx < 6 && dy < 6) return; lock = dx > dy ? 1 : -1; if (lock > 0) { try { stage.setPointerCapture(e.pointerId); } catch (x) {} } }
+      if (lock > 0) { e.preventDefault(); last = at(e); cmpSet(stage, last, false); }
+    });
+    var up = function (e) { if (on && !lock && e.type === "pointerup") cmpSet(stage, at(e), true); else if (on && lock > 0 && last != null) cmpSet(stage, last, false); on = false; last = null; };
+    ON(stage, "lsn-cmp", "pointerup", up); ON(stage, "lsn-cmp", "pointercancel", up);
+    var r = stage.querySelector(".pn-cmp-r"); if (r) ON(r, "lsn-cmp", "input", function () { cmpSet(stage, +r.value, false); });
+  }
+
+  // Quick check: one tap answers; the right option lights, a wrong pick is marked, the reason shows under it.
+  function qcFb(q, k) {
+    var ok = k === q.a;
+    return '<p class="pn-ix-res ' + (ok ? "ok" : "bad") + '">' + svg(ok ? ICO.tick : ICO.cross, 18) + (ok ? "<b>Right.</b>" : "<b>Not quite.</b> The answer is " + escH(q.o[q.a]) + ".") + "</p>" +
+      '<p class="pn-ix-why">' + escH(q.why || "") + "</p>" + (ok ? streakHtml() : "");
+  }
+  function qcHtml(q, i) {
+    var a = ansOf(i), k = a.qc, done = k != null, tf = isTF(q);
+    return '<section class="pn-qc' + (done ? " done" : "") + '" aria-label="Quick check" data-qc="' + i + '">' + tag("bolt", "Quick check") + '<p class="pn-qc-q">' + escH(q.q) + "</p>" +
+      '<div class="pn-qc-o' + (tf ? " tf" : "") + '">' + q.o.map(function (o, j) {
+        var cls = done ? (j === q.a ? " ok" : j === k ? " bad" : " dim") : "";
+        return '<button type="button" class="pn-qc-b' + cls + '" data-act="l-qc" data-k="' + j + '"' + (done ? ' aria-disabled="true"' : "") + ">" +
+          (done && j === q.a ? svg(ICO.tick, 18) : done && j === k ? svg(ICO.cross, 18) : "") + "<span>" + escH(o) + "</span></button>";
+      }).join("") + '</div><div class="pn-ix-fb" role="status" aria-live="polite">' + (done ? qcFb(q, k) : "") + "</div></section>";
+  }
+
+  // Classic signs deck and key points: pages after the last step.
+  function cardsPage() {
+    var a = ansOf(L.i), f = a.flip || {};
+    return '<div class="pn-pg-h">' + tag("cards", "Classic signs") + '<h2 class="pn-pg-t">What does each sign mean?</h2><p class="pn-pg-s">Say it to yourself, then tap the card to check.</p></div>' +
+      '<div class="pn-flips">' + L.les.cards.map(function (c, k) {
+        var on = !!f[k];
+        return '<button type="button" class="pn-flip' + (on ? " on" : "") + '" data-act="l-flip" data-k="' + k + '" aria-pressed="' + on + '" aria-label="' + escH(c.f) + (on ? ": " + escH(c.b) : ", turn to see the meaning") + '">' +
+          '<span class="pn-flip-in" aria-hidden="true"><span class="pn-flip-f"><small>Sign ' + (k + 1) + " of " + L.les.cards.length + "</small><b>" + escH(c.f) + "</b><em>" + svg(ICO.redo, 14) + "Tap to turn</em></span>" +
+          '<span class="pn-flip-b"><small>' + escH(c.f) + "</small><span>" + escH(c.b) + "</span></span></span></button>";
+      }).join("") + "</div>";
+  }
+  function scoreHtml() {
+    var sc = L.sc;
+    if (!sc.n) return "";
+    return '<div class="pn-lsn-sc"><span><b>' + sc.ok + "</b> of " + sc.n + " right</span>" + (sc.best >= 2 ? "<span>Best streak <b>" + sc.best + "</b></span>" : "") + "</div>";
+  }
+  function keysPage() {
+    return '<div class="pn-pg-h">' + tag("list", "Key points") + '<h2 class="pn-pg-t">' + escH(L.les.title) + "</h2></div>" +
+      '<ol class="pn-keys">' + L.les.keys.map(function (k) { return "<li><i>" + svg(ICO.tick, 16) + "</i><span>" + boldHtml(k) + "</span></li>"; }).join("") + "</ol>" + scoreHtml();
+  }
+  function page() { return pages(L.les)[L.i]; }
+  function pageSay() {
+    var p = page(), les = L.les;
+    if (p === "cards") return "Classic signs. " + les.cards.map(function (c) { return c.f + ". " + c.b; }).join(" ");
+    if (p === "keys") return "Key points. " + les.keys.join(" ").replace(/\*\*/g, "");
+    return les.steps[p].say;
   }
 
   // Ask MaiK (prep-ask.js) is always offered: on this phone or online, and the sheet says which works here. Without it,
   // the older offline-only teacher, only when MaiK runs on this phone.
   function askable() { if (G.PREP_ASK) return true; var T = G.PREP_TEACHER; try { return !!(T && T.explainStep && T.ready && T.ready()); } catch (e) { return false; } }
   function barHtml() {
-    var s = store(), last = L.i === L.les.steps.length - 1, speak = canSpeak();
+    var s = store(), last = L.i === pages(L.les).length - 1, speak = canSpeak();
     return '<div class="pn-lsn-bar" id="pnLsnBar"><div class="pn-lsn-bin">' +
       (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + ic("ask") + "</button>" : "") +
       '<button type="button" class="pn-ib" data-act="l-prev" aria-label="Previous step"' + (L.i ? "" : " disabled") + ">" + ic("back") + "</button>" +
@@ -345,13 +629,16 @@
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
   function readerHtml() {
-    var les = L.les, n = les.steps.length, step = les.steps[L.i], s = store();
+    var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
-    return host.bar(escH(les.title), "Step " + (L.i + 1) + " of " + n, "back", autoBtn) +
+    var anim = L.dir ? (L.dir > 0 ? " fwd" : " rev") : "";
+    var body = step ? '<article class="pn-lsn-step' + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
+        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") + "</article>"
+      : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
+    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", autoBtn) +
       '<div class="pn-lsn-prog" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="' + (L.i + 1) + '">' +
-      les.steps.map(function (x, k) { return "<i" + (k <= L.i ? ' class="on' + (k === L.i ? " cur" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
-      '<div class="pn-body pn-lsn" id="pnLsn"><article class="pn-lsn-step' + (L.dir ? (L.dir > 0 ? " fwd" : " rev") : "") + '" tabindex="-1" aria-roledescription="lesson step">' +
-      '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis) + "</article>" +
+      pg.map(function (x, k) { var ix = typeof x !== "number" || interactive(les.steps[x]); return "<i" + (k <= L.i || ix ? ' class="' + (k <= L.i ? "on" : "") + (k === L.i ? " cur" : "") + (ix ? " ix" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
+      '<div class="pn-body pn-lsn" id="pnLsn">' + body +
       (L.i === 0 && canSpeak() ? '<p class="pn-note">Narration uses this device\'s own voice.</p>' : "") +
       "</div>" + barHtml();
   }
@@ -362,24 +649,37 @@
     var fx = L.fx || {}, cele = fx.m0 && host.celeFor ? host.celeFor(fx.m0, fx) : null;
     var line = host.maikLine ? host.maikLine({ subject: L.sid }, fx) : "";
     return host.bar(escH(les.title), "Lesson finished", "back") + '<div class="pn-body"><section class="pn-panel pn-lsn-fin" role="status" tabindex="-1"' + (fx.cf && L.firstXp ? ' data-cf="1"' : "") + (host.celeAttrs ? host.celeAttrs(cele) : "") + ">" + (host.celeChip ? host.celeChip(cele) : "") +
+      (L.sc.n ? '<p class="pn-mut pn-lsn-fsc">' + L.sc.ok + " of " + L.sc.n + " answers right" + (L.sc.best >= 2 ? ", best streak " + L.sc.best : "") + "</p>" : "") +
       (L.firstXp ? '<p class="pn-lsn-xp"><b>+' + L.firstXp + '</b> XP</p><p class="pn-mut">' + les.steps.length + " steps read. Lesson XP so far: " + host.fmt(total) + "</p>"
         : '<p class="pn-lsn-xp"><b>Done</b></p><p class="pn-mut">Read again. XP counts the first time through; lesson XP so far: ' + host.fmt(total) + "</p>") +
       (nq ? '<button type="button" class="pn-btn pri" data-act="l-quiz">' + ico("play") + " " + nq + " quick questions</button>" : "") +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="l-again">' + ic("redo") + ' Read again</button><button type="button" class="pn-btn" data-act="back">Done</button></div>' +
       (nq ? '<p class="pn-mut pn-small">The questions come from this module\'s bank and are scheduled for spaced review like any other answer.</p>' : "") + "</section>" + line + "</div>";
   }
+  function interactive(s) { var v = s && s.vis; return !!(s && (s.qc || (v && v.kind === "image" && (v.spot || v.marks || v.pair)))); }
+  // L.zoom: { src, alt, caption } of the figure being enlarged (the main image, or the second one of a compare).
   function zoomHtml() {
-    var v = L.les.steps[L.i].vis;
-    return '<div class="pn-zoom" role="dialog" aria-modal="true" aria-label="Image, enlarged" id="pnZoom"><div class="pn-zoom-top"><p>' + escH(v.caption) + '</p><button type="button" class="pn-ib" data-act="l-unzoom" aria-label="Close image">' + ic("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
+    var z = L.zoom;
+    return '<div class="pn-zoom" role="dialog" aria-modal="true" aria-label="Image, enlarged" id="pnZoom"><div class="pn-zoom-top"><p>' + escH(z.caption) + '</p><button type="button" class="pn-ib" data-act="l-unzoom" aria-label="Close image">' + ic("close") + "</button></div>" +
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(z.src)) + '" alt="' + escH(z.alt) + '"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
+  }
+  function zoomOf(z) {
+    var p = page(), v = typeof p === "number" && L.les.steps[p].vis;
+    if (!v || v.kind !== "image") return null;
+    if (z === "b" && v.pair) return { src: v.pair.src, alt: v.pair.alt || v.pair.tag, caption: v.pair.tag + ". " + (v.pair.why || v.caption) };
+    return { src: v.src, alt: v.alt, caption: v.pair ? (v.pair.tagA || "This image") + ". " + v.caption : v.caption };
   }
   function draw(focus) {
     if (!L.les || !host) return;
     var r = host.root && host.root(); if (!r) return;
     host.paint(L.fin ? finishHtml() : readerHtml() + (L.zoom ? zoomHtml() : ""), focus || (L.fin ? ".pn-lsn-fin" : L.zoom ? "[data-act=l-unzoom]" : null));
     L.dir = 0;
-    if (!L.fin) bindSwipe(r.querySelector("#pnLsn"));
+    if (!L.fin) { bindSwipe(r.querySelector("#pnLsn")); bindIx(r); }
     if (L.zoom) bindPinch(r.querySelector(".pn-zoom-sc"));
+  }
+  function bindIx(r) {
+    [].forEach.call(r.querySelectorAll("[data-spot]"), function (st) { ON(st, "lsn-spot", "click", function (e) { spotTap(st, e); }); });
+    [].forEach.call(r.querySelectorAll("[data-cmp]"), bindCmp);
   }
   /* The enlarged image: pinch between 1x and 4x around the fingers' midpoint, drag to pan once zoomed, tap to toggle
      2.2x (the button, so keys work too). Transform only; it eases back to 1x when let go under 1.05x. */
@@ -427,15 +727,15 @@
   function bindSwipe(el) {
     if (!el) return;
     var x0 = 0, y0 = 0, on = false;
-    ON(el, "lsn", "pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
+    ON(el, "lsn", "pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl,.pn-cmp-sl,.pn-flips"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
     ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
     ON(el, "lsn", "pointercancel", function () { on = false; });
   }
 
   /* ---------- navigation ---------- */
   function save() {
-    var s = store(), p = s.ls[L.key] || (s.ls[L.key] = { i: 0, n: L.les.steps.length, done: 0, xp: 0 });
-    p.i = L.i; p.n = L.les.steps.length; host.save();
+    var s = store(), n = pages(L.les).length, p = s.ls[L.key] || (s.ls[L.key] = { i: 0, n: n, done: 0, xp: 0 });
+    p.i = L.i; p.n = n; host.save();
   }
   function go(i, keepVoice) {
     L.dir = i > L.i ? 1 : -1; L.i = i; save();
@@ -443,7 +743,7 @@
     if (L.playing) narrate(); else if (!keepVoice) stopVoice();
   }
   function next() {
-    if (L.i < L.les.steps.length - 1) return go(L.i + 1);
+    if (L.i < pages(L.les).length - 1) return go(L.i + 1);
     var s = store(), p = s.ls[L.key];
     L.playing = false; stopVoice();
     L.firstXp = 0;
@@ -452,7 +752,7 @@
     var m0 = host.snap ? host.snap() : null, td = host.today(), core = host.core && host.core(), dayOf = function (ms) { try { return core.dayNum(ms, new Date(ms).getTimezoneOffset()); } catch (e) { return -1; } };
     var earlier = Object.keys(s.ls).some(function (k) { return k !== L.key && s.ls[k].done && dayOf(s.ls[k].done) === td; });
     L.fx = { m0: m0, cf: !earlier };
-    if (!p.done) { p.xp = xpFor(L.les); L.firstXp = p.xp; }
+    if (!p.done) { p.xp = xpFor(L.les) + XP_HIT * L.sc.ok; L.firstXp = p.xp; }
     p.done = Date.now(); p.i = 0; host.save();
     L.fin = true; draw();
   }
@@ -536,7 +836,7 @@
   function open(sid, mid, h, key) {
     host = h;
     key = key || mid;
-    L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = false; L.playing = false;
+    L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
@@ -544,7 +844,7 @@
     lessonFile(key).then(function (les) {
       if (host.stackTop() !== loading) return;   // left while loading
       var s = store(), p = s.ls[key];
-      L.les = les; L.i = p && !p.done && p.i < les.steps.length ? p.i : 0; L.dir = 0;
+      L.les = les; L.i = p && !p.done && p.i < pages(les).length ? p.i : 0; L.dir = 0;
       save(); warm(les);
       var stk = host.stack(); stk[stk.length - 1] = view;
       draw();
@@ -569,7 +869,12 @@
     if (a === "l-play") return setPlaying(!L.playing);
     if (a === "l-speed") { var s = store(); s.lsp.r = nextSpeed(s.lsp.r); host.save(); if (L.playing) narrate(); return drawBar(); }
     if (a === "l-auto") { var s2 = store(); s2.lsp.au = s2.lsp.au ? 0 : 1; host.save(); return draw("[data-act=l-auto]"); }
-    if (a === "l-zoom") { L.zoom = true; return draw(); }
+    if (a === "l-zoom") {
+      // The shared PrepNucleus image viewer when it is loaded (window.PREP_VIEWER.open), else the reader's own enlarge.
+      var zz = zoomOf(b.getAttribute("data-z") || "a"), PV = G.PREP_VIEWER;
+      if (zz && PV && typeof PV.open === "function") { try { PV.open({ src: imgSrc(zz.src), alt: zz.alt, caption: zz.caption, from: b }); return; } catch (e) {} }
+      L.zoom = zz; if (L.zoom) { L.zret = b.getAttribute("data-z") ? '[data-act=l-zoom][data-z="' + b.getAttribute("data-z") + '"]' : "[data-act=l-zoom]"; draw(); } return; }
+    if (a === "l-show" || a === "l-qc" || a === "l-marks" || a === "l-mark" || a === "l-flip" || a === "l-cmp") return ixAct(a, b);
     if (a === "l-zoom2") {
       if (Date.now() - Z.moved < 350) return;   // the click that ends a pinch or a pan is not a tap
       var big = Z.s <= 1.05, img = b.querySelector("img");
@@ -577,19 +882,54 @@
       if (img) zoomTo(img, big ? 2.2 : 1, 0, 0, !reduced());
       return;
     }
-    if (a === "l-unzoom") { L.zoom = false; return draw("[data-act=l-zoom]"); }
-    if (a === "l-again") { L.fin = false; L.i = 0; L.dir = 0; save(); return draw(); }
+    if (a === "l-unzoom") { L.zoom = null; return draw(L.zret || "[data-act=l-zoom]"); }
+    if (a === "l-again") { L.fin = false; L.i = 0; L.dir = 0; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 }; save(); return draw(); }
     if (a === "l-quiz") return startQuiz();
-    if (a === "l-ask") { var st = L.les.steps[L.i]; L.playing = false; stopVoice(); if (G.PREP_ASK) return G.PREP_ASK.open({ kind: "step", step: st, title: L.les.title }, host); return G.PREP_TEACHER.explainStep(st, L.les.title, host); }
+    if (a === "l-ask") { var pg = page(), st = typeof pg === "number" ? L.les.steps[pg] : { tx: pageSay(), say: pageSay(), vis: null }; L.playing = false; stopVoice(); if (G.PREP_ASK) return G.PREP_ASK.open({ kind: "step", step: st, title: L.les.title }, host); return G.PREP_TEACHER.explainStep(st, L.les.title, host); }
   }
   /* back(): true when handled here (the zoomed image closes first). Leaving the reader stops the voice. */
   function back() {
     if (!host || !L.les) return false;
-    if (L.zoom && host.stackTop() === L.view) { L.zoom = false; draw("[data-act=l-zoom]"); return true; }
+    if (L.zoom && host.stackTop() === L.view) { L.zoom = null; draw(L.zret || "[data-act=l-zoom]"); return true; }
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
     return false;
   }
-  function leave() { L.playing = false; L.zoom = false; stopVoice(); }
+  function leave() { L.playing = false; L.zoom = null; stopVoice(); }
+  /* Taps on the interactive parts. Each updates its own part in place and keeps the focus on the control. */
+  function ixAct(a, b) {
+    var r = host.root && host.root(), p = page(), step = typeof p === "number" ? L.les.steps[p] : null, v = step && step.vis, ans = ansOf(L.i), k = +b.getAttribute("data-k");
+    if (a === "l-show") {
+      if (!v || !v.spot || ans.done) return;
+      ans.done = 1; score(false);
+      var fig = b.closest(".pn-spot");
+      spotPaint(fig, v.spot, ans);
+      var nx = r && r.querySelector("[data-act=l-next]"); if (nx) nx.focus();
+      return;
+    }
+    if (a === "l-qc") {
+      var q = step && step.qc; if (!q || ans.qc != null || !(k >= 0 && k < q.o.length)) return;
+      ans.qc = k; score(k === q.a);
+      var sec = b.closest(".pn-qc"); if (!sec) return;
+      sec.outerHTML = qcHtml(q, p);
+      var nb = r && r.querySelector('.pn-qc [data-k="' + k + '"]'); if (nb) nb.focus();
+      return;
+    }
+    if (a === "l-marks" || a === "l-mark") {
+      if (!v || !v.marks) return;
+      if (a === "l-marks") { ans.all = !ans.all; if (!ans.all) ans.open = {}; }
+      else { ans.open = ans.open || {}; if (ans.all) { ans.all = false; ans.open = {}; v.marks.forEach(function (m, j) { ans.open[j] = 1; }); } ans.open[k] = ans.open[k] ? 0 : 1; }
+      marksPaint(b.closest(".pn-reveal"), v, ans);
+      return;
+    }
+    if (a === "l-cmp") { var stage = b.closest(".pn-pair") && b.closest(".pn-pair").querySelector("[data-cmp]"); if (stage) cmpSet(stage, +b.getAttribute("data-v"), true); return; }
+    if (a === "l-flip") {
+      var f = ans.flip || (ans.flip = {}), c = L.les.cards && L.les.cards[k]; if (!c) return;
+      f[k] = f[k] ? 0 : 1;
+      b.classList.toggle("on", !!f[k]); b.setAttribute("aria-pressed", String(!!f[k]));
+      b.setAttribute("aria-label", c.f + (f[k] ? ": " + c.b : ", turn to see the meaning"));
+      if (f[k]) try { if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic("light"); } catch (e) {}
+    }
+  }
   /* Keys in the reader (an iPad with a keyboard, a laptop): ArrowRight next step, ArrowLeft previous, Space play or
      pause. Only while the reader is the top screen with no sheet or enlarged image over it; never while typing, never
      on a table that scrolls sideways (its arrows scroll it), and Space stays the button's own key on a focused control. */

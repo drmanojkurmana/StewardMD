@@ -50,8 +50,11 @@ http.createServer((req, res) => {
       return;
     }
     if (err) { res.writeHead(404); res.end("404"); return; }
-    // no-store so the test harness always sees the current working tree (defeats Chrome's cache)
-    res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream", "cache-control": "no-store, must-revalidate" });
+    // no-store so the test harness always sees the current working tree (defeats Chrome's cache). Fixture lesson media
+    // under an api/ folder are served like the bank route serves them (immutable, one year), so offline tests see the
+    // HTTP cache the app relies on.
+    const immutable = /\/test\/fixtures\/[a-z0-9-]+\/api\/v\d+\/lessons\/media\//.test(fp.split("\\").join("/"));
+    res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream", "cache-control": immutable ? "public, max-age=31536000, immutable" : "no-store, must-revalidate" });
     res.end(data);
   });
 }).listen(port, () => console.log(`[serve] ${root} on http://localhost:${port}`));
