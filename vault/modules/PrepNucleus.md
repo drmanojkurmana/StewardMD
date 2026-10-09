@@ -966,3 +966,12 @@ best way of learning."
 - Tests: `test/prep-radlx.test.mjs`, `test/run-prep-lessons-ix-ui.mjs` (fixture `test/fixtures/prep-lx`, synthetic
   shapes; W=390|820|1180, PN_LIGHT=1). `test/serve.mjs` serves fixture lesson media immutable like the bank route so
   the offline check sees the real HTTP cache.
+- **Run 2026-10-09 (results):** 340 radbook lessons revised (v2 files, `r: 2`). Images 350 -> 982 (lessons with 3+
+  images 39 -> 207; with none 144 -> 46, mostly anatomy lessons from the true/false book, which has no figures);
+  interactive elements 0 -> 1,234 (222 spot, 118 label sets, 15 compares, 577 quick checks, 302 sign decks; 325 lessons
+  with 2+); 163 figure steps added; 306 figure uses the strict vote had dropped came back under the lesson rubric.
+  Licensed figures: 12 Open-i case-report figures (11 CC BY 4.0, 1 CC BY 3.0), credited in terms.html; Commons gave
+  none that passed. Animal and veterinary study figures are excluded in code (`ANIMAL`), hand vetoes in
+  `<dir>/veto.json`. Spend $4.83 (plan gemini-2.5-flash $2.21, locate $2.62). Lesson: the plan request's own boxes
+  were wrong (laterality, guessed round numbers); a detection-only request per image (`locate`) fixed them, so keep
+  the two stages separate.

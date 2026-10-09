@@ -535,8 +535,8 @@ function votesPrep(D, args) {
   const vd = path.join(D.dir, "votes"); fs.mkdirSync(path.join(vd, "img"), { recursive: true });
   // only lessons whose every spot and label set has been through locate (a later locate run fills the rest)
   const LOC = readJson(path.join(D.dir, "loc.json"), {});
-  const located = (id) => { const pl = readJson(path.join(D.dir, "plan", id + ".json"), {}).plan || {}, l = LOC[id] || {};
-    return (pl.spot || []).every((x) => l["s:" + x.c] !== undefined) && (pl.reveal || []).every((x) => l["r:" + x.c] !== undefined || new Set((x.marks || []).map((m) => m.label)).size < 2); };
+  const located = (id) => { const pl = readJson(path.join(D.dir, "plan", id + ".json"), {}).plan || {}, l = LOC[id] || {}, has = (c) => !!P[id] && P[id].cands.some((x) => x.cid === c);
+    return (pl.spot || []).every((x) => !has(x.c) || l["s:" + x.c] !== undefined) && (pl.reveal || []).every((x) => !has(x.c) || l["r:" + x.c] !== undefined || new Set((x.marks || []).map((m) => m.label)).size < 2); };
   const lessons = shipped(D.book).filter((l) => G[l.id] && located(l.id)), items = [], draw = [];
   for (const les of lessons) {
     const p = P[les.id], g = G[les.id], cOf = (id) => p.cands.find((c) => c.cid === id), uses = [];
@@ -599,6 +599,9 @@ function votesApply(D) {
 // =====================================================================================================================
 // assemble
 // =====================================================================================================================
+/* animal(c) -> true for a licensed figure from a veterinary or animal study: never shown to students as a patient image. */
+export const ANIMAL = /\b(?:canine|dogs?|pupp(?:y|ies)|cattle|bovine|feline|cats?|rats?|mice|mouse|murine|porcine|pigs?|piglets?|sheep|ovine|equine|horses?|rabbits?|newts?|zebrafish|primates?|monkeys?|animal|veterinary)\b/i;
+export const animal = (c) => !!c && c.kind !== "pdf" && ANIMAL.test(String((c.credit && c.credit.title) || "") + " " + String(c.cap || ""));
 const arOf = (c) => (c && c.w && c.h ? Math.round((c.w / c.h) * 1000) / 1000 : undefined);
 /* buildLesson(les, pool, gated, votes) -> the new lesson file, or null when nothing changed. */
 export function buildLesson(les, p, g, v) {
@@ -646,11 +649,17 @@ function assemble(D) {
   const P = readJson(path.join(D.dir, "pool.json"), {}), G = readJson(path.join(D.dir, "gated.json"), {}), V = readJson(path.join(D.dir, "votes/result.json"), null);
   if (!V) throw new Error("run votes-apply first");
   const out = path.join(D.dir, "out"); fs.rmSync(out, { recursive: true, force: true });
+  const VETO = readJson(path.join(D.dir, "veto.json"), {});
   const lessons = shipped(D.book), media = new Map(), before = [], after = [], changed = [], bad = [];
   for (const les of lessons) {
     before.push({ id: les.id, ...lessonCounts(les) });
     if (!G[les.id] || !V[les.id]) { after.push({ id: les.id, ...lessonCounts(les) }); continue; }
-    const { lesson, media: m } = buildLesson(les, P[les.id], G[les.id], V[les.id]);
+    const p = P[les.id], v = JSON.parse(JSON.stringify(V[les.id])), g = G[les.id], cOf = (id) => p.cands.find((c) => c.cid === id);
+    for (const [i, f] of Object.entries(g.figs)) if (animal(cOf(f.c)) && v.uses["fig:" + i]) v.uses["fig:" + i].fig = false;
+    g.add.forEach((a, k) => { if (animal(cOf(a.c)) && v.uses["add:" + k]) v.uses["add:" + k].fig = false; });
+    if (g.pair && (animal(cOf(g.pair.a)) || animal(cOf(g.pair.b))) && v.uses.pair) v.uses.pair.fig = false;
+    for (const u of VETO[les.id] || []) if (v.uses[u]) v.uses[u].fig = false;     // hand review (veto.json): wrong for the step
+    const { lesson, media: m } = buildLesson(les, p, g, v);
     const probs = LP.checkLesson(lesson);
     if (probs.length) { bad.push({ id: les.id, why: probs.slice(0, 3) }); after.push({ id: les.id, ...lessonCounts(les) }); continue; }
     m.forEach((c, name) => media.set(name, c));
@@ -676,11 +685,12 @@ const escH = (t) => String(t || "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "
 /* creditsHtml(credits) -> <li> lines for terms.html, one a licensed figure, sorted by title. */
 export function creditsHtml(credits) {
   const lic = (l) => (l && l.url ? `<a href="${escH(l.url)}" target="_blank" rel="noopener">${escH(l.code)}</a>` : escH((l && l.code) || ""));
-  const seen = new Set();
-  return credits.filter((c) => { const k = c.kind === "openi" ? c.pmcid + c.fig : c.page; if (seen.has(k)) return false; seen.add(k); return true; })
-    .sort((a, b) => String(a.title).localeCompare(String(b.title)))
+  const by = new Map();
+  for (const c of credits) { const k = c.kind === "openi" ? c.pmcid : c.page; if (!by.has(k)) by.set(k, { ...c, figs: [] }); if (c.fig && !by.get(k).figs.includes(c.fig)) by.get(k).figs.push(c.fig); }
+  const au = (a) => String(a || "").replace(/\.+$/, "");
+  return [...by.values()].sort((a, b) => String(a.title).localeCompare(String(b.title)))
     .map((c) => c.kind === "openi"
-      ? `        <li>${escH(c.title)}. ${escH(c.authors || "Authors as listed in the article")}. ${lic(c.lic)}. Source: <a href="https://pmc.ncbi.nlm.nih.gov/articles/${escH(c.pmcid)}/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/articles/${escH(c.pmcid)}/</a>${c.doi ? " (doi:" + escH(c.doi) + ")" : ""}. Figure ${escH(c.fig)} (converted to WebP).</li>`
+      ? `        <li>${escH(c.title)}. ${escH(au(c.authors) || "Authors as listed in the article")}. ${lic(c.lic)}. Source: <a href="https://pmc.ncbi.nlm.nih.gov/articles/${escH(c.pmcid)}/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/articles/${escH(c.pmcid)}/</a>${c.doi ? " (doi:" + escH(c.doi) + ")" : ""}. ${c.figs.length > 1 ? "Figures" : "Figure"} ${escH(c.figs.join(", "))} (converted to WebP).</li>`
       : `        <li>${escH(c.title)}. ${escH(c.author)}. ${lic(c.lic)}. Source: <a href="${escH(c.page)}" target="_blank" rel="noopener">Wikimedia Commons</a> (converted to WebP).</li>`).join("\n") + "\n";
 }
 
