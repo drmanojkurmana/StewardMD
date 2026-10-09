@@ -31,7 +31,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { normText, verbatim, parseModelJson, cleanText, missingNumbers } from "../functions/_prep-core.js";
-import { ctxOf, figQaMap, topicsOf, topicFigs, groundOf, allLessons, lessonKey, mediaName, MEDIA, logPath, spent } from "./prep-radbook.mjs";
+import { ctxOf, figQaMap, topicsOf, topicFigs, groundOf, allLessons, lessonKey, mediaName, MEDIA, logPath, spent, useBook } from "./prep-radbook.mjs";
 import { licenceOf, xmlLicence, stripHtml, authorsShort, slug, MODALITY } from "./prep-rad.mjs";
 import { costUsd } from "./prep-vertex.mjs";
 
@@ -39,7 +39,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 export const LP = require("../prep-lessons.js");
 const UA = "StewardMD-PrepNucleus-radiology/1.0 (https://stewardmd.com; contact drmanojkurmana@gmail.com)";
-export const MODEL = "gemini-2.5-flash";
+export const MODEL = process.env.PREP_PLAN_MODEL || "gemini-2.5-flash";
 export const REV = 2;                                     // lesson files ship under v<REV>/lessons/
 const readJson = (p, d) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return d; } };
 const writeJson = (p, o, pretty) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, pretty ? JSON.stringify(o, null, 1) : JSON.stringify(o)); };
@@ -51,7 +51,7 @@ const r3 = (x) => Math.round(x * 1000) / 1000;
 // pure helpers (tested in test/prep-radlx.test.mjs)
 // =====================================================================================================================
 export const DASH = /[‒–—―⸺⸻]/;
-export const BAN = /\b(?:fig(?:ure)?\.?\s*\d|case\s*no|book|notes|chapter|author|source|textbook|pmc\d*|pubmed|et al|journal|radiopaedia|wikipedia|AI|artificial intelligence)\b/i;
+export const BAN = /\b(?:fig(?:ure)?\.?\s*\d|case\s*no|book|notes|chapter|author|source|textbook|pmc\d*|pubmed|et al|journal|radiopaedia|wikipedia|AI|artificial intelligence|prometheus|lionhart|crack the core|gamesmanship)\b/i;
 /* boxOf([ymin, xmin, ymax, xmax] in 0..1000) -> [x, y, w, h] in 0..1, or null when it is not a usable target: out of
  * bounds, under 1.5% a side, or over 55% of the image. */
 export function boxOf(b) {
@@ -114,10 +114,12 @@ export function lessonCounts(l) {
 // =====================================================================================================================
 // paths and context
 // =====================================================================================================================
+// --ctc: the Crack the Core book (set "ctcbook", tools/prep-ctc.mjs CTC_BOOK): its book dir and its own work dir.
 function dirs(args) {
-  const book = args.book || path.join(os.homedir(), "prep-data/radnotes/book");
-  const dir = args.dir || path.join(os.homedir(), "prep-data/radnotes/lx");
-  return { book, dir };
+  const ctc = args.flags.has("ctc");
+  const book = args.book || path.join(os.homedir(), ctc ? "prep-data/radnotes/ctc/book" : "prep-data/radnotes/book");
+  const dir = args.dir || path.join(os.homedir(), ctc ? "prep-data/radnotes/ctclx" : "prep-data/radnotes/lx");
+  return { book, dir, ctc };
 }
 function shipped(book) {
   const d = path.join(book, "out/lessons");
@@ -312,6 +314,7 @@ async function plan(D, args) {
   const lessons = shipped(D.book).filter((l) => P[l.id] && (!args.only || l.id === args.only));
   const cap = +(args.cap || 12), project = process.env.PREP_VERTEX_PROJECT;
   const todo = lessons.filter((l) => !fs.existsSync(path.join(D.dir, "plan", l.id + ".json")));
+  if (args.flags.has("reverse")) todo.reverse();          // a second runner works from the other end
   const estIn = todo.reduce((a, l) => a + 3500 + P[l.id].cands.length * 1100, 0), estOut = todo.length * 3500;
   console.log(`plan: ${todo.length} of ${lessons.length} lessons to do; estimate ${(estIn / 1e6).toFixed(2)}M in, ${(estOut / 1e6).toFixed(2)}M out (thinking included) = $${costUsd({ inTok: estIn, outTok: estOut }, MODEL).toFixed(2)}; spent so far on the book log $${spent(D.book).toFixed(2)}`);
   if (args.flags.has("dry-run") || !todo.length) return;
@@ -340,7 +343,7 @@ async function plan(D, args) {
   await Promise.all(Array.from({ length: +(args.conc || 6) }, async () => {
     while (k < todo.length) {
       if (usd > cap) return;
-      const les = todo[k++]; await one(les);
+      const les = todo[k++]; if (fs.existsSync(path.join(D.dir, "plan", les.id + ".json"))) continue; await one(les);
       if ((n + fail) % 20 === 0) console.log(`  ${n} done, ${fail} failed, $${usd.toFixed(3)}`);
     }
   }));
@@ -581,7 +584,7 @@ function votesApply(D) {
       for (const u of it.uses) {
         const va = (a.uses || []).find((x) => x.u === u.u), vb = (b.uses || []).find((x) => x.u === u.u);
         // the figure (fig ok), and separately its overlay (box or labels); a failed overlay keeps the plain figure
-        r.uses[u.u] = { fig: !!(va && vb && va.fig === true && vb.fig === true && va.ident !== true && vb.ident !== true), overlay: !!(va && vb && va.overlay === true && vb.overlay === true) };
+        r.uses[u.u] = { fig: !!(va && vb && va.fig === true && vb.fig === true && va.ident !== true && vb.ident !== true), overlay: !!(va && vb && va.overlay === true && vb.overlay === true), no: !!(va && vb && va.fig === false && vb.fig === false) };
         if (u.kind === "reveal" && va && vb && Array.isArray(va.marks) && Array.isArray(vb.marks)) r.marks[u.u] = u.labels.map((_, j) => va.marks[j] === true && vb.marks[j] === true);
         if ((va && va.ident) || (vb && vb.ident)) r.ident.push(u.u);
         if (!r.uses[u.u].fig) reasons.push(it.lesson + " " + u.u + ": " + [va && va.why, vb && vb.why].filter(Boolean).join(" | ").slice(0, 200));
@@ -600,7 +603,7 @@ function votesApply(D) {
 // assemble
 // =====================================================================================================================
 /* animal(c) -> true for a licensed figure from a veterinary or animal study: never shown to students as a patient image. */
-export const ANIMAL = /\b(?:canine|dogs?|pupp(?:y|ies)|cattle|bovine|feline|cats?|rats?|mice|mouse|murine|porcine|pigs?|piglets?|sheep|ovine|equine|horses?|rabbits?|newts?|zebrafish|primates?|monkeys?|animal|veterinary)\b/i;
+export const ANIMAL = /\b(?:canine|dogs?|pupp(?:y|ies)|cattle|bovine|feline|cats?|rats?|mice|mouse|murine|porcine|pigs?|piglets?|calf|calves|heifers?|goats?|caprine|lambs?|sheep|ovine|equine|horses?|rabbits?|newts?|zebrafish|primates?|monkeys?|animal|veterinary)\b/i;
 export const animal = (c) => !!c && c.kind !== "pdf" && ANIMAL.test(String((c.credit && c.credit.title) || "") + " " + String(c.cap || ""));
 const arOf = (c) => (c && c.w && c.h ? Math.round((c.w / c.h) * 1000) / 1000 : undefined);
 /* buildLesson(les, pool, gated, votes) -> the new lesson file, or null when nothing changed. */
@@ -621,8 +624,8 @@ export function buildLesson(les, p, g, v) {
       const c = cOf(f.c), keep = s.vis && s.vis.kind === "image" ? s.vis : null;
       st.vis = over("fig:" + i, c, imgVis(c, f.cap || (keep && keep.caption) || "", keep && keep.alt));
       if (keep && keep.ar == null) { const ar = arOf(c); if (ar) st.vis.ar = ar; }
-    } else if (s.vis && s.vis.kind === "image" && (v.ident || []).includes("fig:" + i)) {
-      st.vis = null;                                                       // a voter read a patient identifier on it
+    } else if (s.vis && s.vis.kind === "image" && ((v.ident || []).includes("fig:" + i) || (vu && vu.no))) {
+      st.vis = null;                                     // a voter read a patient identifier on it, or both said it is wrong for the step
     } else if (s.vis && s.vis.kind === "image") {
       const fid = p.used[i] && cOf(p.used[i]); if (fid) { media.set(fid.name, fid); const ar = arOf(fid); if (ar) st.vis = { ...s.vis, ar }; }
     }
@@ -753,6 +756,7 @@ export function parseArgs(argv) {
 }
 async function main() {
   const args = parseArgs(process.argv.slice(2)), cmd = args._[0], D = dirs(args);
+  if (D.ctc) useBook((await import("./prep-ctc.mjs")).CTC_BOOK);
   fs.mkdirSync(D.dir, { recursive: true });
   if (cmd === "pool") return pool(D, args);
   if (cmd === "plan") return plan(D, args);

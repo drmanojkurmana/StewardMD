@@ -975,3 +975,18 @@ best way of learning."
   `<dir>/veto.json`. Spend $4.83 (plan gemini-2.5-flash $2.21, locate $2.62). Lesson: the plan request's own boxes
   were wrong (laterality, guessed round numbers); a detection-only request per image (`locate`) fixed them, so keep
   the two stages separate.
+
+## Interactive + image pass on the 334 Crack the Core lessons (2026-10-09, branch `feat/prep-ctc-interactive`, prep42)
+- Same pipeline as the radbook run: `node tools/prep-radlx.mjs <stage> --ctc` (book dir `~/prep-data/radnotes/ctc/book`,
+  work dir `~/prep-data/radnotes/ctclx`). New in the tool: `--ctc`, a both-voters-say-wrong drop of a kept book figure
+  (`no`), `PREP_PLAN_MODEL` / `PREP_LOC_MODEL` overrides, `--reverse` plan runner that skips planned lessons, and
+  more brand words in `BAN` (prometheus, lionhart, crack the core, gamesmanship). `ANIMAL` now also catches calf,
+  calves, heifer, goat, caprine, lamb (a calf case report had slipped through).
+- **Results:** 334 lessons revised (all `r: 2`). Images 265 -> 713 (lessons with 3+ images 19 -> 132; with none
+  168 -> 64); interactive elements 0 -> 1,046 (138 spot, 45 label sets, 14 compares, 545 quick checks, 304 sign
+  decks, 333 key point pages); 317 lessons with 2+ interactive parts. Licensed figures: 34 Open-i (CC BY 4.0,
+  3.0, 2.0) and 2 Commons (CC BY 4.0), merged into the terms.html "Radiology lesson figure credits" list.
+- Hand fixes: `ctclx/veto.json` drops a teratoma image reused in the hydrometrocolpos lesson and a clinic stock photo
+  from Commons; lesson 650692 step text corrected (tardus parvus is seen downstream of a stenosis). Veto keys are the
+  full lesson id with its slug.
+- Spend $4.04 (plan $2.58 across gemini-2.5-flash and gemini-3.6-flash, locate $1.46); votes by Haiku subagents.
