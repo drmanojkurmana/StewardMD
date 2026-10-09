@@ -120,6 +120,16 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   letters), never from the capped offline mirror or a truncated page. The register's number is the one
   recorded (one number, one account). Kill switch: env `VERIFY_NAME_FALLBACK=0`. Tests:
   `test/verify-nmc-live.test.mjs`.
+- **Three tests, any one passes (owner, 2026-10-09).** `verify-doctor.js`: (1) register number + name
+  (`pickMatch`), (2) any register row with the exact full name read off the certificate or photo ID
+  (`nameMatches`, all rows not just a unique one), (3) the certificate reading itself, confidence > 0.7
+  (`docReadAccepts`, certificate mode only, a reg number must have been read). One account per number on
+  every path (`icu:reg:<reg>`). A less certain pass (several namesakes, the document alone, a number that is
+  not the register's) still verifies and emails the owner "Auto-verified, please check" with a one-click
+  Revoke (`/api/verifications/action?do=reject`). Revoke now frees the number (`doReject`). Students and
+  interns: a clearly read ID (> 0.7) is accepted at once as a reviewed trainee (never prescribes), owner
+  emailed. Kill switches: `VERIFY_NAME_FALLBACK=0`, `VERIFY_DOC_ACCEPT=0`. Tests: `test/verify-nmc-live.test.mjs`.
+  The "exactly one row" rule above is superseded.
 - **The manual-review path must refresh the token.** The free week is the `provUntil` claim the server
   writes on `pending_review`; verify.js refreshed the token only on `verified`, so a doctor under review
   saw Free until the token renewed itself (up to an hour). Both paths now `getIdToken(true)` + `resyncPro()`.

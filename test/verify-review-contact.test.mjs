@@ -178,7 +178,8 @@ test("student review email names the account and links WhatsApp (Apple Hide My E
   const { res, sent, kv } = await runStudentReview({
     profile: { name: "Somasreekar Marella", phone: "9876543210", hospital: "GIMSR Visakhapatnam" },
     lifecycle: { firstSeen: 1, phone: "919876543210", phoneVerifiedAt: 2 },
-    geminiJson: { full_name: "SOMASREEKAR MARELLA", institution: "GIMSR Visakhapatnam", course: "MBBS", years: "2022-2027", looks_valid: true, confidence: 0.9 },
+    // 0.6: a blurry card, so it still goes to a person (a clear one, above 0.7, is accepted at once since 2026-10-09)
+    geminiJson: { full_name: "SOMASREEKAR MARELLA", institution: "GIMSR Visakhapatnam", course: "MBBS", years: "2022-2027", looks_valid: true, confidence: 0.6 },
   });
   assert.equal(res.status, "pending_review");
   assert.equal(res.reason, "medical_student_id");

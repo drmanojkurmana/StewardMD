@@ -55,10 +55,11 @@ async function approve(e, uid, regNo, force) {
   const r = await verifications.onRequest({ request: req, env: e, params: { path: ["approve"] } });
   return { status: r.status, body: await r.json() };
 }
-// The certificate reader (Gemini) answers with a readable name; the intern role goes straight to review.
+// The certificate reader (Gemini) answers with a readable name at 0.6: below the 0.7 at which an intern ID is
+// accepted at once (2026-10-09), so the intern goes to review, the path these tests are about.
 function withGemini(fn) {
   const real = globalThis.fetch;
-  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: '{"full_name":"Asha Rao","registration_number":"","looks_valid":true,"confidence":0.9}' }] } }] }) });
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: '{"full_name":"Asha Rao","registration_number":"","looks_valid":true,"confidence":0.6}' }] } }] }) });
   return fn().finally(() => { globalThis.fetch = real; });
 }
 async function upload(e, uid, hw) {

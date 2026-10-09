@@ -417,6 +417,21 @@
         setTimeout(hideGate, 2600);
         return;
       }
+      // 1b) Student / intern ID read clearly: accepted at once as a reviewed trainee (never prescribes).
+      if (data.status === "trainee_verified") {
+        stopSteps();
+        var stu = (data.role || _role) === "student";
+        setStatusMsg("success", resultHtml(vfIco("check") + " You're verified", [
+          (stu ? "Your college ID" : "Your internship ID") + " is accepted.",
+          "Pro is free for your first 7 days.",
+          "The prescription generator stays locked for " + (stu ? "students" : "interns") + "."]));
+        try { await u.getIdToken(true); } catch (e) {}
+        _tCache = { val: true, at: Date.now(), role: data.role || _role };
+        try { resyncPro(); } catch (e) {}
+        settle(true); showStatus();
+        setTimeout(hideGate, 2600);
+        return;
+      }
       // 2) AI unsure / not matched → cert emailed to support; grant PROVISIONAL access.
       if (data.status === "pending_review" && data.trialUsed) {
         // Once per doctor: the free week was already used with this registration, number or device.
