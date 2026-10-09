@@ -63,7 +63,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG13.1 | ob3-pelvis-head |  |  |
 | OG13.2 | ob3-mechanism | explorer:mechanism, drill:labour |  |
 | OG13.3 | ob3-onset-stages, ob3-bishop-induction, ob3-monitoring-lcg, ob3-third-stage, ob3-respectful-care | tool:bishop, drill:labour, explorer:mechanism, clinic:ctg |  |
-| OG13.4 | ob8-preterm-what, ob8-preterm-steroids, ob8-tocolysis, ob8-pprom, ob8-postterm |  |  |
+| OG13.4 | ob8-preterm-what, ob8-preterm-steroids, ob8-tocolysis, ob8-pprom, ob8-postterm | drill:steroids |  |
 | OG13.5 |  | drill:labour |  |
 | OG13.6 | ob3-mechanism | drill:labour |  |
 | OG13.7 |  | drill:labour |  |
@@ -107,14 +107,14 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG27.3 | gy4-pid |  |  |
 | OG28.1 | gy7-when-to-look, gy7-semen, gy7-ovulation, gy7-tubes-uterus, gy7-treatment-ladder |  |  |
 | OG28.2 | gy7-tubes-uterus |  |  |
-| OG28.3 | gy7-ovulation, gy7-treatment-ladder |  |  |
-| OG28.4 | gy7-treatment-ladder |  |  |
+| OG28.3 | gy7-ovulation, gy7-treatment-ladder | drill:ovulation |  |
+| OG28.4 | gy7-treatment-ladder | drill:ovulation |  |
 | OG29.1 | gy5-fibroid, gy5-fibroid-treat |  |  |
 | OG30.1 | gy3-what, gy3-why, gy3-diagnose, gy3-hirsutism, gy3-risks, gy3-manage |  |  |
 | OG30.2 | gy3-hirsutism |  |  |
 | OG31.1 | gy6-floor, gy6-pop-types, gy6-popq, gy6-pop-manage | explorer:popq |  |
-| OG32.1 | gy9-what-is, gy9-symptoms, gy9-hrt-who, gy9-hrt-regimens, gy9-bone |  |  |
-| OG32.2 | gy12-pmb |  |  |
+| OG32.1 | gy9-what-is, gy9-symptoms, gy9-hrt-who, gy9-hrt-regimens, gy9-bone | drill:hrt |  |
+| OG32.2 | gy12-pmb | drill:pmb |  |
 | OG33.1 | gy10-natural-history, gy12-cervix, gy12-staging |  |  |
 | OG33.2 | gy12-cervix |  |  |
 | OG33.3 | gy10-three-tests, gy10-who-when | explorer:cervical-screening |  |

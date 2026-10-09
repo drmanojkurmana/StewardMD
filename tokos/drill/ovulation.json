@@ -1,0 +1,55 @@
+{
+  "id": "ovulation", "kind": "drill", "level": "mbbs", "review": "ai_drafted", "timeLimitSec": 600,
+  "title": { "en": "Anovulatory infertility drill: letrozole first in PCOS", "hi": "एनोवुलेटरी इनफर्टिलिटी ड्रिल: PCOS में पहले letrozole" },
+  "scenario": {
+    "en": "A 29-year-old woman has PCOS and has not ovulated for several cycles. No other infertility factor has been found. She wants to become pregnant. Work through the first drug, the pregnancy check and the monitoring if clomiphene is used. Teaching scenario, not a real patient.",
+    "hi": "29 वर्षीय महिला को PCOS है और कई cycles से ovulation नहीं हुआ। कोई दूसरा infertility factor नहीं मिला। वह गर्भ चाहती है। पहली दवा, गर्भावस्था की जाँच और clomiphene लेने पर निगरानी पर काम करें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "Teede HJ et al. Recommendations from the 2023 international evidence-based guideline for the assessment and management of polycystic ovary syndrome. J Clin Endocrinol Metab 2023 (PMC10477934)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477934/" }
+  ],
+  "stages": [
+    { "id": "first", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Anovulatory PCOS, no other infertility factor, and she wants a pregnancy. Which first-line drug do you choose for ovulation induction?", "hi": "anovulatory PCOS है, कोई दूसरा infertility factor नहीं है, और वह गर्भ चाहती है। ovulation induction के लिए पहली पंक्ति की कौन-सी दवा चुनेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "pregnancy",
+          "text": { "en": "Letrozole.", "hi": "Letrozole।" },
+          "feedback": { "en": "2023 international PCOS guideline: \"Letrozole should be the first-line pharmacological treatment for ovulation induction in infertile anovulatory women with PCOS, with no other infertility factors.\"", "hi": "2023 अंतरराष्ट्रीय PCOS दिशानिर्देश: बिना किसी दूसरे infertility factor वाली anovulatory PCOS में letrozole पहली दवा है।" } },
+        { "id": "b", "correct": false, "next": "pregnancy",
+          "text": { "en": "Clomiphene.", "hi": "Clomiphene।" },
+          "feedback": { "en": "The guideline says letrozole should be used rather than clomiphene citrate in this group, because it improves ovulation, clinical pregnancy and live birth rates.", "hi": "दिशानिर्देश कहता है कि इस समूह में clomiphene citrate की जगह letrozole देना चाहिए, क्योंकि यह ovulation, clinical pregnancy और live birth rates बेहतर करता है।" } },
+        { "id": "c", "correct": false, "next": "pregnancy",
+          "text": { "en": "Gonadotrophin injections.", "hi": "Gonadotrophin के इंजेक्शन।" },
+          "feedback": { "en": "The guideline places gonadotrophins as second-line, after first-line oral ovulation induction has failed.", "hi": "दिशानिर्देश में gonadotrophins दूसरी पंक्ति में हैं, जब पहली पंक्ति की oral ovulation induction विफल हो।" } }
+      ]
+    },
+    { "id": "pregnancy", "src": 0, "timeSec": 60,
+      "prompt": { "en": "She had unprotected sex last week and her period is late. What must you do before you prescribe letrozole?", "hi": "उसने पिछले हफ़्ते बिना सुरक्षा संभोग किया और period देर से आया है। letrozole लिखने से पहले क्या करना ज़रूरी है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "monitor",
+          "text": { "en": "Exclude a pre-existing pregnancy first.", "hi": "पहले पहले से मौजूद गर्भावस्था को नकारें।" },
+          "feedback": { "en": "The guideline: \"Letrozole should not be given where there is any possibility of a pre-existing pregnancy.\" Check for pregnancy before the prescription.", "hi": "दिशानिर्देश: जहाँ पहले से गर्भावस्था की कोई संभावना हो, वहाँ letrozole नहीं देना चाहिए। लिखने से पहले गर्भावस्था की जाँच करें।" } },
+        { "id": "b", "correct": false, "next": "monitor",
+          "text": { "en": "Prescribe now and check for pregnancy only if the period does not come.", "hi": "अभी लिखें, और गर्भावस्था की जाँच तभी करें जब period न आए।" },
+          "feedback": { "en": "The check comes before the prescription. Letrozole should not be given where a pre-existing pregnancy is possible.", "hi": "जाँच लिखने से पहले आती है। जहाँ पहले से गर्भावस्था संभव हो, वहाँ letrozole नहीं देना चाहिए।" } },
+        { "id": "c", "correct": false, "next": "monitor",
+          "text": { "en": "Nothing. Pregnancy is not a concern with this drug.", "hi": "कुछ नहीं। इस दवा में गर्भावस्था की चिंता नहीं है।" },
+          "feedback": { "en": "The guideline gives no such exemption. Letrozole should not be given where there is any possibility of a pre-existing pregnancy.", "hi": "दिशानिर्देश में ऐसी कोई छूट नहीं है। जहाँ पहले से गर्भावस्था की कोई संभावना हो, वहाँ letrozole नहीं देना चाहिए।" } }
+      ]
+    },
+    { "id": "monitor", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Letrozole cannot be used for her, so you start clomiphene. What do you arrange?", "hi": "उसके लिए letrozole नहीं चल सकता, इसलिए आप clomiphene शुरू करते हैं। क्या व्यवस्था करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "end",
+          "text": { "en": "Ultrasound monitoring of the cycles, because clomiphene raises the risk of multiple pregnancy.", "hi": "cycles की ultrasound निगरानी, क्योंकि clomiphene से multiple pregnancy का जोखिम बढ़ता है।" },
+          "feedback": { "en": "The guideline: \"The risk of multiple pregnancy is increased with clomiphene citrate use ... and therefore clomiphene cycles may require ultrasound monitoring.\"", "hi": "दिशानिर्देश: clomiphene citrate से multiple pregnancy का जोखिम बढ़ता है, इसलिए clomiphene के cycles में ultrasound निगरानी की ज़रूरत हो सकती है।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "No monitoring. It is a tablet taken at home.", "hi": "कोई निगरानी नहीं। यह घर पर ली जाने वाली गोली है।" },
+          "feedback": { "en": "Being a tablet does not remove the multiple pregnancy risk. The guideline says clomiphene cycles may require ultrasound monitoring.", "hi": "गोली होने से multiple pregnancy का जोखिम खत्म नहीं होता। दिशानिर्देश के अनुसार clomiphene cycles में ultrasound निगरानी ज़रूरी हो सकती है।" } },
+        { "id": "c", "correct": false, "next": "end",
+          "text": { "en": "Monitoring only after a positive pregnancy test.", "hi": "सिर्फ़ pregnancy test positive आने के बाद निगरानी।" },
+          "feedback": { "en": "The guideline ties the ultrasound monitoring to the clomiphene cycles, not to a positive pregnancy test.", "hi": "दिशानिर्देश ultrasound निगरानी को clomiphene cycles से जोड़ता है, positive pregnancy test से नहीं।" } }
+      ]
+    }
+  ]
+}
