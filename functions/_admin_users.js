@@ -38,15 +38,17 @@ export async function lookupAccounts(env, uids, deps) {
   const out = new Map();
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
   const tok = await serviceAccountToken(env);
+  let lastErr = null;
   for (let i = 0; i < uids.length; i += 100) {
     const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:lookup`, {
       method: "POST", headers: { "Authorization": "Bearer " + tok, "Content-Type": "application/json" },
       body: JSON.stringify({ localId: uids.slice(i, i + 100) }),
     });
-    if (!res.ok) continue;
+    if (!res.ok) { lastErr = Object.assign(new Error("firebase_lookup_failed"), { code: "firebase_lookup", status: res.status }); continue; }
     const d = await res.json();
     for (const u of (d.users || [])) out.set(u.localId, u);
   }
+  if (lastErr && !out.size) throw lastErr;   // nothing came back: say why, never "no such accounts"
   return out;
 }
 
@@ -133,13 +135,17 @@ export async function userDetail(env, uid, deps) {
   if (!uid) return { ok: false, error: "no_uid" };
   const now = deps.now || Date.now();
   const kv = deps.lcKv || lcKv(env), vkv = deps.verifyKv || verifyKv(env), store = deps.usageStore || usageStore(env);
-  const fbMap = await lookupAccounts(env, [uid], deps).catch(() => new Map());
+  // What could not be read is REPORTED, never shown as "empty" (owner, 2026-10-09: a profile read that
+  // failed showed as "Profile not filled in yet").
+  const errors = {};
+  const why = (e) => String((e && (e.code || e.message)) || e || "failed") + (e && e.status ? " " + e.status : "");
+  const fbMap = await lookupAccounts(env, [uid], deps).catch((e) => { errors.account = why(e); return new Map(); });
   const fb = fbMap.get(uid) || null;
   const [lc, vrec, prof, ent] = await Promise.all([
     kv ? kv.get(LC_PREFIX + uid, "json").catch(() => null) : null,
     vkv ? vkv.get("icu:doctor:" + uid, "json").catch(() => null) : null,
-    (deps.fsGet || realFsGet)(env, "users/" + uid + "/profile/self").catch(() => null),
-    (deps.adminLookup || adminLookup)(env, { uid }, deps.entDeps).catch(() => null),
+    (deps.fsGet || realFsGet)(env, "users/" + uid + "/profile/self").catch((e) => { errors.profile = why(e); return null; }),
+    (deps.adminLookup || adminLookup)(env, { uid }, deps.entDeps).catch((e) => { errors.plan = why(e); return null; }),
   ]);
   if (!fb && !lc && !vrec) return { ok: false, error: "not_found" };
   const row = accountRow(uid, lc, fb, vrec, now);
@@ -171,6 +177,6 @@ export async function userDetail(env, uid, deps) {
     plan: ent && ent.ok ? { tier: ent.tier || "free", tierExp: ent.tierExp, role: ent.role, smdId: ent.smdId, aiCapTokens: ent.aiCapTokens, monthUsage: ent.usage || null } : null,
     // per-account feature switches (POST /api/entitlements/admin/set-flag | clear-flag)
     features: ent && ent.ok && Array.isArray(ent.features) ? ent.features : [],
-    limits: modules, usage,
+    limits: modules, usage, errors,
   };
 }
