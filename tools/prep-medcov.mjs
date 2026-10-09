@@ -46,8 +46,8 @@ import { readX, gateX, keyAgrees } from "./prep-radnotes.mjs";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const SET = "medcov";
 // The R2 folder of this release: overlay/<OUT_SET>/<subject>/<module>.json. Files are immutable and phones keep them,
-// so a changed release goes to a new folder (medcov2 holds rounds 1 to 3 with the tidied explanations).
-export const OUT_SET = "medcov2";
+// so a changed release goes to a new folder (medcov2: rounds 1 to 3 tidied; medcov3 adds the round 3 combination items rescued by --loose-combo).
+export const OUT_SET = "medcov3";
 const L = ["A", "B", "C", "D"];
 const readJson = (p, d) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return d; } };
 const writeJson = (p, o, pretty) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, pretty ? JSON.stringify(o, null, 1) : JSON.stringify(o)); };
@@ -367,8 +367,33 @@ export function gateQ(rq, g, bookNorm) {
   return null;
 }
 /* gateXAll(x, it, ground, bookNorm) -> reasons (radnotes gateX plus the book copy check). */
-export function gateXAll(x, it, ground, bookNorm) {
-  const why = gateX(x, it, ground);
+const COMBO = new Set(["tf", "match", "reasoning"]);
+/* comboKeyAgrees(key, item) -> a combination item's key line names its answer: "option C" / "C." with the right ka,
+ * or the statement numbers of the key (any order, "only" optional), or the matching pairs, or the A/R verdict. */
+export function comboKeyAgrees(key, it, ka) {
+  const k = String(key || ""), ans = String(it.o[it.a] || ""), letter = L[it.a];
+  if (!COMBO.has(it.fm)) return false;
+  if (ka === letter && new RegExp("(?:^|\\b(?:[Oo]ption|[Aa]nswer|[Cc]hoice)\\s+)\\(?" + letter + "\\)?(?:[.:,)]|\\s|$)").test(k)) return true;
+  if (it.fm === "tf") {
+    const want = (ans.match(/\d/g) || []).sort().join(""), all = /\ball\b/i.test(ans);
+    if (!want) return false;
+    const m = k.match(/(?:statements?\s+)?(\d(?:\s*(?:,|and|&)\s*\d)*)(?:\s+only)?\s+(?:are|is)\s+(?:correct|true|right)/i);
+    if (m && (m[1].match(/\d/g) || []).sort().join("") === want) return true;
+    return all && /\ball (?:three|four|the) statements\b|\ball (?:are|of them are) (?:correct|true)/i.test(k);
+  }
+  if (it.fm === "match") {
+    const pairs = (s) => (String(s).match(/[a-d]\s*[-–]?\s*\(?[1-4]\)?/gi) || []).map((p) => p.replace(/[^a-d1-4]/gi, "").toLowerCase()).sort().join(" ");
+    const want = pairs(ans); return want.split(" ").length >= 3 && pairs(k).includes(want);
+  }
+  if (it.fm === "reasoning") {
+    const v = it.a === 0 ? /both\b[^.]*\btrue\b[^.]*\b(?:R|reason)\b[^.]*\b(?:correctly\s+)?explains?\b/i : it.a === 1 ? /both\b[^.]*\btrue\b[^.]*\b(?:not|does\s*n[o']t)\b[^.]*\bexplain/i : it.a === 2 ? /\b(?:A|assertion) is true\b[^.]*\b(?:R|reason) is false\b/i : /\b(?:A|assertion) is false\b[^.]*\b(?:R|reason) is true\b/i;
+    return v.test(k);
+  }
+  return false;
+}
+export function gateXAll(x, it, ground, bookNorm, opt) {
+  let why = gateX(x, it, ground);
+  if (opt && opt.loose && x && COMBO.has(it.fm) && why.includes("key line does not name the answer") && comboKeyAgrees(x.key, it, x.ka)) why = why.filter((w) => w !== "key line does not name the answer");
   if (x && bookNorm && verbatim([x.key, x.notes, x.pearl, ...Object.values(x.others || {})], bookNorm, 12)) why.push("copies the book");
   if (x && /harrison/i.test(JSON.stringify(x))) why.push("names a book");
   return why;
@@ -393,14 +418,18 @@ export function finalItem(it, x) {
 // Tidy (explanations only; keys, options and stems are never touched)
 // =====================================================================================================================
 const cap1 = (s) => s.replace(/^[a-z]/, (c) => c.toUpperCase());
-const OPENER = /^(.{2,200}?)\s+(?:is|are)\s+(?:the\s+)?(?:correct|right|best)(?:\s+[a-z-]+){0,2}?\s*,?\s+(?:because|as|since)\s+(.{8,})$/i;
+const OPENER = /^(.{1,200}?)\s+(?:is|are)\s+(?:the\s+)?(?:correct|right|best)(?:\s+[a-z-]+){0,2}?\s*,?\s+(?:because|as|since)\s+(.{8,})$/i;
 const OPENER2 = /^the\s+(?:correct|right|best)\s+(?:answer|option|choice)\s+is\s+(.{2,200}?)\s*,?\s+(?:because|as|since)\s+(.{8,})$/i;
 /* keyOpener(key, it) -> the key line without the "X is correct because" opener ("X: reason"), or the key as it was
  * when the pattern does not match or the result would no longer name the answer. */
 export function keyOpener(key, it) {
   const k = String(key || "").trim(), m = k.match(OPENER) || k.match(OPENER2);
   if (!m) return k;
-  const out = cap1(m[1].trim().replace(/[,:;]$/, "")) + ": " + cap1(m[2].trim());
+  let head = m[1].trim().replace(/[,:;]$/, "");
+  // "D is correct because ..." on a combination item: the letter alone becomes "D (a-3, b-1, c-2)"
+  const lm = head.match(/^(?:option\s+)?\(?([A-D])\)?$/i);
+  if (lm && lm[1].toUpperCase() === L[it.a] && it.o && it.o[it.a]) head = L[it.a] + " (" + it.o[it.a] + ")";
+  const out = cap1(head) + ": " + cap1(m[2].trim());
   return keyAgrees(out, it) ? out : k;
 }
 /* noteLines(notes) -> [{ t, kind }]: h heading, b bullet, n numbered step, th/ts table head and separator, tr table
@@ -628,6 +657,13 @@ async function runAll(dir, args) {
   applyX(groups, await go("07-explain", xLines(groups, false), "explain"));
   const redo = xGroups(pass.filter((c) => !c.x));
   applyX(redo, await go("08-explain-redo", xLines(redo, true), "explain"));
+  // combination formats: a key line that names the answer by its letter or by its statement set (statements in any
+  // order, "only" optional, a matching with any spacing, an assertion-reason verdict in other words) is accepted
+  // when every other gate passes (--loose-combo; the redo grouping above still uses the strict gate)
+  if (args.flags && args.flags.has("loose-combo")) for (const c of pass.filter((x) => !x.x && COMBO.has(x.it.fm))) {
+    for (const cand of c._cands || []) { const why = gateXAll(cand, c.it, c.p.g.text + " " + c.it.q, c.p.bookNorm, { loose: true }); if (!why.length) { c.x = cand; c._why = ""; c.loose = true; break; } }
+  }
+  if (process.env.MEDCOV_DUMP) writeJson(process.env.MEDCOV_DUMP, pass.filter((c) => !c.x).map((c) => ({ id: c.it.id, fm: c.it.fm, key: c.it.o[c.it.a], letter: L[c.it.a], why: c._why, lines: (c._cands || []).map((x) => x.key + " [ka " + x.ka + "]") })), true);
   const done = pass.filter((c) => c.x);
   const items = done.map((c) => ({ ...finalItem(c.it, c.x), _sid: c.p.sid, _tid: c.p.tid }));
   const summary = { topics: topics.length, generated: raw.length, codeRejected: rej, candidates: cands.length, solved: s1.ok.length, reviewed: r1.ok.length, rewriteTried: failed.length, rewriteGenerated: raw2.length, rewriteRejected: rej2, rewritePassed: r2.ok.length, explained: done.length };
@@ -648,7 +684,7 @@ function xLines(groups, redo) { return groups.map((g) => ({ key: g.key, request:
 function applyX(groups, out) {
   for (const g of groups) {
     const xs = readX((out.get(g.key) || {}).text || "", g.list.map((c) => c.it));
-    g.list.forEach((c, k) => { const why = gateXAll(xs[k], c.it, c.p.g.text + " " + c.it.q, c.p.bookNorm); if (!why.length) { c.x = xs[k]; c._why = ""; } else c._why = why.join("; "); });
+    g.list.forEach((c, k) => { if (xs[k]) (c._cands = c._cands || []).push(xs[k]); const why = gateXAll(xs[k], c.it, c.p.g.text + " " + c.it.q, c.p.bookNorm); if (!why.length) { c.x = xs[k]; c._why = ""; } else c._why = why.join("; "); });
   }
 }
 
